@@ -33,8 +33,10 @@
 
 $data = simplexml_load_file('./data/Daffodils_372154186');
 
-$players = get_all_players($data);
+$general_data = get_general_datas($data);
+$players_data = get_all_players_datas($data);
+// log_($data);
+log_($general_data);
 
-echo "<pre>".print_r($players, true)."</pre>";
-// echo "<pre>".print_r($data->farmhands->Farmer->name, true)."</pre>";
+// log_($players);
 
