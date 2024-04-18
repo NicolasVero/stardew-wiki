@@ -18,6 +18,7 @@ function get_aggregated_data(object $data):array {
     
     return array(
         'name'           => (string) $data->name,
+        'gender'         => (string) $data->gender,
         'favorite_thing' => (string) $data->favoriteThing,
         'levels'         => array(
             'farming_level'  => (int) $data->farmingLevel,
@@ -30,10 +31,9 @@ function get_aggregated_data(object $data):array {
         'max_items'      => (int) $data->maxItems,
         'max_health'     => (int) $data->maxHealth,
         'max_stamina'    => (int) $data->maxStamina,
-        'gender'         => (string) $data->gender,
         'money'          => (int) $data->money,
-        'game_duration'  => get_game_duration((int) $data->millisecondsPlayed),
         'total_money'    => (int) $data->totalMoneyEarned,
+        'game_duration'  => get_game_duration((int) $data->millisecondsPlayed),
         'friendship'     => get_friendship_data($data->friendshipData),
         'monsters_kill'  => get_monsters_kill_data($data->stats),
         'quest_log'      => get_quest_log($data->questLog)
@@ -41,10 +41,16 @@ function get_aggregated_data(object $data):array {
 }
 
 
-function get_game_duration($duration) {
-    return $duration;
-}
+function get_game_duration(int $duration):string {
 
+    $totalSeconds = intdiv($duration, 1000);
+    $seconds      = $totalSeconds % 60;
+    $totalMinutes = intdiv($totalSeconds, 60);
+    $minutes      = $totalMinutes % 60;
+    $hours        = intdiv($totalMinutes, 60);
+
+    return sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
+}
 
 function get_monsters_kill_data(object $data): array { 
     $monsters = [];
