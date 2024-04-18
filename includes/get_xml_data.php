@@ -17,5 +17,5 @@ $players_data = get_all_players_datas($data);
 // log_($data);
 // log_($general_data);
 
-log_($players_data);
+// log_($players_data[0]);
 

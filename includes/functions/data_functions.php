@@ -19,11 +19,13 @@ function get_aggregated_data(object $data):array {
     return array(
         'name'           => (string) $data->name,
         'favorite_thing' => (string) $data->favoriteThing,
-        'farming_level'  => (int) $data->farmingLevel,
-        'mining_level'   => (int) $data->miningLevel,
-        'combat_level'   => (int) $data->combatLevel,
-        'foraging_level' => (int) $data->foragingLevel,
-        'fishing_level'  => (int) $data->fishingLevel,
+        'levels'         => array(
+            'farming_level'  => (int) $data->farmingLevel,
+            'mining_level'   => (int) $data->miningLevel,
+            'combat_level'   => (int) $data->combatLevel,
+            'foraging_level' => (int) $data->foragingLevel,
+            'fishing_level'  => (int) $data->fishingLevel,
+        ),
         'luck_level'     => (int) $data->luckLevel,
         'max_items'      => (int) $data->maxItems,
         'max_health'     => (int) $data->maxHealth,
