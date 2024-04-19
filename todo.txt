@@ -39,8 +39,5 @@ PLAYER :
 whichPetType
 deepestMineLevel
 
-currentSeason	:	summer
-
-
 
 faire image competences avancement 

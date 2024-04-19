@@ -20,6 +20,7 @@ function get_aggregated_data(object $data):array {
         'name'           => (string) $data->name,
         'gender'         => (string) $data->gender,
         'favorite_thing' => (string) $data->favoriteThing,
+        'animal_type'    => (string) $data->whichPetType,
         'levels'         => array(
             'farming_level'  => (int) $data->farmingLevel,
             'mining_level'   => (int) $data->miningLevel,

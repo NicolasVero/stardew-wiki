@@ -1,0 +1,36 @@
+{
+    "0"  : "Rancher",
+    "1"  : "Tiller",
+    "2"  : "Coopmaster",
+    "3"  : "Shepherd",
+    "4"  : "Artisan",
+    "5"  : "Agriculturist",
+
+    "6"  : "Miner",
+    "7"  : "Geologist",
+    "8"  : "Blacksmith",
+    "9"  : "Prospector",
+    "10" : "Excavator",
+    "11" : "Gemologist",
+
+    "12" : "Forester",
+    "13" : "Gatherer",
+    "14" : "Lumberjack",
+    "15" : "Tapper",
+    "16" : "Botanist",
+    "17" : "Tracker",
+
+    "18" : "Fisher",
+    "19" : "Trapper",
+    "20" : "Angler",
+    "21" : "Pirate",
+    "22" : "Mariner",
+    "23" : "Luremaster",
+
+    "24" : "Fighter",
+    "25" : "Scout",
+    "26" : "Brute",
+    "27" : "Defender",
+    "28" : "Acrobat",
+    "29" : "Desperado"
+}
