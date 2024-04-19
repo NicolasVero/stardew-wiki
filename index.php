@@ -12,7 +12,7 @@ $player = $players_data[0];
 
 foreach($player['levels'] as $key => $level) {
 
-    $image_source = './medias/images/icons' . explode('_', $key)[0] . '.png';
+    $image_source = './medias/images/icons/' . explode('_', $key)[0] . '.png';
     ?>
         <img src="<?= $image_source; ?>" alt="<?= $key; ?>"></img> 
         <p><?= $level; ?></p>

@@ -36,6 +36,9 @@ PLAYER :
     farmName
 
 
+whichPetType
+deepestMineLevel
+
 currentSeason	:	summer
 
 
