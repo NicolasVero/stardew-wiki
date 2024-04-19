@@ -27,7 +27,6 @@ function get_aggregated_data(object $data):array {
             'foraging_level' => (int) $data->foragingLevel,
             'fishing_level'  => (int) $data->fishingLevel,
         ),
-        'luck_level'     => (int) $data->luckLevel,
         'max_items'      => (int) $data->maxItems,
         'max_health'     => (int) $data->maxHealth,
         'max_stamina'    => (int) $data->maxStamina,
@@ -70,9 +69,11 @@ function get_friendship_data(object $data):array {
     foreach($data->item as $item) {
         $friends[(string) $item->key->string] = array(
 
-            'points'     => (int) $item->value->Friendship->Points,
-            'status'     => (string) $item->value->Friendship->Status,
-            'week_gifts' => (int) $item->value->Friendship->GiftsThisWeek
+            'points'       => (int) $item->value->Friendship->Points,
+            'friend_level' => (int) floor(($item->value->Friendship->Points) / 250),
+            // 'is_datable'  
+            'status'       => (string) $item->value->Friendship->Status,
+            'week_gifts'   => (int) $item->value->Friendship->GiftsThisWeek
         );
     }
 
