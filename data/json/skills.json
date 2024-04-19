@@ -1,36 +1,132 @@
 {
-    "0"  : "Rancher",
-    "1"  : "Tiller",
-    "2"  : "Coopmaster",
-    "3"  : "Shepherd",
-    "4"  : "Artisan",
-    "5"  : "Agriculturist",
+    "0": {
+        "skill": "Rancher",
+        "description": "Animal products worth 20% more."
+    },
+    "1": {
+        "skill": "Tiller",
+        "description": "Crops worth 10% more."
+    },
+    "2": {
+        "skill": "Coopmaster",
+        "description": "Befriend coop animals quicker. Incubation time (for Incubator and Ostrich Incubator) cut in half."
+    },
+    "3": {
+        "skill": "Shepherd",
+        "description": "Befriend barn animals quicker. Sheep produce wool faster."
+    },
+    "4": {
+        "skill": "Artisan",
+        "description": "Artisan goods (wine, cheese, oil, etc.) worth 40% more."
+    },
+    "5": {
+        "skill": "Agriculturist",
+        "description": "All crops grow 10% faster."
+    },
 
-    "6"  : "Miner",
-    "7"  : "Geologist",
-    "8"  : "Blacksmith",
-    "9"  : "Prospector",
-    "10" : "Excavator",
-    "11" : "Gemologist",
 
-    "12" : "Forester",
-    "13" : "Gatherer",
-    "14" : "Lumberjack",
-    "15" : "Tapper",
-    "16" : "Botanist",
-    "17" : "Tracker",
+    "6": {
+        "skill": "Miner",
+        "description": "+1 ore per vein."
+    },
+    "7": {
+        "skill": "Geologist",
+        "description": "Chance for gems to appear in pairs. (50% chance per mining node. Also applies to geodes spawned from breaking rocks.)"
+    },
+    "8": {
+        "skill": "Blacksmith",
+        "description": "Metal bars worth 50% more. (Applies to Copper, Iron, Gold, Iridium, & Radioactive Bars)"
+    },
+    "9": {
+        "skill": "Prospector",
+        "description": "Chance to find coal doubled."
+    },
+    "10": {
+        "skill": "Excavator",
+        "description": "Chance to find geodes doubled. (Applies to all 4 types of geodes)"
+    },
+    "11": {
+        "skill": "Gemologist",
+        "description": "Gems worth 30% more. (applies to Minerals and Gems)"
+    },
 
-    "18" : "Fisher",
-    "19" : "Trapper",
-    "20" : "Angler",
-    "21" : "Pirate",
-    "22" : "Mariner",
-    "23" : "Luremaster",
 
-    "24" : "Fighter",
-    "25" : "Scout",
-    "26" : "Brute",
-    "27" : "Defender",
-    "28" : "Acrobat",
-    "29" : "Desperado"
+    "12": {
+        "skill": "Forester",
+        "description": "Trees drop 25% more wood. (Applies to Trees, Stumps & Logs)"
+    },
+    "13": {
+        "skill": "Gatherer",
+        "description": "Chance for double harvest of foraged items. (20% chance of double harvest)"
+    },
+    "14": {
+        "skill": "Lumberjack",
+        "description": "All trees have a chance to drop hardwood."
+    },
+    "15" : {
+        "skill": "Tapper",
+        "description": "Syrups worth 25% more."
+    },
+    "16": {
+        "skill": "Botanist",
+        "description": "Foraged items are always highest quality."
+    },
+    "17": {
+        "skill": "Tracker",
+        "description": "Location of forageable items revealed."
+    },
+
+
+    "18": {
+        "skill": "Fisher",
+        "description": "Fish worth 25% more."
+    },
+    "19": {
+        "skill": "Trapper",
+        "description": "Resources required to craft crab pots reduced."
+    },
+
+
+    "20": {
+        "skill": "Angler",
+        "description": "Fish worth 50% more."
+    },
+    "21": {
+        "skill": "Pirate",
+        "description": "Chance to find treasure doubled."
+    },
+    "22": {
+        "skill": "Mariner",
+        "description": "Crab pots no longer produce junk items."
+    },
+    "23": {
+        "skill": "Luremaster",
+        "description": "Crab pots no longer require bait."
+    },
+
+
+    "24": {
+        "skill": "Fighter",
+        "description": "All attacks deal 10% more damage."
+    },
+    "25": {
+        "skill": "Scout",
+        "description": "Critical strike chance increased by 50%."
+    },
+    "26": {
+        "skill": "Brute",
+        "description": "Deal 15% more damage."
+    },
+    "27": {
+        "skill": "Defender",
+        "description": "+25 HP."
+    },
+    "28": {
+        "skill": "Acrobat",
+        "description": "Cooldown on special moves cut in half."
+    },
+    "29": {
+        "skill": "Desperado",
+        "description": "Critical strikes are deadlier."
+    }
 }

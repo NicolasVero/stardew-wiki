@@ -28,11 +28,14 @@ function get_aggregated_data(object $data):array {
             'foraging_level' => (int) $data->foragingLevel,
             'fishing_level'  => (int) $data->fishingLevel,
         ),
+        'deepest_mine_level' => (int) $data->deepestMineLevel,
         'max_items'      => (int) $data->maxItems,
         'max_health'     => (int) $data->maxHealth,
         'max_stamina'    => (int) $data->maxStamina,
         'money'          => (int) $data->money,
         'total_money'    => (int) $data->totalMoneyEarned,
+        'has_skull_key'  => has_element($data->hasSkullKey),
+        'skills'         => get_skills_data((array) $data->professions->int),
         'game_duration'  => get_game_duration((int) $data->millisecondsPlayed),
         'friendship'     => get_friendship_data($data->friendshipData),
         'monsters_kill'  => get_monsters_kill_data($data->stats),
@@ -40,6 +43,22 @@ function get_aggregated_data(object $data):array {
     );
 }
 
+function has_element(object $element):bool {
+    return !empty((array) $element);
+}
+
+function get_skills_data(array $skills):array {
+
+    $json_skills = json_decode(file_get_contents(get_site_root() . '/data/json/skills.json'), true);
+    $skills_datas = array();
+
+    foreach($json_skills as $key => $skill) {
+        if(in_array($key, $skills))
+            $skills_datas[] = $json_skills[$key];
+    }
+
+    return $skills_datas;
+}
 
 function get_game_duration(int $duration):string {
 
@@ -52,7 +71,7 @@ function get_game_duration(int $duration):string {
     return sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
 }
 
-function get_monsters_kill_data(object $data): array { 
+function get_monsters_kill_data(object $data):array { 
     $monsters = [];
     
     foreach ($data->specificMonstersKilled->item as $item) {
@@ -72,7 +91,6 @@ function get_friendship_data(object $data):array {
 
             'points'       => (int) $item->value->Friendship->Points,
             'friend_level' => (int) floor(($item->value->Friendship->Points) / 250),
-            // 'is_datable'  
             'status'       => (string) $item->value->Friendship->Status,
             'week_gifts'   => (int) $item->value->Friendship->GiftsThisWeek
         );
