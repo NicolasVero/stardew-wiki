@@ -7,7 +7,7 @@ function get_all_players_datas(object $data): array {
     array_push($players, get_aggregated_data($data->player));
 
     foreach($data->farmhands as $side_player) {
-        array_push($players, get_aggregated_data($side_player->Farmer));     
+        // array_push($players, get_aggregated_data($side_player->Farmer));     
     }
 
     return $players;
@@ -37,22 +37,26 @@ function get_aggregated_data(object $data):array {
             'has_magnifying_glass' => has_element($data->hasMagnifyingGlass),
             'has_dark_talisman'    => has_element($data->hasDarkTalisman),
             'has_magic_ink'        => has_element($data->hasMagicInk),
-            // 'bear'
-            // 'onion'
+            'has_bear_knowledge'   => (int) in_array(2120303, (array) $data->eventsSeen->int),
+            'has_onion_mastery'    => (int) in_array(3910979, (array) $data->eventsSeen->int),
             'has_town_key'         => has_element($data->HasTownKey),
         ),
-        'fish_caught'    => get_fish_caught($data->fishCaught),
-        'mine_level'     => (int) $data->deepestMineLevel,
-        'max_items'      => (int) $data->maxItems,
-        'max_health'     => (int) $data->maxHealth,
-        'max_stamina'    => (int) $data->maxStamina,
-        'money'          => (int) $data->money,
-        'total_money'    => (int) $data->totalMoneyEarned,
-        'skills'         => get_skills_data((array) $data->professions->int),
-        'game_duration'  => get_game_duration((int) $data->millisecondsPlayed),
-        'friendship'     => get_friendship_data($data->friendshipData),
-        'monsters_kill'  => get_monsters_kill_data($data->stats),
-        'quest_log'      => get_quest_log($data->questLog)
+        'fish_caught'     => get_item_list($data->fishCaught, 'fish'),
+        'artifacts_found' => get_item_list($data->archaeologyFound, 'artifacts'),
+        'minerals_found'  => get_item_list($data->mineralsFound, 'minerals'),
+        'cooking_recipe'  => get_item_list($data->cookingRecipes, 'recipes'),
+        'achievements'    => get_achievement($data->achievements),
+        'mine_level'      => (int) $data->deepestMineLevel,
+        'max_items'       => (int) $data->maxItems,
+        'max_health'      => (int) $data->maxHealth,
+        'max_stamina'     => (int) $data->maxStamina,
+        'money'           => (int) $data->money,
+        'total_money'     => (int) $data->totalMoneyEarned,
+        'skills'          => get_skills_data((array) $data->professions->int),
+        'game_duration'   => get_game_duration((int) $data->millisecondsPlayed),
+        'friendship'      => get_friendship_data($data->friendshipData),
+        'monsters_kill'   => get_monsters_kill_data($data->stats),
+        'quest_log'       => get_quest_log($data->questLog)
     );
 }
 
@@ -60,9 +64,39 @@ function has_element(object $element):int {
     return !empty((array) $element);
 }
 
+function get_achievement(object $achievements):array {
 
-function get_fish_caught($fishs) {
-    log_($fishs);
+    $datas = array();
+    
+    foreach($achievements->int as $achievement) 
+        $datas[] = find_reference_in_json((string)$achievement, 'achievements');
+    
+    return $datas;
+}
+
+
+function get_item_list(object $items, string $filename):array {
+
+    $datas = array();
+
+    foreach($items->item as $item) {
+        $item_id = str_replace('(O)', '', (string) $item->key->string);
+
+        if(ctype_digit($item_id))
+            $datas[] = find_reference_in_json($item_id, $filename);
+
+        if($filename == 'recipes')
+            $datas[] = $item_id;
+    }
+    
+    return $datas;
+}
+
+
+function find_reference_in_json(int $id, string $file) {
+    $json_file = json_decode(file_get_contents(get_site_root() . '/data/json/' . $file . '.json'), true);
+
+    return $json_file[$id];
 }
 
 
