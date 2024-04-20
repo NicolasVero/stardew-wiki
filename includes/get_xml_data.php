@@ -1,7 +1,5 @@
 <?php
 
-//     deepestMineLevel	:	30
-
 //     -- (mineralsFound) ??
 //     -- (fishCaught) ??
 //     -- (archaeologyFound) ??

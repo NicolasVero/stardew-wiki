@@ -28,13 +28,22 @@ function get_aggregated_data(object $data):array {
             'foraging_level' => (int) $data->foragingLevel,
             'fishing_level'  => (int) $data->fishingLevel,
         ),
-        'deepest_mine_level' => (int) $data->deepestMineLevel,
+        'has_element' => array(
+            'has_skull_key'        => has_element($data->hasSkullKey),
+            'has_special_charm'    => has_element($data->hasSpecialCharm),
+            'has_town_key'         => has_element($data->HasTownKey),
+            'has_club_card'        => has_element($data->hasClubCard),
+            'has_dark_talisman'    => has_element($data->hasDarkTalisman),
+            'has_magic_ink'        => has_element($data->hasMagicInk),
+            'has_magnifying_glass' => has_element($data->hasMagnifyingGlass),
+            'has_rusty_key'        => has_element($data->hasRustyKey)
+        ),
+        'mine_level'     => (int) $data->deepestMineLevel,
         'max_items'      => (int) $data->maxItems,
         'max_health'     => (int) $data->maxHealth,
         'max_stamina'    => (int) $data->maxStamina,
         'money'          => (int) $data->money,
         'total_money'    => (int) $data->totalMoneyEarned,
-        'has_skull_key'  => has_element($data->hasSkullKey),
         'skills'         => get_skills_data((array) $data->professions->int),
         'game_duration'  => get_game_duration((int) $data->millisecondsPlayed),
         'friendship'     => get_friendship_data($data->friendshipData),
@@ -43,7 +52,7 @@ function get_aggregated_data(object $data):array {
     );
 }
 
-function has_element(object $element):bool {
+function has_element(object $element):int {
     return !empty((array) $element);
 }
 
