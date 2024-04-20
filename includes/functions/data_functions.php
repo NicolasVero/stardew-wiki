@@ -29,15 +29,19 @@ function get_aggregated_data(object $data):array {
             'fishing_level'  => (int) $data->fishingLevel,
         ),
         'has_element' => array(
-            'has_skull_key'        => has_element($data->hasSkullKey),
-            'has_special_charm'    => has_element($data->hasSpecialCharm),
-            'has_town_key'         => has_element($data->HasTownKey),
+            'understand_dwarf'     => has_element($data->canUnderstandDwarves),
+            'has_rusty_key'        => has_element($data->hasRustyKey),
             'has_club_card'        => has_element($data->hasClubCard),
+            'has_special_charm'    => has_element($data->hasSpecialCharm),
+            'has_skull_key'        => has_element($data->hasSkullKey),
+            'has_magnifying_glass' => has_element($data->hasMagnifyingGlass),
             'has_dark_talisman'    => has_element($data->hasDarkTalisman),
             'has_magic_ink'        => has_element($data->hasMagicInk),
-            'has_magnifying_glass' => has_element($data->hasMagnifyingGlass),
-            'has_rusty_key'        => has_element($data->hasRustyKey)
+            // 'bear'
+            // 'onion'
+            'has_town_key'         => has_element($data->HasTownKey),
         ),
+        'fish_caught'    => get_fish_caught($data->fishCaught),
         'mine_level'     => (int) $data->deepestMineLevel,
         'max_items'      => (int) $data->maxItems,
         'max_health'     => (int) $data->maxHealth,
@@ -55,6 +59,12 @@ function get_aggregated_data(object $data):array {
 function has_element(object $element):int {
     return !empty((array) $element);
 }
+
+
+function get_fish_caught($fishs) {
+    log_($fishs);
+}
+
 
 function get_skills_data(array $skills):array {
 
