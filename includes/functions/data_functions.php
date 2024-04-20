@@ -45,6 +45,7 @@ function get_aggregated_data(object $data):array {
         'artifacts_found' => get_item_list($data->archaeologyFound, 'artifacts'),
         'minerals_found'  => get_item_list($data->mineralsFound, 'minerals'),
         'cooking_recipe'  => get_item_list($data->cookingRecipes, 'recipes'),
+        'shipped_items'   => get_item_list($data->basicShipped, 'shipped_items'),
         'achievements'    => get_achievement($data->achievements),
         'mine_level'      => (int) $data->deepestMineLevel,
         'max_items'       => (int) $data->maxItems,
@@ -77,13 +78,21 @@ function get_achievement(object $achievements):array {
 
 function get_item_list(object $items, string $filename):array {
 
+    // if($filename == 'shipped_items') 
+        log_($filename);
+
     $datas = array();
 
     foreach($items->item as $item) {
         $item_id = str_replace('(O)', '', (string) $item->key->string);
 
-        if(ctype_digit($item_id))
-            $datas[] = find_reference_in_json($item_id, $filename);
+        if(ctype_digit($item_id)) {
+
+            $reference = find_reference_in_json($item_id, $filename);
+            
+            if(!empty($reference))
+                $datas[] = $reference;
+        }
 
         if($filename == 'recipes')
             $datas[] = $item_id;
@@ -96,7 +105,7 @@ function get_item_list(object $items, string $filename):array {
 function find_reference_in_json(int $id, string $file) {
     $json_file = json_decode(file_get_contents(get_site_root() . '/data/json/' . $file . '.json'), true);
 
-    return $json_file[$id];
+    return isset($json_file[$id]) ? $json_file[$id] : null;
 }
 
 
