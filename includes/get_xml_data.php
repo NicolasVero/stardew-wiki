@@ -1,12 +1,5 @@
 <?php
 
-//     -- (mineralsFound) ??
-//     -- (fishCaught) ??
-//     -- (archaeologyFound) ??
-//     -- (experiencePoints) ??
-//     --(achievements) ??
-
-
 // $data = simplexml_load_file('./data/saves/gameInfos_better.xml');
 $data = simplexml_load_file('./data/saves/Daffodils_372154186');
 
