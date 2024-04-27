@@ -10,8 +10,11 @@ function get_all_players_datas(object $data): array {
         // array_push($players, get_aggregated_data($side_player->Farmer));     
     }
 
+    complete_general_data($players, $data);
+
     return $players;
 }
+
 
 
 function get_aggregated_data(object $data):array {
@@ -20,14 +23,18 @@ function get_aggregated_data(object $data):array {
         'general' => array(
             'name'           => (string) $data->name,
             'gender'         => (string) $data->gender,
+            'farm_name'      => (string) $data->farmName,
             'favorite_thing' => (string) $data->favoriteThing,
             'animal_type'    => (string) $data->whichPetType,
-            'mine_level'      => (int) $data->deepestMineLevel,
-            'max_items'       => (int) $data->maxItems,
-            'max_health'      => (int) $data->maxHealth,
-            'max_stamina'     => (int) $data->maxStamina,
-            'money'           => (int) $data->money,
-            'total_money'     => (int) $data->totalMoneyEarned,
+            'date'           => get_formatted_date($data),
+            'game_duration'  => get_game_duration((int) $data->millisecondsPlayed),
+            'mine_level'     => (int) $data->deepestMineLevel,
+            'max_items'      => (int) $data->maxItems,
+            'max_health'     => (int) $data->maxHealth,
+            'max_stamina'    => (int) $data->maxStamina,
+            'gold'           => (int) $data->money,
+            'total_gold'     => (int) $data->totalMoneyEarned,
+            'qi_gem'         => (int) $data->qiGems
         ),
         'levels'         => array(
             'farming_level'  => (int) $data->farmingLevel,
@@ -56,7 +63,6 @@ function get_aggregated_data(object $data):array {
         'shipped_items'   => get_item_list($data->basicShipped, 'shipped_items'),
         'achievements'    => get_achievement($data->achievements),
         'skills'          => get_skills_data((array) $data->professions->int),
-        'game_duration'   => get_game_duration((int) $data->millisecondsPlayed),
         'friendship'      => get_friendship_data($data->friendshipData),
         'monsters_kill'   => get_monsters_kill_data($data->stats),
         'quest_log'       => get_quest_log($data->questLog)
@@ -173,7 +179,7 @@ function get_quest_log(object $data):array {
             'objective'   => (string) $item->_currentObjective,
             'description' => (string) $item->_questDescription,
             'title'       => (string) $item->_questTitle,
-            'money'       => (int) $item->moneyReward
+            'gold'       => (int) $item->moneyReward
         );
     }
 
@@ -181,12 +187,19 @@ function get_quest_log(object $data):array {
 }
 
 
-function get_general_datas(object $data):array {
-    
-    return array(
-        'farm_name' => (string) $data->player->farmName,   
-        'day'       => (int) $data->dayOfMonth,
-        'season'    => (string) $data->currentSeason,
-        'year'      => (int) $data->year
-    );
+function get_formatted_date(object $data):string {
+
+    $day    = $data->dayOfMonthForSaveGame;
+    $season = array('spring', 'summer', 'fall', 'winter')[$data->seasonForSaveGame % 4];
+    $year   = $data->yearForSaveGame;
+
+    return "Day $day of $season, Year $year";
+}
+
+
+
+function complete_general_data(array &$players, object $data) {
+    foreach($players as &$player) {
+        $player['general']['golden_walnut'] = (int) $data->goldenWalnuts;
+    }
 }

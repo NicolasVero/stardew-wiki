@@ -11,26 +11,42 @@ function display_page(array $all_datas):string {
 
 function display_header(array $datas):string {
     
-    log_(get_images_folder_root());
-    log_($datas);
+    extract($datas);
     
     $images_path = get_images_folder_root();
-
-    extract($datas);
-
     $gender_logo = $images_path . "icons/" . strtolower($gender) . ".png";
-
-    echo $money;
 
     $structure = "
         <header>
             <div class='header'>
                 <span>
                     <img src='$gender_logo' alt='Gender logo' class='player_gender_logo' />
-                    <span class='player_name'>$name</span>
+                    <span class='data player_name'>$name</span>
+                </span>
+
+                <span>
+                    <span class='data date-in-game'>$date</span>
+                </span>
+
+                <span>
+                    <span class='data time-in-game'>$game_duration</span>
+                    <span class='data-label'>time in game</span>
                 </span>
             </div>
-            <div class='sub-header'></div>
+
+            <div class='sub-header'>
+                <span>
+                    <img src='{$images_path}/icons/gold.png' alt='Gold coin' />
+                    <span class='data actual-gold'>" . number_format($gold) . "</span>
+                    <span class='data-label'>actual gold</span>
+                </span>
+
+                <span>
+                    <img src='{$images_path}icons/gold.png' alt='Gold coin' />
+                    <span class='data cumulative-gold'>" . number_format($total_gold) . "</span>
+                    <span class='data-label'>cumulative gold</span>
+                </span>
+            </div>
         </header>
     ";
 
