@@ -32,9 +32,10 @@ function get_aggregated_data(object $data):array {
             'max_items'      => (int) $data->maxItems,
             'max_health'     => (int) $data->maxHealth,
             'max_stamina'    => (int) $data->maxStamina,
-            'gold'           => (int) $data->money,
-            'total_gold'     => (int) $data->totalMoneyEarned,
-            'qi_gem'         => (int) $data->qiGems
+            'golds'          => (int) $data->money,
+            'total_golds'    => (int) $data->totalMoneyEarned,
+            'qi_gems'        => (int) $data->qiGems,
+            'casino_coins'   => (int) $data->clubCoins
         ),
         'levels'         => array(
             'farming_level'  => (int) $data->farmingLevel,
@@ -85,9 +86,6 @@ function get_achievement(object $achievements):array {
 
 
 function get_item_list(object $items, string $filename):array {
-
-    // if($filename == 'shipped_items') 
-        // log_($filename);
 
     $datas = array();
 
@@ -200,6 +198,6 @@ function get_formatted_date(object $data):string {
 
 function complete_general_data(array &$players, object $data) {
     foreach($players as &$player) {
-        $player['general']['golden_walnut'] = (int) $data->goldenWalnuts;
+        $player['general']['golden_walnuts'] = (int) $data->goldenWalnuts;
     }
 }
