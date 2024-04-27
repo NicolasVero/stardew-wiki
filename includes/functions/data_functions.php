@@ -17,10 +17,18 @@ function get_all_players_datas(object $data): array {
 function get_aggregated_data(object $data):array {
     
     return array(
-        'name'           => (string) $data->name,
-        'gender'         => (string) $data->gender,
-        'favorite_thing' => (string) $data->favoriteThing,
-        'animal_type'    => (string) $data->whichPetType,
+        'general' => array(
+            'name'           => (string) $data->name,
+            'gender'         => (string) $data->gender,
+            'favorite_thing' => (string) $data->favoriteThing,
+            'animal_type'    => (string) $data->whichPetType,
+            'mine_level'      => (int) $data->deepestMineLevel,
+            'max_items'       => (int) $data->maxItems,
+            'max_health'      => (int) $data->maxHealth,
+            'max_stamina'     => (int) $data->maxStamina,
+            'money'           => (int) $data->money,
+            'total_money'     => (int) $data->totalMoneyEarned,
+        ),
         'levels'         => array(
             'farming_level'  => (int) $data->farmingLevel,
             'mining_level'   => (int) $data->miningLevel,
@@ -47,12 +55,6 @@ function get_aggregated_data(object $data):array {
         'cooking_recipe'  => get_item_list($data->cookingRecipes, 'recipes'),
         'shipped_items'   => get_item_list($data->basicShipped, 'shipped_items'),
         'achievements'    => get_achievement($data->achievements),
-        'mine_level'      => (int) $data->deepestMineLevel,
-        'max_items'       => (int) $data->maxItems,
-        'max_health'      => (int) $data->maxHealth,
-        'max_stamina'     => (int) $data->maxStamina,
-        'money'           => (int) $data->money,
-        'total_money'     => (int) $data->totalMoneyEarned,
         'skills'          => get_skills_data((array) $data->professions->int),
         'game_duration'   => get_game_duration((int) $data->millisecondsPlayed),
         'friendship'      => get_friendship_data($data->friendshipData),
@@ -79,7 +81,7 @@ function get_achievement(object $achievements):array {
 function get_item_list(object $items, string $filename):array {
 
     // if($filename == 'shipped_items') 
-        log_($filename);
+        // log_($filename);
 
     $datas = array();
 
