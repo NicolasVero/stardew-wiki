@@ -7,6 +7,10 @@ function display_page(array $all_datas):string {
     $structure .= display_header($all_datas['general']);
     $structure .= "<main>";
     $structure .= display_general_stats($all_datas['general']);
+    $structure .= display_skills(array(
+        'levels' => $all_datas['levels'], 
+        'skills' => $all_datas['skills'])
+    );
     
     $structure .= "</main>";
 
@@ -108,6 +112,64 @@ function display_general_stats(array $datas):string {
         
         </div>
     ";
+
+    return $structure;
+}
+
+
+function display_skills(array $datas):string {
+    
+    $structure = "";
+
+    foreach($datas['levels'] as $key => $level) {
+        
+        $level_icon_name = explode('_', $key)[0];
+        $level_icon = get_images_folder_root() . "icons/$level_icon_name.png";
+
+        $structure .= "
+            <span>
+                <img src='$level_icon' alt='$key'/>
+                
+                " . get_level_progress_bar($level) . "
+                <span>$level</span>
+                <span>" . get_skills_icons($datas['skills'], $level_icon_name) . "</span>
+            </span>
+        ";
+    }
+
+    return $structure;
+}
+
+function get_level_progress_bar(int $level):string {
+
+    $structure = "<span class='level-progress-bar'>";
+
+    for($i = 1; $i <= 10; $i++) {
+        if($level >= $i) $level_bar = get_images_folder_root() . (($i % 5 == 0) ? "icons/big_level.png"       : "icons/level.png");
+        else             $level_bar = get_images_folder_root() . (($i % 5 == 0) ? "icons/big_level_empty.png" : "icons/level_empty.png");
+        
+        $structure .= "<img src='$level_bar' alt='' width='20px'/>";        
+    }
+
+    $structure .= "</span>";
+
+    return $structure;
+}
+
+function get_skills_icons(array $skills, string $current_skill):string {
+
+    $structure = "";
+
+    foreach($skills as $skill) {
+        if($current_skill == strtolower($skill['source'])) {
+
+            $skill_icon = strtolower($skill['skill']);
+            $skill_icon_path = get_images_folder_root() . "skills/$skill_icon.png";
+            $skill_description = $skill['description'];
+            
+            $structure .= "<img src='$skill_icon_path' alt='' title='$skill_description' />";
+        }
+    }
 
     return $structure;
 }

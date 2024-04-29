@@ -1,12 +1,10 @@
 <?php
 
-function get_site_root():string {
-    return 'http://localhost/travail/stardew_wiki/';
-}
+
+require_once 'functions.php';
 
 include 'components/header.php';
 
-require_once 'functions.php';
 require_once 'includes/get_xml_data.php';
 
 

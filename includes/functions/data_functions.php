@@ -37,7 +37,7 @@ function get_aggregated_data(object $data):array {
             'qi_gems'        => (int) $data->qiGems,
             'casino_coins'   => (int) $data->clubCoins
         ),
-        'levels'         => array(
+        'levels' => array(
             'farming_level'  => (int) $data->farmingLevel,
             'mining_level'   => (int) $data->miningLevel,
             'combat_level'   => (int) $data->combatLevel,
