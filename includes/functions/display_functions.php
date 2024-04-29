@@ -1,12 +1,15 @@
 <?php 
 
 function display_page(array $all_datas):string {
-    
+
     $structure = "";
 
     $structure .= display_header($all_datas['general']);
+    $structure .= "<main>";
     $structure .= display_general_stats($all_datas['general']);
     
+    $structure .= "</main>";
+
     return $structure;
 }
 
@@ -17,6 +20,7 @@ function display_header(array $datas):string {
     $images_path = get_images_folder_root();
 
     $structure = "
+		<button class='data save-file'>Upload a save file</button>
         <header>
             <div class='header'>
                 <span>
@@ -61,7 +65,7 @@ function display_header(array $datas):string {
                     </span>
                 </span>
                 <span>
-                    <span class='farm-name'>$farm_name farm</span>
+                    <span class='data-info farm-name'>$farm_name farm</span>
                 </span>
             </div>
         </header>
@@ -75,9 +79,9 @@ function display_general_stats(array $datas):string {
     extract($datas);
     $images_path = get_images_folder_root();
 
-    $strucure = "
-        <h2>General stats</h2>
-        <div class='general-stats'>
+    $structure = "
+        <h2 class='section-title'>General stats</h2>
+        <div class='info-section general-stats'>
             <span>
                 <img src='{$images_path}icons/energy.png' alt='Energy' />
                 <span class='data data-energy'>" . number_format($max_stamina) . "</span>
@@ -105,5 +109,5 @@ function display_general_stats(array $datas):string {
         </div>
     ";
 
-    return $strucure;
+    return $structure;
 }

@@ -1,0 +1,155 @@
+// out: false
+
+@font-face {
+	font-family: 'Stardew Valley Stonks';
+	src: url('../../medias/fonts/stardew_valley_stonks.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Stardew Valley Regular';
+	src: url('../../medias/fonts/stardew_valley_regular.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Inter';
+	src: url('../../medias/fonts/inter.ttf') format('truetype');
+}
+
+// Background
+@primary-bg: rgba(0, 0, 0, 0.21);
+@secondary-bg: rgba(255, 255, 255, 0.64);
+
+// Font color
+@primary-fc: rgba(0, 0, 0, 1);
+@secondary-fc: rgba(0, 0, 0, .64);
+@auxiliary-fc: rgba(109, 109, 109, 1);
+
+// Font family
+@primary-ff: "Stardew Valley Stonks", serif;
+@secondary-ff: "Inter", sans-serif;
+@auxiliary-fc: "Stardew Valley Regular";
+
+// Font size
+@primary-fs: 16px;
+@secondary-fs: 10px;
+@auxiliary-fs: 14px;
+
+// Images size
+@medium-icon: 20px;
+@small-icon: 12px;
+
+* {
+	// margin: 0 auto;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+html {
+	background-image: url("../../medias/images/content/bg.png");
+	object-fit: cover;
+}
+
+body {
+	margin: 100px 100px;
+	border-radius: 5px;
+	background-color: @secondary-bg;
+
+	.save-file {
+		position: absolute;
+		top: calc(100px/2 + 10px);
+		right: 100px;
+		background-color: rgba(255, 198, 119, 1);
+		padding: 5px 15px;
+		
+		border: solid 2px rgba(162, 120, 69, 1);
+		// border-image: url('../../medias/images/content/border-image.png') 15 stretch;
+	}
+
+	.data {
+		font-size: @primary-fs;
+		font-family: @primary-ff;
+		color: @primary-fc;
+	}
+
+	.data-info {
+		font-size: @auxiliary-fs;
+		font-family: @primary-ff;
+		color: @primary-fc;
+	}
+
+	.data-label {
+		font-size: @secondary-fs;
+		font-family: @secondary-ff;
+		color: @secondary-fc;
+		font-weight: 200;
+	}
+
+	header {
+		display: flex;
+		flex-direction: column;
+		background-color: @primary-bg;
+		padding: 15px;
+		gap: 10px;
+
+		.header {
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			& > span:first-of-type {
+				display: flex;
+				align-items: flex-end;
+				gap: 10px;
+			}
+
+			img {
+				width: @medium-icon;
+			}
+		}
+
+		.sub-header {
+			width: 100%;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+
+			.all-money {
+				display: flex;
+				gap: 50px;
+			}
+
+			img {
+				width: @small-icon;
+			}
+		}
+	}
+	
+	main {
+		padding: 5px 15px;
+
+		.section-title {
+			font-size: @secondary-fs;
+			font-family: @primary-ff;
+			font-weight: 400;
+			color: @primary-fc;
+		}
+
+		.info-section {
+			width: fit-content;
+			display: flex;
+			justify-content: center;
+			gap: 50px;
+
+			span {
+				display: flex;
+				align-items: flex-end;
+				gap: 5px;
+			}
+
+			img {
+				height: @medium-icon;
+			}
+		}
+	}
+}

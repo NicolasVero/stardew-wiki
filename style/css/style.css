@@ -2,3 +2,109 @@ pre {
   background-color: #f3f3f3b8;
   padding: 20px;
 }
+@font-face {
+  font-family: 'Stardew Valley Stonks';
+  src: url('../../medias/fonts/stardew_valley_stonks.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Stardew Valley Regular';
+  src: url('../../medias/fonts/stardew_valley_regular.ttf') format('truetype');
+}
+@font-face {
+  font-family: 'Inter';
+  src: url('../../medias/fonts/inter.ttf') format('truetype');
+}
+* {
+  padding: 0;
+  box-sizing: border-box;
+}
+html {
+  background-image: url("../../medias/images/content/bg.png");
+  object-fit: cover;
+}
+body {
+  margin: 100px 100px;
+  border-radius: 5px;
+  background-color: rgba(255, 255, 255, 0.64);
+}
+body .save-file {
+  position: absolute;
+  top: calc(100px/2 + 10px);
+  right: 100px;
+  background-color: #ffc677;
+  padding: 5px 15px;
+  border: solid 2px #a27845;
+}
+body .data {
+  font-size: 16px;
+  font-family: "Stardew Valley Stonks", serif;
+  color: #000000;
+}
+body .data-info {
+  font-size: 14px;
+  font-family: "Stardew Valley Stonks", serif;
+  color: #000000;
+}
+body .data-label {
+  font-size: 10px;
+  font-family: "Inter", sans-serif;
+  color: rgba(0, 0, 0, 0.64);
+  font-weight: 200;
+}
+body header {
+  display: flex;
+  flex-direction: column;
+  background-color: rgba(0, 0, 0, 0.21);
+  padding: 15px;
+  gap: 10px;
+}
+body header .header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+body header .header > span:first-of-type {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+}
+body header .header img {
+  width: 20px;
+}
+body header .sub-header {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+body header .sub-header .all-money {
+  display: flex;
+  gap: 50px;
+}
+body header .sub-header img {
+  width: 12px;
+}
+body main {
+  padding: 5px 15px;
+}
+body main .section-title {
+  font-size: 10px;
+  font-family: "Stardew Valley Stonks", serif;
+  font-weight: 400;
+  color: #000000;
+}
+body main .info-section {
+  width: fit-content;
+  display: flex;
+  justify-content: center;
+  gap: 50px;
+}
+body main .info-section span {
+  display: flex;
+  align-items: flex-end;
+  gap: 5px;
+}
+body main .info-section img {
+  height: 20px;
+}
