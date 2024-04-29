@@ -127,7 +127,7 @@ function display_skills(array $datas):string {
         $level_icon = get_images_folder_root() . "icons/$level_icon_name.png";
 
         $structure .= "
-            <span>
+            <span class='skill $key'>
                 <img src='$level_icon' alt='$key'/>
                 
                 " . get_level_progress_bar($level) . "
@@ -148,7 +148,7 @@ function get_level_progress_bar(int $level):string {
         if($level >= $i) $level_bar = get_images_folder_root() . (($i % 5 == 0) ? "icons/big_level.png"       : "icons/level.png");
         else             $level_bar = get_images_folder_root() . (($i % 5 == 0) ? "icons/big_level_empty.png" : "icons/level_empty.png");
         
-        $structure .= "<img src='$level_bar' alt='' width='20px'/>";        
+        $structure .= "<img src='$level_bar' alt=''/>";        
     }
 
     $structure .= "</span>";
