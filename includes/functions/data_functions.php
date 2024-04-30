@@ -65,7 +65,7 @@ function get_aggregated_data(object $data):array {
         'achievements'    => get_achievement($data->achievements),
         'skills'          => get_skills_data((array) $data->professions->int),
         'friendship'      => get_friendship_data($data->friendshipData),
-        'monsters_kill'   => get_monsters_kill_data($data->stats),
+        'enemies_killed'   => get_enemies_killed_data($data->stats),
         'quest_log'       => get_quest_log($data->questLog)
     );
 }
@@ -139,14 +139,14 @@ function get_game_duration(int $duration):string {
     return sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
 }
 
-function get_monsters_kill_data(object $data):array { 
-    $monsters = [];
+function get_enemies_killed_data(object $data):array { 
+    $enemies = [];
     
     foreach ($data->specificMonstersKilled->item as $item) {
-        $monsters[(string) $item->key->string] = (int) $item->value->int;
+        $enemies[(string) $item->key->string] = (int) $item->value->int;
     }
     
-    return $monsters;
+    return $enemies;
 }
 
 

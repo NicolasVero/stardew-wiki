@@ -20,6 +20,8 @@ function display_page(array $all_datas):string {
     $structure .= display_gallery($all_datas['cooking_recipe'], 'recipes', 'Cooking recipes');
     $structure .= display_gallery($all_datas['shipped_items'], 'shipped_items', 'Shipped items');
 
+    $structure .= display_enemies($all_datas['enemies_killed']);
+
     $structure .= "</main>";
 
     return $structure;
@@ -287,3 +289,35 @@ function display_gallery(array $player_elements, string $json_file, string $sect
 
     return $structure;
 }
+
+
+function display_enemies(array $player_enemies):string {
+    $structure = "";
+
+    $enemies = json_decode(file_get_contents(get_json_folder() . 'enemies.json'), true);
+    $images_path = get_images_folder() . "enemies/";
+
+    $structure .= "
+        <section class='gallery monsters-section'>
+            <h2>Enemies</h2>
+            <span>
+    ";
+
+    foreach($enemies['enemies'] as $enemy) {
+
+        $enemy_class = array_key_exists($enemy, $player_enemies) ? "found" : "not-found"; 
+        $enemy_image = $images_path . formate_text_for_file($enemy) . ".png";        
+        $enemy_killed = (isset($player_enemies[$enemy])) ? $player_enemies[$enemy] : 0;
+        $tooltip_text = ($enemy_killed > 0) ? "$enemy : $enemy_killed killed" : $enemy;
+
+
+        $structure .= "
+            <span class='labeled'>
+                <img src='$enemy_image' alt='$enemy' class='gallery-item enemies $enemy_class' />
+                <span>$tooltip_text</span>
+            </span>
+        ";
+    }
+
+    return $structure;
+} 
