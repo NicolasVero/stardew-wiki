@@ -14,6 +14,12 @@ function display_page(array $all_datas):string {
     $structure .= display_top_friendships($all_datas['friendship'], 4);
     $structure .= display_friendships($all_datas['friendship']);
 
+    $structure .= display_gallery($all_datas['fish_caught'], 'fish', 'Fish caught');
+    $structure .= display_gallery($all_datas['artifacts_found'], 'artifacts', 'Artifacts');
+    $structure .= display_gallery($all_datas['minerals_found'], 'minerals', 'Minerals');
+    $structure .= display_gallery($all_datas['cooking_recipe'], 'recipes', 'Cooking recipes');
+    $structure .= display_gallery($all_datas['shipped_items'], 'shipped_items', 'Shipped items');
+
     $structure .= "</main>";
 
     return $structure;
@@ -194,7 +200,7 @@ function display_top_friendships(array $friends, int $limit):string {
 function display_friendships(array $friends, $limit = -1):string {
 
     $images_path = get_images_folder();
-    $marriables_npc = json_decode(file_get_contents(get_site_root() . '/data/json/marriables.json'), true);
+    $marriables_npc = json_decode(file_get_contents(get_json_folder() . 'marriables.json'), true);
 
     $section_class = ($limit == -1) ? 'all-friends' : 'top-friends';
     $structure = "
@@ -243,6 +249,33 @@ function display_friendships(array $friends, $limit = -1):string {
         </div>
         <span class='view-all view-all-friendships'>View all friendships</span>    
     </section>";
+
+    return $structure;
+}
+
+function display_gallery(array $player_elements, string $json_file, string $section_title):string {
+    $structure = "";
+    $images_path = get_images_folder() . "$json_file/";
+
+    $elements = json_decode(file_get_contents(get_json_folder() . $json_file . '.json'), true);
+
+    log_($elements);
+
+    $structure .= "
+        <section class='gallery $json_file-section'>
+            <h2>$section_title</h2>
+            <span>
+    ";
+
+    foreach($elements as $element) {
+
+        $element_class = in_array($element, $player_elements) ? "found" : "not-found"; 
+        $element_image = $images_path . formate_text_for_file($element) . ".png";
+
+        $structure .= "<img src='$element_image' alt='$element' class='gallery-item $json_file $element_class' />";
+    }
+
+    $structure .= "</span>";
 
     return $structure;
 }

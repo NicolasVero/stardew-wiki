@@ -172,3 +172,10 @@ body main .info-section.skills .skill img {
 body main .info-section.skills .skill img.level-icon {
   height: 24px;
 }
+
+
+
+.not-found {
+  filter:grayscale(1);
+  opacity: 0.2;
+}

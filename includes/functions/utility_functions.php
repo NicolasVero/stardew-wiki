@@ -16,3 +16,18 @@ function get_site_root():string {
     return 'http://localhost/travail/stardew_wiki/';
 }
 
+function formate_text_for_file(string $string):string {
+
+    $search =  [' ', '\'', '(', ')'];
+    $replace = ['_', ''  , '' , '' ];
+
+    $string = str_replace($search, $replace, $string);
+
+    $string = strtolower($string);
+
+    if (substr($string, -1) === '_') {
+        $string = substr($string, 0, -1);
+    }
+
+    return $string;
+}

@@ -109,7 +109,7 @@ function get_item_list(object $items, string $filename):array {
 
 
 function find_reference_in_json(int $id, string $file) {
-    $json_file = json_decode(file_get_contents(get_site_root() . '/data/json/' . $file . '.json'), true);
+    $json_file = json_decode(file_get_contents(get_json_folder() . $file . '.json'), true);
 
     return isset($json_file[$id]) ? $json_file[$id] : null;
 }
@@ -117,7 +117,7 @@ function find_reference_in_json(int $id, string $file) {
 
 function get_skills_data(array $skills):array {
 
-    $json_skills = json_decode(file_get_contents(get_site_root() . '/data/json/skills.json'), true);
+    $json_skills = json_decode(file_get_contents(get_json_folder() . 'skills.json'), true);
     $skills_datas = array();
 
     foreach($json_skills as $key => $skill) {
