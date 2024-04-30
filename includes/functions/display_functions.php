@@ -241,7 +241,7 @@ function display_friendships(array $friends, $limit = -1):string {
 
     $structure .= "
         </div>
-        <span class='view-all view-all-friendships>View all friendships</span>    
+        <span class='view-all view-all-friendships'>View all friendships</span>    
     </section>";
 
     return $structure;
