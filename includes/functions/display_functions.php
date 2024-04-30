@@ -219,7 +219,12 @@ function display_friendships(array $friends, $limit = -1):string {
         $friend_icon = $images_path . "characters/" . strtolower($name) . ".png";
 
 
-        $structure .= "<img src='$friend_icon' alt='$name icon' />";
+        $structure .= "
+            <span class='labeled'>
+                <img src='$friend_icon' alt='$name icon' />
+                <span>$name</span>
+            </span>  
+        ";
             
         $can_be_married = in_array($name, $marriables_npc['marriables']) && $friend['status'] == "Friendly";
 
@@ -259,8 +264,6 @@ function display_gallery(array $player_elements, string $json_file, string $sect
 
     $elements = json_decode(file_get_contents(get_json_folder() . $json_file . '.json'), true);
 
-    log_($elements);
-
     $structure .= "
         <section class='gallery $json_file-section'>
             <h2>$section_title</h2>
@@ -272,7 +275,12 @@ function display_gallery(array $player_elements, string $json_file, string $sect
         $element_class = in_array($element, $player_elements) ? "found" : "not-found"; 
         $element_image = $images_path . formate_text_for_file($element) . ".png";
 
-        $structure .= "<img src='$element_image' alt='$element' class='gallery-item $json_file $element_class' />";
+        $structure .= "
+            <span class='labeled'>
+                <img src='$element_image' alt='$element' class='gallery-item $json_file $element_class' />
+                <span>$element</span>
+            </span>
+        ";
     }
 
     $structure .= "</span>";
