@@ -11,7 +11,7 @@ function display_page(array $all_datas):string {
         'levels' => $all_datas['levels'], 
         'skills' => $all_datas['skills'])
     );
-    
+
     $structure .= "</main>";
 
     return $structure;
@@ -85,7 +85,7 @@ function display_general_stats(array $datas):string {
 
     $structure = "
         <h2 class='section-title'>General stats</h2>
-        <div class='info-section general-stats'>
+        <section class='info-section general-stats'>
             <span>
                 <img src='{$images_path}icons/energy.png' alt='Energy' />
                 <span class='data data-energy'>" . number_format($max_stamina) . "</span>
@@ -110,7 +110,7 @@ function display_general_stats(array $datas):string {
                 <span class='data-label'>deepest mine level</span>
             </span>
         
-        </div>
+        </section>
     ";
 
     return $structure;
@@ -119,7 +119,9 @@ function display_general_stats(array $datas):string {
 
 function display_skills(array $datas):string {
     
-    $structure = "";
+    $structure = "
+		<section class='skills info-section'>
+			<h2 class='section-title'>Skills</h2>";
 
     foreach($datas['levels'] as $key => $level) {
         
@@ -128,14 +130,16 @@ function display_skills(array $datas):string {
 
         $structure .= "
             <span class='skill $key'>
-                <img src='$level_icon' alt='$key'/>
+                <img src='$level_icon' class='level-icon' alt='$key'/>
                 
                 " . get_level_progress_bar($level) . "
-                <span>$level</span>
+                <span class='level'>$level</span>
                 <span>" . get_skills_icons($datas['skills'], $level_icon_name) . "</span>
             </span>
         ";
     }
+
+    $structure .= "</section>";
 
     return $structure;
 }
@@ -167,7 +171,12 @@ function get_skills_icons(array $skills, string $current_skill):string {
             $skill_icon_path = get_images_folder_root() . "skills/$skill_icon.png";
             $skill_description = $skill['description'];
             
-            $structure .= "<img src='$skill_icon_path' alt='' title='$skill_description' />";
+            $structure .= "
+			<span class='labeled'>
+				<img src='$skill_icon_path' alt='$skill_description' />
+				<span>$skill_description</span>
+			</span>
+			";
         }
     }
 

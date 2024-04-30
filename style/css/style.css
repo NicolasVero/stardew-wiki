@@ -17,9 +17,15 @@ pre {
 * {
   padding: 0;
   box-sizing: border-box;
+  cursor: url("../../medias/images/cursors/cursor.cur"), auto;
 }
 html {
   background-image: url("../../medias/images/content/bg.png");
+  background-size: 125% 125%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
   object-fit: cover;
 }
 body {
@@ -29,11 +35,14 @@ body {
 }
 body .save-file {
   position: absolute;
+  cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   top: calc(100px/2 + 10px);
   right: 100px;
-  background-color: #ffc677;
   padding: 5px 15px;
-  border: solid 2px #a27845;
+  background-color: #ffc677;
+  border-image: url('../../medias/images/content/border-image.png') 15 stretch;
+  border-image-width: 5px;
+  background-clip: padding-box;
 }
 body .data {
   font-size: 16px;
@@ -86,7 +95,30 @@ body header .sub-header img {
   width: 12px;
 }
 body main {
+  display: flex;
+  flex-wrap: wrap;
   padding: 5px 15px;
+}
+body main span.labeled:hover {
+  position: relative;
+}
+body main span.labeled span {
+  position: absolute;
+  display: none;
+  width: max-content;
+  font-family: "Stardew Valley Stonks", serif;
+  max-width: 150px;
+  padding: 2.5px 7.5px;
+  background-color: #ffc677;
+  border-image: url('../../medias/images/content/border-image.png') 15 stretch;
+  border-image-width: 2px;
+}
+body main span.labeled img:hover {
+  cursor: url("../../medias/images/cursors/help.cur"), help;
+}
+body main span.labeled img:hover ~ span {
+  z-index: 100;
+  display: inline;
 }
 body main .section-title {
   font-size: 10px;
@@ -97,14 +129,46 @@ body main .section-title {
 body main .info-section {
   width: fit-content;
   display: flex;
-  justify-content: center;
+  margin-bottom: 20px;
+}
+body main .info-section.general-stats {
+  flex-basis: 100%;
   gap: 50px;
 }
-body main .info-section span {
+body main .info-section.general-stats span {
   display: flex;
   align-items: flex-end;
   gap: 5px;
 }
-body main .info-section img {
+body main .info-section.general-stats img {
   height: 20px;
+}
+body main .info-section.skills {
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+body main .info-section.skills .skill {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+body main .info-section.skills .skill .level {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 16px;
+  font-family: "Stardew Valley Stonks", serif;
+  color: #000000;
+}
+body main .info-section.skills .skill .level-progress-bar {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+body main .info-section.skills .skill img {
+  height: 20px;
+}
+body main .info-section.skills .skill img.level-icon {
+  height: 24px;
 }
