@@ -11,17 +11,18 @@ function display_page(array $all_datas):string {
         'levels' => $all_datas['levels'], 
         'skills' => $all_datas['skills'])
     );
+    $structure .= display_top_friendships($all_datas['friendship'], 4);
+    $structure .= display_friendships($all_datas['friendship']);
 
     $structure .= "</main>";
 
     return $structure;
 }
 
-
 function display_header(array $datas):string {
     
     extract($datas);    
-    $images_path = get_images_folder_root();
+    $images_path = get_images_folder();
 
     $structure = "
 		<button class='data save-file'>Upload a save file</button>
@@ -81,41 +82,42 @@ function display_header(array $datas):string {
 function display_general_stats(array $datas):string {
 
     extract($datas);
-    $images_path = get_images_folder_root();
+    $images_path = get_images_folder();
 
     $structure = "
-        <h2 class='section-title'>General stats</h2>
         <section class='info-section general-stats'>
-            <span>
-                <img src='{$images_path}icons/energy.png' alt='Energy' />
-                <span class='data data-energy'>" . number_format($max_stamina) . "</span>
-                <span class='data-label'>max stamina</span>
-            </span>
+        <h2 class='section-title'>General stats</h2>
 
-            <span>
-                <img src='{$images_path}icons/health.png' alt='Health' />
-                <span class='data data-health'>" . number_format($max_health) . "</span>
-                <span class='data-label'>max health</span>
-            </span>
+            <div>
+                <span>
+                    <img src='{$images_path}icons/energy.png' alt='Energy' />
+                    <span class='data data-energy'>" . number_format($max_stamina) . "</span>
+                    <span class='data-label'>max stamina</span>
+                </span>
 
-            <span>
-                <img src='{$images_path}icons/inventory.png' alt='Inventory' />
-                <span class='data data-inventory'>" . number_format($max_items) . "</span>
-                <span class='data-label'>max inventory</span>
-            </span>
+                <span>
+                    <img src='{$images_path}icons/health.png' alt='Health' />
+                    <span class='data data-health'>" . number_format($max_health) . "</span>
+                    <span class='data-label'>max health</span>
+                </span>
 
-            <span>
-                <img src='{$images_path}icons/mine_level.png' alt='Mine level' />
-                <span class='data data-mine-level'>" . number_format($mine_level) . "</span>
-                <span class='data-label'>deepest mine level</span>
-            </span>
-        
+                <span>
+                    <img src='{$images_path}icons/inventory.png' alt='Inventory' />
+                    <span class='data data-inventory'>" . number_format($max_items) . "</span>
+                    <span class='data-label'>max inventory</span>
+                </span>
+
+                <span>
+                    <img src='{$images_path}icons/mine_level.png' alt='Mine level' />
+                    <span class='data data-mine-level'>" . number_format($mine_level) . "</span>
+                    <span class='data-label'>deepest mine level</span>
+                </span>
+            </div>
         </section>
     ";
 
     return $structure;
 }
-
 
 function display_skills(array $datas):string {
     
@@ -126,7 +128,7 @@ function display_skills(array $datas):string {
     foreach($datas['levels'] as $key => $level) {
         
         $level_icon_name = explode('_', $key)[0];
-        $level_icon = get_images_folder_root() . "icons/$level_icon_name.png";
+        $level_icon = get_images_folder() . "icons/$level_icon_name.png";
 
         $structure .= "
             <span class='skill $key'>
@@ -149,8 +151,8 @@ function get_level_progress_bar(int $level):string {
     $structure = "<span class='level-progress-bar'>";
 
     for($i = 1; $i <= 10; $i++) {
-        if($level >= $i) $level_bar = get_images_folder_root() . (($i % 5 == 0) ? "icons/big_level.png"       : "icons/level.png");
-        else             $level_bar = get_images_folder_root() . (($i % 5 == 0) ? "icons/big_level_empty.png" : "icons/level_empty.png");
+        if($level >= $i) $level_bar = get_images_folder() . (($i % 5 == 0) ? "icons/big_level.png"       : "icons/level.png");
+        else             $level_bar = get_images_folder() . (($i % 5 == 0) ? "icons/big_level_empty.png" : "icons/level_empty.png");
         
         $structure .= "<img src='$level_bar' alt=''/>";        
     }
@@ -162,13 +164,13 @@ function get_level_progress_bar(int $level):string {
 
 function get_skills_icons(array $skills, string $current_skill):string {
 
-    $structure = "";
+    $structure = "<section class='skills-section'>";
 
     foreach($skills as $skill) {
         if($current_skill == strtolower($skill['source'])) {
 
             $skill_icon = strtolower($skill['skill']);
-            $skill_icon_path = get_images_folder_root() . "skills/$skill_icon.png";
+            $skill_icon_path = get_images_folder() . "skills/$skill_icon.png";
             $skill_description = $skill['description'];
             
             $structure .= "
@@ -179,6 +181,68 @@ function get_skills_icons(array $skills, string $current_skill):string {
 			";
         }
     }
+
+    $structure .= "</section>";
+
+    return $structure;
+}
+
+function display_top_friendships(array $friends, int $limit):string {
+    return display_friendships($friends, $limit);
+}
+
+function display_friendships(array $friends, $limit = -1):string {
+
+    $images_path = get_images_folder();
+    $marriables_npc = json_decode(file_get_contents(get_site_root() . '/data/json/marriables.json'), true);
+
+    $section_class = ($limit == -1) ? 'all-friends' : 'top-friends';
+    $structure = "
+        <section class='friends-section $section_class'>
+            <h2>Friendship progression</h2>
+            <div>
+    ";
+
+    foreach($friends as $name => $friend) {
+        if($limit == 0)
+            break;
+
+        $limit--;
+
+        extract($friend);
+        $friend_icon = $images_path . "characters/" . strtolower($name) . ".png";
+
+
+        $structure .= "<img src='$friend_icon' alt='$name icon' />";
+            
+        $can_be_married = in_array($name, $marriables_npc['marriables']) && $friend['status'] == "Friendly";
+
+        for($i = 1; $i <= 10; $i++) {
+
+            if($i > 8 && $can_be_married) {
+                $heart_icon = get_images_folder() . "icons/locked_heart.png";
+                $structure .= "<img src='$heart_icon' alt='' />";
+                continue;
+            }
+
+            $heart_icon = get_images_folder() . (($friend['friend_level'] >= $i) ? "icons/heart.png" : "icons/empty_heart.png");
+            $structure .= "<img src='$heart_icon' alt='' />";
+        }
+        
+        $structure .= "
+            <span>
+                <span class='week-gifts-counter'>$week_gifts</span>
+                <img src='{$images_path}icons/gift.png' alt=''/>
+                <span class='friend-status'>$status</span>
+            </span>
+        ";
+    }
+
+
+    $structure .= "
+        </div>
+        <span class='view-all view-all-friendships>View all friendships</span>    
+    </section>";
 
     return $structure;
 }

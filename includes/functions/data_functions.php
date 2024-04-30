@@ -164,6 +164,10 @@ function get_friendship_data(object $data):array {
         );
     }
 
+    uasort($friends, function ($a, $b) {
+        return $b['points'] - $a['points'];
+    });
+
     return $friends; 
 }
 
