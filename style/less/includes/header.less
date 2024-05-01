@@ -1,44 +1,5 @@
 // out: false
 
-@font-face {
-	font-family: 'Stardew Valley Stonks';
-	src: url('../../medias/fonts/stardew_valley_stonks.ttf') format('truetype');
-}
-
-@font-face {
-	font-family: 'Stardew Valley Regular';
-	src: url('../../medias/fonts/stardew_valley_regular.ttf') format('truetype');
-}
-
-@font-face {
-	font-family: 'Inter';
-	src: url('../../medias/fonts/inter.ttf') format('truetype');
-}
-
-// Background
-@primary-bg: rgba(0, 0, 0, 0.21);
-@secondary-bg: rgba(255, 255, 255, 0.64);
-
-// Font color
-@primary-fc: rgba(0, 0, 0, 1);
-@secondary-fc: rgba(0, 0, 0, .64);
-@auxiliary-fc: rgba(109, 109, 109, 1);
-
-// Font family
-@primary-ff: "Stardew Valley Stonks", serif;
-@secondary-ff: "Inter", sans-serif;
-@auxiliary-fc: "Stardew Valley Regular";
-
-// Font size
-@primary-fs: 16px;
-@secondary-fs: 10px;
-@auxiliary-fs: 14px;
-
-// Images size
-@big-icon: 24px;
-@medium-icon: 20px;
-@small-icon: 12px;
-
 * {
 	// margin: 0 auto;
 	padding: 0;
@@ -98,7 +59,7 @@ body {
 		flex-direction: column;
 		background-color: @primary-bg;
 		padding: 15px;
-		gap: 10px;
+		gap: @medium-gap;
 
 		.header {
 			width: 100%;
@@ -109,7 +70,7 @@ body {
 			& > span:first-of-type {
 				display: flex;
 				align-items: flex-end;
-				gap: 10px;
+				gap: @medium-gap;
 			}
 
 			img {
@@ -125,7 +86,7 @@ body {
 
 			.all-money {
 				display: flex;
-				gap: 50px;
+				gap: @big-gap;
 			}
 
 			img {
@@ -133,112 +94,4 @@ body {
 			}
 		}
 	}
-	
-	main {
-		display: flex;
-		flex-wrap: wrap;
-		padding: 5px 15px;
-
-		span.labeled {
-			&:hover {
-				position: relative;
-			}
-
-			span {
-				position: absolute;
-				display: none;
-				width: max-content;
-				font-family: @primary-ff;
-				max-width: 150px;
-				padding: 2.5px 7.5px;
-				background-color: rgba(255, 198, 119, 1);
-				border-image: url('../../medias/images/content/border-image.png') 15 stretch;
-				border-image-width: 2px;
-			}
-
-			img {
-				&:hover {
-					cursor: url("../../medias/images/cursors/help.cur"), help;
-					&~ span {
-						z-index: 100;
-						display: inline;
-					}
-				}
-			}
-		}
-		
-		.section-title {
-			font-size: @secondary-fs;
-			font-family: @primary-ff;
-			font-weight: 400;
-			color: @primary-fc;
-		}
-
-		.info-section {
-			width: fit-content;
-			display: flex;
-			margin-bottom: 20px;
-
-			// TODO pour + de sections
-			// &:not(.general-stats) {
-			// 	flex-basis: 50%;
-			// }
-
-			&.general-stats {
-				flex-basis: 100%;
-				gap: 50px;
-				
-				span {
-					display: flex;
-					align-items: flex-end;
-					gap: 5px;
-				}
-				
-				img {
-					height: @medium-icon;
-				}
-			}
-
-			&.skills {
-				flex-direction: column;
-				justify-content: center;
-				gap: 10px;
-
-				.skill {
-					display: flex;
-					align-items: center;
-					gap: 10px;
-
-					.level {
-						display: flex;
-						justify-content: center;
-						align-items: center;
-						font-size: @primary-fs;
-						font-family: @primary-ff;
-						color: @primary-fc;
-					}
-
-					.level-progress-bar {
-						display: flex;
-						align-items: center;
-						gap: 5px;
-					}
-
-					img {
-						height: @medium-icon;
-						&.level-icon {
-							height: @big-icon;
-						}
-					}
-
-				}
-			}
-		}
-	}
 }
-
-// ! enlever cette horreur
-.not-found {
-	filter:grayscale(1);
-	opacity: 0.2;
-  }

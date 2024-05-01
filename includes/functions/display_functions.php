@@ -14,13 +14,18 @@ function display_page(array $all_datas):string {
     $structure .= display_top_friendships($all_datas['friendship'], 4);
     $structure .= display_friendships($all_datas['friendship']);
 
+    $structure .= "<div class='separated-galleries'>";
     $structure .= display_gallery($all_datas['fish_caught'], 'fish', 'Fish caught');
-    $structure .= display_gallery($all_datas['artifacts_found'], 'artifacts', 'Artifacts');
-    $structure .= display_gallery($all_datas['minerals_found'], 'minerals', 'Minerals');
     $structure .= display_gallery($all_datas['cooking_recipe'], 'recipes', 'Cooking recipes');
+    $structure .= display_gallery($all_datas['minerals_found'], 'minerals', 'Minerals');
+    $structure .= display_gallery($all_datas['artifacts_found'], 'artifacts', 'Artifacts');
+    $structure .= "</div>";
+
     $structure .= display_gallery($all_datas['shipped_items'], 'shipped_items', 'Shipped items');
 
+    $structure .= "<div class='separated-galleries'>";
     $structure .= display_enemies($all_datas['enemies_killed']);
+    $structure .= "</div>";
 
     $structure .= "</main>";
 
@@ -94,7 +99,7 @@ function display_general_stats(array $datas):string {
 
     $structure = "
         <section class='info-section general-stats'>
-        <h2 class='section-title'>General stats</h2>
+        	<h2 class='section-title'>General stats</h2>
 
             <div>
                 <span>
@@ -182,7 +187,7 @@ function get_skills_icons(array $skills, string $current_skill):string {
             $skill_description = $skill['description'];
             
             $structure .= "
-			<span class='labeled'>
+			<span class='tooltip'>
 				<img src='$skill_icon_path' alt='$skill_description' />
 				<span>$skill_description</span>
 			</span>
@@ -206,8 +211,8 @@ function display_friendships(array $friends, $limit = -1):string {
 
     $section_class = ($limit == -1) ? 'all-friends' : 'top-friends';
     $structure = "
-        <section class='friends-section $section_class'>
-            <h2>Friendship progression</h2>
+        <section class='info-section friends-section $section_class'>
+            <h2 class='section-title'>Friendship progression</h2>
             <div>
     ";
 
@@ -222,10 +227,12 @@ function display_friendships(array $friends, $limit = -1):string {
 
 
         $structure .= "
-            <span class='labeled'>
-                <img src='$friend_icon' alt='$name icon' />
-                <span>$name</span>
-            </span>  
+			<span>
+				<span class='tooltip'>
+					<img src='$friend_icon' class='character-icon' alt='$name icon' />
+					<span>$name</span>
+				</span>
+				<span class='hearts-level'>
         ";
             
         $can_be_married = in_array($name, $marriables_npc['marriables']) && $friend['status'] == "Friendly";
@@ -234,41 +241,42 @@ function display_friendships(array $friends, $limit = -1):string {
 
             if($i > 8 && $can_be_married) {
                 $heart_icon = get_images_folder() . "icons/locked_heart.png";
-                $structure .= "<img src='$heart_icon' alt='' />";
+                $structure .= "<img src='$heart_icon' class='hearts' alt='' />";
                 continue;
             }
 
             $heart_icon = get_images_folder() . (($friend['friend_level'] >= $i) ? "icons/heart.png" : "icons/empty_heart.png");
-            $structure .= "<img src='$heart_icon' alt='' />";
+            $structure .= "<img src='$heart_icon' class='hearts' alt='' />";
         }
         
         $structure .= "
-            <span>
-                <span class='week-gifts-counter'>$week_gifts</span>
-                <img src='{$images_path}icons/gift.png' alt=''/>
-                <span class='friend-status'>$status</span>
-            </span>
+				</span>
+				<span class='gifts'>
+					<img src='{$images_path}icons/gift.png' class='gift' alt=''/>
+					<span class='gift-counter'>$week_gifts</span><span class='week'>this week</span>
+				</span>
+				<span class='friend-status'>$status</span>
+			</span>
         ";
     }
 
 
     $structure .= "
+			<span class='view-all view-all-friendships'>View all friendships</span>
         </div>
-        <span class='view-all view-all-friendships'>View all friendships</span>    
     </section>";
 
     return $structure;
 }
 
 function display_gallery(array $player_elements, string $json_file, string $section_title):string {
-    $structure = "";
     $images_path = get_images_folder() . "$json_file/";
 
     $elements = json_decode(file_get_contents(get_json_folder() . $json_file . '.json'), true);
 
-    $structure .= "
+    $structure = "
         <section class='gallery $json_file-section'>
-            <h2>$section_title</h2>
+            <h2 class='section-title'>$section_title</h2>
             <span>
     ";
 
@@ -278,28 +286,29 @@ function display_gallery(array $player_elements, string $json_file, string $sect
         $element_image = $images_path . formate_text_for_file($element) . ".png";
 
         $structure .= "
-            <span class='labeled'>
+            <span class='tooltip'>
                 <img src='$element_image' alt='$element' class='gallery-item $json_file $element_class' />
                 <span>$element</span>
             </span>
         ";
     }
 
-    $structure .= "</span>";
+    $structure .= "
+		</span>
+			</section>
+	";
 
     return $structure;
 }
 
 
 function display_enemies(array $player_enemies):string {
-    $structure = "";
-
     $enemies = json_decode(file_get_contents(get_json_folder() . 'enemies.json'), true);
     $images_path = get_images_folder() . "enemies/";
 
-    $structure .= "
+    $structure = "
         <section class='gallery monsters-section'>
-            <h2>Enemies</h2>
+            <h2 class='section-title'>Enemies</h2>
             <span>
     ";
 
@@ -312,12 +321,17 @@ function display_enemies(array $player_enemies):string {
 
 
         $structure .= "
-            <span class='labeled'>
+            <span class='tooltip'>
                 <img src='$enemy_image' alt='$enemy' class='gallery-item enemies $enemy_class' />
                 <span>$tooltip_text</span>
             </span>
         ";
     }
+
+	$structure .= "
+			</span>
+		</section>
+	";
 
     return $structure;
 } 

@@ -14,6 +14,26 @@ pre {
   font-family: 'Inter';
   src: url('../../medias/fonts/inter.ttf') format('truetype');
 }
+.tooltip:hover {
+  position: relative;
+}
+.tooltip span {
+  position: absolute;
+  display: none;
+  font-family: "Stardew Valley Stonks", serif;
+  width: max-content;
+  padding: 5px 7.5px;
+  background-color: #ffc677;
+  border-image: url('../../medias/images/content/border-image.png') 15 stretch;
+  border-image-width: 2px;
+}
+.tooltip img:hover {
+  cursor: url("../../medias/images/cursors/help.cur"), help;
+}
+.tooltip img:hover ~ span {
+  z-index: 100;
+  display: inline;
+}
 * {
   padding: 0;
   box-sizing: border-box;
@@ -94,66 +114,49 @@ body header .sub-header .all-money {
 body header .sub-header img {
   width: 12px;
 }
-body main {
+main {
   display: flex;
   flex-wrap: wrap;
   padding: 5px 15px;
+  gap: 50px 0;
 }
-body main span.labeled:hover {
-  position: relative;
-}
-body main span.labeled span {
-  position: absolute;
-  display: none;
-  width: max-content;
-  font-family: "Stardew Valley Stonks", serif;
-  max-width: 150px;
-  padding: 2.5px 7.5px;
-  background-color: #ffc677;
-  border-image: url('../../medias/images/content/border-image.png') 15 stretch;
-  border-image-width: 2px;
-}
-body main span.labeled img:hover {
-  cursor: url("../../medias/images/cursors/help.cur"), help;
-}
-body main span.labeled img:hover ~ span {
-  z-index: 100;
-  display: inline;
-}
-body main .section-title {
+main .section-title {
   font-size: 10px;
   font-family: "Stardew Valley Stonks", serif;
   font-weight: 400;
   color: #000000;
 }
-body main .info-section {
+main .info-section {
   width: fit-content;
   display: flex;
-  margin-bottom: 20px;
+  justify-content: flex-start;
+  flex-direction: column;
+  gap: 10px;
 }
-body main .info-section.general-stats {
+main .info-section.general-stats {
   flex-basis: 100%;
+}
+main .info-section.general-stats div {
+  display: flex;
   gap: 50px;
 }
-body main .info-section.general-stats span {
+main .info-section.general-stats span {
   display: flex;
   align-items: flex-end;
   gap: 5px;
 }
-body main .info-section.general-stats img {
+main .info-section.general-stats img {
   height: 20px;
 }
-body main .info-section.skills {
-  flex-direction: column;
-  justify-content: center;
-  gap: 10px;
+main .info-section.skills {
+  flex-basis: 45%;
 }
-body main .info-section.skills .skill {
+main .info-section.skills .skill {
   display: flex;
   align-items: center;
   gap: 10px;
 }
-body main .info-section.skills .skill .level {
+main .info-section.skills .skill .level {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -161,18 +164,108 @@ body main .info-section.skills .skill .level {
   font-family: "Stardew Valley Stonks", serif;
   color: #000000;
 }
-body main .info-section.skills .skill .level-progress-bar {
+main .info-section.skills .skill .level-progress-bar {
   display: flex;
   align-items: center;
   gap: 5px;
 }
-body main .info-section.skills .skill img {
+main .info-section.skills .skill img {
   height: 20px;
 }
-body main .info-section.skills .skill img.level-icon {
+main .info-section.skills .skill img.level-icon {
   height: 24px;
 }
-.not-found {
+main .info-section.friends-section {
+  font-family: "Stardew Valley Stonks", serif;
+  font-size: 14px;
+  color: #000000;
+  flex-basis: 55%;
+}
+main .info-section.friends-section div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 10px;
+}
+main .info-section.friends-section div > span {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+main .info-section.friends-section div .character-icon {
+  width: 32px;
+}
+main .info-section.friends-section div .hearts-level {
+  display: flex;
+  gap: 5px;
+}
+main .info-section.friends-section div .hearts-level .hearts {
+  width: 20px;
+}
+main .info-section.friends-section div .gifts {
+  display: flex;
+  gap: 10px;
+}
+main .info-section.friends-section div .gifts .gift {
+  width: 20px;
+}
+main .info-section.friends-section div .gifts .week {
+  font-family: "Inter", sans-serif;
+  font-size: 10px;
+  color: rgba(0, 0, 0, 0.64);
+  width: max-content;
+}
+main .info-section.friends-section div .gifts .friend-status {
+  font-size: 14px;
+}
+main .info-section.friends-section div .view-all-friendships {
+  font-family: "Stardew Valley Stonks", serif;
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.64);
+  align-self: flex-end;
+  cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
+}
+main .info-section.friends-section.all-friends {
+  display: none;
+  position: absolute;
+  width: 80vw;
+  height: 80vh;
+  top: 10vh;
+  left: 10vw;
+  padding: 10px 25px;
+  background-clip: padding-box;
+  background-color: rgba(255, 255, 255, 0.64);
+  border-image: url('../../medias/images/content/border-image.png') 15 stretch;
+  border-image-width: 10px;
+  border-image-outset: 10px;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+main .info-section.friends-section.all-friends .section-title {
+  font-size: 16px;
+}
+main .separated-galleries {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 50px 0;
+}
+main .gallery {
+  display: flex;
+  flex-direction: column;
+}
+main .gallery:not(.shipped_items-section) {
+  flex-basis: 47.5%;
+}
+main .gallery > span {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+main .gallery img {
+  height: 24px;
+}
+main .gallery > span .not-found {
   filter: grayscale(1);
   opacity: 0.2;
 }

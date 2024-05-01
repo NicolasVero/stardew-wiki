@@ -1,0 +1,76 @@
+// out: false
+
+@font-face {
+	font-family: 'Stardew Valley Stonks';
+	src: url('../../medias/fonts/stardew_valley_stonks.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Stardew Valley Regular';
+	src: url('../../medias/fonts/stardew_valley_regular.ttf') format('truetype');
+}
+
+@font-face {
+	font-family: 'Inter';
+	src: url('../../medias/fonts/inter.ttf') format('truetype');
+}
+
+// Background
+@primary-bg: rgba(0, 0, 0, 0.21);
+@secondary-bg: rgba(255, 255, 255, 0.64);
+
+// Font color
+@primary-fc: rgba(0, 0, 0, 1);
+@secondary-fc: rgba(0, 0, 0, .64);
+@auxiliary-fc: rgba(109, 109, 109, 1);
+
+// Font family
+@primary-ff: "Stardew Valley Stonks", serif;
+@secondary-ff: "Inter", sans-serif;
+@auxiliary-fc: "Stardew Valley Regular";
+
+// Font size
+@primary-fs: 16px;
+@secondary-fs: 10px;
+@auxiliary-fs: 14px;
+
+// Images size
+@bigger-icon: 32px;
+@big-icon: 24px;
+@medium-icon: 20px;
+@small-icon: 12px;
+
+// Gaps
+@big-gap: 50px;
+@medium-gap: 10px;
+@small-gap: 5px;
+
+// Tooltips
+.tooltip {
+	&:hover {
+		position: relative;
+	}
+
+	span {
+		position: absolute;
+		display: none;
+		width: max-content;
+		font-family: @primary-ff;
+		width: max-content;
+		// max-width: 150px;
+		padding: 5px 7.5px;
+		background-color: rgba(255, 198, 119, 1);
+		border-image: url('../../medias/images/content/border-image.png') 15 stretch;
+		border-image-width: 2px;
+	}
+
+	img {
+		&:hover {
+			cursor: url("../../medias/images/cursors/help.cur"), help;
+			& ~ span {
+				z-index: 100;
+				display: inline;
+			}
+		}
+	}
+}
