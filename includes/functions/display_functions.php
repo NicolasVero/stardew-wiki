@@ -38,7 +38,7 @@ function display_player_selection(array $players):string {
     $structure = "<ul id='player_selection'>";
 
     foreach($players as $player) {
-        $structure .= "<li value='$player'>$player</option>";
+        $structure .= "<li value='$player' class='button-elements'>$player</option>";
     }
 	/* Test username max length
     $structure .= "
@@ -65,7 +65,7 @@ function display_header(array $datas):string {
     $images_path = get_images_folder();
 
     $structure = "
-		<button class='data save-file'>Upload a save file</button>
+		<button class='button-elements save-file'>Upload a save file</button>
         <header>
             <div class='header'>
                 <span>
@@ -175,7 +175,7 @@ function display_skills(array $datas):string {
                 <img src='$level_icon' class='level-icon' alt='$key'/>
                 
                 " . get_level_progress_bar($level) . "
-                <span class='level'>$level</span>
+                <span class='level data'>$level</span>
                 <span>" . get_skills_icons($datas['skills'], $level_icon_name) . "</span>
             </span>
         ";
@@ -292,9 +292,9 @@ function display_friendships(array $friends, $limit = -1):string {
 				</span>
 				<span class='gifts'>
 					<img src='{$images_path}icons/gift.png' class='gift' alt=''/>
-					<span class='gift-counter'>$week_gifts</span><span class='week'>this week</span>
+					<span class='gift-counter data'>$week_gifts</span><span class='week'>this week</span>
 				</span>
-				<span class='friend-status'>$status</span>
+				<span class='friend-status data'>$status</span>
 			</span>
         ";
     }

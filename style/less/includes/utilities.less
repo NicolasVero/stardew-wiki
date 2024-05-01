@@ -17,7 +17,7 @@
 
 // Background
 @primary-bg: rgba(0, 0, 0, 0.21);
-@secondary-bg: rgba(255, 255, 255, 0.64);
+@secondary-bg: rgba(255, 255, 255, 0.7);
 @stardew-bg: rgba(255, 198, 119, 1);
 
 // Font color
@@ -32,15 +32,16 @@
 
 // Font size
 @bigger-fs: 20px;
-@big-fs: 16px;
-@md-fs: 14px;
-@small-fs: 10px;
+@big-fs: 18px;
+@md-fs: 16px;
+@small-fs: 12px;
 
 // Images size
-@bigger-icon: 32px;
-@big-icon: 24px;
-@md-icon: 20px;
-@small-icon: 12px;
+@bigger-icon: 48px;
+@big-icon: 28px;
+@md-icon: 24px;
+@small-icon: 20px;
+@xsmall-icon: 16px;
 
 // Gaps
 @bigger-gap: 50px;
@@ -60,10 +61,10 @@
 	}
 
 	span {
+		.data;
 		position: absolute;
 		display: none;
 		width: max-content;
-		font-family: @primary-ff;
 		width: max-content;
 		// max-width: 150px;
 		padding: 5px 7.5px;
@@ -85,20 +86,30 @@
 
 // Basic classes
 .data {
-	font-size: @big-fs;
 	font-family: @primary-ff;
+	font-size: @big-fs;
 	color: @primary-fc;
 }
 
 .data-info {
-	font-size: @md-fs;
 	font-family: @primary-ff;
+	font-size: @md-fs;
 	color: @primary-fc;
 }
 
 .data-label {
-	font-size: @small-fs;
 	font-family: @secondary-ff;
+	font-size: @small-fs;
 	color: @secondary-fc;
 	font-weight: 200;
+}
+
+.button-elements {
+	.data;
+}
+
+
+.not-found {
+	filter:grayscale(1);
+	opacity: 0.2;
 }

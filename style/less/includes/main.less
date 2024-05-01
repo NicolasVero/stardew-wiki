@@ -3,11 +3,19 @@
 main {
 	display: flex;
 	flex-wrap: wrap;
-	padding: 5px 15px;
+	padding: 5px 25px;
 	gap: @big-gap 0;
+
+	section {
+		&:not(.general-stats) {
+			display: flex;
+			flex-direction: column;
+			gap: @md-gap;
+		}
+	}
 	
 	.section-title {
-		font-size: @small-fs;
+		font-size: @md-fs;
 		font-family: @primary-ff;
 		font-weight: 400;
 		color: @primary-fc;
@@ -15,10 +23,8 @@ main {
 
 	.info-section {
 		width: fit-content;
-		display: flex;
 		justify-content: flex-start;
-		flex-direction: column;
-		gap: @md-gap;
+		flex-basis: 50%;
 
 		&.general-stats {
 			position: relative;
@@ -36,9 +42,10 @@ main {
 			}
 			
 			img {
-				height: @md-icon;
+				height: @big-icon;
 				&.quest-icon {
 					position: absolute;
+					top: 0;
 					right: 0;
 					cursor: @pointer;
 				}
@@ -46,8 +53,6 @@ main {
 		}
 
 		&.skills {
-			flex-basis: 45%;
-
 			.skill {
 				display: flex;
 				align-items: center;
@@ -57,9 +62,6 @@ main {
 					display: flex;
 					justify-content: center;
 					align-items: center;
-					font-size: @big-fs;
-					font-family: @primary-ff;
-					color: @primary-fc;
 				}
 
 				.level-progress-bar {
@@ -69,7 +71,7 @@ main {
 				}
 
 				img {
-					height: @md-icon;
+					height: @big-icon;
 					&.level-icon {
 						height: @big-icon;
 					}
@@ -78,11 +80,6 @@ main {
 		}
 
 		&.friends-section {
-			font-family: @primary-ff;
-			font-size: @md-fs;
-			color: @primary-fc;
-			flex-basis: 55%;
-
 			& > span {
 				display: flex;
 				flex-direction: column;
@@ -92,9 +89,9 @@ main {
 				& > span {
 					display: flex;
 					align-items: center;
-					justify-content: space-between;
-					// gap: @big-gap;
+					// gap: @bigger-gap;
 				}
+
 
 				.character-icon {
 					width: @bigger-icon;
@@ -104,7 +101,7 @@ main {
 					display: flex;
 					gap: @small-gap;
 					.hearts {
-						width: @md-icon;
+						width: @small-icon;
 					}
 				}
 				.gifts {
@@ -120,11 +117,12 @@ main {
 						color: @secondary-fc;
 						width: max-content;
 					}
-
-					.friend-status {
-						font-size: @md-fs;
-					}
 				}
+
+				.friend-status {
+					font-size: @md-fs;
+				}
+
 				.view-all-friendships {
 					font-family: @primary-ff;
 					// font-size: @md-fs;
@@ -135,25 +133,40 @@ main {
 				}
 			}
 
+			&.top-friends {
+				& > span {
+					& > span {
+						justify-content: space-between;
+					}
+				}
+			}
+
 			&.all-friends {
 				display: none;
 	
 				position: fixed;
-				width: 80vw;
 				height: 80vh;
-				top: 10vh;
-				left: 10vw;
 				padding: 10px 25px;
+				top: 50%;
+				left: 50%;
+				transform: translate(-50%,-50%);
+
 				background-clip: padding-box;
 				background-color: @secondary-bg;
 				border-image: url('../../medias/images/content/border_image.png') 15 stretch;
 				border-image-width: 10px;
 				border-image-outset: 10px;
+
 				overflow-y: scroll;
 				// 1000 -> Au dessus de tout / 998 Laisse le tooltip passer par dessus
 				z-index: 1000;
-				// scrollbar-width: none;
 				scrollbar-width: thin;
+
+				& > span {
+					& > span {
+						gap: @bigger-gap;
+					}
+				}
 
 				div {
 					display: flex;
@@ -198,12 +211,9 @@ main {
 		img {
 			height: @big-icon;
 		}
-		
-		& > span {
-			.not-found {
-				filter:grayscale(1);
-				opacity: 0.2;
-			}
-		}
+	}
+
+	& > :last-child {
+		margin-bottom: @bigger-gap;
 	}
 }

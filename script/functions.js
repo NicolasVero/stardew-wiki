@@ -22,3 +22,4 @@ function activateButtons(show, hide, sections_to_show, unable_scroll) {
 }
 
 activateButtons('.view-all-friendships', '.exit-all-friendships', '.all-friends', true);
+activateButtons('.view-all-quests', '.exit-all-quests', '.all-quests', true);
