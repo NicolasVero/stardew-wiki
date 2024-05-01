@@ -225,11 +225,23 @@ function display_friendships(array $friends, $limit = -1):string {
     $marriables_npc = json_decode(file_get_contents(get_json_folder() . 'marriables.json'), true);
 
     $section_class = ($limit == -1) ? 'all-friends' : 'top-friends';
-    $structure = "
+    $view_all = ($limit == -1) ? '' : "<span class='view-all view-all-friendships'>View all friendships</span>";
+    $structure = ($limit == -1) ? 
+	"
+        <section class='info-section friends-section $section_class'>
+			<div>
+           		<h2 class='section-title'>Friendship progression</h2>
+				<img src='" . get_images_folder() . "content/exit.png' class='exit-all-friendships' />
+			</div>
+            <span>
+    "
+	:
+	"
         <section class='info-section friends-section $section_class'>
             <h2 class='section-title'>Friendship progression</h2>
-            <div>
-    ";
+            <span>
+    "
+	;
 
     foreach($friends as $name => $friend) {
         if($limit == 0)
@@ -277,8 +289,8 @@ function display_friendships(array $friends, $limit = -1):string {
 
 
     $structure .= "
-			<span class='view-all view-all-friendships'>View all friendships</span>
-        </div>
+			$view_all
+        </span>
     </section>";
 
     return $structure;

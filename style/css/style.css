@@ -118,7 +118,7 @@ main {
   display: flex;
   flex-wrap: wrap;
   padding: 5px 15px;
-  gap: 50px 0;
+  gap: 25px 0;
 }
 main .section-title {
   font-size: 10px;
@@ -181,53 +181,53 @@ main .info-section.friends-section {
   color: #000000;
   flex-basis: 55%;
 }
-main .info-section.friends-section div {
+main .info-section.friends-section > span {
   display: flex;
   flex-direction: column;
   justify-content: center;
   gap: 10px;
 }
-main .info-section.friends-section div > span {
+main .info-section.friends-section > span > span {
   display: flex;
   align-items: center;
   justify-content: space-between;
 }
-main .info-section.friends-section div .character-icon {
+main .info-section.friends-section > span .character-icon {
   width: 32px;
 }
-main .info-section.friends-section div .hearts-level {
+main .info-section.friends-section > span .hearts-level {
   display: flex;
   gap: 5px;
 }
-main .info-section.friends-section div .hearts-level .hearts {
+main .info-section.friends-section > span .hearts-level .hearts {
   width: 20px;
 }
-main .info-section.friends-section div .gifts {
+main .info-section.friends-section > span .gifts {
   display: flex;
   gap: 10px;
 }
-main .info-section.friends-section div .gifts .gift {
+main .info-section.friends-section > span .gifts .gift {
   width: 20px;
 }
-main .info-section.friends-section div .gifts .week {
+main .info-section.friends-section > span .gifts .week {
   font-family: "Inter", sans-serif;
   font-size: 10px;
   color: rgba(0, 0, 0, 0.64);
   width: max-content;
 }
-main .info-section.friends-section div .gifts .friend-status {
+main .info-section.friends-section > span .gifts .friend-status {
   font-size: 14px;
 }
-main .info-section.friends-section div .view-all-friendships {
+main .info-section.friends-section > span .view-all-friendships {
   font-family: "Stardew Valley Stonks", serif;
-  font-size: 14px;
+  font-size: 10px;
   color: rgba(0, 0, 0, 0.64);
   align-self: flex-end;
   cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
 }
 main .info-section.friends-section.all-friends {
   display: none;
-  position: absolute;
+  position: fixed;
   width: 80vw;
   height: 80vh;
   top: 10vh;
@@ -239,7 +239,16 @@ main .info-section.friends-section.all-friends {
   border-image-width: 10px;
   border-image-outset: 10px;
   overflow-y: scroll;
-  scrollbar-width: none;
+  scrollbar-width: thin;
+}
+main .info-section.friends-section.all-friends div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+main .info-section.friends-section.all-friends .exit-all-friendships {
+  width: 32px;
+  cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
 }
 main .info-section.friends-section.all-friends .section-title {
   font-size: 16px;
@@ -248,7 +257,7 @@ main .separated-galleries {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  gap: 50px 0;
+  gap: 25px 0;
 }
 main .gallery {
   display: flex;

@@ -7,7 +7,7 @@ main {
 	gap: @big-gap 0;
 	
 	.section-title {
-		font-size: @secondary-fs;
+		font-size: @small-fs;
 		font-family: @primary-ff;
 		font-weight: 400;
 		color: @primary-fc;
@@ -18,14 +18,14 @@ main {
 		display: flex;
 		justify-content: flex-start;
 		flex-direction: column;
-		gap: @medium-gap;
+		gap: @md-gap;
 
 		&.general-stats {
 			flex-basis: 100%;
 
 			div {
 				display: flex;
-				gap: @big-gap;
+				gap: @bigger-gap;
 			}
 			
 			span {
@@ -35,7 +35,7 @@ main {
 			}
 			
 			img {
-				height: @medium-icon;
+				height: @md-icon;
 			}
 		}
 
@@ -45,13 +45,13 @@ main {
 			.skill {
 				display: flex;
 				align-items: center;
-				gap: @medium-gap;
+				gap: @md-gap;
 
 				.level {
 					display: flex;
 					justify-content: center;
 					align-items: center;
-					font-size: @primary-fs;
+					font-size: @big-fs;
 					font-family: @primary-ff;
 					color: @primary-fc;
 				}
@@ -63,7 +63,7 @@ main {
 				}
 
 				img {
-					height: @medium-icon;
+					height: @md-icon;
 					&.level-icon {
 						height: @big-icon;
 					}
@@ -73,15 +73,15 @@ main {
 
 		&.friends-section {
 			font-family: @primary-ff;
-			font-size: @auxiliary-fs;
+			font-size: @md-fs;
 			color: @primary-fc;
 			flex-basis: 55%;
 
-			div {
+			& > span {
 				display: flex;
 				flex-direction: column;
 				justify-content: center;
-				gap: @medium-gap;
+				gap: @md-gap;
 
 				& > span {
 					display: flex;
@@ -98,30 +98,31 @@ main {
 					display: flex;
 					gap: @small-gap;
 					.hearts {
-						width: @medium-icon;
+						width: @md-icon;
 					}
 				}
 				.gifts {
 					display: flex;
-					gap: @medium-gap;
+					gap: @md-gap;
 					.gift {
-						width: @medium-icon;
+						width: @md-icon;
 					}
 
 					.week {
 						font-family: @secondary-ff;
-						font-size: @secondary-fs;
+						font-size: @small-fs;
 						color: @secondary-fc;
 						width: max-content;
 					}
 
 					.friend-status {
-						font-size: @auxiliary-fs;
+						font-size: @md-fs;
 					}
 				}
 				.view-all-friendships {
 					font-family: @primary-ff;
-					font-size: @auxiliary-fs;
+					// font-size: @md-fs;
+					font-size: @small-fs;
 					color: @secondary-fc;
 					align-self: flex-end;
 					cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
@@ -131,7 +132,7 @@ main {
 			&.all-friends {
 				display: none;
 	
-				position: absolute;
+				position: fixed;
 				width: 80vw;
 				height: 80vh;
 				top: 10vh;
@@ -143,10 +144,22 @@ main {
 				border-image-width: 10px;
 				border-image-outset: 10px;
 				overflow-y: scroll;
-				scrollbar-width: none;
+				// scrollbar-width: none;
+				scrollbar-width: thin;
+
+				div {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+				}
+
+				.exit-all-friendships {
+					width: @bigger-icon;
+					cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
+				}
 	
 				.section-title {
-					font-size: @primary-fs;
+					font-size: @big-fs;
 				}
 			}
 		}
@@ -185,4 +198,3 @@ main {
 		}
 	}
 }
-
