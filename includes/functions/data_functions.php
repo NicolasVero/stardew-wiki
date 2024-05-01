@@ -1,7 +1,7 @@
 <?php
 
 
-function get_all_players_datas(object $data): array {
+function get_all_players_datas(object $data):array {
     $players = array();
 
     array_push($players, get_aggregated_data($data->player));
@@ -15,6 +15,18 @@ function get_all_players_datas(object $data): array {
     return $players;
 }
 
+
+function get_all_players(object $data):array {
+    $players_names = array();
+
+    array_push($players_names, (string) $data->player->name);
+
+    foreach($data->farmhands as $side_player) {
+        array_push($players_names, (string) $side_player->Farmer->name);     
+    }
+
+    return $players_names;
+}
 
 
 function get_aggregated_data(object $data):array {

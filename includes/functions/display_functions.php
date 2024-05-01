@@ -1,9 +1,10 @@
 <?php 
 
-function display_page(array $all_datas):string {
+function display_page(array $all_datas, array $players):string {
 
     $structure = "";
 
+    $structure .= display_player_selection($players);
     $structure .= display_header($all_datas['general']);
     $structure .= "<main>";
     $structure .= display_general_stats($all_datas['general']);
@@ -31,6 +32,20 @@ function display_page(array $all_datas):string {
 
     return $structure;
 }
+
+
+function display_player_selection(array $players):string {
+    $structure = "<select id='player_selection'>";
+
+    foreach($players as $player) {
+        $structure .= "<option value='$player'>$player</option>";
+    }
+    
+    $structure .= "</select>";
+    
+    return $structure;
+}
+
 
 function display_header(array $datas):string {
     
