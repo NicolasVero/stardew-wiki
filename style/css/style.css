@@ -254,6 +254,7 @@ main .info-section.friends-section.all-friends .section-title {
   font-size: 16px;
 }
 main .separated-galleries {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
