@@ -3,10 +3,10 @@ function toggleVisibilityAndScroll(element, shouldDisplay, shouldDisableScroll) 
     // document.body.style.overflow = (shouldDisableScroll) ? 'hidden' : 'auto';
 }
 
-function activateButtons(show, hide, to_show, unable_scroll) {
+function activateButtons(show, hide, sections_to_show, unable_scroll) {
     let show_button = document.querySelectorAll(show);
     let hide_button = document.querySelectorAll(hide);
-	let sections = document.querySelector(to_show);
+	let sections = document.querySelector(sections_to_show);
 
     show_button.forEach(function(button) {
         button.addEventListener('click', function() {
@@ -21,4 +21,4 @@ function activateButtons(show, hide, to_show, unable_scroll) {
     });
 }
 
-activateButtons('.view-all-friendships', '.exit', '.all-friends', true);
+activateButtons('.view-all-friendships', '.exit-all-friendships', '.all-friends', true);

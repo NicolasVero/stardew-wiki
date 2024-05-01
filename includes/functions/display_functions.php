@@ -216,7 +216,7 @@ function display_friendships(array $friends, $limit = -1):string {
         <section class='info-section friends-section $section_class'>
 			<div>
            		<h2 class='section-title'>Friendship progression</h2>
-				<img src='" . get_images_folder() . "content/exit.png' class='exit' />
+				<img src='" . get_images_folder() . "content/exit.png' class='exit-all-friendships' />
 			</div>
             <span>
     "

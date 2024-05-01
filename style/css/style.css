@@ -246,7 +246,7 @@ main .info-section.friends-section.all-friends div {
   justify-content: space-between;
   align-items: center;
 }
-main .info-section.friends-section.all-friends .exit {
+main .info-section.friends-section.all-friends .exit-all-friendships {
   width: 32px;
   cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
 }
