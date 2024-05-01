@@ -21,6 +21,7 @@ main {
 		gap: @md-gap;
 
 		&.general-stats {
+			position: relative;
 			flex-basis: 100%;
 
 			div {
@@ -36,6 +37,11 @@ main {
 			
 			img {
 				height: @md-icon;
+				&.quest-icon {
+					position: absolute;
+					right: 0;
+					cursor: @pointer;
+				}
 			}
 		}
 
@@ -125,7 +131,7 @@ main {
 					font-size: @small-fs;
 					color: @secondary-fc;
 					align-self: flex-end;
-					cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
+					cursor: @pointer;
 				}
 			}
 
@@ -140,10 +146,12 @@ main {
 				padding: 10px 25px;
 				background-clip: padding-box;
 				background-color: @secondary-bg;
-				border-image: url('../../medias/images/content/border-image.png') 15 stretch;
+				border-image: url('../../medias/images/content/border_image.png') 15 stretch;
 				border-image-width: 10px;
 				border-image-outset: 10px;
 				overflow-y: scroll;
+				// 1000 -> Au dessus de tout / 998 Laisse le tooltip passer par dessus
+				z-index: 1000;
 				// scrollbar-width: none;
 				scrollbar-width: thin;
 
@@ -155,7 +163,7 @@ main {
 
 				.exit-all-friendships {
 					width: @bigger-icon;
-					cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
+					cursor: @pointer;
 				}
 	
 				.section-title {

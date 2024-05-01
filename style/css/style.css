@@ -24,7 +24,7 @@ pre {
   width: max-content;
   padding: 5px 7.5px;
   background-color: #ffc677;
-  border-image: url('../../medias/images/content/border-image.png') 15 stretch;
+  border-image: url('../../medias/images/content/border_image.png') 15 stretch;
   border-image-width: 2px;
 }
 .tooltip img:hover {
@@ -33,6 +33,22 @@ pre {
 .tooltip img:hover ~ span {
   z-index: 100;
   display: inline;
+}
+.data {
+  font-size: 16px;
+  font-family: "Stardew Valley Stonks", serif;
+  color: #000000;
+}
+.data-info {
+  font-size: 14px;
+  font-family: "Stardew Valley Stonks", serif;
+  color: #000000;
+}
+.data-label {
+  font-size: 10px;
+  font-family: "Inter", sans-serif;
+  color: rgba(0, 0, 0, 0.64);
+  font-weight: 200;
 }
 * {
   padding: 0;
@@ -53,32 +69,42 @@ body {
   border-radius: 5px;
   background-color: rgba(255, 255, 255, 0.64);
 }
+body #player_selection {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 25px;
+  position: absolute;
+  top: calc(100px/2 + 2 * 5px);
+  margin-right: 2px;
+  margin: 0;
+  font-family: "Stardew Valley Stonks", serif;
+  font-size: 16px;
+  color: #000000;
+  list-style-type: none;
+}
+body #player_selection li {
+  height: 25px;
+  padding: 5px 15px;
+  background-color: #ffc677;
+  border-image: url('../../medias/images/content/border_image.png') 15 stretch;
+  border-image-width: 5px;
+  border-image-outset: 2px;
+  background-clip: padding-box;
+}
+body #player_selection li:hover {
+  cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
+}
 body .save-file {
   position: absolute;
   cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
-  top: calc(100px/2 + 10px);
+  top: calc(100px/2 + 2 * 5px);
   right: 100px;
   padding: 5px 15px;
   background-color: #ffc677;
-  border-image: url('../../medias/images/content/border-image.png') 15 stretch;
+  border-image: url('../../medias/images/content/border_image.png') 15 stretch;
   border-image-width: 5px;
   background-clip: padding-box;
-}
-body .data {
-  font-size: 16px;
-  font-family: "Stardew Valley Stonks", serif;
-  color: #000000;
-}
-body .data-info {
-  font-size: 14px;
-  font-family: "Stardew Valley Stonks", serif;
-  color: #000000;
-}
-body .data-label {
-  font-size: 10px;
-  font-family: "Inter", sans-serif;
-  color: rgba(0, 0, 0, 0.64);
-  font-weight: 200;
 }
 body header {
   display: flex;
@@ -134,6 +160,7 @@ main .info-section {
   gap: 10px;
 }
 main .info-section.general-stats {
+  position: relative;
   flex-basis: 100%;
 }
 main .info-section.general-stats div {
@@ -147,6 +174,11 @@ main .info-section.general-stats span {
 }
 main .info-section.general-stats img {
   height: 20px;
+}
+main .info-section.general-stats img.quest-icon {
+  position: absolute;
+  right: 0;
+  cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
 }
 main .info-section.skills {
   flex-basis: 45%;
@@ -235,10 +267,11 @@ main .info-section.friends-section.all-friends {
   padding: 10px 25px;
   background-clip: padding-box;
   background-color: rgba(255, 255, 255, 0.64);
-  border-image: url('../../medias/images/content/border-image.png') 15 stretch;
+  border-image: url('../../medias/images/content/border_image.png') 15 stretch;
   border-image-width: 10px;
   border-image-outset: 10px;
   overflow-y: scroll;
+  z-index: 1000;
   scrollbar-width: thin;
 }
 main .info-section.friends-section.all-friends div {

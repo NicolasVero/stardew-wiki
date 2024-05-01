@@ -35,13 +35,13 @@ function display_page(array $all_datas, array $players):string {
 
 
 function display_player_selection(array $players):string {
-    $structure = "<select id='player_selection'>";
+    $structure = "<ul id='player_selection'>";
 
     foreach($players as $player) {
-        $structure .= "<option value='$player'>$player</option>";
+        $structure .= "<li value='$player'>$player</option>";
     }
     
-    $structure .= "</select>";
+    $structure .= "</ul>";
     
     return $structure;
 }
@@ -115,7 +115,7 @@ function display_general_stats(array $datas):string {
     $structure = "
         <section class='info-section general-stats'>
         	<h2 class='section-title'>General stats</h2>
-
+			<img src='" . get_images_folder() . "/content/quest_icon.png' class='quest-icon view-all-quests'>
             <div>
                 <span>
                     <img src='{$images_path}icons/energy.png' alt='Energy' />

@@ -4,7 +4,7 @@
 	// margin: 0 auto;
 	padding: 0;
 	box-sizing: border-box;
-	cursor: url("../../medias/images/cursors/cursor.cur"), auto;
+	cursor: @auto;
 }
 
 html {
@@ -22,36 +22,48 @@ body {
 	border-radius: 5px;
 	background-color: @secondary-bg;
 
+	#player_selection {
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		gap: @big-gap;
+		position: absolute;
+		top: calc(100px/2 + 2 * 5px);
+		margin-right: 2px;
+		margin: 0;
+
+		font-family: @primary-ff;
+		font-size: @big-fs;
+		color: @primary-fc;
+		list-style-type: none;
+
+		li {
+			height: 25px;
+			padding: 5px 15px;
+			background-color: @stardew-bg;
+			border-image: url('../../medias/images/content/border_image.png') 15 stretch;
+			border-image-width: 5px;
+			// border-image-width: 5px 5px 0 5px;
+			border-image-outset: 2px;
+			background-clip: padding-box;
+
+			&:hover {
+				cursor: @pointer;
+			}
+		}
+	}
+
 	.save-file {
 		position: absolute;
-		cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
-		top: calc(100px/2 + 10px);
+		cursor: @pointer;
+		top: calc(100px/2 + 2 * 5px);
 		right: 100px;
 		padding: 5px 15px;
-		background-color: rgba(255, 198, 119, 1);
+		background-color: @stardew-bg;
 		// border: solid 2px rgba(162, 120, 69, 1);
-		border-image: url('../../medias/images/content/border-image.png') 15 stretch;
+		border-image: url('../../medias/images/content/border_image.png') 15 stretch;
 		border-image-width: 5px;
 		background-clip: padding-box;
-	}
-
-	.data {
-		font-size: @big-fs;
-		font-family: @primary-ff;
-		color: @primary-fc;
-	}
-
-	.data-info {
-		font-size: @md-fs;
-		font-family: @primary-ff;
-		color: @primary-fc;
-	}
-
-	.data-label {
-		font-size: @small-fs;
-		font-family: @secondary-ff;
-		color: @secondary-fc;
-		font-weight: 200;
 	}
 
 	header {
