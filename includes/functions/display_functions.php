@@ -40,7 +40,19 @@ function display_player_selection(array $players):string {
     foreach($players as $player) {
         $structure .= "<li value='$player'>$player</option>";
     }
-    
+	/* Test username max length
+    $structure .= "
+		<li value=''>WWWWWW</option>
+		<li value=''>WWWWWW</option>
+		<li value=''>WWWWWW</option>
+		<li value=''>WWWWWW</option>
+		<li value=''>WWWWWW</option>
+		<li value=''>WWWWWW</option>
+		<li value=''>WWWWWW</option>
+		<li value=''>WWWWWW</option>
+	";
+	*/
+
     $structure .= "</ul>";
     
     return $structure;

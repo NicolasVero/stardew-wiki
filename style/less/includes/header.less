@@ -24,10 +24,11 @@ body {
 
 	#player_selection {
 		display: flex;
-		justify-content: center;
+		flex-wrap: wrap;
 		align-items: center;
-		gap: @big-gap;
+		gap: @md-gap @big-gap;
 		position: absolute;
+		width: 70%;
 		top: calc(100px/2 + 2 * 5px);
 		margin-right: 2px;
 		margin: 0;
