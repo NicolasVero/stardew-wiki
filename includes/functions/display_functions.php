@@ -165,7 +165,9 @@ function display_skills(array $datas):string {
     
     $structure = "
 		<section class='skills info-section'>
-			<h2 class='section-title'>Skills</h2>";
+			<h2 class='section-title'>Skills</h2>
+            <span>    
+    ";
 
     foreach($datas['levels'] as $key => $level) {
         
@@ -186,7 +188,10 @@ function display_skills(array $datas):string {
         ";
     }
 
-    $structure .= "</section>";
+    $structure .= "
+            </span>
+        </section>
+    ";
 
     return $structure;
 }

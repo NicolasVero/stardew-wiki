@@ -1,6 +1,5 @@
 <?php
 
-
 require_once 'functions.php';
 
 include 'components/header.php';
