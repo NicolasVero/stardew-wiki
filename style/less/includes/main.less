@@ -1,219 +1,238 @@
 // out: false
 
-main {
-	display: flex;
-	flex-wrap: wrap;
-	padding: 5px 25px;
-	gap: @big-gap 0;
+body {
+	position: relative;
+	margin: 100px 100px;
+	border-radius: 5px;
+	background-color: @secondary-bg;
 
-	section {
-		&:not(.general-stats) {
-			display: flex;
-			flex-direction: column;
-			gap: @md-gap;
-		}
-	}
-	
-	.section-title {
-		font-size: @md-fs;
-		font-family: @primary-ff;
-		font-weight: 400;
-		color: @primary-fc;
-	}
-
-	.info-section {
-		width: fit-content;
-		justify-content: flex-start;
-		flex-basis: 50%;
-
-		&.general-stats {
-			position: relative;
-			flex-basis: 100%;
-
-			div {
-				display: flex;
-				gap: @bigger-gap;
-			}
-			
-			span {
-				display: flex;
-				align-items: flex-end;
-				gap: @small-gap;
-			}
-			
-			img {
-				height: @big-icon;
-				&.quest-icon {
-					position: absolute;
-					top: 0;
-					right: 0;
-					cursor: @pointer;
-				}
-			}
-		}
-
-		&.skills {
-			.skill {
-				display: flex;
-				align-items: center;
-				gap: @md-gap;
-
-				.level {
-					display: flex;
-					justify-content: center;
-					align-items: center;
-				}
-
-				.level-progress-bar {
-					display: flex;
-					align-items: center;
-					gap: @small-gap;
-				}
-
-				img {
-					height: @big-icon;
-					&.level-icon {
-						height: @big-icon;
-					}
-				}
-			}
-		}
-
-		&.friends-section {
-			& > span {
-				display: flex;
-				flex-direction: column;
-				justify-content: center;
-				gap: @md-gap;
-
-				& > span {
-					display: flex;
-					align-items: center;
-					// gap: @bigger-gap;
-				}
-
-
-				.character-icon {
-					width: @bigger-icon;
-				}
-
-				.hearts-level {
-					display: flex;
-					gap: @small-gap;
-					.hearts {
-						width: @small-icon;
-					}
-				}
-				.gifts {
-					display: flex;
-					gap: @md-gap;
-					.gift {
-						width: @md-icon;
-					}
-
-					.week {
-						font-family: @secondary-ff;
-						font-size: @small-fs;
-						color: @secondary-fc;
-						width: max-content;
-					}
-				}
-
-				.friend-status {
-					font-size: @md-fs;
-				}
-
-				.view-all-friendships {
-					font-family: @primary-ff;
-					// font-size: @md-fs;
-					font-size: @small-fs;
-					color: @secondary-fc;
-					align-self: flex-end;
-					cursor: @pointer;
-				}
-			}
-
-			&.top-friends {
-				& > span {
-					& > span {
-						justify-content: space-between;
-					}
-				}
-			}
-
-			&.all-friends {
-				display: none;
-	
-				position: fixed;
-				height: 80vh;
-				padding: 10px 25px;
-				top: 50%;
-				left: 50%;
-				transform: translate(-50%,-50%);
-
-				background-clip: padding-box;
-				background-color: @secondary-bg;
-				border-image: url('../../medias/images/content/border_image.png') 15 stretch;
-				border-image-width: 10px;
-				border-image-outset: 10px;
-
-				overflow-y: scroll;
-				// 1000 -> Au dessus de tout / 998 Laisse le tooltip passer par dessus
-				z-index: 1000;
-				scrollbar-width: thin;
-
-				& > span {
-					& > span {
-						gap: @bigger-gap;
-					}
-				}
-
-				div {
-					display: flex;
-					justify-content: space-between;
-					align-items: center;
-				}
-
-				.exit-all-friendships {
-					width: @bigger-icon;
-					cursor: @pointer;
-				}
-	
-				.section-title {
-					font-size: @big-fs;
-				}
-			}
-		}
-	}
-
-	.separated-galleries {
-		width: 100%;
+	main {
 		display: flex;
 		flex-wrap: wrap;
-		justify-content: space-between;
+		padding: 5px 25px;
 		gap: @big-gap 0;
-	}
-
-	.gallery {
-		display: flex;
-		flex-direction: column;
-		
-		&:not(.shipped_items-section) {
-			flex-basis: 47.5%;
+	
+		section {
+			&:not(.general-stats) {
+				display: flex;
+				flex-direction: column;
+				gap: @md-gap;
+			}
 		}
+		
+		.section-title {
+			font-size: @md-fs;
+			font-family: @primary-ff;
+			font-weight: 400;
+			color: @primary-fc;
+		}
+	
+		.info-section {
+			width: fit-content;
+			justify-content: flex-start;
+			flex-basis: 50%;
+	
+			&.general-stats {
+				position: relative;
+				flex-basis: 100%;
+	
+				div {
+					display: flex;
+					gap: @bigger-gap;
+				}
+				
+				span {
+					display: flex;
+					align-items: flex-end;
+					gap: @small-gap;
+				}
+				
+				img {
+					height: @big-icon;
+					&.quest-icon {
+						position: absolute;
+						top: 0;
+						right: 0;
+						cursor: @pointer;
+					}
+				}
+			}
+	
+			&.skills {
+				.skill {
+					display: flex;
+					align-items: center;
+					gap: @md-gap;
 
-		& > span {
+					div {
+						display: flex;
+  						gap: 10px;
+					}
+	
+					.level {
+						display: flex;
+						justify-content: center;
+						align-items: center;
+					}
+	
+					.level-progress-bar {
+						display: flex;
+						align-items: center;
+						gap: @small-gap;
+					}
+	
+					img {
+						height: @md-icon;
+						&.level-icon {
+							height: @big-icon;
+						}
+					}
+				}
+			}
+	
+			&.friends-section {
+				& > span {
+					display: flex;
+					flex-direction: column;
+					justify-content: center;
+					gap: @md-gap;
+	
+					& > span {
+						display: flex;
+						align-items: center;
+						// gap: @bigger-gap;
+					}
+	
+	
+					.character-icon {
+						width: @bigger-icon;
+					}
+	
+					.hearts-level {
+						display: flex;
+						gap: @small-gap;
+						.hearts {
+							width: @small-icon;
+						}
+					}
+					.gifts {
+						display: flex;
+						gap: @md-gap;
+						.gift {
+							width: @md-icon;
+						}
+	
+						.week {
+							font-family: @secondary-ff;
+							font-size: @small-fs;
+							color: @secondary-fc;
+							width: max-content;
+						}
+					}
+	
+					.friend-status {
+						font-size: @md-fs;
+					}
+	
+					.view-all-friendships {
+						font-family: @primary-ff;
+						// font-size: @md-fs;
+						font-size: @small-fs;
+						color: @secondary-fc;
+						align-self: flex-end;
+						cursor: @pointer;
+					}
+				}
+	
+				&.top-friends {
+					& > span {
+						& > span {
+							justify-content: space-between;
+						}
+					}
+				}
+	
+				&.all-friends {
+					display: none;
+		
+					position: fixed;
+					height: 80vh;
+					padding: 10px 25px;
+					top: 50%;
+					left: 50%;
+					transform: translate(-50%,-50%);
+	
+					background-clip: padding-box;
+					background-color: @secondary-bg;
+					border-image: url('../../medias/images/content/border_image.png') 15 stretch;
+					border-image-width: 10px;
+					border-image-outset: 10px;
+	
+					overflow-y: scroll;
+					// 1000 -> Au dessus de tout / 998 Laisse le tooltip passer par dessus
+					z-index: 1000;
+					scrollbar-width: thin;
+	
+					& > span {
+						& > span {
+							gap: @bigger-gap;
+						}
+					}
+	
+					div {
+						display: flex;
+						justify-content: space-between;
+						align-items: center;
+					}
+	
+					.exit-all-friendships {
+						width: @big-icon;
+						cursor: @pointer;
+					}
+		
+					.section-title {
+						font-size: @big-fs;
+					}
+				}
+			}
+		}
+	
+		.separated-galleries {
+			width: 100%;
 			display: flex;
 			flex-wrap: wrap;
-			gap: @small-gap;
+			justify-content: space-between;
+			gap: @big-gap 0;
 		}
-
-		img {
-			height: @big-icon;
+	
+		.gallery {
+			display: flex;
+			flex-direction: column;
+	
+			&.monsters-section {
+				justify-content: space-between;
+				& > span {
+					gap: @md-gap;
+				}
+			}
+			
+			&:not(.shipped_items-section) {
+				flex-basis: 47.5%;
+			}
+	
+			& > span {
+				display: flex;
+				flex-wrap: wrap;
+				gap: @small-gap;
+			}
+	
+			img {
+				height: @big-icon;
+			}
 		}
-	}
-
-	& > :last-child {
-		margin-bottom: @bigger-gap;
+	
+		& > :last-child {
+			margin-bottom: @bigger-gap;
+		}
 	}
 }

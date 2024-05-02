@@ -42,14 +42,14 @@ function display_player_selection(array $players):string {
     }
 	/* Test username max length
     $structure .= "
-		<li value=''>WWWWWW</option>
-		<li value=''>WWWWWW</option>
-		<li value=''>WWWWWW</option>
-		<li value=''>WWWWWW</option>
-		<li value=''>WWWWWW</option>
-		<li value=''>WWWWWW</option>
-		<li value=''>WWWWWW</option>
-		<li value=''>WWWWWW</option>
+		<li value='' class='button-elements'>WWWWWW</option>
+		<li value='' class='button-elements'>WWWWWW</option>
+		<li value='' class='button-elements'>WWWWWW</option>
+		<li value='' class='button-elements'>WWWWWW</option>
+		<li value='' class='button-elements'>WWWWWW</option>
+		<li value='' class='button-elements'>WWWWWW</option>
+		<li value='' class='button-elements'>WWWWWW</option>
+		<li value='' class='button-elements'>WWWWWW</option>
 	";
 	*/
 
@@ -63,6 +63,7 @@ function display_header(array $datas):string {
     
     extract($datas);    
     $images_path = get_images_folder();
+	$gender = ($gender == null) ? 'neutral' : $gender;
 
     $structure = "
 		<button class='button-elements save-file'>Upload a save file</button>
@@ -172,7 +173,10 @@ function display_skills(array $datas):string {
 
         $structure .= "
             <span class='skill $key'>
+				<span class='tooltip'>
                 <img src='$level_icon' class='level-icon' alt='$key'/>
+					<span>$key</span>
+				</span>
                 
                 " . get_level_progress_bar($level) . "
                 <span class='level data'>$level</span>
@@ -204,7 +208,7 @@ function get_level_progress_bar(int $level):string {
 
 function get_skills_icons(array $skills, string $current_skill):string {
 
-    $structure = "<section class='skills-section'>";
+    $structure = "<div class='skills-section'>";
 
     foreach($skills as $skill) {
         if($current_skill == strtolower($skill['source'])) {
@@ -222,7 +226,7 @@ function get_skills_icons(array $skills, string $current_skill):string {
         }
     }
 
-    $structure .= "</section>";
+    $structure .= "</div>";
 
     return $structure;
 }

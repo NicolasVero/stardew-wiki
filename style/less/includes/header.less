@@ -1,106 +1,83 @@
 // out: false
 
-* {
-	// margin: 0 auto;
-	padding: 0;
-	box-sizing: border-box;
-	cursor: @auto;
-}
+#player_selection {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	gap: @md-gap @big-gap;
+	position: absolute;
+	top: -35px;
+	width: 70%;
+	margin-right: 2px;
+	margin: 0;
+	list-style-type: none;
 
-html {
-	background-image: url("../../medias/images/content/bg.png");
-	background-size: 125% 125%;
-	background-size: cover;
-	background-position: center;
-	background-repeat: no-repeat;
-	background-attachment: fixed;
-	object-fit: cover;
-}
-
-body {
-	margin: 100px 100px;
-	border-radius: 5px;
-	background-color: @secondary-bg;
-
-	#player_selection {
-		display: flex;
-		flex-wrap: wrap;
-		align-items: center;
-		gap: @md-gap @big-gap;
-		position: absolute;
-		width: 70%;
-		top: calc(100px/2 + 2 * 5px);
-		margin-right: 2px;
-		margin: 0;
-		list-style-type: none;
-
-		li {
-			height: 25px;
-			padding: 5px 15px;
-			background-color: @stardew-bg;
-			border-image: url('../../medias/images/content/border_image.png') 15 stretch;
-			border-image-width: 5px;
-			// border-image-width: 5px 5px 0 5px;
-			border-image-outset: 2px;
-			background-clip: padding-box;
-
-			&:hover {
-				cursor: @pointer;
-			}
-		}
-	}
-
-	.save-file {
-		position: absolute;
-		cursor: @pointer;
-		top: calc(100px/2 + 2 * 5px);
-		right: 100px;
+	li {
+		height: 25px;
 		padding: 5px 15px;
 		background-color: @stardew-bg;
-		// border: solid 2px rgba(162, 120, 69, 1);
 		border-image: url('../../medias/images/content/border_image.png') 15 stretch;
 		border-image-width: 5px;
+		// border-image-width: 5px 5px 0 5px;
+		border-image-outset: 2px;
 		background-clip: padding-box;
+
+		&:hover {
+			cursor: @pointer;
+		}
 	}
+}
 
-	header {
+.save-file {
+	position: absolute;
+	top: -35px;
+	cursor: @pointer;
+	right: 0;
+	padding: 5px 15px;
+	background-color: @stardew-bg;
+	// border: solid 2px rgba(162, 120, 69, 1);
+	border-image: url('../../medias/images/content/border_image.png') 15 stretch;
+	border-image-width: 5px;
+	background-clip: padding-box;
+}
+
+header {
+	display: flex;
+	flex-direction: column;
+	background-color: @primary-bg;
+	padding: 15px 25px;
+	gap: @md-gap;
+
+	.header {
+		width: 100%;
 		display: flex;
-		flex-direction: column;
-		background-color: @primary-bg;
-		padding: 15px 25px;
-		gap: @md-gap;
+		justify-content: space-between;
+		align-items: center;
 
-		.header {
-			width: 100%;
+		& > span:first-of-type {
 			display: flex;
-			justify-content: space-between;
-			align-items: center;
-
-			& > span:first-of-type {
-				display: flex;
-				align-items: flex-end;
-				gap: @md-gap;
-			}
-
-			img {
-				width: @md-icon;
-			}
+			align-items: flex-end;
+			gap: @md-gap;
 		}
 
-		.sub-header {
-			width: 100%;
+		img {
+			width: @md-icon;
+		}
+	}
+
+	.sub-header {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+
+		.all-money {
 			display: flex;
-			justify-content: space-between;
-			align-items: center;
+			gap: @bigger-gap;
+		}
 
-			.all-money {
-				display: flex;
-				gap: @bigger-gap;
-			}
-
-			img {
-				width: @xsmall-icon;
-			}
+		img {
+			width: @xsmall-icon;
 		}
 	}
 }

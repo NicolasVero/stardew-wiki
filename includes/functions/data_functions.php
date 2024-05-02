@@ -72,6 +72,7 @@ function get_aggregated_data(object $data):array {
         'fish_caught'     => get_item_list($data->fishCaught, 'fish'),
         'artifacts_found' => get_item_list($data->archaeologyFound, 'artifacts'),
         'minerals_found'  => get_item_list($data->mineralsFound, 'minerals'),
+		//! Display les cookingRecipes que tu possèdes, pas que tu as déjà cuisiné, peut-être le changer?
         'cooking_recipe'  => get_item_list($data->cookingRecipes, 'recipes'),
         'shipped_items'   => get_item_list($data->basicShipped, 'shipped_items'),
         'achievements'    => get_achievement($data->achievements),
@@ -102,10 +103,10 @@ function get_item_list(object $items, string $filename):array {
     $datas = array();
 
     foreach($items->item as $item) {
+		//! Anciennes versions ($item->key->int) sauf cookingRecipes ($item->key-string)
         $item_id = str_replace('(O)', '', (string) $item->key->string);
 
         if(ctype_digit($item_id)) {
-
             $reference = find_reference_in_json($item_id, $filename);
             
             if(!empty($reference))
@@ -163,7 +164,7 @@ function get_enemies_killed_data(object $data):array {
 
 
 function get_friendship_data(object $data):array { 
-    
+    //! Faire json de tous les villageois car parties moddées en rajoute des inconnus
     $friends = array();
 
     foreach($data->item as $item) {

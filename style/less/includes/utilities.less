@@ -15,6 +15,9 @@
 	src: url('../../medias/fonts/inter.ttf') format('truetype');
 }
 
+// Media queries
+
+
 // Background
 @primary-bg: rgba(0, 0, 0, 0.21);
 @secondary-bg: rgba(255, 255, 255, 0.7);
@@ -37,7 +40,7 @@
 @small-fs: 12px;
 
 // Images size
-@bigger-icon: 48px;
+@bigger-icon: 40px;
 @big-icon: 28px;
 @md-icon: 24px;
 @small-icon: 20px;
@@ -112,4 +115,22 @@
 .not-found {
 	filter:grayscale(1);
 	opacity: 0.2;
+}
+
+// Basic style
+* {
+	// margin: 0 auto;
+	padding: 0;
+	box-sizing: border-box;
+	cursor: @auto;
+}
+
+html {
+	background-image: url("../../medias/images/content/bg.png");
+	background-size: 125% 125%;
+	background-size: cover;
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;
+	object-fit: cover;
 }
