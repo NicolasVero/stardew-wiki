@@ -1,0 +1,88 @@
+// out: false
+
+// Desktop changes
+.desktop-changes() {
+	body {
+		margin: 100px 100px;
+	}
+	main {
+		.info-section {
+			width: fit-content;
+			flex-basis: 50%;
+		}
+		.gallery {
+			&:not(.shipped_items-section) {
+				flex-basis: 47.5%;
+			}
+		}
+	}
+}
+
+// Mobile changes
+.mobile-changes() {
+	body {
+		main {
+			.info-section {
+				&.general-stats {
+					& > div {
+						flex-wrap: wrap;
+						gap: (@md-gap * @d-ratio) 0;
+						
+						& > span {
+							flex-basis: 50%;
+						}
+					}
+				}
+
+				&.friends-section {
+					align-items: center;
+
+					&.top-friends {
+						width: 100%;
+					}
+
+					&.all-friends {
+						width: 80%;
+						& > span {
+							& > span {
+								gap: (@md-gap * @d-ratio);
+								justify-content: space-between;
+								
+								.gifts {
+									.gift-counter {
+										font-size: (@md-fs * @d-ratio);
+									}
+	
+									.week {
+										font-size: (@small-fs * @d-ratio);
+									}
+								}
+
+								.friend-status {
+									font-size: (@md-fs * @d-ratio);
+								}
+							}
+						}
+					}
+
+					& > span {
+						width: 100%;
+						& > span {
+							.character-icon {
+								width: (@bigger-icon * @d-ratio);
+							}
+							.hearts {
+								width: (@small-icon * @d-ratio);
+							}
+							.gifts {
+								.gift {
+									width: (@md-icon * @d-ratio);
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

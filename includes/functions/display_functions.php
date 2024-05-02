@@ -297,9 +297,9 @@ function display_friendships(array $friends, $limit = -1):string {
 				</span>
 				<span class='gifts'>
 					<img src='{$images_path}icons/gift.png' class='gift' alt=''/>
-					<span class='gift-counter data'>$week_gifts</span><span class='week'>this week</span>
+					<span class='gift-counter'>$week_gifts</span><span class='week'>this week</span>
 				</span>
-				<span class='friend-status data'>$status</span>
+				<span class='friend-status'>$status</span>
 			</span>
         ";
     }

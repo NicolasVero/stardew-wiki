@@ -4,7 +4,7 @@
 	display: flex;
 	flex-wrap: wrap;
 	align-items: center;
-	gap: @md-gap @big-gap;
+	gap: (@md-gap * @ratio) (@big-gap * @ratio);
 	position: absolute;
 	top: -35px;
 	width: 70%;
@@ -14,7 +14,7 @@
 
 	li {
 		height: 25px;
-		padding: 5px 15px;
+		padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @ratio);
 		background-color: @stardew-bg;
 		border-image: url('../../medias/images/content/border_image.png') 15 stretch;
 		border-image-width: 5px;
@@ -33,7 +33,7 @@
 	top: -35px;
 	cursor: @pointer;
 	right: 0;
-	padding: 5px 15px;
+	padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @ratio);
 	background-color: @stardew-bg;
 	// border: solid 2px rgba(162, 120, 69, 1);
 	border-image: url('../../medias/images/content/border_image.png') 15 stretch;
@@ -45,8 +45,8 @@ header {
 	display: flex;
 	flex-direction: column;
 	background-color: @primary-bg;
-	padding: 15px 25px;
-	gap: @md-gap;
+	padding: (@md-gap * @ratio) (@big-gap * @ratio);
+	gap: (@md-gap * @ratio);
 
 	.header {
 		width: 100%;
@@ -57,11 +57,11 @@ header {
 		& > span:first-of-type {
 			display: flex;
 			align-items: flex-end;
-			gap: @md-gap;
+			gap: (@md-gap * @ratio);
 		}
 
 		img {
-			width: @md-icon;
+			width: (@md-icon * @ratio);
 		}
 	}
 
@@ -73,11 +73,11 @@ header {
 
 		.all-money {
 			display: flex;
-			gap: @bigger-gap;
+			gap: (@bigger-gap * @ratio);
 		}
 
 		img {
-			width: @xsmall-icon;
+			width: (@xsmall-icon * @ratio);
 		}
 	}
 }

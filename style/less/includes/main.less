@@ -2,35 +2,33 @@
 
 body {
 	position: relative;
-	margin: 100px 100px;
 	border-radius: 5px;
 	background-color: @secondary-bg;
 
 	main {
 		display: flex;
 		flex-wrap: wrap;
-		padding: 5px 25px;
-		gap: @big-gap 0;
+		padding: (@small-gap * @ratio) (@big-gap * @ratio);
+		gap: (@big-gap * @ratio) 0;
 	
 		section {
 			&:not(.general-stats) {
 				display: flex;
 				flex-direction: column;
-				gap: @md-gap;
+				gap: (@md-gap * @ratio);
 			}
 		}
 		
 		.section-title {
-			font-size: @md-fs;
+			font-size: (@md-fs * @ratio);
 			font-family: @primary-ff;
 			font-weight: 400;
 			color: @primary-fc;
+			align-self: flex-start;
 		}
 	
 		.info-section {
-			width: fit-content;
 			justify-content: flex-start;
-			flex-basis: 50%;
 	
 			&.general-stats {
 				position: relative;
@@ -38,17 +36,17 @@ body {
 	
 				div {
 					display: flex;
-					gap: @bigger-gap;
+					gap: (@bigger-gap * @ratio);
 				}
 				
 				span {
 					display: flex;
 					align-items: flex-end;
-					gap: @small-gap;
+					gap: (@small-gap * @ratio);
 				}
 				
 				img {
-					height: @big-icon;
+					height: (@big-icon * @ratio);
 					&.quest-icon {
 						position: absolute;
 						top: 0;
@@ -62,11 +60,11 @@ body {
 				.skill {
 					display: flex;
 					align-items: center;
-					gap: @md-gap;
+					gap: (@md-gap * @ratio);
 
 					div {
 						display: flex;
-  						gap: 10px;
+  						gap: (@md-gap * @ratio);
 					}
 	
 					.level {
@@ -78,13 +76,13 @@ body {
 					.level-progress-bar {
 						display: flex;
 						align-items: center;
-						gap: @small-gap;
+						gap: (@small-gap * @ratio);
 					}
 	
 					img {
-						height: @md-icon;
+						height: (@md-icon * @ratio);
 						&.level-icon {
-							height: @big-icon;
+							height: (@big-icon * @ratio);
 						}
 					}
 				}
@@ -95,49 +93,56 @@ body {
 					display: flex;
 					flex-direction: column;
 					justify-content: center;
-					gap: @md-gap;
+					gap: (@md-gap * @ratio);
 	
 					& > span {
 						display: flex;
 						align-items: center;
-						// gap: @bigger-gap;
+						// gap: (@bigger-gap * @ratio);
 					}
 	
 	
 					.character-icon {
-						width: @bigger-icon;
+						width: (@bigger-icon * @ratio);
 					}
 	
 					.hearts-level {
 						display: flex;
-						gap: @small-gap;
+						gap: (@small-gap * @ratio);
 						.hearts {
-							width: @small-icon;
+							width: (@small-icon * @ratio);
 						}
 					}
 					.gifts {
 						display: flex;
-						gap: @md-gap;
+						align-items: center;
+						gap: (@md-gap * @ratio);
+						
 						.gift {
-							width: @md-icon;
+							width: (@md-icon * @ratio);
+						}
+
+						.gift-counter {
+							.data;
 						}
 	
 						.week {
 							font-family: @secondary-ff;
-							font-size: @small-fs;
+							font-size: (@small-fs * @ratio);
 							color: @secondary-fc;
 							width: max-content;
 						}
 					}
 	
 					.friend-status {
-						font-size: @md-fs;
+						.data;
+						font-size: (@md-fs * @ratio);
 					}
 	
 					.view-all-friendships {
 						font-family: @primary-ff;
-						// font-size: @md-fs;
-						font-size: @small-fs;
+						// font-size: (@md-fs * @ratio);
+						font-size: (@small-fs * @ratio);
 						color: @secondary-fc;
 						align-self: flex-end;
 						cursor: @pointer;
@@ -157,10 +162,8 @@ body {
 		
 					position: fixed;
 					height: 80vh;
-					padding: 10px 25px;
-					top: 50%;
-					left: 50%;
-					transform: translate(-50%,-50%);
+					padding: (@md-gap * @ratio) (@big-gap * @ratio);
+					.center-absolute();
 	
 					background-clip: padding-box;
 					background-color: @secondary-bg;
@@ -175,7 +178,7 @@ body {
 	
 					& > span {
 						& > span {
-							gap: @bigger-gap;
+							gap: (@bigger-gap * @ratio);
 						}
 					}
 	
@@ -186,12 +189,12 @@ body {
 					}
 	
 					.exit-all-friendships {
-						width: @big-icon;
+						width: (@big-icon * @ratio);
 						cursor: @pointer;
 					}
 		
 					.section-title {
-						font-size: @big-fs;
+						font-size: (@big-fs * @ratio);
 					}
 				}
 			}
@@ -202,7 +205,7 @@ body {
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: space-between;
-			gap: @big-gap 0;
+			gap: (@big-gap * @ratio) 0;
 		}
 	
 		.gallery {
@@ -212,27 +215,23 @@ body {
 			&.monsters-section {
 				justify-content: space-between;
 				& > span {
-					gap: @md-gap;
+					gap: (@md-gap * @ratio);
 				}
-			}
-			
-			&:not(.shipped_items-section) {
-				flex-basis: 47.5%;
 			}
 	
 			& > span {
 				display: flex;
 				flex-wrap: wrap;
-				gap: @small-gap;
+				gap: (@small-gap * @ratio);
 			}
 	
 			img {
-				height: @big-icon;
+				height: (@big-icon * @ratio);
 			}
 		}
 	
 		& > :last-child {
-			margin-bottom: @bigger-gap;
+			margin-bottom: (@bigger-gap * @ratio);
 		}
 	}
 }

@@ -16,7 +16,9 @@
 }
 
 // Media queries
-
+@desktop: 768px;
+@ratio: 1;
+@d-ratio: 0.5;
 
 // Background
 @primary-bg: rgba(0, 0, 0, 0.21);
@@ -39,7 +41,7 @@
 @md-fs: 16px;
 @small-fs: 12px;
 
-// Images size
+// Icon size
 @bigger-icon: 40px;
 @big-icon: 28px;
 @md-icon: 24px;
@@ -51,11 +53,19 @@
 @big-gap: 25px;
 @md-gap: 10px;
 @small-gap: 5px;
+@button-gaps: 5px 15px;
 
 // Cursors
 @auto: url("../../medias/images/cursors/cursor.cur"), auto;
 @pointer: url("../../medias/images/cursors/pointer.cur"), pointer;
 @help: url("../../medias/images/cursors/help.cur"), help;
+
+// Center absolute
+.center-absolute() {
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%,-50%);
+}
 
 // Tooltips
 .tooltip {
@@ -133,4 +143,21 @@ html {
 	background-repeat: no-repeat;
 	background-attachment: fixed;
 	object-fit: cover;
+}
+
+// Media Queries
+@media (min-width: @desktop) {
+	.desktop-changes() !important;
+	@ratio: 1;
+	@import (multiple) "media-queries";
+	@import (multiple) "header";
+	@import (multiple) "main";
+}
+  
+  @media (max-width: @desktop) {
+	.mobile-changes() !important;
+	@ratio: 0.75;
+	@import (multiple) "media-queries";
+	@import (multiple) "header";
+	@import (multiple) "main";
 }
