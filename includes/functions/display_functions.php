@@ -63,6 +63,7 @@ function display_header(array $datas):string {
     
     extract($datas);    
     $images_path = get_images_folder();
+	$farm_name = str_contains(strtolower($farm_name), 'farm') ? $farm_name : $farm_name . ' farm';
 	$gender = ($gender == null) ? 'neutral' : $gender;
 
     $structure = "
@@ -111,7 +112,7 @@ function display_header(array $datas):string {
                     </span>
                 </span>
                 <span>
-                    <span class='data-info farm-name'>$farm_name farm</span>
+                    <span class='data-info farm-name'>$farm_name</span>
                 </span>
             </div>
         </header>
