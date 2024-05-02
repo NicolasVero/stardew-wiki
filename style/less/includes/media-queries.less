@@ -8,7 +8,9 @@
 	main {
 		.info-section {
 			width: fit-content;
-			flex-basis: 50%;
+			&:not(.general-stats) {
+				flex-basis: 50%;
+			}
 		}
 		.gallery {
 			&:not(.shipped_items-section) {

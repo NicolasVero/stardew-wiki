@@ -81,6 +81,8 @@ html {
   }
   main .info-section {
     width: fit-content !important;
+  }
+  main .info-section:not(.general-stats) {
     flex-basis: 50% !important;
   }
   main .gallery:not(.shipped_items-section) {
