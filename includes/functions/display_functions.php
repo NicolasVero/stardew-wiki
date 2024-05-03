@@ -186,7 +186,7 @@ function display_skills(array $datas):string {
             <span class='skill $key'>
 				<span class='tooltip'>
                 <img src='$level_icon' class='level-icon' alt='$key'/>
-					<span>$key</span>
+					<span>" . ucfirst($level_icon_name) . "</span>
 				</span>
                 
                 " . get_level_progress_bar($level) . "

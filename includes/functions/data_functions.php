@@ -244,6 +244,3 @@ function complete_general_data(array &$players, object $data) {
     }
 }
 
-function format_original_data_string(string $data):string {
-    return str_replace('(O)', '', $data);
-}

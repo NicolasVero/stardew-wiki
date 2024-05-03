@@ -25,9 +25,13 @@ function formate_text_for_file(string $string):string {
 
     $string = strtolower($string);
 
-    if (substr($string, -1) === '_') {
+    if(substr($string, -1) === '_') {
         $string = substr($string, 0, -1);
     }
 
     return $string;
+}
+
+function format_original_data_string(string $data):string {
+    return str_replace('(O)', '', $data);
 }
