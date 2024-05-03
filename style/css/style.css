@@ -129,12 +129,13 @@ html {
     border: solid 2px #a27845;
     border-image: url('../../medias/images/content/border_image.png') 15 stretch;
     border-image-width: 5px;
+    border-image-outset: 2px;
     background-clip: padding-box;
   }
   header {
     display: flex;
     flex-direction: column;
-    background-color: rgba(187, 187, 187, 0.5475);
+    background-color: rgba(187, 187, 187, 0.6);
     border-radius: 5px 5px 0 0;
     padding: 10px 25px;
     gap: 10px;
@@ -504,12 +505,13 @@ html {
     border: solid 2px #a27845;
     border-image: url('../../medias/images/content/border_image.png') 15 stretch;
     border-image-width: 5px;
+    border-image-outset: 2px;
     background-clip: padding-box;
   }
   header {
     display: flex;
     flex-direction: column;
-    background-color: rgba(187, 187, 187, 0.5475);
+    background-color: rgba(187, 187, 187, 0.6);
     border-radius: 5px 5px 0 0;
     padding: 7.5px 18.75px;
     gap: 7.5px;
