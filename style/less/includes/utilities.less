@@ -1,5 +1,6 @@
 // out: false
 
+// Font faces
 @font-face {
 	font-family: 'Stardew Valley Stonks';
 	src: url('../../medias/fonts/stardew_valley_stonks.ttf') format('truetype');
@@ -60,73 +61,6 @@
 @pointer: url("../../medias/images/cursors/pointer.cur"), pointer;
 @help: url("../../medias/images/cursors/help.cur"), help;
 
-// Center absolute
-.center-absolute() {
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%,-50%);
-}
-
-// Tooltips
-.tooltip {
-	&:hover {
-		position: relative;
-	}
-
-	span {
-		.data;
-		position: absolute;
-		display: none;
-		width: max-content;
-		width: max-content;
-		// max-width: 150px;
-		padding: 5px 7.5px;
-		background-color: @stardew-bg;
-		border-image: url('../../medias/images/content/border_image.png') 15 stretch;
-		border-image-width: 2px;
-	}
-
-	img {
-		&:hover {
-			cursor: @help;
-			& ~ span {
-				z-index: 100;
-				display: inline;
-			}
-		}
-	}
-}
-
-// Basic classes
-.data {
-	font-family: @primary-ff;
-	font-size: @big-fs;
-	color: @primary-fc;
-}
-
-.data-info {
-	font-family: @primary-ff;
-	font-size: @md-fs;
-	color: @primary-fc;
-}
-
-.data-label {
-	font-family: @secondary-ff;
-	font-size: @small-fs;
-	color: @secondary-fc;
-	font-weight: 200;
-}
-
-.button-elements {
-	.data;
-}
-
-
-.not-found {
-	filter:grayscale(1);
-	opacity: 0.2;
-}
-
 // Basic style
 * {
 	// margin: 0 auto;
@@ -149,14 +83,16 @@ html {
 @media (min-width: @desktop) {
 	.desktop-changes() !important;
 	@ratio: 1;
+	@import (multiple) "general-classes";
 	@import (multiple) "media-queries";
 	@import (multiple) "header";
 	@import (multiple) "main";
 }
-  
-  @media (max-width: @desktop) {
+
+@media (max-width: @desktop) {
 	.mobile-changes() !important;
 	@ratio: 0.75;
+	@import (multiple) "general-classes";
 	@import (multiple) "media-queries";
 	@import (multiple) "header";
 	@import (multiple) "main";

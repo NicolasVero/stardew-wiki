@@ -24,12 +24,37 @@
 // Mobile changes
 .mobile-changes() {
 	body {
+		margin: 50px 10px;
+
+		.sur-header {
+			height: 25px;
+			top: -30px;
+		}
+
+		header {
+			.sub-header {
+				justify-content: center;
+				flex-wrap: wrap;
+				gap: (@md-gap * @ratio);
+
+				.all-money {
+					justify-content: space-around;
+					flex-basis: 100%;
+					gap: @md-gap * @ratio;
+
+					& > span {
+						width: fit-content;
+					}
+				}
+			}
+		}
+
 		main {
 			.info-section {
 				&.general-stats {
 					& > div {
 						flex-wrap: wrap;
-						gap: (@md-gap * @d-ratio) 0;
+						gap: (@big-gap * @d-ratio) 0;
 						
 						& > span {
 							flex-basis: 50%;

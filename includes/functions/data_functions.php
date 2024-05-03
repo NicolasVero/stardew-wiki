@@ -1,5 +1,7 @@
 <?php
-
+/* //! Fix certains noms:
+dwarf scrolls -> i au lieu de I
+fairy_Stone -> stone */
 
 function get_all_players_datas(object $data):array {
     $players = array();
