@@ -15,6 +15,9 @@ function display_page(array $all_datas, array $players):string {
     $structure .= display_top_friendships($all_datas['friendship'], 4);
     $structure .= display_friendships($all_datas['friendship']);
 
+	// TODO Futur Unlockable section
+    $structure .= display_gallery($all_datas['has_element'], 'unlockables', 'Unlockables');
+
     $structure .= "<div class='separated-galleries'>";
     $structure .= display_gallery($all_datas['fish_caught'], 'fish', 'Fish caught');
     $structure .= display_gallery($all_datas['cooking_recipe'], 'recipes', 'Cooking recipes');
@@ -26,6 +29,8 @@ function display_page(array $all_datas, array $players):string {
 
     $structure .= "<div class='separated-galleries'>";
     $structure .= display_enemies($all_datas['enemies_killed']);
+	// TODO Futurs Achievements
+    // $structure .= display_gallery($all_datas['achievements'], 'achievements', 'Achievements');
     $structure .= "</div>";
 
     $structure .= "</main>";
@@ -41,19 +46,19 @@ function display_player_selection(array $players):string {
 	";
 
     foreach($players as $player) {
-        // $structure .= "<li value='$player' class='button-elements'>$player</option>";
+        $structure .= "<li value='$player' class='button-elements'>$player</option>";
     }
 	/* Test username max length */
-    $structure .= "
-		<li class='button-elements'>WWWWWW</option>
-		<li class='button-elements'>WWWWWW</option>
-		<li class='button-elements'>WWWWWW</option>
-		<li class='button-elements'>WWWWWW</option>
-		<li class='button-elements'>WWWWWW</option>
-		<li class='button-elements'>WWWWWW</option>
-		<li class='button-elements'>WWWWWW</option>
-		<li class='button-elements'>WWWWWW</option>
-	";
+    // $structure .= "
+	// 	<li class='button-elements'>WWWWWW</option>
+	// 	<li class='button-elements'>WWWWWW</option>
+	// 	<li class='button-elements'>WWWWWW</option>
+	// 	<li class='button-elements'>WWWWWW</option>
+	// 	<li class='button-elements'>WWWWWW</option>
+	// 	<li class='button-elements'>WWWWWW</option>
+	// 	<li class='button-elements'>WWWWWW</option>
+	// 	<li class='button-elements'>WWWWWW</option>
+	// ";
 
     $structure .= "</ul>";
     

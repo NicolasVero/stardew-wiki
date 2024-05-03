@@ -35,7 +35,7 @@ html {
   body main .info-section:not(.general-stats) {
     flex-basis: 50% !important;
   }
-  body main .gallery:not(.shipped_items-section) {
+  body main .gallery:not(.shipped_items-section, .unlockables-section) {
     flex-basis: 47.5% !important;
   }
   .not-found {
