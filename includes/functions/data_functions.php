@@ -68,16 +68,16 @@ function get_aggregated_data(object $data):array {
             'has_onion_mastery'    => (int) in_array(3910979, (array) $data->eventsSeen->int),
             'has_town_key'         => has_element($data->HasTownKey),
         ),
-        'fish_caught'     => get_item_list($data->fishCaught, 'fish'),
+        'fish_caught'     => get_fish_caught_data($data->fishCaught),
         'artifacts_found' => get_item_list($data->archaeologyFound, 'artifacts'),
         'minerals_found'  => get_item_list($data->mineralsFound, 'minerals'),
-		//! Display les cookingRecipes que tu possèdes, pas que tu as déjà cuisiné, peut-être le changer?
+		//& Display les cookingRecipes que tu possèdes, pas que tu as déjà cuisiné, peut-être le changer?
         'cooking_recipe'  => get_item_list($data->cookingRecipes, 'recipes'),
         'shipped_items'   => get_item_list($data->basicShipped, 'shipped_items'),
         'achievements'    => get_achievement($data->achievements),
         'skills'          => get_skills_data((array) $data->professions->int),
         'friendship'      => get_friendship_data($data->friendshipData),
-        'enemies_killed'   => get_enemies_killed_data($data->stats),
+        'enemies_killed'  => get_enemies_killed_data($data->stats),
         'quest_log'       => get_quest_log($data->questLog)
     );
 }
@@ -87,7 +87,7 @@ function has_element(object $element):int {
 }
 
 function get_achievement(object $achievements):array {
-
+   
     $datas = array();
     
     foreach($achievements->int as $achievement) 
@@ -98,12 +98,11 @@ function get_achievement(object $achievements):array {
 
 
 function get_item_list(object $items, string $filename):array {
-
     $datas = array();
 
     foreach($items->item as $item) {
-		//! Anciennes versions ($item->key->int) sauf cookingRecipes ($item->key-string)
-        $item_id = str_replace('(O)', '', (string) $item->key->string);
+		//& Anciennes versions ($item->key->int) sauf cookingRecipes ($item->key-string)
+        $item_id = format_original_data_string($item->key->string);
 
         if(ctype_digit($item_id)) {
             $reference = find_reference_in_json($item_id, $filename);
@@ -112,6 +111,7 @@ function get_item_list(object $items, string $filename):array {
                 $datas[] = $reference;
         }
 
+        // Les recettes ne sont pas stockées avec un id, mais avec une string
         if($filename == 'recipes')
             $datas[] = $item_id;
     }
@@ -120,8 +120,9 @@ function get_item_list(object $items, string $filename):array {
 }
 
 
-function find_reference_in_json(int $id, string $file) {
-    //! Changer file_get_contents en curl -> problème de pare-feu en hébergé
+
+function find_reference_in_json(int $id, string $file):mixed {
+    //& Changer file_get_contents en curl -> problème de pare-feu en hébergé
     $json_file = json_decode(file_get_contents(get_json_folder() . $file . '.json'), true);
 
     return isset($json_file[$id]) ? $json_file[$id] : null;
@@ -152,18 +153,43 @@ function get_game_duration(int $duration):string {
 }
 
 function get_enemies_killed_data(object $data):array { 
-    $enemies = [];
+    $enemies = array();
     
-    foreach ($data->specificMonstersKilled->item as $item) {
-        $enemies[(string) $item->key->string] = (int) $item->value->int;
+    foreach($data->specificMonstersKilled->item as $item) {
+        $enemies[(string) $item->key->string] = array(
+            'killed_counter' => (int) $item->value->int
+        );
     }
     
     return $enemies;
 }
 
+function get_fish_caught_data(object $data):array {
+    $fishs = array();
+
+    foreach($data->item as $item) {
+
+        $values_array = (array) $item->value->ArrayOfInt->int;
+        $index = find_reference_in_json(
+            (int) format_original_data_string($item->key->string),
+            'fish'
+        );
+
+        if(empty($index) || $index == "" || $values_array[1] == -1) 
+            continue;
+        
+        $fishs[$index] = array(
+            'caught_counter' => (int) $values_array[0],
+            'max_length'     => (int) $values_array[1]
+        );
+    }
+
+    return $fishs;
+}
+
 
 function get_friendship_data(object $data):array { 
-    //! Faire json de tous les villageois car parties moddées en rajoute des inconnus
+    //& Faire json de tous les villageois car parties moddées en rajoute des inconnus
     $friends = array();
 
     foreach($data->item as $item) {
@@ -216,4 +242,8 @@ function complete_general_data(array &$players, object $data) {
     foreach($players as &$player) {
         $player['general']['golden_walnuts'] = (int) $data->goldenWalnuts;
     }
+}
+
+function format_original_data_string(string $data):string {
+    return str_replace('(O)', '', $data);
 }

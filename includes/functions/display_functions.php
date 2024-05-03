@@ -19,7 +19,7 @@ function display_page(array $all_datas, array $players):string {
     $structure .= display_gallery($all_datas['has_element'], 'unlockables', 'Unlockables');
 
     $structure .= "<div class='separated-galleries'>";
-    $structure .= display_gallery($all_datas['fish_caught'], 'fish', 'Fish caught');
+    $structure .= display_detailled_gallery($all_datas['fish_caught'], 'fish', 'Fish caught');
     $structure .= display_gallery($all_datas['cooking_recipe'], 'recipes', 'Cooking recipes');
     $structure .= display_gallery($all_datas['minerals_found'], 'minerals', 'Minerals');
     $structure .= display_gallery($all_datas['artifacts_found'], 'artifacts', 'Artifacts');
@@ -28,7 +28,7 @@ function display_page(array $all_datas, array $players):string {
     $structure .= display_gallery($all_datas['shipped_items'], 'shipped_items', 'Shipped items');
 
     $structure .= "<div class='separated-galleries'>";
-    $structure .= display_enemies($all_datas['enemies_killed']);
+    $structure .= display_detailled_gallery($all_datas['enemies_killed'], 'enemies', 'Enemies killed');
 	// TODO Futurs Achievements
     // $structure .= display_gallery($all_datas['achievements'], 'achievements', 'Achievements');
     $structure .= "</div>";
@@ -326,13 +326,13 @@ function display_friendships(array $friends, $limit = -1):string {
     return $structure;
 }
 
-function display_gallery(array $player_elements, string $json_file, string $section_title):string {
-    $images_path = get_images_folder() . "$json_file/";
+function display_gallery(array $player_elements, string $json_filename, string $section_title):string {
+    $images_path = get_images_folder() . "$json_filename/";
 
-    $elements = json_decode(file_get_contents(get_json_folder() . $json_file . '.json'), true);
+    $elements = json_decode(file_get_contents(get_json_folder() . $json_filename . '.json'), true);
 
     $structure = "
-        <section class='gallery $json_file-section'>
+        <section class='gallery $json_filename-section'>
             <h2 class='section-title'>$section_title</h2>
             <span>
     ";
@@ -344,7 +344,7 @@ function display_gallery(array $player_elements, string $json_file, string $sect
 
         $structure .= "
             <span class='tooltip'>
-                <img src='$element_image' alt='$element' class='gallery-item $json_file $element_class' />
+                <img src='$element_image' alt='$element' class='gallery-item $json_filename $element_class' />
                 <span>$element</span>
             </span>
         ";
@@ -359,28 +359,30 @@ function display_gallery(array $player_elements, string $json_file, string $sect
 }
 
 
-function display_enemies(array $player_enemies):string {
-    $enemies = json_decode(file_get_contents(get_json_folder() . 'enemies.json'), true);
-    $images_path = get_images_folder() . "enemies/";
+function display_detailled_gallery(array $player_datas, string $json_filename, string $section_title):string {
+    $json_datas = json_decode(file_get_contents(get_json_folder() . $json_filename . '.json'), true);
+    $images_path = get_images_folder() . "$json_filename/";
 
     $structure = "
-        <section class='gallery monsters-section'>
-            <h2 class='section-title'>Enemies</h2>
+        <section class='gallery $json_filename-section'>
+            <h2 class='section-title'>$section_title</h2>
             <span>
     ";
 
-    foreach($enemies['enemies'] as $enemy) {
 
-        $enemy_class = array_key_exists($enemy, $player_enemies) ? "found" : "not-found"; 
-        $enemy_image = $images_path . formate_text_for_file($enemy) . ".png";        
-        $enemy_killed = (isset($player_enemies[$enemy])) ? $player_enemies[$enemy] : 0;
-        $tooltip_text = ($enemy_killed > 0) ? "$enemy : $enemy_killed killed" : $enemy;
+    foreach($json_datas as $json_line_name) {
+        
+        $is_found = array_key_exists($json_line_name, $player_datas);
+
+        $element_class = ($is_found) ? 'found' : 'not-found';
+        $element_image = $images_path . formate_text_for_file($json_line_name) . '.png';
+        $element_tooltip = ($is_found) ? get_tooltip_text($player_datas, $json_line_name, $json_filename) : $json_line_name;
 
 
         $structure .= "
             <span class='tooltip'>
-                <img src='$enemy_image' alt='$enemy' class='gallery-item enemies $enemy_class' />
-                <span>$tooltip_text</span>
+                <img src='$element_image' alt='$json_line_name' class='gallery-item enemies $element_class' />
+                <span>$element_tooltip</span>
             </span>
         ";
     }
@@ -392,3 +394,24 @@ function display_enemies(array $player_enemies):string {
 
     return $structure;
 } 
+
+
+function get_tooltip_text(array $player_data, string $json_line_name, string $data_type):string {
+    
+    $data_array = $player_data[$json_line_name];
+
+    if(empty($data_array))
+        return $json_line_name;
+
+    extract($data_array);
+
+    if($data_type == 'fish') {
+        return "$json_line_name : caught $caught_counter times ($max_length inches)";
+    }
+
+    if($data_type == 'enemies') {
+        return "$json_line_name : $killed_counter killed";
+    }
+    
+    return $json_line_name;
+}
