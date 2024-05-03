@@ -71,7 +71,6 @@ function get_aggregated_data(object $data):array {
         'fish_caught'     => get_fish_caught_data($data->fishCaught),
         'artifacts_found' => get_item_list($data->archaeologyFound, 'artifacts'),
         'minerals_found'  => get_item_list($data->mineralsFound, 'minerals'),
-		//& Display les cookingRecipes que tu possèdes, pas que tu as déjà cuisiné, peut-être le changer?
         'cooking_recipe'  => get_cooking_recipes($data->cookingRecipes),
         'shipped_items'   => get_item_list($data->basicShipped, 'shipped_items'),
         'achievements'    => get_achievement($data->achievements),
@@ -90,8 +89,15 @@ function get_achievement(object $achievements):array {
    
     $datas = array();
     
-    foreach($achievements->int as $achievement) 
-        $datas[] = find_reference_in_json((string)$achievement, 'achievements');
+    foreach($achievements->int as $achievement) {
+        $json_data = find_reference_in_json((int) $achievement, 'achievements_details');
+        $achievement_title = explode(':', $json_data)[0]; 
+        $achievement_description = explode(':', $json_data)[1]; 
+
+        $datas[$achievement_title] = array(
+            'description' => $achievement_description
+        );
+    }
     
     return $datas;
 }
@@ -185,12 +191,17 @@ function get_fish_caught_data(object $data):array {
 
 
 function get_friendship_data(object $data):array { 
-    //& Faire json de tous les villageois car parties moddées en rajoute des inconnus
     $friends = array();
+    $json_villagers = json_decode(file_get_contents(get_json_folder() . 'villagers.json'), true);
 
+    // log_($json_villagers);
     foreach($data->item as $item) {
-        $friends[(string) $item->key->string] = array(
+        
+        $friend_name = (string) $item->key->string;
 
+        if(!in_array($friend_name, $json_villagers['villagers'])) continue;
+
+        $friends[$friend_name] = array(
             'points'       => (int) $item->value->Friendship->Points,
             'friend_level' => (int) floor(($item->value->Friendship->Points) / 250),
             'status'       => (string) $item->value->Friendship->Status,

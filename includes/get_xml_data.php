@@ -7,4 +7,4 @@ $data = simplexml_load_file('./data/saves/sevran2');
 $players_data = get_all_players_datas($data);
 $players = get_all_players($data);
 
-// log_($players_data);
+log_($players_data);

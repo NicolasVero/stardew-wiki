@@ -19,19 +19,16 @@ function display_page(array $all_datas, array $players):string {
     $structure .= display_gallery($all_datas['has_element'], 'unlockables', 'Unlockables');
 
     $structure .= "<div class='separated-galleries'>";
-    $structure .= display_detailled_gallery($all_datas['fish_caught'], 'fish', 'Fish caught');
-    $structure .= display_detailled_gallery($all_datas['cooking_recipe'], 'recipes', 'Cooking recipes');
-    $structure .= display_gallery($all_datas['minerals_found'], 'minerals', 'Minerals');
-    $structure .= display_gallery($all_datas['artifacts_found'], 'artifacts', 'Artifacts');
+        $structure .= display_detailled_gallery($all_datas['fish_caught'], 'fish', 'Fish caught');
+        $structure .= display_detailled_gallery($all_datas['cooking_recipe'], 'recipes', 'Cooking recipes');
+        $structure .= display_gallery($all_datas['minerals_found'], 'minerals', 'Minerals');
+        $structure .= display_gallery($all_datas['artifacts_found'], 'artifacts', 'Artifacts');
+        $structure .= display_detailled_gallery($all_datas['enemies_killed'], 'enemies', 'Enemies killed');
+        $structure .= display_detailled_gallery($all_datas['achievements'], 'achievements', 'Achievements');
     $structure .= "</div>";
 
     $structure .= display_gallery($all_datas['shipped_items'], 'shipped_items', 'Shipped items');
 
-    $structure .= "<div class='separated-galleries'>";
-    $structure .= display_detailled_gallery($all_datas['enemies_killed'], 'enemies', 'Enemies killed');
-	// TODO Futurs Achievements
-    // $structure .= display_gallery($all_datas['achievements'], 'achievements', 'Achievements');
-    $structure .= "</div>";
 
     $structure .= "</main>";
 
@@ -369,7 +366,6 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
             <span>
     ";
     
-    
     foreach($json_datas as $json_line_name) {
 
         $is_found = array_key_exists($json_line_name, $player_datas);
@@ -379,7 +375,11 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
         if($json_filename == 'recipes' && $is_found && $player_datas[$json_line_name]['cooked_count'] == 0)
             $element_class .= ' not-cooked'; 
 
-        $element_image   = $images_path . formate_text_for_file($json_line_name) . '.png';
+        if($json_filename == 'achievements')
+            $element_image = $images_path . formate_text_for_file((string) explode(':', $json_line_name)[0] ). '.png';
+        else 
+            $element_image   = $images_path . formate_text_for_file($json_line_name) . '.png';
+
         $element_tooltip = ($is_found) ? get_tooltip_text($player_datas, $json_line_name, $json_filename) : $json_line_name;
 
 
@@ -420,6 +420,8 @@ function get_tooltip_text(array $player_data, string $json_line_name, string $da
             if($cooked_count) return "$json_line_name : not cooked yet";
             return "$json_line_name : cooked $cooked_count times";
 
+        case 'achievements' :
+            return "$json_line_name : $description";
 
          default : return $json_line_name;
     }
