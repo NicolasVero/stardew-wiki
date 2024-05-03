@@ -35,7 +35,10 @@ function display_page(array $all_datas, array $players):string {
 
 
 function display_player_selection(array $players):string {
-    $structure = "<ul id='player_selection'>";
+    $structure = "
+		<div class='sur-header'>
+			<ul id='player_selection'>
+	";
 
     foreach($players as $player) {
         $structure .= "<li value='$player' class='button-elements'>$player</option>";
@@ -67,7 +70,8 @@ function display_header(array $datas):string {
 	$gender = ($gender == null) ? 'neutral' : $gender;
 
     $structure = "
-		<button class='button-elements save-file'>Upload a save file</button>
+			<button class='button-elements save-file'>Upload a save file</button>
+		</div>
         <header>
             <div class='header'>
                 <span>

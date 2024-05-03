@@ -1,44 +1,46 @@
 // out: false
 
-#player_selection {
-	display: flex;
-	flex-wrap: wrap;
-	align-items: center;
-	gap: (@md-gap * @ratio) (@big-gap * @ratio);
+.sur-header {
 	position: absolute;
-	top: -35px;
-	width: 70%;
-	margin-right: 2px;
-	margin: 0;
-	list-style-type: none;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-start;
+	width: 100%;
+	height: 50px;
+	top: -50px;
 
-	li {
-		height: 25px;
-		padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @ratio);
-		background-color: @stardew-bg;
-		border-image: url('../../medias/images/content/border_image.png') 15 stretch;
-		border-image-width: 5px;
-		// border-image-width: 5px 5px 0 5px;
-		border-image-outset: 2px;
-		background-clip: padding-box;
+	#player_selection {
+		display: flex;
+		flex-wrap: wrap;
+		align-items: center;
+		gap: (@md-gap * @ratio) (@big-gap * @ratio);
+		margin: 0;
+		list-style-type: none;
 
-		&:hover {
-			cursor: @pointer;
+		li {
+			padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @ratio);
+			background-color: @stardew-bg;
+			border-image: url('../../medias/images/content/border_image.png') 15 stretch;
+			border-image-width: 5px;
+			border-image-outset: 2px;
+			background-clip: padding-box;
+			height: 25px;
+
+			&:hover {
+				cursor: @pointer;
+			}
 		}
 	}
-}
 
-.save-file {
-	position: absolute;
-	top: -35px;
-	cursor: @pointer;
-	right: 0;
-	padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @ratio);
-	background-color: @stardew-bg;
-	// border: solid 2px rgba(162, 120, 69, 1);
-	border-image: url('../../medias/images/content/border_image.png') 15 stretch;
-	border-image-width: 5px;
-	background-clip: padding-box;
+	.save-file {
+		cursor: @pointer;
+		padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @ratio);
+		background-color: @stardew-bg;
+		// border: solid 2px rgba(162, 120, 69, 1);
+		border-image: url('../../medias/images/content/border_image.png') 15 stretch;
+		border-image-width: 5px;
+		background-clip: padding-box;
+	}
 }
 
 header {

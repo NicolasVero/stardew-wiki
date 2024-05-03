@@ -77,7 +77,7 @@ html {
 }
 @media (min-width: 768px) {
   body {
-    margin: 100px 100px !important;
+    margin: 15vh 10vw !important;
   }
   main .info-section {
     width: fit-content !important;
@@ -88,35 +88,37 @@ html {
   main .gallery:not(.shipped_items-section) {
     flex-basis: 47.5% !important;
   }
-  #player_selection {
+  .sur-header {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    height: 50px;
+    top: -50px;
+  }
+  .sur-header #player_selection {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 10px 25px;
-    position: absolute;
-    top: -35px;
-    width: 70%;
-    margin-right: 2px;
     margin: 0;
     list-style-type: none;
   }
-  #player_selection li {
-    height: 25px;
+  .sur-header #player_selection li {
     padding: 5px 15px;
     background-color: #ffc677;
     border-image: url('../../medias/images/content/border_image.png') 15 stretch;
     border-image-width: 5px;
     border-image-outset: 2px;
     background-clip: padding-box;
+    height: 25px;
   }
-  #player_selection li:hover {
+  .sur-header #player_selection li:hover {
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
-  .save-file {
-    position: absolute;
-    top: -35px;
+  .sur-header .save-file {
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
-    right: 0;
     padding: 5px 15px;
     background-color: #ffc677;
     border-image: url('../../medias/images/content/border_image.png') 15 stretch;
@@ -388,35 +390,37 @@ html {
   body main .info-section.friends-section > span > span .gifts .gift {
     width: 12px !important;
   }
-  #player_selection {
+  .sur-header {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    width: 100%;
+    height: 50px;
+    top: -50px;
+  }
+  .sur-header #player_selection {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     gap: 7.5px 18.75px;
-    position: absolute;
-    top: -35px;
-    width: 70%;
-    margin-right: 2px;
     margin: 0;
     list-style-type: none;
   }
-  #player_selection li {
-    height: 25px;
+  .sur-header #player_selection li {
     padding: 3.75px 11.25px;
     background-color: #ffc677;
     border-image: url('../../medias/images/content/border_image.png') 15 stretch;
     border-image-width: 5px;
     border-image-outset: 2px;
     background-clip: padding-box;
+    height: 25px;
   }
-  #player_selection li:hover {
+  .sur-header #player_selection li:hover {
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
-  .save-file {
-    position: absolute;
-    top: -35px;
+  .sur-header .save-file {
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
-    right: 0;
     padding: 3.75px 11.25px;
     background-color: #ffc677;
     border-image: url('../../medias/images/content/border_image.png') 15 stretch;
