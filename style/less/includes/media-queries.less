@@ -3,19 +3,26 @@
 // Desktop changes
 .desktop-changes() {
 	body {
-		margin: 15vh 10vw;
-		// margin: 100px 100px;
-	}
-	main {
-		.info-section {
-			width: fit-content;
-			&:not(.general-stats) {
-				flex-basis: 50%;
+		margin: 5vh 10vw;
+
+		.sur-header {
+			#player_selection {
+				width: 70%;
 			}
 		}
-		.gallery {
-			&:not(.shipped_items-section) {
-				flex-basis: 47.5%;
+	
+		main {
+			.info-section {
+				width: fit-content;
+				&:not(.general-stats) {
+					flex-basis: 50%;
+				}
+			}
+	
+			.gallery {
+				&:not(.shipped_items-section) {
+					flex-basis: 47.5%;
+				}
 			}
 		}
 	}
@@ -25,11 +32,6 @@
 .mobile-changes() {
 	body {
 		margin: 50px 10px;
-
-		.sur-header {
-			height: 25px;
-			top: -30px;
-		}
 
 		header {
 			.sub-header {

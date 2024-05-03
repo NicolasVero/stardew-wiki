@@ -9,9 +9,10 @@
 
 // Items not found
 .not-found {
-	filter:grayscale(1);
+	filter: grayscale(1);
 	opacity: 0.2;
 }
+
 // Basic classes
 .data {
 	font-family: @primary-ff;
@@ -19,6 +20,14 @@
 	color: @primary-fc;
 }
 
+.buttons {
+	transition: transform .2s ease-in-out;
+	&:hover {
+		transform: scale(1.1);
+	}
+}
+
+// Data classes
 .data-info {
 	font-family: @primary-ff;
 	font-size: @md-fs * @ratio;
@@ -34,6 +43,7 @@
 
 .button-elements {
 	.data;
+	.buttons;
 }
 
 // Tooltips

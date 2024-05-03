@@ -41,20 +41,19 @@ function display_player_selection(array $players):string {
 	";
 
     foreach($players as $player) {
-        $structure .= "<li value='$player' class='button-elements'>$player</option>";
+        // $structure .= "<li value='$player' class='button-elements'>$player</option>";
     }
-	/* Test username max length
+	/* Test username max length */
     $structure .= "
-		<li value='' class='button-elements'>WWWWWW</option>
-		<li value='' class='button-elements'>WWWWWW</option>
-		<li value='' class='button-elements'>WWWWWW</option>
-		<li value='' class='button-elements'>WWWWWW</option>
-		<li value='' class='button-elements'>WWWWWW</option>
-		<li value='' class='button-elements'>WWWWWW</option>
-		<li value='' class='button-elements'>WWWWWW</option>
-		<li value='' class='button-elements'>WWWWWW</option>
+		<li class='button-elements'>WWWWWW</option>
+		<li class='button-elements'>WWWWWW</option>
+		<li class='button-elements'>WWWWWW</option>
+		<li class='button-elements'>WWWWWW</option>
+		<li class='button-elements'>WWWWWW</option>
+		<li class='button-elements'>WWWWWW</option>
+		<li class='button-elements'>WWWWWW</option>
+		<li class='button-elements'>WWWWWW</option>
 	";
-	*/
 
     $structure .= "</ul>";
     
@@ -133,7 +132,7 @@ function display_general_stats(array $datas):string {
     $structure = "
         <section class='info-section general-stats'>
         	<h2 class='section-title'>General stats</h2>
-			<img src='" . get_images_folder() . "/content/quest_icon.png' class='quest-icon view-all-quests'>
+			<img src='" . get_images_folder() . "/content/quest_icon.png' class='quest-icon view-all-quests button-elements'>
             <div>
                 <span>
                     <img src='{$images_path}icons/energy.png' alt='Energy' />

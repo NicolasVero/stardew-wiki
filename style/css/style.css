@@ -20,25 +20,22 @@ pre {
   cursor: url("../../medias/images/cursors/cursor.cur"), auto;
 }
 html {
-  background-image: url("../../medias/images/content/bg.png");
-  background-size: 125% 125%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  object-fit: cover;
+  background: #0A0523 url("../../medias/images/content/bg.png") no-repeat fixed center center / cover;
 }
 @media (min-width: 768px) {
   body {
-    margin: 15vh 10vw !important;
+    margin: 5vh 10vw !important;
   }
-  main .info-section {
+  body .sur-header #player_selection {
+    width: 70% !important;
+  }
+  body main .info-section {
     width: fit-content !important;
   }
-  main .info-section:not(.general-stats) {
+  body main .info-section:not(.general-stats) {
     flex-basis: 50% !important;
   }
-  main .gallery:not(.shipped_items-section) {
+  body main .gallery:not(.shipped_items-section) {
     flex-basis: 47.5% !important;
   }
   .not-found {
@@ -49,6 +46,12 @@ html {
     font-family: "Stardew Valley Stonks", serif;
     font-size: 18px;
     color: #000000;
+  }
+  .buttons {
+    transition: transform 0.2s ease-in-out;
+  }
+  .buttons:hover {
+    transform: scale(1.1);
   }
   .data-info {
     font-family: "Stardew Valley Stonks", serif;
@@ -65,6 +68,10 @@ html {
     font-family: "Stardew Valley Stonks", serif;
     font-size: 18px;
     color: #000000;
+    transition: transform 0.2s ease-in-out;
+  }
+  .button-elements:hover {
+    transform: scale(1.1);
   }
   .tooltip:hover {
     position: relative;
@@ -89,38 +96,37 @@ html {
     display: inline;
   }
   .sur-header {
-    position: absolute;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: flex-end;
     width: 100%;
-    height: 50px;
-    top: -50px;
+    margin-bottom: 20px;
   }
   .sur-header #player_selection {
+    margin: 0;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 10px 25px;
-    margin: 0;
+    gap: 5px 10px;
     list-style-type: none;
   }
   .sur-header #player_selection li {
-    padding: 5px 15px;
+    padding: 2.5px 5px;
     background-color: #ffc677;
+    border: solid 2px #a27845;
     border-image: url('../../medias/images/content/border_image.png') 15 stretch;
     border-image-width: 5px;
     border-image-outset: 2px;
     background-clip: padding-box;
-    height: 25px;
   }
   .sur-header #player_selection li:hover {
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
   .sur-header .save-file {
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
-    padding: 5px 15px;
+    padding: 5px 10px;
     background-color: #ffc677;
+    border: solid 2px #a27845;
     border-image: url('../../medias/images/content/border_image.png') 15 stretch;
     border-image-width: 5px;
     background-clip: padding-box;
@@ -128,7 +134,8 @@ html {
   header {
     display: flex;
     flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.21);
+    background-color: rgba(187, 187, 187, 0.5475);
+    border-radius: 5px 5px 0 0;
     padding: 10px 25px;
     gap: 10px;
   }
@@ -161,12 +168,12 @@ html {
   }
   body {
     position: relative;
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.7);
   }
   body main {
+    background-color: rgba(255, 255, 255, 0.7);
     display: flex;
     flex-wrap: wrap;
+    border-radius: 0 0 5px 5px;
     padding: 5px 25px;
     gap: 25px 0;
   }
@@ -352,10 +359,6 @@ html {
   body {
     margin: 50px 10px !important;
   }
-  body .sur-header {
-    height: 25px !important;
-    top: -30px !important;
-  }
   body header .sub-header {
     justify-content: center !important;
     flex-wrap: wrap !important;
@@ -419,6 +422,12 @@ html {
     font-size: 13.5px;
     color: #000000;
   }
+  .buttons {
+    transition: transform 0.2s ease-in-out;
+  }
+  .buttons:hover {
+    transform: scale(1.1);
+  }
   .data-info {
     font-family: "Stardew Valley Stonks", serif;
     font-size: 12px;
@@ -434,6 +443,10 @@ html {
     font-family: "Stardew Valley Stonks", serif;
     font-size: 13.5px;
     color: #000000;
+    transition: transform 0.2s ease-in-out;
+  }
+  .button-elements:hover {
+    transform: scale(1.1);
   }
   .tooltip:hover {
     position: relative;
@@ -458,38 +471,37 @@ html {
     display: inline;
   }
   .sur-header {
-    position: absolute;
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: flex-end;
     width: 100%;
-    height: 50px;
-    top: -50px;
+    margin-bottom: 20px;
   }
   .sur-header #player_selection {
+    margin: 0;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-    gap: 7.5px 18.75px;
-    margin: 0;
+    gap: 3.75px 7.5px;
     list-style-type: none;
   }
   .sur-header #player_selection li {
-    padding: 3.75px 11.25px;
+    padding: 2.5px 5px;
     background-color: #ffc677;
+    border: solid 2px #a27845;
     border-image: url('../../medias/images/content/border_image.png') 15 stretch;
     border-image-width: 5px;
     border-image-outset: 2px;
     background-clip: padding-box;
-    height: 25px;
   }
   .sur-header #player_selection li:hover {
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
   .sur-header .save-file {
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
-    padding: 3.75px 11.25px;
+    padding: 3.75px 7.5px;
     background-color: #ffc677;
+    border: solid 2px #a27845;
     border-image: url('../../medias/images/content/border_image.png') 15 stretch;
     border-image-width: 5px;
     background-clip: padding-box;
@@ -497,7 +509,8 @@ html {
   header {
     display: flex;
     flex-direction: column;
-    background-color: rgba(0, 0, 0, 0.21);
+    background-color: rgba(187, 187, 187, 0.5475);
+    border-radius: 5px 5px 0 0;
     padding: 7.5px 18.75px;
     gap: 7.5px;
   }
@@ -530,12 +543,12 @@ html {
   }
   body {
     position: relative;
-    border-radius: 5px;
-    background-color: rgba(255, 255, 255, 0.7);
   }
   body main {
+    background-color: rgba(255, 255, 255, 0.7);
     display: flex;
     flex-wrap: wrap;
+    border-radius: 0 0 5px 5px;
     padding: 3.75px 18.75px;
     gap: 18.75px 0;
   }
