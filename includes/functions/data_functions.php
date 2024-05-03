@@ -72,7 +72,7 @@ function get_aggregated_data(object $data):array {
         'artifacts_found' => get_item_list($data->archaeologyFound, 'artifacts'),
         'minerals_found'  => get_item_list($data->mineralsFound, 'minerals'),
 		//& Display les cookingRecipes que tu possèdes, pas que tu as déjà cuisiné, peut-être le changer?
-        'cooking_recipe'  => get_item_list($data->cookingRecipes, 'recipes'),
+        'cooking_recipe'  => get_cooking_recipes($data->cookingRecipes),
         'shipped_items'   => get_item_list($data->basicShipped, 'shipped_items'),
         'achievements'    => get_achievement($data->achievements),
         'skills'          => get_skills_data((array) $data->professions->int),
@@ -110,10 +110,6 @@ function get_item_list(object $items, string $filename):array {
             if(!empty($reference))
                 $datas[] = $reference;
         }
-
-        // Les recettes ne sont pas stockées avec un id, mais avec une string
-        if($filename == 'recipes')
-            $datas[] = $item_id;
     }
     
     return $datas;
@@ -219,7 +215,8 @@ function get_quest_log(object $data):array {
             'objective'   => (string) $item->_currentObjective,
             'description' => (string) $item->_questDescription,
             'title'       => (string) $item->_questTitle,
-            'gold'       => (int) $item->moneyReward
+            'gold'        => (int) $item->moneyReward,
+            'is_limited'  => (boolean) $item->dailyQuest
         );
     }
 
@@ -244,3 +241,16 @@ function complete_general_data(array &$players, object $data) {
     }
 }
 
+function get_cooking_recipes(object $recipes) {
+
+    $return_datas = array();
+
+    foreach($recipes->item as $recipe) {
+        $item_name = format_original_data_string($recipe->key->string);
+        $return_datas[$item_name] = array(
+            'cooked_count' => (int) $recipe->value->int
+        );
+    }
+    
+    return $return_datas;
+}

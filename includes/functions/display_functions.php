@@ -20,7 +20,7 @@ function display_page(array $all_datas, array $players):string {
 
     $structure .= "<div class='separated-galleries'>";
     $structure .= display_detailled_gallery($all_datas['fish_caught'], 'fish', 'Fish caught');
-    $structure .= display_gallery($all_datas['cooking_recipe'], 'recipes', 'Cooking recipes');
+    $structure .= display_detailled_gallery($all_datas['cooking_recipe'], 'recipes', 'Cooking recipes');
     $structure .= display_gallery($all_datas['minerals_found'], 'minerals', 'Minerals');
     $structure .= display_gallery($all_datas['artifacts_found'], 'artifacts', 'Artifacts');
     $structure .= "</div>";
@@ -368,14 +368,18 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
             <h2 class='section-title'>$section_title</h2>
             <span>
     ";
-
-
+    
+    
     foreach($json_datas as $json_line_name) {
-        
+
         $is_found = array_key_exists($json_line_name, $player_datas);
 
-        $element_class = ($is_found) ? 'found' : 'not-found';
-        $element_image = $images_path . formate_text_for_file($json_line_name) . '.png';
+        $element_class   = ($is_found) ? 'found' : 'not-found';
+
+        if($json_filename == 'recipes' && $is_found && $player_datas[$json_line_name]['cooked_count'] == 0)
+            $element_class .= ' not-cooked'; 
+
+        $element_image   = $images_path . formate_text_for_file($json_line_name) . '.png';
         $element_tooltip = ($is_found) ? get_tooltip_text($player_datas, $json_line_name, $json_filename) : $json_line_name;
 
 
@@ -405,13 +409,18 @@ function get_tooltip_text(array $player_data, string $json_line_name, string $da
 
     extract($data_array);
 
-    if($data_type == 'fish') {
-        return "$json_line_name : caught $caught_counter times ($max_length inches)";
-    }
+    switch($data_type) {
+        case 'fish' : 
+            return "$json_line_name : caught $caught_counter times ($max_length inches)";
 
-    if($data_type == 'enemies') {
-        return "$json_line_name : $killed_counter killed";
+        case 'enemies' : 
+            return "$json_line_name : $killed_counter killed";
+
+        case 'recipes' : 
+            if($cooked_count) return "$json_line_name : not cooked yet";
+            return "$json_line_name : cooked $cooked_count times";
+
+
+         default : return $json_line_name;
     }
-    
-    return $json_line_name;
 }
