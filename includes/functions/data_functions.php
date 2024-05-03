@@ -194,7 +194,6 @@ function get_friendship_data(object $data):array {
     $friends = array();
     $json_villagers = json_decode(file_get_contents(get_json_folder() . 'villagers.json'), true);
 
-    // log_($json_villagers);
     foreach($data->item as $item) {
         
         $friend_name = (string) $item->key->string;

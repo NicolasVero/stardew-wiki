@@ -375,11 +375,7 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
         if($json_filename == 'recipes' && $is_found && $player_datas[$json_line_name]['cooked_count'] == 0)
             $element_class .= ' not-cooked'; 
 
-        if($json_filename == 'achievements')
-            $element_image = $images_path . formate_text_for_file((string) explode(':', $json_line_name)[0] ). '.png';
-        else 
-            $element_image   = $images_path . formate_text_for_file($json_line_name) . '.png';
-
+        $element_image = $images_path . formate_text_for_file((string) explode(':', $json_line_name)[0]). '.png';
         $element_tooltip = ($is_found) ? get_tooltip_text($player_datas, $json_line_name, $json_filename) : $json_line_name;
 
 
