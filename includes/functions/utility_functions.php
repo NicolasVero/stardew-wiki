@@ -36,3 +36,7 @@ function formate_text_for_file(string $string):string {
 function format_original_data_string(string $data):string {
     return str_replace('(O)', '', $data);
 }
+
+function has_element(object $element):int {
+    return !empty((array) $element);
+}

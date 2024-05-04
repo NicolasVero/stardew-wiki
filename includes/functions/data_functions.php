@@ -3,13 +3,11 @@
 function get_all_players_datas(object $data):array {
     $players = array();
 
-    array_push($players, get_aggregated_data($data->player));
+    array_push($players, get_aggregated_data($data->player, $data));
 
     foreach($data->farmhands as $side_player) {
-        // array_push($players, get_aggregated_data($side_player->Farmer));     
+        // array_push($players, get_aggregated_data($side_player->Farmer, $data));
     }
-
-    complete_general_data($players, $data);
 
     return $players;
 }
@@ -28,11 +26,11 @@ function get_all_players(object $data):array {
 }
 
 
-function get_aggregated_data(object $data):array {
+function get_aggregated_data(object $data, object $general_data):array {
     
     return array(
         'general' => array(
-            'game_version'   => "1.0.0",
+            'game_version'   => (string) $general_data->gameVersion,
             'name'           => (string) $data->name,
             'gender'         => (string) $data->gender,
             'farm_name'      => (string) $data->farmName,
@@ -46,7 +44,7 @@ function get_aggregated_data(object $data):array {
             'max_stamina'    => (int) $data->maxStamina,
             'golds'          => (int) $data->money,
             'total_golds'    => (int) $data->totalMoneyEarned,
-            'golden_walnuts' => 0,
+            'golden_walnuts' => (int) $general_data->goldenWalnuts,
             'qi_gems'        => (int) $data->qiGems,
             'casino_coins'   => (int) $data->clubCoins
         ),
@@ -71,8 +69,8 @@ function get_aggregated_data(object $data):array {
             'has_town_key'         => has_element($data->HasTownKey),
         ),
         'fish_caught'     => get_fish_caught_data($data->fishCaught),
-        'artifacts_found' => get_item_list($data->archaeologyFound, 'artifacts'),
-        'minerals_found'  => get_item_list($data->mineralsFound, 'minerals'),
+        'artifacts_found' => get_artifacts($data->archaeologyFound, $general_data),
+        'minerals_found'  => get_minerals($data->mineralsFound, $general_data),
         'cooking_recipe'  => get_cooking_recipes($data->cookingRecipes, $data->recipesCooked),
         'shipped_items'   => get_item_list($data->basicShipped, 'shipped_items'),
         'achievements'    => get_achievement($data->achievements),
@@ -83,9 +81,7 @@ function get_aggregated_data(object $data):array {
     );
 }
 
-function has_element(object $element):int {
-    return !empty((array) $element);
-}
+
 
 function get_achievement(object $achievements):array {
    
@@ -258,14 +254,6 @@ function get_formatted_date(object $data):string {
 }
 
 
-
-function complete_general_data(array &$players, object $data) {
-    foreach($players as &$player) {
-        $player['general']['game_version']   = (string) $data->gameVersion;
-        $player['general']['golden_walnuts'] = (int) $data->goldenWalnuts;
-    }
-}
-
 function get_cooking_recipes(object $recipes, object $recipes_cooked) {
 
     $return_datas = array();
@@ -277,11 +265,61 @@ function get_cooking_recipes(object $recipes, object $recipes_cooked) {
 
         foreach($recipes_cooked->item as $recipe_cooked) {
             if ((int) $recipe_cooked->key->string == $index)
-                $return_datas[$item_name] = array('cooked_count' => (int) $recipe_cooked->value->int);
+                $return_datas[$item_name] = array('counter' => (int) $recipe_cooked->value->int);
             else
-                $return_datas[$item_name] = array('cooked_count' => 0);
+                $return_datas[$item_name] = array('counter' => 0);
         }
     }
     
     return $return_datas;
+}
+
+function get_artifacts(object $artifacts, object $general_data):array {
+    $datas = array();
+
+    foreach($artifacts->item as $artifact) {
+		//& Anciennes versions ($item->key->int) sauf cookingRecipes ($item->key-string)
+        $artifact_id = format_original_data_string($artifact->key->string);
+
+        if(!ctype_digit($artifact_id)) 
+            $artifact_id = get_custom_id($artifact_id);
+
+        $reference = find_reference_in_json($artifact_id, 'artifacts');
+        
+
+        if(!empty($reference))
+            $datas[$reference] = array('counter' => is_given_to_museum($artifact_id, $general_data));
+    }
+    
+    return $datas;
+}
+
+function get_minerals(object $minerals, object $general_data):array {
+    $datas = array();
+
+    foreach($minerals->item as $mineral) {
+		//& Anciennes versions ($item->key->int) sauf cookingRecipes ($item->key-string)
+        $mineral_id = format_original_data_string($mineral->key->string);
+
+        if(!ctype_digit($mineral_id)) 
+            $mineral_id = get_custom_id($mineral_id);
+
+        $reference = find_reference_in_json($mineral_id, 'minerals');
+        
+
+        if(!empty($reference))
+            $datas[$reference] = array('counter' => is_given_to_museum($mineral_id, $general_data));
+    }
+    
+    return $datas;
+}
+
+function is_given_to_museum(int $item_id, object $general_data):int {   
+    $museum_items = $general_data->locations->GameLocation[32]->museumPieces;
+
+    foreach($museum_items->item as $museum_item) {
+        if($item_id == (int) $museum_item->value->string) return 1;
+    }
+
+    return 0;
 }

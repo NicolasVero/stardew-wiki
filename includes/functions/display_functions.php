@@ -21,8 +21,8 @@ function display_page(array $all_datas, array $players):string {
     $structure .= "<div class='separated-galleries'>";
         $structure .= display_detailled_gallery($all_datas['fish_caught'], 'fish', 'Fish caught');
         $structure .= display_detailled_gallery($all_datas['cooking_recipe'], 'recipes', 'Cooking recipes');
-        $structure .= display_gallery($all_datas['minerals_found'], 'minerals', 'Minerals');
-        $structure .= display_gallery($all_datas['artifacts_found'], 'artifacts', 'Artifacts');
+        $structure .= display_detailled_gallery($all_datas['minerals_found'], 'minerals', 'Minerals');
+        $structure .= display_detailled_gallery($all_datas['artifacts_found'], 'artifacts', 'Artifacts');
         $structure .= display_detailled_gallery($all_datas['enemies_killed'], 'enemies', 'Enemies killed');
         $structure .= display_detailled_gallery($all_datas['achievements'], 'achievements', 'Achievements');
     $structure .= "</div>";
@@ -373,8 +373,11 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
 
         $element_class   = ($is_found) ? 'found' : 'not-found';
 
-        if($json_filename == 'recipes' && $is_found && $player_datas[$json_line_name]['cooked_count'] == 0)
-            $element_class .= ' not-cooked';
+
+        if(in_array($json_filename, array('recipes', 'artifacts', 'minerals'))) 
+            if($is_found && $player_datas[$json_line_name]['counter'] == 0)
+                $element_class .= ' unused';
+
 
         $element_image = $images_path . formate_text_for_file((string) explode(':', $json_line_name)[0]). '.png';
         $element_tooltip = ($is_found) ? get_tooltip_text($player_datas, $json_line_name, $json_filename) : $json_line_name;
@@ -415,11 +418,14 @@ function get_tooltip_text(array $player_data, string $json_line_name, string $da
             return "$json_line_name : $killed_counter killed";
 
         case 'recipes' :
-            if(!$cooked_count) return "$json_line_name : not cooked yet";
-            return "$json_line_name : cooked " . (int) $cooked_count . " times";
+            if(!$counter) return "$json_line_name : not cooked yet";
+            return "$json_line_name : cooked " . (int) $counter . " times";
 
         case 'achievements' :
             return "$json_line_name : $description";
+
+        // case 'artifacts' : 
+        //     if($counter == 0) return 
 
          default : return $json_line_name;
     }
