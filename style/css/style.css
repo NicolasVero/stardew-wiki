@@ -40,6 +40,10 @@ html {
   body main .gallery:not(.shipped_items-section, .unlockables-section) {
     flex-basis: 47.5% !important;
   }
+  .not-cooked {
+    filter: grayscale(1);
+    opacity: 1;
+  }
   .not-found {
     filter: grayscale(1);
     opacity: 0.2;
@@ -416,6 +420,10 @@ html {
   }
   body main .info-section.friends-section > span > span .gifts .gift {
     width: 12px !important;
+  }
+  .not-cooked {
+    filter: grayscale(1);
+    opacity: 1;
   }
   .not-found {
     filter: grayscale(1);

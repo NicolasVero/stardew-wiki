@@ -1,5 +1,8 @@
 <?php
 
+error_reporting(E_ALL);
+
+
 function get_all_players_datas(object $data):array {
     $players = array();
 
@@ -254,18 +257,17 @@ function complete_general_data(array &$players, object $data) {
 function get_cooking_recipes(object $recipes, object $recipes_cooked) {
 
     $return_datas = array();
-    log_($recipes_cooked);
     $json_recipes = json_decode(file_get_contents(get_json_folder() . 'recipes.json'), true);
-    log_($json_recipes);
 
-    
     foreach($recipes->item as $recipe) {
         $item_name = format_original_data_string($recipe->key->string);
         $index = array_search($item_name, $json_recipes);
 
-        $return_datas[$item_name] = array(
-            'cooked_count' => (int) $recipes_cooked->value->int
-        );
+        foreach($recipes_cooked->item as $recipe_cooked)
+            if ((int) $recipe_cooked->key->string == $index)
+                $return_datas[$item_name] = array('cooked_count' => (int) $recipe_cooked->value->int);
+            else
+                $return_datas[$item_name] = array('cooked_count' => 0);
     }
     
     return $return_datas;
