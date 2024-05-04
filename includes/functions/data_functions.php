@@ -71,7 +71,7 @@ function get_aggregated_data(object $data):array {
         'fish_caught'     => get_fish_caught_data($data->fishCaught),
         'artifacts_found' => get_item_list($data->archaeologyFound, 'artifacts'),
         'minerals_found'  => get_item_list($data->mineralsFound, 'minerals'),
-        'cooking_recipe'  => get_cooking_recipes($data->cookingRecipes),
+        'cooking_recipe'  => get_cooking_recipes($data->cookingRecipes, $data->recipesCooked),
         'shipped_items'   => get_item_list($data->basicShipped, 'shipped_items'),
         'achievements'    => get_achievement($data->achievements),
         'skills'          => get_skills_data((array) $data->professions->int),
@@ -251,14 +251,20 @@ function complete_general_data(array &$players, object $data) {
     }
 }
 
-function get_cooking_recipes(object $recipes) {
+function get_cooking_recipes(object $recipes, object $recipes_cooked) {
 
     $return_datas = array();
+    log_($recipes_cooked);
+    $json_recipes = json_decode(file_get_contents(get_json_folder() . 'recipes.json'), true);
+    log_($json_recipes);
 
+    
     foreach($recipes->item as $recipe) {
         $item_name = format_original_data_string($recipe->key->string);
+        $index = array_search($item_name, $json_recipes);
+
         $return_datas[$item_name] = array(
-            'cooked_count' => (int) $recipe->value->int
+            'cooked_count' => (int) $recipes_cooked->value->int
         );
     }
     

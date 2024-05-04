@@ -71,7 +71,7 @@ function display_header(array $datas):string {
 	$gender = ($gender == null) ? 'neutral' : $gender;
 
     $structure = "
-			<button class='button-elements save-file'>Upload a save file</button>
+		<button class='button-elements save-file'>Upload a save file</button>
 		</div>
         <header>
             <div class='header'>
