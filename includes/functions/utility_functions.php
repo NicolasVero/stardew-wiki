@@ -18,8 +18,8 @@ function get_site_root():string {
 
 function formate_text_for_file(string $string):string {
 
-    $search =  [' ', '\'', '(', ')'];
-    $replace = ['_', ''  , '' , '' ];
+    $search =  [' ', '\'', '(', ')', ',', '.', ':'];
+    $replace = ['_', ''  , '' , '', '', '', ''    ];
 
     $string = str_replace($search, $replace, $string);
 
