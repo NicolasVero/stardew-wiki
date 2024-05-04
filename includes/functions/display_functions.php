@@ -325,8 +325,8 @@ function display_friendships(array $friends, $limit = -1):string {
 
 function display_gallery(array $player_elements, string $json_filename, string $section_title):string {
     $images_path = get_images_folder() . "$json_filename/";
-
     $elements = json_decode(file_get_contents(get_json_folder() . $json_filename . '.json'), true);
+    sort($elements);
 
     $structure = "
         <section class='gallery $json_filename-section'>
@@ -357,8 +357,9 @@ function display_gallery(array $player_elements, string $json_filename, string $
 
 
 function display_detailled_gallery(array $player_datas, string $json_filename, string $section_title):string {
-    $json_datas = json_decode(file_get_contents(get_json_folder() . $json_filename . '.json'), true);
     $images_path = get_images_folder() . "$json_filename/";
+    $json_datas = json_decode(file_get_contents(get_json_folder() . $json_filename . '.json'), true);
+    sort($json_datas);
 
     $structure = "
         <section class='gallery $json_filename-section'>
@@ -381,7 +382,7 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
 
         $structure .= "
             <span class='tooltip'>
-                <img src='$element_image' alt='$json_line_name' class='gallery-item $element_class' />
+                <img src='$element_image' alt='$json_line_name' class='gallery-item $json_filename $element_class' />
                 <span>$element_tooltip</span>
             </span>
         ";
