@@ -230,6 +230,7 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 20px;
   }
   body main .info-section.skills .skill .level-progress-bar {
     display: flex;
@@ -606,6 +607,7 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
+    width: 20px;
   }
   body main .info-section.skills .skill .level-progress-bar {
     display: flex;
