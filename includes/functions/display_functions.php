@@ -408,14 +408,15 @@ function get_tooltip_text(array $player_data, string $json_line_name, string $da
 
     switch($data_type) {
         case 'fish' : 
-            return "$json_line_name : caught $caught_counter times ($max_length inches)";
+            if($max_length > 0) return "$json_line_name : caught $caught_counter times ($max_length inches)";
+            return "$json_line_name : caught $caught_counter times";
 
         case 'enemies' : 
             return "$json_line_name : $killed_counter killed";
 
         case 'recipes' :
-            if(!$player_data[$json_line_name]['cooked_count']) return "$json_line_name : not cooked yet";
-            return "$json_line_name : cooked " . (int) $player_data[$json_line_name]['cooked_count'] . " times";
+            if(!$cooked_count) return "$json_line_name : not cooked yet";
+            return "$json_line_name : cooked " . (int) $cooked_count . " times";
 
         case 'achievements' :
             return "$json_line_name : $description";

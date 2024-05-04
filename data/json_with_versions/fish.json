@@ -74,9 +74,9 @@
         "838" : "Blue Discus"
     },
     "1.6.0" : {
-        "Goby" : "Goby",
-        "SeaJelly" : "Sea Jelly",
-        "RiverJelly" : "River Jelly",
-        "CaveJelly" : "Cave Jelly"
+        "102000" : "Goby",
+        "102001" : "Sea Jelly",
+        "102002" : "River Jelly",
+        "102003" : "Cave Jelly"
     }
 }

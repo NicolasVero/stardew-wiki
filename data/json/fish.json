@@ -62,5 +62,9 @@
     "800" : "Blobfish",
     "836" : "Stingray",
     "837" : "Lionfish",
-    "838" : "Blue Discus"
+    "838" : "Blue Discus",
+    "102000" : "Goby",
+    "102001" : "Sea Jelly",
+    "102002" : "River Jelly",
+    "102003" : "Cave Jelly"
 }

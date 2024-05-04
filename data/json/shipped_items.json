@@ -143,5 +143,10 @@
     "851" : "Magma Cap",
     "881" : "Bone Fragment",
     "909" : "Radioactive Ore",
-    "910" : "Radioactive Bar "
+    "910" : "Radioactive Bar ",
+    "100001" : "Summer Squash",
+    "100002" : "Broccoli",
+    "100003" : "Carrot",
+    "100004" : "Powdermelon",
+    "100005" : "Smoked Fish"
 }

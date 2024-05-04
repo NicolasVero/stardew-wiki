@@ -1,8 +1,5 @@
 <?php
 
-error_reporting(E_ALL);
-
-
 function get_all_players_datas(object $data):array {
     $players = array();
 
@@ -115,17 +112,24 @@ function get_item_list(object $items, string $filename):array {
 		//& Anciennes versions ($item->key->int) sauf cookingRecipes ($item->key-string)
         $item_id = format_original_data_string($item->key->string);
 
-        if(ctype_digit($item_id)) {
-            $reference = find_reference_in_json($item_id, $filename);
-            
-            if(!empty($reference))
-                $datas[] = $reference;
-        }
+        if(!ctype_digit($item_id)) 
+            $item_id = get_custom_id($item_id);
+
+        $reference = find_reference_in_json($item_id, $filename);
+        
+        if(!empty($reference))
+            $datas[] = $reference;
     }
     
     return $datas;
 }
 
+
+
+function get_custom_id(string $item):int {
+    $custom_ids = json_decode(file_get_contents(get_json_folder() . 'custom_ids.json'), true);
+    return array_search($item, $custom_ids);
+}
 
 
 function find_reference_in_json(int $id, string $file):mixed {
@@ -176,13 +180,18 @@ function get_fish_caught_data(object $data):array {
 
     foreach($data->item as $item) {
 
+        $item_id = format_original_data_string($item->key->string);
+
+        if(!ctype_digit($item_id)) 
+            $item_id = get_custom_id($item_id);
+
         $values_array = (array) $item->value->ArrayOfInt->int;
         $index = find_reference_in_json(
-            (int) format_original_data_string($item->key->string),
+            $item_id,
             'fish'
         );
 
-        if(empty($index) || $index == "" || $values_array[1] == -1) 
+        if(empty($index) || $index == "") 
             continue;
         
         $fishs[$index] = array(
@@ -266,11 +275,12 @@ function get_cooking_recipes(object $recipes, object $recipes_cooked) {
         $item_name = format_original_data_string($recipe->key->string);
         $index = array_search($item_name, $json_recipes);
 
-        foreach($recipes_cooked->item as $recipe_cooked)
+        foreach($recipes_cooked->item as $recipe_cooked) {
             if ((int) $recipe_cooked->key->string == $index)
                 $return_datas[$item_name] = array('cooked_count' => (int) $recipe_cooked->value->int);
             else
                 $return_datas[$item_name] = array('cooked_count' => 0);
+        }
     }
     
     return $return_datas;
