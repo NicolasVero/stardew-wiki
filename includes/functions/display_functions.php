@@ -424,9 +424,10 @@ function get_tooltip_text(array $player_data, string $json_line_name, string $da
         case 'achievements' :
             return "$json_line_name : $description";
 
-        // case 'artifacts' : 
-        //     if($counter == 0) return 
+        case ('artifacts' || 'minerals') : 
+            if($counter == 0) return "$json_line_name : not given yet";
+            return "$json_line_name : given to museum";
 
-         default : return $json_line_name;
+        default : return $json_line_name;
     }
 }

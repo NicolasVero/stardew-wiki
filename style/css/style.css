@@ -40,7 +40,7 @@ html {
   body main .gallery:not(.shipped_items-section, .unlockables-section) {
     flex-basis: 47.5% !important;
   }
-  .not-cooked {
+  .unused {
     filter: grayscale(1);
     opacity: 1;
   }
@@ -421,7 +421,7 @@ html {
   body main .info-section.friends-section > span > span .gifts .gift {
     width: 12px !important;
   }
-  .not-cooked {
+  .unused {
     filter: grayscale(1);
     opacity: 1;
   }
