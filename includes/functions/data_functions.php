@@ -35,6 +35,7 @@ function get_aggregated_data(object $data):array {
     
     return array(
         'general' => array(
+            'game_version'   => "1.0.0",
             'name'           => (string) $data->name,
             'gender'         => (string) $data->gender,
             'farm_name'      => (string) $data->farmName,
@@ -48,6 +49,7 @@ function get_aggregated_data(object $data):array {
             'max_stamina'    => (int) $data->maxStamina,
             'golds'          => (int) $data->money,
             'total_golds'    => (int) $data->totalMoneyEarned,
+            'golden_walnuts' => 0,
             'qi_gems'        => (int) $data->qiGems,
             'casino_coins'   => (int) $data->clubCoins
         ),
@@ -250,6 +252,7 @@ function get_formatted_date(object $data):string {
 
 function complete_general_data(array &$players, object $data) {
     foreach($players as &$player) {
+        $player['general']['game_version']   = (string) $data->gameVersion;
         $player['general']['golden_walnuts'] = (int) $data->goldenWalnuts;
     }
 }
