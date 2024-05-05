@@ -23,14 +23,10 @@
 			border-image-width: 5px;
 			border-image-outset: 2px;
 			background-clip: padding-box;
-
-			&:hover {
-				cursor: @pointer;
-			}
 		}
 	}
 
-	.save-file {
+	.upload-file {
 		cursor: @pointer;
 		padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @ratio);
 		background-color: @stardew-bg;
@@ -39,6 +35,62 @@
 		border-image-width: 5px;
 		border-image-outset: 2px;
 		background-clip: padding-box;
+	}
+}
+
+.upload-panel {
+	display: none;
+
+	font-family: @primary-ff;
+	font-size: (@md-fs * @ratio);
+	color: @primary-fc;
+
+	position: fixed;
+	min-width: 20vw;
+	padding: (@big-gap * @ratio) (@big-gap * @ratio);
+	.center-absolute();
+
+	background-clip: padding-box;
+	background-color: @panel-bg;
+	border-image: url('../../medias/images/content/border_image.png') 15 stretch;
+	border-image-width: 10px;
+	border-image-outset: 8px;
+
+	overflow-y: scroll;
+	// 1000 -> Au dessus de tout / 998 Laisse le tooltip passer par dessus
+	z-index: 1000;
+	scrollbar-width: none;
+	
+	& > div {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-bottom: (@big-gap * @ratio);
+	}
+
+	& > span {
+		display: flex;
+		align-items: center;
+		gap: (@md-gap * @ratio);
+	}
+
+	.section-title {
+		font-size: (@big-fs * @ratio);
+	}
+
+	label {
+		cursor: @pointer;
+		padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @ratio);
+		background-color: @stardew-bg;
+		border: solid 2px rgba(162, 120, 69, 1);
+		border-image: url('../../medias/images/content/border_image.png') 15 stretch;
+		border-image-width: 5px;
+		border-image-outset: 2px;
+		background-clip: padding-box;
+	}
+
+	#save-upload {
+		display: none;
 	}
 }
 

@@ -28,6 +28,7 @@
 	transition: transform .2s ease-in-out;
 	&:hover {
 		transform: scale(1.1);
+		cursor: @pointer;
 	}
 }
 
@@ -48,6 +49,11 @@
 .button-elements {
 	.data;
 	.buttons;
+}
+
+.exit {
+	width: (@big-icon * @ratio);
+	cursor: @pointer;
 }
 
 // Tooltips

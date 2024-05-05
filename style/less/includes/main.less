@@ -92,6 +92,81 @@ body {
 
 			&.quests-section {
 				display: none;
+
+				font-family: @primary-ff;
+				font-size: (@md-fs * @ratio);
+				color: @primary-fc;
+		
+				position: fixed;
+				max-height: 80vh;
+				padding: (@big-gap * @ratio) (@big-gap * @ratio);
+				.center-absolute();
+
+				background-clip: padding-box;
+				background-color: @panel-bg;
+				border-image: url('../../medias/images/content/border_image.png') 15 stretch;
+				border-image-width: 10px;
+				border-image-outset: 8px;
+
+				overflow-y: scroll;
+				// 1000 -> Au dessus de tout / 998 Laisse le tooltip passer par dessus
+				z-index: 1000;
+				scrollbar-width: none;
+
+				.section-title {
+					margin: 0;
+				}
+
+				.quests {
+					display: flex;
+					flex-direction: column;
+					gap: (@big-gap * @ratio);
+
+					.quest {
+						display: flex;
+						justify-content: space-between;
+
+						& > span {
+							justify-content: center;
+							gap: (@small-gap * @ratio);
+						}
+
+						.quest-infos {
+							display: flex;
+							flex-direction: column;
+
+							.quest-description {
+								font-size: (@big-fs * @ratio);
+							}
+
+							.quest-title {
+								font-style: italic;
+							}
+						}
+
+						.quest-rewards {
+							display: flex;
+							flex-direction: column;
+							align-items: flex-end;
+
+							.quest-reward {
+								display: flex;
+								align-items: center;
+							}
+						}
+					}
+				}
+
+				div {
+					display: flex;
+					justify-content: space-between;
+					align-items: center;
+					margin-bottom: (@big-gap * @ratio);
+				}
+	
+				.section-title {
+					font-size: (@big-fs * @ratio);
+				}
 			}
 	
 			&.friends-section {
@@ -172,7 +247,7 @@ body {
 					.center-absolute();
 	
 					background-clip: padding-box;
-					background-color: rgba(255, 198, 119, .7);
+					background-color: @panel-bg;
 					border-image: url('../../medias/images/content/border_image.png') 15 stretch;
 					border-image-width: 10px;
 					border-image-outset: 8px;
@@ -180,8 +255,7 @@ body {
 					overflow-y: scroll;
 					// 1000 -> Au dessus de tout / 998 Laisse le tooltip passer par dessus
 					z-index: 1000;
-					// scrollbar-width: thin;
-					scrollbar-color: white transparent;
+					scrollbar-width: none;
 	
 					& > span {
 						& > span {
@@ -193,11 +267,6 @@ body {
 						display: flex;
 						justify-content: space-between;
 						align-items: center;
-					}
-	
-					.exit-all-friendships {
-						width: (@big-icon * @ratio);
-						cursor: @pointer;
 					}
 		
 					.section-title {

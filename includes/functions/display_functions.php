@@ -5,6 +5,7 @@ function display_page(array $all_datas, array $players):string {
     $structure = "";
 
     $structure .= display_player_selection($players);
+    $structure .= display_save_button();
     $structure .= display_header($all_datas['general']);
     $structure .= "<main>";
     $structure .= display_general_stats($all_datas['general']);
@@ -47,20 +48,28 @@ function display_player_selection(array $players):string {
     foreach($players as $player) {
         $structure .= "<li value='$player' class='button-elements'>$player</option>";
     }
-	/* Test username max length */
-    // $structure .= "
-	// 	<li class='button-elements'>WWWWWW</option>
-	// 	<li class='button-elements'>WWWWWW</option>
-	// 	<li class='button-elements'>WWWWWW</option>
-	// 	<li class='button-elements'>WWWWWW</option>
-	// 	<li class='button-elements'>WWWWWW</option>
-	// 	<li class='button-elements'>WWWWWW</option>
-	// 	<li class='button-elements'>WWWWWW</option>
-	// 	<li class='button-elements'>WWWWWW</option>
-	// ";
 
     $structure .= "</ul>";
     
+    return $structure;
+}
+
+function display_save_button():string {
+    $structure = "
+        <button class='button-elements upload-file'>Upload a save file</button>
+    </div>
+    <section class='upload-panel'>
+        <div>
+            <h2 class='section-title'>Upload a save</h2>
+            <img src='" . get_images_folder() . "content/exit.png' class='exit-upload exit' />
+        </div>
+        <span>
+            <label for='save-upload' class='button-elements'>Browse</label>
+            <span id='newFilename'>Choose a file</span>
+            <input type='file' id='save-upload'>
+        </span>
+    </section>
+    ";
     return $structure;
 }
 
@@ -73,8 +82,6 @@ function display_header(array $datas):string {
 	$gender = ($gender == null) ? 'neutral' : $gender;
 
     $structure = "
-		<button class='button-elements save-file'>Upload a save file</button>
-		</div>
         <header>
             <div class='header'>
                 <span>
@@ -176,9 +183,10 @@ function display_quests(array $datas):string {
     $structure = "
         <section class='quests-section info-section all-quests'>
             <div>
-                <h2 class='section-title'>Quests in progress</h2>				<img src='" . get_images_folder() . "content/exit.png' class='exit-all-quests' />
+                <h2 class='section-title'>Quests in progress</h2>
+                <img src='" . get_images_folder() . "content/exit.png' class='exit-all-quests exit' />
             </div>
-            <span>
+            <span class='quests'>
     ";
 
     foreach($datas as $data) {
@@ -188,20 +196,27 @@ function display_quests(array $datas):string {
         $rewards = $data['rewards'];
 
         $structure .= "
-            <span>
-                $objective
-                $title
-            </span>
-            <span>
+            <span class='quest'>
+                <span class='quest-infos'>
+                    <span clas='quest-description'>$objective</span>
+                    <span class='quest-title'>$title</span>
+                </span>
+                <span class='quest-rewards'>
         ";
         if($rewards === []) continue;
         
         for($i = 0; $i<count($rewards);$i++) {
+            $structure .= "<span class='quest-reward'>";
             if (ctype_digit($rewards[$i]))
                 $structure .= "<img src='$images_path/icons/gold.png'/>$rewards[$i]";
             else
                 $structure .= "$rewards[$i]";
+            $structure .= "</span>";
         }
+        $structure .= "
+                </span>
+            </span>
+        ";
     }
 
     $structure .= "
@@ -304,7 +319,7 @@ function display_friendships(array $friends, $limit = -1):string {
         <section class='info-section friends-section $section_class'>
 			<div>
            		<h2 class='section-title'>Friendship progression</h2>
-				<img src='" . get_images_folder() . "content/exit.png' class='exit-all-friendships' />
+				<img src='" . get_images_folder() . "content/exit.png' class='exit-all-friendships exit' />
 			</div>
             <span>
     "
