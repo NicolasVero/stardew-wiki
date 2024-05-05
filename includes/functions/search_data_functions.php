@@ -145,13 +145,17 @@ function get_quest_log(object $data):array {
     $quests = array();
 
     foreach($data->Quest as $item) {
+        $quest_id = (int) $item->id;
+        $index = find_reference_in_json(
+            $quest_id,
+            'quests'
+        );
+        
         $quests[] = array(
-
-            'objective'   => (string) $item->_currentObjective,
-            'description' => (string) $item->_questDescription,
-            'title'       => (string) $item->_questTitle,
-            'gold'        => (int) $item->moneyReward,
-            'is_limited'  => (boolean) $item->dailyQuest
+            'objective'   => $index['objective'],
+            'description' => $index['description'],
+            'title'       => $index['title'],
+            'rewards'     => $index['reward']
         );
     }
 

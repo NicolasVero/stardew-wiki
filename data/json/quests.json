@@ -3,25 +3,25 @@
         "title" : "Meet The Wizard",
         "objective" : "Enter the wizard's tower.",
         "description" : "You received a letter from the local wizard. He claims to have information regarding the old community center.",
-        "reward" : null
+        "reward" : [null]
     },
     "2" : {
         "title" : "The Mysterious Qi",
         "objective" : "Leave a rainbow shell in the box at the train platform.",
         "description" : "Within a secret lock-box, you found a note with peculiar instructions. It's signed by a 'Mr. Qi'.",
-        "reward" : null
+        "reward" : [null]
     },
     "3" : {
         "title" : "The Mysterious Qi",
         "objective" : "Place 10 beets inside Mayor Lewis' fridge.",
         "description" : "You've found another note written by 'Mr. Qi'. The request is even more unusual this time.",
-        "reward" : null
+        "reward" : [null]
     },
     "4" : {
         "title" : "The Mysterious Qi",
         "objective" : "Give the sand dragon his final meal.",
         "description" : "You've found yet another strange note within the Mayor's fridge. This time, the instructions are more cryptic.",
-        "reward" : null
+        "reward" : [null]
     },
     "5" : {
         "title" : "The Mysterious Qi",
@@ -33,97 +33,97 @@
         "title" : "Getting Started",
         "objective" : "Cultivate and harvest a parsnip.",
         "description" : "If you want to become a farmer, you have to start with the basics. Use your hoe to till the soil, then use a seed packet on the tilled soil to sow a crop. Water every day until the crop is ready for harvest.",
-        "reward" : 100
+        "reward" : [100]
     },
     "7" : {
         "title" : "Raising Animals",
         "objective" : "Build a Coop.",
         "description" : "Robin, the local carpenter, lives north of town. In exchange for raw materialsand money, she'll construct new buildings on your farm. You'll need her to build a coop orbarn so that you can raise animals.",
-        "reward" : 100
+        "reward" : [100]
     },
     "8" : {
         "title" : "Advancement",
         "objective" : "Reach Farming level 1 and craft a scarecrow.",
         "description" : "As you gain experience, you'll discover new crafting recipes to increaseprofit and make life easier. A scarecrow, for example, will prevent crows from snacking onyour precious crops.",
-        "reward" : 100
+        "reward" : [100]
     },
     "9" : {
         "title" : "Introductions",
         "objective" : "Go talk to every villagers in town",
         "description" : "It would be a nice gesture to introduce yourself around town. Some people might be anxious to meet the new farmer.",
-        "reward" : "100 Friendship points"
+        "reward" : ["100 Friendship points"]
     },
     "10" : {
         "title" : "Copper Ore",
         "objective" : "Bring a piece of copper ore to Clint's blacksmith shop.",
         "description" : "You found a piece of copper ore. You're not sure what you can use it for, but the local blacksmith ought to know.",
-        "reward" : 0
+        "reward" : [null]
     },
     "11" : {
         "title" : "Forging ahead",
         "objective" : "Craft a Furnace.",
         "description" : "If you're going to keep mining, you should build a furnace.",
-        "reward" : 0
+        "reward" : [null]
     },
     "12" : {
         "title" : "Smelting",
         "objective" : "Use your furnace to smelt a Copper Bar.",
         "description" : "Now that you've built a furnace, you can smelt some metal. According to Clint's instructions, if you place 5 copper ore and 1 piece of coal in the furnace, it should produce a copper bar.",
-        "reward" : 0
+        "reward" : [null]
     },
     "13" : {
         "title" : "To The Beach",
         "description" : "Someone named Willy invited you to visit the beach south of town. He says he has something to give you.",
         "objective" : "Visit the beach south of town before 5:00 pm.",
-        "reward" : "Bamboo pole"
+        "reward" : ["Bamboo pole"]
     },
     "14" : {
         "title" : "Explore The Mine",
         "description" : "There's an old mine shaft in the mountains north of town. There could be valuable minerals inside, but Marlon hinted that it might be dangerous.",
         "objective" : "Reach level 5 in the mines.",
-        "reward" : 0
+        "reward" : [null]
     },
     "15" : {
         "title" : "Initiation",
         "description" : "If you can slay 10 slimes, you'll have earned your place in the Adventurer's Guild.",
         "objective" : "Slay 10 slimes",
-        "reward" : "Access to the Adventurer's Guild"
+        "reward" : ["Access to the Adventurer's Guild"]
     },
     "16" : {
         "title" : "Initiation",
         "description" : "You successfully dispatched 10 slimes. Now you can enter the Adventurer's Guild.",
         "objective" : "Enter the Adventurer's Guild.",
-        "reward" : null
+        "reward" : [null]
     },
     "17" : {
         "title" : "Deeper In The Mine",
         "description" : "It seems that the mine elevator is still functional. It will allow you to quickly return to any elevator doors you've discovered. A deeper expedition might be in order.",
         "objective" : "Reach level 40 in the mines.",
-        "reward" : null
+        "reward" : [null]
     },
     "18" : {
         "title" : "To The Bottom?",
         "description" : "So far, there's no sign of the bottom. How low does it go?",
         "objective" : "Reach the bottom of the mine.",
-        "reward" : null
+        "reward" : [null]
     },
     "19" : {
         "title" : "The Skull Key",
         "description" : "You found a strange looking key in the bottom of the mines.",
         "objective" : "Discover the purpose of the Skull Key.",
-        "reward" : "Access to the Skull Cavern"
+        "reward" : ["Access to the Skull Cavern"]
     },
     "20" : {
         "title" : "Qi's Challenge",
         "description" : "You've been challenged to reach level 25 in the skull cavern. You've been promised a substantial reward if you're successful.",
         "objective" : "Reach level 25 in the Skull Cavern.",
-        "reward" : 10000
+        "reward" : [10000]
     },
     "21" : {
         "title" : "Marnie's Request",
         "description" : "Marnie came by the farm and asked if you'd bring her a cave carrot. She's trying to train her goats to speak, and cave carrot is their favorite snack.",
         "objective" : "Bring a Cave Carrot into Marnie's shop.",
-        "reward" : "100 Friendship points"
+        "reward" : ["100 Friendship points"]
     },
     "22" : {
         "title" : "Fish Casserole",
@@ -138,55 +138,55 @@
         "title" : "Archaeology",
         "description" : "You found an ancient-looking object. Could it be some kind of artifact from long ago? Perhaps Gunther, curator of the local museum, has the answer.",
         "objective" : "Visit Gunther at the museum.",
-        "reward" : 0
+        "reward" : [null]
     },
     "24" : {
         "title" : "Archaeology",
         "description" : "Gunther asked if you'd consider donating any new artifacts or minerals you find to the museum. He says he'll compensate you by way of occasional rare goods.",
         "objective" : "Donate an artifact or a mineral to the museum.",
-        "reward" : 250
+        "reward" : [250]
     },
     "25" : {
         "title" : "How To Win Friends",
         "description" : "Giving gifts is a great way to build friendships. Learn each person's individual tastes and you'll be popular in no time.",
         "objective" : "Give anyone a gift.",
-        "reward" : 100
+        "reward" : [100]
     },
     "26" : {
         "title" : "Rat Problem",
         "description" : "There's something odd going on in the Community Center...",
         "objective" : "Investigate the Community Center",
-        "reward" : null
+        "reward" : [null]
     },
     "27" : {
         "title" : "Goblin Problem",
         "description" : "There's a goblin blocking the path to the Witch's hut. There must be some way to get him to move... Perhaps I should seek out more information on Goblins.",
         "objective" : "Gain entrance to the Witch's hut.",
-        "reward" : "Access to Wizard buildings"
+        "reward" : ["Access to Wizard buildings"]
     },
     "28" : {
         "title" : "Dark Talisman",
         "description" : "The Wizard asked me to retrieve the magic ink from his ex-wife's house... but to gain access I'll need a dark talisman.",
         "objective" : "Enter the sewer and ask Krobus about the dark talisman.",
-        "reward" : "Access to Witch's Swamp"
+        "reward" : ["Access to Witch's Swamp"]
     },
     "29" : {
         "title" : "Strange Note",
         "description" : "You found a note, barely legible, asking you to bring *may-pal serrup* to the *seecrit wuds*./Bring *may-pal serrup* to the *seecrit wuds*",
         "objective" : "Bring maple syrup to the Secret Woods",
-        "reward" : "Bear's knowledge"
+        "reward" : ["Bear's knowledge"]
     },
     "30" : {
         "title" : "Cryptic Note",
         "description" : "You found a note that reads, *Someone is waiting for you on level 100 in the Skull Cavern*",
         "objective" : "Reach level 100 in the Skull Cavern",
-        "reward" : "Iridium snake milk"
+        "reward" : ["Iridium snake milk"]
     },
     "31" : {
         "title" : "A Winter Mystery",
         "description" : "You encountered a suspicious looking figure by the bus stop. When it saw you, it fled toward town. Could there be a clue to its whereabouts?",
         "objective" : "Find the shadowy figure.",
-        "reward" : "Magnifying Glass"
+        "reward" : ["Magnifying Glass"]
     },
     "100" : {
         "title" : "Robin's Lost Axe",
@@ -255,7 +255,7 @@
         "title" : "Blackberry Basket",
         "description" : "It's blackberry season, but Linus can't find his basket! He's asking you to help him find it. He has no idea where it is.",
         "objective" : "Find Linus' basket and return it to him.",
-        "reward" : "1 Friendship heart"
+        "reward" : ["1 Friendship heart"]
     },
     "108" : {
         "title" : "Carving Pumpkins",
@@ -279,7 +279,7 @@
         "title" : "Clint's Attempt",
         "description" : "Clint wants you to give Emily an amethyst. He wants you to tell her it's from him.",
         "objective" : "Bring Emily an Amethyst.",
-        "reward" : "1 Friendship heart with Emily"
+        "reward" : ["1 Friendship heart with Emily"]
     },
     "111" : {
         "title" : "A Dark Reagent",
@@ -420,13 +420,13 @@
         "title" : "Errand for your Wife",
         "description" : "Your wife asked you to bring her 200 pieces of fiber for a secret project.",
         "objective" : "Bring Emily 200 fiber.",
-        "reward" : null
+        "reward" : [null]
     },
     "127" : {
         "title" : "Haley's Cake-Walk",
         "description" : "Your wife is organizing a charity cake-walk in the town square. She asked you to bring a chocolate cake.",
         "objective" : "Enter Town on a sunny morning with a chocolate cake.",
-        "reward" : null
+        "reward" : [null]
     },
     "130" : {
         "title" : "The Pirate's Wife",
@@ -441,24 +441,24 @@
         "title" : "Willy's Challenge",
         "description" : "Willy has challenged you to catch 3 Sandfish.",
         "objective" : "Catch 3 Sandfish.",
-        "reward" : null
+        "reward" : [null]
     },
     "132" : {
         "title" : "Getting Started",
         "description" : "If you want to become a farmer, you have to start with the basics. Feed your chickens each day by letting them eat grass outside, or by placing hay into their troughs. Once they are mature, harvest an egg!",
         "objective" : "Harvest an egg from your chickens.",
-        "reward" : 100
+        "reward" : [100]
     },
     "133" : {
         "title" : "Feeding Animals",
         "description" : "Robin, the local carpenter, lives north of town. In exchange for raw materials and money, she'll construct new buildings on your farm. If you build a silo, you can start harvesting your own grass with the scythe, and store it to feed your animals.",
         "objective" : "Build a Silo.",
-        "reward" : 100
+        "reward" : [100]
     },
     "134" : {
         "title" : "The Giant Stump",
         "description" : "The big tree to the south of my farm blew down. With 100 hardwood, I could turn the stump into something interesting...",
         "objective" : "Fix up the giant stump.",
-        "reward" : "Access to Raccoon Quests"
+        "reward" : ["Access to Raccoon Quests"]
     }
 }

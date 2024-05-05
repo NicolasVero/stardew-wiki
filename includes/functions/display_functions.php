@@ -8,6 +8,8 @@ function display_page(array $all_datas, array $players):string {
     $structure .= display_header($all_datas['general']);
     $structure .= "<main>";
     $structure .= display_general_stats($all_datas['general']);
+    // TODO quests
+    $structure .= display_quests($all_datas['quest_log']);
     $structure .= display_skills(array(
         'levels' => $all_datas['levels'], 
         'skills' => $all_datas['skills'])
@@ -166,10 +168,54 @@ function display_general_stats(array $datas):string {
     return $structure;
 }
 
+function display_quests(array $datas):string {
+    
+    extract($datas);
+    $images_path = get_images_folder();
+
+    $structure = "
+        <section class='quests-section info-section all-quests'>
+            <div>
+                <h2 class='section-title'>Quests in progress</h2>				<img src='" . get_images_folder() . "content/exit.png' class='exit-all-quests' />
+            </div>
+            <span>
+    ";
+
+    foreach($datas as $data) {
+        $title = $data['title'];
+        $description = $data['description'];
+        $objective = $data['objective'];
+        $rewards = $data['rewards'];
+
+        $structure .= "
+            <span>
+                $objective
+                $title
+            </span>
+            <span>
+        ";
+        if($rewards === []) continue;
+        
+        for($i = 0; $i<count($rewards);$i++) {
+            if (ctype_digit($rewards[$i]))
+                $structure .= "<img src='$images_path/icons/gold.png'/>$rewards[$i]";
+            else
+                $structure .= "$rewards[$i]";
+        }
+    }
+
+    $structure .= "
+            </span>
+        </section>
+    ";
+
+    return $structure;
+}
+
 function display_skills(array $datas):string {
     
     $structure = "
-		<section class='skills info-section'>
+		<section class='skills-section info-section'>
 			<h2 class='section-title'>Skills</h2>
             <span>    
     ";

@@ -235,31 +235,34 @@ html {
     right: 0;
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
-  body main .info-section.skills .skill {
+  body main .info-section.skills-section .skill {
     display: flex;
     align-items: center;
     gap: 10px;
   }
-  body main .info-section.skills .skill div {
+  body main .info-section.skills-section .skill div {
     display: flex;
     gap: 10px;
   }
-  body main .info-section.skills .skill .level {
+  body main .info-section.skills-section .skill .level {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 20px;
   }
-  body main .info-section.skills .skill .level-progress-bar {
+  body main .info-section.skills-section .skill .level-progress-bar {
     display: flex;
     align-items: center;
     gap: 5px;
   }
-  body main .info-section.skills .skill img {
+  body main .info-section.skills-section .skill img {
     height: 24px;
   }
-  body main .info-section.skills .skill img.level-icon {
+  body main .info-section.skills-section .skill img.level-icon {
     height: 28px;
+  }
+  body main .info-section.quests-section {
+    display: none;
   }
   body main .info-section.friends-section > span {
     display: flex;
@@ -630,31 +633,34 @@ html {
     right: 0;
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
-  body main .info-section.skills .skill {
+  body main .info-section.skills-section .skill {
     display: flex;
     align-items: center;
     gap: 7.5px;
   }
-  body main .info-section.skills .skill div {
+  body main .info-section.skills-section .skill div {
     display: flex;
     gap: 7.5px;
   }
-  body main .info-section.skills .skill .level {
+  body main .info-section.skills-section .skill .level {
     display: flex;
     justify-content: center;
     align-items: center;
     width: 20px;
   }
-  body main .info-section.skills .skill .level-progress-bar {
+  body main .info-section.skills-section .skill .level-progress-bar {
     display: flex;
     align-items: center;
     gap: 3.75px;
   }
-  body main .info-section.skills .skill img {
+  body main .info-section.skills-section .skill img {
     height: 18px;
   }
-  body main .info-section.skills .skill img.level-icon {
+  body main .info-section.skills-section .skill img.level-icon {
     height: 21px;
+  }
+  body main .info-section.quests-section {
+    display: none;
   }
   body main .info-section.friends-section > span {
     display: flex;
