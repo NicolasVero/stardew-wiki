@@ -325,13 +325,13 @@ html {
     left: 50%;
     transform: translate(-50%, -50%);
     background-clip: padding-box;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 198, 119, 0.7);
     border-image: url('../../medias/images/content/border_image.png') 15 stretch;
     border-image-width: 10px;
-    border-image-outset: 10px;
+    border-image-outset: 8px;
     overflow-y: scroll;
     z-index: 1000;
-    scrollbar-width: thin;
+    scrollbar-color: white transparent;
   }
   body main .info-section.friends-section.all-friends > span > span {
     gap: 50px;
@@ -720,13 +720,13 @@ html {
     left: 50%;
     transform: translate(-50%, -50%);
     background-clip: padding-box;
-    background-color: rgba(255, 255, 255, 0.7);
+    background-color: rgba(255, 198, 119, 0.7);
     border-image: url('../../medias/images/content/border_image.png') 15 stretch;
     border-image-width: 10px;
-    border-image-outset: 10px;
+    border-image-outset: 8px;
     overflow-y: scroll;
     z-index: 1000;
-    scrollbar-width: thin;
+    scrollbar-color: white transparent;
   }
   body main .info-section.friends-section.all-friends > span > span {
     gap: 37.5px;

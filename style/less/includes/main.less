@@ -168,15 +168,16 @@ body {
 					.center-absolute();
 	
 					background-clip: padding-box;
-					background-color: @secondary-bg;
+					background-color: rgba(255, 198, 119, .7);
 					border-image: url('../../medias/images/content/border_image.png') 15 stretch;
 					border-image-width: 10px;
-					border-image-outset: 10px;
+					border-image-outset: 8px;
 	
 					overflow-y: scroll;
 					// 1000 -> Au dessus de tout / 998 Laisse le tooltip passer par dessus
 					z-index: 1000;
-					scrollbar-width: thin;
+					// scrollbar-width: thin;
+					scrollbar-color: white transparent;
 	
 					& > span {
 						& > span {
