@@ -1,3 +1,4 @@
+// Panneaux d'infos
 function toggleVisibilityAndScroll(element, shouldDisplay, shouldDisableScroll) {
     element.style.display = (shouldDisplay) ? 'block' : 'none';
     // document.body.style.overflow = (shouldDisableScroll) ? 'hidden' : 'auto';
@@ -23,3 +24,16 @@ function activateButtons(show, hide, sections_to_show, unable_scroll) {
 
 activateButtons('.view-all-friendships', '.exit-all-friendships', '.all-friends', true);
 activateButtons('.view-all-quests', '.exit-all-quests', '.all-quests', true);
+
+
+// Tooltips
+const tooltips = document.querySelectorAll('.tooltip');
+
+tooltips.forEach(tooltip => {
+    const rect = tooltip.getBoundingClientRect();
+    
+    if (rect.left > window.innerWidth / 2)
+        tooltip.querySelector('span').classList.add('left');
+    else
+        tooltip.querySelector('span').classList.add('right');
+});

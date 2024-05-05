@@ -52,30 +52,47 @@
 
 // Tooltips
 .tooltip {
-	&:hover {
-		position: relative;
-	}
+    &:hover {
+        position: relative;
+    }
 
-	span {
-		.data;
-		position: absolute;
-		display: none;
-		width: max-content;
-		width: max-content;
-		// max-width: 150px;
-		padding: 5px 7.5px;
-		background-color: @stardew-bg;
-		border-image: url('../../medias/images/content/border_image.png') 15 stretch;
-		border-image-width: 2px;
-	}
+    span {
+        .data;
+        position: absolute;
+        display: none;
+        width: max-content;
+        padding: 5px 7.5px;
+        background-color: @stardew-bg;
+        border-image: url('../../medias/images/content/border_image.png') 15 stretch;
+        border-image-width: 2px;
 
-	img {
-		&:hover {
-			cursor: @help;
-			& ~ span {
-				z-index: 100;
-				display: inline;
-			}
-		}
-	}
+        &.left {
+            right: 100%;
+        }
+
+        &.right {
+            left: 100%;
+        }
+    }
+
+    img {
+        &:hover {
+            cursor: @help;
+
+            & ~ span {
+                z-index: 100;
+                display: inline;
+
+               	&.left {
+               	    left: auto;
+               	    right: 100%;
+               	}
+
+               	&.right {
+               	    left: 100%;
+               	    right: auto;
+               	}
+            }
+        }
+    }
 }
