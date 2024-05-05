@@ -33,10 +33,15 @@ function formate_text_for_file(string $string):string {
     return $string;
 }
 
-function format_original_data_string(string $data):string {
+function formate_original_data_string(string $data):string {
     return str_replace('(O)', '', $data);
 }
 
 function has_element(object $element):int {
     return !empty((array) $element);
+}
+
+function get_custom_id(string $item):int {
+    $custom_ids = json_decode(file_get_contents(get_json_folder() . 'custom_ids.json'), true);
+    return array_search($item, $custom_ids);
 }
