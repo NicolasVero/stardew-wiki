@@ -215,10 +215,7 @@ function display_quests(array $datas):string {
         for($i = 0; $i<count($rewards); $i++) {
             $structure .= "<span class='quest-reward'>";
             $structure .= (is_numeric($rewards[$i])) ? "<img src='$images_path/icons/gold.png'/>" . formate_number($rewards[$i]) : $rewards[$i];
-            // if(is_numeric($rewards[$i]))
-            //     $structure .= "<img src='$images_path/icons/gold.png'/>" . formate_number($rewards[$i]);
-            // else
-            //     $structure .= "$rewards[$i]";
+
             $structure .= "</span>";
         }
         $structure .= "
