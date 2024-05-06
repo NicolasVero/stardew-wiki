@@ -29,8 +29,7 @@ function get_all_players(object $data):array {
 }
 
 
-function get_aggregated_data(object $data, object $general_data):array {
-    
+function get_aggregated_data(object $data, object $general_data):array {     
     return array(
         'general' => array(
             'game_version'   => (string) $general_data->gameVersion,
@@ -59,17 +58,17 @@ function get_aggregated_data(object $data, object $general_data):array {
             'fishing_level'  => (int) $data->fishingLevel,
         ),
         'has_element' => array(
-            'understand_dwarf'     => has_element($data->canUnderstandDwarves),
-            'has_rusty_key'        => has_element($data->hasRustyKey),
-            'has_club_card'        => has_element($data->hasClubCard),
-            'has_special_charm'    => has_element($data->hasSpecialCharm),
-            'has_skull_key'        => has_element($data->hasSkullKey),
-            'has_magnifying_glass' => has_element($data->hasMagnifyingGlass),
-            'has_dark_talisman'    => has_element($data->hasDarkTalisman),
-            'has_magic_ink'        => has_element($data->hasMagicInk),
-            'has_bear_knowledge'   => (int) in_array(2120303, (array) $data->eventsSeen->int),
-            'has_onion_mastery'    => (int) in_array(3910979, (array) $data->eventsSeen->int),
-            'has_town_key'         => has_element($data->HasTownKey),
+            'dwarvish_translation_guide'    => has_element("HasDwarvishTranslationGuide", $data),
+            'rusty_key'        				=> has_element("HasRustyKey", $data),
+            'club_card'        				=> has_element("HasClubCard", $data),
+            'special_charm'    				=> has_element("HasSpecialCharm", $data),
+            'skull_key'        				=> has_element("HasSkullKey", $data),
+            'magnifying_glass' 				=> has_element("HasMagnifyingGlass", $data),
+            'dark_talisman'    				=> has_element("HasDarkTalisman", $data),
+            'magic_ink'        				=> has_element("HasPickedUpMagicInk", $data),
+            'bears_knowledge'   			=> (int) in_array(2120303, (array) $data->eventsSeen->int),
+            'spring_onion_mastery'  		=> (int) in_array(3910979, (array) $data->eventsSeen->int),
+            'town_key'         				=> has_element("HasTownKey", $data),
         ),
         'fish_caught'     => get_fish_caught_data($data->fishCaught),
         'artifacts_found' => get_artifacts($data->archaeologyFound, $general_data),
@@ -83,3 +82,20 @@ function get_aggregated_data(object $data, object $general_data):array {
         'quest_log'       => get_quest_log($data->questLog)
     );
 }
+
+/*
+	### Get unlockables < 1.6 ###
+    'has_element' => array(
+        'understand_dwarf'     => has_element($data->canUnderstandDwarves),
+        'has_rusty_key'        => has_element($data->hasRustyKey),
+        'has_club_card'        => has_element($data->hasClubCard),
+        'has_special_charm'    => has_element($data->hasSpecialCharm),
+        'has_skull_key'        => has_element($data->hasSkullKey),
+        'has_magnifying_glass' => has_element($data->hasMagnifyingGlass),
+        'has_dark_talisman'    => has_element($data->hasDarkTalisman),
+        'has_magic_ink'        => has_element($data->hasMagicInk),
+        'has_bear_knowledge'   => (int) in_array(2120303, (array) $data->eventsSeen->int),
+        'has_onion_mastery'    => (int) in_array(3910979, (array) $data->eventsSeen->int),
+        'has_town_key'         => has_element($data->HasTownKey),
+    ),
+*/

@@ -1,4 +1,2 @@
 locationsVisited
-fenetre modale quetes
-achievements
 usernames -> chgt caractères spéciaux

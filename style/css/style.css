@@ -477,6 +477,9 @@ html {
     display: flex;
     flex-direction: column;
   }
+  body main .gallery.unlockables-section > span {
+    gap: 25px;
+  }
   body main .gallery.monsters-section {
     justify-content: space-between;
   }
@@ -989,6 +992,9 @@ html {
   body main .gallery {
     display: flex;
     flex-direction: column;
+  }
+  body main .gallery.unlockables-section > span {
+    gap: 18.75px;
   }
   body main .gallery.monsters-section {
     justify-content: space-between;

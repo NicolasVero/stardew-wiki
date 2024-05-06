@@ -37,9 +37,14 @@ function formate_original_data_string(string $data):string {
     return str_replace('(O)', '', $data);
 }
 
+function has_element(string $element, object $data):int {
+    return (in_array($element, (array) $data->mailReceived->string)) ? 1 : 0;
+}
+/* ### Get unlockables < 1.6 ###
 function has_element(object $element):int {
     return !empty((array) $element);
 }
+*/
 
 function get_custom_id(string $item):int {
     $custom_ids = json_decode(file_get_contents(get_json_folder() . 'custom_ids.json'), true);

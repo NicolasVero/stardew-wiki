@@ -19,7 +19,7 @@ function display_page(array $all_datas, array $players):string {
     $structure .= display_friendships($all_datas['friendship']);
 
 	// TODO Futur Unlockable section
-    $structure .= display_gallery($all_datas['has_element'], 'unlockables', 'Unlockables');
+    $structure .= display_unlockables($all_datas['has_element']);
 
     $structure .= "<div class='separated-galleries'>";
         $structure .= display_detailled_gallery($all_datas['fish_caught'], 'fish', 'Fish caught');
@@ -391,6 +391,42 @@ function display_friendships(array $friends, $limit = -1):string {
     return $structure;
 }
 
+function display_unlockables(array $player_elements):string {
+    $images_path = get_images_folder() . "icons/";
+    $elements = json_decode(file_get_contents(get_json_folder() . 'unlockables.json'), true);
+    $elements = $elements['unlockables'];
+    sort($elements);
+
+    $structure = "
+        <section class='gallery unlockables-section'>
+            <h2 class='section-title'>Unlockables</h2>
+            <span>
+    ";
+
+	foreach($elements as $element){
+		$formatted_name = formate_text_for_file($element);
+		if (!isset($player_elements[$formatted_name]))
+			continue;
+
+		$element_class = ($player_elements[$formatted_name]) ? "found" : "not-found";
+		$element_image = "$images_path$formatted_name.png";
+		
+		$structure .= "
+			<span class='tooltip'>
+				<img src='$element_image' alt='$element' class='gallery-item unlockables $element_class' />
+				<span>$element</span>
+			</span>
+		";
+	}
+
+    $structure .= "
+			</span>
+		</section>
+	";
+
+    return $structure;
+}
+
 function display_gallery(array $player_elements, string $json_filename, string $section_title):string {
     $images_path = get_images_folder() . "$json_filename/";
     $elements = json_decode(file_get_contents(get_json_folder() . $json_filename . '.json'), true);
@@ -416,8 +452,8 @@ function display_gallery(array $player_elements, string $json_filename, string $
     }
 
     $structure .= "
-		</span>
-			</section>
+			</span>
+		</section>
 	";
 
     return $structure;
