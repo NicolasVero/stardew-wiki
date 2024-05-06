@@ -16,7 +16,7 @@
 		list-style-type: none;
 
 		li {
-			padding: (extract(@button-gaps, 1) * @d-ratio) (extract(@button-gaps, 2) * @d-ratio);
+			padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @d-ratio);
 			background-color: @stardew-bg;
 			border: solid 2px rgba(162, 120, 69, 1);
 			border-image: url('../../medias/images/content/border_image.png') 15 stretch;
@@ -51,7 +51,7 @@
 	.center-absolute();
 
 	background-clip: padding-box;
-	background-color: @panel-bg;
+	background-color: @stardew-bg;
 	border-image: url('../../medias/images/content/border_image.png') 15 stretch;
 	border-image-width: 10px;
 	border-image-outset: 8px;
