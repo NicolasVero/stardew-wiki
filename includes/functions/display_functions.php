@@ -390,7 +390,7 @@ function display_friendships(array $friends, $limit = -1):string {
 }
 
 function display_unlockables(array $player_elements):string {
-    $images_path = get_images_folder() . "icons/";
+    $images_path = get_images_folder() . "unlockables/";
     $elements = json_decode(file_get_contents(get_json_folder() . 'unlockables.json'), true);
     $elements = $elements['unlockables'];
     sort($elements);
@@ -401,7 +401,7 @@ function display_unlockables(array $player_elements):string {
             <span>
     ";
 
-	foreach($elements as $element){
+	foreach($elements as $element) {
 		$formatted_name = formate_text_for_file($element);
 		if (!isset($player_elements[$formatted_name]))
 			continue;
