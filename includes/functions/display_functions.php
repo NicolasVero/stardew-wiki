@@ -46,7 +46,7 @@ function display_player_selection(array $players):string {
 	";
 
     foreach($players as $player) {
-        $structure .= "<li value='$player' class='button-elements'>$player</option>";
+        $structure .= "<li value='$player' class='button-elements'>" . formate_usernames($player) . "</option>";
     }
 
     $structure .= "</ul>";
