@@ -100,18 +100,7 @@ body {
 				position: fixed;
 				max-height: 80vh;
 				padding: (@big-gap * @ratio) (@big-gap * @ratio);
-				.center-absolute();
-
-				background-clip: padding-box;
-				background-color: @stardew-bg;
-				border-image: url('../../medias/images/content/border_image.png') 15 stretch;
-				border-image-width: 10px;
-				border-image-outset: 8px;
-
-				overflow-y: scroll;
-				// 1000 -> Au dessus de tout / 998 Laisse le tooltip passer par dessus
-				z-index: 1000;
-				scrollbar-width: none;
+				.absolute-panel;
 
 				.section-title {
 					margin: 0;
@@ -254,18 +243,7 @@ body {
 					position: fixed;
 					height: 80vh;
 					padding: (@md-gap * @ratio) (@big-gap * @ratio);
-					.center-absolute();
-	
-					background-clip: padding-box;
-					background-color: @stardew-bg;
-					border-image: url('../../medias/images/content/border_image.png') 15 stretch;
-					border-image-width: 10px;
-					border-image-outset: 8px;
-	
-					overflow-y: scroll;
-					// 1000 -> Au dessus de tout / 998 Laisse le tooltip passer par dessus
-					z-index: 1000;
-					scrollbar-width: none;
+					.absolute-panel;
 	
 					& > span {
 						& > span {
