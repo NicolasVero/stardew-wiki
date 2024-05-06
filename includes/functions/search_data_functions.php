@@ -254,7 +254,7 @@ function get_formatted_date(object $data):string {
 }
 
 
-function get_cooking_recipes(object $recipes, object $recipes_cooked) {
+function get_cooking_recipes(object $recipes, object $recipes_cooked):array {
 
     $return_datas = array();
     $json_recipes = json_decode(file_get_contents(get_json_folder() . 'recipes.json'), true);

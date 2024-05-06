@@ -17,6 +17,13 @@ function get_site_root():string {
     return 'http://localhost/travail/stardew_wiki/';
 }
 
+function formate_number(int $number, string $lang = 'en'):string {
+	if($lang == 'fr') 
+		return number_format($number, 0, ',', ' ');
+
+	return number_format($number);
+} 
+
 function formate_text_for_file(string $string):string {
 
     $search =  [' ', '\'', '(', ')', ',', '.', ':'];

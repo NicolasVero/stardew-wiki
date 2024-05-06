@@ -103,25 +103,25 @@ function display_header(array $datas):string {
                 <span class='all-money'>
                     <span>
                         <img src='{$images_path}icons/gold.png' alt='Gold coin' />
-                        <span class='data actual-gold'>" . number_format($golds) . "</span>
+                        <span class='data actual-gold'>" . formate_number($golds) . "</span>
                         <span class='data-label'>golds</span>
                     </span>
 
                     <span>
                         <img src='{$images_path}icons/golden_walnut.png' alt='Golden walnut' />
-                        <span class='data actual-golden-walnut'>" . number_format($golden_walnuts) . "</span>
+                        <span class='data actual-golden-walnut'>" . formate_number($golden_walnuts) . "</span>
                         <span class='data-label'>golden walnut</span>
                     </span>
 
                     <span>
                         <img src='{$images_path}icons/qi_gem.png' alt='Qi gems' />
-                        <span class='data actual-qi-gem'>" . number_format($qi_gems) . "</span>
+                        <span class='data actual-qi-gem'>" . formate_number($qi_gems) . "</span>
                         <span class='data-label'>qi gem</span>
                     </span>
 
                     <span>
                         <img src='{$images_path}icons/casino_coins.png' alt='Casino coins' />
-                        <span class='data actual-golden-walnut'>" . number_format($casino_coins) . "</span>
+                        <span class='data actual-golden-walnut'>" . formate_number($casino_coins) . "</span>
                         <span class='data-label'>casino coins</span>
                     </span>
                 </span>
@@ -147,25 +147,25 @@ function display_general_stats(array $datas):string {
             <div>
                 <span>
                     <img src='{$images_path}icons/energy.png' alt='Energy' />
-                    <span class='data data-energy'>" . number_format($max_stamina) . "</span>
+                    <span class='data data-energy'>" . formate_number($max_stamina) . "</span>
                     <span class='data-label'>max stamina</span>
                 </span>
 
                 <span>
                     <img src='{$images_path}icons/health.png' alt='Health' />
-                    <span class='data data-health'>" . number_format($max_health) . "</span>
+                    <span class='data data-health'>" . formate_number($max_health) . "</span>
                     <span class='data-label'>max health</span>
                 </span>
 
                 <span>
                     <img src='{$images_path}icons/inventory.png' alt='Inventory' />
-                    <span class='data data-inventory'>" . number_format($max_items) . "</span>
+                    <span class='data data-inventory'>" . formate_number($max_items) . "</span>
                     <span class='data-label'>max inventory</span>
                 </span>
 
                 <span>
                     <img src='{$images_path}icons/mine_level.png' alt='Mine level' />
-                    <span class='data data-mine-level'>" . number_format($mine_level) . "</span>
+                    <span class='data data-mine-level'>" . formate_number($mine_level) . "</span>
                     <span class='data-label'>deepest mine level</span>
                 </span>
             </div>
@@ -214,10 +214,11 @@ function display_quests(array $datas):string {
 		
         for($i = 0; $i<count($rewards); $i++) {
             $structure .= "<span class='quest-reward'>";
-            if (is_numeric($rewards[$i]))
-                $structure .= "<img src='$images_path/icons/gold.png'/>$rewards[$i]";
-            else
-                $structure .= "$rewards[$i]";
+            $structure .= (is_numeric($rewards[$i])) ? "<img src='$images_path/icons/gold.png'/>" . formate_number($rewards[$i]) : $rewards[$i];
+            // if(is_numeric($rewards[$i]))
+            //     $structure .= "<img src='$images_path/icons/gold.png'/>" . formate_number($rewards[$i]);
+            // else
+            //     $structure .= "$rewards[$i]";
             $structure .= "</span>";
         }
         $structure .= "
