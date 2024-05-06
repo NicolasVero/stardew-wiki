@@ -150,13 +150,94 @@ function get_quest_log(object $data):array {
             $quest_id,
             'quests'
         );
-        
-        $quests[] = array(
-            'objective'   => $index['objective'],
-            'description' => $index['description'],
-            'title'       => $index['title'],
-            'rewards'     => $index['reward']
-        );
+
+		// Quêtes histoire
+		if (!empty($index)){
+			$quests[] = array(
+				'daily'		  => false,
+				'objective'   => $index['objective'],
+				'description' => $index['description'],
+				'title'       => $index['title'],
+				'rewards'     => $index['reward']
+			);
+		}
+
+		// Quêtes daily
+		else {
+			$quest_type = (int) $item->questType;
+
+			$days_left = (int) $item->daysLeft;
+			$rewards = [(int) $item->reward];
+			$target = $item->target;
+			
+			switch($quest_type) {
+
+				case 3 :
+					$json_item = json_decode(file_get_contents(get_json_folder() . 'shipped_items.json'), true);
+					$goal_name = find_reference_in_json(formate_original_data_string($item->item), 'shipped_items');
+
+					$keyword = "Deliver";
+					$keyword_ing = "Delivering";
+
+					$number_to_get = $item->number;
+					$number_obtained = 0;
+					break;
+
+				case 4 :
+					$goal_name = $item->monsterName;
+
+					$keyword = "Kill";
+					$keyword_ing = "Killing";
+
+					$number_to_get = $item->numberToKill;
+					$number_obtained = $item->numberKilled;
+					break;
+
+				case 5 :
+					$goal_name = "people";
+
+					$keyword = "Talk to";
+					$keyword_ing = "Socializing";
+
+					$number_to_get = $item->total;
+					$number_obtained = $item->whoToGreet;
+					break;
+
+				case 7 :
+					$json_fish = json_decode(file_get_contents(get_json_folder() . 'fish.json'), true);
+					$goal_name = find_reference_in_json(formate_original_data_string($item->whichFish), 'fish');
+
+					$keyword = "Fish";
+					$keyword_ing = "Fishing";
+
+					$number_to_get = $item->numberToFish;
+					$number_obtained = $item->numberFished;
+					break;
+
+				case 10 :
+					$json_fish = json_decode(file_get_contents(get_json_folder() . 'shipped_items.json'), true);
+					$goal_name = find_reference_in_json(formate_original_data_string($item->resource), 'shipped_items');
+
+					$keyword = "Fish";
+					$keyword_ing = "Fishing";
+
+					$number_to_get = $item->number;
+					$number_obtained = $item->numberCollected;
+					break;
+			}
+			
+			$title = "$keyword_ing Quest";
+			$description = "Help $target with his $keyword_ing request.";
+			$objective = "$keyword $number_to_get $goal_name for $target : $number_obtained/$number_to_get";
+			$quests[] = array(
+				'daily'		  => true,
+				'objective'   => $objective,
+				'description' => $description,
+				'title'       => $title,
+				'daysLeft'    => $days_left,
+				'rewards'     => $rewards
+			);
+		}
     }
 
     return $quests;

@@ -342,6 +342,7 @@ html {
   body main .info-section.quests-section .quests .quest {
     display: flex;
     justify-content: space-between;
+    gap: 25px;
   }
   body main .info-section.quests-section .quests .quest > span {
     justify-content: center;
@@ -357,6 +358,10 @@ html {
   body main .info-section.quests-section .quests .quest .quest-infos .quest-title {
     font-style: italic;
   }
+  body main .info-section.quests-section .quests .quest .days-left {
+    display: flex;
+    align-items: center;
+  }
   body main .info-section.quests-section .quests .quest .quest-rewards {
     display: flex;
     flex-direction: column;
@@ -365,6 +370,9 @@ html {
   body main .info-section.quests-section .quests .quest .quest-rewards .quest-reward {
     display: flex;
     align-items: center;
+  }
+  body main .info-section.quests-section .quests .quest img {
+    width: 20px;
   }
   body main .info-section.quests-section div {
     display: flex;
@@ -847,6 +855,7 @@ html {
   body main .info-section.quests-section .quests .quest {
     display: flex;
     justify-content: space-between;
+    gap: 18.75px;
   }
   body main .info-section.quests-section .quests .quest > span {
     justify-content: center;
@@ -862,6 +871,10 @@ html {
   body main .info-section.quests-section .quests .quest .quest-infos .quest-title {
     font-style: italic;
   }
+  body main .info-section.quests-section .quests .quest .days-left {
+    display: flex;
+    align-items: center;
+  }
   body main .info-section.quests-section .quests .quest .quest-rewards {
     display: flex;
     flex-direction: column;
@@ -870,6 +883,9 @@ html {
   body main .info-section.quests-section .quests .quest .quest-rewards .quest-reward {
     display: flex;
     align-items: center;
+  }
+  body main .info-section.quests-section .quests .quest img {
+    width: 15px;
   }
   body main .info-section.quests-section div {
     display: flex;

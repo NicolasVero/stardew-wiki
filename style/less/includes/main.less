@@ -125,6 +125,7 @@ body {
 					.quest {
 						display: flex;
 						justify-content: space-between;
+						gap: (@big-gap * @ratio);
 
 						& > span {
 							justify-content: center;
@@ -144,6 +145,11 @@ body {
 							}
 						}
 
+						.days-left {
+							display: flex;
+							align-items: center;
+						}
+
 						.quest-rewards {
 							display: flex;
 							flex-direction: column;
@@ -153,6 +159,10 @@ body {
 								display: flex;
 								align-items: center;
 							}
+						}
+
+						img {
+							width: (@small-icon * @ratio);
 						}
 					}
 				}

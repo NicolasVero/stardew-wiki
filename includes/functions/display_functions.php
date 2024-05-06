@@ -201,13 +201,20 @@ function display_quests(array $datas):string {
                     <span clas='quest-description'>$objective</span>
                     <span class='quest-title'>$title</span>
                 </span>
-                <span class='quest-rewards'>
         ";
-        if($rewards === []) continue;
+        if($rewards === []) {
+			$structure .= "</span>";
+			continue;
+		}
         
-        for($i = 0; $i<count($rewards);$i++) {
+		if(isset($data['daysLeft']))
+			$structure .= " <span class='days-left'><img src='$images_path/icons/timer.png'/>" . $data['daysLeft'] . " day</span>";
+
+		$structure .= "<span class='quest-rewards'>";
+		
+        for($i = 0; $i<count($rewards); $i++) {
             $structure .= "<span class='quest-reward'>";
-            if (ctype_digit($rewards[$i]))
+            if (is_numeric($rewards[$i]))
                 $structure .= "<img src='$images_path/icons/gold.png'/>$rewards[$i]";
             else
                 $structure .= "$rewards[$i]";
