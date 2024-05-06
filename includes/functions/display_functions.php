@@ -214,7 +214,18 @@ function display_quests(array $datas):string {
 		
         for($i = 0; $i<count($rewards); $i++) {
             $structure .= "<span class='quest-reward'>";
-            $structure .= (is_numeric($rewards[$i])) ? "<img src='$images_path/icons/gold.png'/>" . formate_number($rewards[$i]) : $rewards[$i];
+            
+            if(strstr($rewards[$i], "Friendship")) {
+                $reward_number = explode(" ", $rewards[$i])[0];
+                if(strstr($rewards[$i], "heart"))
+                    $structure .= "$reward_number&nbsp<img src='$images_path/icons/heart.png'/>";
+                else
+                    $structure .= "$reward_number&nbsppts&nbsp<img src='$images_path/icons/heart_" . $reward_number .".png'/>";
+            }
+            elseif(is_numeric($rewards[$i]))
+                $structure .= "<img src='$images_path/icons/gold.png'/>" . formate_number($rewards[$i]);
+            else
+                $structure .= $rewards[$i];
 
             $structure .= "</span>";
         }
@@ -369,11 +380,22 @@ function display_friendships(array $friends, $limit = -1):string {
             $structure .= "<img src='$heart_icon' class='hearts' alt='' />";
         }
         
+        $gifted = [];
+        $gifted[0] = ($friend['week_gifts'] > 0) ? "gifted" : "not-gifted";
+        $gifted[1] = ($friend['week_gifts'] == 2) ? "gifted" : "not-gifted";
+
+        $talked_to = ($friend['talked_to_today']) ? "talked" : "not-talked";
+
         $structure .= "
 				</span>
-				<span class='gifts'>
-					<img src='{$images_path}icons/gift.png' class='gift' alt=''/>
-					<span class='gift-counter'>$week_gifts</span><span class='week'>this week</span>
+				<span class='interactions'>
+                    <span>
+					    <img src='{$images_path}icons/gift.png' class='interaction $gifted[0]' alt=''/>
+					    <img src='{$images_path}icons/gift.png' class='interaction $gifted[1]' alt=''/>
+                    </span>
+                    <span>
+					    <img src='{$images_path}icons/speech.png' class='interaction $talked_to' alt=''/>
+                    </span>
 				</span>
 				<span class='friend-status'>$status</span>
 			</span>

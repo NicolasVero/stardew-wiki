@@ -126,10 +126,11 @@ function get_friendship_data(object $data):array {
         if(!in_array($friend_name, $json_villagers['villagers'])) continue;
 
         $friends[$friend_name] = array(
-            'points'       => (int) $item->value->Friendship->Points,
-            'friend_level' => (int) floor(($item->value->Friendship->Points) / 250),
-            'status'       => (string) $item->value->Friendship->Status,
-            'week_gifts'   => (int) $item->value->Friendship->GiftsThisWeek
+            'points'            => (int) $item->value->Friendship->Points,
+            'friend_level'      => (int) floor(($item->value->Friendship->Points) / 250),
+            'status'            => (string) $item->value->Friendship->Status,
+            'week_gifts'        => (int) $item->value->Friendship->GiftsThisWeek,
+            'talked_to_today'   => (int) $item->value->Friendship->TalkedToToday
         );
     }
 
