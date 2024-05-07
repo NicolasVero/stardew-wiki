@@ -58,6 +58,7 @@ function get_aggregated_data(object $data, object $general_data):array {
             'fishing_level'  => (int) $data->fishingLevel,
         ),
         'has_element' => array(
+            'forest_magic'    => has_element("canReadJunimoText", $data),
             'dwarvish_translation_guide'    => has_element("HasDwarvishTranslationGuide", $data),
             'rusty_key'        				=> has_element("HasRustyKey", $data),
             'club_card'        				=> has_element("HasClubCard", $data),
