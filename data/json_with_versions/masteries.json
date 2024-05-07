@@ -1,0 +1,9 @@
+{
+	"1.6.0" : {
+		"mastery_0" : "Farming Mastery",
+		"mastery_1" : "Fishing Mastery",
+		"mastery_2" : "Foraging Mastery",
+		"mastery_3" : "Mining Mastery",
+		"mastery_4" : "Combat Mastery"
+	}
+}

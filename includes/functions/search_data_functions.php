@@ -26,7 +26,7 @@ function get_item_list(object $items, string $filename):array {
 		//& Anciennes versions ($item->key->int) sauf cookingRecipes ($item->key-string)
         $item_id = formate_original_data_string($item->key->string);
 
-        if(!ctype_digit($item_id)) 
+        if(!ctype_digit($item_id))
             $item_id = get_custom_id($item_id);
 
         $reference = find_reference_in_json($item_id, $filename);
@@ -43,7 +43,7 @@ function get_item_list(object $items, string $filename):array {
 
 
 
-function find_reference_in_json(int $id, string $file):mixed {
+function find_reference_in_json(mixed $id, string $file):mixed {
     //& Changer file_get_contents en curl -> problème de pare-feu en hébergé
     $json_file = json_decode(file_get_contents(get_json_folder() . $file . '.json'), true);
 
@@ -84,6 +84,23 @@ function get_enemies_killed_data(object $data):array {
     }
     
     return $enemies;
+}
+
+function get_item_list_string(object $data, string $filename):array { 
+    $items = array();
+    
+    foreach($data->item as $item) {
+
+        $item_id = formate_original_data_string($item->key->string);
+        $reference = find_reference_in_json($item_id, $filename);
+
+        if(empty($reference)) 
+            continue;
+
+        $items[] = $reference;
+    }
+    
+    return $items;
 }
 
 function get_fish_caught_data(object $data):array {
@@ -174,7 +191,6 @@ function get_quest_log(object $data):array {
 			switch($quest_type) {
 
 				case 3 :
-					$json_item = json_decode(file_get_contents(get_json_folder() . 'shipped_items.json'), true);
 					$goal_name = find_reference_in_json(formate_original_data_string($item->item), 'shipped_items');
 
 					$keyword = "Deliver";
@@ -205,7 +221,6 @@ function get_quest_log(object $data):array {
 					break;
 
 				case 7 :
-					$json_fish = json_decode(file_get_contents(get_json_folder() . 'fish.json'), true);
 					$goal_name = find_reference_in_json(formate_original_data_string($item->whichFish), 'fish');
 
 					$keyword = "Fish";
@@ -216,7 +231,6 @@ function get_quest_log(object $data):array {
 					break;
 
 				case 10 :
-					$json_fish = json_decode(file_get_contents(get_json_folder() . 'shipped_items.json'), true);
 					$goal_name = find_reference_in_json(formate_original_data_string($item->resource), 'shipped_items');
 
 					$keyword = "Fish";

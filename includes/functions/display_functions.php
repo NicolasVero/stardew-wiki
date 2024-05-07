@@ -22,6 +22,8 @@ function display_page(array $all_datas, array $players):string {
     $structure .= display_unlockables($all_datas['has_element']);
 
     $structure .= "<div class='separated-galleries'>";
+        $structure .= display_gallery($all_datas['books'], 'books', 'Books');
+        $structure .= display_gallery($all_datas['masteries'], 'masteries', 'Masteries');
         $structure .= display_detailled_gallery($all_datas['fish_caught'], 'fish', 'Fish caught');
         $structure .= display_detailled_gallery($all_datas['cooking_recipe'], 'recipes', 'Cooking recipes');
         $structure .= display_detailled_gallery($all_datas['minerals_found'], 'minerals', 'Minerals');
