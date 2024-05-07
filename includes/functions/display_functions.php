@@ -204,7 +204,7 @@ function display_quests(array $datas):string {
                     <span class='quest-title'>$title</span>
                 </span>
         ";
-        if($rewards === []) {
+        if(empty($rewards)) {
 			$structure .= "</span>";
 			continue;
 		}
