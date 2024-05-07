@@ -58,7 +58,7 @@ function get_aggregated_data(object $data, object $general_data):array {
             'fishing_level'  => (int) $data->fishingLevel,
         ),
         'has_element' => array(
-            'forest_magic'    => has_element("canReadJunimoText", $data),
+            'forest_magic'                  => has_element("canReadJunimoText", $data),
             'dwarvish_translation_guide'    => has_element("HasDwarvishTranslationGuide", $data),
             'rusty_key'        				=> has_element("HasRustyKey", $data),
             'club_card'        				=> has_element("HasClubCard", $data),
@@ -71,6 +71,7 @@ function get_aggregated_data(object $data, object $general_data):array {
             'spring_onion_mastery'  		=> (int) in_array(3910979, (array) $data->eventsSeen->int),
             'town_key'         				=> has_element("HasTownKey", $data),
         ),
+        // 'books'           => get_books(),
         'fish_caught'     => get_fish_caught_data($data->fishCaught),
         'artifacts_found' => get_artifacts($data->archaeologyFound, $general_data),
         'minerals_found'  => get_minerals($data->mineralsFound, $general_data),
