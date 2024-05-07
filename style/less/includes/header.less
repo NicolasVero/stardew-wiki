@@ -59,9 +59,18 @@
 
 	& > span {
 		display: flex;
+		flex-direction: column;
 		justify-content: center;
 		align-items: center;
-		gap: (@md-gap * @ratio);
+		gap: (@big-gap * @ratio);
+
+		& > span {
+			&:first-of-type {
+				display: flex;
+				align-items: center;
+				gap: (@md-gap * @ratio);
+			}
+		}
 	}
 
 	.section-title {
@@ -79,7 +88,7 @@
 		background-clip: padding-box;
 	}
 
-	#save-upload {
+	#save-upload, #no-spoil-mode {
 		display: none;
 	}
 }

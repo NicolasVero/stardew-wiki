@@ -66,9 +66,15 @@ function display_save_button():string {
             <img src='" . get_images_folder() . "content/exit.png' class='exit-upload exit' />
         </div>
         <span>
-            <label for='save-upload' class='button-elements'>Browse</label>
-            <span id='newFilename'>Choose a file</span>
-            <input type='file' id='save-upload'>
+            <span>
+                <label for='save-upload' class='button-elements'>Browse</label>
+                <span id='newFilename'>Choose a file</span>
+                <input type='file' id='save-upload'>
+            </span>
+            <span>
+                <label for='no-spoil-mode' id='no-spoil-label' class='button-elements'>Click here to deactivate the no spoil mode.</label>
+                <input type='checkbox' id='no-spoil-mode'>
+            </span>
         </span>
     </section>
     ";

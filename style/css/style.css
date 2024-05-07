@@ -198,7 +198,13 @@ html {
   }
   .upload-panel > span {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    gap: 25px;
+  }
+  .upload-panel > span > span:first-of-type {
+    display: flex;
     align-items: center;
     gap: 10px;
   }
@@ -215,7 +221,8 @@ html {
     border-image-outset: 2px;
     background-clip: padding-box;
   }
-  .upload-panel #save-upload {
+  .upload-panel #save-upload,
+  .upload-panel #no-spoil-mode {
     display: none;
   }
   header {
@@ -730,7 +737,13 @@ html {
   }
   .upload-panel > span {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    gap: 18.75px;
+  }
+  .upload-panel > span > span:first-of-type {
+    display: flex;
     align-items: center;
     gap: 7.5px;
   }
@@ -747,7 +760,8 @@ html {
     border-image-outset: 2px;
     background-clip: padding-box;
   }
-  .upload-panel #save-upload {
+  .upload-panel #save-upload,
+  .upload-panel #no-spoil-mode {
     display: none;
   }
   header {
