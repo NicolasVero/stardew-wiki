@@ -139,7 +139,7 @@ html {
   .sur-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: flex-start;
     width: 100%;
     margin-bottom: 20px;
   }
@@ -671,7 +671,7 @@ html {
   .sur-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-end;
+    align-items: flex-start;
     width: 100%;
     margin-bottom: 20px;
   }
