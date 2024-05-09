@@ -9,7 +9,6 @@ function display_page(array $all_datas, array $players):string {
     $structure .= display_header($all_datas['general']);
     $structure .= "<main>";
     $structure .= display_general_stats($all_datas['general']);
-    // TODO quests
     $structure .= display_quests($all_datas['quest_log']);
     $structure .= display_skills(array(
             'levels'    => $all_datas['levels'], 
@@ -20,12 +19,9 @@ function display_page(array $all_datas, array $players):string {
     $structure .= display_top_friendships($all_datas['friendship'], 4);
     $structure .= display_friendships($all_datas['friendship']);
 
-	// TODO Futur Unlockable section
-    $structure .= display_unlockables($all_datas['has_element']);
-
     $structure .= "<div class='separated-galleries'>";
+        $structure .= display_unlockables($all_datas['has_element']);
         $structure .= display_gallery($all_datas['books'], 'books', 'Books');
-        $structure .= display_gallery($all_datas['masteries'], 'masteries', 'Masteries');
         $structure .= display_detailled_gallery($all_datas['fish_caught'], 'fish', 'Fish caught');
         $structure .= display_detailled_gallery($all_datas['cooking_recipe'], 'recipes', 'Cooking recipes');
         $structure .= display_detailled_gallery($all_datas['minerals_found'], 'minerals', 'Minerals');
@@ -149,6 +145,10 @@ function display_general_stats(array $datas):string {
 
     extract($datas);
     $images_path = get_images_folder();
+    $deepest_mine_level = ($mine_level > 120) ? 120 : $mine_level; 
+    $deepest_skull_mine_level = ($mine_level - 120 < 0) ? 0 : $mine_level - 120;
+    
+    $deepest_mine_level_tooltip = "$deepest_mine_level stardew mine " . (($deepest_skull_mine_level > 0) ? "+ $deepest_skull_mine_level skull mine" : "");
 
     $structure = "
         <section class='info-section general-stats'>
@@ -174,7 +174,10 @@ function display_general_stats(array $datas):string {
                 </span>
 
                 <span>
-                    <img src='{$images_path}icons/mine_level.png' alt='Mine level' />
+                    <span class='tooltip'>
+                        <img src='{$images_path}icons/mine_level.png' alt='Mine level' />
+                        <span>$deepest_mine_level_tooltip</span>
+                    </span>
                     <span class='data data-mine-level'>" . formate_number($mine_level) . "</span>
                     <span class='data-label'>deepest mine level</span>
                 </span>
@@ -404,17 +407,13 @@ function display_friendships(array $friends, $limit = -1):string {
         $gifted[0] = ($friend['week_gifts'] > 0) ? "gifted" : "not-gifted";
         $gifted[1] = ($friend['week_gifts'] == 2) ? "gifted" : "not-gifted";
 
-        $talked_to = ($friend['talked_to_today']) ? "talked" : "not-talked";
-
         $structure .= "
 				</span>
 				<span class='interactions'>
-                    <span>
-					    <img src='{$images_path}icons/gift.png' class='interaction $gifted[0]' alt=''/>
-					    <img src='{$images_path}icons/gift.png' class='interaction $gifted[1]' alt=''/>
-                    </span>
-                    <span>
-					    <img src='{$images_path}icons/speech.png' class='interaction $talked_to' alt=''/>
+                    <span class='tooltip'>
+                        <img src='{$images_path}icons/gift.png' class='interaction $gifted[0]' alt=''/>
+                        <img src='{$images_path}icons/gift.png' class='interaction $gifted[1]' alt=''/>
+                        <span>gifts made in the last week</span>
                     </span>
 				</span>
 				<span class='friend-status'>$status</span>
