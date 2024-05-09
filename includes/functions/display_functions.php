@@ -276,6 +276,8 @@ function display_skills(array $datas):string {
             <span>    
     ";
 
+    $mastery_visible_class = (empty($datas['masteries'])) ? "" : "not-hide";
+
     foreach($datas['levels'] as $key => $level) {
         
         $level_icon_name = explode('_', $key)[0];
@@ -288,7 +290,7 @@ function display_skills(array $datas):string {
             <span class='skill $key'>
 
                 <span class='tooltip'>
-                    <img src='$mastery_icon' class='level-icon $mastery_class' alt='$key'/>
+                    <img src='$mastery_icon' class='level-icon $mastery_class $mastery_visible_class' alt='$key'/>
                     <span>" . ucfirst($mastery_tooltip) . "</span>
                 </span>
 
