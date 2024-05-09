@@ -399,13 +399,12 @@ function display_friendships(array $friends, $limit = -1):string {
 
         $structure .= "
 			<span>
-				<span class='tooltip'>
-					<img src='$friend_icon' class='character-icon' alt='$name icon' />
-					<span>$name</span>
-				</span>
-				<span class='hearts-level'>
+				<img src='$friend_icon' class='character-icon' alt='$name icon' />
+				<span class='character-name'>$name</span>
+			    <span class='hearts-level'>
         ";
-            
+
+
         $can_be_married = in_array($name, $marriables_npc['marriables']) && $friend['status'] == "Friendly";
 
         for($i = 1; $i <= 10; $i++) {

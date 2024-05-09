@@ -433,6 +433,10 @@ html {
   body main .info-section.friends-section > span .character-icon {
     width: 40px;
   }
+  body main .info-section.friends-section > span .character-name {
+    width: 90px;
+    font-family: "Stardew Valley Stonks", serif;
+  }
   body main .info-section.friends-section > span .hearts-level {
     display: flex;
     gap: 5px;
@@ -982,6 +986,10 @@ html {
   }
   body main .info-section.friends-section > span .character-icon {
     width: 30px;
+  }
+  body main .info-section.friends-section > span .character-name {
+    width: 90px;
+    font-family: "Stardew Valley Stonks", serif;
   }
   body main .info-section.friends-section > span .hearts-level {
     display: flex;
