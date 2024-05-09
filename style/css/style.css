@@ -272,7 +272,7 @@ html {
     gap: 50px;
   }
   header .sub-header img {
-    width: 16px;
+    height: 16px;
   }
   body {
     position: relative;
@@ -822,7 +822,7 @@ html {
     gap: 37.5px;
   }
   header .sub-header img {
-    width: 12px;
+    height: 12px;
   }
   body {
     position: relative;
