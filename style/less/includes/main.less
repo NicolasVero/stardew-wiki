@@ -114,7 +114,7 @@ body {
 					.quest {
 						display: flex;
 						justify-content: space-between;
-						gap: (@big-gap * @ratio);
+						gap: (@bigger-gap * 2 * @ratio);
 
 						& > span {
 							justify-content: center;
@@ -127,7 +127,6 @@ body {
 
 							.quest-description {
 								font-size: (@big-fs * @ratio);
-								min-width: 500px;
 							}
 
 							.quest-title {
@@ -142,10 +141,12 @@ body {
 
 						.quest-rewards {
 							display: flex;
+							gap: (@big-gap * @ratio);
 
 							.quest-reward {
 								display: flex;
 								align-items: center;
+								gap: (@xsmall-gap * @ratio);
 							}
 						}
 

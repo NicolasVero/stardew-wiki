@@ -246,12 +246,12 @@ function display_quests(array $datas):string {
             if(strstr($rewards[$i], "Friendship")) {
                 $reward_number = explode(" ", $rewards[$i])[0];
                 if(strstr($rewards[$i], "heart"))
-                    $structure .= "$reward_number&nbsp<img src='$images_path/icons/heart.png'/>";
+                    $structure .= "<img src='$images_path/icons/heart.png'/>";
                 else
-                    $structure .= "$reward_number&nbsppts&nbsp<img src='$images_path/icons/heart_" . $reward_number .".png'/>";
+                    $structure .= "<img src='$images_path/icons/heart_" . $reward_number .".png'/>";
             }
             elseif(is_numeric($rewards[$i]))
-                $structure .= "<img src='$images_path/icons/gold.png'/>" . formate_number($rewards[$i]);
+                $structure .= formate_number($rewards[$i]) . "<img src='$images_path/icons/gold.png'/>";
             else
                 $structure .= $rewards[$i];
 
