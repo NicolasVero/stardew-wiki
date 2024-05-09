@@ -12,8 +12,10 @@ function display_page(array $all_datas, array $players):string {
     // TODO quests
     $structure .= display_quests($all_datas['quest_log']);
     $structure .= display_skills(array(
-        'levels' => $all_datas['levels'], 
-        'skills' => $all_datas['skills'])
+            'levels'    => $all_datas['levels'], 
+            'skills'    => $all_datas['skills'],
+            'masteries' => $all_datas['masteries']
+        )
     );
     $structure .= display_top_friendships($all_datas['friendship'], 4);
     $structure .= display_friendships($all_datas['friendship']);
@@ -262,13 +264,23 @@ function display_skills(array $datas):string {
     foreach($datas['levels'] as $key => $level) {
         
         $level_icon_name = explode('_', $key)[0];
-        $level_icon = get_images_folder() . "icons/$level_icon_name.png";
+        $level_icon      = get_images_folder() . "icons/$level_icon_name.png";
+        $mastery_icon    = get_images_folder() . "icons/mastery.png";
+        $mastery_class   = (in_array(ucfirst(explode('_', $key)[0]) . " Mastery", $datas['masteries'])) ? 'found' : 'not-found';
+        $mastery_tooltip = ucfirst(explode('_', $key)[0]) . " mastery";
 
         $structure .= "
             <span class='skill $key'>
+
+                <span class='tooltip'>
+                    <img src='$mastery_icon' class='level-icon $mastery_class' alt='$key'/>
+                    <span>" . ucfirst($mastery_tooltip) . "</span>
+                </span>
+
 				<span class='tooltip'>
-                <img src='$level_icon' class='level-icon' alt='$key'/>
+                    <img src='$level_icon' class='level-icon' alt='$key'/>
 					<span>" . ucfirst($level_icon_name) . "</span>
+
 				</span>
                 
                 " . get_level_progress_bar($level) . "
