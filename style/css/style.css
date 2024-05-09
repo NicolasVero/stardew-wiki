@@ -391,6 +391,7 @@ html {
   }
   body main .info-section.quests-section .quests .quest .quest-infos .quest-description {
     font-size: 18px;
+    min-width: 500px;
   }
   body main .info-section.quests-section .quests .quest .quest-infos .quest-title {
     font-style: italic;
@@ -401,8 +402,6 @@ html {
   }
   body main .info-section.quests-section .quests .quest .quest-rewards {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
   }
   body main .info-section.quests-section .quests .quest .quest-rewards .quest-reward {
     display: flex;
@@ -945,6 +944,7 @@ html {
   }
   body main .info-section.quests-section .quests .quest .quest-infos .quest-description {
     font-size: 13.5px;
+    min-width: 500px;
   }
   body main .info-section.quests-section .quests .quest .quest-infos .quest-title {
     font-style: italic;
@@ -955,8 +955,6 @@ html {
   }
   body main .info-section.quests-section .quests .quest .quest-rewards {
     display: flex;
-    flex-direction: column;
-    align-items: flex-end;
   }
   body main .info-section.quests-section .quests .quest .quest-rewards .quest-reward {
     display: flex;

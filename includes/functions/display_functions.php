@@ -226,7 +226,7 @@ function display_quests(array $datas):string {
         $structure .= "
             <span class='quest'>
                 <span class='quest-infos'>
-                    <span clas='quest-description'>$objective</span>
+                    <span class='quest-description'>$objective</span>
                     <span class='quest-title'>$title</span>
                 </span>
         ";
