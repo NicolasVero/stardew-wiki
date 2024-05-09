@@ -38,7 +38,7 @@ function get_aggregated_data(object $data, object $general_data):array {
             'game_version'       => (string) $general_data->gameVersion,
             'game_version_score' => $game_version_score,
             'name'               => (string) $data->name,
-            'gender'             => (string) $data->gender,
+            'gender'             => get_gender(array($data->gender, $data->isMale)),
             'farm_name'          => (string) $data->farmName,
             'favorite_thing'     => (string) $data->favoriteThing,
             'animal_type'        => (string) $data->whichPetType,

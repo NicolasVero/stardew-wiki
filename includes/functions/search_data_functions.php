@@ -1,6 +1,20 @@
 <?php 
 
 
+function get_gender(array $genders):string {
+
+    foreach($genders as $gender) {
+        if(!empty($gender)) {
+            if(is_numeric($gender[0]))
+                return ($gender[0] == 0) ? "Male" : "Female";
+            else 
+                return ($gender[0]) ? "Male" : "Female";
+        }
+    }
+
+    return "Neutral";
+}
+
 function get_achievement(object $achievements):array {
    
     $datas = array();

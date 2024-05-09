@@ -50,20 +50,20 @@ tooltips.forEach(tooltip => {
 // Style input type file
 document.getElementById('save-upload').addEventListener('change', changeLabelName);
 function changeLabelName(event) {
-    let newFilename = event.target.files[0].name.substring(0, 12);
+    const newFilename = event.target.files[0].name.substring(0, 12);
     document.getElementById('newFilename').innerHTML = newFilename;
 }
 
 // Mode no spoil
 document.getElementById('no-spoil-mode').addEventListener('change', noSpoilMode);
 function noSpoilMode(event) {
-    var checkbox = event.target;
-    var label = document.getElementById("no-spoil-label");
+    const checkbox = event.target;
+    const label = document.getElementById("no-spoil-label");
     
     label.textContent = (checkbox.checked) ? "Click here to deactivate the no spoil mode." : "Click here to activate the no spoil mode.";
     var elements = document.getElementsByClassName("not-found");
-    for(var i = 0; i < elements.length; i++) {
-        var parentElement = elements[i].parentElement;
+    for(let i = 0; i < elements.length; i++) {
+        const parentElement = elements[i].parentElement;
         if(parentElement && !elements[i].classList.contains("not-hide"))
             parentElement.style.display = (parentElement.style.display === "none") ?  "block" : "none";
     }
