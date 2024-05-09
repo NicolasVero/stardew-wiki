@@ -64,7 +64,7 @@ function noSpoilMode(event) {
     var elements = document.getElementsByClassName("not-found");
     for(var i = 0; i < elements.length; i++) {
         var parentElement = elements[i].parentElement;
-        if(parentElement)
+        if(parentElement && !elements[i].classList.contains("not-hide"))
             parentElement.style.display = (parentElement.style.display === "none") ?  "block" : "none";
     }
 }

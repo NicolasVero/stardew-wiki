@@ -62,13 +62,16 @@ function display_player_selection(array $players):string {
 }
 
 function display_game_version(string $game_version):string {
-    $structure = "<span class='game_version'>$game_version</span>";
+    $structure = "
+        <span>
+            <span class='game_version'>$game_version</span>";
     return $structure;
 }
 
 function display_save_button():string {
     $structure = "
-        <button class='button-elements upload-file'>Upload a save file</button>
+            <button class='button-elements upload-file'>Upload a save file</button>
+        </span>
     </div>
     <section class='upload-panel'>
         <div>
