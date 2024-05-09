@@ -295,7 +295,7 @@ html {
     display: flex;
     gap: 50px;
   }
-  body main .info-section.general-stats span {
+  body main .info-section.general-stats span:not(.tooltip > span) {
     display: flex;
     align-items: flex-end;
     gap: 5px;
@@ -835,7 +835,7 @@ html {
     display: flex;
     gap: 37.5px;
   }
-  body main .info-section.general-stats span {
+  body main .info-section.general-stats span:not(.tooltip > span) {
     display: flex;
     align-items: flex-end;
     gap: 3.75px;
