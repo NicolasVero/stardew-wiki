@@ -340,9 +340,10 @@ function get_artifacts(object $artifacts, object $general_data, int $version_sco
 
         $reference = find_reference_in_json($artifact_id, 'artifacts');
         
+        $museum_index = get_museum_index($general_data);
 
         if(!empty($reference))
-            $datas[$reference] = array('counter' => is_given_to_museum($artifact_id, $general_data, $version_score));
+            $datas[$reference] = array('counter' => is_given_to_museum($artifact_id, $general_data, $museum_index, $version_score));
     }
     
     return $datas;
@@ -364,18 +365,19 @@ function get_minerals(object $minerals, object $general_data, $version_score):ar
 
         $reference = find_reference_in_json($mineral_id, 'minerals');
         
+        $museum_index = get_museum_index($general_data);
 
         if(!empty($reference))
-            $datas[$reference] = array('counter' => is_given_to_museum($mineral_id, $general_data, $version_score));
+            $datas[$reference] = array('counter' => is_given_to_museum($mineral_id, $general_data, $museum_index, $version_score));
     }
     
     return $datas;
 }
 
-function is_given_to_museum(int $item_id, object $general_data, int $version_score):int { 
+function is_given_to_museum(int $item_id, object $general_data, int $museum_index, int $version_score):int { 
 
-    $location_index = ($version_score < get_game_version_score("1.6.0")) ? 31 : 32;
-    $museum_items = $general_data->locations->GameLocation[$location_index]->museumPieces;
+    // $location_index = ($version_score < get_game_version_score("1.6.0")) ? 31 : 32;
+    $museum_items = $general_data->locations->GameLocation[$museum_index]->museumPieces;
 
     foreach($museum_items->item as $museum_item) {
         if($version_score < get_game_version_score("1.6.0")) {
@@ -386,4 +388,18 @@ function is_given_to_museum(int $item_id, object $general_data, int $version_sco
     }
 
     return 0;
+}
+
+function get_museum_index(object $locations):int {
+    $index_museum = 0;
+
+    $locations = $locations->locations->GameLocation;
+
+    foreach ($locations as $location) {
+        if (isset($location->museumPieces))
+            break;
+        $index_museum++;
+    }
+
+    return $index_museum;
 }
