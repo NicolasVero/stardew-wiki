@@ -19,12 +19,16 @@ function get_achievement(object $achievements):array {
 }
 
 
-function get_item_list(object $items, string $filename):array {
+function get_item_list(object $items, string $filename, int $version_score):array {
     $datas = array();
 
     foreach($items->item as $item) {
-		//& Anciennes versions ($item->key->int) sauf cookingRecipes ($item->key-string)
-        $item_id = formate_original_data_string($item->key->string);
+
+        if($version_score < get_game_version_score("1.6.0")) 
+            $item_id = formate_original_data_string($item->key->int);
+		else 
+            $item_id = formate_original_data_string($item->key->string);
+        
 
         if(!ctype_digit($item_id))
             $item_id = get_custom_id($item_id);
@@ -88,7 +92,7 @@ function get_enemies_killed_data(object $data):array {
 
 function get_item_list_string(object $data, string $filename):array { 
     $items = array();
-    
+
     foreach($data->item as $item) {
 
         $item_id = formate_original_data_string($item->key->string);
@@ -103,12 +107,16 @@ function get_item_list_string(object $data, string $filename):array {
     return $items;
 }
 
-function get_fish_caught_data(object $data):array {
+function get_fish_caught_data(object $data, int $version_score):array {
     $fishs = array();
 
     foreach($data->item as $item) {
 
-        $item_id = formate_original_data_string($item->key->string);
+        if($version_score < get_game_version_score("1.6.0")) 
+            $item_id = formate_original_data_string($item->key->int);
+        else 
+            $item_id = formate_original_data_string($item->key->string);
+
 
         if(!ctype_digit($item_id)) 
             $item_id = get_custom_id($item_id);
@@ -289,12 +297,15 @@ function get_cooking_recipes(object $recipes, object $recipes_cooked):array {
     return $return_datas;
 }
 
-function get_artifacts(object $artifacts, object $general_data):array {
+function get_artifacts(object $artifacts, object $general_data, int $version_score):array {
     $datas = array();
 
     foreach($artifacts->item as $artifact) {
-		//& Anciennes versions ($item->key->int) sauf cookingRecipes ($item->key-string)
-        $artifact_id = formate_original_data_string($artifact->key->string);
+
+        if($version_score < get_game_version_score("1.6.0")) 
+            $artifact_id = formate_original_data_string($artifact->key->int);
+        else 
+            $artifact_id = formate_original_data_string($artifact->key->string);
 
         if(!ctype_digit($artifact_id)) 
             $artifact_id = get_custom_id($artifact_id);
@@ -303,18 +314,22 @@ function get_artifacts(object $artifacts, object $general_data):array {
         
 
         if(!empty($reference))
-            $datas[$reference] = array('counter' => is_given_to_museum($artifact_id, $general_data));
+            $datas[$reference] = array('counter' => is_given_to_museum($artifact_id, $general_data, $version_score));
     }
     
     return $datas;
 }
 
-function get_minerals(object $minerals, object $general_data):array {
+function get_minerals(object $minerals, object $general_data, $version_score):array {
     $datas = array();
 
     foreach($minerals->item as $mineral) {
-		//& Anciennes versions ($item->key->int) sauf cookingRecipes ($item->key-string)
-        $mineral_id = formate_original_data_string($mineral->key->string);
+
+        if($version_score < get_game_version_score("1.6.0")) 
+            $mineral_id = formate_original_data_string($mineral->key->int);
+        else 
+            $mineral_id = formate_original_data_string($mineral->key->string);
+
 
         if(!ctype_digit($mineral_id)) 
             $mineral_id = get_custom_id($mineral_id);
@@ -323,17 +338,23 @@ function get_minerals(object $minerals, object $general_data):array {
         
 
         if(!empty($reference))
-            $datas[$reference] = array('counter' => is_given_to_museum($mineral_id, $general_data));
+            $datas[$reference] = array('counter' => is_given_to_museum($mineral_id, $general_data, $version_score));
     }
     
     return $datas;
 }
 
-function is_given_to_museum(int $item_id, object $general_data):int {   
-    $museum_items = $general_data->locations->GameLocation[32]->museumPieces;
+function is_given_to_museum(int $item_id, object $general_data, int $version_score):int { 
+
+    $location_index = ($version_score < get_game_version_score("1.6.0")) ? 31 : 32;
+    $museum_items = $general_data->locations->GameLocation[$location_index]->museumPieces;
 
     foreach($museum_items->item as $museum_item) {
-        if($item_id == (int) $museum_item->value->string) return 1;
+        if($version_score < get_game_version_score("1.6.0")) {
+            if($item_id == (int) $museum_item->value->int) return 1;
+        } else {
+            if($item_id == (int) $museum_item->value->string) return 1;
+        }
     }
 
     return 0;

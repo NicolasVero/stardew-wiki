@@ -29,33 +29,37 @@ function get_all_players(object $data):array {
 }
 
 
-function get_aggregated_data(object $data, object $general_data):array {     
+function get_aggregated_data(object $data, object $general_data):array {    
+
+    $game_version_score = (int) get_game_version_score((string) $general_data->gameVersion);
+    
     return array(
         'general' => array(
-            'game_version'   => (string) $general_data->gameVersion,
-            'name'           => (string) $data->name,
-            'gender'         => (string) $data->gender,
-            'farm_name'      => (string) $data->farmName,
-            'favorite_thing' => (string) $data->favoriteThing,
-            'animal_type'    => (string) $data->whichPetType,
-            'date'           => get_formatted_date($data),
-            'game_duration'  => get_game_duration((int) $data->millisecondsPlayed),
-            'mine_level'     => (int) $data->deepestMineLevel,
-            'max_items'      => (int) $data->maxItems,
-            'max_health'     => (int) $data->maxHealth,
-            'max_stamina'    => (int) $data->maxStamina,
-            'golds'          => (int) $data->money,
-            'total_golds'    => (int) $data->totalMoneyEarned,
-            'golden_walnuts' => (int) $general_data->goldenWalnuts,
-            'qi_gems'        => (int) $data->qiGems,
-            'casino_coins'   => (int) $data->clubCoins
+            'game_version'       => (string) $general_data->gameVersion,
+            'game_version_score' => $game_version_score,
+            'name'               => (string) $data->name,
+            'gender'             => (string) $data->gender,
+            'farm_name'          => (string) $data->farmName,
+            'favorite_thing'     => (string) $data->favoriteThing,
+            'animal_type'        => (string) $data->whichPetType,
+            'date'               => get_formatted_date($data),
+            'game_duration'      => get_game_duration((int) $data->millisecondsPlayed),
+            'mine_level'         => (int) $data->deepestMineLevel,
+            'max_items'          => (int) $data->maxItems,
+            'max_health'         => (int) $data->maxHealth,
+            'max_stamina'        => (int) $data->maxStamina,
+            'golds'              => (int) $data->money,
+            'total_golds'        => (int) $data->totalMoneyEarned,
+            'golden_walnuts'     => (int) $general_data->goldenWalnuts,
+            'qi_gems'            => (int) $data->qiGems,
+            'casino_coins'       => (int) $data->clubCoins
         ),
         'levels' => array(
-            'farming_level'  => (int) $data->farmingLevel,
-            'mining_level'   => (int) $data->miningLevel,
-            'combat_level'   => (int) $data->combatLevel,
-            'foraging_level' => (int) $data->foragingLevel,
-            'fishing_level'  => (int) $data->fishingLevel,
+            'farming_level'      => (int) $data->farmingLevel,
+            'mining_level'       => (int) $data->miningLevel,
+            'combat_level'       => (int) $data->combatLevel,
+            'foraging_level'     => (int) $data->foragingLevel,
+            'fishing_level'      => (int) $data->fishingLevel,
         ),
         'has_element' => array(
             'forest_magic'                  => has_element("canReadJunimoText", $data),
@@ -73,11 +77,11 @@ function get_aggregated_data(object $data, object $general_data):array {
         ),
         'books'           => get_item_list_string($data->stats->Values, "books"),
         'masteries'       => get_item_list_string($data->stats->Values, "masteries"),
-        'fish_caught'     => get_fish_caught_data($data->fishCaught),
-        'artifacts_found' => get_artifacts($data->archaeologyFound, $general_data),
-        'minerals_found'  => get_minerals($data->mineralsFound, $general_data),
+        'fish_caught'     => get_fish_caught_data($data->fishCaught, $game_version_score),
+        'artifacts_found' => get_artifacts($data->archaeologyFound, $general_data, $game_version_score),
+        'minerals_found'  => get_minerals($data->mineralsFound, $general_data, $game_version_score),
         'cooking_recipe'  => get_cooking_recipes($data->cookingRecipes, $data->recipesCooked),
-        'shipped_items'   => get_item_list($data->basicShipped, 'shipped_items'),
+        'shipped_items'   => get_item_list($data->basicShipped, 'shipped_items', $game_version_score),
         'achievements'    => get_achievement($data->achievements),
         'skills'          => get_skills_data((array) $data->professions->int),
         'friendship'      => get_friendship_data($data->friendshipData),

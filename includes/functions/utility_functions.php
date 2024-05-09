@@ -79,3 +79,19 @@ function get_custom_id(string $item):int {
     $custom_ids = json_decode(file_get_contents(get_json_folder() . 'custom_ids.json'), true);
     return array_search($item, $custom_ids);
 }
+
+
+function get_game_version_score(string $version):int {
+	$version_numbers = explode('.', $version);
+
+	while(count($version_numbers) < 3)
+		$version_numbers[] = 0;
+
+	$version_numbers = array_reverse($version_numbers);
+	$score = 0;
+
+	for($i = 0; $i < count($version_numbers); $i++)
+		$score += pow($version_numbers[$i], 10 * $i); 
+
+	return (int) $score;
+}
