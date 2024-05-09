@@ -429,7 +429,7 @@ function display_friendships(array $friends, $limit = -1):string {
                     <span class='tooltip'>
                         <img src='{$images_path}icons/gift.png' class='interaction $gifted[0]' alt=''/>
                         <img src='{$images_path}icons/gift.png' class='interaction $gifted[1]' alt=''/>
-                        <span>gifts made in the last week</span>
+                        <span>Gifts made in the last week</span>
                     </span>
 				</span>
 				<span class='friend-status'>$status</span>

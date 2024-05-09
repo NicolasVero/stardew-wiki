@@ -283,14 +283,19 @@ function get_cooking_recipes(object $recipes, object $recipes_cooked):array {
     $json_recipes = json_decode(file_get_contents(get_json_folder() . 'recipes.json'), true);
 
     foreach($recipes->item as $recipe) {
+
         $item_name = formate_original_data_string($recipe->key->string);
         $index = array_search($item_name, $json_recipes);
 
         foreach($recipes_cooked->item as $recipe_cooked) {
-            if ((int) $recipe_cooked->key->string == $index)
+
+            if((int) $recipe_cooked->key->string == $index) {
                 $return_datas[$item_name] = array('counter' => (int) $recipe_cooked->value->int);
-            else
+                break;
+            }
+            else 
                 $return_datas[$item_name] = array('counter' => 0);
+            
         }
     }
     
