@@ -22,7 +22,7 @@ function display_page(array $all_datas, array $players):string {
         $structure .= display_unlockables($all_datas['has_element']);
         $structure .= display_gallery($all_datas['books'], 'books', 'Books');
         $structure .= display_detailled_gallery($all_datas['fish_caught'], 'fish', 'Fish caught');
-        $structure .= display_detailled_gallery($all_datas['cooking_recipe'], 'recipes', 'Cooking recipes');
+        $structure .= display_detailled_gallery($all_datas['cooking_recipes'], 'recipes', 'Cooking recipes');
         $structure .= display_detailled_gallery($all_datas['minerals_found'], 'minerals', 'Minerals');
         $structure .= display_detailled_gallery($all_datas['artifacts_found'], 'artifacts', 'Artifacts');
         $structure .= display_detailled_gallery($all_datas['enemies_killed'], 'enemies', 'Enemies killed');

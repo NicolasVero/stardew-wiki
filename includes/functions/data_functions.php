@@ -80,7 +80,7 @@ function get_aggregated_data(object $data, object $general_data):array {
         'fish_caught'     => get_fish_caught_data($data->fishCaught, $game_version_score),
         'artifacts_found' => get_artifacts($data->archaeologyFound, $general_data, $game_version_score),
         'minerals_found'  => get_minerals($data->mineralsFound, $general_data, $game_version_score),
-        'cooking_recipe'  => get_cooking_recipes($data->cookingRecipes, $data->recipesCooked, $game_version_score),
+        'cooking_recipes'  => get_cooking_recipes($data->cookingRecipes, $data->recipesCooked, $game_version_score),
         'shipped_items'   => get_item_list($data->basicShipped, 'shipped_items', $game_version_score),
         'achievements'    => get_achievement($data->achievements),
         'skills'          => get_skills_data((array) $data->professions->int),
