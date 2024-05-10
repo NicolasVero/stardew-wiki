@@ -16,6 +16,7 @@
 		list-style-type: none;
 
 		li {
+			.button-elements;
 			padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @d-ratio);
 			background-color: @stardew-bg;
 			border: solid 2px rgba(162, 120, 69, 1);
@@ -38,6 +39,7 @@
 		}
 
 		.upload-file {
+			.button-elements;
 			cursor: @pointer;
 			padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @ratio);
 			background-color: @stardew-bg;
@@ -74,8 +76,9 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		align-items: center;
 		gap: (@big-gap * @ratio);
+		width: fit-content;
+		margin: 0 auto;
 
 		& > span {
 			&:first-of-type {
@@ -90,7 +93,8 @@
 		font-size: (@big-fs * @ratio);
 	}
 
-	label {
+	#browse-files {
+		.button-elements;
 		cursor: @pointer;
 		padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @ratio);
 		background-color: @stardew-bg;
@@ -101,8 +105,24 @@
 		background-clip: padding-box;
 	}
 
-	#save-upload, #no-spoil-mode {
+	#save-upload {
 		display: none;
+	}
+
+	.checkboxes {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+
+		.checkbox {
+			display: flex;
+			align-items: flex-end;
+			gap: (@md-gap * @ratio);
+
+			#no-spoil-mode {
+				.checkbox-elements;
+			}
+		}
 	}
 }
 

@@ -70,6 +70,30 @@ not-hide {
 	user-select: none;
 }
 
+.checkbox-elements {
+	display: none;
+
+	& ~ .checkmark {
+		width: 20px;
+		aspect-ratio: 1/1;
+		border: solid 3px #5b2b2a;
+		background-color: @stardew-bg;
+
+		img {
+			width: 100%;
+			display: none;
+		}
+	}
+
+	&:checked {
+		& ~ .checkmark {
+			img {
+				display: block;
+			}
+		}
+	}
+}
+
 .exit {
 	width: (@big-icon * @ratio);
 	cursor: @pointer;

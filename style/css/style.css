@@ -100,6 +100,22 @@ html {
     transform: scale(1.1);
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
+  .checkbox-elements {
+    display: none;
+  }
+  .checkbox-elements ~ .checkmark {
+    width: 20px;
+    aspect-ratio: 1/1;
+    border: solid 3px #5b2b2a;
+    background-color: #ffc677;
+  }
+  .checkbox-elements ~ .checkmark img {
+    width: 100%;
+    display: none;
+  }
+  .checkbox-elements:checked ~ .checkmark img {
+    display: block;
+  }
   .exit {
     width: 28px;
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
@@ -156,6 +172,11 @@ html {
     list-style-type: none;
   }
   .sur-header #player_selection li {
+    font-family: "Stardew Valley Stonks", serif;
+    font-size: 18px;
+    color: #000000;
+    transition: transform 0.2s ease-in-out;
+    user-select: none;
     padding: 5px 5px;
     background-color: #ffc677;
     border: solid 2px #a27845;
@@ -163,6 +184,10 @@ html {
     border-image-width: 5px;
     border-image-outset: 2px;
     background-clip: padding-box;
+  }
+  .sur-header #player_selection li:hover {
+    transform: scale(1.1);
+    cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
   .sur-header > span {
     display: flex;
@@ -175,6 +200,11 @@ html {
     align-self: flex-end;
   }
   .sur-header > span .upload-file {
+    font-family: "Stardew Valley Stonks", serif;
+    font-size: 18px;
+    color: #000000;
+    transition: transform 0.2s ease-in-out;
+    user-select: none;
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
     padding: 5px 10px;
     background-color: #ffc677;
@@ -183,6 +213,10 @@ html {
     border-image-width: 5px;
     border-image-outset: 2px;
     background-clip: padding-box;
+  }
+  .sur-header > span .upload-file:hover {
+    transform: scale(1.1);
+    cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
   .upload-panel {
     display: none;
@@ -214,8 +248,9 @@ html {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     gap: 25px;
+    width: fit-content;
+    margin: 0 auto;
   }
   .upload-panel > span > span:first-of-type {
     display: flex;
@@ -225,7 +260,12 @@ html {
   .upload-panel .section-title {
     font-size: 18px;
   }
-  .upload-panel label {
+  .upload-panel #browse-files {
+    font-family: "Stardew Valley Stonks", serif;
+    font-size: 18px;
+    color: #000000;
+    transition: transform 0.2s ease-in-out;
+    user-select: none;
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
     padding: 5px 10px;
     background-color: #ffc677;
@@ -235,9 +275,38 @@ html {
     border-image-outset: 2px;
     background-clip: padding-box;
   }
-  .upload-panel #save-upload,
-  .upload-panel #no-spoil-mode {
+  .upload-panel #browse-files:hover {
+    transform: scale(1.1);
+    cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
+  }
+  .upload-panel #save-upload {
     display: none;
+  }
+  .upload-panel .checkboxes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .upload-panel .checkboxes .checkbox {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+  }
+  .upload-panel .checkboxes .checkbox #no-spoil-mode {
+    display: none;
+  }
+  .upload-panel .checkboxes .checkbox #no-spoil-mode ~ .checkmark {
+    width: 20px;
+    aspect-ratio: 1/1;
+    border: solid 3px #5b2b2a;
+    background-color: #ffc677;
+  }
+  .upload-panel .checkboxes .checkbox #no-spoil-mode ~ .checkmark img {
+    width: 100%;
+    display: none;
+  }
+  .upload-panel .checkboxes .checkbox #no-spoil-mode:checked ~ .checkmark img {
+    display: block;
   }
   header {
     display: flex;
@@ -654,6 +723,22 @@ html {
     transform: scale(1.1);
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
+  .checkbox-elements {
+    display: none;
+  }
+  .checkbox-elements ~ .checkmark {
+    width: 20px;
+    aspect-ratio: 1/1;
+    border: solid 3px #5b2b2a;
+    background-color: #ffc677;
+  }
+  .checkbox-elements ~ .checkmark img {
+    width: 100%;
+    display: none;
+  }
+  .checkbox-elements:checked ~ .checkmark img {
+    display: block;
+  }
   .exit {
     width: 21px;
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
@@ -710,6 +795,11 @@ html {
     list-style-type: none;
   }
   .sur-header #player_selection li {
+    font-family: "Stardew Valley Stonks", serif;
+    font-size: 13.5px;
+    color: #000000;
+    transition: transform 0.2s ease-in-out;
+    user-select: none;
     padding: 3.75px 5px;
     background-color: #ffc677;
     border: solid 2px #a27845;
@@ -717,6 +807,10 @@ html {
     border-image-width: 5px;
     border-image-outset: 2px;
     background-clip: padding-box;
+  }
+  .sur-header #player_selection li:hover {
+    transform: scale(1.1);
+    cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
   .sur-header > span {
     display: flex;
@@ -729,6 +823,11 @@ html {
     align-self: flex-end;
   }
   .sur-header > span .upload-file {
+    font-family: "Stardew Valley Stonks", serif;
+    font-size: 13.5px;
+    color: #000000;
+    transition: transform 0.2s ease-in-out;
+    user-select: none;
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
     padding: 3.75px 7.5px;
     background-color: #ffc677;
@@ -737,6 +836,10 @@ html {
     border-image-width: 5px;
     border-image-outset: 2px;
     background-clip: padding-box;
+  }
+  .sur-header > span .upload-file:hover {
+    transform: scale(1.1);
+    cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
   .upload-panel {
     display: none;
@@ -768,8 +871,9 @@ html {
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
     gap: 18.75px;
+    width: fit-content;
+    margin: 0 auto;
   }
   .upload-panel > span > span:first-of-type {
     display: flex;
@@ -779,7 +883,12 @@ html {
   .upload-panel .section-title {
     font-size: 13.5px;
   }
-  .upload-panel label {
+  .upload-panel #browse-files {
+    font-family: "Stardew Valley Stonks", serif;
+    font-size: 13.5px;
+    color: #000000;
+    transition: transform 0.2s ease-in-out;
+    user-select: none;
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
     padding: 3.75px 7.5px;
     background-color: #ffc677;
@@ -789,9 +898,38 @@ html {
     border-image-outset: 2px;
     background-clip: padding-box;
   }
-  .upload-panel #save-upload,
-  .upload-panel #no-spoil-mode {
+  .upload-panel #browse-files:hover {
+    transform: scale(1.1);
+    cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
+  }
+  .upload-panel #save-upload {
     display: none;
+  }
+  .upload-panel .checkboxes {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .upload-panel .checkboxes .checkbox {
+    display: flex;
+    align-items: flex-end;
+    gap: 7.5px;
+  }
+  .upload-panel .checkboxes .checkbox #no-spoil-mode {
+    display: none;
+  }
+  .upload-panel .checkboxes .checkbox #no-spoil-mode ~ .checkmark {
+    width: 20px;
+    aspect-ratio: 1/1;
+    border: solid 3px #5b2b2a;
+    background-color: #ffc677;
+  }
+  .upload-panel .checkboxes .checkbox #no-spoil-mode ~ .checkmark img {
+    width: 100%;
+    display: none;
+  }
+  .upload-panel .checkboxes .checkbox #no-spoil-mode:checked ~ .checkmark img {
+    display: block;
   }
   header {
     display: flex;

@@ -53,7 +53,7 @@ function display_player_selection(array $players):string {
 	";
 
     foreach($players as $player) {
-        $structure .= "<li value='$player' class='button-elements'>" . formate_usernames($player) . "</option>";
+        $structure .= "<li value='$player'>" . formate_usernames($player) . "</option>";
     }
 
     $structure .= "</ul>";
@@ -70,7 +70,7 @@ function display_game_version(string $game_version):string {
 
 function display_save_button():string {
     $structure = "
-            <button class='button-elements upload-file'>Upload a save file</button>
+            <button class='upload-file'>Upload a save file</button>
         </span>
     </div>
     <section class='upload-panel'>
@@ -80,13 +80,16 @@ function display_save_button():string {
         </div>
         <span>
             <span>
-                <label for='save-upload' class='button-elements'>Browse</label>
+                <label id='browse-files' for='save-upload'>Browse</label>
                 <span id='newFilename'>Choose a file</span>
                 <input type='file' id='save-upload'>
             </span>
-            <span>
-                <label for='no-spoil-mode' id='no-spoil-label' class='button-elements'>Click here to deactivate the no spoil mode.</label>
-                <input type='checkbox' id='no-spoil-mode'>
+            <span class='checkboxes'>
+                <span class='checkbox'>
+                    <input type='checkbox' id='no-spoil-mode'>
+                    <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png'></span>
+                    <label for='no-spoil-mode' id='no-spoil-label'>No spoil mode</label>
+                </span>
             </span>
         </span>
     </section>

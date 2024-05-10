@@ -7,9 +7,9 @@ function toggleVisibilityAndScroll(element, shouldDisplay, shouldDisableScroll) 
 }
 
 function activateButtons(show, hide, sections_to_show, unable_scroll) {
-    let show_button = document.querySelectorAll(show);
-    let hide_button = document.querySelectorAll(hide);
-    let sections = document.querySelector(sections_to_show);
+    const show_button = document.querySelectorAll(show);
+    const hide_button = document.querySelectorAll(hide);
+    const sections = document.querySelector(sections_to_show);
 
     show_button.forEach(function(button) {
         button.addEventListener('click', function() {
@@ -61,13 +61,26 @@ function changeLabelName(event) {
 document.getElementById('no-spoil-mode').addEventListener('change', noSpoilMode);
 function noSpoilMode(event) {
     const checkbox = event.target;
-    const label = document.getElementById("no-spoil-label");
-    
-    label.textContent = (checkbox.checked) ? "Click here to deactivate the no spoil mode." : "Click here to activate the no spoil mode.";
-    var elements = document.getElementsByClassName("not-found");
+
+    const elements = document.getElementsByClassName("not-found");
     for(let i = 0; i < elements.length; i++) {
         const parentElement = elements[i].parentElement;
         if(parentElement && !elements[i].classList.contains("not-hide"))
             parentElement.style.display = (parentElement.style.display === "none") ?  "block" : "none";
     }
 }
+
+// Custom checkboxes
+function activateCustomCheckboxes(checkmarkClass) {
+    let checkmarks = document.querySelectorAll(checkmarkClass);
+    checkmarks.forEach(function(checkbox) {
+        checkbox.addEventListener('click', function() {
+            let adjacentCheckbox = checkbox.previousElementSibling;
+            if (adjacentCheckbox && adjacentCheckbox.type === 'checkbox') {
+                adjacentCheckbox.checked = (!adjacentCheckbox.checked) ? true : false;
+                adjacentCheckbox.dispatchEvent(new Event('change'));
+            }
+        });
+    });   
+}
+activateCustomCheckboxes(".checkmark");
