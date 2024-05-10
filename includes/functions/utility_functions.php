@@ -13,6 +13,10 @@ function get_json_folder():string {
     return get_site_root() . "data/json/";
 }
 
+function get_json_folder2():string {
+    return get_site_root() . "data/json_with_versions/";
+}
+
 function get_site_root():string {
     return 'http://localhost/travail/stardew_wiki/';
 }

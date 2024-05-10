@@ -81,7 +81,11 @@ function AJAX_send() {
 
         xhr.onreadystatechange = function() {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-                document.getElementById("display").innerHTML = xhr.responseText;
+
+                const data = JSON.parse(xhr.responseText);
+                const html = data.html;
+
+                document.getElementById("display").innerHTML = html;
                 load_elements();
             }
         };
