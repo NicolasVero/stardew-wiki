@@ -95,3 +95,16 @@ function get_game_version_score(string $version):int {
 
 	return (int) $score;
 }
+
+
+function in_bytes_conversion(string $size):int {
+
+    $unit_to_power = array('o'  => 0, 'Ko' => 1, 'Mo' => 2, 'Go' => 3);
+
+    preg_match('/(\d+)([a-zA-Z]+)/', $size, $matches);
+    
+    $value = (int) $matches[1];
+    $unite = $matches[2];
+    
+    return $value * pow(1024, $unit_to_power[$unite]);
+}

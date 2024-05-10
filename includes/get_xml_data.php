@@ -1,10 +1,12 @@
 <?php
 
+require 'functions/data_functions.php';
+require 'functions/display_functions.php';
+require 'functions/utility_functions.php';
+require 'security_check.php';
 
-if ($_FILES['save-upload']['error'] === UPLOAD_ERR_OK) {
-    require 'functions/data_functions.php';
-    require 'functions/display_functions.php';
-    require 'functions/utility_functions.php';
+
+if($_FILES['save-upload']['error'] === UPLOAD_ERR_OK && is_file_secure($_FILES['save-upload'])) {
 
     $uploadedFile = $_FILES['save-upload']['tmp_name'];
     $data = simplexml_load_file($uploadedFile);
