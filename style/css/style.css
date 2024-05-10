@@ -100,6 +100,14 @@ html {
     color: rgba(0, 0, 0, 0.64);
     font-weight: 200;
   }
+  .filled-element {
+    background-color: #ffc677;
+    border: solid 2px #a27845;
+    border-image: url('../../medias/images/content/border_image.png') 15 stretch;
+    border-image-width: 5px;
+    border-image-outset: 2px;
+    background-clip: padding-box;
+  }
   .button-elements {
     font-family: "Stardew Valley Stonks", serif;
     font-size: 18px;
@@ -170,12 +178,13 @@ html {
   .sur-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: flex-end;
     width: 100%;
     margin-bottom: 20px;
   }
-  .sur-header.landing {
+  .sur-header#landing {
     justify-content: flex-end;
+    gap: 10px;
   }
   .sur-header #player_selection {
     margin: 0;
@@ -191,34 +200,15 @@ html {
     color: #000000;
     transition: transform 0.2s ease-in-out;
     user-select: none;
-    padding: 5px 5px;
     background-color: #ffc677;
     border: solid 2px #a27845;
     border-image: url('../../medias/images/content/border_image.png') 15 stretch;
     border-image-width: 5px;
     border-image-outset: 2px;
     background-clip: padding-box;
+    padding: 5px 5px;
   }
   .sur-header #player_selection li:hover {
-    transform: scale(1.1);
-    cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
-  }
-  .sur-header .upload-file {
-    font-family: "Stardew Valley Stonks", serif;
-    font-size: 18px;
-    color: #000000;
-    transition: transform 0.2s ease-in-out;
-    user-select: none;
-    cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
-    padding: 5px 10px;
-    background-color: #ffc677;
-    border: solid 2px #a27845;
-    border-image: url('../../medias/images/content/border_image.png') 15 stretch;
-    border-image-width: 5px;
-    border-image-outset: 2px;
-    background-clip: padding-box;
-  }
-  .sur-header .upload-file:hover {
     transform: scale(1.1);
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
@@ -232,8 +222,8 @@ html {
     font-size: 16px;
     color: #ffffff;
   }
-  .sur-header > span .view-settings,
-  .sur-header > span #secondary-upload {
+  .sur-header > span .main-settings,
+  .sur-header > span .file-upload {
     display: flex;
   }
   .sur-header > span img {
@@ -242,7 +232,7 @@ html {
     color: #000000;
     transition: transform 0.2s ease-in-out;
     user-select: none;
-    width: 28px;
+    width: 40px;
   }
   .sur-header > span img:hover {
     transform: scale(1.1);
@@ -290,14 +280,14 @@ html {
     color: #000000;
     transition: transform 0.2s ease-in-out;
     user-select: none;
-    cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
-    padding: 5px 10px;
     background-color: #ffc677;
     border: solid 2px #a27845;
     border-image: url('../../medias/images/content/border_image.png') 15 stretch;
     border-image-width: 5px;
     border-image-outset: 2px;
     background-clip: padding-box;
+    cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
+    padding: 5px 10px;
   }
   .upload-panel #browse-files:hover {
     transform: scale(1.1);
@@ -756,6 +746,14 @@ html {
     color: rgba(0, 0, 0, 0.64);
     font-weight: 200;
   }
+  .filled-element {
+    background-color: #ffc677;
+    border: solid 2px #a27845;
+    border-image: url('../../medias/images/content/border_image.png') 15 stretch;
+    border-image-width: 5px;
+    border-image-outset: 2px;
+    background-clip: padding-box;
+  }
   .button-elements {
     font-family: "Stardew Valley Stonks", serif;
     font-size: 13.5px;
@@ -826,12 +824,13 @@ html {
   .sur-header {
     display: flex;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: flex-end;
     width: 100%;
     margin-bottom: 20px;
   }
-  .sur-header.landing {
+  .sur-header#landing {
     justify-content: flex-end;
+    gap: 7.5px;
   }
   .sur-header #player_selection {
     margin: 0;
@@ -847,34 +846,15 @@ html {
     color: #000000;
     transition: transform 0.2s ease-in-out;
     user-select: none;
-    padding: 3.75px 5px;
     background-color: #ffc677;
     border: solid 2px #a27845;
     border-image: url('../../medias/images/content/border_image.png') 15 stretch;
     border-image-width: 5px;
     border-image-outset: 2px;
     background-clip: padding-box;
+    padding: 3.75px 5px;
   }
   .sur-header #player_selection li:hover {
-    transform: scale(1.1);
-    cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
-  }
-  .sur-header .upload-file {
-    font-family: "Stardew Valley Stonks", serif;
-    font-size: 13.5px;
-    color: #000000;
-    transition: transform 0.2s ease-in-out;
-    user-select: none;
-    cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
-    padding: 3.75px 7.5px;
-    background-color: #ffc677;
-    border: solid 2px #a27845;
-    border-image: url('../../medias/images/content/border_image.png') 15 stretch;
-    border-image-width: 5px;
-    border-image-outset: 2px;
-    background-clip: padding-box;
-  }
-  .sur-header .upload-file:hover {
     transform: scale(1.1);
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
@@ -888,8 +868,8 @@ html {
     font-size: 12px;
     color: #ffffff;
   }
-  .sur-header > span .view-settings,
-  .sur-header > span #secondary-upload {
+  .sur-header > span .main-settings,
+  .sur-header > span .file-upload {
     display: flex;
   }
   .sur-header > span img {
@@ -898,7 +878,7 @@ html {
     color: #000000;
     transition: transform 0.2s ease-in-out;
     user-select: none;
-    width: 21px;
+    width: 30px;
   }
   .sur-header > span img:hover {
     transform: scale(1.1);
@@ -946,14 +926,14 @@ html {
     color: #000000;
     transition: transform 0.2s ease-in-out;
     user-select: none;
-    cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
-    padding: 3.75px 7.5px;
     background-color: #ffc677;
     border: solid 2px #a27845;
     border-image: url('../../medias/images/content/border_image.png') 15 stretch;
     border-image-width: 5px;
     border-image-outset: 2px;
     background-clip: padding-box;
+    cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
+    padding: 3.75px 7.5px;
   }
   .upload-panel #browse-files:hover {
     transform: scale(1.1);

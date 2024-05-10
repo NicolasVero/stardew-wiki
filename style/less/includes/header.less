@@ -3,12 +3,13 @@
 .sur-header {
 	display: flex;
 	justify-content: space-between;
-	align-items: flex-start;
+	align-items: flex-end;
 	width: 100%;
 	margin-bottom: 20px;
 	
-	&.landing {
+	&#landing {
 		justify-content: flex-end;
+		gap: (@md-gap * @ratio);
 	}
 
 	#player_selection {
@@ -26,13 +27,6 @@
 		}
 	}
 
-	.upload-file {
-		.button-elements;
-		.filled-element;
-		cursor: @pointer;
-		padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @ratio);
-	}
-
 	& > span {
 		display: flex;
 		align-items: flex-end;
@@ -44,14 +38,14 @@
 			color: @third-fc;
 		}
 
-		.view-settings, #secondary-upload {
+		.main-settings, .file-upload {
 			display: flex;
 
 		}
 
 		img {
 			.button-elements;
-			width: (@big-icon * @ratio);
+			width: (@bigger-icon * @ratio);
 		}
 	}
 

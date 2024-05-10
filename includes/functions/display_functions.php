@@ -2,15 +2,45 @@
 
 function display_index():string {
     $save_button = display_save_button();
+    $settings = display_settings("landing");
 
     return "
         <script src='" . get_site_root() ."script/functions.js' defer></script>
-        <div class='sur-header landing'>
+        <div id='landing' class='sur-header'>
             $save_button
+            $settings
         </div>
         <div id='landing-page'>
             <main>bonjour</main>
         </div>
+
+        <section class='upload-panel'>
+            <div class='panel-title'>
+                <h2 class='section-title'>Upload a save</h2>
+                <img src='" . get_images_folder() . "content/exit.png' class='exit-upload exit' />
+            </div>
+            <span>
+                <span>
+                    <label id='browse-files' for='save-upload'>Browse</label>
+                    <span id='new-filename'>Choose a file</span>
+                    <input type='file' id='save-upload'>
+                </span>
+            </span>
+        </section>
+    
+        <section class='settings settings-panel'>
+            <div class='panel-title'>
+                <h2 class='section-title'>Settings</h2>
+                <img src='" . get_images_folder() . "content/exit.png' class='exit-settings exit' />
+            </div>
+            <span class='checkboxes'>
+                <span class='checkbox'>
+                    <input type='checkbox' id='no-spoil-mode'>
+                    <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png'></span>
+                    <label for='no-spoil-mode' id='no-spoil-label'>No spoil mode</label>
+                </span>
+            </span>
+        </section>
     ";
 }
 
@@ -88,48 +118,22 @@ function display_game_version(string $game_version):string {
     return $structure;
 }
 
-function display_settings():string {
+function display_settings(string $prefix = 'main'):string {
     $structure = "
-        <span class='view-settings'><img src='" . get_images_folder() ."icons/options.png'></span>
-        <section class='settings settings-panel'>
-            <div class='panel-title'>
-                <h2 class='section-title'>Settings</h2>
-                <img src='" . get_images_folder() . "content/exit.png' class='exit-settings exit' />
-            </div>
-            <span class='checkboxes'>
-                <span class='checkbox'>
-                    <input type='checkbox' id='no-spoil-mode'>
-                    <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png'></span>
-                    <label for='no-spoil-mode' id='no-spoil-label'>No spoil mode</label>
-                </span>
-            </span>
-        </section>
+        <span class='$prefix-settings'><img src='" . get_images_folder() ."icons/options.png'></span>
     ";
     return $structure;
 }
 
 function display_secondary_upload():string {
     return "
-        <span id='secondary-upload'><img src='" . get_images_folder() ."icons/file.png'></span>
+        <span class='file-upload'><img src='" . get_images_folder() ."icons/file.png'></span>
     ";
 }
 
 function display_save_button():string {
     return "
-        <button id='landing_upload' class='upload-file'>Upload a save file</button>
-        <section class='upload-panel'>
-            <div class='panel-title'>
-                <h2 class='section-title'>Upload a save</h2>
-                <img src='" . get_images_folder() . "content/exit.png' class='exit-upload exit' />
-            </div>
-            <span>
-                <span>
-                    <label id='browse-files' for='save-upload'>Browse</label>
-                    <span id='new-filename'>Choose a file</span>
-                    <input type='file' id='save-upload'>
-                </span>
-            </span>
-        </section>
+        <span class='landing-upload'><img src='" . get_images_folder() ."icons/file.png'></span>
     ";
 }
 
