@@ -40,11 +40,14 @@ const tooltips = document.querySelectorAll('.tooltip');
 
 tooltips.forEach(tooltip => {
     const rect = tooltip.getBoundingClientRect();
+    const span = tooltip.querySelector('span');
     
-    if (rect.left > window.innerWidth / 2)
-        tooltip.querySelector('span').classList.add('left');
-    else
-        tooltip.querySelector('span').classList.add('right');
+    if (!span.classList.contains('left') && !span.classList.contains('right')){
+        if (rect.left > window.innerWidth / 2)
+            tooltip.querySelector('span').classList.add('left');
+        else
+            tooltip.querySelector('span').classList.add('right');
+    }
 });
 
 // Style input type file

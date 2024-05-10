@@ -241,7 +241,7 @@ function display_quests(array $datas):string {
 		$structure .= "<span class='quest-rewards'>";
 		
         for($i = 0; $i<count($rewards); $i++) {
-            $structure .= "<span class='quest-reward'>";
+            $structure .= "<span class='quest-reward tooltip'>";
             
             if(strstr($rewards[$i], "Friendship")) {
                 $reward_number = explode(" ", $rewards[$i])[0];
@@ -255,6 +255,7 @@ function display_quests(array $datas):string {
             else
                 $structure .= $rewards[$i];
 
+                $structure .= "<span class='left'>$rewards[$i]</span>";
             $structure .= "</span>";
         }
         $structure .= "
@@ -429,7 +430,7 @@ function display_friendships(array $friends, $limit = -1):string {
                     <span class='tooltip'>
                         <img src='{$images_path}icons/gift.png' class='interaction $gifted[0]' alt=''/>
                         <img src='{$images_path}icons/gift.png' class='interaction $gifted[1]' alt=''/>
-                        <span>Gifts made in the last week</span>
+                        <span class='left'>Gifts made in the last week</span>
                     </span>
 				</span>
 				<span class='friend-status'>$status</span>
