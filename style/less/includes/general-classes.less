@@ -1,7 +1,7 @@
 // out: false
 
 // Center absolute
-.center-absolute() {
+.center-absolute {
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%,-50%);
@@ -34,10 +34,16 @@ not-hide {
 		cursor: @pointer;
 	}
 }
+	
+.panel-title {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: (@big-gap * @ratio);
+}
 
 .absolute-panel {
-	.center-absolute();
-
+	.center-absolute;
 	background-clip: padding-box;
 	background-color: @stardew-bg;
 	border-image: url('../../medias/images/content/border_image.png') 15 stretch;

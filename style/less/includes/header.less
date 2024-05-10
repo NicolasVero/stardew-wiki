@@ -29,28 +29,37 @@
 
 	& > span {
 		display: flex;
+		align-items: flex-end;
 		gap: (@md-gap * @ratio);
 
 		.game_version {
 			font-family: @primary-ff;
 			font-size: @md-fs * @ratio;
 			color: @third-fc;
-			align-self: flex-end;
 		}
 
-		.upload-file {
-			.button-elements;
-			cursor: @pointer;
-			padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @ratio);
-			background-color: @stardew-bg;
-			border: solid 2px rgba(162, 120, 69, 1);
-			border-image: url('../../medias/images/content/border_image.png') 15 stretch;
-			border-image-width: 5px;
-			border-image-outset: 2px;
-			background-clip: padding-box;
+		.view-settings {
+			display: flex;
+
+			img {
+				.button-elements;
+				width: (@big-icon * @ratio);
+			}
 		}
 	}
 
+}
+
+.upload-file {
+	.button-elements;
+	cursor: @pointer;
+	padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @ratio);
+	background-color: @stardew-bg;
+	border: solid 2px rgba(162, 120, 69, 1);
+	border-image: url('../../medias/images/content/border_image.png') 15 stretch;
+	border-image-width: 5px;
+	border-image-outset: 2px;
+	background-clip: padding-box;
 }
 
 .upload-panel {
@@ -64,13 +73,6 @@
 	min-width: 20vw;
 	padding: (@big-gap * @ratio) (@big-gap * @ratio);
 	.absolute-panel;
-	
-	& > div {
-		display: flex;
-		justify-content: space-between;
-		align-items: center;
-		margin-bottom: (@big-gap * @ratio);
-	}
 
 	& > span {
 		display: flex;
@@ -108,6 +110,20 @@
 	#save-upload {
 		display: none;
 	}
+
+}
+
+.settings-panel {
+	display: none;
+	min-width: 20vw;
+
+	font-family: @primary-ff;
+	font-size: (@md-fs * @ratio);
+	color: @primary-fc;
+
+	position: fixed;
+	padding: (@big-gap * @ratio) (@big-gap * @ratio);
+	.absolute-panel;
 
 	.checkboxes {
 		display: flex;

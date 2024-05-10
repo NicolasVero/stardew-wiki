@@ -4,9 +4,10 @@ function display_index():string {
     $save_button = display_save_button();
 
     return "
-    $save_button
+        <script src='" . get_site_root() ."script/functions.js' defer></script>
+        $save_button
         <div id='landing-page'>
-            <p>bonjour</p>
+            <main>bonjour</main>
         </div>
     ";
 }
@@ -50,8 +51,14 @@ function display_page(array $all_datas, array $players):string {
 
 function display_sur_header(string $game_version, array $players):string {
 
-    $structure = display_player_selection($players);
-    $structure .= display_game_version($game_version);
+    $structure = "<div class='sur-header'>";
+        $structure .= display_player_selection($players);
+        $structure .= "<span>";
+            $structure .= display_game_version($game_version);
+            $structure .= display_settings();
+        $structure .= "</span>";
+    $structure .= "</div>";
+    // $structure .= display_fake_button();
     // $structure .= display_save_button();
 
     return $structure;
@@ -59,8 +66,7 @@ function display_sur_header(string $game_version, array $players):string {
 
 function display_player_selection(array $players):string {
     $structure = "
-		<div class='sur-header'>
-			<ul id='player_selection'>
+		<ul id='player_selection'>
 	";
 
     foreach($players as $player) {
@@ -74,36 +80,44 @@ function display_player_selection(array $players):string {
 
 function display_game_version(string $game_version):string {
     $structure = "
-        <span>
-            <span class='game_version'>$game_version</span>
-        <span>
+            <span class='game_version'>V $game_version</span>
     ";
     return $structure;
 }
 
-function display_save_button():string {
-    return "
-        <span>
-            <button class='upload-file'>Upload a save file</button>
-        </span>
-    </div>
-    <section class='upload-panel'>
-        <div>
-            <h2 class='section-title'>Upload a save</h2>
-            <img src='" . get_images_folder() . "content/exit.png' class='exit-upload exit' />
-        </div>
-        <span>
-            <span>
-                <label id='browse-files' for='save-upload'>Browse</label>
-                <span id='newFilename'>Choose a file</span>
-                <input type='file' id='save-upload'>
-            </span>
+function display_settings():string {
+    $structure = "
+        <span class='view-settings'><img src='" . get_images_folder() ."icons/options.png'></span>
+        <section class='settings settings-panel'>
+            <div class='panel-title'>
+                <h2 class='section-title'>Settings</h2>
+                <img src='" . get_images_folder() . "content/exit.png' class='exit-settings exit' />
+            </div>
             <span class='checkboxes'>
                 <span class='checkbox'>
                     <input type='checkbox' id='no-spoil-mode'>
                     <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png'></span>
                     <label for='no-spoil-mode' id='no-spoil-label'>No spoil mode</label>
                 </span>
+            </span>
+        </section>
+    ";
+    return $structure;
+}
+
+function display_save_button():string {
+    return "
+    <button class='upload-file'>Upload a save file</button>
+    <section class='upload-panel'>
+        <div class='panel-title'>
+            <h2 class='section-title'>Upload a save</h2>
+            <img src='" . get_images_folder() . "content/exit.png' class='exit-upload exit' />
+        </div>
+        <span>
+            <span>
+                <label id='browse-files' for='save-upload'>Browse</label>
+                <span id='new-filename'>Choose a file</span>
+                <input type='file' id='save-upload'>
             </span>
         </span>
     </section>
@@ -226,7 +240,7 @@ function display_quests(array $datas):string {
 
     $structure = "
         <section class='quests-section info-section all-quests'>
-            <div>
+            <div class='panel-title'>
                 <h2 class='section-title'>Quests in progress</h2>
                 <img src='" . get_images_folder() . "content/exit.png' class='exit-all-quests exit' />
             </div>
@@ -257,21 +271,18 @@ function display_quests(array $datas):string {
 		$structure .= "<span class='quest-rewards'>";
 		
         for($i = 0; $i<count($rewards); $i++) {
-            $structure .= "<span class='quest-reward tooltip'>";
+            $structure .= (is_numeric($rewards[$i])) ? "<span class='quest-reward'>" : "<span class='quest-reward tooltip'>";
             
             if(strstr($rewards[$i], "Friendship")) {
                 $reward_number = explode(" ", $rewards[$i])[0];
-                if(strstr($rewards[$i], "heart"))
-                    $structure .= "<img src='$images_path/icons/heart.png'/>";
-                else
-                    $structure .= "<img src='$images_path/icons/heart_" . $reward_number .".png'/>";
+                $structure .= "<img src='$images_path/icons/heart_" . $reward_number .".png'/>";
             }
             elseif(is_numeric($rewards[$i]))
                 $structure .= formate_number($rewards[$i]) . "<img src='$images_path/icons/gold.png'/>";
             else
                 $structure .= $rewards[$i];
 
-                $structure .= "<span class='left'>$rewards[$i]</span>";
+            $structure .= (is_numeric($rewards[$i])) ? "" : "<span class='left'>$rewards[$i]</span>";
             $structure .= "</span>";
         }
         $structure .= "
@@ -390,7 +401,7 @@ function display_friendships(array $friends, $limit = -1):string {
     $structure = ($limit == -1) ? 
 	"
         <section class='info-section friends-section $section_class'>
-			<div>
+			<div class='panel-title'>
            		<h2 class='section-title'>Friendship progression</h2>
 				<img src='" . get_images_folder() . "content/exit.png' class='exit-all-friendships exit' />
 			</div>
