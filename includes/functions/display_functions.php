@@ -1,5 +1,16 @@
 <?php 
 
+function display_index():string {
+    $save_button = display_save_button();
+
+    return "
+    $save_button
+        <div id='landing-page'>
+            <p>bonjour</p>
+        </div>
+    ";
+}
+
 function display_page(array $all_datas, array $players):string {
 
     $structure = "";
@@ -41,7 +52,7 @@ function display_sur_header(string $game_version, array $players):string {
 
     $structure = display_player_selection($players);
     $structure .= display_game_version($game_version);
-    $structure .= display_save_button();
+    // $structure .= display_save_button();
 
     return $structure;
 }
@@ -64,12 +75,15 @@ function display_player_selection(array $players):string {
 function display_game_version(string $game_version):string {
     $structure = "
         <span>
-            <span class='game_version'>$game_version</span>";
+            <span class='game_version'>$game_version</span>
+        <span>
+    ";
     return $structure;
 }
 
 function display_save_button():string {
-    $structure = "
+    return "
+        <span>
             <button class='upload-file'>Upload a save file</button>
         </span>
     </div>
@@ -94,7 +108,6 @@ function display_save_button():string {
         </span>
     </section>
     ";
-    return $structure;
 }
 
 

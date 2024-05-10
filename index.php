@@ -1,17 +1,16 @@
 <?php
 
-require_once 'functions.php';
+require 'functions.php';
 
 include 'components/header.php';
 
-require_once 'includes/get_xml_data.php';
-
-
-
+// require_once 'includes/get_xml_data.php';
+echo display_index();
+echo "<div id='display'></div>";
 // log_($players);
 
-$player_data = $players_data[0];
-echo display_page($player_data, $players);
-log_($player_data);
+// $player_data = $players_data[0];
+// echo display_page($player_data, $players);
+// log_($player_data);
 
 include 'components/footer.php';

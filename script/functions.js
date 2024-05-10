@@ -50,13 +50,6 @@ tooltips.forEach(tooltip => {
     }
 });
 
-// Style input type file
-document.getElementById('save-upload').addEventListener('change', changeLabelName);
-function changeLabelName(event) {
-    const newFilename = event.target.files[0].name.substring(0, 12);
-    document.getElementById('newFilename').innerHTML = newFilename;
-}
-
 // Mode no spoil
 document.getElementById('no-spoil-mode').addEventListener('change', noSpoilMode);
 function noSpoilMode(event) {
@@ -84,3 +77,50 @@ function activateCustomCheckboxes(checkmarkClass) {
     });   
 }
 activateCustomCheckboxes(".checkmark");
+
+
+
+
+
+
+
+
+
+
+
+// Style input type file
+document.getElementById('save-upload').addEventListener('change', changeLabelName);
+document.getElementById('landing-save-upload').addEventListener('change', changeLabelName);
+function changeLabelName(event) {
+    const newFilename = event.target.files[0].name.substring(0, 12);
+    document.getElementById('newFilename').innerHTML = newFilename;
+    AJAXSend();
+}
+
+function AJAXSend() {
+    const xml_upload = document.getElementById('save-upload');
+    let file = xml_upload.files[0];
+    document.getElementById("display").innerHTML = '';
+    document.getElementById("landing-page").innerHTML = '';
+
+    
+    if(file) {
+        let formData = new FormData();
+        formData.append('save-upload', file);
+        let xhr = new XMLHttpRequest();
+        let url = './includes/get_xml_data.php';
+
+        xhr.open('POST', url, true);
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                console.log(xhr.responseText);
+                document.getElementById("display").innerHTML = xhr.responseText;
+            }
+        };
+
+        xhr.send(formData);
+    } else {
+        console.error('not in')
+    }
+}
