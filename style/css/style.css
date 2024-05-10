@@ -174,6 +174,9 @@ html {
     width: 100%;
     margin-bottom: 20px;
   }
+  .sur-header.landing {
+    justify-content: flex-end;
+  }
   .sur-header #player_selection {
     margin: 0;
     display: flex;
@@ -200,32 +203,7 @@ html {
     transform: scale(1.1);
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
-  .sur-header > span {
-    display: flex;
-    align-items: flex-end;
-    gap: 10px;
-  }
-  .sur-header > span .game_version {
-    font-family: "Stardew Valley Stonks", serif;
-    font-size: 16px;
-    color: #ffffff;
-  }
-  .sur-header > span .view-settings {
-    display: flex;
-  }
-  .sur-header > span .view-settings img {
-    font-family: "Stardew Valley Stonks", serif;
-    font-size: 18px;
-    color: #000000;
-    transition: transform 0.2s ease-in-out;
-    user-select: none;
-    width: 28px;
-  }
-  .sur-header > span .view-settings img:hover {
-    transform: scale(1.1);
-    cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
-  }
-  .upload-file {
+  .sur-header .upload-file {
     font-family: "Stardew Valley Stonks", serif;
     font-size: 18px;
     color: #000000;
@@ -240,7 +218,33 @@ html {
     border-image-outset: 2px;
     background-clip: padding-box;
   }
-  .upload-file:hover {
+  .sur-header .upload-file:hover {
+    transform: scale(1.1);
+    cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
+  }
+  .sur-header > span {
+    display: flex;
+    align-items: flex-end;
+    gap: 10px;
+  }
+  .sur-header > span .game_version {
+    font-family: "Stardew Valley Stonks", serif;
+    font-size: 16px;
+    color: #ffffff;
+  }
+  .sur-header > span .view-settings,
+  .sur-header > span #secondary-upload {
+    display: flex;
+  }
+  .sur-header > span img {
+    font-family: "Stardew Valley Stonks", serif;
+    font-size: 18px;
+    color: #000000;
+    transition: transform 0.2s ease-in-out;
+    user-select: none;
+    width: 28px;
+  }
+  .sur-header > span img:hover {
     transform: scale(1.1);
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
@@ -826,6 +830,9 @@ html {
     width: 100%;
     margin-bottom: 20px;
   }
+  .sur-header.landing {
+    justify-content: flex-end;
+  }
   .sur-header #player_selection {
     margin: 0;
     display: flex;
@@ -852,32 +859,7 @@ html {
     transform: scale(1.1);
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
-  .sur-header > span {
-    display: flex;
-    align-items: flex-end;
-    gap: 7.5px;
-  }
-  .sur-header > span .game_version {
-    font-family: "Stardew Valley Stonks", serif;
-    font-size: 12px;
-    color: #ffffff;
-  }
-  .sur-header > span .view-settings {
-    display: flex;
-  }
-  .sur-header > span .view-settings img {
-    font-family: "Stardew Valley Stonks", serif;
-    font-size: 13.5px;
-    color: #000000;
-    transition: transform 0.2s ease-in-out;
-    user-select: none;
-    width: 21px;
-  }
-  .sur-header > span .view-settings img:hover {
-    transform: scale(1.1);
-    cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
-  }
-  .upload-file {
+  .sur-header .upload-file {
     font-family: "Stardew Valley Stonks", serif;
     font-size: 13.5px;
     color: #000000;
@@ -892,7 +874,33 @@ html {
     border-image-outset: 2px;
     background-clip: padding-box;
   }
-  .upload-file:hover {
+  .sur-header .upload-file:hover {
+    transform: scale(1.1);
+    cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
+  }
+  .sur-header > span {
+    display: flex;
+    align-items: flex-end;
+    gap: 7.5px;
+  }
+  .sur-header > span .game_version {
+    font-family: "Stardew Valley Stonks", serif;
+    font-size: 12px;
+    color: #ffffff;
+  }
+  .sur-header > span .view-settings,
+  .sur-header > span #secondary-upload {
+    display: flex;
+  }
+  .sur-header > span img {
+    font-family: "Stardew Valley Stonks", serif;
+    font-size: 13.5px;
+    color: #000000;
+    transition: transform 0.2s ease-in-out;
+    user-select: none;
+    width: 21px;
+  }
+  .sur-header > span img:hover {
     transform: scale(1.1);
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }

@@ -29,6 +29,10 @@ function activate_buttons(show, hide, sections_to_show, disable_scroll) {
 }
 activate_buttons('.upload-file', '.exit-upload', '.upload-panel', false);
 
+function deactivate_landing_upload() {
+    document.getElementById("landing_upload").style.display = "none";
+}
+
 // Mode no spoil
 function no_spoil_mode() {
     const elements = document.getElementsByClassName("not-found");
@@ -93,14 +97,18 @@ function AJAX_send() {
 // Load html elements
 function load_elements() {
 
+    toggle_visibility_and_scroll(current_section, false, false);
+    deactivate_landing_upload();
+
     // Buttons & panels
     activate_buttons('.view-all-friendships', '.exit-all-friendships', '.all-friends', false);
     activate_buttons('.view-all-quests', '.exit-all-quests', '.all-quests', false);
     activate_buttons('.view-settings', '.exit-settings', '.settings', false);
+    activate_buttons('#secondary-upload', '.exit-upload', '.upload-panel', false);
 
     // Checkboxes
     activate_custom_checkboxes(".checkmark");
-    
+
     // Settings
     document.getElementById('no-spoil-mode').addEventListener('change', no_spoil_mode);
 

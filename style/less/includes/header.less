@@ -6,6 +6,10 @@
 	align-items: flex-start;
 	width: 100%;
 	margin-bottom: 20px;
+	
+	&.landing {
+		justify-content: flex-end;
+	}
 
 	#player_selection {
 		margin: 0;
@@ -17,14 +21,16 @@
 
 		li {
 			.button-elements;
+			.filled-element;
 			padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @d-ratio);
-			background-color: @stardew-bg;
-			border: solid 2px rgba(162, 120, 69, 1);
-			border-image: url('../../medias/images/content/border_image.png') 15 stretch;
-			border-image-width: 5px;
-			border-image-outset: 2px;
-			background-clip: padding-box;
 		}
+	}
+
+	.upload-file {
+		.button-elements;
+		.filled-element;
+		cursor: @pointer;
+		padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @ratio);
 	}
 
 	& > span {
@@ -38,28 +44,17 @@
 			color: @third-fc;
 		}
 
-		.view-settings {
+		.view-settings, #secondary-upload {
 			display: flex;
 
-			img {
-				.button-elements;
-				width: (@big-icon * @ratio);
-			}
+		}
+
+		img {
+			.button-elements;
+			width: (@big-icon * @ratio);
 		}
 	}
 
-}
-
-.upload-file {
-	.button-elements;
-	cursor: @pointer;
-	padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @ratio);
-	background-color: @stardew-bg;
-	border: solid 2px rgba(162, 120, 69, 1);
-	border-image: url('../../medias/images/content/border_image.png') 15 stretch;
-	border-image-width: 5px;
-	border-image-outset: 2px;
-	background-clip: padding-box;
 }
 
 .upload-panel {
@@ -97,14 +92,9 @@
 
 	#browse-files {
 		.button-elements;
+		.filled-element;
 		cursor: @pointer;
 		padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @ratio);
-		background-color: @stardew-bg;
-		border: solid 2px rgba(162, 120, 69, 1);
-		border-image: url('../../medias/images/content/border_image.png') 15 stretch;
-		border-image-width: 5px;
-		border-image-outset: 2px;
-		background-clip: padding-box;
 	}
 
 	#save-upload {

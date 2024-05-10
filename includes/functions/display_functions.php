@@ -5,7 +5,9 @@ function display_index():string {
 
     return "
         <script src='" . get_site_root() ."script/functions.js' defer></script>
-        $save_button
+        <div class='sur-header landing'>
+            $save_button
+        </div>
         <div id='landing-page'>
             <main>bonjour</main>
         </div>
@@ -55,6 +57,7 @@ function display_sur_header(string $game_version, array $players):string {
         $structure .= display_player_selection($players);
         $structure .= "<span>";
             $structure .= display_game_version($game_version);
+            $structure .= display_secondary_upload();
             $structure .= display_settings();
         $structure .= "</span>";
     $structure .= "</div>";
@@ -105,22 +108,28 @@ function display_settings():string {
     return $structure;
 }
 
+function display_secondary_upload():string {
+    return "
+        <span id='secondary-upload'><img src='" . get_images_folder() ."icons/file.png'></span>
+    ";
+}
+
 function display_save_button():string {
     return "
-    <button class='upload-file'>Upload a save file</button>
-    <section class='upload-panel'>
-        <div class='panel-title'>
-            <h2 class='section-title'>Upload a save</h2>
-            <img src='" . get_images_folder() . "content/exit.png' class='exit-upload exit' />
-        </div>
-        <span>
+        <button id='landing_upload' class='upload-file'>Upload a save file</button>
+        <section class='upload-panel'>
+            <div class='panel-title'>
+                <h2 class='section-title'>Upload a save</h2>
+                <img src='" . get_images_folder() . "content/exit.png' class='exit-upload exit' />
+            </div>
             <span>
-                <label id='browse-files' for='save-upload'>Browse</label>
-                <span id='new-filename'>Choose a file</span>
-                <input type='file' id='save-upload'>
+                <span>
+                    <label id='browse-files' for='save-upload'>Browse</label>
+                    <span id='new-filename'>Choose a file</span>
+                    <input type='file' id='save-upload'>
+                </span>
             </span>
-        </span>
-    </section>
+        </section>
     ";
 }
 
