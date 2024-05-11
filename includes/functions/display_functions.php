@@ -172,9 +172,11 @@ function display_error_page(Exception $exception):string {
             $save_button
             $settings_button
         </div>
-        <div class='dialogue-box-error-container'>
-            <img src='" . get_images_folder() . "dialogue_boxes/${image}.png' alt='$image' />
-            <p>$dialogue</p>
+        <div class='error-wrapper'>
+            <div class='dialogue-box-error-container'>
+                <img src='" . get_images_folder() . "dialogue_boxes/$image.png' alt='$image' />
+                <span>$dialogue</span>
+            </div>
         </div>
     ";
 

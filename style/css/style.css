@@ -17,6 +17,10 @@ pre {
   src: url('../../medias/fonts/stardew_valley_all_caps.ttf') format('truetype');
 }
 @font-face {
+  font-family: 'SV Bold';
+  src: url('../../medias/fonts/svbold.ttf') format('truetype');
+}
+@font-face {
   font-family: 'Inter';
   src: url('../../medias/fonts/inter.ttf') format('truetype');
 }
@@ -207,6 +211,7 @@ html {
     font-family: "Stardew Valley Stonks", serif;
     font-size: 16px;
     color: #000000;
+    color: #6d6d6d;
   }
   body #landing-page main section > span {
     display: flex;
@@ -275,6 +280,29 @@ html {
     height: 50px;
     left: 25px;
     bottom: 10px;
+  }
+  body .error-wrapper {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
+  body .error-wrapper .dialogue-box-error-container {
+    position: relative;
+    width: fit-content;
+    margin: 0 auto;
+  }
+  body .error-wrapper .dialogue-box-error-container span {
+    position: absolute;
+    width: 57%;
+    font-family: "SV Bold";
+    color: #561000;
+    font-size: 24px;
+    letter-spacing: 2px;
+    line-height: 1.4;
+    top: 25px;
+    left: 25px;
+    padding: 5px;
   }
   .sur-header {
     display: flex;
@@ -481,9 +509,6 @@ html {
   }
   header .sub-header img {
     height: 16px;
-  }
-  body {
-    position: relative;
   }
   body main {
     background-color: rgba(255, 255, 255, 0.7);
@@ -954,6 +979,7 @@ html {
     font-family: "Stardew Valley Stonks", serif;
     font-size: 12px;
     color: #000000;
+    color: #6d6d6d;
   }
   body #landing-page main section > span {
     display: flex;
@@ -1022,6 +1048,29 @@ html {
     height: 37.5px;
     left: 18.75px;
     bottom: 7.5px;
+  }
+  body .error-wrapper {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+  }
+  body .error-wrapper .dialogue-box-error-container {
+    position: relative;
+    width: fit-content;
+    margin: 0 auto;
+  }
+  body .error-wrapper .dialogue-box-error-container span {
+    position: absolute;
+    width: 57%;
+    font-family: "SV Bold";
+    color: #561000;
+    font-size: 18px;
+    letter-spacing: 2px;
+    line-height: 1.4;
+    top: 18.75px;
+    left: 18.75px;
+    padding: 3.75px;
   }
   .sur-header {
     display: flex;
@@ -1228,9 +1277,6 @@ html {
   }
   header .sub-header img {
     height: 12px;
-  }
-  body {
-    position: relative;
   }
   body main {
     background-color: rgba(255, 255, 255, 0.7);
