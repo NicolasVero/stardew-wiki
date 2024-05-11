@@ -198,6 +198,13 @@ html {
     padding: 25px 50px;
     border-radius: 5px;
   }
+  body #landing-page main h1.section-title {
+    margin-inline: auto;
+    font-size: 24px;
+    font-family: 'SV Bold';
+    font-weight: 100;
+    letter-spacing: 2px;
+  }
   body #landing-page main a {
     text-decoration: underline;
     text-decoration-color: #ffc677;
@@ -965,6 +972,13 @@ html {
     gap: 18.75px;
     padding: 18.75px 37.5px;
     border-radius: 5px;
+  }
+  body #landing-page main h1.section-title {
+    margin-inline: auto;
+    font-size: 24px;
+    font-family: 'SV Bold';
+    font-weight: 100;
+    letter-spacing: 2px;
   }
   body #landing-page main a {
     text-decoration: underline;

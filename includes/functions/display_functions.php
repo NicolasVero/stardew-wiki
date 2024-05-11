@@ -20,15 +20,15 @@ function display_landing_page():string {
         $settings_panel
         <div id='landing-page'>
             <main>
-                <h2 class='section-title'>Welcome to Stardew Dashboard</h2>
+                <h1 class='section-title'>Welcome to Stardew Dashboard</h1>
                 <section class='project-description'>
                     <h2 class='section-title'>What is Stardew Dashboard?</h2>
                     <span>
                         <span>
-                            Are you an avid farmer in Stardew Valley looking to optimize your gameplay experience? Look no further! Stardew Dashboard is your ultimate companion for managing your farm and tracking your progress.
+                            Are you an avid farmer in Stardew Valley looking to optimize your gameplay experience? Look no further! Stardew Dashboard is your ultimate companion to manage your farm and track your progress.
                         </span>
                         <span>
-                            Upload your game save file effortlessly and gain access to a wealth of information about your farm, from tracking your progress in mastering recipes to discovering new elements of the game world. With our intuitive interface, staying on top of your farm's needs and exploring all that Stardew Valley has to offer has never been easier.
+                            Upload your game save file effortlessly and gain access to a wealth of information about your farm, from tracking your progress in mastering recipes to discovering new elements of the game world. With our intuitive interface, staying on top of your farm's needs and exploring everything that Stardew Valley has to offer has never been easier.
                         </span>
                         <span>
                             Whether you're a seasoned veteran or just starting out, Stardew Dashboard is here to enhance your Stardew Valley experience. Join our community today and take your farming to the next level!
@@ -39,23 +39,23 @@ function display_landing_page():string {
                     <h2 class='section-title'>How to use it</h2>
                     <span>
                         <span>
-                            To start using Stardew Dashboard, retrieve your backup
-                            <code>(C:\Users\UserName\AppData\Roaming\StardewValley\Saves\SaveName).</code>
-                            The backup file is the one with the same name as your backup.
+                            To start using Stardew Dashboard, retrieve your save
+                            <code id='save_os_path'>(C:\Users\UserName\AppData\Roaming\StardewValley\Saves\SaveName).</code>
+                            The save file is the one with the same name as your folder.
                         </span>
                         <span>
-                            Well done! The hardest part is done! Now you just have to upload
+                            Well done! The hardest part is behind us! Now you just have to upload
                             <span class='img-embed landing-upload'>
                                 <img src='" . get_images_folder() ."icons/file.png'>
                             </span>
-                            your backup directly to our site and let the magic happen.
+                            your save directly to our website and let the magic happen.
                         </span>
                         <span>
-                            There's also a range of options
+                            There's also a range of settings
                             <span class='img-embed landing-settings'>
                                 <img src='" . get_images_folder() ."icons/settings.png'>
                             </span>
-                            to custom your experience!
+                            to customize your experience!
                         </span>
                     </span>
                 </section>
@@ -63,7 +63,7 @@ function display_landing_page():string {
                     <h2 class='section-title'>About us</h2>
                     <span>
                         <span>
-                            Stardew Dashboard is a project by two French students in their third year of a bachelor's degree in web development.
+                            Stardew Dashboard is a project made by two French students in their third year of a bachelor's degree in web development.
                             Created during our spare time, this website serves as a tool for us to conveniently track our progress in Stardew Valley. 
                         </span>
                     </span>
@@ -76,7 +76,7 @@ function display_landing_page():string {
                                         Romain is a hard-working web developer. He loves taking on challenges and always going the extra mile. 
                                     </span>
                                     <span>
-                                        He took care of the front-end integration, and helped Nicolas with the back-end.
+                                        He took care of the Front-End, and helped Nicolas with the Back-End.
                                     </span>
                                 </span>
                                 <span class='socials'>
@@ -90,7 +90,7 @@ function display_landing_page():string {
                             <span>
                                 <span class='character-presentation'>
                                     <span>
-                                        Nicolas is a young man with a passion for development and sleeping.
+                                        Nicolas is a young man with a passion for development, sleep, and who loves to make web development during his weekends. 
                                     </span>
                                     <span>
                                         He took care of the UX / UI design, as well as the Back-End of the website.

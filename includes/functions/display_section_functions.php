@@ -107,7 +107,7 @@ function display_header(array $datas):string {
             <div class='header'>
                 <span>
                     <img src='{$images_path}icons/" . strtolower($gender) . ".png' alt='Gender logo' class='player_gender_logo' />
-                    <span class='data player_name'>$name</span>
+                    <span class='data player_name'>$name <span>- $farmer_level</span></span>
                 </span>
 
                 <span>
@@ -634,4 +634,33 @@ function display_achievements(array $datas):string {
 
 function display_shipped_items(array $datas):string {
     return display_gallery($datas['shipped_items'], 'shipped_items', 'Shipped items', $datas['general']['game_version_score']);
+}
+
+
+
+
+function get_farmer_level(object $data):string {
+    
+    $level_names = array(
+        'Newcomer',
+        'Greenhorn',
+        'Bumpkin',
+        'Cowpoke',
+        'Farmhand',
+        'Tiller',
+        'Smallholder',
+        'Sodbuster',
+        'Farmboy',
+        'Granger',
+        'Planter',
+        'Rancher',
+        'Farmer',
+        'Agriculturist',
+        'Cropmaster',
+        'Farm King'
+    );
+
+    $level = ($data->farmingLevel + $data->miningLevel + $data->combatLevel + $data->foragingLevel + $data->fishingLevel + $data->luckLevel) / 2;
+
+    return $level_names[floor($level / 2)];
 }

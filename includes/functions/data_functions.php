@@ -41,6 +41,7 @@ function get_aggregated_data(object $data, object $general_data):array {
             'name'               => (string) $data->name,
             'gender'             => get_gender(array($data->gender, $data->isMale)),
             'farm_name'          => (string) $data->farmName,
+            'farmer_level'       => get_farmer_level($data),
             'favorite_thing'     => (string) $data->favoriteThing,
             'animal_type'        => (string) $data->whichPetType,
             'date'               => get_formatted_date($data),

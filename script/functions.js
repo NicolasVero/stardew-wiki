@@ -185,3 +185,28 @@ function load_elements() {
         }
     });
 }
+
+
+window.addEventListener('load', () => {
+    const os_path = get_os_path(detect_os());
+    const tag     = document.getElementById('save_os_path');
+
+    tag.innerHTML = os_path;
+});
+
+function detect_os() {
+    const user_agent = window.navigator.userAgent.toLowerCase();
+        
+    if(user_agent.includes('mac'))   return 'Mac';
+    if(user_agent.includes('linux')) return 'Linux';
+    
+    return 'Windows';
+}
+
+function get_os_path(os = 'Windows') {
+    switch(os) {
+        case 'Windows' : return '(%AppData%/StardewValley/Saves/SaveName).';
+        case 'Mac'     : return '(~/.config/StardewValley/Saves/).';
+        case 'Linux'   : return '(~/.steam/debian-installation/steamapps/compatdata/413150/pfx/drive_c/users/steamuser/AppData/Roaming/StardewValley/Saves/).';
+    }
+}
