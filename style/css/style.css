@@ -191,7 +191,7 @@ html {
     display: flex;
     flex-direction: column;
     gap: 25px;
-    padding: 10px 25px;
+    padding: 25px 50px;
     border-radius: 5px;
   }
   body #landing-page main a {
@@ -212,6 +212,46 @@ html {
     display: flex;
     flex-direction: column;
     gap: 25px;
+  }
+  body #landing-page main section > span.characters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 25px;
+    margin-top: 25px;
+    font-size: 14px;
+  }
+  body #landing-page main section > span.characters > span {
+    display: flex;
+    justify-content: flex-start;
+    flex-basis: 50%;
+    gap: 25px;
+  }
+  body #landing-page main section > span.characters > span > span {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  body #landing-page main section > span.characters .character-image {
+    width: 50px;
+  }
+  body #landing-page main section > span.characters .character-presentation {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    max-width: 450px;
+  }
+  body #landing-page main section > span.characters .socials {
+    display: flex;
+    gap: 10px;
+  }
+  body #landing-page main section > span.characters .socials img {
+    width: 28px;
+    cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
+  }
+  body #landing-page main section.about {
+    display: flex;
+    flex-direction: column;
   }
   body #landing-page main .section-title {
     font-weight: 600;
@@ -894,7 +934,7 @@ html {
     display: flex;
     flex-direction: column;
     gap: 18.75px;
-    padding: 7.5px 18.75px;
+    padding: 18.75px 37.5px;
     border-radius: 5px;
   }
   body #landing-page main a {
@@ -915,6 +955,46 @@ html {
     display: flex;
     flex-direction: column;
     gap: 18.75px;
+  }
+  body #landing-page main section > span.characters {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    gap: 18.75px;
+    margin-top: 18.75px;
+    font-size: 10.5px;
+  }
+  body #landing-page main section > span.characters > span {
+    display: flex;
+    justify-content: flex-start;
+    flex-basis: 50%;
+    gap: 18.75px;
+  }
+  body #landing-page main section > span.characters > span > span {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+  }
+  body #landing-page main section > span.characters .character-image {
+    width: 37.5px;
+  }
+  body #landing-page main section > span.characters .character-presentation {
+    display: flex;
+    flex-direction: column;
+    gap: 7.5px;
+    max-width: 450px;
+  }
+  body #landing-page main section > span.characters .socials {
+    display: flex;
+    gap: 7.5px;
+  }
+  body #landing-page main section > span.characters .socials img {
+    width: 21px;
+    cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
+  }
+  body #landing-page main section.about {
+    display: flex;
+    flex-direction: column;
   }
   body #landing-page main .section-title {
     font-weight: 600;

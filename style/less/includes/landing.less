@@ -7,7 +7,7 @@ body {
 			display: flex;
 			flex-direction: column;
 			gap: (@big-gap * @ratio);
-			padding: (@md-gap * @ratio) (@big-gap * @ratio);
+			padding: (@big-gap * @ratio) (@bigger-gap * @ratio);
 			border-radius: 5px;
 	
 			a {
@@ -30,6 +30,54 @@ body {
 					display: flex;
 					flex-direction: column;
 					gap: (@big-gap * @ratio);
+
+					&.characters {
+						display: flex;
+						flex-direction: row;
+						justify-content: space-evenly;
+						gap: (@big-gap * @ratio);
+						margin-top: (@big-gap * @ratio);
+						font-size: (@small-fs * @ratio);
+
+						& > span {
+							display: flex;
+							justify-content: flex-start;
+							flex-basis: 50%;
+							gap: (@big-gap * @ratio);
+
+							& > span {
+								display: flex;
+								flex-direction: column;
+								justify-content: space-between;
+							}
+						}
+
+						.character-image {
+							width: (@giant-icon * @ratio);
+						}
+
+						.character-presentation {
+							display: flex;
+							flex-direction: column;
+							gap: (@md-gap * @ratio);
+							max-width: 450px;
+						}
+
+						.socials {
+							display: flex;
+							gap: (@md-gap * @ratio); 
+							
+							img {
+								width: (@big-icon * @ratio);
+								cursor: @pointer;
+							}
+						}
+					}
+				}
+
+				&.about {
+					display: flex;
+					flex-direction: column;
 				}
 			}
 
@@ -57,7 +105,7 @@ body {
 	.loading {
 		display: none;
 		position: fixed;
-		height: (@loading-icon * @ratio);
+		height: (@giant-icon * @ratio);
 		left: (@big-gap * @ratio);
 		bottom: 0;
 	}

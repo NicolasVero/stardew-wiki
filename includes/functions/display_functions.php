@@ -19,7 +19,7 @@ function display_landing_page():string {
         <div id='landing-page'>
             <main>
                 <h2 class='section-title'>Welcome to Stardew Dashboard</h2>
-                <section>
+                <section class='project-description'>
                     <h2 class='section-title'>What is Stardew Dashboard?</h2>
                     <span>
                         <span>
@@ -33,11 +33,13 @@ function display_landing_page():string {
                         </span>
                     </span>
                 </section>
-                <section>
+                <section class='how-to-use-it'>
                     <h2 class='section-title'>How to use it</h2>
                     <span>
                         <span>
-                            To start using Stardew Dashboard, retrieve your backup <code>(C:\Users\UserName\AppData\Roaming\StardewValley\Saves\SaveName)</code>. The backup file is the one with the same name as your backup.
+                            To start using Stardew Dashboard, retrieve your backup
+                            <code>(C:\Users\UserName\AppData\Roaming\StardewValley\Saves\SaveName).</code>
+                            The backup file is the one with the same name as your backup.
                         </span>
                         <span>
                             Well done! The hardest part is done! Now you just have to upload
@@ -55,12 +57,48 @@ function display_landing_page():string {
                         </span>
                     </span>
                 </section>
-                <section>
+                <section class='about'>
                     <h2 class='section-title'>About us</h2>
                     <span>
                         <span>
                             Stardew Dashboard is a project by two French students in their third year of a bachelor's degree in web development.
                             Created during our spare time, this website serves as a tool for us to conveniently track our progress in Stardew Valley. 
+                        </span>
+                    </span>
+                    <span class='characters'>
+                        <span>
+                            <img src='" . get_images_folder() ."content/romain.png' class='character-image'>
+                            <span>
+                                <span class='character-presentation'>
+                                    <span>
+                                        Romain is a hard-working web developer. He loves taking on challenges and always going the extra mile. 
+                                    </span>
+                                    <span>
+                                        He took care of the front-end integration, and helped Nicolas with the back-end.
+                                    </span>
+                                </span>
+                                <span class='socials'>
+                                    <a href='https://github.com/BreadyBred' target='_blank'><img src='" . get_images_folder() ."social/github.png'></a>
+                                    <a href='https://www.linkedin.com/in/romain-gerard/' target='_blank'><img src='" . get_images_folder() ."social/linkedin.png'></a>
+                                </span>
+                            </span>
+                        </span>
+                        <span>
+                            <img src='" . get_images_folder() ."content/nico.png' class='character-image'>
+                            <span>
+                                <span class='character-presentation'>
+                                    <span>
+                                        Nicolas is a young man with a passion for development and sleeping.
+                                    </span>
+                                    <span>
+                                        He took care of the UX / UI design, as well as the Back-End of the website.
+                                    </span>
+                                </span>
+                                <span class='socials'>
+                                    <a href='https://github.com/NicolasVero' target='_blank'><img src='" . get_images_folder() ."social/github.png'></a>
+                                    <a href='https://www.linkedin.com/in/nicolas-vero/' target='_blank'><img src='" . get_images_folder() ."social/linkedin.png'></a>
+                                </span>
+                            </span>
                         </span>
                     </span>
                 </section>
