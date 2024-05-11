@@ -70,11 +70,16 @@ html {
     transform: scale(1.1);
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
-  .panel-title {
+  .panel-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 25px;
+  }
+  .panel-title {
+    font-family: "Stardew Valley Stonks", serif;
+    font-size: 18px;
+    color: #000000;
   }
   .absolute-panel {
     top: 50%;
@@ -326,20 +331,20 @@ html {
     align-items: flex-end;
     gap: 10px;
   }
-  .settings-panel .checkboxes .checkbox #no-spoil-mode {
+  .settings-panel .checkboxes .checkbox #no_spoil_mode {
     display: none;
   }
-  .settings-panel .checkboxes .checkbox #no-spoil-mode ~ .checkmark {
+  .settings-panel .checkboxes .checkbox #no_spoil_mode ~ .checkmark {
     width: 20px;
     aspect-ratio: 1/1;
     border: solid 3px #5b2b2a;
     background-color: #ffc677;
   }
-  .settings-panel .checkboxes .checkbox #no-spoil-mode ~ .checkmark img {
+  .settings-panel .checkboxes .checkbox #no_spoil_mode ~ .checkmark img {
     width: 100%;
     display: none;
   }
-  .settings-panel .checkboxes .checkbox #no-spoil-mode:checked ~ .checkmark img {
+  .settings-panel .checkboxes .checkbox #no_spoil_mode:checked ~ .checkmark img {
     display: block;
   }
   header {
@@ -716,11 +721,16 @@ html {
     transform: scale(1.1);
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
-  .panel-title {
+  .panel-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 18.75px;
+  }
+  .panel-title {
+    font-family: "Stardew Valley Stonks", serif;
+    font-size: 13.5px;
+    color: #000000;
   }
   .absolute-panel {
     top: 50%;
@@ -972,20 +982,20 @@ html {
     align-items: flex-end;
     gap: 7.5px;
   }
-  .settings-panel .checkboxes .checkbox #no-spoil-mode {
+  .settings-panel .checkboxes .checkbox #no_spoil_mode {
     display: none;
   }
-  .settings-panel .checkboxes .checkbox #no-spoil-mode ~ .checkmark {
+  .settings-panel .checkboxes .checkbox #no_spoil_mode ~ .checkmark {
     width: 20px;
     aspect-ratio: 1/1;
     border: solid 3px #5b2b2a;
     background-color: #ffc677;
   }
-  .settings-panel .checkboxes .checkbox #no-spoil-mode ~ .checkmark img {
+  .settings-panel .checkboxes .checkbox #no_spoil_mode ~ .checkmark img {
     width: 100%;
     display: none;
   }
-  .settings-panel .checkboxes .checkbox #no-spoil-mode:checked ~ .checkmark img {
+  .settings-panel .checkboxes .checkbox #no_spoil_mode:checked ~ .checkmark img {
     display: block;
   }
   header {

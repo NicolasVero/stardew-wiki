@@ -15,8 +15,8 @@ function display_index():string {
         </div>
 
         <section class='upload-panel'>
-            <div class='panel-title'>
-                <h2 class='section-title'>Upload a save</h2>
+            <div class='panel-header'>
+                <h2 class='section-title panel-title'>Upload a save</h2>
                 <img src='" . get_images_folder() . "content/exit.png' class='exit-upload exit' />
             </div>
             <span>
@@ -29,15 +29,15 @@ function display_index():string {
         </section>
     
         <section class='settings settings-panel'>
-            <div class='panel-title'>
-                <h2 class='section-title'>Settings</h2>
+            <div class='panel-header'>
+                <h2 class='section-title panel-title'>Settings</h2>
                 <img src='" . get_images_folder() . "content/exit.png' class='exit-settings exit' />
             </div>
             <span class='checkboxes'>
                 <span class='checkbox'>
-                    <input type='checkbox' id='no-spoil-mode'>
+                    <input type='checkbox' id='no_spoil_mode'>
                     <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png'></span>
-                    <label for='no-spoil-mode' id='no-spoil-label'>No spoil mode</label>
+                    <label for='no_spoil_mode' id='no-spoil-label'>No spoil mode</label>
                 </span>
             </span>
         </section>
@@ -253,8 +253,8 @@ function display_quests(array $datas):string {
 
     $structure = "
         <section class='quests-section info-section all-quests'>
-            <div class='panel-title'>
-                <h2 class='section-title'>Quests in progress</h2>
+            <div class='panel-header'>
+                <h2 class='section-title panel-title'>Quests in progress</h2>
                 <img src='" . get_images_folder() . "content/exit.png' class='exit-all-quests exit' />
             </div>
             <span class='quests'>
@@ -414,8 +414,8 @@ function display_friendships(array $friends, $limit = -1):string {
     $structure = ($limit == -1) ? 
 	"
         <section class='info-section friends-section $section_class'>
-			<div class='panel-title'>
-           		<h2 class='section-title'>Friendship progression</h2>
+			<div class='panel-header'>
+           		<h2 class='section-title panel-title'>Friendship progression</h2>
 				<img src='" . get_images_folder() . "content/exit.png' class='exit-all-friendships exit' />
 			</div>
             <span>

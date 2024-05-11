@@ -34,17 +34,23 @@ function deactivate_landing_inputs() {
 }
 
 // Mode no spoil
-function no_spoil_mode() {
+function no_spoil_mode(event) {
+    event = event || {};
+
     const elements = document.getElementsByClassName("not-found");
     for(let i = 0; i < elements.length; i++) {
         const parent_element = elements[i].parentElement;
-        if(parent_element && !elements[i].classList.contains("not-hide"))
-            parent_element.style.display = (parent_element.style.display === "none") ?  "block" : "none";
+        if(parent_element && !elements[i].classList.contains("not-hide")) {
+            const isChecked = event.target ? event.target.checked : true;
+            parent_element.style.display = isChecked ? "none" : "block";
+        }
     }
 }
 
+
+
 // Custom checkboxes
-function activate_custom_checkboxes(checkmark_class) {
+function toggle_custom_checkboxes(checkmark_class) {
     let checkmarks = document.querySelectorAll(checkmark_class);
     checkmarks.forEach(function(checkbox) {
         checkbox.addEventListener('click', function() {
@@ -55,6 +61,22 @@ function activate_custom_checkboxes(checkmark_class) {
             }
         });
     });   
+}
+
+// Toggle when uploaded file
+function toggle_checkboxes_actions() {
+    const checkboxes = document.querySelectorAll(".checkbox");
+    checkboxes.forEach(function(checkbox) {
+        const checkboxInput = checkbox.querySelector("input[type='checkbox']");
+        if (checkboxInput) {
+            const functionName = checkboxInput.id;
+            const isChecked = checkboxInput.checked;
+
+            if (isChecked && typeof window[functionName] === 'function') {
+                window[functionName](); // Call the function
+            }
+        }
+    });
 }
 
 // Style input type file
@@ -97,17 +119,19 @@ function AJAX_send() {
 }
 
 
-document.getElementById('no-spoil-mode').addEventListener('change', no_spoil_mode);
+document.getElementById('no_spoil_mode').addEventListener('change', no_spoil_mode);
 document.getElementById('save-upload').addEventListener('change', change_label_name);
 activate_buttons('.landing-upload', '.exit-upload', '.upload-panel', false);
 activate_buttons('.landing-settings', '.exit-settings', '.settings', false);
-activate_custom_checkboxes(".checkmark");
+toggle_custom_checkboxes(".checkmark");
 
 // Load html elements
 function load_elements() {
 
     toggle_visibility_and_scroll(current_section, false, false);
     deactivate_landing_inputs();
+
+    toggle_checkboxes_actions();
 
     // Buttons & panels
     activate_buttons('.view-all-friendships', '.exit-all-friendships', '.all-friends', false);
