@@ -12,9 +12,8 @@ function activate_buttons(show, hide, sections_to_show, disable_scroll) {
 
     show_button.forEach(function(button) {
         button.addEventListener('click', function() {
-            if (current_section !== null) {
+            if (current_section !== null)
                 toggle_visibility_and_scroll(current_section, false, disable_scroll);
-            }
             current_section = sections;
             toggle_visibility_and_scroll(sections, true, disable_scroll);
         });
@@ -36,13 +35,13 @@ function deactivate_landing_inputs() {
 // Mode no spoil
 function no_spoil_mode(event) {
     event = event || {};
-
+    const is_checked = (event.target) ? event.target.checked : true;
     const elements = document.getElementsByClassName("not-found");
     for(let i = 0; i < elements.length; i++) {
         const parent_element = elements[i].parentElement;
         if(parent_element && !elements[i].classList.contains("not-hide")) {
-            const isChecked = (event.target) ? event.target.checked : true;
-            parent_element.style.display = isChecked ? "none" : "block";
+            // Si toggle versions items checked et no spoil mode unchecked, ne pas montrer les items avec la classe newer-version
+            parent_element.style.display = (is_checked) ? "none" : "block";
         }
     }
 }
@@ -51,27 +50,28 @@ function toggle_versions_items_mode(event) {
     event = event || {};
 
     const elements = document.getElementsByClassName("newer-version");
+    const not_found_items = document.getElementsByClassName("newer-version");
+
     // Check elements à l'unité
     for(let i = 0; i < elements.length; i++) {
         const parent_element = elements[i].parentElement;
-        const isChecked = (event.target) ? event.target.checked : true;
-        parent_element.style.display = isChecked ? "none" : "block";
+        const is_checked = (event.target) ? event.target.checked : true;
+        parent_element.style.display = (is_checked && parent_element.style.display != "none") ? "none" : "block";
     }
 
     // Check section entière
     const sections = document.getElementsByClassName("gallery");
     for(let i = 0; i < sections.length; i++) {
-        allChildrenNewerVersion = true;
+        all_children_newer_version = true;
         const section = sections[i];
         const spans = section.querySelectorAll(".tooltip");
-        
         spans.forEach(span => {
             const img = span.children[0].classList.contains('newer-version');
             if (!img)
-                allChildrenNewerVersion = false;
+                all_children_newer_version = false;
         });
         const title = section.querySelector("h2");
-        title.style.display = allChildrenNewerVersion ? "none" : "block";
+        title.style.display = (all_children_newer_version && title.style.display != "none") ? "none" : "block";
     }
 }
 
@@ -100,9 +100,8 @@ function toggle_checkboxes_actions() {
             const functionName = checkboxInput.id;
             const isChecked = checkboxInput.checked;
 
-            if (isChecked && typeof window[functionName] === 'function') {
+            if (isChecked && typeof window[functionName] === 'function')
                 window[functionName]();
-            }
         }
     });
 }
