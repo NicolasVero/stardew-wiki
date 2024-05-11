@@ -80,10 +80,15 @@ function toggle_checkboxes_actions() {
 }
 
 // Style input type file
-function change_label_name(event) {
+function file_choice(event) {
     const new_filename = event.target.files[0].name.substring(0, 12);
     document.getElementById('new-filename').innerHTML = new_filename;
+    toggle_loading(true);
     AJAX_send();
+}
+
+function toggle_loading(shown) {
+    document.getElementById('loading-strip').style.display = (shown) ? "block" : "none";
 }
 
 function AJAX_send() {
@@ -109,6 +114,7 @@ function AJAX_send() {
 
                 document.getElementById("display").innerHTML = html;
                 load_elements();
+                toggle_loading(false);
             }
         };
 
@@ -118,7 +124,7 @@ function AJAX_send() {
 
 
 document.getElementById('no_spoil_mode').addEventListener('change', no_spoil_mode);
-document.getElementById('save-upload').addEventListener('change', change_label_name);
+document.getElementById('save-upload').addEventListener('change', file_choice);
 activate_buttons('.landing-upload', '.exit-upload', '.upload-panel', false);
 activate_buttons('.landing-settings', '.exit-settings', '.settings', false);
 toggle_custom_checkboxes(".checkmark");

@@ -211,6 +211,13 @@ html {
     width: 28px;
     margin-top: -17.5px;
   }
+  body .loading {
+    display: none;
+    position: fixed;
+    height: 50px;
+    left: 25px;
+    bottom: 0;
+  }
   .sur-header {
     display: flex;
     justify-content: space-between;
@@ -892,6 +899,13 @@ html {
     position: absolute;
     width: 21px;
     margin-top: -13.125px;
+  }
+  body .loading {
+    display: none;
+    position: fixed;
+    height: 37.5px;
+    left: 18.75px;
+    bottom: 0;
   }
   .sur-header {
     display: flex;

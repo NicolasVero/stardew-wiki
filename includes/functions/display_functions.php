@@ -50,6 +50,7 @@ function display_landing_page():string {
                 </section>
             </main>
         </div>
+        <img src='" . get_images_folder() . "content/loading.png' id='loading-strip' class='loading'>
     ";
 }
 
