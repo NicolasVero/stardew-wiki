@@ -18,34 +18,50 @@ function display_landing_page():string {
         $settings_panel
         <div id='landing-page'>
             <main>
-                <h2 class='section-title'>Welcome to Stardew dashboard</h2>
+                <h2 class='section-title'>Welcome to Stardew Dashboard</h2>
                 <section>
-                    <h3>What is 'faut trouver un nom':</h3>
-                    <span>
-                        wow l'explication est folle
-                    </span>
-                </section>
-                <section>
-                    <h3>How to use 'le nom':</h3>
+                    <h2 class='section-title'>What is Stardew Dashboard?</h2>
                     <span>
                         <span>
-                            Cette image elle est cool et tout
-                        </span>
-                        <span class='img-embed'>
-                            <img src='" . get_images_folder() ."icons/settings.png'>
+                            Are you an avid farmer in Stardew Valley looking to optimize your gameplay experience? Look no further! Stardew Dashboard is your ultimate companion for managing your farm and tracking your progress.
                         </span>
                         <span>
-                            et celle là ptn jsuis trop fan
+                            Upload your game save file effortlessly and gain access to a wealth of information about your farm, from tracking your progress in mastering recipes to discovering new elements of the game world. With our intuitive interface, staying on top of your farm's needs and exploring all that Stardew Valley has to offer has never been easier.
                         </span>
-                        <span class='img-embed'>
-                            <img src='" . get_images_folder() ."icons/file.png'>
+                        <span>
+                            Whether you're a seasoned veteran or just starting out, Stardew Dashboard is here to enhance your Stardew Valley experience. Join our community today and take your farming to the next level!
                         </span>
                     </span>
                 </section>
                 <section>
-                    <h3>About ou liens jsp sah faudra trouver des noms de sections</h3>
+                    <h2 class='section-title'>How to use it</h2>
                     <span>
-                        stv ajouter des liens <a>coucou</a>
+                        <span>
+                            To start using Stardew Dashboard, retrieve your backup <code>(C:\Users\UserName\AppData\Roaming\StardewValley\Saves\SaveName)</code>. The backup file is the one with the same name as your backup.
+                        </span>
+                        <span>
+                            Well done! The hardest part is done! Now you just have to upload
+                            <span class='img-embed landing-upload'>
+                                <img src='" . get_images_folder() ."icons/file.png'>
+                            </span>
+                            your backup directly to our site and let the magic happen.
+                        </span>
+                        <span>
+                            There's also a range of options
+                            <span class='img-embed landing-settings'>
+                                <img src='" . get_images_folder() ."icons/settings.png'>
+                            </span>
+                            to custom your experience!
+                        </span>
+                    </span>
+                </section>
+                <section>
+                    <h2 class='section-title'>About us</h2>
+                    <span>
+                        <span>
+                            Stardew Dashboard is a project by two French students in their third year of a bachelor's degree in web development.
+                            Created during our spare time, this website serves as a tool for us to conveniently track our progress in Stardew Valley. 
+                        </span>
                     </span>
                 </section>
             </main>
@@ -316,6 +332,7 @@ function display_quests(array $datas):string {
                     <span class='quest-title'>$title</span>
                 </span>
         ";
+
         if(empty($rewards)) {
 			$structure .= "</span>";
 			continue;
