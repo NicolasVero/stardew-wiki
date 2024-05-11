@@ -201,6 +201,11 @@ function display_settings_panel():string {
                     <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png'></span>
                     <label for='no_spoil_mode' id='no-spoil-label'>No spoil mode</label>
                 </span>
+                <span class='checkbox'>
+                    <input type='checkbox' id='toggle_versions_items_mode' checked>
+                    <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png'></span>
+                    <label for='toggle_versions_items_mode' id='toggle-versions-items-label'>See items from more recent versions</label>
+                </span>
             </span>
         </section>
     ";
@@ -639,17 +644,17 @@ function display_gallery(array $player_elements, string $json_filename, string $
         
         foreach($json_version as $json_line_name) {
 
-        $element_class = in_array($json_line_name, $player_elements) ? "found" : "not-found"; 
-        $element_image = $images_path . formate_text_for_file($json_line_name) . ".png";
+            $element_class = in_array($json_line_name, $player_elements) ? "found" : "not-found"; 
+            $element_image = $images_path . formate_text_for_file($json_line_name) . ".png";
 
-        $structure .= "
-            <span class='tooltip'>
-                <img src='$element_image' alt='$json_line_name' class='gallery-item $json_filename $element_class $is_newer_version_class' />
-                <span>$json_line_name</span>
-            </span>
-        ";
+            $structure .= "
+                <span class='tooltip'>
+                    <img src='$element_image' alt='$json_line_name' class='gallery-item $json_filename $element_class $is_newer_version_class' />
+                    <span>$json_line_name</span>
+                </span>
+            ";
+        }
     }
-}
 
     $structure .= "
 			</span>

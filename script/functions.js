@@ -47,6 +47,17 @@ function no_spoil_mode(event) {
     }
 }
 
+function toggle_versions_items_mode(event) {
+    event = event || {};
+
+    const elements = document.getElementsByClassName("newer-version");
+    for(let i = 0; i < elements.length; i++) {
+        const parent_element = elements[i].parentElement;
+        const isChecked = (event.target) ? event.target.checked : true;
+        parent_element.style.display = isChecked ? "none" : "block";
+    }
+}
+
 
 
 // Custom checkboxes
@@ -124,6 +135,7 @@ function AJAX_send() {
 
 
 document.getElementById('no_spoil_mode').addEventListener('change', no_spoil_mode);
+document.getElementById('toggle_versions_items_mode').addEventListener('change', toggle_versions_items_mode);
 document.getElementById('save-upload').addEventListener('change', file_choice);
 activate_buttons('.landing-upload', '.exit-upload', '.upload-panel', false);
 activate_buttons('.landing-settings', '.exit-settings', '.settings', false);

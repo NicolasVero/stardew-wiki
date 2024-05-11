@@ -113,13 +113,14 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
+		gap: (@md-gap * @ratio);
 
 		.checkbox {
 			display: flex;
 			align-items: flex-end;
 			gap: (@md-gap * @ratio);
 
-			#no_spoil_mode {
+			#no_spoil_mode, #toggle_versions_items_mode {
 				.checkbox-elements;
 			}
 		}

@@ -59,7 +59,7 @@ html {
     filter: grayscale(1);
     opacity: 0.2;
   }
-  not-hide {
+  .not-hide {
     display: block !important;
   }
   .data {
@@ -421,26 +421,31 @@ html {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 10px;
   }
   .settings-panel .checkboxes .checkbox {
     display: flex;
     align-items: flex-end;
     gap: 10px;
   }
-  .settings-panel .checkboxes .checkbox #no_spoil_mode {
+  .settings-panel .checkboxes .checkbox #no_spoil_mode,
+  .settings-panel .checkboxes .checkbox #toggle_versions_items_mode {
     display: none;
   }
-  .settings-panel .checkboxes .checkbox #no_spoil_mode ~ .checkmark {
+  .settings-panel .checkboxes .checkbox #no_spoil_mode ~ .checkmark,
+  .settings-panel .checkboxes .checkbox #toggle_versions_items_mode ~ .checkmark {
     width: 20px;
     aspect-ratio: 1/1;
     border: solid 3px #5b2b2a;
     background-color: #ffc677;
   }
-  .settings-panel .checkboxes .checkbox #no_spoil_mode ~ .checkmark img {
+  .settings-panel .checkboxes .checkbox #no_spoil_mode ~ .checkmark img,
+  .settings-panel .checkboxes .checkbox #toggle_versions_items_mode ~ .checkmark img {
     width: 100%;
     display: none;
   }
-  .settings-panel .checkboxes .checkbox #no_spoil_mode:checked ~ .checkmark img {
+  .settings-panel .checkboxes .checkbox #no_spoil_mode:checked ~ .checkmark img,
+  .settings-panel .checkboxes .checkbox #toggle_versions_items_mode:checked ~ .checkmark img {
     display: block;
   }
   header {
@@ -802,7 +807,7 @@ html {
     filter: grayscale(1);
     opacity: 0.2;
   }
-  not-hide {
+  .not-hide {
     display: block !important;
   }
   .data {
@@ -1164,26 +1169,31 @@ html {
     display: flex;
     flex-direction: column;
     justify-content: center;
+    gap: 7.5px;
   }
   .settings-panel .checkboxes .checkbox {
     display: flex;
     align-items: flex-end;
     gap: 7.5px;
   }
-  .settings-panel .checkboxes .checkbox #no_spoil_mode {
+  .settings-panel .checkboxes .checkbox #no_spoil_mode,
+  .settings-panel .checkboxes .checkbox #toggle_versions_items_mode {
     display: none;
   }
-  .settings-panel .checkboxes .checkbox #no_spoil_mode ~ .checkmark {
+  .settings-panel .checkboxes .checkbox #no_spoil_mode ~ .checkmark,
+  .settings-panel .checkboxes .checkbox #toggle_versions_items_mode ~ .checkmark {
     width: 20px;
     aspect-ratio: 1/1;
     border: solid 3px #5b2b2a;
     background-color: #ffc677;
   }
-  .settings-panel .checkboxes .checkbox #no_spoil_mode ~ .checkmark img {
+  .settings-panel .checkboxes .checkbox #no_spoil_mode ~ .checkmark img,
+  .settings-panel .checkboxes .checkbox #toggle_versions_items_mode ~ .checkmark img {
     width: 100%;
     display: none;
   }
-  .settings-panel .checkboxes .checkbox #no_spoil_mode:checked ~ .checkmark img {
+  .settings-panel .checkboxes .checkbox #no_spoil_mode:checked ~ .checkmark img,
+  .settings-panel .checkboxes .checkbox #toggle_versions_items_mode:checked ~ .checkmark img {
     display: block;
   }
   header {
