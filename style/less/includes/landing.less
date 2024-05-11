@@ -23,6 +23,7 @@ body {
 
 			code {
 				.data-info;
+				color: @auxiliary-fc;
 			}
 
 			section {
@@ -108,5 +109,31 @@ body {
 		height: (@giant-icon * @ratio);
 		left: (@big-gap * @ratio);
 		bottom: (@md-gap * @ratio);
+	}
+
+	.error-wrapper {
+		position: absolute;
+		left: 0;
+		bottom: 0;
+		width: 100%;
+
+		.dialogue-box-error-container {
+			position: relative; 
+			width: fit-content;
+			margin: 0 auto;
+			
+			span {
+				position: absolute;
+				width: 57%;
+				font-family: @dialogue-ff;
+				color: @dialogue-fc;
+				font-size: ((@giant-fs) * @ratio);
+				letter-spacing: 2px;
+				line-height: 1.4;
+				top: (@big-gap * @ratio);
+				left: (@big-gap * @ratio);
+				padding: (@small-gap * @ratio);
+			}
+		}
 	}
 }
