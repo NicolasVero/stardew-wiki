@@ -145,19 +145,19 @@ function display_error_page(Exception $exception):string {
 
     $exception_dialogues = array(
         "Error loading file." => array(
-            "dialogue" => "hello there",
+            "dialogue" => "Oh, bother! It seems like the file got lost in the mines. Could you try again? Or perhaps seek help from a trusty adventurer to retrieve it?",
             "image"    => "dialogue_box_dwarf"
         ),
         "Error downloading file." => array(
-            "dialogue" => "aaaa",
+            "dialogue" => "Oops! Looks like the file is playing hide and seek in the shadows. Maybe a stealthier approach is needed to capture it. Keep your eyes peeled, friend!",
             "image"    => "dialogue_box_henchman"
         ),
         "Invalid file size." => array(
-            "dialogue" => "aaaa",
+            "dialogue" => "Hold up there! The file size seems a bit too hefty for our cozy little village. Let's trim it down a tad before trying to squeeze it through the gate, shall we?",
             "image"    => "dialogue_box_bouncer"
         ),
         "File not conforming to a Stardew Valley save." => array(
-            "dialogue" => "hello there uwu",
+            "dialogue" => "Ah, shucks! This file doesn't quite match the charm of Stardew Valley. It's like trying to plant a melon seed in winter – just won't work! Let's find a file more in tune with the rhythm of the seasons, shall we?",
             "image"    => "dialogue_box_grandpa"
         )
     );
