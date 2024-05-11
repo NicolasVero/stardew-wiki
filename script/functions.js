@@ -51,10 +51,27 @@ function toggle_versions_items_mode(event) {
     event = event || {};
 
     const elements = document.getElementsByClassName("newer-version");
+    // Check elements à l'unité
     for(let i = 0; i < elements.length; i++) {
         const parent_element = elements[i].parentElement;
         const isChecked = (event.target) ? event.target.checked : true;
         parent_element.style.display = isChecked ? "none" : "block";
+    }
+
+    // Check section entière
+    const sections = document.getElementsByClassName("gallery");
+    for(let i = 0; i < sections.length; i++) {
+        allChildrenNewerVersion = true;
+        const section = sections[i];
+        const spans = section.querySelectorAll(".tooltip");
+        
+        spans.forEach(span => {
+            const img = span.children[0].classList.contains('newer-version');
+            if (!img)
+                allChildrenNewerVersion = false;
+        });
+        const title = section.querySelector("h2");
+        title.style.display = allChildrenNewerVersion ? "none" : "block";
     }
 }
 
@@ -84,7 +101,7 @@ function toggle_checkboxes_actions() {
             const isChecked = checkboxInput.checked;
 
             if (isChecked && typeof window[functionName] === 'function') {
-                window[functionName](); // Call the function
+                window[functionName]();
             }
         }
     });

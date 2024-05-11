@@ -56,9 +56,9 @@ function display_settings_panel():string {
                     <label for='no_spoil_mode' id='no-spoil-label'>No spoil mode</label>
                 </span>
                 <span class='checkbox'>
-                    <input type='checkbox' id='toggle_versions_items_mode' checked>
+                    <input type='checkbox' id='toggle_versions_items_mode'>
                     <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png'></span>
-                    <label for='toggle_versions_items_mode' id='toggle-versions-items-label'>See items from more recent versions</label>
+                    <label for='toggle_versions_items_mode' id='toggle-versions-items-label'>Hide items from more recent versions</label>
                 </span>
             </span>
         </section>
