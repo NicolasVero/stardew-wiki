@@ -137,7 +137,7 @@ function display_settings_panel():string {
         <section class='settings settings-panel'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Settings</h2>
-                <img src='" . get_images_folder() . "content/exit.png' class='exit-settings exit' />
+                <img src='" . get_images_folder() . "icons/exit.png' class='exit-settings exit' />
             </div>
             <span class='checkboxes'>
                 <span class='checkbox'>
@@ -167,7 +167,7 @@ function display_save_panel():string {
         <section class='upload-panel'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Upload a save</h2>
-                <img src='" . get_images_folder() . "content/exit.png' class='exit-upload exit' />
+                <img src='" . get_images_folder() . "icons/exit.png' class='exit-upload exit' />
             </div>
             <span>
                 <span>
@@ -253,7 +253,7 @@ function display_general_stats(array $datas):string {
     $structure = "
         <section class='info-section general-stats'>
         	<h2 class='section-title'>General stats</h2>
-			<img src='" . get_images_folder() . "/content/quest_icon.png' class='quest-icon view-all-quests button-elements'>
+			<img src='" . get_images_folder() . "/icons/quest.png' class='quest-icon view-all-quests button-elements'>
             <div>
                 <span>
                     <img src='{$images_path}icons/energy.png' alt='Energy' />
@@ -297,7 +297,7 @@ function display_quests(array $datas):string {
         <section class='quests-section info-section all-quests'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Quests in progress</h2>
-                <img src='" . get_images_folder() . "content/exit.png' class='exit-all-quests exit' />
+                <img src='" . get_images_folder() . "icons/exit.png' class='exit-all-quests exit' />
             </div>
             <span class='quests'>
     ";
@@ -458,7 +458,7 @@ function display_friendships(array $friends, $limit = -1):string {
         <section class='info-section friends-section $section_class'>
 			<div class='panel-header'>
            		<h2 class='section-title panel-title'>Friendship progression</h2>
-				<img src='" . get_images_folder() . "content/exit.png' class='exit-all-friendships exit' />
+				<img src='" . get_images_folder() . "icons/exit.png' class='exit-all-friendships exit' />
 			</div>
             <span>
     "
