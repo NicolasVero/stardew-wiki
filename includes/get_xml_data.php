@@ -30,7 +30,7 @@ try {
         $response['code'] = "success";
     }
 } catch (Exception $exception) {
-    $response['html'] = "Something went wrong";
+    $response['html'] = display_error_page($exception);
     $response['code'] = "failed";
 }
 

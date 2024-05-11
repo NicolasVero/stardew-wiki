@@ -140,3 +140,43 @@ function display_page(array $all_datas, array $players):string {
 
     return $structure;
 }
+
+function display_error_page(Exception $exception):string {
+
+    $exception_dialogues = array(
+        "Error loading file." => array(
+            "dialogue" => "hello there",
+            "image"    => "dialogue_box_dwarf"
+        ),
+        "Error downloading file." => array(
+            "dialogue" => "aaaa",
+            "image"    => "dialogue_box_henchman"
+        ),
+        "Invalid file size." => array(
+            "dialogue" => "aaaa",
+            "image"    => "dialogue_box_bouncer"
+        ),
+        "File not conforming to a Stardew Valley save." => array(
+            "dialogue" => "hello there uwu",
+            "image"    => "dialogue_box_grandpa"
+        )
+    );
+
+    extract($exception_dialogues[$exception->getMessage()]);
+
+    $save_button = display_secondary_upload();
+    $settings_button = display_settings_button();
+
+    $strucure = "
+        <div id='landing' class='sur-header'>
+            $save_button
+            $settings_button
+        </div>
+        <div class='dialogue-box-error-container'>
+            <img src='" . get_images_folder() . "dialogue_boxes/${image}.png' alt='$image' />
+            <p>$dialogue</p>
+        </div>
+    ";
+
+    return $strucure;
+}

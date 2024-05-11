@@ -274,7 +274,7 @@ html {
     position: fixed;
     height: 50px;
     left: 25px;
-    bottom: 0;
+    bottom: 10px;
   }
   .sur-header {
     display: flex;
@@ -1022,7 +1022,7 @@ html {
     position: fixed;
     height: 37.5px;
     left: 18.75px;
-    bottom: 0;
+    bottom: 7.5px;
   }
   .sur-header {
     display: flex;
