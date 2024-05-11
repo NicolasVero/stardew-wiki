@@ -5,7 +5,7 @@ require 'functions.php';
 include 'components/header.php';
 
 // require_once 'includes/get_xml_data.php';
-echo display_index();
+echo display_landing_page();
 echo "<div id='display'></div>";
 // log_($players);
 

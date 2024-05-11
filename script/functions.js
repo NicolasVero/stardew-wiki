@@ -41,7 +41,7 @@ function no_spoil_mode(event) {
     for(let i = 0; i < elements.length; i++) {
         const parent_element = elements[i].parentElement;
         if(parent_element && !elements[i].classList.contains("not-hide")) {
-            const isChecked = event.target ? event.target.checked : true;
+            const isChecked = (event.target) ? event.target.checked : true;
             parent_element.style.display = isChecked ? "none" : "block";
         }
     }
@@ -51,10 +51,10 @@ function no_spoil_mode(event) {
 
 // Custom checkboxes
 function toggle_custom_checkboxes(checkmark_class) {
-    let checkmarks = document.querySelectorAll(checkmark_class);
+    const checkmarks = document.querySelectorAll(checkmark_class);
     checkmarks.forEach(function(checkbox) {
         checkbox.addEventListener('click', function() {
-            let adjacent_checkbox = checkbox.previousElementSibling;
+            const adjacent_checkbox = checkbox.previousElementSibling;
             if (adjacent_checkbox && adjacent_checkbox.type === 'checkbox') {
                 adjacent_checkbox.checked = (!adjacent_checkbox.checked) ? true : false;
                 adjacent_checkbox.dispatchEvent(new Event('change'));
@@ -88,7 +88,7 @@ function change_label_name(event) {
 
 function AJAX_send() {
     const xml_upload = document.getElementById('save-upload');
-    let file = xml_upload.files[0];
+    const file = xml_upload.files[0];
     document.getElementById("display").innerHTML = '';
     document.getElementById("landing-page").innerHTML = '';
 
@@ -97,7 +97,7 @@ function AJAX_send() {
         let form_data = new FormData();
         form_data.append('save-upload', file);
         let xhr = new XMLHttpRequest();
-        let url = './includes/get_xml_data.php';
+        const url = './includes/get_xml_data.php';
 
         xhr.open('POST', url, true);
 
@@ -113,8 +113,6 @@ function AJAX_send() {
         };
 
         xhr.send(form_data);
-    } else {
-        console.error('not in');
     }
 }
 

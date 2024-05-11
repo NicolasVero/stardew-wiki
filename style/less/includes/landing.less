@@ -1,0 +1,39 @@
+// out: false
+
+body {
+	#landing-page {
+		main {
+			.data-info;
+			display: flex;
+			flex-direction: column;
+			gap: (@big-gap * @ratio);
+			padding: (@md-gap * @ratio) (@big-gap * @ratio);
+			border-radius: 5px;
+	
+			a {
+				text-decoration: underline;
+				text-decoration-color: @stardew-bg;
+				color: @stardew-bg;
+
+				&:hover {
+					opacity: 0.7;
+					cursor: @pointer;
+				}
+			}
+
+			.img-embed {
+				display: inline-block;
+				position: relative;
+				width: (@big-icon * @ratio);
+				height: (@big-icon * @ratio);
+				margin-bottom: -(@big-gap * @ratio);
+				
+				img {
+					position: absolute;
+					width: (@big-icon * @ratio);
+					margin-top: -((@big-gap - (@md-gap - (@small-gap - @xsmall-gap))) * @ratio);
+				}
+			}
+		}
+	}
+}

@@ -1,46 +1,55 @@
 <?php 
 
-function display_index():string {
+function display_landing_page():string {
     $save_button = display_save_button();
-    $settings = display_settings("landing");
+    $save_panel = display_save_panel();
+
+    $settings_button = display_settings_button("landing");
+    $settings_panel = display_settings_panel();
+
 
     return "
         <script src='" . get_site_root() ."script/functions.js' defer></script>
         <div id='landing' class='sur-header'>
             $save_button
-            $settings
+            $settings_button
         </div>
+        $save_panel
+        $settings_panel
         <div id='landing-page'>
-            <main>bonjour</main>
+            <main>
+                <h2 class='section-title'>Welcome to Stardew dashboard</h2>
+                <section>
+                    <h3>What is 'faut trouver un nom':</h3>
+                    <span>
+                        wow l'explication est folle
+                    </span>
+                </section>
+                <section>
+                    <h3>How to use 'le nom':</h3>
+                    <span>
+                        <span>
+                            Cette image elle est cool et tout
+                        </span>
+                        <span class='img-embed'>
+                            <img src='" . get_images_folder() ."icons/settings.png'>
+                        </span>
+                        <span>
+                            et celle là ptn jsuis trop fan
+                        </span>
+                        <span class='img-embed'>
+                            <img src='" . get_images_folder() ."icons/file.png'>
+                        </span>
+                    </span>
+                </section>
+                <section>
+                    <h3>About ou liens jsp sah faudra trouver des noms de sections</h3>
+                    <span>
+                        stv ajouter des liens <a>coucou</a>
+                    </span>
+                </section>
+            </main>
         </div>
-
-        <section class='upload-panel'>
-            <div class='panel-header'>
-                <h2 class='section-title panel-title'>Upload a save</h2>
-                <img src='" . get_images_folder() . "content/exit.png' class='exit-upload exit' />
-            </div>
-            <span>
-                <span>
-                    <label id='browse-files' for='save-upload'>Browse</label>
-                    <span id='new-filename'>Choose a file</span>
-                    <input type='file' id='save-upload'>
-                </span>
-            </span>
-        </section>
-    
-        <section class='settings settings-panel'>
-            <div class='panel-header'>
-                <h2 class='section-title panel-title'>Settings</h2>
-                <img src='" . get_images_folder() . "content/exit.png' class='exit-settings exit' />
-            </div>
-            <span class='checkboxes'>
-                <span class='checkbox'>
-                    <input type='checkbox' id='no_spoil_mode'>
-                    <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png'></span>
-                    <label for='no_spoil_mode' id='no-spoil-label'>No spoil mode</label>
-                </span>
-            </span>
-        </section>
     ";
 }
 
@@ -88,11 +97,9 @@ function display_sur_header(string $game_version, array $players):string {
         $structure .= "<span>";
             $structure .= display_game_version($game_version);
             $structure .= display_secondary_upload();
-            $structure .= display_settings();
+            $structure .= display_settings_button();
         $structure .= "</span>";
     $structure .= "</div>";
-    // $structure .= display_fake_button();
-    // $structure .= display_save_button();
 
     return $structure;
 }
@@ -118,16 +125,28 @@ function display_game_version(string $game_version):string {
     return $structure;
 }
 
-function display_settings(string $prefix = 'main'):string {
+function display_settings_button(string $prefix = 'main'):string {
     $structure = "
-        <span class='$prefix-settings'><img src='" . get_images_folder() ."icons/options.png'></span>
+        <span class='$prefix-settings'><img src='" . get_images_folder() ."icons/settings.png'></span>
     ";
     return $structure;
 }
 
-function display_secondary_upload():string {
+function display_settings_panel():string {
     return "
-        <span class='file-upload'><img src='" . get_images_folder() ."icons/file.png'></span>
+        <section class='settings settings-panel'>
+            <div class='panel-header'>
+                <h2 class='section-title panel-title'>Settings</h2>
+                <img src='" . get_images_folder() . "content/exit.png' class='exit-settings exit' />
+            </div>
+            <span class='checkboxes'>
+                <span class='checkbox'>
+                    <input type='checkbox' id='no_spoil_mode'>
+                    <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png'></span>
+                    <label for='no_spoil_mode' id='no-spoil-label'>No spoil mode</label>
+                </span>
+            </span>
+        </section>
     ";
 }
 
@@ -137,6 +156,29 @@ function display_save_button():string {
     ";
 }
 
+function display_secondary_upload():string {
+    return "
+        <span class='file-upload'><img src='" . get_images_folder() ."icons/file.png'></span>
+    ";
+}
+
+function display_save_panel():string {
+    return "
+        <section class='upload-panel'>
+            <div class='panel-header'>
+                <h2 class='section-title panel-title'>Upload a save</h2>
+                <img src='" . get_images_folder() . "content/exit.png' class='exit-upload exit' />
+            </div>
+            <span>
+                <span>
+                    <label id='browse-files' for='save-upload'>Browse</label>
+                    <span id='new-filename'>Choose a file</span>
+                    <input type='file' id='save-upload'>
+                </span>
+            </span>
+        </section>
+    ";
+}
 
 function display_header(array $datas):string {
     
@@ -555,7 +597,6 @@ function display_gallery(array $player_elements, string $json_filename, string $
     return $structure;
 }
 
-
 function display_detailled_gallery(array $player_datas, string $json_filename, string $section_title):string {
     $images_path = get_images_folder() . "$json_filename/";
     $json_datas = json_decode(file_get_contents(get_json_folder() . $json_filename . '.json'), true);
@@ -598,7 +639,6 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
 
     return $structure;
 } 
-
 
 function get_tooltip_text(array $player_data, string $json_line_name, string $data_type):string {
     

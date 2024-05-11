@@ -180,6 +180,37 @@ html {
     left: 100%;
     right: auto;
   }
+  body #landing-page main {
+    font-family: "Stardew Valley Stonks", serif;
+    font-size: 16px;
+    color: #000000;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    padding: 10px 25px;
+    border-radius: 5px;
+  }
+  body #landing-page main a {
+    text-decoration: underline;
+    text-decoration-color: #ffc677;
+    color: #ffc677;
+  }
+  body #landing-page main a:hover {
+    opacity: 0.7;
+    cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
+  }
+  body #landing-page main .img-embed {
+    display: inline-block;
+    position: relative;
+    width: 28px;
+    height: 28px;
+    margin-bottom: -25px;
+  }
+  body #landing-page main .img-embed img {
+    position: absolute;
+    width: 28px;
+    margin-top: -17.5px;
+  }
   .sur-header {
     display: flex;
     justify-content: space-between;
@@ -630,7 +661,7 @@ html {
     height: 28px;
   }
   body main > :last-child {
-    margin-bottom: 50px;
+    margin-bottom: 25px;
   }
 }
 @media (max-width: 768px) {
@@ -830,6 +861,37 @@ html {
   .tooltip img:hover ~ span.right {
     left: 100%;
     right: auto;
+  }
+  body #landing-page main {
+    font-family: "Stardew Valley Stonks", serif;
+    font-size: 12px;
+    color: #000000;
+    display: flex;
+    flex-direction: column;
+    gap: 18.75px;
+    padding: 7.5px 18.75px;
+    border-radius: 5px;
+  }
+  body #landing-page main a {
+    text-decoration: underline;
+    text-decoration-color: #ffc677;
+    color: #ffc677;
+  }
+  body #landing-page main a:hover {
+    opacity: 0.7;
+    cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
+  }
+  body #landing-page main .img-embed {
+    display: inline-block;
+    position: relative;
+    width: 21px;
+    height: 21px;
+    margin-bottom: -18.75px;
+  }
+  body #landing-page main .img-embed img {
+    position: absolute;
+    width: 21px;
+    margin-top: -13.125px;
   }
   .sur-header {
     display: flex;
@@ -1281,6 +1343,6 @@ html {
     height: 21px;
   }
   body main > :last-child {
-    margin-bottom: 37.5px;
+    margin-bottom: 18.75px;
   }
 }
