@@ -22,7 +22,7 @@ function get_all_players(object $data):array {
     array_push($players_names, (string) $data->player->name);
 
     foreach($data->farmhands as $side_player) {
-        if(!empty($side_player['name']))
+        if(!empty($side_player->Farmer->name))
             array_push($players_names, (string) $side_player->Farmer->name);     
     }
 

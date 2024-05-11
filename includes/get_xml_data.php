@@ -17,7 +17,6 @@ if($_FILES['save-upload']['error'] === UPLOAD_ERR_OK && is_file_secure($_FILES['
     $players_data = get_all_players_datas($data);
     $players = get_all_players($data);
     
-    
 
     $response['html'] = display_page($players_data[0], $players);
     $response['code'] = "success";
