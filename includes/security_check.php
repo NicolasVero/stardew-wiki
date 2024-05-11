@@ -14,12 +14,7 @@ function is_file_secure(mixed $file): bool {
         throw new Exception('Invalid file size.');
     }
 
-    $file_content = (array) simplexml_load_file($file['tmp_name']);
-    if(!(
-        array_key_exists('player', $file_content) &&
-        array_key_exists('uniqueIDForThisGame', $file_content) &&
-        array_key_exists('gameVersion', $file_content)
-    )) {
+    if(!array_keys_exists(array('player', 'uniqueIDForThisGame', 'gameVersion'), (array) simplexml_load_file($file['tmp_name']))) {
         throw new Exception('File not conforming to a Stardew Valley save.');
     }
 

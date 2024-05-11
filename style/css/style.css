@@ -365,7 +365,6 @@ html {
     justify-content: center;
     gap: 25px;
     width: fit-content;
-    margin: 0 auto;
   }
   .upload-panel > span > span:first-of-type {
     display: flex;
@@ -1113,7 +1112,6 @@ html {
     justify-content: center;
     gap: 18.75px;
     width: fit-content;
-    margin: 0 auto;
   }
   .upload-panel > span > span:first-of-type {
     display: flex;

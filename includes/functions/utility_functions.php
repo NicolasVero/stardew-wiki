@@ -112,3 +112,8 @@ function in_bytes_conversion(string $size):int {
     
     return $value * pow(1024, $unit_to_power[$unite]);
 }
+
+
+function array_keys_exists(array $keys, array $array):bool {
+    return count(array_diff_key(array_flip($keys), $array)) === 0;
+}
