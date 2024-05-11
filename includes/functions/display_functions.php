@@ -123,21 +123,22 @@ function display_page(array $all_datas, array $players):string {
             'masteries' => $all_datas['masteries']
         )
     );
+
     $structure .= display_top_friendships($all_datas['friendship'], 4);
     $structure .= display_friendships($all_datas['friendship']);
 
     $structure .= "<div class='separated-galleries'>";
         $structure .= display_unlockables($all_datas['has_element']);
-        $structure .= display_gallery($all_datas['books'], 'books', 'Books');
-        $structure .= display_detailled_gallery($all_datas['fish_caught'], 'fish', 'Fish caught');
-        $structure .= display_detailled_gallery($all_datas['cooking_recipes'], 'recipes', 'Cooking recipes');
-        $structure .= display_detailled_gallery($all_datas['minerals_found'], 'minerals', 'Minerals');
-        $structure .= display_detailled_gallery($all_datas['artifacts_found'], 'artifacts', 'Artifacts');
-        $structure .= display_detailled_gallery($all_datas['enemies_killed'], 'enemies', 'Enemies killed');
-        $structure .= display_detailled_gallery($all_datas['achievements'], 'achievements', 'Achievements');
+        $structure .= display_gallery($all_datas['books'], 'books', 'Books', $all_datas['general']['game_version_score']);
+        $structure .= display_detailled_gallery($all_datas['fish_caught'], 'fish', 'Fish caught', $all_datas['general']['game_version_score']);
+        $structure .= display_detailled_gallery($all_datas['cooking_recipes'], 'recipes', 'Cooking recipes', $all_datas['general']['game_version_score']);
+        $structure .= display_detailled_gallery($all_datas['minerals_found'], 'minerals', 'Minerals', $all_datas['general']['game_version_score']);
+        $structure .= display_detailled_gallery($all_datas['artifacts_found'], 'artifacts', 'Artifacts', $all_datas['general']['game_version_score']);
+        $structure .= display_detailled_gallery($all_datas['enemies_killed'], 'enemies', 'Enemies killed', $all_datas['general']['game_version_score']);
+        $structure .= display_detailled_gallery($all_datas['achievements'], 'achievements', 'Achievements', $all_datas['general']['game_version_score']);
     $structure .= "</div>";
 
-    $structure .= display_gallery($all_datas['shipped_items'], 'shipped_items', 'Shipped items');
+    $structure .= display_gallery($all_datas['shipped_items'], 'shipped_items', 'Shipped items', $all_datas['general']['game_version_score']);
 
 
     $structure .= "</main>";
@@ -621,10 +622,10 @@ function display_unlockables(array $player_elements):string {
     return $structure;
 }
 
-function display_gallery(array $player_elements, string $json_filename, string $section_title):string {
+function display_gallery(array $player_elements, string $json_filename, string $section_title, int $version_score):string {
     $images_path = get_images_folder() . "$json_filename/";
-    $elements = json_decode(file_get_contents(get_json_folder() . $json_filename . '.json'), true);
-    sort($elements);
+    $json_datas = json_decode(file_get_contents(get_json_folder2() . $json_filename . '.json'), true);
+    // sort($json_datas);
 
     $structure = "
         <section class='gallery $json_filename-section'>
@@ -632,18 +633,23 @@ function display_gallery(array $player_elements, string $json_filename, string $
             <span>
     ";
 
-    foreach($elements as $element) {
+    
+    foreach($json_datas as $key => $json_version) {
+        $is_newer_version_class = ($version_score < get_game_version_score($key)) ? 'newer-version' : 'older-version';
+        
+        foreach($json_version as $json_line_name) {
 
-        $element_class = in_array($element, $player_elements) ? "found" : "not-found"; 
-        $element_image = $images_path . formate_text_for_file($element) . ".png";
+        $element_class = in_array($json_line_name, $player_elements) ? "found" : "not-found"; 
+        $element_image = $images_path . formate_text_for_file($json_line_name) . ".png";
 
         $structure .= "
             <span class='tooltip'>
-                <img src='$element_image' alt='$element' class='gallery-item $json_filename $element_class' />
-                <span>$element</span>
+                <img src='$element_image' alt='$json_line_name' class='gallery-item $json_filename $element_class $is_newer_version_class' />
+                <span>$json_line_name</span>
             </span>
         ";
     }
+}
 
     $structure .= "
 			</span>
@@ -653,10 +659,11 @@ function display_gallery(array $player_elements, string $json_filename, string $
     return $structure;
 }
 
-function display_detailled_gallery(array $player_datas, string $json_filename, string $section_title):string {
+function display_detailled_gallery(array $player_datas, string $json_filename, string $section_title, int $version_score):string {
     $images_path = get_images_folder() . "$json_filename/";
-    $json_datas = json_decode(file_get_contents(get_json_folder() . $json_filename . '.json'), true);
-    sort($json_datas);
+    $json_datas = json_decode(file_get_contents(get_json_folder2() . $json_filename . '.json'), true);
+    // sort($json_datas);
+
 
     $structure = "
         <section class='gallery $json_filename-section'>
@@ -664,28 +671,34 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
             <span>
     ";
     
-    foreach($json_datas as $json_line_name) {
+    foreach($json_datas as $key => $json_version) {
+        
+        $is_newer_version_class = ($version_score < get_game_version_score($key)) ? 'newer-version' : 'older-version';
+        
+        foreach($json_version as $json_line_name) {
 
-        $is_found = array_key_exists($json_line_name, $player_datas);
+    
+            $is_found = array_key_exists($json_line_name, $player_datas);
 
-        $element_class   = ($is_found) ? 'found' : 'not-found';
-
-
-        if(in_array($json_filename, array('recipes', 'artifacts', 'minerals'))) 
-            if($is_found && $player_datas[$json_line_name]['counter'] == 0)
-                $element_class .= ' unused';
-
-
-        $element_image = $images_path . formate_text_for_file((string) explode(':', $json_line_name)[0]). '.png';
-        $element_tooltip = ($is_found) ? get_tooltip_text($player_datas, $json_line_name, $json_filename) : $json_line_name;
+            $element_class   = ($is_found) ? 'found' : 'not-found';
 
 
-        $structure .= "
-            <span class='tooltip'>
-                <img src='$element_image' alt='$json_line_name' class='gallery-item $json_filename $element_class' />
-                <span>$element_tooltip</span>
-            </span>
-        ";
+            if(in_array($json_filename, array('recipes', 'artifacts', 'minerals'))) 
+                if($is_found && $player_datas[$json_line_name]['counter'] == 0)
+                    $element_class .= ' unused';
+
+
+            $element_image = $images_path . formate_text_for_file((string) explode(':', $json_line_name)[0]). '.png';
+            $element_tooltip = ($is_found) ? get_tooltip_text($player_datas, $json_line_name, $json_filename) : $json_line_name;
+
+
+            $structure .= "
+                <span class='tooltip'>
+                    <img src='$element_image' alt='$json_line_name' class='gallery-item $json_filename $element_class $is_newer_version_class' />
+                    <span>$element_tooltip</span>
+                </span>
+            ";
+        }
     }
 
 	$structure .= "
