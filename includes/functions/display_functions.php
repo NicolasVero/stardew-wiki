@@ -3,11 +3,11 @@
 require 'display_section_functions.php';
 
 function display_landing_page():string {
-    $save_button = display_save_button();
-    $save_panel = display_save_panel();
+    $save_button     = display_save_button();
+    $save_panel      = display_save_panel();
 
     $settings_button = display_settings_button("landing");
-    $settings_panel = display_settings_panel();
+    $settings_panel  = display_settings_panel();
 
 
     return "
