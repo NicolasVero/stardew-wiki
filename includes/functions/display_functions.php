@@ -11,7 +11,6 @@ function display_landing_page():string {
 
 
     return "
-        <script src='" . get_site_root() ."script/functions.js' defer></script>
         <div id='landing' class='sur-header'>
             $save_button
             $settings_button
