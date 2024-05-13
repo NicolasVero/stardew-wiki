@@ -1,11 +1,11 @@
 function toggle_custom_checkboxes(checkmark_class) {
     const checkmarks = document.querySelectorAll(checkmark_class);
     checkmarks.forEach(function(checkbox) {
-        checkbox.addEventListener('click', function() {
+        checkbox.addEventListener("click", function() {
             const adjacent_checkbox = checkbox.previousElementSibling;
-            if (adjacent_checkbox && adjacent_checkbox.type === 'checkbox') {
+            if (adjacent_checkbox && adjacent_checkbox.type === "checkbox") {
                 adjacent_checkbox.checked = (!adjacent_checkbox.checked) ? true : false;
-                adjacent_checkbox.dispatchEvent(new Event('change'));
+                adjacent_checkbox.dispatchEvent(new Event("change"));
             }
         });
     });   
@@ -19,7 +19,7 @@ function toggle_checkboxes_actions() {
             const function_name = checkbox_input.id;
             const is_checked = checkbox_input.checked;
 
-            if (is_checked && typeof window[function_name] === 'function')
+            if (is_checked && typeof window[function_name] === "function")
                 window[function_name]();
         }
     });
