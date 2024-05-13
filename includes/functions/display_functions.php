@@ -45,14 +45,14 @@ function display_landing_page():string {
                         <span>
                             Well done! The hardest part is behind us! Now you just have to upload
                             <span class='img-embed landing-upload'>
-                                <img src='" . get_images_folder() ."icons/file.png'>
+                                <img src='" . get_images_folder() ."icons/file.png' class='modal-opener'>
                             </span>
                             your save directly to our website and let the magic happen.
                         </span>
                         <span>
                             There's also a range of settings
                             <span class='img-embed landing-settings'>
-                                <img src='" . get_images_folder() ."icons/settings.png'>
+                                <img src='" . get_images_folder() ."icons/settings.png' class='modal-opener'>
                             </span>
                             to customize your experience!
                         </span>

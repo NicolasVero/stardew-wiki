@@ -37,7 +37,7 @@ function display_game_version(string $game_version):string {
 
 function display_settings_button(string $prefix = 'main'):string {
     $structure = "
-        <span class='$prefix-settings'><img src='" . get_images_folder() ."icons/settings.png'></span>
+        <span class='$prefix-settings modal-opener'><img src='" . get_images_folder() ."icons/settings.png' class='modal-opener'></span>
     ";
     return $structure;
 }
@@ -67,13 +67,13 @@ function display_settings_panel():string {
 
 function display_save_button():string {
     return "
-        <span class='landing-upload'><img src='" . get_images_folder() ."icons/file.png'></span>
+        <span class='landing-upload modal-opener'><img src='" . get_images_folder() ."icons/file.png' class='modal-opener'></span>
     ";
 }
 
 function display_secondary_upload():string {
     return "
-        <span class='file-upload'><img src='" . get_images_folder() ."icons/file.png'></span>
+        <span class='file-upload modal-opener'><img src='" . get_images_folder() ."icons/file.png' class='modal-opener'></span>
     ";
 }
 
@@ -168,7 +168,7 @@ function display_general_stats(array $datas):string {
     $structure = "
         <section class='info-section general-stats'>
         	<h2 class='section-title'>General stats</h2>
-			<img src='" . get_images_folder() . "/icons/quest.png' class='quest-icon view-all-quests button-elements'>
+			<img src='" . get_images_folder() . "/icons/quest.png' class='quest-icon view-all-quests button-elements modal-opener'>
             <div>
                 <span>
                     <img src='{$images_path}icons/energy.png' alt='Energy' />
@@ -370,7 +370,7 @@ function display_friendships(array $friends, $limit = -1):string {
     $marriables_npc = json_decode(file_get_contents(get_json_folder() . 'marriables.json'), true);
 
     $section_class = ($limit == -1) ? 'all-friends' : 'top-friends';
-    $view_all = ($limit == -1) ? '' : "<span class='view-all view-all-friendships'>View all friendships</span>";
+    $view_all = ($limit == -1) ? '' : "<span class='view-all view-all-friendships modal-opener'>View all friendships</span>";
     $structure = ($limit == -1) ? 
 	"
         <section class='info-section friends-section $section_class'>

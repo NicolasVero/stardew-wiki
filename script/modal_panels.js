@@ -26,3 +26,8 @@ function toggle_visibility_and_scroll(element, should_display, should_disable_sc
     element.style.display = (should_display) ? 'block' : 'none';
     document.body.style.overflow = (should_disable_scroll) ? 'hidden' : 'auto';
 }
+
+function hide_panels(event) {
+	if (current_section && event.target !== current_section && !event.target.classList.contains('modal-opener'))
+		current_section.style.display = "none";
+}
