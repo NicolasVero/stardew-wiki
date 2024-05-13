@@ -192,6 +192,11 @@ body {
 						display: flex;
 						align-items: center;
 						gap: (@big-gap * @ratio);
+
+						& > span {
+							display: flex;
+							gap: (@md-gap * @ratio);
+						}
 						
 						.interaction {
 							width: (@md-icon * @ratio);

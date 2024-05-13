@@ -45,6 +45,10 @@ html {
   body main .info-section:not(.general-stats) {
     flex-basis: 50% !important;
   }
+  body main .info-section:not(.general-stats).skills-section,
+  body main .info-section:not(.general-stats).friends-section.top-friends {
+    flex-basis: 45% !important;
+  }
   body main .gallery:not(.shipped_items-section, .unlockables-section) {
     flex-basis: 47.5% !important;
   }
@@ -682,6 +686,10 @@ html {
     display: flex;
     align-items: center;
     gap: 25px;
+  }
+  body main .info-section.friends-section > span .interactions > span {
+    display: flex;
+    gap: 10px;
   }
   body main .info-section.friends-section > span .interactions .interaction {
     width: 24px;
@@ -1457,6 +1465,10 @@ html {
     display: flex;
     align-items: center;
     gap: 18.75px;
+  }
+  body main .info-section.friends-section > span .interactions > span {
+    display: flex;
+    gap: 7.5px;
   }
   body main .info-section.friends-section > span .interactions .interaction {
     width: 18px;
