@@ -369,8 +369,6 @@ function display_friendships(array $friends, $limit = -1):string {
     $images_path = get_images_folder();
     $marriables_npc = json_decode(file_get_contents(get_json_folder() . 'marriables.json'), true);
 
-    $villagers_json = json_decode(file_get_contents(get_json_folder() . 'villagers.json'), true);
-
     $section_class = ($limit == -1) ? 'all-friends' : 'top-friends';
     $view_all = ($limit == -1) ? '' : "<span class='view-all view-all-friendships'>View all friendships</span>";
     $structure = ($limit == -1) ? 
@@ -390,42 +388,24 @@ function display_friendships(array $friends, $limit = -1):string {
     "
 	;
 
-    foreach($villagers_json['villagers'] as $villager_name) {
+    foreach($friends as $name => $friend) {
         if($limit == 0)
             break;
 
         $limit--;
 
-        // extract($friend);
-        $friend_icon = $images_path . "characters/" . strtolower($villager_name) . ".png";
-
-		if (!isset($friends[$villager_name])) {
-			$has_met = "not-found";
-			$friend = array(
-				'points'        	=> 0,
-				'friend_level'   	=> 0,
-				'status'			=> "Unknown",
-				'week_gifts'     	=> 0,
-				'talked_to_today'	=> 0
-			);
-		}
-		else {
-			$has_met = "";
-			$friend = $friends[$villager_name];
-		}
-
-		$status = $friend['status'];
-
+        extract($friend);
+        $friend_icon = $images_path . "characters/" . strtolower($name) . ".png";
 
         $structure .= "
 			<span>
-				<img src='$friend_icon' class='character-icon $has_met' alt='$villager_name icon' />
-				<span class='character-name'>$villager_name</span>
+				<img src='$friend_icon' class='character-icon' alt='$name icon' />
+				<span class='character-name'>$name</span>
 			    <span class='hearts-level'>
         ";
 
 		
-        $can_be_married = in_array($villager_name, $marriables_npc['marriables']) && $status == "Friendly";
+        $can_be_married = in_array($name, $marriables_npc['marriables']) && $status == "Friendly";
 
         for($i = 1; $i <= 10; $i++) {
 
@@ -435,13 +415,13 @@ function display_friendships(array $friends, $limit = -1):string {
                 continue;
             }
 
-            $heart_icon = get_images_folder() . (($friend['friend_level'] >= $i) ? "icons/heart.png" : "icons/empty_heart.png");
+            $heart_icon = get_images_folder() . (($friend_level >= $i) ? "icons/heart.png" : "icons/empty_heart.png");
             $structure .= "<img src='$heart_icon' class='hearts' alt='' />";
         }
         
         $gifted = [];
-        $gifted[0] = ($friend['week_gifts'] > 0) ? "gifted" : "not-gifted";
-        $gifted[1] = ($friend['week_gifts'] == 2) ? "gifted" : "not-gifted";
+        $gifted[0] = ($week_gifts > 0) ? "gifted" : "not-gifted";
+        $gifted[1] = ($week_gifts == 2) ? "gifted" : "not-gifted";
 
         $structure .= "
 				</span>
