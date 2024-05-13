@@ -70,6 +70,12 @@ html {
   .not-hide {
     display: block !important;
   }
+  .no-spoil-title {
+    display: none;
+    font-family: "Stardew Valley Stonks", serif;
+    font-size: 16px;
+    color: #000000;
+  }
   .data {
     font-family: "Stardew Valley Stonks", serif;
     font-size: 18px;
@@ -848,6 +854,12 @@ html {
   }
   .not-hide {
     display: block !important;
+  }
+  .no-spoil-title {
+    display: none;
+    font-family: "Stardew Valley Stonks", serif;
+    font-size: 12px;
+    color: #000000;
   }
   .data {
     font-family: "Stardew Valley Stonks", serif;

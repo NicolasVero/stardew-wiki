@@ -44,7 +44,7 @@ function no_spoil_mode(event) {
         }
     }
 
-    check_if_all_elements_hidden();
+    check_if_all_elements_hidden(1);
 }
 
 function toggle_versions_items_mode(event) {
@@ -63,24 +63,32 @@ function toggle_versions_items_mode(event) {
             parent_element.style.display = (is_element_not_found) ? "none" : (is_checked) ? "none" : "block";
     }
 
-    check_if_all_elements_hidden();
+    check_if_all_elements_hidden(0);
 }
 
 
-function check_if_all_elements_hidden() {
+function check_if_all_elements_hidden(id_command) {
     const sections = document.getElementsByClassName("gallery");
     for(let i = 0; i < sections.length; i++) {
-        title_to_hide = true;
+        no_items_to_show = true;
 
         const section = sections[i];
         const title = section.querySelector("h2");
-        const spans = section.querySelectorAll(".tooltip")
+        const smaller_title = section.children[1].querySelector("span .no-spoil-title");
+        const spans = section.querySelectorAll(".tooltip");
 
         spans.forEach(span => {
             if (span.style.display != "none")
-                title_to_hide = false;
+                no_items_to_show = false;
         });
         
-        title.style.display = (title_to_hide) ? "none" : "block";
+		switch(id_command) {
+			case 0:
+				title.style.display = (no_items_to_show) ? "none" : "block";
+				break;
+			case 1:
+				smaller_title.style.display = (no_items_to_show) ? "block" : "none";
+				break;
+		}
     }
 }

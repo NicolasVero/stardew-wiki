@@ -476,6 +476,7 @@ function display_unlockables(array $player_elements):string {
         <section class='gallery unlockables-section'>
             <h2 class='section-title'>Unlockables</h2>
             <span>
+				<h3 class='no-spoil-title'>Nothing to see here yet</h2>
     ";
 
 	foreach($elements as $element) {
@@ -511,6 +512,7 @@ function display_gallery(array $player_elements, string $json_filename, string $
         <section class='gallery $json_filename-section'>
             <h2 class='section-title'>$section_title</h2>
             <span>
+				<h3 class='no-spoil-title'>Nothing to see here yet</h2>
     ";
 
     
@@ -549,6 +551,7 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
         <section class='gallery $json_filename-section'>
             <h2 class='section-title'>$section_title</h2>
             <span>
+				<h3 class='no-spoil-title'>Nothing to see here yet</h2>
     ";
     
     foreach($json_datas as $key => $json_version) {
