@@ -369,6 +369,8 @@ function display_friendships(array $friends, $limit = -1):string {
     $images_path = get_images_folder();
     $marriables_npc = json_decode(file_get_contents(get_json_folder() . 'marriables.json'), true);
 
+    $villagers_json = json_decode(file_get_contents(get_json_folder() . 'villagers.json'), true);
+
     $section_class = ($limit == -1) ? 'all-friends' : 'top-friends';
     $view_all = ($limit == -1) ? '' : "<span class='view-all view-all-friendships modal-opener'>View all friendships</span>";
     $structure = ($limit == -1) ? 
@@ -422,6 +424,56 @@ function display_friendships(array $friends, $limit = -1):string {
         $gifted = [];
         $gifted[0] = ($week_gifts > 0) ? "gifted" : "not-gifted";
         $gifted[1] = ($week_gifts == 2) ? "gifted" : "not-gifted";
+
+        $structure .= "
+				</span>
+				<span class='interactions'>
+                    <span class='tooltip'>
+                        <img src='{$images_path}icons/gift.png' class='interaction $gifted[0]' alt=''/>
+                        <img src='{$images_path}icons/gift.png' class='interaction $gifted[1]' alt=''/>
+                        <span class='left'>Gifts made in the last week</span>
+                    </span>
+				</span>
+				<span class='friend-status'>$status</span>
+			</span>
+        ";
+    }
+
+    foreach($villagers_json["villagers"] as $villager_name) {
+        if($limit == 0)
+            break;
+
+		if(isset($friends[$villager_name]))
+			continue;
+
+        $limit--;
+        $friend_icon = $images_path . "characters/" . strtolower($villager_name) . ".png";
+
+        $can_be_married = in_array($villager_name, $marriables_npc['marriables']);
+
+        $structure .= "
+			<span>
+				<img src='$friend_icon' class='character-icon not-found' alt='$villager_name icon' />
+				<span class='character-name'>$villager_name</span>
+			    <span class='hearts-level'>
+        ";
+		
+		$status = "Unknown";
+        $can_be_married = in_array($villager_name, $marriables_npc['marriables']);
+
+        for($i = 1; $i <= 10; $i++) {
+
+            if($i > 8 && $can_be_married) {
+                $heart_icon = get_images_folder() . "icons/locked_heart.png";
+                $structure .= "<img src='$heart_icon' class='hearts' alt='' />";
+                continue;
+            }
+
+            $heart_icon = get_images_folder() . (($friend_level >= $i) ? "icons/heart.png" : "icons/empty_heart.png");
+            $structure .= "<img src='$heart_icon' class='hearts' alt='' />";
+        }
+        
+        $gifted = ["not-gifted", "not-gifted"];
 
         $structure .= "
 				</span>
