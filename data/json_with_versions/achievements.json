@@ -29,8 +29,7 @@
         "30" : "A Big Help",
         "31" : "Polyculture",
         "32" : "Monoculture",
-        "34" : "Full Shipment",
-        "40" : "A Distant Shore"
+        "34" : "Full Shipment"
     },
     "1.6.0" : {
         "35" : "Well read",
@@ -38,6 +37,7 @@
         "37" : "Blue Ribbon",
         "38" : "An Unforgettable Soup",
         "39" : "Good Neighbors",
+        "40" : "A Distant Shore",
         "41" : "Danger In The Deep",
         "42" : "Infinite Power",
         "44" : "Perfection"
