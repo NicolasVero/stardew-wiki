@@ -3,60 +3,55 @@
         "1"  : "Bat",
         "2"  : "Big Slime",
         "4"  : "Bug",
-        "6"  : "Cave Fly",
-        "8"  : "Duggy",
-        "9"  : "Dust Sprite",
-        "12" : "Frost Bat",
-        "13" : "Frost Jelly",
-        "14" : "Ghost",
-        "15" : "Green Slime",
-        "16" : "Grub",
-        "22" : "Lava Bat",
-        "23" : "Lava Crab",
-        "28" : "Metal Head",
-        "29" : "Mummy",
-        "33" : "Purple Slime",
-        "35" : "Red Sludge",
-        "36" : "Rock Crab",
-        "37" : "Serpent",
-        "38" : "Shadow Brute",
-        "39" : "Shadow Shaman",
-        "41" : "Skeleton",
-        "44" : "Squid Kid",
-        "46" : "Stone Golem"
+        "6"  : "Fly",
+        "7"  : "Duggy",
+        "8"  : "Dust Spirit",
+        "11" : "Frost Bat",
+        "12" : "Frost Jelly",
+        "13" : "Ghost",
+        "14" : "Green Slime",
+        "15" : "Grub",
+        "21" : "Lava Bat",
+        "22" : "Lava Crab",
+        "26" : "Metal Head",
+        "27" : "Mummy",
+        "30" : "Sludge",
+        "31" : "Rock Crab",
+        "32" : "Serpent",
+        "33" : "Shadow Brute",
+        "34" : "Shadow Shaman",
+        "36" : "Skeleton",
+        "39" : "Squid Kid",
+        "41" : "Stone Golem"
     },
     "1.1.0" : {
-        "30" : "Mutant Fly",
-        "31" : "Mutant Grub",
-        "48" : "Wilderness Golem"
+        "43" : "Wilderness Golem"
     },
     "1.3.0" : {
-        "19" : "Iridium Bat"
+        "18" : "Iridium Bat"
     },
     "1.3.27" : {
         "5"  : "Carbon Ghost",
-        "20" : "Iridium Crab"
+        "19" : "Iridium Crab"
     },
     "1.4.0" : {
-        "7"  : "Copper Slime",
-        "17" : "Haunted Skull",
-        "21" : "Iron Slime",
-        "32" : "Pepper Rex"
+        "16" : "Haunted Skull",
+        "28" : "Pepper Rex"
     },
     "1.5.0" : {
         "3"  : "Blue Squid",
-        "10" : "Dwarvish Sentry",
-        "11" : "False Magma Cap",
-        "18" : "Hot Head",
-        "24" : "Lava Lurk",
-        "25" : "Magma Duggy",
-        "26" : "Magma Sparker",
-        "27" : "Magma Sprite",
-        "34" : "Putrid Ghost",
-        "40" : "Shadow Sniper",
-        "42" : "Skeleton Mage",
-        "43" : "Spider",
-        "45" : "Stick Bug",
-        "47" : "Tiger Slime"
+        "9" : "Dwarvish Sentry",
+        "10" : "False Magma Cap",
+        "17" : "Hot Head",
+        "22" : "Lava Lurk",
+        "23" : "Magma Duggy",
+        "24" : "Magma Sparker",
+        "25" : "Magma Sprite",
+        "29" : "Putrid Ghost",
+        "35" : "Shadow Sniper",
+        "37" : "Skeleton Mage",
+        "38" : "Spider",
+        "40" : "Stick Bug",
+        "41" : "Tiger Slime"
     }
 }
