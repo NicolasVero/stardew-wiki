@@ -32,6 +32,41 @@ function get_achievement(object $achievements):array {
     return $datas;
 }
 
+function get_unlockables(string $unlockable_name, object $player_data, int $version_score):int {
+	$is_newer_version = ($version_score < get_game_version_score("1.6.0"));
+	switch($unlockable_name) {
+		case "forest_magic":
+			return has_element("canReadJunimoText", $player_data);
+			break;
+		case "dwarvish_translation_guide":
+			return ($is_newer_version) ? has_element_old($player_data->canUnderstandDwarves) : has_element("HasDwarvishTranslationGuide", $player_data);
+			break;
+		case "rusty_key":
+			return ($is_newer_version) ? has_element_old($player_data->hasRustyKey) : has_element("HasRustyKey", $player_data);
+			break;
+		case "club_card":
+			return ($is_newer_version) ? has_element_old($player_data->hasClubCard) : has_element("HasClubCard", $player_data);
+			break;
+		case "special_charm":
+			return ($is_newer_version) ? has_element_old($player_data->hasSpecialCharm) : has_element("HasSpecialCharm", $player_data);
+			break;
+		case "skull_key":
+			return ($is_newer_version) ? has_element_old($player_data->hasSkullKey) : has_element("HasSkullKey", $player_data);
+			break;
+		case "magnifying_glass":
+			return ($is_newer_version) ? has_element_old($player_data->hasMagnifyingGlass) : has_element("HasMagnifyingGlass", $player_data);
+			break;
+		case "dark_talisman":
+			return ($is_newer_version) ? has_element_old($player_data->hasDarkTalisman) : has_element("HasDarkTalisman", $player_data);
+			break;
+		case "magic_ink":
+			return ($is_newer_version) ? has_element_old($player_data->hasMagicInk) : has_element("HasPickedUpMagicInk", $player_data);
+			break;
+		case "town_key":
+			return ($is_newer_version) ? has_element_old($player_data->HasTownKey) : has_element("HasTownKey", $player_data);
+			break;
+	}
+}
 
 function get_item_list(object $items, string $filename, int $version_score):array {
     $datas = array();

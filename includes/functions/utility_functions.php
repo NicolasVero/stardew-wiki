@@ -73,11 +73,10 @@ function formate_usernames(string $username):string {
 function has_element(string $element, object $data):int {
     return (in_array($element, (array) $data->mailReceived->string)) ? 1 : 0;
 }
-/* ### Get unlockables < 1.6 ###
-function has_element(object $element):int {
+
+function has_element_old(object $element):int {
     return !empty((array) $element);
 }
-*/
 
 function get_custom_id(string $item):int {
     $custom_ids = json_decode(file_get_contents(get_json_folder() . 'custom_ids.json'), true);
