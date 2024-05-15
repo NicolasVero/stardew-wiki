@@ -5,6 +5,11 @@ window.addEventListener("load", () => {
     
     tag.innerHTML = os_path;
 
+	document.addEventListener("keyup", (event) => {
+		if (event.key === 'Escape')
+			hide_panels(event);
+	});
+
 	document.addEventListener("click", hide_panels);
     document.getElementById("no_spoil_mode").addEventListener("change", no_spoil_mode);
     document.getElementById("toggle_versions_items_mode").addEventListener("change", toggle_versions_items_mode);

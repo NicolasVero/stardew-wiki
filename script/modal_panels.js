@@ -28,6 +28,7 @@ function toggle_visibility_and_scroll(element, should_display, should_disable_sc
 }
 
 function hide_panels(event) {
+    event = event || {};
 	if (current_section && event.target !== current_section && !current_section.contains(event.target) && !event.target.classList.contains("modal-opener"))
 		current_section.style.display = "none";
 }
