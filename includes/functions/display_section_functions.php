@@ -204,7 +204,7 @@ function display_general_stats(array $datas):string {
 }
 
 function display_quests(array $datas):string {
-    
+
     extract($datas);
     $images_path = get_images_folder();
 
@@ -216,6 +216,14 @@ function display_quests(array $datas):string {
             </div>
             <span class='quests'>
     ";
+
+	if(empty($datas)) {
+		$structure .= "
+					<h3>Nothing to see here yet</h3>
+				</span>
+			</section>
+		";
+	}
 
     foreach($datas as $data) {
         $title = $data['title'];

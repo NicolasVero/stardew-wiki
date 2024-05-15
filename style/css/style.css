@@ -606,6 +606,7 @@ html {
     font-size: 16px;
     color: #000000;
     position: fixed;
+    min-width: 30vw;
     max-height: 80vh;
     padding: 25px 25px;
     top: 50%;
@@ -1393,6 +1394,7 @@ html {
     font-size: 12px;
     color: #000000;
     position: fixed;
+    min-width: 30vw;
     max-height: 80vh;
     padding: 18.75px 18.75px;
     top: 50%;
