@@ -30,12 +30,3 @@ function deactivate_landing_inputs() {
     document.getElementById("landing").style.display = "none";
     document.getElementById("landing-page").style.display = "none";
 }
-
-
-export default {
-    detect_os,
-    get_os_path,
-    file_choice,
-    toggle_loading,
-    deactivate_landing_inputs
-};
