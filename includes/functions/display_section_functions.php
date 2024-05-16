@@ -163,7 +163,7 @@ function display_general_stats(array $datas):string {
     $deepest_mine_level = ($mine_level > 120) ? 120 : $mine_level; 
     $deepest_skull_mine_level = ($mine_level - 120 < 0) ? 0 : $mine_level - 120;
     
-    $deepest_mine_level_tooltip = "$deepest_mine_level stardew mine " . (($deepest_skull_mine_level > 0) ? "+ $deepest_skull_mine_level skull mine" : "");
+    $deepest_mine_level_tooltip = "$deepest_mine_level floors in the Stardew Mine " . (($deepest_skull_mine_level > 0) ? "& $deepest_skull_mine_level floors in the Skull Mine" : "");
 
     $structure = "
         <section class='info-section general-stats'>
