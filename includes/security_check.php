@@ -3,7 +3,7 @@
 function is_file_secure(mixed $file):bool {
 
     
-    if(!in_array($file['type'], array('application/xml', 'text/xml'))) {
+    if(!in_array($file['type'], array('application/xml', 'text/xml', 'application/octet-stream'))) {
         throw new Exception('The file is not in xml format.');
     }
     
