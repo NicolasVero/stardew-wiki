@@ -24,7 +24,15 @@ try {
         $players_data = get_all_players_datas($data);
         $players = get_all_players($data);
 
-        $response['html'] = display_page($players_data[0], $players);
+        for($i = 0; $i < count($players); $i++) {
+            $pages['player_' . $i] = "
+                <div class='player_container player_{$i}_container'>" . 
+                    display_page($players_data[$i], $players) . "
+                </div>
+            ";
+        }
+
+        $response['html'] = $pages;
         $response['code'] = "success";
     }
 } catch (Exception $exception) {

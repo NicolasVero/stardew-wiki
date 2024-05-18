@@ -1,6 +1,5 @@
 RewriteEngine On
 RewriteBase /travail/stardew_wiki/
 
-# Rediriger toutes les requêtes vers index.php sauf s'il s'agit d'un fichier existant
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteRule ^ index.php [L]

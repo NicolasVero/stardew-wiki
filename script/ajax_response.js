@@ -19,7 +19,12 @@ function AJAX_send() {
                 const data = JSON.parse(xhr.responseText);
                 const html = data.html;
 
-                document.getElementById("display").innerHTML = html;
+                const page_display = document.getElementById("display");
+
+                for(let i = 0; i < 2; i++) {
+                    page_display.innerHTML += html['player_' + i];
+                }
+
                 load_elements();
                 toggle_loading(false);
             }

@@ -9,7 +9,7 @@ function get_all_players_datas(object $data):array {
     array_push($players, get_aggregated_data($data->player, $data));
 
     foreach($data->farmhands as $side_player) {
-        // array_push($players, get_aggregated_data($side_player->Farmer, $data));
+        array_push($players, get_aggregated_data($side_player->Farmer, $data));
     }
 
     return $players;
