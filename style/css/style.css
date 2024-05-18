@@ -36,7 +36,7 @@ html {
   body {
     margin: 5vh 10vw !important;
   }
-  body .sur-header #player_selection {
+  body .sur-header #players_selections {
     width: 70% !important;
   }
   body main .info-section {
@@ -334,7 +334,7 @@ html {
     justify-content: flex-end;
     gap: 10px;
   }
-  .sur-header #player_selection {
+  .sur-header #players_selection {
     margin: 0;
     display: flex;
     flex-wrap: wrap;
@@ -342,7 +342,7 @@ html {
     gap: 5px 10px;
     list-style-type: none;
   }
-  .sur-header #player_selection li {
+  .sur-header #players_selection li {
     font-family: "Stardew Valley Stonks", serif;
     font-size: 18px;
     color: #000000;
@@ -356,7 +356,7 @@ html {
     background-clip: padding-box;
     padding: 5px 5px;
   }
-  .sur-header #player_selection li:hover {
+  .sur-header #players_selection li:hover {
     transform: scale(1.1);
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
@@ -1122,7 +1122,7 @@ html {
     justify-content: flex-end;
     gap: 7.5px;
   }
-  .sur-header #player_selection {
+  .sur-header #players_selection {
     margin: 0;
     display: flex;
     flex-wrap: wrap;
@@ -1130,7 +1130,7 @@ html {
     gap: 3.75px 7.5px;
     list-style-type: none;
   }
-  .sur-header #player_selection li {
+  .sur-header #players_selection li {
     font-family: "Stardew Valley Stonks", serif;
     font-size: 13.5px;
     color: #000000;
@@ -1144,7 +1144,7 @@ html {
     background-clip: padding-box;
     padding: 3.75px 5px;
   }
-  .sur-header #player_selection li:hover {
+  .sur-header #players_selection li:hover {
     transform: scale(1.1);
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }

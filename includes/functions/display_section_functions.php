@@ -16,11 +16,11 @@ function display_sur_header(string $game_version, array $players):string {
 
 function display_player_selection(array $players):string {
     $structure = "
-		<ul id='player_selection'>
+		<ul id='players_selection'>
 	";
 
-    foreach($players as $player) {
-        $structure .= "<li value='$player'>" . formate_usernames($player) . "</option>";
+    for($i = 0; $i < count($players); $i++) {
+        $structure .= "<li class='player_selection' value='player_$i'>" . formate_usernames($players[$i]) . "</option>";
     }
 
     $structure .= "</ul>";

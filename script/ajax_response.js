@@ -14,24 +14,52 @@ function AJAX_send() {
         xhr.open("POST", url, true);
 
         xhr.onreadystatechange = function() {
-            if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+            if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
 
                 const data = JSON.parse(xhr.responseText);
                 const html = data.html;
 
                 const page_display = document.getElementById("display");
 
+                //& remplacer par nombre attribut object
                 for(let i = 0; i < 2; i++) {
                     page_display.innerHTML += html['player_' + i];
                 }
 
                 load_elements();
                 toggle_loading(false);
+
+
+
+                initializePlayerSwapper(2);
             }
         };
 
         xhr.send(form_data);
     }
+}
+
+function initializePlayerSwapper(players_count) {
+    const players_selection = document.getElementsByClassName("player_selection");
+    console.log(players_selection);
+
+    for(let i = 0; i < players_selection.length; i++) {
+        players_selection[i].addEventListener("click", () => {
+            console.log(i)
+            swapDisplayedPlayer(i % players_count);
+        });
+    }
+}
+
+function swapDisplayedPlayer(player_id) {
+
+    const players_display = document.getElementsByClassName("player_container");
+    
+    for(let i = 0; i < players_display.length; i++) {
+        players_display[i].style.display = (player_id != i) ? "none" : "block"; 
+    }
+
+    players_display[player_id].style.display = "block";
 }
 
 // Load html elements
