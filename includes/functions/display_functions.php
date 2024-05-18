@@ -92,7 +92,7 @@ function display_landing_page():string {
                                         Nicolas is a young man with a passion for development, sleep, and who loves to make web development during his weekends. 
                                     </span>
                                     <span>
-                                        He took care of the UX / UI design, as well as the Back-End of the website.
+                                        He took care of the Back-End of the website, as well as the UX / UI design.
                                     </span>
                                 </span>
                                 <span class='socials'>
@@ -143,6 +143,10 @@ function display_page(array $all_datas, array $players):string {
 function display_error_page(Exception $exception):string {
 
     $exception_dialogues = array(
+        "The file is not in xml format." => array(
+            "dialogue" => "Oh, my stars! It appears this file has lost its way in the tangled underbrush of incompatible formats. XML, my dear friend, is the language of precision and organization, much like the delicate balance of ecosystems on our beloved Ginger Island!",
+            "image"    => "dialogue_box_professor_snail"
+        ),
         "Error loading file." => array(
             "dialogue" => "Oh, bother! It seems like the file got lost in the mines. Could you try again? Or perhaps seek help from a trusty adventurer to retrieve it?",
             "image"    => "dialogue_box_dwarf"

@@ -15,6 +15,7 @@ require 'security_check.php';
 
 
 $response = array();
+$response['uwu'] = $_FILES;
 
 try {
     if(is_file_secure($_FILES['save-upload'])) {
@@ -36,8 +37,9 @@ try {
         $response['code'] = "success";
     }
 } catch (Exception $exception) {
-    $response['html'] = display_error_page($exception);
-    $response['code'] = "failed";
+    $response['html']  = display_error_page($exception);
+    $response['code']  = "failed";
+    $response['error'] = $exception->getMessage();
 }
 
 echo json_encode($response);

@@ -20,17 +20,23 @@ function AJAX_send() {
                 const html = data.html;
 
                 const page_display = document.getElementById("display");
-                const players_count = Object.keys(html).length;;
+                
+                if(data.code == "success") {
 
-                for(let i = 0; i < players_count; i++) {
-                    page_display.innerHTML += html['player_' + i];
+                    const players_count = Object.keys(html).length;;
+
+                    for(let i = 0; i < players_count; i++) {
+                        page_display.innerHTML += html['player_' + i];
+                    }
+
+                    initializePlayerSwapper(players_count);
+                    swapDisplayedPlayer(0);
+                } else {
+                    page_display.innerHTML = html;
                 }
 
                 load_elements();
                 toggle_loading(false);
-
-                initializePlayerSwapper(players_count);
-                swapDisplayedPlayer(0);
             }
         };
 
