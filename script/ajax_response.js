@@ -20,18 +20,17 @@ function AJAX_send() {
                 const html = data.html;
 
                 const page_display = document.getElementById("display");
+                const players_count = Object.keys(html).length;;
 
-                //& remplacer par nombre attribut object
-                for(let i = 0; i < 2; i++) {
+                for(let i = 0; i < players_count; i++) {
                     page_display.innerHTML += html['player_' + i];
                 }
 
                 load_elements();
                 toggle_loading(false);
 
-
-
-                initializePlayerSwapper(2);
+                initializePlayerSwapper(players_count);
+                swapDisplayedPlayer(0);
             }
         };
 
@@ -41,11 +40,9 @@ function AJAX_send() {
 
 function initializePlayerSwapper(players_count) {
     const players_selection = document.getElementsByClassName("player_selection");
-    console.log(players_selection);
 
     for(let i = 0; i < players_selection.length; i++) {
         players_selection[i].addEventListener("click", () => {
-            console.log(i)
             swapDisplayedPlayer(i % players_count);
         });
     }
@@ -54,12 +51,9 @@ function initializePlayerSwapper(players_count) {
 function swapDisplayedPlayer(player_id) {
 
     const players_display = document.getElementsByClassName("player_container");
-    
-    for(let i = 0; i < players_display.length; i++) {
-        players_display[i].style.display = (player_id != i) ? "none" : "block"; 
-    }
 
-    players_display[player_id].style.display = "block";
+    for(let i = 0; i < players_display.length; i++) 
+        players_display[i].style.display = (player_id != i) ? "none" : "block"; 
 }
 
 // Load html elements
