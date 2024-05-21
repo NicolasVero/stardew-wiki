@@ -30,3 +30,18 @@ function deactivate_landing_inputs() {
     document.getElementById("landing").style.display = "none";
     document.getElementById("landing-page").style.display = "none";
 }
+
+function in_bytes_conversion(size) {
+    const unit_to_power = { 'o': 0, 'Ko': 1, 'Mo': 2, 'Go': 3 };
+
+    const matches = size.match(/(\d+)([a-zA-Z]+)/);
+    const value = parseInt(matches[1], 10);
+    const unit = matches[2];
+
+    return value * Math.pow(1024, unit_to_power[unit]);
+}
+
+// Exemple d'utilisation
+const size = "41Mo";
+const bytes = inBytesConversion(size);
+console.log(bytes); // Affiche 4294967296

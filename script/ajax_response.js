@@ -1,15 +1,20 @@
 function AJAX_send() {
     const xml_upload = document.getElementById("save-upload");
-    const file = xml_upload.files[0];
+    const file       = xml_upload.files[0];
+    const max_size   = "35Mo";
+
+    const is_file_too_big = (file.size > in_bytes_conversion(max_size));
+
     document.getElementById("display").innerHTML = "";
     document.getElementById("landing-page").innerHTML = "";
 
     
     if(file) {
         let form_data = new FormData();
+        let xhr       = new XMLHttpRequest();
+        const url     = "./includes/get_xml_data.php";
+        
         form_data.append("save-upload", file);
-        let xhr = new XMLHttpRequest();
-        const url = "./includes/get_xml_data.php";
 
         xhr.open("POST", url, true);
 
