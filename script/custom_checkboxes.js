@@ -69,6 +69,10 @@ function toggle_versions_items_mode(event) {
 
 function check_if_all_elements_hidden(id_command) {
     const sections = document.getElementsByClassName("gallery");
+
+    const nsm_checked = document.getElementById("no_spoil_mode").checked;
+    const tvim_checked = document.getElementById("toggle_versions_items_mode").checked;
+
     for(let i = 0; i < sections.length; i++) {
         no_items_to_show = true;
 
@@ -84,10 +88,11 @@ function check_if_all_elements_hidden(id_command) {
         
 		switch(id_command) {
 			case 0:
-				title.style.display = (no_items_to_show) ? "none" : "block";
+				title.style.display = (!nsm_checked && no_items_to_show) ? "none" : "block";
+				smaller_title.style.display = (nsm_checked && no_items_to_show) ? "block" : "none";
 				break;
 			case 1:
-				smaller_title.style.display = (no_items_to_show) ? "block" : "none";
+				smaller_title.style.display = (!tvim_checked && no_items_to_show) ? "block" : "none";
 				break;
 		}
     }
