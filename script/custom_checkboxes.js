@@ -38,9 +38,9 @@ function no_spoil_mode(event) {
         if(parent_element && !elements[i].classList.contains("not-hide")) {
             is_element_newer_version = elements[i].classList.contains("newer-version");
             if(!tvim_checked)
-                parent_element.style.display = (is_checked) ? "none" : "block";
+                parent_element.style.display = (is_checked) ? "none" : "flex";
             else
-                parent_element.style.display = (is_element_newer_version) ? "none" : (is_checked) ? "none" : "block";
+                parent_element.style.display = (is_element_newer_version) ? "none" : (is_checked) ? "none" : "flex";
         }
     }
 
@@ -58,9 +58,9 @@ function toggle_versions_items_mode(event) {
         const parent_element = elements[i].parentElement;
         is_element_not_found = elements[i].classList.contains("not-found");
         if(!nsm_checked)
-            parent_element.style.display = (is_checked) ? "none" : "block";
+            parent_element.style.display = (is_checked) ? "none" : "flex";
         else
-            parent_element.style.display = (is_element_not_found) ? "none" : (is_checked) ? "none" : "block";
+            parent_element.style.display = (is_element_not_found) ? "none" : (is_checked) ? "none" : "flex";
     }
 
     check_if_all_elements_hidden(0);

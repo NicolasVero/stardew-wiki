@@ -118,9 +118,12 @@ function display_page(array $all_datas, array $players):string {
     $structure .= "<main>";
     $structure .= display_general_stats($all_datas['general']);
     $structure .= display_quests($all_datas['quest_log']);
-    $structure .= display_skills($all_datas);
-    $structure .= display_top_friendships($all_datas['friendship'], 4);
-    $structure .= display_friendships($all_datas['friendship']);
+
+    $structure .= "<div class='separated-galleries'>";
+		$structure .= display_skills($all_datas);
+		$structure .= display_top_friendships($all_datas['friendship'], 4);
+		$structure .= display_friendships($all_datas['friendship']);
+    $structure .= "</div>";
 
     $structure .= "<div class='separated-galleries'>";
         $structure .= display_unlockables($all_datas['has_element']);
