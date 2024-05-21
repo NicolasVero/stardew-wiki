@@ -126,7 +126,9 @@ function display_page(array $all_datas, array $players, int $playerID):string {
 		$structure .= "<div class='separated-galleries'>";
 			$structure .= display_skills($all_datas);
 			$structure .= display_top_friendships($all_datas['friendship'], $playerID, 4);
+		$structure .= "</div>";
 			
+		$structure .= "<div class='separated-galleries'>";
 			$structure .= display_unlockables($all_datas['has_element']);
 			$structure .= display_books($all_datas);
 

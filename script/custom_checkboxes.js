@@ -92,7 +92,7 @@ function check_if_all_elements_hidden(id_command) {
 				smaller_title.style.display = (nsm_checked && no_items_to_show) ? "block" : "none";
 				break;
 			case 1:
-				smaller_title.style.display = (!tvim_checked && no_items_to_show) ? "block" : "none";
+				smaller_title.style.display = (no_items_to_show) ? "block" : "none";
 				break;
 		}
     }

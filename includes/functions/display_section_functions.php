@@ -368,7 +368,7 @@ function get_skills_icons(array $skills, string $current_skill):string {
     return $structure;
 }
 
-function display_top_friendships(array $friends, int $limit, int $playerID):string {
+function display_top_friendships(array $friends, int $playerID, int $limit):string {
     return display_friendships($friends, $playerID, $limit);
 }
 
