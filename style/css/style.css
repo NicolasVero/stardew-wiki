@@ -720,7 +720,7 @@ html {
     color: #000000;
     font-size: 16px;
   }
-  body main .info-section.friends-section > span .view-all-friendships {
+  body main .info-section.friends-section > span .view-all-friends {
     font-family: "Stardew Valley Stonks", serif;
     font-size: 12px;
     color: rgba(0, 0, 0, 0.64);
@@ -1508,7 +1508,7 @@ html {
     color: #000000;
     font-size: 12px;
   }
-  body main .info-section.friends-section > span .view-all-friendships {
+  body main .info-section.friends-section > span .view-all-friends {
     font-family: "Stardew Valley Stonks", serif;
     font-size: 9px;
     color: rgba(0, 0, 0, 0.64);

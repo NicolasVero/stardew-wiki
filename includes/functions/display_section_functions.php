@@ -368,11 +368,11 @@ function get_skills_icons(array $skills, string $current_skill):string {
     return $structure;
 }
 
-function display_top_friendships(array $friends, int $limit):string {
-    return display_friendships($friends, $limit);
+function display_top_friendships(array $friends, int $limit, int $playerID):string {
+    return display_friendships($friends, $limit, $playerID);
 }
 
-function display_friendships(array $friends, $limit = -1, int $playerID = null):string {
+function display_friendships(array $friends, int $limit = -1, int $playerID):string {
 
     $images_path = get_images_folder();
     $marriables_npc = json_decode(file_get_contents(get_json_folder() . 'marriables.json'), true);
@@ -380,10 +380,10 @@ function display_friendships(array $friends, $limit = -1, int $playerID = null):
     $villagers_json = json_decode(file_get_contents(get_json_folder() . 'villagers.json'), true);
 
     $section_class = ($limit == -1) ? 'all-friends' : 'top-friends';
-    $view_all = ($limit == -1) ? '' : "<span class='view-all view-all-friendships-$playerID modal-opener'>View all friendships</span>";
+    $view_all = ($limit == -1) ? '' : "<span class='view-all-friends view-all-friendships-$playerID modal-opener'>View all friendships</span>";
     $structure = ($limit == -1) ? 
 	"
-        <section class='info-section friends-section $section_class-$playerID'>
+        <section class='info-section friends-section $section_class $section_class-$playerID'>
 			<div class='panel-header'>
            		<h2 class='section-title panel-title'>Friendship progression</h2>
 				<img src='" . get_images_folder() . "icons/exit.png' class='exit-all-friendships-$playerID exit' />
