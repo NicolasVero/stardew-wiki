@@ -20,7 +20,6 @@ $response['uwu'] = $_FILES;
 try {
     if(is_file_secure($_FILES['save-upload'])) {
         $uploadedFile = $_FILES['save-upload']['tmp_name'];
-        log_($_FILES['save-upload']['type']);
         $data = simplexml_load_file($uploadedFile);
 
         $players_data = get_all_players_datas($data);
