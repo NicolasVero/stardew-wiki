@@ -36,6 +36,7 @@ function AJAX_send() {
                     page_display.innerHTML = html;
                 }
 
+				toggle_visibility_and_scroll(current_section, false, false);
                 toggle_loading(false);
             }
         };
@@ -65,7 +66,6 @@ function swapDisplayedPlayer(player_id) {
 // Load html elements
 function load_elements() {
 
-    toggle_visibility_and_scroll(current_section, false, false);
     deactivate_landing_inputs();
 
     toggle_checkboxes_actions();

@@ -179,10 +179,6 @@ function display_error_page(Exception $exception):string {
     $settings_button = display_settings_button();
 
     $strucure = "
-        <div id='landing' class='sur-header'>
-            $save_button
-            $settings_button
-        </div>
         <div class='error-wrapper'>
             <div class='dialogue-box-error-container'>
                 <img src='" . get_images_folder() . "dialogue_boxes/$image.png' alt='$image' />
