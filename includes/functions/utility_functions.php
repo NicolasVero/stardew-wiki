@@ -94,7 +94,7 @@ function get_game_version_score(string $version):int {
 	$score = 0;
 
 	for($i = 0; $i < count($version_numbers); $i++)
-		$score += pow($version_numbers[$i], 10 * $i); 
+		$score += $version_numbers[$i] * pow(1000, $i); 
 
 	return (int) $score;
 }
