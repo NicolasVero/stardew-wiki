@@ -30,12 +30,12 @@ function AJAX_send() {
                     }
 
                     initializePlayerSwapper(players_count);
+					load_elements();
                     swapDisplayedPlayer(0);
                 } else {
                     page_display.innerHTML = html;
                 }
 
-                load_elements();
                 toggle_loading(false);
             }
         };

@@ -14,6 +14,7 @@ window.addEventListener("load", () => {
     document.getElementById("no_spoil_mode").addEventListener("change", no_spoil_mode);
     document.getElementById("toggle_versions_items_mode").addEventListener("change", toggle_versions_items_mode);
     document.getElementById("save-upload").addEventListener("change", file_choice);
+	
     activate_buttons(".landing-upload", ".exit-upload", ".upload-panel", false);
     activate_buttons(".landing-settings", ".exit-settings", ".settings", false);
     toggle_custom_checkboxes(".checkmark");
