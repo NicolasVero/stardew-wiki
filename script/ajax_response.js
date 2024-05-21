@@ -9,7 +9,7 @@ function AJAX_send() {
     document.getElementById("landing-page").innerHTML = "";
 
     
-    if(file) {
+    if(file && !is_file_too_big) {
         let form_data = new FormData();
         let xhr       = new XMLHttpRequest();
         const url     = "./includes/get_xml_data.php";
@@ -34,9 +34,8 @@ function AJAX_send() {
                         page_display.innerHTML += html['player_' + i];
                     }
 
-                    initializePlayerSwapper(players_count);
+                    initialize_player_swapper(players_count);
 					load_elements();
-                    swapDisplayedPlayer(0);
                 } else {
                     page_display.innerHTML = html;
                 }
@@ -47,20 +46,23 @@ function AJAX_send() {
         };
 
         xhr.send(form_data);
+    } else {
+        alert("error, the file is too large");
     }
 }
 
-function initializePlayerSwapper(players_count) {
+function initialize_player_swapper(players_count) {
     const players_selection = document.getElementsByClassName("player_selection");
 
     for(let i = 0; i < players_selection.length; i++) {
         players_selection[i].addEventListener("click", () => {
-            swapDisplayedPlayer(i % players_count);
+            swap_displayed_player(i % players_count);
         });
     }
+    swap_displayed_player(0);
 }
 
-function swapDisplayedPlayer(player_id) {
+function swap_displayed_player(player_id) {
 
     const players_display = document.getElementsByClassName("player_container");
 
