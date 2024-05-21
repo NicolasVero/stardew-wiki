@@ -40,8 +40,3 @@ function in_bytes_conversion(size) {
 
     return value * Math.pow(1024, unit_to_power[unit]);
 }
-
-// Exemple d'utilisation
-const size = "41Mo";
-const bytes = inBytesConversion(size);
-console.log(bytes); // Affiche 4294967296
