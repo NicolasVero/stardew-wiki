@@ -28,7 +28,7 @@ try {
         for($i = 0; $i < count($players); $i++) {
             $pages['player_' . $i] = "
                 <div class='player_container player_{$i}_container'>" . 
-                    display_page($players_data[$i], $players) . "
+                    display_page($players_data[$i], $players, $i) . "
                 </div>
             ";
         }

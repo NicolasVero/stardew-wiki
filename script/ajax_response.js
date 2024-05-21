@@ -71,10 +71,42 @@ function load_elements() {
     toggle_checkboxes_actions();
 
     // Buttons & panels
-    activate_buttons(".view-all-friendships", ".exit-all-friendships", ".all-friends", false);
-    activate_buttons(".view-all-quests", ".exit-all-quests", ".all-quests", false);
-    activate_buttons(".main-settings", ".exit-settings", ".settings", false);
-    activate_buttons(".file-upload", ".exit-upload", ".upload-panel", false);
+	let buttons =
+	[
+		{
+			"open_button"    : ".main-settings",
+			"exit_button"    : ".exit-settings",
+			"modal_panel"    : ".settings",
+			"disable_scroll" : false
+		},
+		{
+			"open_button"    : ".file-upload",
+			"exit_button"    : ".exit-upload",
+			"modal_panel"    : ".upload-panel",
+			"disable_scroll" : false
+		}
+	];
+
+	//& Remplacer 8 par le nombre de joueur de la save ?
+	for(let i = 0; i < 8; i++){
+		buttons.push({
+			"open_button"    : ".view-all-friendships-" + i,
+			"exit_button"    : ".exit-all-friendships-" + i,
+			"modal_panel"    : ".all-friends-" + i,
+			"disable_scroll" : false
+		});
+
+		buttons.push({
+			"open_button"    : ".view-all-quests-" + i,
+			"exit_button"    : ".exit-all-quests-" + i,
+			"modal_panel"    : ".all-quests-" + i,
+			"disable_scroll" : false
+		});
+	}
+
+	buttons.forEach(button => {
+		activate_buttons(button.open_button, button.exit_button, button.modal_panel, button.disable_scroll);
+	});
 
     // Tooltips
     const tooltips = document.querySelectorAll(".tooltip");

@@ -109,21 +109,23 @@ function display_landing_page():string {
     ";
 }
 
-function display_page(array $all_datas, array $players):string {
+function display_page(array $all_datas, array $players, int $playerID):string {
 
     $structure = "";
 
     $structure .= display_sur_header($all_datas['general']['game_version'], $players);
     $structure .= display_header($all_datas['general']);
     $structure .= "<main>";
-    $structure .= display_general_stats($all_datas['general']);
-    $structure .= display_quests($all_datas['quest_log']);
+    $structure .= display_general_stats($all_datas['general'], $playerID);
 
     $structure .= "<div class='separated-galleries'>";
 		$structure .= display_skills($all_datas);
 		$structure .= display_top_friendships($all_datas['friendship'], 4);
-		$structure .= display_friendships($all_datas['friendship']);
     $structure .= "</div>";
+
+	// Modal panels
+	$structure .= display_friendships($all_datas['friendship'], $playerID);
+    $structure .= display_quests($all_datas['quest_log'], $playerID);
 
     $structure .= "<div class='separated-galleries'>";
         $structure .= display_unlockables($all_datas['has_element']);
