@@ -369,10 +369,10 @@ function get_skills_icons(array $skills, string $current_skill):string {
 }
 
 function display_top_friendships(array $friends, int $limit, int $playerID):string {
-    return display_friendships($friends, $limit, $playerID);
+    return display_friendships($friends, $playerID, $limit);
 }
 
-function display_friendships(array $friends, int $limit = -1, int $playerID):string {
+function display_friendships(array $friends, int $playerID, int $limit = -1):string {
 
     $images_path = get_images_folder();
     $marriables_npc = json_decode(file_get_contents(get_json_folder() . 'marriables.json'), true);
