@@ -35,6 +35,7 @@ function AJAX_send() {
                     }
 
                     initialize_player_swapper(players_count);
+					swap_displayed_player(0);
 					load_elements();
                 } else {
                     page_display.innerHTML = html;
@@ -59,7 +60,6 @@ function initialize_player_swapper(players_count) {
             swap_displayed_player(i % players_count);
         });
     }
-    swap_displayed_player(0);
 }
 
 function swap_displayed_player(player_id) {
