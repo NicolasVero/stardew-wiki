@@ -39,31 +39,37 @@ function get_unlockables(string $unlockable_name, object $player_data, int $vers
 			return has_element("canReadJunimoText", $player_data);
 			break;
 		case "dwarvish_translation_guide":
-			return ($is_older_version) ? has_element_old($player_data->canUnderstandDwarves) : has_element("HasDwarvishTranslationGuide", $player_data);
+			return ($is_older_version) ? has_element_ov($player_data->canUnderstandDwarves) : has_element("HasDwarvishTranslationGuide", $player_data);
 			break;
 		case "rusty_key":
-			return ($is_older_version) ? has_element_old($player_data->hasRustyKey) : has_element("HasRustyKey", $player_data);
+			return ($is_older_version)
+				? has_element_ov($player_data->hasRustyKey) :
+					((isset($GLOBALS['host_data']))
+						? does_host_has_element("rusty_key") : has_element("HasRustyKey", $player_data));
 			break;
 		case "club_card":
-			return ($is_older_version) ? has_element_old($player_data->hasClubCard) : has_element("HasClubCard", $player_data);
+			return ($is_older_version) ? has_element_ov($player_data->hasClubCard) 			: has_element("HasClubCard", $player_data);
 			break;
 		case "special_charm":
-			return ($is_older_version) ? has_element_old($player_data->hasSpecialCharm) : has_element("HasSpecialCharm", $player_data);
+			return ($is_older_version) ? has_element_ov($player_data->hasSpecialCharm) 		: has_element("HasSpecialCharm", $player_data);
 			break;
 		case "skull_key":
-			return ($is_older_version) ? has_element_old($player_data->hasSkullKey) : has_element("HasSkullKey", $player_data);
+			return ($is_older_version)
+				? has_element_ov($player_data->hasSkullKey) :
+					((isset($GLOBALS['host_data']))
+						? does_host_has_element("skull_key") : has_element("HasSkullKey", $player_data));
 			break;
 		case "magnifying_glass":
-			return ($is_older_version) ? has_element_old($player_data->hasMagnifyingGlass) : has_element("HasMagnifyingGlass", $player_data);
+			return ($is_older_version) ? has_element_ov($player_data->hasMagnifyingGlass) 	: has_element("HasMagnifyingGlass", $player_data);
 			break;
 		case "dark_talisman":
-			return ($is_older_version) ? has_element_old($player_data->hasDarkTalisman) : has_element("HasDarkTalisman", $player_data);
+			return ($is_older_version) ? has_element_ov($player_data->hasDarkTalisman) 		: has_element("HasDarkTalisman", $player_data);
 			break;
 		case "magic_ink":
-			return ($is_older_version) ? has_element_old($player_data->hasMagicInk) : has_element("HasPickedUpMagicInk", $player_data);
+			return ($is_older_version) ? has_element_ov($player_data->hasMagicInk) 			: has_element("HasPickedUpMagicInk", $player_data);
 			break;
 		case "town_key":
-			return ($is_older_version) ? has_element_old($player_data->HasTownKey) : has_element("HasTownKey", $player_data);
+			return ($is_older_version) ? has_element_ov($player_data->HasTownKey) 			: has_element("HasTownKey", $player_data);
 			break;
 	}
 }

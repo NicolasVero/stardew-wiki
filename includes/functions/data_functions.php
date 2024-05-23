@@ -7,6 +7,7 @@ function get_all_players_datas(object $data):array {
     $players = array();
 
     array_push($players, get_aggregated_data($data->player, $data));
+	$GLOBALS['host_data'] = $players[0];
 
 	if(empty($data->farmhands))
     	return $players;

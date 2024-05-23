@@ -70,11 +70,15 @@ function formate_usernames(string $username):string {
 	return strtr($username, $regex);
 }
 
+function does_host_has_element(string $element):int {
+	return ($GLOBALS['host_data']['has_element'][$element]);
+}
+
 function has_element(string $element, object $data):int {
     return (in_array($element, (array) $data->mailReceived->string)) ? 1 : 0;
 }
 
-function has_element_old(object $element):int {
+function has_element_ov(object $element):int {
     return !empty((array) $element);
 }
 
