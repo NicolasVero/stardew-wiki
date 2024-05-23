@@ -35,8 +35,9 @@ function AJAX_send() {
                     }
 
                     initialize_player_swapper(players_count);
-					swap_displayed_player(0);
 					load_elements();
+					swap_displayed_player(0);
+                    
                 } else {
                     page_display.innerHTML = html;
                 }
