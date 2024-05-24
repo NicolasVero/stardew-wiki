@@ -79,7 +79,7 @@ function display_secondary_upload():string {
 
 function display_save_panel():string {
     return "
-        <section class='upload-panel'>
+        <section class='upload-panel to-keep-open'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Upload a save</h2>
                 <img src='" . get_images_folder() . "icons/exit.png' class='exit-upload exit' />
