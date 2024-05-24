@@ -21,7 +21,6 @@ function get_all_players_datas():array {
 
 	$GLOBALS['all_players_data'] = $players_data;
 
-    // log_($players_data);
     return $players_data;
 }
 
@@ -95,20 +94,3 @@ function get_aggregated_data(object $data):array {
         'quest_log'       => get_quest_log($data->questLog)
     );
 }
-
-/*
-	### Get unlockables < 1.6 ###
-    'has_element' => array(
-        'understand_dwarf'     => has_element($data->canUnderstandDwarves),
-        'has_rusty_key'        => has_element($data->hasRustyKey),
-        'has_club_card'        => has_element($data->hasClubCard),
-        'has_special_charm'    => has_element($data->hasSpecialCharm),
-        'has_skull_key'        => has_element($data->hasSkullKey),
-        'has_magnifying_glass' => has_element($data->hasMagnifyingGlass),
-        'has_dark_talisman'    => has_element($data->hasDarkTalisman),
-        'has_magic_ink'        => has_element($data->hasMagicInk),
-        'has_bear_knowledge'   => (int) in_array(2120303, (array) $data->eventsSeen->int),
-        'has_onion_mastery'    => (int) in_array(3910979, (array) $data->eventsSeen->int),
-        'has_town_key'         => has_element($data->HasTownKey),
-    ),
-*/

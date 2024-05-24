@@ -550,8 +550,10 @@ function display_unlockables():string {
 		
 		$structure .= "
 			<span class='tooltip'>
-				<img src='$element_image' alt='$element' class='gallery-item unlockables $element_class' />
-				<span>$element</span>
+                <a href='" . get_wiki_link(get_item_id_by_name($element)) . "' target='_blank'>
+				    <img src='$element_image' alt='$element' class='gallery-item unlockables $element_class' />
+				</a>
+                <span>$element</span>
 			</span>
 		";
 	}
@@ -594,16 +596,20 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
                 if($is_found && $player_datas[$json_line_name]['counter'] == 0)
                     $element_class .= ' unused';
 
-
             $element_image = $images_path . formate_text_for_file((string) explode(':', $json_line_name)[0]). '.png';
-
-            // if($json_filename != 'books')
             $element_tooltip = ($is_found) ? get_tooltip_text($player_datas, $json_line_name, $json_filename) : $json_line_name;
-
+           
+            if(!in_array($json_filename, array('achievements')))
+                $wiki_url = get_wiki_link(get_item_id_by_name($json_line_name));
+            else 
+                $wiki_url = 'https://stardewvalleywiki.com/Achievements';
+            
 
             $structure .= "
                 <span class='tooltip'>
-                    <img src='$element_image' alt='$json_line_name' class='gallery-item $json_filename $element_class $is_newer_version_class' />
+                    <a href='$wiki_url' target='_blank'>
+                        <img src='$element_image' alt='$json_line_name' class='gallery-item $json_filename $element_class $is_newer_version_class' />
+                    </a>
                     <span>$element_tooltip</span>
                 </span>
             ";

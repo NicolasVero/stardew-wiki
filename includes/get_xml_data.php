@@ -9,12 +9,13 @@ require 'security_check.php';
 $response = array();
 $response['file_content'] = $_FILES;
 
-// log_(sanitize_json_with_version('quests'), 'romain ce gros bdh');
-
 try {
     if(is_file_secure($_FILES['save-upload'])) {
         $uploadedFile = $_FILES['save-upload']['tmp_name'];
         $data = simplexml_load_file($uploadedFile);
+
+        load_all_items();
+        load_wiki_links();
         $GLOBALS['untreated_all_players_data'] = $data;
 
         $players_data = get_all_players_datas();

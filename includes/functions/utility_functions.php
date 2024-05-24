@@ -128,3 +128,19 @@ function sanitize_json_with_version(string $json_name):array {
 	
 	return $sanitize_json;
 }
+
+function load_all_items():void {
+	$GLOBALS['all_items'] = json_decode(file_get_contents(get_json_folder() . "all_items.json"), true);
+}
+
+function get_item_id_by_name(string $name):int {
+	return array_search($name, $GLOBALS['all_items']);
+}
+
+function load_wiki_links():void {
+	$GLOBALS['wiki_links'] = json_decode(file_get_contents(get_json_folder() . "wiki_links.json"), true);
+}
+
+function get_wiki_link(int $id):string {
+	return $GLOBALS['wiki_links'][$id];
+}
