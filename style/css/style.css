@@ -185,18 +185,27 @@ html {
   .tooltip span.right {
     left: 100%;
   }
-  .tooltip img:hover {
+  .tooltip img,
+  .tooltip a {
+    display: inline-block;
+    height: 28px;
+  }
+  .tooltip img:hover,
+  .tooltip a:hover {
     cursor: url("../../medias/images/cursors/help.cur"), help;
   }
-  .tooltip img:hover ~ span {
+  .tooltip img:hover ~ span,
+  .tooltip a:hover ~ span {
     z-index: 100;
     display: inline !important;
   }
-  .tooltip img:hover ~ span.left {
+  .tooltip img:hover ~ span.left,
+  .tooltip a:hover ~ span.left {
     left: auto;
     right: 100%;
   }
-  .tooltip img:hover ~ span.right {
+  .tooltip img:hover ~ span.right,
+  .tooltip a:hover ~ span.right {
     left: 100%;
     right: auto;
   }
@@ -973,18 +982,27 @@ html {
   .tooltip span.right {
     left: 100%;
   }
-  .tooltip img:hover {
+  .tooltip img,
+  .tooltip a {
+    display: inline-block;
+    height: 21px;
+  }
+  .tooltip img:hover,
+  .tooltip a:hover {
     cursor: url("../../medias/images/cursors/help.cur"), help;
   }
-  .tooltip img:hover ~ span {
+  .tooltip img:hover ~ span,
+  .tooltip a:hover ~ span {
     z-index: 100;
     display: inline !important;
   }
-  .tooltip img:hover ~ span.left {
+  .tooltip img:hover ~ span.left,
+  .tooltip a:hover ~ span.left {
     left: auto;
     right: 100%;
   }
-  .tooltip img:hover ~ span.right {
+  .tooltip img:hover ~ span.right,
+  .tooltip a:hover ~ span.right {
     left: 100%;
     right: auto;
   }
