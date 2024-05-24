@@ -47,7 +47,7 @@ html {
   }
   body main .info-section:not(.general-stats).skills-section,
   body main .info-section:not(.general-stats).friends-section.top-friends {
-    flex-basis: 45% !important;
+    flex-basis: 47.5% !important;
   }
   body main .gallery:not(.shipped_items-section, .unlockables-section) {
     flex-basis: 47.5% !important;
@@ -554,11 +554,12 @@ html {
     gap: 10px;
   }
   body main .section-title {
-    font-size: 16px;
+    font-size: 14px;
     font-family: "Stardew Valley Stonks", serif;
     font-weight: 400;
     color: #000000;
     align-self: flex-start;
+    margin-bottom: 0;
   }
   body main .info-section {
     justify-content: flex-start;
@@ -1353,11 +1354,12 @@ html {
     gap: 7.5px;
   }
   body main .section-title {
-    font-size: 12px;
+    font-size: 10.5px;
     font-family: "Stardew Valley Stonks", serif;
     font-weight: 400;
     color: #000000;
     align-self: flex-start;
+    margin-bottom: 0;
   }
   body main .info-section {
     justify-content: flex-start;

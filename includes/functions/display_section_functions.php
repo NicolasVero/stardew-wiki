@@ -240,7 +240,6 @@ function display_quests():string {
 
     foreach($datas as $data) {
         $title = $data['title'];
-        $description = $data['description'];
         $objective = $data['objective'];
         $rewards = $data['rewards'];
 

@@ -1,6 +1,6 @@
 <?php
 
-function log_(mixed $element, string $title = '') {
+function log_(mixed $element, string $title = ''):void {
     if($title != '') echo "<h2>$title</h2>";
     echo "<pre>" . print_r($element, true) . "</pre>";
 } 
