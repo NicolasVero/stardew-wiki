@@ -32,7 +32,12 @@ function get_achievement(object $achievements):array {
     return $datas;
 }
 
-function get_unlockables(string $unlockable_name, object $player_data, int $version_score):int {
+function get_unlockables(string $unlockable_name):int {
+
+    $player_data = $GLOBALS['untreated_player_data'];
+    $version_score = $GLOBALS['game_version_score'];
+
+
 	$is_older_version = ($version_score < get_game_version_score("1.6.0"));
 	switch($unlockable_name) {
 		case "forest_magic":
@@ -74,7 +79,9 @@ function get_unlockables(string $unlockable_name, object $player_data, int $vers
 	}
 }
 
-function get_item_list(object $items, string $filename, int $version_score):array {
+function get_item_list(object $items, string $filename):array {
+
+    $version_score = $GLOBALS['game_version_score'];
     $datas = array();
 
     foreach($items->item as $item) {
@@ -145,8 +152,10 @@ function get_enemies_killed_data(object $data):array {
     return $enemies;
 }
 
-function get_item_list_string(object $data, string $filename, int $version_score):array {
+function get_item_list_string(object $data, string $filename):array {
     
+    $version_score = $GLOBALS['game_version_score'];
+
     if($version_score < get_game_version_score("1.6.0")) 
         return array();
     
@@ -170,7 +179,9 @@ function get_item_list_string(object $data, string $filename, int $version_score
     return $items;
 }
 
-function get_fish_caught_data(object $data, int $version_score):array {
+function get_fish_caught(object $data):array {
+    
+    $version_score = $GLOBALS['game_version_score'];
     $fishs = array();
 
     foreach($data->item as $item) {
@@ -340,8 +351,9 @@ function get_formatted_date(object $data):string {
 }
 
 
-function get_cooking_recipes(object $recipes, object $recipes_cooked, int $version_score):array {
+function get_cooking_recipes(object $recipes, object $recipes_cooked):array {
 
+    $version_score = $GLOBALS['game_version_score'];
     $return_datas = array();
     $json_recipes = sanitize_json_with_version('recipes');
 
@@ -370,7 +382,9 @@ function get_cooking_recipes(object $recipes, object $recipes_cooked, int $versi
     return $return_datas;
 }
 
-function get_artifacts(object $artifacts, object $general_data, int $version_score):array {
+function get_artifacts(object $artifacts, object $general_data):array {
+
+    $version_score = $GLOBALS['game_version_score'];
     $datas = array();
 
     foreach($artifacts->item as $artifact) {
@@ -394,7 +408,9 @@ function get_artifacts(object $artifacts, object $general_data, int $version_sco
     return $datas;
 }
 
-function get_minerals(object $minerals, object $general_data, $version_score):array {
+function get_minerals(object $minerals, object $general_data):array {
+    
+    $version_score = $GLOBALS['game_version_score'];
     $datas = array();
 
     foreach($minerals->item as $mineral) {

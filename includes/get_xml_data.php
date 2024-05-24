@@ -15,9 +15,10 @@ try {
     if(is_file_secure($_FILES['save-upload'])) {
         $uploadedFile = $_FILES['save-upload']['tmp_name'];
         $data = simplexml_load_file($uploadedFile);
+        $GLOBALS['untreated_all_players_data'] = $data;
 
-        $players_data = get_all_players_datas($data);
-        $players = get_all_players($data);
+        $players_data = get_all_players_datas();
+        $players = get_all_players();
 
         for($player_count = 0; $player_count < count($players); $player_count++) {
 			$GLOBALS['player_id'] = $player_count;
