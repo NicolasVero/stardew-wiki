@@ -1,16 +1,14 @@
 {
-    "marriables" : [
-        "Alex",
-        "Abigail",
-        "Elliott",
-        "Emily",
-        "Haley",
-        "Harvey",
-        "Leah",
-        "Maru",
-        "Penny",
-        "Sam",
-        "Sebastian",
-        "Shane"
-    ]
+    "0" : "Alex",
+    "1" : "Abigail",
+    "2" : "Elliott",
+    "3" : "Emily",
+    "4" : "Haley",
+    "5" : "Harvey",
+    "6" : "Leah",
+    "7" : "Maru",
+    "8" : "Penny",
+    "9" : "Sam",
+    "10" : "Sebastian",
+    "11" : "Shane"  
 }

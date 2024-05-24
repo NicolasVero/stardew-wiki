@@ -104,14 +104,14 @@ function get_item_list(object $items, string $filename, int $version_score):arra
 
 function find_reference_in_json(mixed $id, string $file):mixed {
     //& Changer file_get_contents en curl -> problème de pare-feu en hébergé
-    $json_file = json_decode(file_get_contents(get_json_folder() . $file . '.json'), true);
+    $json_file = sanitize_json_with_version($file);
 
     return isset($json_file[$id]) ? $json_file[$id] : null;
 }
 
 
 function get_skills_data(array $skills):array {
-    $json_skills = json_decode(file_get_contents(get_json_folder() . 'skills.json'), true);
+    $json_skills = sanitize_json_with_version('skills');
     $skills_datas = array();
 
     foreach($json_skills as $key => $skill) {
@@ -343,7 +343,7 @@ function get_formatted_date(object $data):string {
 function get_cooking_recipes(object $recipes, object $recipes_cooked, int $version_score):array {
 
     $return_datas = array();
-    $json_recipes = json_decode(file_get_contents(get_json_folder() . 'recipes.json'), true);
+    $json_recipes = sanitize_json_with_version('recipes');
 
     foreach($recipes->item as $recipe) {
 

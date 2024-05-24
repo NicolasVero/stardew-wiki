@@ -393,9 +393,9 @@ function display_friendships(int $limit = -1):string {
 	$friends = $GLOBALS['all_players_data'][$player_id]['friendship'];
 
     $images_path = get_images_folder();
-    $marriables_npc = json_decode(file_get_contents(get_json_folder() . 'marriables.json'), true);
 
-    $villagers_json = json_decode(file_get_contents(get_json_folder() . 'villagers.json'), true);
+    $marriables_npc = sanitize_json_with_version('marriables');
+    $villagers_json = sanitize_json_with_version('villagers');
 
     $section_class = ($limit == -1) ? 'all-friends' : 'top-friends';
     $view_all = ($limit == -1) ? '' : "<span class='view-all-friends view-all-friendships-$player_id modal-opener'>View all friendships</span>";
@@ -433,7 +433,7 @@ function display_friendships(int $limit = -1):string {
         ";
 
 		
-        $can_be_married = in_array($name, $marriables_npc['marriables']) && $status == "Friendly";
+        $can_be_married = in_array($name, $marriables_npc) && $status == "Friendly";
 
         for($i = 1; $i <= 10; $i++) {
 
@@ -465,7 +465,7 @@ function display_friendships(int $limit = -1):string {
         ";
     }
 
-    foreach($villagers_json["villagers"] as $villager_name) {
+    foreach($villagers_json as $villager_name) {
         if($limit == 0)
             break;
 
@@ -475,7 +475,7 @@ function display_friendships(int $limit = -1):string {
         $limit--;
         $friend_icon = $images_path . "characters/" . strtolower($villager_name) . ".png";
 
-        $can_be_married = in_array($villager_name, $marriables_npc['marriables']);
+        $can_be_married = in_array($villager_name, $marriables_npc);
 
         $structure .= "
 			<span>
@@ -485,7 +485,7 @@ function display_friendships(int $limit = -1):string {
         ";
 		
 		$status = "Unknown";
-        $can_be_married = in_array($villager_name, $marriables_npc['marriables']);
+        $can_be_married = in_array($villager_name, $marriables_npc);
 
         for($i = 1; $i <= 10; $i++) {
 
@@ -530,8 +530,7 @@ function display_unlockables():string {
 	$player_elements = $GLOBALS['all_players_data'][$player_id]['has_element'];
 
     $images_path = get_images_folder() . "unlockables/";
-    $elements = json_decode(file_get_contents(get_json_folder() . 'unlockables.json'), true);
-    $elements = $elements['unlockables'];
+    $elements = sanitize_json_with_version('unlockables');
     sort($elements);
 
     $structure = "
@@ -571,7 +570,6 @@ function display_gallery(array $player_elements, string $json_filename, string $
 
     $images_path = get_images_folder() . "$json_filename/";
     $json_datas = json_decode(file_get_contents(get_json_folder2() . $json_filename . '.json'), true);
-    // sort($json_datas);
 
     $structure = "
         <section class='gallery $json_filename-section'>

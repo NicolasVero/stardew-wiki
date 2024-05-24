@@ -5,19 +5,11 @@ require 'functions/display_functions.php';
 require 'functions/utility_functions.php';
 require 'security_check.php';
 
-//&TEMP
-// $data = simplexml_load_file('./data/romain-1.5.6');
-
-// // $general_data = get_general_datas($data);
-// $players_data = get_all_players_datas($data);
-// $players = get_all_players($data);
-//&TEMP
-
 
 $response = array();
 $response['file_content'] = $_FILES;
 
-$reponse['test'] = sanitize_json_with_version('villagers');
+// log_(sanitize_json_with_version('quests'), 'romain ce gros bdh');
 
 try {
     if(is_file_secure($_FILES['save-upload'])) {
