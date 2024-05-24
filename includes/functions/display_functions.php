@@ -109,7 +109,7 @@ function display_landing_page():string {
     ";
 }
 
-function display_page(array $all_datas, array $players, int $player_id):string {
+function display_page():string {
 
     $structure = display_sur_header();
     $structure .= display_header();

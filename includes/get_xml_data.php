@@ -29,7 +29,7 @@ try {
 			$GLOBALS['player_id'] = $player_count;
             $pages['player_' . $player_count] = "
                 <div class='player_container player_{$player_count}_container'>" . 
-                    display_page($players_data[$player_count], $players, $player_count) . "
+                    display_page() . "
                 </div>
             ";
         }
