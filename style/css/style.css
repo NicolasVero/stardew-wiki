@@ -188,7 +188,6 @@ html {
   .tooltip img,
   .tooltip a {
     display: inline-block;
-    height: 28px;
   }
   .tooltip img:hover,
   .tooltip a:hover {
@@ -208,6 +207,9 @@ html {
   .tooltip a:hover ~ span.right {
     left: 100%;
     right: auto;
+  }
+  .tooltip a {
+    height: 28px;
   }
   body #landing-page main {
     font-family: "Stardew Valley Stonks", serif;
@@ -985,7 +987,6 @@ html {
   .tooltip img,
   .tooltip a {
     display: inline-block;
-    height: 21px;
   }
   .tooltip img:hover,
   .tooltip a:hover {
@@ -1005,6 +1006,9 @@ html {
   .tooltip a:hover ~ span.right {
     left: 100%;
     right: auto;
+  }
+  .tooltip a {
+    height: 21px;
   }
   body #landing-page main {
     font-family: "Stardew Valley Stonks", serif;
