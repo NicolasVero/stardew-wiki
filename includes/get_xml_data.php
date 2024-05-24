@@ -15,7 +15,7 @@ require 'security_check.php';
 
 
 $response = array();
-$response['uwu'] = $_FILES;
+$response['file_content'] = $_FILES;
 
 try {
     if(is_file_secure($_FILES['save-upload'])) {
@@ -25,14 +25,16 @@ try {
         $players_data = get_all_players_datas($data);
         $players = get_all_players($data);
 
-        for($i = 0; $i < count($players); $i++) {
-            $pages['player_' . $i] = "
-                <div class='player_container player_{$i}_container'>" . 
-                    display_page($players_data[$i], $players, $i) . "
+        for($player_count = 0; $player_count < count($players); $player_count++) {
+			$GLOBALS['player_id'] = $player_count;
+            $pages['player_' . $player_count] = "
+                <div class='player_container player_{$player_count}_container'>" . 
+                    display_page() . "
                 </div>
             ";
         }
 
+        $response['global_variables'] = $GLOBALS;
         $response['html'] = $pages;
         $response['code'] = "success";
     }

@@ -15,6 +15,7 @@ function get_all_players_datas(object $data):array {
     foreach($data->farmhands as $side_player) {
         array_push($players, get_aggregated_data($side_player->Farmer, $data));
     }
+	$GLOBALS['all_players_data'] = $players;
 
     return $players;
 }
@@ -29,6 +30,7 @@ function get_all_players(object $data):array {
         if(!empty($side_player->Farmer->name))
             array_push($players_names, (string) $side_player->Farmer->name);     
     }
+	$GLOBALS['players_names'] = $players_names;
 
     return $players_names;
 }
@@ -37,6 +39,8 @@ function get_all_players(object $data):array {
 function get_aggregated_data(object $data, object $general_data):array {    
 
     $game_version_score = (int) get_game_version_score((string) $general_data->gameVersion);
+	$GLOBALS['game_version'] = $general_data->gameVersion;
+	$GLOBALS['game_version_score'] = $game_version_score;
     
     return array(
         'general' => array(

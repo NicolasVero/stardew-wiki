@@ -155,6 +155,10 @@ function get_item_list_string(object $data, string $filename, int $version_score
     foreach($data->item as $item) {
 
         $item_id = formate_original_data_string($item->key->string);
+
+        if(!ctype_digit($item_id)) 
+            $item_id = get_custom_id($item_id);
+
         $reference = find_reference_in_json($item_id, $filename);
 
         if(empty($reference)) 

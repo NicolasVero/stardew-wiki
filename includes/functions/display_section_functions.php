@@ -1,11 +1,11 @@
 <?php 
 
-function display_sur_header(string $game_version, array $players):string {
+function display_sur_header():string {
 
     $structure = "<div class='sur-header'>";
-        $structure .= display_player_selection($players);
+        $structure .= display_player_selection();
         $structure .= "<span>";
-            $structure .= display_game_version($game_version);
+            $structure .= display_game_version();
             $structure .= display_secondary_upload();
             $structure .= display_settings_button();
         $structure .= "</span>";
@@ -14,7 +14,10 @@ function display_sur_header(string $game_version, array $players):string {
     return $structure;
 }
 
-function display_player_selection(array $players):string {
+function display_player_selection():string {
+
+	$players = $GLOBALS['players_names'];
+
     $structure = "
 		<ul id='players_selection'>
 	";
@@ -28,9 +31,9 @@ function display_player_selection(array $players):string {
     return $structure;
 }
 
-function display_game_version(string $game_version):string {
+function display_game_version():string {
     $structure = "
-            <span class='game_version'>V $game_version</span>
+            <span class='game_version'>V " . $GLOBALS['game_version'] . "</span>
     ";
     return $structure;
 }
@@ -95,7 +98,10 @@ function display_save_panel():string {
     ";
 }
 
-function display_header(array $datas):string {
+function display_header():string {
+
+	$player_id = $GLOBALS['player_id'];
+	$datas = $GLOBALS['all_players_data'][$player_id]['general'];
     
     extract($datas);    
     $images_path = get_images_folder();
@@ -156,7 +162,11 @@ function display_header(array $datas):string {
     return $structure;
 }
 
-function display_general_stats(array $datas, int $playerID):string {
+function display_general_stats():string {
+
+
+	$player_id = $GLOBALS['player_id'];
+	$datas = $GLOBALS['all_players_data'][$player_id]['general'];
 
     extract($datas);
     $images_path = get_images_folder();
@@ -168,7 +178,7 @@ function display_general_stats(array $datas, int $playerID):string {
     $structure = "
         <section class='info-section general-stats'>
         	<h2 class='section-title'>General stats</h2>
-			<img src='" . get_images_folder() . "/icons/quest.png' class='quest-icon view-all-quests-$playerID button-elements modal-opener'>
+			<img src='" . get_images_folder() . "/icons/quest.png' class='quest-icon view-all-quests-$player_id button-elements modal-opener'>
             <div>
                 <span>
                     <img src='{$images_path}icons/energy.png' alt='Energy' />
@@ -203,16 +213,19 @@ function display_general_stats(array $datas, int $playerID):string {
     return $structure;
 }
 
-function display_quests(array $datas, int $playerID):string {
+function display_quests():string {
+
+	$player_id = $GLOBALS['player_id'];
+	$datas = $GLOBALS['all_players_data'][$player_id]['quest_log'];
 
     extract($datas);
     $images_path = get_images_folder();
 
     $structure = "
-        <section class='quests-section info-section all-quests-$playerID'>
+        <section class='quests-section info-section all-quests-$player_id'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Quests in progress</h2>
-                <img src='" . get_images_folder() . "icons/exit.png' class='exit-all-quests-$playerID exit' />
+                <img src='" . get_images_folder() . "icons/exit.png' class='exit-all-quests-$player_id exit' />
             </div>
             <span class='quests'>
     ";
@@ -278,8 +291,10 @@ function display_quests(array $datas, int $playerID):string {
     return $structure;
 }
 
-function display_skills(array $datas):string {
+function display_skills():string {
     
+	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
+
     $structure = "
 		<section class='skills-section info-section'>
 			<h2 class='section-title'>Skills</h2>
@@ -298,7 +313,7 @@ function display_skills(array $datas):string {
 
         $structure .= "<span class='skill $key'>";
 
-        $is_newer_version_class = ($datas['general']['game_version_score'] < get_game_version_score("1.6.0")) ? 'newer-version' : 'older-version';
+        $is_newer_version_class = ($GLOBALS['game_version_score'] < get_game_version_score("1.6.0")) ? 'newer-version' : 'older-version';
 
         $structure .= "
             <span class='tooltip'>
@@ -368,11 +383,14 @@ function get_skills_icons(array $skills, string $current_skill):string {
     return $structure;
 }
 
-function display_top_friendships(array $friends, int $playerID, int $limit):string {
-    return display_friendships($friends, $playerID, $limit);
+function display_top_friendships(int $limit = 4):string {
+    return display_friendships($limit);
 }
 
-function display_friendships(array $friends, int $playerID, int $limit = -1):string {
+function display_friendships(int $limit = -1):string {
+
+	$player_id = $GLOBALS['player_id'];
+	$friends = $GLOBALS['all_players_data'][$player_id]['friendship'];
 
     $images_path = get_images_folder();
     $marriables_npc = json_decode(file_get_contents(get_json_folder() . 'marriables.json'), true);
@@ -380,13 +398,13 @@ function display_friendships(array $friends, int $playerID, int $limit = -1):str
     $villagers_json = json_decode(file_get_contents(get_json_folder() . 'villagers.json'), true);
 
     $section_class = ($limit == -1) ? 'all-friends' : 'top-friends';
-    $view_all = ($limit == -1) ? '' : "<span class='view-all-friends view-all-friendships-$playerID modal-opener'>View all friendships</span>";
+    $view_all = ($limit == -1) ? '' : "<span class='view-all-friends view-all-friendships-$player_id modal-opener'>View all friendships</span>";
     $structure = ($limit == -1) ? 
 	"
-        <section class='info-section friends-section $section_class $section_class-$playerID'>
+        <section class='info-section friends-section $section_class $section_class-$player_id'>
 			<div class='panel-header'>
            		<h2 class='section-title panel-title'>Friendship progression</h2>
-				<img src='" . get_images_folder() . "icons/exit.png' class='exit-all-friendships-$playerID exit' />
+				<img src='" . get_images_folder() . "icons/exit.png' class='exit-all-friendships-$player_id exit' />
 			</div>
             <span>
     "
@@ -506,7 +524,11 @@ function display_friendships(array $friends, int $playerID, int $limit = -1):str
     return $structure;
 }
 
-function display_unlockables(array $player_elements):string {
+function display_unlockables():string {
+
+	$player_id = $GLOBALS['player_id'];
+	$player_elements = $GLOBALS['all_players_data'][$player_id]['has_element'];
+
     $images_path = get_images_folder() . "unlockables/";
     $elements = json_decode(file_get_contents(get_json_folder() . 'unlockables.json'), true);
     $elements = $elements['unlockables'];
@@ -543,7 +565,10 @@ function display_unlockables(array $player_elements):string {
     return $structure;
 }
 
-function display_gallery(array $player_elements, string $json_filename, string $section_title, int $version_score):string {
+function display_gallery(array $player_elements, string $json_filename, string $section_title):string {
+
+	$version_score = $GLOBALS['game_version_score'];
+
     $images_path = get_images_folder() . "$json_filename/";
     $json_datas = json_decode(file_get_contents(get_json_folder2() . $json_filename . '.json'), true);
     // sort($json_datas);
@@ -581,8 +606,11 @@ function display_gallery(array $player_elements, string $json_filename, string $
     return $structure;
 }
 
-function display_detailled_gallery(array $player_datas, string $json_filename, string $section_title, int $version_score):string {
-    $images_path = get_images_folder() . "$json_filename/";
+function display_detailled_gallery(array $player_datas, string $json_filename, string $section_title):string {
+    
+	$version_score = $GLOBALS['game_version_score'];
+
+	$images_path = get_images_folder() . "$json_filename/";
     $json_datas = json_decode(file_get_contents(get_json_folder2() . $json_filename . '.json'), true);
     // sort($json_datas);
 
@@ -666,36 +694,44 @@ function get_tooltip_text(array $player_data, string $json_line_name, string $da
 
 
 
-function display_books(array $datas):string {
-    return display_gallery($datas['books'], 'books', 'Books', $datas['general']['game_version_score']);
+function display_books():string {
+	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
+    return display_gallery($datas['books'], 'books', 'Books');
 }
 
-function display_fish(array $datas):string {
-    return display_detailled_gallery($datas['fish_caught'], 'fish', 'Fish caught', $datas['general']['game_version_score']);
+function display_fish():string {
+	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
+    return display_detailled_gallery($datas['fish_caught'], 'fish', 'Fish caught');
 }
 
-function display_cooking_recipes(array $datas):string {
-    return display_detailled_gallery($datas['cooking_recipes'], 'recipes', 'Cooking recipes', $datas['general']['game_version_score']);
+function display_cooking_recipes():string {
+	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
+    return display_detailled_gallery($datas['cooking_recipes'], 'recipes', 'Cooking recipes');
 }
 
-function display_minerals(array $datas):string {
-    return display_detailled_gallery($datas['minerals_found'], 'minerals', 'Minerals', $datas['general']['game_version_score']);
+function display_minerals():string {
+	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
+    return display_detailled_gallery($datas['minerals_found'], 'minerals', 'Minerals');
 }
 
-function display_artifacts(array $datas):string {
-    return display_detailled_gallery($datas['artifacts_found'], 'artifacts', 'Artifacts', $datas['general']['game_version_score']);
+function display_artifacts():string {
+	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
+    return display_detailled_gallery($datas['artifacts_found'], 'artifacts', 'Artifacts');
 }
 
-function display_enemies(array $datas):string {
-    return display_detailled_gallery($datas['enemies_killed'], 'enemies', 'Enemies killed', $datas['general']['game_version_score']);
+function display_enemies():string {
+	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
+    return display_detailled_gallery($datas['enemies_killed'], 'enemies', 'Enemies killed');
 }
 
-function display_achievements(array $datas):string {
-    return display_detailled_gallery($datas['achievements'], 'achievements', 'Achievements', $datas['general']['game_version_score']);
+function display_achievements():string {
+	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
+    return display_detailled_gallery($datas['achievements'], 'achievements', 'Achievements');
 }
 
-function display_shipped_items(array $datas):string {
-    return display_gallery($datas['shipped_items'], 'shipped_items', 'Shipped items', $datas['general']['game_version_score']);
+function display_shipped_items():string {
+	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
+    return display_gallery($datas['shipped_items'], 'shipped_items', 'Shipped items');
 }
 
 
