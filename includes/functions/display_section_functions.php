@@ -66,7 +66,7 @@ function display_settings_panel():string {
                 <span class='checkbox'>
                     <input type='checkbox' id='wiki_redirections' checked>
                     <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png'></span>
-                    <label for='wiki_redirections' id='wiki_redirections-label'>Activate Wiki Redirections</label>
+                    <label for='wiki_redirections' id='wiki_redirections-label'>Activate wiki redirections</label>
                 </span>
             </span>
         </section>
@@ -516,7 +516,7 @@ function display_friendships(int $limit = -1):string {
         $structure .= "
 				</span>
                 <span class='tooltip'>
-                    <img src='{$images_path}icons/birthday_icon.png' class='birthday $is_birthday' alt=''/>
+                    <img src='{$images_path}icons/birthday_icon.png' class='birthday_icon $is_birthday' alt=''/>
                     <span class='left'>$birthday</span>
                 </span>
 				<span class='interactions'>
