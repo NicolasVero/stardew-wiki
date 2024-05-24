@@ -115,31 +115,31 @@ function display_page(array $all_datas, array $players, int $player_id):string {
     $structure .= display_header();
     $structure .= "<main>";
 
-		$structure .= display_general_stats($all_datas['general'], $player_id);
+		$structure .= display_general_stats();
 
 		// Modal panels
-		$structure .= display_friendships($all_datas['friendship'], $player_id);
-		$structure .= display_quests($all_datas['quest_log'], $player_id);
+		$structure .= display_friendships();
+		$structure .= display_quests();
 
 		$structure .= "<div class='separated-galleries'>";
-			$structure .= display_skills($all_datas);
-			$structure .= display_top_friendships($all_datas['friendship'], $player_id, 4);
+			$structure .= display_skills();
+			$structure .= display_top_friendships();
 		$structure .= "</div>";
 			
 		$structure .= "<div class='separated-galleries'>";
-			$structure .= display_unlockables($all_datas['has_element']);
-			$structure .= display_books($all_datas);
+			$structure .= display_unlockables();
+			$structure .= display_books();
 
-			$structure .= display_cooking_recipes($all_datas);
-			$structure .= display_fish($all_datas);
+			$structure .= display_cooking_recipes();
+			$structure .= display_fish();
 
-			$structure .= display_minerals($all_datas);
-			$structure .= display_artifacts($all_datas);
+			$structure .= display_minerals();
+			$structure .= display_artifacts();
 
-			$structure .= display_enemies($all_datas);
-			$structure .= display_achievements($all_datas);
+			$structure .= display_enemies();
+			$structure .= display_achievements();
 
-			$structure .= display_shipped_items($all_datas);
+			$structure .= display_shipped_items();
 		$structure .= "</div>";
 
 
