@@ -205,13 +205,13 @@ function get_fish_caught_data(object $data, int $version_score):array {
 
 function get_friendship_data(object $data):array { 
     $friends = array();
-    $json_villagers = json_decode(file_get_contents(get_json_folder() . 'villagers.json'), true);
+    $json_villagers = sanitize_json_with_version('villagers');
 
     foreach($data->item as $item) {
         
         $friend_name = (string) $item->key->string;
 
-        if(!in_array($friend_name, $json_villagers['villagers'])) continue;
+        if(!in_array($friend_name, $json_villagers)) continue;
 
         $friends[$friend_name] = array(
             'points'            => (int) $item->value->Friendship->Points,

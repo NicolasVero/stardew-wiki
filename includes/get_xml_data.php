@@ -17,6 +17,8 @@ require 'security_check.php';
 $response = array();
 $response['file_content'] = $_FILES;
 
+$reponse['test'] = sanitize_json_with_version('villagers');
+
 try {
     if(is_file_secure($_FILES['save-upload'])) {
         $uploadedFile = $_FILES['save-upload']['tmp_name'];

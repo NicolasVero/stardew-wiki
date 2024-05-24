@@ -30,5 +30,11 @@
 	"103015" : "Book_Horse",
 	"103016" : "Book_Artifact",
 	"103017" : "Book_Grass",
-	"103018" : "Book_AnimalCatalogue"
+	"103018" : "Book_AnimalCatalogue",
+
+	"104000" : "mastery_0",
+	"104001" : "mastery_1",
+	"104002" : "mastery_2",
+	"104003" : "mastery_3",
+	"104004" : "mastery_4"
 }

@@ -120,3 +120,15 @@ function in_bytes_conversion(string $size):int {
 function array_keys_exists(array $keys, array $array):bool {
     return count(array_diff_key(array_flip($keys), $array)) === 0;
 }
+
+
+function sanitize_json_with_version(string $json_name):array {
+
+	$original_json = json_decode(file_get_contents(get_json_folder2() . "$json_name.json"), true);
+	$sanitize_json = array();
+
+	foreach($original_json as $key => $json_version) 
+		$sanitize_json += $json_version;
+	
+	return $sanitize_json;
+}
