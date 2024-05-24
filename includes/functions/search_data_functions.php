@@ -286,6 +286,7 @@ function get_fish_caught(object $data):array {
 function get_friendship_data(object $data):array { 
     $friends = array();
     $json_villagers = sanitize_json_with_version('villagers');
+    $json_birthday = decode('villagers_birthday');
 
     foreach($data->item as $item) {
         
@@ -297,6 +298,7 @@ function get_friendship_data(object $data):array {
             'id'                => get_custom_id($friend_name),
             'points'            => (int) $item->value->Friendship->Points,
             'friend_level'      => (int) floor(($item->value->Friendship->Points) / 250),
+            'birthday'          => $json_birthday[get_custom_id($friend_name)],
             'status'            => (string) $item->value->Friendship->Status,
             'week_gifts'        => (int) $item->value->Friendship->GiftsThisWeek,
             'talked_to_today'   => (int) $item->value->Friendship->TalkedToToday
@@ -411,13 +413,20 @@ function get_quest_log(object $data):array {
 }
 
 
-function get_formatted_date(object $data):string {
+function get_formatted_date(object $data, bool $display_date = true):mixed {
 
     $day    = $data->dayOfMonthForSaveGame;
     $season = array('spring', 'summer', 'fall', 'winter')[$data->seasonForSaveGame % 4];
     $year   = $data->yearForSaveGame;
 
-    return "Day $day of $season, Year $year";
+    if($display_date)
+        return "Day $day of $season, Year $year";
+
+    return array(
+        'day' => $day,
+        'season' => $season,
+        'year' => $year
+    );
 }
 
 

@@ -424,6 +424,10 @@ function display_friendships(int $limit = -1):string {
         extract($friend);
         $friend_icon = $images_path . "characters/" . strtolower($name) . ".png";
 
+        $is_birthday = (is_this_birthday($birthday)) ? "found" : "not-found";
+        $birthday = explode('/', $birthday);
+        $birthday = "Day " . $birthday[0] . " of " . $birthday[1];
+
         $structure .= "
 			<span>
 				<img src='$friend_icon' class='character-icon' alt='$name icon' />
@@ -452,6 +456,10 @@ function display_friendships(int $limit = -1):string {
 
         $structure .= "
 				</span>
+                <span class='tooltip'>
+                    <img src='{$images_path}icons/birthday_icon.png' class='birthday $is_birthday' alt=''/>
+                    <span class='left'>$birthday</span>
+                </span>
 				<span class='interactions'>
                     <span class='tooltip'>
                         <img src='{$images_path}icons/gift.png' class='interaction $gifted[0]' alt=''/>
@@ -502,6 +510,10 @@ function display_friendships(int $limit = -1):string {
 
         $structure .= "
 				</span>
+                <span class='tooltip'>
+                    <img src='{$images_path}icons/birthday_icon.png' class='birthday $is_birthday' alt=''/>
+                    <span class='left'>$birthday</span>
+                </span>
 				<span class='interactions'>
                     <span class='tooltip'>
                         <img src='{$images_path}icons/gift.png' class='interaction $gifted[0]' alt=''/>

@@ -703,6 +703,9 @@ html {
   body main .info-section.friends-section > span .hearts-level .hearts {
     width: 20px;
   }
+  body main .info-section.friends-section > span .birthday {
+    width: 24px;
+  }
   body main .info-section.friends-section > span .interactions {
     display: flex;
     align-items: center;
@@ -1502,6 +1505,9 @@ html {
   }
   body main .info-section.friends-section > span .hearts-level .hearts {
     width: 15px;
+  }
+  body main .info-section.friends-section > span .birthday {
+    width: 18px;
   }
   body main .info-section.friends-section > span .interactions {
     display: flex;

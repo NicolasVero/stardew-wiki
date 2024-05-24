@@ -149,3 +149,9 @@ function get_wiki_link(int $id):string {
 function decode(string $filename):array {
 	return json_decode(file_get_contents(get_json_folder() . "$filename.json"), true);
 }
+
+function is_this_birthday(string $birthday):bool {
+    extract(get_formatted_date($GLOBALS['untreated_player_data'], false));
+
+    return $birthday == "$day/$season";
+}
