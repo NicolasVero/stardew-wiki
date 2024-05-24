@@ -10,5 +10,25 @@
 	"102000" : "Goby",
 	"102001" : "SeaJelly",
 	"102002" : "RiverJelly",
-	"102003" : "CaveJelly"
+	"102003" : "CaveJelly",
+
+	"103000" : "Book_PriceCatalogue",
+	"103001" : "Book_Marlon",
+	"103002" : "Book_Speed" ,
+	"103003" : "Book_Speed2",
+	"103004" : "Book_Void" ,
+	"103005" : "Book_Friendship",
+	"103006" : "Book_Defense" ,
+	"103007" : "Book_Woodcutting",
+	"103008" : "Book_WildSeeds",
+	"103009" : "Book_Roe",
+	"103010" : "Book_Bombs",
+	"103011" : "Book_Crabbing",
+	"103012" : "Book_Trash",
+	"103013" : "Book_Diamonds",
+	"103014" : "Book_Mystery",
+	"103015" : "Book_Horse",
+	"103016" : "Book_Artifact",
+	"103017" : "Book_Grass",
+	"103018" : "Book_AnimalCatalogue"
 }
