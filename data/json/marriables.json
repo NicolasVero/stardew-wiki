@@ -1,14 +1,18 @@
 {
-    "0" : "Alex",
-    "1" : "Abigail",
-    "2" : "Elliott",
-    "3" : "Emily",
-    "4" : "Haley",
-    "5" : "Harvey",
-    "6" : "Leah",
-    "7" : "Maru",
-    "8" : "Penny",
-    "9" : "Sam",
-    "10" : "Sebastian",
-    "11" : "Shane"  
+    "1.0.0" : {
+        "0" : "Abigail",
+        "1" : "Alex",
+        "2" : "Elliott",
+        "3" : "Haley",
+        "4" : "Harvey",
+        "5" : "Leah",
+        "6" : "Maru",
+        "7" : "Penny",
+        "8" : "Sam",
+        "9" : "Sebastian"
+    },
+    "1.1.0" : {
+        "10" : "Emily",
+        "11" : "Shane"
+    }
 }
