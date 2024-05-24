@@ -79,7 +79,7 @@ function has_element_ov(object $element):int {
 }
 
 function get_custom_id(string $item):int {
-    $custom_ids = json_decode(file_get_contents(get_json_folder() . 'custom_ids.json'), true);
+	$custom_ids = decode('custom_ids');
     return array_search($item, $custom_ids);
 }
 
@@ -120,7 +120,8 @@ function array_keys_exists(array $keys, array $array):bool {
 
 function sanitize_json_with_version(string $json_name):array {
 
-	$original_json = json_decode(file_get_contents(get_json_folder() . "$json_name.json"), true);
+	$original_json = decode($json_name);
+
 	$sanitize_json = array();
 
 	foreach($original_json as $key => $json_version) 
@@ -130,7 +131,7 @@ function sanitize_json_with_version(string $json_name):array {
 }
 
 function load_all_items():void {
-	$GLOBALS['all_items'] = json_decode(file_get_contents(get_json_folder() . "all_items.json"), true);
+	$GLOBALS['all_items'] = decode('all_items');
 }
 
 function get_item_id_by_name(string $name):int {
@@ -138,9 +139,13 @@ function get_item_id_by_name(string $name):int {
 }
 
 function load_wiki_links():void {
-	$GLOBALS['wiki_links'] = json_decode(file_get_contents(get_json_folder() . "wiki_links.json"), true);
+	$GLOBALS['wiki_links'] = decode('wiki_links');
 }
 
 function get_wiki_link(int $id):string {
 	return $GLOBALS['wiki_links'][$id];
+}
+
+function decode(string $filename):array {
+	return json_decode(file_get_contents(get_json_folder() . "$filename.json"), true);
 }
