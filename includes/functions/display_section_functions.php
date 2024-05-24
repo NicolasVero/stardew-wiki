@@ -1,6 +1,9 @@
 <?php 
 
-function display_sur_header(string $game_version, array $players):string {
+function display_sur_header():string {
+	
+	$game_version = $GLOBALS['game_version'];
+	$players = $GLOBALS['players_names'];
 
     $structure = "<div class='sur-header'>";
         $structure .= display_player_selection($players);
@@ -156,7 +159,7 @@ function display_header(array $datas):string {
     return $structure;
 }
 
-function display_general_stats(array $datas, int $playerID):string {
+function display_general_stats(array $datas, int $player_id):string {
 
     extract($datas);
     $images_path = get_images_folder();
@@ -168,7 +171,7 @@ function display_general_stats(array $datas, int $playerID):string {
     $structure = "
         <section class='info-section general-stats'>
         	<h2 class='section-title'>General stats</h2>
-			<img src='" . get_images_folder() . "/icons/quest.png' class='quest-icon view-all-quests-$playerID button-elements modal-opener'>
+			<img src='" . get_images_folder() . "/icons/quest.png' class='quest-icon view-all-quests-$player_id button-elements modal-opener'>
             <div>
                 <span>
                     <img src='{$images_path}icons/energy.png' alt='Energy' />
@@ -203,16 +206,16 @@ function display_general_stats(array $datas, int $playerID):string {
     return $structure;
 }
 
-function display_quests(array $datas, int $playerID):string {
+function display_quests(array $datas, int $player_id):string {
 
     extract($datas);
     $images_path = get_images_folder();
 
     $structure = "
-        <section class='quests-section info-section all-quests-$playerID'>
+        <section class='quests-section info-section all-quests-$player_id'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Quests in progress</h2>
-                <img src='" . get_images_folder() . "icons/exit.png' class='exit-all-quests-$playerID exit' />
+                <img src='" . get_images_folder() . "icons/exit.png' class='exit-all-quests-$player_id exit' />
             </div>
             <span class='quests'>
     ";
@@ -368,11 +371,11 @@ function get_skills_icons(array $skills, string $current_skill):string {
     return $structure;
 }
 
-function display_top_friendships(array $friends, int $playerID, int $limit):string {
-    return display_friendships($friends, $playerID, $limit);
+function display_top_friendships(array $friends, int $player_id, int $limit):string {
+    return display_friendships($friends, $player_id, $limit);
 }
 
-function display_friendships(array $friends, int $playerID, int $limit = -1):string {
+function display_friendships(array $friends, int $player_id, int $limit = -1):string {
 
     $images_path = get_images_folder();
     $marriables_npc = json_decode(file_get_contents(get_json_folder() . 'marriables.json'), true);
@@ -380,13 +383,13 @@ function display_friendships(array $friends, int $playerID, int $limit = -1):str
     $villagers_json = json_decode(file_get_contents(get_json_folder() . 'villagers.json'), true);
 
     $section_class = ($limit == -1) ? 'all-friends' : 'top-friends';
-    $view_all = ($limit == -1) ? '' : "<span class='view-all-friends view-all-friendships-$playerID modal-opener'>View all friendships</span>";
+    $view_all = ($limit == -1) ? '' : "<span class='view-all-friends view-all-friendships-$player_id modal-opener'>View all friendships</span>";
     $structure = ($limit == -1) ? 
 	"
-        <section class='info-section friends-section $section_class $section_class-$playerID'>
+        <section class='info-section friends-section $section_class $section_class-$player_id'>
 			<div class='panel-header'>
            		<h2 class='section-title panel-title'>Friendship progression</h2>
-				<img src='" . get_images_folder() . "icons/exit.png' class='exit-all-friendships-$playerID exit' />
+				<img src='" . get_images_folder() . "icons/exit.png' class='exit-all-friendships-$player_id exit' />
 			</div>
             <span>
     "
