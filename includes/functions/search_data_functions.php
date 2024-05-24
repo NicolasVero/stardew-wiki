@@ -32,6 +32,59 @@ function get_achievement(object $achievements):array {
     return $datas;
 }
 
+function get_unlockables_list(object $data):array {
+    return array(
+        'forest_magic' => array(
+            'id'       => 107004,
+            'is_found' => get_unlockables("forest_magic")
+        ),
+        'dwarvish_translation_guide' => array(
+            'id'       => 107000,
+            'is_found' => get_unlockables("dwarvish_translation_guide")
+        ),
+        'rusty_key' => array(
+            'id'       => 107001,
+            'is_found' => get_unlockables("rusty_key")
+        ),
+        'club_card' => array(
+            'id'       => 107002,
+            'is_found' => get_unlockables("club_card")
+        ),
+        'special_charm' => array(
+            'id'       => 107007,
+            'is_found' => get_unlockables("special_charm")
+        ),
+        'skull_key' => array(
+            'id'       => 107003,
+            'is_found' => get_unlockables("skull_key"),
+        ),
+        'magnifying_glass' => array(
+            'id'       => 107008,
+            'is_found' => get_unlockables("magnifying_glass")
+        ),            
+        'dark_talisman' => array(
+            'id'       => 107005,
+            'is_found' => get_unlockables("dark_talisman")
+        ),
+        'magic_ink' => array(
+            'id'       => 107006,
+            'is_found' => get_unlockables("magic_ink")
+        ),
+        'bears_knowledge' => array(
+            'id'       => 107009,
+            'is_found' => (int) in_array(2120303, (array) $data->eventsSeen->int)
+        ),
+        'spring_onion_mastery' => array(
+            'id'       => 107010,
+            'is_found' => (int) in_array(3910979, (array) $data->eventsSeen->int)
+        ),
+        'town_key' => array(
+            'id'       => 107011,
+            'is_found' => get_unlockables("town_key")
+        )
+    );
+}
+
 function get_unlockables(string $unlockable_name):int {
 
     $player_data = $GLOBALS['untreated_player_data'];
@@ -43,9 +96,11 @@ function get_unlockables(string $unlockable_name):int {
 		case "forest_magic":
 			return has_element("canReadJunimoText", $player_data);
 			break;
+
 		case "dwarvish_translation_guide":
 			return ($is_older_version) ? has_element_ov($player_data->canUnderstandDwarves) : has_element("HasDwarvishTranslationGuide", $player_data);
 			break;
+
 		case "rusty_key":
 			return ($is_older_version)
 				? has_element_ov($player_data->hasRustyKey) :
@@ -55,31 +110,37 @@ function get_unlockables(string $unlockable_name):int {
 		case "club_card":
 			return ($is_older_version) ? has_element_ov($player_data->hasClubCard) 			: has_element("HasClubCard", $player_data);
 			break;
+
 		case "special_charm":
 			return ($is_older_version) ? has_element_ov($player_data->hasSpecialCharm) 		: has_element("HasSpecialCharm", $player_data);
 			break;
+
 		case "skull_key":
 			return ($is_older_version)
 				? has_element_ov($player_data->hasSkullKey) :
 					((isset($GLOBALS['host_data']))
 						? does_host_has_element("skull_key") : has_element("HasSkullKey", $player_data));
 			break;
+
 		case "magnifying_glass":
 			return ($is_older_version) ? has_element_ov($player_data->hasMagnifyingGlass) 	: has_element("HasMagnifyingGlass", $player_data);
 			break;
+
 		case "dark_talisman":
 			return ($is_older_version) ? has_element_ov($player_data->hasDarkTalisman) 		: has_element("HasDarkTalisman", $player_data);
 			break;
+
 		case "magic_ink":
 			return ($is_older_version) ? has_element_ov($player_data->hasMagicInk) 			: has_element("HasPickedUpMagicInk", $player_data);
 			break;
+
 		case "town_key":
 			return ($is_older_version) ? has_element_ov($player_data->HasTownKey) 			: has_element("HasTownKey", $player_data);
 			break;
 	}
 }
 
-function get_item_list(object $items, string $filename):array {
+function get_shipped_items(object $items, string $filename):array {
 
     $version_score = $GLOBALS['game_version_score'];
     $datas = array();
@@ -97,8 +158,12 @@ function get_item_list(object $items, string $filename):array {
 
         $reference = find_reference_in_json($item_id, $filename);
         
-        if(!empty($reference))
-            $datas[] = $reference;
+        if(!empty($reference)) {
+
+            $datas[$reference] = array(
+                'id' => $item_id
+            );
+        }
     }
     
     return $datas;
@@ -145,6 +210,7 @@ function get_enemies_killed_data(object $data):array {
     
     foreach($data->specificMonstersKilled->item as $item) {
         $enemies[(string) $item->key->string] = array(
+            'id'             => get_custom_id((string) $item->key->string),
             'killed_counter' => (int) $item->value->int
         );
     }
@@ -173,7 +239,9 @@ function get_item_list_string(object $data, string $filename):array {
         if(empty($reference)) 
             continue;
 
-        $items[] = $reference;
+        $items[$reference] = array(
+            'id' => $item_id
+        );
     }
     
     return $items;
@@ -205,6 +273,7 @@ function get_fish_caught(object $data):array {
             continue;
         
         $fishs[$index] = array(
+            'id'             => (int) $item_id,
             'caught_counter' => (int) $values_array[0],
             'max_length'     => (int) $values_array[1]
         );
@@ -225,6 +294,7 @@ function get_friendship_data(object $data):array {
         if(!in_array($friend_name, $json_villagers)) continue;
 
         $friends[$friend_name] = array(
+            'id'                => get_custom_id($friend_name),
             'points'            => (int) $item->value->Friendship->Points,
             'friend_level'      => (int) floor(($item->value->Friendship->Points) / 250),
             'status'            => (string) $item->value->Friendship->Status,
@@ -370,11 +440,18 @@ function get_cooking_recipes(object $recipes, object $recipes_cooked):array {
                 $recipe_id = (int) $recipe_cooked->key->string;
 
             if($recipe_id == $index) {
-                $return_datas[$item_name] = array('counter' => (int) $recipe_cooked->value->int);
+                $return_datas[$item_name] = array(
+                    'id'      => $recipe_id,
+                    'counter' => (int) $recipe_cooked->value->int
+                );
                 break;
             }
-            else 
-                $return_datas[$item_name] = array('counter' => 0);
+            else {
+                $return_datas[$item_name] = array(
+                    'id'      => $recipe_id,
+                    'counter' => 0
+                );
+            }
             
         }
     }
@@ -401,8 +478,12 @@ function get_artifacts(object $artifacts, object $general_data):array {
         
         $museum_index = get_museum_index($general_data);
 
-        if(!empty($reference))
-            $datas[$reference] = array('counter' => is_given_to_museum($artifact_id, $general_data, $museum_index, $version_score));
+        if(!empty($reference)) {
+            $datas[$reference] = array(
+                'id'      => $artifact_id,
+                'counter' => is_given_to_museum($artifact_id, $general_data, $museum_index, $version_score)
+            );
+        }
     }
     
     return $datas;
@@ -428,8 +509,12 @@ function get_minerals(object $minerals, object $general_data):array {
         
         $museum_index = get_museum_index($general_data);
 
-        if(!empty($reference))
-            $datas[$reference] = array('counter' => is_given_to_museum($mineral_id, $general_data, $museum_index, $version_score));
+        if(!empty($reference)) {
+            $datas[$reference] = array(
+                'id'      => $mineral_id,
+                'counter' => is_given_to_museum($mineral_id, $general_data, $museum_index, $version_score)
+            );
+        }
     }
     
     return $datas;

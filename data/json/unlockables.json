@@ -3,19 +3,20 @@
 		"107000" : "Dwarvish Translation Guide",
 		"107001" : "Rusty Key",
 		"107002" : "Club Card",
-		"107003" : "Skull Key"
+		"107003" : "Skull Key",
+		"107004" : "Forest Magic"
 	},
 	"1.1.0" :  {
-		"107004" : "Dark Talisman",
-		"107005" : "Magic Ink"
+		"107005" : "Dark Talisman",
+		"107006" : "Magic Ink"
 	},
 	"1.3.27" : {
-		"107006" : "Special Charm",
-		"107007" : "Magnifying Glass",
-		"107008" : "Bear's Knowledge",
-		"107009" : "Spring Onion Mastery"
+		"107007" : "Special Charm",
+		"107008" : "Magnifying Glass",
+		"107009" : "Bear's Knowledge",
+		"107010" : "Spring Onion Mastery"
 	},
 	"1.5.0" : {
-		"107010" : "Town Key"
+		"107011" : "Town Key"
 	}
 }

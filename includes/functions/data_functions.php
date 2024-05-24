@@ -4,24 +4,25 @@ require 'search_data_functions.php';
 
 
 function get_all_players_datas():array {
-    $players = array();
+    $players_data = array();
     $data = $GLOBALS['untreated_all_players_data'];
 
-    array_push($players, get_aggregated_data($data->player));
-	$GLOBALS['host_data'] = $players[0];
+    array_push($players_data, get_aggregated_data($data->player));
+	$GLOBALS['host_data'] = $players_data[0];
 
 	if(empty($data->farmhands)) {
-        $GLOBALS['all_players_data'] = $players;
-    	return $players;
+        $GLOBALS['all_players_data'] = $players_data;
+    	return $players_data;
     }
 
     foreach($data->farmhands as $side_player) {
-        array_push($players, get_aggregated_data($side_player->Farmer));
+        array_push($players_data, get_aggregated_data($side_player->Farmer));
     }
 
-	$GLOBALS['all_players_data'] = $players;
+	$GLOBALS['all_players_data'] = $players_data;
 
-    return $players;
+    // log_($players_data);
+    return $players_data;
 }
 
 
@@ -79,27 +80,14 @@ function get_aggregated_data(object $data):array {
             'foraging_level'     => (int) $data->foragingLevel,
             'fishing_level'      => (int) $data->fishingLevel,
         ),
-        'has_element' => array(
-            'forest_magic'                  => get_unlockables("forest_magic"),
-            'dwarvish_translation_guide'    => get_unlockables("dwarvish_translation_guide"),
-            'rusty_key'        				=> get_unlockables("rusty_key"),
-            'club_card'        				=> get_unlockables("club_card"),
-            'special_charm'    				=> get_unlockables("special_charm"),
-            'skull_key'        				=> get_unlockables("skull_key"),
-            'magnifying_glass' 				=> get_unlockables("magnifying_glass"),
-            'dark_talisman'    				=> get_unlockables("dark_talisman"),
-            'magic_ink'        				=> get_unlockables("magic_ink"),
-            'bears_knowledge'   			=> (int) in_array(2120303, (array) $data->eventsSeen->int),
-            'spring_onion_mastery'  		=> (int) in_array(3910979, (array) $data->eventsSeen->int),
-            'town_key'         				=> get_unlockables("town_key"),
-        ),
+        'has_element'     => get_unlockables_list($data), 
         'books'           => get_item_list_string($data->stats->Values, "books"),
         'masteries'       => get_item_list_string($data->stats->Values, "masteries"),
         'fish_caught'     => get_fish_caught($data->fishCaught),
         'artifacts_found' => get_artifacts($data->archaeologyFound, $general_data),
         'minerals_found'  => get_minerals($data->mineralsFound, $general_data),
         'cooking_recipes' => get_cooking_recipes($data->cookingRecipes, $data->recipesCooked),
-        'shipped_items'   => get_item_list($data->basicShipped, 'shipped_items'),
+        'shipped_items'   => get_shipped_items($data->basicShipped, 'shipped_items'),
         'achievements'    => get_achievement($data->achievements),
         'skills'          => get_skills_data((array) $data->professions->int),
         'friendship'      => get_friendship_data($data->friendshipData),

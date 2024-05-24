@@ -542,10 +542,10 @@ function display_unlockables():string {
 
 	foreach($elements as $element) {
 		$formatted_name = formate_text_for_file($element);
-		if (!isset($player_elements[$formatted_name]))
+		if(!isset($player_elements[$formatted_name]['is_found']))
 			continue;
 
-		$element_class = ($player_elements[$formatted_name]) ? "found" : "not-found";
+		$element_class = ($player_elements[$formatted_name]['is_found']) ? "found" : "not-found";
 		$element_image = "$images_path$formatted_name.png";
 		
 		$structure .= "
@@ -564,54 +564,12 @@ function display_unlockables():string {
     return $structure;
 }
 
-function display_gallery(array $player_elements, string $json_filename, string $section_title):string {
-
-	$version_score = $GLOBALS['game_version_score'];
-
-    $images_path = get_images_folder() . "$json_filename/";
-    $json_datas = json_decode(file_get_contents(get_json_folder() . $json_filename . '.json'), true);
-
-    $structure = "
-        <section class='gallery $json_filename-section'>
-            <h2 class='section-title'>$section_title</h2>
-            <span>
-				<h3 class='no-spoil-title'>Nothing to see here yet</h2>
-    ";
-
-    
-    foreach($json_datas as $key => $json_version) {
-        $is_newer_version_class = ($version_score < get_game_version_score($key)) ? 'newer-version' : 'older-version';
-        
-        foreach($json_version as $json_line_name) {
-
-            $element_class = in_array($json_line_name, $player_elements) ? "found" : "not-found"; 
-            $element_image = $images_path . formate_text_for_file($json_line_name) . ".png";
-
-            $structure .= "
-                <span class='tooltip'>
-                    <img src='$element_image' alt='$json_line_name' class='gallery-item $json_filename $element_class $is_newer_version_class' />
-                    <span>$json_line_name</span>
-                </span>
-            ";
-        }
-    }
-
-    $structure .= "
-			</span>
-		</section>
-	";
-
-    return $structure;
-}
-
 function display_detailled_gallery(array $player_datas, string $json_filename, string $section_title):string {
     
 	$version_score = $GLOBALS['game_version_score'];
 
 	$images_path = get_images_folder() . "$json_filename/";
     $json_datas = json_decode(file_get_contents(get_json_folder() . $json_filename . '.json'), true);
-    // sort($json_datas);
-
 
     $structure = "
         <section class='gallery $json_filename-section'>
@@ -638,6 +596,8 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
 
 
             $element_image = $images_path . formate_text_for_file((string) explode(':', $json_line_name)[0]). '.png';
+
+            // if($json_filename != 'books')
             $element_tooltip = ($is_found) ? get_tooltip_text($player_datas, $json_line_name, $json_filename) : $json_line_name;
 
 
@@ -682,7 +642,8 @@ function get_tooltip_text(array $player_data, string $json_line_name, string $da
         case 'achievements' :
             return "$json_line_name : $description";
 
-        case ('artifacts' || 'minerals') : 
+        case 'artifacts':
+        case 'minerals':  
             if($counter == 0) return "$json_line_name : not given yet";
             return "$json_line_name : given to museum";
 
@@ -694,7 +655,7 @@ function get_tooltip_text(array $player_data, string $json_line_name, string $da
 
 function display_books():string {
 	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
-    return display_gallery($datas['books'], 'books', 'Books');
+    return display_detailled_gallery($datas['books'], 'books', 'Books');
 }
 
 function display_fish():string {
@@ -729,7 +690,7 @@ function display_achievements():string {
 
 function display_shipped_items():string {
 	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
-    return display_gallery($datas['shipped_items'], 'shipped_items', 'Shipped items');
+    return display_detailled_gallery($datas['shipped_items'], 'shipped_items', 'Shipped items');
 }
 
 

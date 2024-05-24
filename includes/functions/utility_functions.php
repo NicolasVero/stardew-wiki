@@ -67,7 +67,7 @@ function formate_usernames(string $username):string {
 }
 
 function does_host_has_element(string $element):int {
-	return ($GLOBALS['host_data']['has_element'][$element]);
+	return ($GLOBALS['host_data']['has_element'][$element]['is_found']);
 }
 
 function has_element(string $element, object $data):int {
