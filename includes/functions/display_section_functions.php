@@ -63,6 +63,11 @@ function display_settings_panel():string {
                     <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png'></span>
                     <label for='toggle_versions_items_mode' id='toggle-versions-items-label'>Hide items from more recent versions</label>
                 </span>
+                <span class='checkbox'>
+                    <input type='checkbox' id='wiki_redirections' checked>
+                    <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png'></span>
+                    <label for='wiki_redirections' id='wiki_redirections-label'>Activate Wiki Redirections</label>
+                </span>
             </span>
         </section>
     ";
@@ -424,7 +429,7 @@ function display_friendships(int $limit = -1):string {
         extract($friend);
         $friend_icon = $images_path . "characters/" . strtolower($name) . ".png";
 
-        $is_birthday = (is_this_birthday($birthday)) ? "found" : "not-found";
+        $is_birthday = (is_this_birthday($birthday)) ? "is_birthday" : "isnt_birthday";
         $birthday = explode('/', $birthday);
         $birthday = "Day " . $birthday[0] . " of " . $birthday[1];
 
@@ -457,7 +462,7 @@ function display_friendships(int $limit = -1):string {
         $structure .= "
 				</span>
                 <span class='tooltip'>
-                    <img src='{$images_path}icons/birthday_icon.png' class='birthday $is_birthday' alt=''/>
+                    <img src='{$images_path}icons/birthday_icon.png' class='birthday_icon $is_birthday' alt=''/>
                     <span class='left'>$birthday</span>
                 </span>
 				<span class='interactions'>

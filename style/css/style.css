@@ -63,7 +63,8 @@ html {
   }
   .not-found,
   .not-gifted,
-  .not-talked {
+  .not-talked,
+  .isnt_birthday {
     filter: grayscale(1);
     opacity: 0.2;
   }
@@ -485,24 +486,20 @@ html {
     align-items: flex-end;
     gap: 10px;
   }
-  .settings-panel .checkboxes .checkbox #no_spoil_mode,
-  .settings-panel .checkboxes .checkbox #toggle_versions_items_mode {
+  .settings-panel .checkboxes .checkbox input {
     display: none;
   }
-  .settings-panel .checkboxes .checkbox #no_spoil_mode ~ .checkmark,
-  .settings-panel .checkboxes .checkbox #toggle_versions_items_mode ~ .checkmark {
+  .settings-panel .checkboxes .checkbox input ~ .checkmark {
     width: 20px;
     aspect-ratio: 1/1;
     border: solid 3px #5b2b2a;
     background-color: #ffc677;
   }
-  .settings-panel .checkboxes .checkbox #no_spoil_mode ~ .checkmark img,
-  .settings-panel .checkboxes .checkbox #toggle_versions_items_mode ~ .checkmark img {
+  .settings-panel .checkboxes .checkbox input ~ .checkmark img {
     width: 100%;
     display: none;
   }
-  .settings-panel .checkboxes .checkbox #no_spoil_mode:checked ~ .checkmark img,
-  .settings-panel .checkboxes .checkbox #toggle_versions_items_mode:checked ~ .checkmark img {
+  .settings-panel .checkboxes .checkbox input:checked ~ .checkmark img {
     display: block;
   }
   header {
@@ -703,7 +700,7 @@ html {
   body main .info-section.friends-section > span .hearts-level .hearts {
     width: 20px;
   }
-  body main .info-section.friends-section > span .birthday {
+  body main .info-section.friends-section > span .birthday_icon {
     width: 24px;
   }
   body main .info-section.friends-section > span .interactions {
@@ -866,7 +863,8 @@ html {
   }
   .not-found,
   .not-gifted,
-  .not-talked {
+  .not-talked,
+  .isnt_birthday {
     filter: grayscale(1);
     opacity: 0.2;
   }
@@ -1288,24 +1286,20 @@ html {
     align-items: flex-end;
     gap: 7.5px;
   }
-  .settings-panel .checkboxes .checkbox #no_spoil_mode,
-  .settings-panel .checkboxes .checkbox #toggle_versions_items_mode {
+  .settings-panel .checkboxes .checkbox input {
     display: none;
   }
-  .settings-panel .checkboxes .checkbox #no_spoil_mode ~ .checkmark,
-  .settings-panel .checkboxes .checkbox #toggle_versions_items_mode ~ .checkmark {
+  .settings-panel .checkboxes .checkbox input ~ .checkmark {
     width: 20px;
     aspect-ratio: 1/1;
     border: solid 3px #5b2b2a;
     background-color: #ffc677;
   }
-  .settings-panel .checkboxes .checkbox #no_spoil_mode ~ .checkmark img,
-  .settings-panel .checkboxes .checkbox #toggle_versions_items_mode ~ .checkmark img {
+  .settings-panel .checkboxes .checkbox input ~ .checkmark img {
     width: 100%;
     display: none;
   }
-  .settings-panel .checkboxes .checkbox #no_spoil_mode:checked ~ .checkmark img,
-  .settings-panel .checkboxes .checkbox #toggle_versions_items_mode:checked ~ .checkmark img {
+  .settings-panel .checkboxes .checkbox input:checked ~ .checkmark img {
     display: block;
   }
   header {
@@ -1506,7 +1500,7 @@ html {
   body main .info-section.friends-section > span .hearts-level .hearts {
     width: 15px;
   }
-  body main .info-section.friends-section > span .birthday {
+  body main .info-section.friends-section > span .birthday_icon {
     width: 18px;
   }
   body main .info-section.friends-section > span .interactions {

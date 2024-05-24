@@ -97,3 +97,16 @@ function check_if_all_elements_hidden(id_command) {
 		}
     }
 }
+
+function wiki_redirections() {
+    const links = document.querySelectorAll("a");
+    
+    links.forEach((link) => {
+        link.addEventListener("click", (event) => {
+            if(!document.getElementById("wiki_redirections").checked) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+            }
+        });
+    });
+}
