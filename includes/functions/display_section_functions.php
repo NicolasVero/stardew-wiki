@@ -1,14 +1,11 @@
 <?php 
 
 function display_sur_header():string {
-	
-	$game_version = $GLOBALS['game_version'];
-	$players = $GLOBALS['players_names'];
 
     $structure = "<div class='sur-header'>";
-        $structure .= display_player_selection($players);
+        $structure .= display_player_selection();
         $structure .= "<span>";
-            $structure .= display_game_version($game_version);
+            $structure .= display_game_version();
             $structure .= display_secondary_upload();
             $structure .= display_settings_button();
         $structure .= "</span>";
@@ -17,7 +14,10 @@ function display_sur_header():string {
     return $structure;
 }
 
-function display_player_selection(array $players):string {
+function display_player_selection():string {
+
+	$players = $GLOBALS['players_names'];
+
     $structure = "
 		<ul id='players_selection'>
 	";
@@ -31,9 +31,9 @@ function display_player_selection(array $players):string {
     return $structure;
 }
 
-function display_game_version(string $game_version):string {
+function display_game_version():string {
     $structure = "
-            <span class='game_version'>V $game_version</span>
+            <span class='game_version'>V " . $GLOBALS['game_version'] . "</span>
     ";
     return $structure;
 }
@@ -98,7 +98,10 @@ function display_save_panel():string {
     ";
 }
 
-function display_header(array $datas):string {
+function display_header():string {
+
+	$player_id = $GLOBALS['player_id'];
+	$datas = $GLOBALS['all_players_data'][$player_id]['general'];
     
     extract($datas);    
     $images_path = get_images_folder();

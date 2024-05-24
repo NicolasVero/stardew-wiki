@@ -112,7 +112,7 @@ function display_landing_page():string {
 function display_page(array $all_datas, array $players, int $player_id):string {
 
     $structure = display_sur_header();
-    $structure .= display_header($all_datas['general']);
+    $structure .= display_header();
     $structure .= "<main>";
 
 		$structure .= display_general_stats($all_datas['general'], $player_id);
