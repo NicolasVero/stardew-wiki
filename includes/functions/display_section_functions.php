@@ -571,7 +571,7 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
 	$version_score = $GLOBALS['game_version_score'];
 
 	$images_path = get_images_folder() . "$json_filename/";
-    $json_datas = json_decode(file_get_contents(get_json_folder() . $json_filename . '.json'), true);
+    $json_datas = decode($json_filename);
 
     $structure = "
         <section class='gallery $json_filename-section'>
