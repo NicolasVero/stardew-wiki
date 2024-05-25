@@ -118,7 +118,7 @@ function display_header():string {
             <div class='header'>
                 <span>
                     <img src='{$images_path}icons/" . strtolower($gender) . ".png' alt='Gender logo' class='player_gender_logo' />
-                    <span class='data player_name'>$name <span>- $farmer_level</span></span>
+                    <span class='data player_name'>$name <span class='data-label'>$farmer_level</span></span>
                 </span>
 
                 <span>
@@ -321,19 +321,26 @@ function display_skills():string {
 
         $structure .= "
             <span class='tooltip'>
-                <img src='$mastery_icon' class='level-icon $mastery_class $mastery_visible_class $is_newer_version_class' alt='$key'/>
+                <a href='https://stardewvalleywiki.com/Mastery_Cave' target='_blank'>
+                    <img src='$mastery_icon' class='level-icon $mastery_class $mastery_visible_class $is_newer_version_class' alt='$key'/>
+                </a>
                 <span>" . ucfirst($mastery_tooltip) . "</span>
             </span>
        
-
             <span class='tooltip'>
-                <img src='$level_icon' class='level-icon' alt='$key'/>
+                <a href='https://stardewvalleywiki.com/Skills' target='_blank'>
+                    <img src='$level_icon' class='level-icon' alt='$key'/>
+                </a>
                 <span>" . ucfirst($level_icon_name) . "</span>
-            </span>
-                
-                " . get_level_progress_bar($level) . "
-                <span class='level data'>$level</span>
-                <span>" . get_skills_icons($datas['skills'], $level_icon_name) . "</span>
+            </span>" 
+            . get_level_progress_bar($level) . 
+            
+            "<span class='level data'>$level</span>
+                <span>
+                    <a href='https://stardewvalleywiki.com/Skills' target='_blank'>" 
+                        . get_skills_icons($datas['skills'], $level_icon_name) . "
+                    </a>
+                </span>
             </span>
         ";
     }
@@ -433,10 +440,14 @@ function display_friendships(int $limit = -1):string {
         $birthday = explode('/', $birthday);
         $birthday = "Day " . $birthday[0] . " of " . $birthday[1];
 
+        $wiki_url = get_wiki_link(get_item_id_by_name($name));
+
         $structure .= "
 			<span>
-				<img src='$friend_icon' class='character-icon' alt='$name icon' />
-				<span class='character-name'>$name</span>
+                <a href='$wiki_url' target='_blank'>
+				    <img src='$friend_icon' class='character-icon' alt='$name icon' />
+				</a>
+                <span class='character-name'>$name</span>
 			    <span class='hearts-level'>
         ";
 
