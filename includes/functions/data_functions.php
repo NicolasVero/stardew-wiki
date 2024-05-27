@@ -80,7 +80,7 @@ function get_aggregated_data(object $data):array {
             'fishing_level'      => (int) $data->fishingLevel,
         ),
         'has_element'     => get_unlockables_list($data),
-        'crafts'          => get_crafting_recipes($data->craftingRecipes),
+        'crafting_recipes'          => get_crafting_recipes($data->craftingRecipes),
         'books'           => get_item_list_string($data->stats->Values, "books"),
         'masteries'       => get_item_list_string($data->stats->Values, "masteries"),
         'fish_caught'     => get_fish_caught($data->fishCaught),
