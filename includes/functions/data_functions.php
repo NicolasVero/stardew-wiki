@@ -33,7 +33,7 @@ function get_all_players():array {
 
     foreach($data->farmhands as $side_player) {
         if(!empty($side_player->Farmer->name))
-            array_push($players_names, (string) $side_player->Farmer->name);     
+            array_push($players_names, (string) $side_player->Farmer->name);
     }
 	$GLOBALS['players_names'] = $players_names;
 
@@ -41,7 +41,7 @@ function get_all_players():array {
 }
 
 
-function get_aggregated_data(object $data):array {    
+function get_aggregated_data(object $data):array {
 
     $general_data = $GLOBALS['untreated_all_players_data'];
     $game_version_score = (int) get_game_version_score((string) $general_data->gameVersion);
@@ -79,7 +79,8 @@ function get_aggregated_data(object $data):array {
             'foraging_level'     => (int) $data->foragingLevel,
             'fishing_level'      => (int) $data->fishingLevel,
         ),
-        'has_element'     => get_unlockables_list($data), 
+        'has_element'     => get_unlockables_list($data),
+        'crafts'          => get_crafting_recipes($data->craftingRecipes),
         'books'           => get_item_list_string($data->stats->Values, "books"),
         'masteries'       => get_item_list_string($data->stats->Values, "masteries"),
         'fish_caught'     => get_fish_caught($data->fishCaught),

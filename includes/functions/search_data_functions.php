@@ -429,12 +429,31 @@ function get_formatted_date(object $data, bool $display_date = true):mixed {
     );
 }
 
+function get_crafting_recipes(object $recipes):array {
+
+    $version_score = $GLOBALS['game_version_score'];
+    $return_datas = array();
+    $json_recipes = sanitize_json_with_version('crafting_recipes');
+
+    foreach($recipes->item as $recipe) {
+
+        $item_name = formate_original_data_string($recipe->key->string);
+        $index = array_search($item_name, $json_recipes);
+
+		$return_datas[$item_name] = array(
+			'id' => $index,
+			'counter' => (int) $recipe->value->int
+		);
+    }
+    
+    return $return_datas;
+}
 
 function get_cooking_recipes(object $recipes, object $recipes_cooked):array {
 
     $version_score = $GLOBALS['game_version_score'];
     $return_datas = array();
-    $json_recipes = sanitize_json_with_version('recipes');
+    $json_recipes = sanitize_json_with_version('cooking_recipes');
 
     foreach($recipes->item as $recipe) {
 

@@ -161,11 +161,23 @@ function display_header():string {
     return $structure;
 }
 
+function display_crafts_button():string {
+	$player_id = $GLOBALS['player_id'];
+	return "<img src='" . get_images_folder() . "/icons/craft_icon.png' class='craft-icon view-all-crafts-$player_id button-elements modal-opener'>";
+}
+
+function display_quest_button():string {
+	$player_id = $GLOBALS['player_id'];
+	return "<img src='" . get_images_folder() . "/icons/quest_icon.png' class='quest-icon view-all-quests-$player_id button-elements modal-opener'>";
+}
+
 function display_general_stats():string {
 
 
 	$player_id = $GLOBALS['player_id'];
 	$datas = $GLOBALS['all_players_data'][$player_id]['general'];
+
+	$quest_button = display_quest_button();
 
     extract($datas);
     $images_path = get_images_folder();
@@ -177,7 +189,7 @@ function display_general_stats():string {
     $structure = "
         <section class='info-section general-stats'>
         	<h2 class='section-title'>General stats</h2>
-			<img src='" . get_images_folder() . "/icons/quest.png' class='quest-icon view-all-quests-$player_id button-elements modal-opener'>
+			$quest_button
             <div>
                 <span>
                     <img src='{$images_path}icons/energy.png' alt='Energy' />
@@ -619,7 +631,7 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
             $element_class   = ($is_found) ? 'found' : 'not-found';
 
 
-            if(in_array($json_filename, array('recipes', 'artifacts', 'minerals'))) 
+            if(in_array($json_filename, array('cooking_recipes', 'artifacts', 'minerals'))) 
                 if($is_found && $player_datas[$json_line_name]['counter'] == 0)
                     $element_class .= ' unused';
 
@@ -672,7 +684,7 @@ function get_tooltip_text(array $player_data, string $json_line_name, string $da
         case 'enemies' : 
             return "$json_line_name : $killed_counter killed";
 
-        case 'recipes' :
+        case 'cooking_recipes' :
             if(!$counter) return "$json_line_name : not cooked yet";
             return "$json_line_name : cooked " . (int) $counter . " times";
 
@@ -702,7 +714,7 @@ function display_fish():string {
 
 function display_cooking_recipes():string {
 	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
-    return display_detailled_gallery($datas['cooking_recipes'], 'recipes', 'Cooking recipes');
+    return display_detailled_gallery($datas['cooking_recipes'], 'cooking_recipes', 'Cooking recipes');
 }
 
 function display_minerals():string {
