@@ -321,14 +321,14 @@ function display_skills():string {
 
         $structure .= "
             <span class='tooltip'>
-                <a href='https://stardewvalleywiki.com/Mastery_Cave' target='_blank'>
+                <a class='wiki_link' href='https://stardewvalleywiki.com/Mastery_Cave' target='_blank'>
                     <img src='$mastery_icon' class='level-icon $mastery_class $mastery_visible_class $is_newer_version_class' alt='$key'/>
                 </a>
                 <span>" . ucfirst($mastery_tooltip) . "</span>
             </span>
        
             <span class='tooltip'>
-                <a href='https://stardewvalleywiki.com/Skills' target='_blank'>
+                <a class='wiki_link' href='https://stardewvalleywiki.com/Skills' target='_blank'>
                     <img src='$level_icon' class='level-icon' alt='$key'/>
                 </a>
                 <span>" . ucfirst($level_icon_name) . "</span>
@@ -337,7 +337,7 @@ function display_skills():string {
             
             "<span class='level data'>$level</span>
                 <span>
-                    <a href='https://stardewvalleywiki.com/Skills' target='_blank'>" 
+                    <a class='wiki_link' href='https://stardewvalleywiki.com/Skills' target='_blank'>" 
                         . get_skills_icons($datas['skills'], $level_icon_name) . "
                     </a>
                 </span>
@@ -444,7 +444,7 @@ function display_friendships(int $limit = -1):string {
 
         $structure .= "
 			<span>
-                <a href='$wiki_url' target='_blank'>
+                <a class='wiki_link' href='$wiki_url' target='_blank'>
 				    <img src='$friend_icon' class='character-icon' alt='$name icon' />
 				</a>
                 <span class='character-name'>$name</span>
@@ -574,10 +574,12 @@ function display_unlockables():string {
 
 		$element_class = ($player_elements[$formatted_name]['is_found']) ? "found" : "not-found";
 		$element_image = "$images_path$formatted_name.png";
+
+		$wiki_url = get_wiki_link(get_item_id_by_name($element));
 		
 		$structure .= "
 			<span class='tooltip'>
-                <a href='" . get_wiki_link(get_item_id_by_name($element)) . "' target='_blank'>
+                <a class='wiki_link' href='$wiki_url' target='_blank'>
 				    <img src='$element_image' alt='$element' class='gallery-item unlockables $element_class' />
 				</a>
                 <span>$element</span>
@@ -634,7 +636,7 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
 
             $structure .= "
                 <span class='tooltip'>
-                    <a href='$wiki_url' target='_blank'>
+                    <a class='wiki_link' href='$wiki_url' target='_blank'>
                         <img src='$element_image' alt='$json_line_name' class='gallery-item $json_filename $element_class $is_newer_version_class' />
                     </a>
                     <span>$element_tooltip</span>

@@ -34,7 +34,11 @@ function no_spoil_mode(event) {
     const tvim_checked = document.getElementById("toggle_versions_items_mode").checked;
 
     for(let i = 0; i < elements.length; i++) {
-        const parent_element = elements[i].parentElement;
+        let parent_element = elements[i].parentElement;
+
+		if(parent_element.classList.contains('wiki_link'))
+			parent_element = parent_element.parentElement;
+
         if(parent_element && !elements[i].classList.contains("not-hide")) {
             is_element_newer_version = elements[i].classList.contains("newer-version");
             if(!tvim_checked)
@@ -92,7 +96,7 @@ function check_if_all_elements_hidden(id_command) {
 				smaller_title.style.display = (nsm_checked && no_items_to_show) ? "block" : "none";
 				break;
 			case 1:
-				smaller_title.style.display = (!tvim_checked && no_items_to_show) ? "block" : "none";
+				smaller_title.style.display = (no_items_to_show) ? "block" : "none";
 				break;
 		}
     }
