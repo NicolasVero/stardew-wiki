@@ -119,14 +119,18 @@ function load_elements() {
     // Tooltips
     const tooltips = document.querySelectorAll(".tooltip");
     tooltips.forEach(tooltip => {
+
         const rect = tooltip.getBoundingClientRect();
         const span = tooltip.querySelector("span");
+
+		if(tooltip.parentElement.parentElement.classList.contains('shipped_items-section'))
+			span.classList.add("right");
         
         if (!span.classList.contains("left") && !span.classList.contains("right")){
             if (rect.left > window.innerWidth / 2)
-                tooltip.querySelector("span").classList.add("left");
+                span.classList.add("left");
             else
-                tooltip.querySelector("span").classList.add("right");
+				span.classList.add("right");
         }
     });
 }

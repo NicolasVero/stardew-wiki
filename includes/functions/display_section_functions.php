@@ -6,7 +6,7 @@ function display_sur_header():string {
         $structure .= display_player_selection();
         $structure .= "<span>";
             $structure .= display_game_version();
-            $structure .= display_secondary_upload();
+            $structure .= display_save_button('file');
             $structure .= display_settings_button();
         $structure .= "</span>";
     $structure .= "</div>";
@@ -47,7 +47,7 @@ function display_settings_button(string $prefix = 'main'):string {
 
 function display_settings_panel():string {
     return "
-        <section class='settings settings-panel'>
+        <section class='settings settings-panel modal-window'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Settings</h2>
                 <img src='" . get_images_folder() . "icons/exit.png' class='exit-settings exit' />
@@ -73,21 +73,15 @@ function display_settings_panel():string {
     ";
 }
 
-function display_save_button():string {
+function display_save_button(string $prefix ='landing'):string {
     return "
-        <span class='landing-upload modal-opener'><img src='" . get_images_folder() ."icons/file.png' class='modal-opener'></span>
-    ";
-}
-
-function display_secondary_upload():string {
-    return "
-        <span class='file-upload modal-opener'><img src='" . get_images_folder() ."icons/file.png' class='modal-opener'></span>
+        <span class='$prefix-upload modal-opener'><img src='" . get_images_folder() ."icons/file.png' class='modal-opener'></span>
     ";
 }
 
 function display_save_panel():string {
     return "
-        <section class='upload-panel to-keep-open'>
+        <section class='upload-panel to-keep-open modal-window'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Upload a save</h2>
                 <img src='" . get_images_folder() . "icons/exit.png' class='exit-upload exit' />
@@ -227,7 +221,7 @@ function display_quests():string {
     $images_path = get_images_folder();
 
     $structure = "
-        <section class='quests-section info-section all-quests-$player_id'>
+        <section class='quests-section info-section all-quests-$player_id modal-window'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Quests in progress</h2>
                 <img src='" . get_images_folder() . "icons/exit.png' class='exit-all-quests-$player_id exit' />
@@ -412,7 +406,7 @@ function display_friendships(int $limit = -1):string {
     $view_all = ($limit == -1) ? '' : "<span class='view-all-friends view-all-friendships-$player_id modal-opener'>View all friendships</span>";
     $structure = ($limit == -1) ? 
 	"
-        <section class='info-section friends-section $section_class $section_class-$player_id'>
+        <section class='info-section friends-section $section_class $section_class-$player_id modal-window'>
 			<div class='panel-header'>
            		<h2 class='section-title panel-title'>Friendship progression</h2>
 				<img src='" . get_images_folder() . "icons/exit.png' class='exit-all-friendships-$player_id exit' />

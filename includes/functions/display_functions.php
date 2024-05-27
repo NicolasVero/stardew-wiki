@@ -175,7 +175,7 @@ function display_error_page(Exception $exception):string {
 
     extract($exception_dialogues[$exception->getMessage()]);
 
-    $save_button = display_secondary_upload();
+    $save_button = display_save_button('file');
     $settings_button = display_settings_button();
 
     $strucure = "

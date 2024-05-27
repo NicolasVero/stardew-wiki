@@ -90,6 +90,12 @@ html {
     transform: scale(1.1);
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
+  .modal-window,
+  .modal-opener,
+  .socials,
+  img {
+    user-select: none;
+  }
   .panel-header {
     display: flex;
     justify-content: space-between;
@@ -889,6 +895,12 @@ html {
   .buttons:hover {
     transform: scale(1.1);
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
+  }
+  .modal-window,
+  .modal-opener,
+  .socials,
+  img {
+    user-select: none;
   }
   .panel-header {
     display: flex;
