@@ -322,7 +322,7 @@ function display_skills():string {
             </span>
        
             <span class='tooltip'>
-                <a class='wiki_link' href='https://stardewvalleywiki.com/Skills' target='_blank'>
+                <a class='wiki_link' href='https://stardewvalleywiki.com/Skills#" . ucfirst($level_icon_name) . "' target='_blank'>
                     <img src='$level_icon' class='level-icon' alt='$key'/>
                 </a>
                 <span>" . ucfirst($level_icon_name) . "</span>
@@ -494,9 +494,13 @@ function display_friendships(int $limit = -1):string {
 
         $can_be_married = in_array($villager_name, $marriables_npc);
 
+        $wiki_url = get_wiki_link(get_item_id_by_name($villager_name));
+
         $structure .= "
 			<span>
-				<img src='$friend_icon' class='character-icon not-found' alt='$villager_name icon' />
+				<a class='wiki_link' href='$wiki_url' target='_blank'>
+					<img src='$friend_icon' class='character-icon not-found' alt='$villager_name icon' />
+				</a>
 				<span class='character-name'>$villager_name</span>
 			    <span class='hearts-level'>
         ";
@@ -630,7 +634,11 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
 
             $structure .= "
                 <span class='tooltip'>
-                    <a class='wiki_link' href='$wiki_url' target='_blank'>
+			";
+
+			$structure .= '<a class="wiki_link" href="' . $wiki_url . '" target="_blank">';
+
+			$structure .= "
                         <img src='$element_image' alt='$json_line_name' class='gallery-item $json_filename $element_class $is_newer_version_class' />
                     </a>
                     <span>$element_tooltip</span>

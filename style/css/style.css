@@ -693,6 +693,7 @@ html {
     align-items: center;
   }
   body main .info-section.friends-section > span .character-icon {
+    cursor: url("../../medias/images/cursors/help.cur"), help;
     width: 40px;
   }
   body main .info-section.friends-section > span .character-name {
@@ -1499,6 +1500,7 @@ html {
     align-items: center;
   }
   body main .info-section.friends-section > span .character-icon {
+    cursor: url("../../medias/images/cursors/help.cur"), help;
     width: 30px;
   }
   body main .info-section.friends-section > span .character-name {
