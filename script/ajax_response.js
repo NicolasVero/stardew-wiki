@@ -116,21 +116,4 @@ function load_elements() {
 		activate_buttons(button.open_button, button.exit_button, button.modal_panel, button.disable_scroll);
 	});
 
-    // Tooltips
-    const tooltips = document.querySelectorAll(".tooltip");
-    tooltips.forEach(tooltip => {
-
-        const rect = tooltip.getBoundingClientRect();
-        const span = tooltip.querySelector("span");
-
-		if(tooltip.parentElement.parentElement.classList.contains('shipped_items-section'))
-			span.classList.add("right");
-        
-        if (!span.classList.contains("left") && !span.classList.contains("right")){
-            if (rect.left > window.innerWidth / 2)
-                span.classList.add("left");
-            else
-				span.classList.add("right");
-        }
-    });
 }

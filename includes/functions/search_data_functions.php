@@ -21,8 +21,8 @@ function get_achievement(object $achievements):array {
     
     foreach($achievements->int as $achievement) {
         $json_data = find_reference_in_json((int) $achievement, 'achievements_details');
-        $achievement_title = explode(':', $json_data)[0]; 
-        $achievement_description = explode(':', $json_data)[1]; 
+        $achievement_title = explode('µ', $json_data)[0]; 
+        $achievement_description = explode('µ', $json_data)[1]; 
 
         $datas[$achievement_title] = array(
             'description' => $achievement_description

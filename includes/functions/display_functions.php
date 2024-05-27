@@ -140,6 +140,8 @@ function display_page():string {
 			$structure .= display_achievements();
 
 			$structure .= display_shipped_items();
+			
+			$structure .= display_crafting_recipes();
 		$structure .= "</div>";
 
 

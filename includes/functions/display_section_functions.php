@@ -605,7 +605,7 @@ function display_unlockables():string {
     return $structure;
 }
 
-function display_detailled_gallery(array $player_datas, string $json_filename, string $section_title):string {
+function display_detailled_gallery(array $player_datas, string $json_filename, string $section_title, string $width):string {
     
 	$version_score = $GLOBALS['game_version_score'];
 
@@ -613,7 +613,7 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
     $json_datas = decode($json_filename);
 
     $structure = "
-        <section class='gallery $json_filename-section'>
+        <section class='gallery $json_filename-section $width'>
             <h2 class='section-title'>$section_title</h2>
             <span>
 				<h3 class='no-spoil-title'>Nothing to see here yet</h2>
@@ -631,11 +631,11 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
             $element_class   = ($is_found) ? 'found' : 'not-found';
 
 
-            if(in_array($json_filename, array('cooking_recipes', 'artifacts', 'minerals'))) 
+            if(in_array($json_filename, array('cooking_recipes', 'crafting_recipes', 'artifacts', 'minerals'))) 
                 if($is_found && $player_datas[$json_line_name]['counter'] == 0)
                     $element_class .= ' unused';
 
-            $element_image = $images_path . formate_text_for_file((string) explode(':', $json_line_name)[0]). '.png';
+            $element_image = $images_path . formate_text_for_file((string) explode('µ', $json_line_name)[0]). '.png';
             $element_tooltip = ($is_found) ? get_tooltip_text($player_datas, $json_line_name, $json_filename) : $json_line_name;
            
             if(!in_array($json_filename, array('achievements')))
@@ -688,6 +688,10 @@ function get_tooltip_text(array $player_data, string $json_line_name, string $da
             if(!$counter) return "$json_line_name : not cooked yet";
             return "$json_line_name : cooked " . (int) $counter . " times";
 
+		case 'crafting_recipes' :
+			if(!$counter) return "$json_line_name : not crafted yet";
+			return "$json_line_name : crafted " . (int) $counter . " times";
+
         case 'achievements' :
             return "$json_line_name : $description";
 
@@ -704,42 +708,47 @@ function get_tooltip_text(array $player_data, string $json_line_name, string $da
 
 function display_books():string {
 	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
-    return display_detailled_gallery($datas['books'], 'books', 'Books');
+    return display_detailled_gallery($datas['books'], 'books', 'Books', "_50");
 }
 
 function display_fish():string {
 	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
-    return display_detailled_gallery($datas['fish_caught'], 'fish', 'Fish caught');
+    return display_detailled_gallery($datas['fish_caught'], 'fish', 'Fish caught', "_50");
 }
 
 function display_cooking_recipes():string {
 	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
-    return display_detailled_gallery($datas['cooking_recipes'], 'cooking_recipes', 'Cooking recipes');
+    return display_detailled_gallery($datas['cooking_recipes'], 'cooking_recipes', 'Cooking recipes', "_50");
 }
 
 function display_minerals():string {
 	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
-    return display_detailled_gallery($datas['minerals_found'], 'minerals', 'Minerals');
+    return display_detailled_gallery($datas['minerals_found'], 'minerals', 'Minerals', "_50");
 }
 
 function display_artifacts():string {
 	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
-    return display_detailled_gallery($datas['artifacts_found'], 'artifacts', 'Artifacts');
+    return display_detailled_gallery($datas['artifacts_found'], 'artifacts', 'Artifacts', "_50");
 }
 
 function display_enemies():string {
 	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
-    return display_detailled_gallery($datas['enemies_killed'], 'enemies', 'Enemies killed');
+    return display_detailled_gallery($datas['enemies_killed'], 'enemies', 'Enemies killed', "_50");
 }
 
 function display_achievements():string {
 	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
-    return display_detailled_gallery($datas['achievements'], 'achievements', 'Achievements');
+    return display_detailled_gallery($datas['achievements'], 'achievements', 'Achievements', "_50");
 }
 
 function display_shipped_items():string {
 	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
-    return display_detailled_gallery($datas['shipped_items'], 'shipped_items', 'Shipped items');
+    return display_detailled_gallery($datas['shipped_items'], 'shipped_items', 'Shipped items', "_100");
+}
+
+function display_crafting_recipes():string {
+	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
+    return display_detailled_gallery($datas['crafting_recipes'], 'crafting_recipes', 'Crafting recipes', "_100");
 }
 
 

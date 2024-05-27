@@ -47,9 +47,9 @@ html {
   }
   body main .info-section:not(.general-stats).skills-section,
   body main .info-section:not(.general-stats).friends-section.top-friends {
-    flex-basis: 47.5% !important;
+    flex-basis: 45% !important;
   }
-  body main .gallery:not(.shipped_items-section, .unlockables-section) {
+  body main .gallery._50 {
     flex-basis: 47.5% !important;
   }
   .center-absolute {

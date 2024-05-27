@@ -40,3 +40,23 @@ function in_bytes_conversion(size) {
 
     return value * Math.pow(1024, unit_to_power[unit]);
 }
+
+function initialize_tooltips() {
+    const tooltips = document.querySelectorAll('.tooltip');
+	console.log("coucou");
+    
+    tooltips.forEach((tooltip) => {
+
+        const rect = tooltip.getBoundingClientRect();
+        const window_width = window.innerWidth;
+        const span = tooltip.querySelector("span");
+        
+        if (!span.classList.contains("left") && !span.classList.contains("right")){
+			if (rect.left < window_width / 2)
+				span.classList.add("right");
+			else
+				span.classList.add("left");
+		}
+
+    });
+}
