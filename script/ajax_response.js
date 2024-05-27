@@ -30,13 +30,11 @@ function AJAX_send() {
 
                     const players_count = Object.keys(html).length;;
 
-                    for(let i = 0; i < players_count; i++) {
+                    for(let i = 0; i < players_count; i++)
                         page_display.innerHTML += html['player_' + i];
-                    }
 
                     initialize_player_swapper(players_count);
 					load_elements();
-					swap_displayed_player(0);
                     
                 } else {
                     page_display.innerHTML = html;
@@ -115,5 +113,7 @@ function load_elements() {
 	buttons.forEach(button => {
 		activate_buttons(button.open_button, button.exit_button, button.modal_panel, button.disable_scroll);
 	});
+
+	update_tooltips_after_ajax();
 
 }

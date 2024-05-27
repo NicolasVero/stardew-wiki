@@ -41,14 +41,53 @@ function in_bytes_conversion(size) {
     return value * Math.pow(1024, unit_to_power[unit]);
 }
 
+function on_images_loaded(callback) {
+	toggle_scroll(false);
+    var images = document.querySelectorAll('img');
+    var images_loaded = 0;
+    var total_images = images.length;
+
+    if (total_images === 0) {
+        callback();
+        return;
+    }
+
+    images.forEach(function(image) {
+        if (image.complete) {
+            images_loaded++;
+        } else {
+            image.addEventListener('load', function() {
+                images_loaded++;
+                if (images_loaded === total_images)
+                    callback();
+            });
+            image.addEventListener('error', function() {
+                images_loaded++;
+                if (images_loaded === total_images)
+                    callback();
+            });
+        }
+    });
+
+    if (images_loaded === total_images)
+        callback();
+}
+
+function update_tooltips_after_ajax() {
+    on_images_loaded(function() {
+        initialize_tooltips();
+		swap_displayed_player(0);
+		toggle_scroll(true);
+    });
+}
+
 function initialize_tooltips() {
     const tooltips = document.querySelectorAll('.tooltip');
-	console.log("coucou");
     
     tooltips.forEach((tooltip) => {
 
-        const rect = tooltip.getBoundingClientRect();
-        const window_width = window.innerWidth;
+		const window_width = window.innerWidth;
+		const rect = tooltip.getBoundingClientRect();
         const span = tooltip.querySelector("span");
         
         if (!span.classList.contains("left") && !span.classList.contains("right")){
@@ -59,4 +98,10 @@ function initialize_tooltips() {
 		}
 
     });
+}
+
+function toggle_scroll(can_scroll) {
+	console.log(document.body.style.overflow);
+    document.body.style.overflow = (can_scroll) ? "auto" : "hidden";
+	console.log(document.body.style.overflow);
 }
