@@ -708,7 +708,7 @@ function get_tooltip_text(array $player_data, string $json_line_name, string $da
 
 function display_festival_icon():string {
 
-    $festivals = sanitize_json_with_version('festivals');
+    $festivals = sanitize_json_with_version_up_to_save_version('festivals');
 
 	$festival_name = "Not a festival day";
 	$festival_class = "isnt_festival";

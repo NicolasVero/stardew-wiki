@@ -133,6 +133,20 @@ function sanitize_json_with_version(string $json_name):array {
 	return $sanitize_json;
 }
 
+function sanitize_json_with_version_up_to_save_version(string $json_name):array {
+
+	$original_json = decode($json_name);
+	$game_version_score = $GLOBALS['game_version_score'];
+
+	$sanitize_json = array();
+
+	foreach($original_json as $key => $json_version)
+		if($game_version_score > get_game_version_score($key))
+			$sanitize_json += $json_version;
+	
+	return $sanitize_json;
+}
+
 function load_all_items():void {
 	$GLOBALS['all_items'] = decode('all_items');
 }
