@@ -22,23 +22,9 @@ function file_choice(event) {
     AJAX_send();
 }
 
-function toggle_loading(shown) {
-    document.getElementById("loading-strip").style.display = (shown) ? "block" : "none";
-}
-
 function deactivate_landing_inputs() {
     document.getElementById("landing").style.display = "none";
     document.getElementById("landing-page").style.display = "none";
-}
-
-function in_bytes_conversion(size) {
-    const unit_to_power = { 'o': 0, 'Ko': 1, 'Mo': 2, 'Go': 3 };
-
-    const matches = size.match(/(\d+)([a-zA-Z]+)/);
-    const value = parseInt(matches[1], 10);
-    const unit = matches[2];
-
-    return value * Math.pow(1024, unit_to_power[unit]);
 }
 
 function on_images_loaded(callback) {
@@ -100,8 +86,22 @@ function initialize_tooltips() {
     });
 }
 
-function toggle_scroll(can_scroll) {
-    document.body.style.overflow = (can_scroll) ? "auto" : "hidden";
+function initialize_player_swapper(players_count) {
+    const players_selection = document.getElementsByClassName("player_selection");
+
+    for(let i = 0; i < players_selection.length; i++) {
+        players_selection[i].addEventListener("click", () => {
+            swap_displayed_player(i % players_count);
+        });
+    }
+}
+
+function swap_displayed_player(player_id) {
+
+    const players_display = document.getElementsByClassName("player_container");
+
+    for(let i = 0; i < players_display.length; i++) 
+        players_display[i].style.display = (player_id != i) ? "none" : "block"; 
 }
 
 async function get_max_upload_size() {
@@ -110,4 +110,70 @@ async function get_max_upload_size() {
 	.then(data => {
 		return data.post_max_size;
 	});
+}
+
+function toggle_scroll(can_scroll) {
+    document.body.style.overflow = (can_scroll) ? "auto" : "hidden";
+}
+
+function toggle_loading(shown) {
+    document.getElementById("loading-strip").style.display = (shown) ? "block" : "none";
+}
+
+function in_bytes_conversion(size) {
+    const unit_to_power = { 'o': 0, 'Ko': 1, 'Mo': 2, 'Go': 3 };
+
+    const matches = size.match(/(\d+)([a-zA-Z]+)/);
+    const value = parseInt(matches[1], 10);
+    const unit = matches[2];
+
+    return value * Math.pow(1024, unit_to_power[unit]);
+}
+
+function load_elements() {
+
+    deactivate_landing_inputs();
+
+    toggle_checkboxes_actions();
+
+    // Buttons & panels
+	let buttons =
+	[
+		{
+			"open_button"    : ".main-settings",
+			"exit_button"    : ".exit-settings",
+			"modal_panel"    : ".settings",
+			"disable_scroll" : false
+		},
+		{
+			"open_button"    : ".file-upload",
+			"exit_button"    : ".exit-upload",
+			"modal_panel"    : ".upload-panel",
+			"disable_scroll" : false
+		}
+	];
+
+	//& Remplacer 8 par le nombre de joueur de la save ?
+	for(let i = 0; i < 8; i++){
+		buttons.push({
+			"open_button"    : ".view-all-friendships-" + i,
+			"exit_button"    : ".exit-all-friendships-" + i,
+			"modal_panel"    : ".all-friends-" + i,
+			"disable_scroll" : false
+		});
+
+		buttons.push({
+			"open_button"    : ".view-all-quests-" + i,
+			"exit_button"    : ".exit-all-quests-" + i,
+			"modal_panel"    : ".all-quests-" + i,
+			"disable_scroll" : false
+		});
+	}
+
+	buttons.forEach(button => {
+		activate_buttons(button.open_button, button.exit_button, button.modal_panel, button.disable_scroll);
+	});
+
+	update_tooltips_after_ajax();
+
 }
