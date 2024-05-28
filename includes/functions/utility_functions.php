@@ -120,20 +120,7 @@ function array_keys_exists(array $keys, array $array):bool {
     return count(array_diff_key(array_flip($keys), $array)) === 0;
 }
 
-
-function sanitize_json_with_version(string $json_name):array {
-
-	$original_json = decode($json_name);
-
-	$sanitize_json = array();
-
-	foreach($original_json as $key => $json_version) 
-		$sanitize_json += $json_version;
-	
-	return $sanitize_json;
-}
-
-function sanitize_json_with_version_up_to_save_version(string $json_name):array {
+function sanitize_json_with_version(string $json_name, bool $version_controler = false):array {
 
 	$original_json = decode($json_name);
 	$game_version_score = $GLOBALS['game_version_score'];
@@ -141,7 +128,7 @@ function sanitize_json_with_version_up_to_save_version(string $json_name):array 
 	$sanitize_json = array();
 
 	foreach($original_json as $key => $json_version)
-		if($game_version_score > get_game_version_score($key))
+		if($game_version_score > get_game_version_score($key) || !$version_controler)
 			$sanitize_json += $json_version;
 	
 	return $sanitize_json;
