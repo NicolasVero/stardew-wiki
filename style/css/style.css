@@ -644,6 +644,7 @@ html {
     display: flex;
     flex-direction: column;
     gap: 25px;
+    white-space: nowrap;
   }
   body main .info-section.quests-section .quests .quest {
     display: flex;
@@ -1452,6 +1453,7 @@ html {
     display: flex;
     flex-direction: column;
     gap: 18.75px;
+    white-space: nowrap;
   }
   body main .info-section.quests-section .quests .quest {
     display: flex;

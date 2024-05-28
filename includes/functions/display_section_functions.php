@@ -270,7 +270,7 @@ function display_quests():string {
 		}
         
 		if(isset($data['daysLeft']))
-			$structure .= " <span class='days-left'><img src='$images_path/icons/timer.png'/>" . $data['daysLeft'] . " day</span>";
+			$structure .= " <span class='days-left'><img src='$images_path/icons/timer.png'/>" . $data['daysLeft'] . " days</span>";
 
 		$structure .= "<span class='quest-rewards'>";
 		
@@ -708,7 +708,7 @@ function get_tooltip_text(array $player_data, string $json_line_name, string $da
 
 function display_festival_icon():string {
 
-    $festivals = sanitize_json_with_version_up_to_save_version('festivals');
+    $festivals = sanitize_json_with_version('festivals', true);
 
 	$festival_name = "Not a festival day";
 	$festival_class = "isnt_festival";

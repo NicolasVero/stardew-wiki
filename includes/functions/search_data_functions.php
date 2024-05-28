@@ -326,11 +326,11 @@ function get_quest_log(object $data):array {
 		// Quêtes histoire
 		if (!empty($index)){
 			$quests[] = array(
-				'daily'		  => false,
-				'objective'   => $index['objective'],
-				'description' => $index['description'],
-				'title'       => $index['title'],
-				'rewards'     => $index['reward']
+				'time_limited'	=> false,
+				'objective'   	=> $index['objective'],
+				'description' 	=> $index['description'],
+				'title'       	=> $index['title'],
+				'rewards'     	=> $index['reward']
 			);
 		}
 
@@ -397,17 +397,55 @@ function get_quest_log(object $data):array {
 			
 			$title = "$keyword_ing Quest";
 			$description = "Help $target with his $keyword_ing request.";
-			$objective = "$keyword $number_to_get $goal_name for $target : $number_obtained/$number_to_get";
+			$objective = "$keyword $number_to_get $goal_name for $target: $number_obtained/$number_to_get";
 			$quests[] = array(
-				'daily'		  => true,
-				'objective'   => $objective,
-				'description' => $description,
-				'title'       => $title,
-				'daysLeft'    => $days_left,
-				'rewards'     => $rewards
+				'time_limited'	=> true,
+				'objective'   	=> $objective,
+				'description' 	=> $description,
+				'title'       	=> $title,
+				'daysLeft'    	=> $days_left,
+				'rewards'     	=> $rewards
 			);
 		}
     }
+
+	// Special Orders (Weekly)
+	$entire_data = $GLOBALS['untreated_all_players_data'];
+	$special_orders_json = sanitize_json_with_version('special_orders', true);
+
+	foreach($entire_data->specialOrders->SpecialOrder as $special_order) {
+		if(((string) $special_order->questState) != 'InProgress')
+			continue;
+
+		$target = (string) $special_order->requester;
+
+		$number_to_get = (int) $special_order->objectives->maxCount;
+		$number_obtained = (int) $special_order->objectives->currentCount;
+
+		$title = "Weekly Special Order";
+		$description = $special_orders_json[(string) $special_order->questKey];
+
+		$objective = "$target, $description: $number_obtained/$number_to_get";
+
+		$days_left = (int) $special_order->dueDate - get_number_of_days_ingame();
+
+		$rewards = array();
+
+		foreach($special_order->rewards as $reward) {
+			if($reward->amount) {
+				$rewards[] = ((int) $reward->amount->int) * ((int) $reward->multiplier->float);
+			}
+		}
+			
+		$quests[] = array(
+			'time_limited'	=> true,
+			'objective'   	=> $objective,
+			'description' 	=> $description,
+			'title'       	=> $title,
+			'daysLeft'    	=> $days_left,
+			'rewards'     	=> $rewards
+		);
+	}
 
     return $quests;
 }

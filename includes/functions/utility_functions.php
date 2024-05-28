@@ -121,19 +121,7 @@ function array_keys_exists(array $keys, array $array):bool {
 }
 
 
-function sanitize_json_with_version(string $json_name):array {
-
-	$original_json = decode($json_name);
-
-	$sanitize_json = array();
-
-	foreach($original_json as $key => $json_version) 
-		$sanitize_json += $json_version;
-	
-	return $sanitize_json;
-}
-
-function sanitize_json_with_version_up_to_save_version(string $json_name):array {
+function sanitize_json_with_version(string $json_name, bool $version_controler = false):array {
 
 	$original_json = decode($json_name);
 	$game_version_score = $GLOBALS['game_version_score'];
@@ -141,7 +129,7 @@ function sanitize_json_with_version_up_to_save_version(string $json_name):array 
 	$sanitize_json = array();
 
 	foreach($original_json as $key => $json_version)
-		if($game_version_score > get_game_version_score($key))
+		if($game_version_score > get_game_version_score($key) || !$version_controler)
 			$sanitize_json += $json_version;
 	
 	return $sanitize_json;
@@ -170,6 +158,11 @@ function decode(string $filename):array {
 function is_this_the_same_day(string $date):bool {
     extract(get_formatted_date(false));
     return $date == "$day/$season";
+}
+
+function get_number_of_days_ingame():int {
+	$data = $GLOBALS['untreated_player_data'];
+    return ((($data->dayOfMonthForSaveGame - 1)) + ($data->seasonForSaveGame * 28) + (($data->yearForSaveGame - 1) * 112));
 }
 
 function get_php_max_upload_size():string {

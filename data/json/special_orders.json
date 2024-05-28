@@ -1,0 +1,22 @@
+{
+	"1.5.0" : {
+		"Caroline"	 : "Ship 100 tropical crops",
+		"Clint" 	 : "Defeat 50 cave creatures",
+		"Demetrius"  : "Catch 10 ocean fish",
+		"Demetrius2" : "Catch 20 river fish",
+		"Emily" 	 : "Deliver one's favourite jewelry",
+		"Evelyn" 	 : "Deliver 12 Leeks",
+		"Gunter" 	 : "Deliver 100 bones",
+		"Gus" 	 	 : "Collect 24 eggs",
+		"Lewis" 	 : "Ship 100 of a specific crop",
+		"Linus"		 : "Gather 20 pieces of trash",
+		"Pam"		 : "Deliver 12 bottles of juice",
+		"Pierre"	 : "Deliver 25 gold-quality vegetables",
+		"Robin" 	 : "Collect 80 pieces of hardwood",
+		"Robin2" 	 : "Collect 1,000 pieces of wood or stone",
+		"Willy"		 : "Deliver 100 pieces of bug meat",
+		"Willy2"	 : "Fish exotic creatures",
+		"Wizard" 	 : "Collect 1 prismatic jelly",
+		"Wizard2" 	 : "Collect 1 ectoplasm"
+	}
+}
