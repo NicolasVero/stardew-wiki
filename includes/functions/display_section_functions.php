@@ -101,6 +101,8 @@ function display_header():string {
 
 	$player_id = $GLOBALS['player_id'];
 	$datas = $GLOBALS['all_players_data'][$player_id]['general'];
+
+	$festival_icon = display_festival_icon();
     
     extract($datas);    
     $images_path = get_images_folder();
@@ -116,7 +118,7 @@ function display_header():string {
                 </span>
 
                 <span>
-                    <span class='data date-in-game'>$date</span>
+                    <span class='data date-in-game'>$date $festival_icon</span>
                 </span>
 
                 <span>
@@ -442,7 +444,7 @@ function display_friendships(int $limit = -1):string {
         extract($friend);
         $friend_icon = $images_path . "characters/" . strtolower($name) . ".png";
 
-        $is_birthday = (is_this_birthday($birthday)) ? "is_birthday" : "isnt_birthday";
+        $is_birthday = (is_this_the_same_day($birthday)) ? "is_birthday" : "isnt_birthday";
         $birthday = explode('/', $birthday);
         $birthday = "Day " . $birthday[0] . " of " . $birthday[1];
 
@@ -702,6 +704,38 @@ function get_tooltip_text(array $player_data, string $json_line_name, string $da
 
         default : return $json_line_name;
     }
+}
+
+function display_festival_icon():string {
+
+    $festivals = sanitize_json_with_version('festivals');
+
+	$festival_name = "Not a festival day";
+	$festival_class = "isnt_festival";
+
+	foreach($festivals as $key => $festival) {
+		for($i = 0; $i < count($festival['date']); $i++) {
+			if(is_this_the_same_day($festival['date'][$i])) {
+				$festival_class = "is_festival";
+				$festival_name = $festival['name'];
+				$wiki_url = get_wiki_link($key);
+				break;
+			}
+		}
+	}
+	
+	return (isset($wiki_url)) ? 
+	"<span class='tooltip'>
+		<a class='wiki_link' href='$wiki_url' target='_blank'>
+			<img src='" . get_images_folder() . "/icons/festival_icon.gif' class='festival_icon $festival_class'>
+		</a>
+		<span>$festival_name</span>
+	</span>"
+	:
+	"<span class='tooltip'>
+		<img src='" . get_images_folder() . "/icons/festival_icon.gif' class='festival_icon $festival_class'>
+		<span>$festival_name</span>
+	</span>";
 }
 
 

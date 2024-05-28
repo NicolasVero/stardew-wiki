@@ -1,50 +1,86 @@
 {
     "1.0.0" : {
-        "Egg Festival" : [
-			"13/spring"
-		],
-        "Flower Dance" : [
-			"24/spring"
-		],
-		"Luau" : [
-			"11/summer"
-		],
-		"Dance of the Moonlight Jellies" : [
-			"28/summer"
-		],
-		"Stardew Valley Fair" : [
-			"16/fall"
-		],
-		"Spirit's Eve" : [
-			"27/fall"
-		],
-		"Festival of Ice" : [
-			"8/winter"
-		],
-		"Feast of the Winter Star" : [
-			"25/winter"
-		]
+        "109001" : {
+			"name" : "Egg Festival",
+			"date" : [
+				"13/spring"
+			]
+		},
+        "109002" : {
+			"name" : "Flower Dance",
+			"date" : [
+				"24/spring"
+			]
+		},
+		"109003" : {
+			"name" : "Luau",
+			"date" : [
+				"11/summer"
+			]
+		},
+		"109004" : {
+			"name" : "Dance of the Moonlight Jellies",
+			"date" : [
+				"28/summer"
+			]
+		},
+		"109005" : {
+			"name" : "Stardew Valley Fair",
+			"date" : [
+				"16/fall"
+			]
+		},
+		"109006" : {
+			"name" : "Spirit's Eve",
+			"date" : [
+				"27/fall"
+			]
+		},
+		"109007" : {
+			"name" : "Festival of Ice",
+			"date" : [
+				"8/winter"
+			]
+		},
+		"109008" : {
+			"name" : "Feast of the Winter Star",
+			"date" : [
+				"25/winter"
+			]
+		}
     },
     "1.3.27" : {
-		"Night Market" : [
-			"15/winter",
-			"16/winter",
-			"17/winter"
-		]
+		"109009" : {
+			"name" : "Night Market",
+			"date" : [
+				"15/winter",
+				"16/winter",
+				"17/winter"
+			]
+		}
 	},
     "1.6.0" : {
-        "Desert Festival" : [
-			"15/spring",
-			"16/spring",
-			"17/spring"
-		],
-		"Trout Derby" : [
-			"20/summer",
-			"21/summer"
-		],
-		"SquidFest" : [
-			"12/winter",
-			"13/winter"
-		]
+        "109010" : {
+			"name" : "Desert Festival",
+			"date" : [
+				"15/spring",
+				"16/spring",
+				"17/spring"
+			]
+		},
+		"109011" : {
+			"name" : "Trout Derby",
+			"date" : [
+				"20/summer",
+				"21/summer"
+			]
+		},
+		"109012" : {
+			"name" : "SquidFest",
+			"date" : [
+				"12/winter",
+				"13/winter"
+			]
+		}
 	}
 }

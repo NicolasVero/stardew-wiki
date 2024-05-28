@@ -67,7 +67,7 @@ function formate_usernames(string $username):string {
 }
 
 function does_host_has_element(string $element):int {
-	return ($GLOBALS['host_data']['has_element'][$element]['is_found']);
+	return ($GLOBALS['host_player_data']['has_element'][$element]['is_found']);
 }
 
 function has_element(string $element, object $data):int {
@@ -153,10 +153,9 @@ function decode(string $filename):array {
 	return json_decode(file_get_contents(get_json_folder() . "$filename.json"), true);
 }
 
-function is_this_birthday(string $birthday):bool {
-    extract(get_formatted_date($GLOBALS['untreated_player_data'], false));
-
-    return $birthday == "$day/$season";
+function is_this_the_same_day(string $date):bool {
+    extract(get_formatted_date(false));
+    return $date == "$day/$season";
 }
 
 function get_php_max_upload_size():string {

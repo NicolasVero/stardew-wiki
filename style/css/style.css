@@ -64,7 +64,8 @@ html {
   .not-found,
   .not-gifted,
   .not-talked,
-  .isnt_birthday {
+  .isnt_birthday,
+  .isnt_festival {
     filter: grayscale(1);
     opacity: 0.2;
   }
@@ -871,7 +872,8 @@ html {
   .not-found,
   .not-gifted,
   .not-talked,
-  .isnt_birthday {
+  .isnt_birthday,
+  .isnt_festival {
     filter: grayscale(1);
     opacity: 0.2;
   }

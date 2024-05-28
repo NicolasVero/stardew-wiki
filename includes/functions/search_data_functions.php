@@ -104,7 +104,7 @@ function get_unlockables(string $unlockable_name):int {
 		case "rusty_key":
 			return ($is_older_version)
 				? has_element_ov($player_data->hasRustyKey) :
-					((isset($GLOBALS['host_data']))
+					((isset($GLOBALS['host_player_data']))
 						? does_host_has_element("rusty_key") : has_element("HasRustyKey", $player_data));
 			break;
 		case "club_card":
@@ -118,7 +118,7 @@ function get_unlockables(string $unlockable_name):int {
 		case "skull_key":
 			return ($is_older_version)
 				? has_element_ov($player_data->hasSkullKey) :
-					((isset($GLOBALS['host_data']))
+					((isset($GLOBALS['host_player_data']))
 						? does_host_has_element("skull_key") : has_element("HasSkullKey", $player_data));
 			break;
 
@@ -413,7 +413,9 @@ function get_quest_log(object $data):array {
 }
 
 
-function get_formatted_date(object $data, bool $display_date = true):mixed {
+function get_formatted_date(bool $display_date = true):mixed {
+
+	$data = $GLOBALS['untreated_player_data'];
 
     $day    = $data->dayOfMonthForSaveGame;
     $season = array('spring', 'summer', 'fall', 'winter')[$data->seasonForSaveGame % 4];

@@ -8,7 +8,7 @@ function get_all_players_datas():array {
     $data = $GLOBALS['untreated_all_players_data'];
 
     array_push($players_data, get_aggregated_data($data->player));
-	$GLOBALS['host_data'] = $players_data[0];
+	$GLOBALS['host_player_data'] = $players_data[0];
 
 	if(empty($data->farmhands)) {
         $GLOBALS['all_players_data'] = $players_data;
@@ -60,7 +60,7 @@ function get_aggregated_data(object $data):array {
             'farmer_level'       => get_farmer_level($data),
             'favorite_thing'     => (string) $data->favoriteThing,
             'animal_type'        => (string) $data->whichPetType,
-            'date'               => get_formatted_date($data),
+            'date'               => get_formatted_date(),
             'game_duration'      => get_game_duration((int) $data->millisecondsPlayed),
             'mine_level'         => (int) $data->deepestMineLevel,
             'max_items'          => (int) $data->maxItems,
