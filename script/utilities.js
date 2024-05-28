@@ -101,7 +101,13 @@ function initialize_tooltips() {
 }
 
 function toggle_scroll(can_scroll) {
-	console.log(document.body.style.overflow);
     document.body.style.overflow = (can_scroll) ? "auto" : "hidden";
-	console.log(document.body.style.overflow);
+}
+
+async function get_max_upload_size() {
+	return fetch('./includes/functions/utility_functions.php?action=get_max_upload_size')
+	.then(response => response.json())
+	.then(data => {
+		return data.post_max_size;
+	});
 }

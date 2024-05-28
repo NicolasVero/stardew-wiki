@@ -1,6 +1,15 @@
 <?php 
 
-function is_file_secure(mixed $file):bool {
+function is_file_secure(mixed $file, bool $manual_error = false, string $manual_error_type):bool {
+
+	if($manual_error) {
+		switch($manual_error_type) {
+			case 'SizeException' :
+				throw new Exception('Invalid file size.');
+			default :
+				return true;
+		}
+	}
 
     if($file['size'] < 0 || $file['size'] > in_bytes_conversion("35Mo")) {
         throw new Exception('Invalid file size.');

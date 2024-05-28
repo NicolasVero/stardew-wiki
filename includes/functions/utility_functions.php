@@ -100,9 +100,12 @@ function get_game_version_score(string $version):int {
 }
 
 
-function in_bytes_conversion(string $size):int {
+function in_bytes_conversion(string $size, string $use = 'local'):int {
 
-    $unit_to_power = array('o'  => 0, 'Ko' => 1, 'Mo' => 2, 'Go' => 3);
+    $unit_to_power = ($use == 'local') ? 
+		array('o'  => 0, 'Ko' => 1, 'Mo' => 2, 'Go' => 3)
+		:
+		array('K' => 1, 'M' => 2, 'G' => 3);
 
     preg_match('/(\d+)([a-zA-Z]+)/', $size, $matches);
     
@@ -155,3 +158,13 @@ function is_this_birthday(string $birthday):bool {
 
     return $birthday == "$day/$season";
 }
+
+function get_php_max_upload_size():string {
+	$post_max_size_bytes = in_bytes_conversion(ini_get('post_max_size'), 'server');
+	return json_encode([
+        'post_max_size' => $post_max_size_bytes
+    ]);
+}
+
+if (isset($_GET['action']) && $_GET['action'] == 'get_max_upload_size')
+    echo get_php_max_upload_size();
