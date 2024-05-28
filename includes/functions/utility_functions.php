@@ -120,7 +120,6 @@ function array_keys_exists(array $keys, array $array):bool {
     return count(array_diff_key(array_flip($keys), $array)) === 0;
 }
 
-
 function sanitize_json_with_version(string $json_name, bool $version_controler = false):array {
 
 	$original_json = decode($json_name);
