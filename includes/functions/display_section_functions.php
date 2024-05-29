@@ -112,16 +112,17 @@ function display_header():string {
     $structure = "
         <header>
             <div class='header'>
-                <span>
+                <span class='player'>
                     <img src='{$images_path}icons/" . strtolower($gender) . ".png' alt='Gender logo' class='player_gender_logo' />
                     <span class='data player_name'>$name <span class='data-label'>$farmer_level</span></span>
                 </span>
 
-                <span>
-                    <span class='data date-in-game'>$date $festival_icon</span>
+                <span class='date'>
+                    <span class='data date-in-game'>$date</span>
+					$festival_icon
                 </span>
 
-                <span>
+                <span class='game_time'>
                     <span class='data time-in-game'>$game_duration</span>
                     <span class='data-label'>time in game</span>
                 </span>

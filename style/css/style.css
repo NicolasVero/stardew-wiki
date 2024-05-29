@@ -523,6 +523,20 @@ html {
     justify-content: space-between;
     align-items: center;
   }
+  header .header > span {
+    flex-basis: 33%;
+  }
+  header .header > span.date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  header .header > span.game_time {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 5px;
+  }
   header .header > span:first-of-type {
     display: flex;
     align-items: flex-end;
@@ -1334,6 +1348,20 @@ html {
     display: flex;
     justify-content: space-between;
     align-items: center;
+  }
+  header .header > span {
+    flex-basis: 33%;
+  }
+  header .header > span.date {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  header .header > span.game_time {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 3.75px;
   }
   header .header > span:first-of-type {
     display: flex;

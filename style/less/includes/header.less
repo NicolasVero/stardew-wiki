@@ -140,6 +140,25 @@ header {
 		justify-content: space-between;
 		align-items: center;
 
+		& > span {
+			flex-basis: 33%;
+
+			&.date {
+				display: flex;
+				justify-content: center;
+				align-items: center;
+			}
+
+			&.game_time {
+				display: flex;
+				justify-content: flex-end;
+  				align-items: center;
+				gap: (@small-gap * @ratio);
+			}
+		}
+
+
+
 		& > span:first-of-type {
 			display: flex;
 			align-items: flex-end;

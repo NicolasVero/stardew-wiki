@@ -10,14 +10,28 @@ function get_all_players_datas():array {
     array_push($players_data, get_aggregated_data($data->player));
 	$GLOBALS['host_player_data'] = $players_data[0];
 
-	if(empty($data->farmhands)) {
-        $GLOBALS['all_players_data'] = $players_data;
-    	return $players_data;
-    }
-
-    foreach($data->farmhands as $side_player) {
-        array_push($players_data, get_aggregated_data($side_player->Farmer));
-    }
+	if($GLOBALS['game_version_score'] < get_game_version_score("1.6.0"))  {
+		foreach($data->locations->GameLocation as $game_location) {
+			if(isset($game_location->buildings)) {
+				foreach($game_location->buildings->Building as $building) {
+					if(isset($building->indoors->farmhand)) {
+						$farmhand_info = $building->indoors->farmhand;
+						array_push($players_data, get_aggregated_data($farmhand_info));
+					}
+				}
+				break;
+			}
+		}
+	} else {
+		if(empty($data->farmhands)) {
+			$GLOBALS['all_players_data'] = $players_data;
+			return $players_data;
+		}
+	
+		foreach($data->farmhands->Farmer as $side_player)
+			array_push($players_data, get_aggregated_data($side_player));
+	
+	}
 
 	$GLOBALS['all_players_data'] = $players_data;
 
@@ -30,11 +44,21 @@ function get_all_players():array {
     $data = $GLOBALS['untreated_all_players_data'];
 
     array_push($players_names, (string) $data->player->name);
+	
+	if($GLOBALS['game_version_score'] < get_game_version_score("1.6.0"))  {
+		foreach($data->locations->GameLocation[0]->buildings->Building as $building) {
+			if(isset($building->indoors->farmhand)) {
+				$farmhand_info = $building->indoors->farmhand;
+				array_push($players_names, (string) $farmhand_info->name);
+			}
+		}
+	} else {
+		foreach($data->farmhands->Farmer as $side_player) {
+			if(!empty($side_player->name))
+				array_push($players_names, (string) $side_player->name);
+		}
+	}
 
-    foreach($data->farmhands as $side_player) {
-        if(!empty($side_player->Farmer->name))
-            array_push($players_names, (string) $side_player->Farmer->name);
-    }
 	$GLOBALS['players_names'] = $players_names;
 
     return $players_names;
