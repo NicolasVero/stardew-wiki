@@ -283,6 +283,8 @@ function display_quests():string {
             }
             elseif(is_numeric($rewards[$i]))
                 $structure .= formate_number($rewards[$i]) . "<img src='$images_path/icons/gold.png'/>";
+            elseif(str_ends_with($rewards[$i], 'q'))
+                $structure .= explode('_', $rewards[$i])[0] . "<img src='$images_path/icons/qi_gem.png'/>";
             else
                 $structure .= $rewards[$i];
 

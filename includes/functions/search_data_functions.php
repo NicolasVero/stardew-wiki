@@ -418,11 +418,12 @@ function get_quest_log(object $data):array {
 			continue;
 
 		$target = (string) $special_order->requester;
+		$is_qi_order = ((string) $special_order->orderType == "Qi");
 
 		$number_to_get = (int) $special_order->objectives->maxCount;
 		$number_obtained = (int) $special_order->objectives->currentCount;
 
-		$title = "Weekly Special Order";
+		$title = ($is_qi_order) ? "QI's Special Order" : "Weekly Special Order";
 		$description = $special_orders_json[(string) $special_order->questKey];
 
 		$objective = "$target, $description: $number_obtained/$number_to_get";
@@ -433,7 +434,7 @@ function get_quest_log(object $data):array {
 
 		foreach($special_order->rewards as $reward) {
 			if($reward->amount) {
-				$rewards[] = ((int) $reward->amount->int) * ((int) $reward->multiplier->float);
+				$rewards[] = ($is_qi_order) ? (int) $reward->amount->int . "_q" : ((int) $reward->amount->int) * ((int) $reward->multiplier->float);
 			}
 		}
 			
