@@ -59,8 +59,12 @@ function toggle_versions_items_mode(event) {
     const nsm_checked = document.getElementById("no_spoil_mode").checked;
 
     for(let i = 0; i < elements.length; i++) {
-        const parent_element = elements[i].parentElement;
+        let parent_element = elements[i].parentElement;
         is_element_not_found = elements[i].classList.contains("not-found");
+
+		if(parent_element.classList.contains('wiki_link'))
+			parent_element = parent_element.parentElement;
+
         if(!nsm_checked)
             parent_element.style.display = (is_checked) ? "none" : "flex";
         else
@@ -92,11 +96,11 @@ function check_if_all_elements_hidden(id_command) {
         
 		switch(id_command) {
 			case 0:
-				title.style.display = (!nsm_checked && no_items_to_show) ? "none" : "block";
-				smaller_title.style.display = (nsm_checked && no_items_to_show) ? "block" : "none";
+				title.style.display = tvim_checked ? (no_items_to_show ? "none" : title.style.display) : "block";
+				smaller_title.style.display = tvim_checked ? (no_items_to_show ? "none" : smaller_title.style.display) : (no_items_to_show && nsm_checked ? "block" : smaller_title.style.display);				
 				break;
 			case 1:
-				smaller_title.style.display = (no_items_to_show) ? "block" : "none";
+				smaller_title.style.display = nsm_checked ? (no_items_to_show ? (!tvim_checked ? "block" : smaller_title.style.display) : smaller_title.style.display) : "none";
 				break;
 		}
     }
