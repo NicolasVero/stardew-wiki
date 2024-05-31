@@ -24,10 +24,10 @@
 		"108021" : "Deluxe Speed-Gro",
 		"108022" : "Basic Retaining Soil",
 		"108023" : "Quality Retaining Soil",
-		"108024" : "Spring Seeds",
-		"108025" : "Summer Seeds",
-		"108026" : "Fall Seeds",
-		"108027" : "Winter Seeds",
+		"108024" : "Wild Seeds (Sp)",
+		"108025" : "Wild Seeds (Su)",
+		"108026" : "Wild Seeds (Fa)",
+		"108027" : "Wild Seeds (Wi)",
 		"108028" : "Ancient Seeds",
 		"108029" : "Wood Floor",
 		"108030" : "Straw Floor",
@@ -51,10 +51,10 @@
 		"108048" : "Sturdy Ring",
 		"108049" : "Warrior Ring",
 		"108050" : "Ring of Yoba",
-		"108051" : "Iridium Ring",
+		"108051" : "Iridium Band",
 		"108052" : "Field Snack",
 		"108053" : "Life Elixir",
-		"108054" : "Oil of Garlic",
+		"108054" : "Oil Of Garlic",
 		"108055" : "Warp Totem: Beach",
 		"108056" : "Warp Totem: Mountains",
 		"108057" : "Warp Totem: Farm",
@@ -91,8 +91,8 @@
 		"108088" : "Scarecrow",
 		"108089" : "Staircase",
 		"108090" : "Explosive Ammo",
-		"108091" : "Iron Bar",
-		"108092" : "Gold Bar"
+		"108091" : "Transmute (Fe)",
+		"108092" : "Transmute (Au)"
 	},
 	"1.1.0" : {
 		"108093" : "Cask"
