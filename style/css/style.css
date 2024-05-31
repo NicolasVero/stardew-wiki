@@ -540,6 +540,11 @@ html {
     align-items: center;
     gap: 5px;
   }
+  header .header > span img.festival_icon {
+    position: relative;
+    top: 2px;
+    margin-left: 20px;
+  }
   header .header > span:first-of-type {
     display: flex;
     align-items: flex-end;
@@ -1371,6 +1376,11 @@ html {
     justify-content: flex-end;
     align-items: center;
     gap: 3.75px;
+  }
+  header .header > span img.festival_icon {
+    position: relative;
+    top: 2px;
+    margin-left: 20px;
   }
   header .header > span:first-of-type {
     display: flex;

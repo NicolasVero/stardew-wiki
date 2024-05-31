@@ -729,8 +729,10 @@ function display_festival_icon():string {
 			}
 		}
 	}
-	
-	return (isset($wiki_url)) ? 
+
+
+	return (isset($wiki_url)) 
+    ? 
 	"<span class='tooltip'>
 		<a class='wiki_link' href='$wiki_url' target='_blank'>
 			<img src='" . get_images_folder() . "/icons/festival_icon.gif' class='festival_icon $festival_class'>
@@ -739,7 +741,7 @@ function display_festival_icon():string {
 	</span>"
 	:
 	"<span class='tooltip'>
-		<img src='" . get_images_folder() . "/icons/festival_icon.gif' class='festival_icon $festival_class'>
+		<img src='" . get_images_folder() . "/icons/festival_icon.png' class='festival_icon $festival_class'>
 		<span>$festival_name</span>
 	</span>";
 }
