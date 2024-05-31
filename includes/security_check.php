@@ -19,7 +19,7 @@ function is_file_secure(mixed $file, bool $manual_error = false, string $manual_
         throw new Exception('The file is not in xml format.');
     }
     
-    if(!array_keys_exists(array('player', 'uniqueIDForThisGame', 'gameVersion'), (array) simplexml_load_file($file['tmp_name']))) {
+    if(!array_keys_exists(array('player', 'uniqueIDForThisGame'), (array) simplexml_load_file($file['tmp_name']))) {
         throw new Exception('File not conforming to a Stardew Valley save.');
     }
 
