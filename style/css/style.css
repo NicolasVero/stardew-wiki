@@ -49,13 +49,16 @@ html {
   body main .info-section:not(.general-stats).friends-section.top-friends {
     flex-basis: 45% !important;
   }
-  body main .gallery._50 {
-    flex-basis: 47.5% !important;
-  }
   .center-absolute {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+  ._50 {
+    flex-basis: 47.5%;
+  }
+  ._100 {
+    flex-basis: 100%;
   }
   .unused {
     filter: grayscale(1);
@@ -882,6 +885,12 @@ html {
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
+  }
+  ._50 {
+    flex-basis: 47.5%;
+  }
+  ._100 {
+    flex-basis: 100%;
   }
   .unused {
     filter: grayscale(1);
