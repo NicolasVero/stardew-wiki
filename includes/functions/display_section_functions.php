@@ -17,6 +17,9 @@ function display_sur_header():string {
 function display_player_selection():string {
 
 	$players = $GLOBALS['players_names'];
+    
+    if(count($players) < 2)
+        return "<ul id='players_selection'></ul>";
 
     $structure = "
 		<ul id='players_selection'>
