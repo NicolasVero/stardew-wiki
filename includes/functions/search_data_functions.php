@@ -496,7 +496,7 @@ function get_cooking_recipes(object $recipes, object $recipes_cooked):array {
     $return_datas = array();
     $json_recipes = sanitize_json_with_version('cooking_recipes');
 
-    $has_ever_cooked = (empty((array) $recipes_cooked)) ? true : false;
+    $has_ever_cooked = (empty((array) $recipes_cooked)) ? false : true;
 
     foreach($recipes->item as $recipe) {
 
@@ -520,8 +520,11 @@ function get_cooking_recipes(object $recipes, object $recipes_cooked):array {
                 }
                 
             }
-        }
 
+            if(isset($return_datas[$item_name]))
+                continue;
+        }
+        
         $return_datas[$item_name] = array(
             'id'      => $index,
             'counter' => 0
