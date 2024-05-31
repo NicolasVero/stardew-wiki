@@ -8,7 +8,7 @@ Whether you're a seasoned veteran or just starting out, Stardew Dashboard is des
 ## Why use Stardew Dashboard?
 - **Optimize your gaming experience**: Be more efficient by having an overview of your farm.
 - **For 100%** : Easily list items you haven't yet discovered.
-- A link to the wiki**: Easy access to wiki pages directly from your Dashboard.
+- **A link to the wiki**: Easy access to wiki pages directly from your Dashboard.
 
 
 ![Stardew dashboard](https://github.com/NicolasVero/readme-elements/blob/master/images/stardew_dashboard.png)
