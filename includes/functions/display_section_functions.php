@@ -579,7 +579,7 @@ function display_unlockables():string {
     sort($elements);
 
     $structure = "
-        <section class='gallery unlockables-section'>
+        <section class='gallery unlockables-section _50'>
             <h2 class='section-title'>Unlockables</h2>
             <span>
 				<h3 class='no-spoil-title'>Nothing to see here yet</h2>
