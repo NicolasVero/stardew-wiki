@@ -1,13 +1,12 @@
 <?php 
 
-function is_file_secure(mixed $file, bool $manual_error = false, string $manual_error_type):bool {
+function is_file_secure(mixed $file, string $external_error = null):bool {
 
-	if($manual_error) {
-		switch($manual_error_type) {
+    
+    if($external_error) {
+		switch($external_error) {
 			case 'SizeException' :
 				throw new Exception('Invalid file size.');
-			default :
-				return true;
 		}
 	}
 

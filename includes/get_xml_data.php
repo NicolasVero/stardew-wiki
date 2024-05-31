@@ -11,17 +11,10 @@ $response['file_content'] = $_FILES;
 
 try {
 
-	$name_check = explode("_", $_FILES['save-upload']['name']);
-	if($name_check[0] == "Error") {
-		$manual_error = true;
-		$manual_error_type = explode(".", ($name_check[1]))[0];
-	}
-	else {
-		$manual_error = false;
-		$manual_error_type = '';
-	}
+	$name_check = explode("_", $_FILES['save-upload']['name']);	
+    $external_error = ($name_check[0] == "Error") ? explode(".", ($name_check[1]))[0] : null;
 
-    if(is_file_secure($_FILES['save-upload'], $manual_error, $manual_error_type)) {
+    if(is_file_secure($_FILES['save-upload'], $external_error)) {
         $uploadedFile = $_FILES['save-upload']['tmp_name'];
         $data = simplexml_load_file($uploadedFile);
 
