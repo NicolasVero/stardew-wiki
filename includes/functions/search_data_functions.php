@@ -496,33 +496,37 @@ function get_cooking_recipes(object $recipes, object $recipes_cooked):array {
     $return_datas = array();
     $json_recipes = sanitize_json_with_version('cooking_recipes');
 
+    $has_ever_cooked = ($recipes_cooked->count() == 1) ? true : false;
+
     foreach($recipes->item as $recipe) {
 
         $item_name = formate_original_data_string($recipe->key->string);
-        $index = array_search($item_name, $json_recipes);            
+        $index = array_search($item_name, $json_recipes);      
 
-        foreach($recipes_cooked->item as $recipe_cooked) {
+        if($has_ever_cooked) {
+            foreach($recipes_cooked->item as $recipe_cooked) {
 
-            if($version_score < get_game_version_score("1.6.0"))
-                $recipe_id = (int) $recipe_cooked->key->int;
-            else
-                $recipe_id = (int) $recipe_cooked->key->string;
+                if($version_score < get_game_version_score("1.6.0"))
+                    $recipe_id = (int) $recipe_cooked->key->int;
+                else
+                    $recipe_id = (int) $recipe_cooked->key->string;
 
-            if($recipe_id == $index) {
-                $return_datas[$item_name] = array(
-                    'id'      => $recipe_id,
-                    'counter' => (int) $recipe_cooked->value->int
-                );
-                break;
+                if($recipe_id == $index) {
+                    $return_datas[$item_name] = array(
+                        'id'      => $recipe_id,
+                        'counter' => (int) $recipe_cooked->value->int
+                    );
+                    break;
+                }
+                
             }
-            else {
-                $return_datas[$item_name] = array(
-                    'id'      => $recipe_id,
-                    'counter' => 0
-                );
-            }
-            
         }
+
+        $return_datas[$item_name] = array(
+            'id'      => $index,
+            'counter' => 0
+        );
+
     }
     
     return $return_datas;
