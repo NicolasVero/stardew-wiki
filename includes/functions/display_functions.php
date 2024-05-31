@@ -32,6 +32,9 @@ function display_landing_page():string {
                         <span>
                             Whether you're a seasoned veteran or just starting out, Stardew Dashboard is here to enhance your Stardew Valley experience. Join our community today and take your farming to the next level!
                         </span>
+                        <span>
+                            Our tool only works on versions higher than 1.4.
+                        </span>
                     </span>
                 </section>
                 <section class='how-to-use-it'>
