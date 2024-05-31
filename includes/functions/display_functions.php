@@ -172,6 +172,10 @@ function display_error_page(Exception $exception):string {
         "File not conforming to a Stardew Valley save." => array(
             "dialogue" => "Ah, shucks! This file doesn't quite match the charm of Stardew Valley. It's like trying to plant a melon seed in winter – just won't work! Let's find a file more in tune with the rhythm of the seasons, shall we?",
             "image"    => "dialogue_box_grandpa"
+        ),
+        "Save file is from an unsupported version." => array(
+            "dialogue" => "",
+            "image"    => ""
         )
     );
 

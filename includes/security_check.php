@@ -22,6 +22,10 @@ function is_file_secure(mixed $file, bool $manual_error = false, string $manual_
     if(!array_keys_exists(array('player', 'uniqueIDForThisGame'), (array) simplexml_load_file($file['tmp_name']))) {
         throw new Exception('File not conforming to a Stardew Valley save.');
     }
+    
+    if(!array_keys_exists(array('gameVersion'), (array) simplexml_load_file($file['tmp_name']))) {
+        throw new Exception('Save file is from an unsupported version.');
+    }
 
     if(!is_uploaded_file($file['tmp_name'])) {
         throw new Exception('Error loading file.');
