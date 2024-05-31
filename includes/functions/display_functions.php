@@ -174,8 +174,8 @@ function display_error_page(Exception $exception):string {
             "image"    => "dialogue_box_grandpa"
         ),
         "Save file is from an unsupported version." => array(
-            "dialogue" => "",
-            "image"    => ""
+            "dialogue" => "Ah, wanderer of the shadows, it seems your version is shrouded in the mists of the past, before the 1.4 era. The depths of the sewers have whispered to me of the new wonders that await in the updated realms. To venture forth, you must embrace the light of the latest version.",
+            "image"    => "dialogue_box_krobus"
         )
     );
 
