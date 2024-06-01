@@ -303,6 +303,10 @@
 				&.full_width {
 					width: 100%;
 				}
+
+				&.stay_start {
+					align-items: flex-start;
+				}
 			
 				textarea {
 					resize: none;
@@ -345,6 +349,16 @@
 				font-size: @big-fs * @ratio;
 				margin: 0 auto;
 				.buttons;
+			}
+
+			input[type=number] {
+				-moz-appearance: textfield;
+				
+				&::-webkit-outer-spin-button,
+				&::-webkit-inner-spin-button {
+					-webkit-appearance: none;
+					margin: 0;
+				}
 			}
 
 			input[type=radio] {

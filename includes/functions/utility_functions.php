@@ -123,7 +123,7 @@ function array_keys_exists(array $keys, array $array):bool {
 function sanitize_json_with_version(string $json_name, bool $version_controler = false):array {
 
 	$original_json = decode($json_name);
-	$game_version_score = $GLOBALS['game_version_score'];
+	$game_version_score = (isset($GLOBALS['game_version_score'])) ? $GLOBALS['game_version_score'] : "";
 
 	$sanitize_json = array();
 

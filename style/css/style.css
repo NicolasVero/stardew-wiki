@@ -369,6 +369,9 @@ html {
   .feedback-panel span form .label_and_input.full_width {
     width: 100%;
   }
+  .feedback-panel span form .label_and_input.stay_start {
+    align-items: flex-start;
+  }
   .feedback-panel span form .label_and_input textarea {
     resize: none;
   }
@@ -408,6 +411,14 @@ html {
   .feedback-panel span form input[type=submit]:hover {
     transform: scale(1.1);
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
+  }
+  .feedback-panel span form input[type=number] {
+    -moz-appearance: textfield;
+  }
+  .feedback-panel span form input[type=number]::-webkit-outer-spin-button,
+  .feedback-panel span form input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
   .feedback-panel span form input[type=radio] {
     display: none;
@@ -1295,6 +1306,9 @@ html {
   .feedback-panel span form .label_and_input.full_width {
     width: 100%;
   }
+  .feedback-panel span form .label_and_input.stay_start {
+    align-items: flex-start;
+  }
   .feedback-panel span form .label_and_input textarea {
     resize: none;
   }
@@ -1334,6 +1348,14 @@ html {
   .feedback-panel span form input[type=submit]:hover {
     transform: scale(1.1);
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
+  }
+  .feedback-panel span form input[type=number] {
+    -moz-appearance: textfield;
+  }
+  .feedback-panel span form input[type=number]::-webkit-outer-spin-button,
+  .feedback-panel span form input[type=number]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
   }
   .feedback-panel span form input[type=radio] {
     display: none;
