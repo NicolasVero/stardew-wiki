@@ -112,12 +112,12 @@ function display_feedback_panel():string {
                     <span>
                         <span class='label_and_input'>
                             <label>Username</label>
-                            <input type='text'>
+                            <input type='text' required>
                         </span>
 
                         <span class='label_and_input'>
                             <label>Email address</label>
-                            <input type='mail'>
+                            <input type='mail' required>
                         </span>
                     </span>
 
@@ -126,7 +126,7 @@ function display_feedback_panel():string {
 
                         <span class='topic_selection'>
                             <span>
-                                <input type='radio' id='feature_request' value='Feature request' name='topic' class='feedback_real_radio'>
+                                <input type='radio' id='feature_request' value='Feature request' name='topic' class='feedback_real_radio' required checked>
                                 <img src='" . get_images_folder() . "icons/exit.png' class='feedback_custom_radio'>
                                 <label for='feature_request'>Feature request</label>
                             </span>
@@ -143,10 +143,11 @@ function display_feedback_panel():string {
                                 <label for='other'>Other</label>
                             </span>
                         </span>
+                    </span>
 
                     <span class='label_and_input full_width'>
                         <label>Message</label>
-                        <textarea rows='8'></textarea>
+                        <textarea rows='8' required></textarea>
                     </span>
 
                     <input type='submit'>
