@@ -60,9 +60,9 @@ html {
   ._100 {
     flex-basis: 100%;
   }
-  .unused {
+  .grey {
     filter: grayscale(1);
-    opacity: 1;
+    opacity: 0.2;
   }
   .not-found,
   .not-gifted,
@@ -73,14 +73,18 @@ html {
     filter: grayscale(1);
     opacity: 0.2;
   }
+  .unused {
+    filter: grayscale(1);
+    opacity: 1;
+  }
   .not-hide {
     display: block !important;
   }
   .no-spoil-title {
-    display: none;
     font-family: "Stardew Valley Stonks", serif;
     font-size: 16px;
     color: #000000;
+    display: none;
     font-size: 14px;
   }
   .data {
@@ -95,6 +99,9 @@ html {
   .buttons:hover {
     transform: scale(1.1);
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
+  }
+  .cant_select {
+    user-select: none;
   }
   .modal-window,
   .modal-opener,
@@ -225,13 +232,12 @@ html {
   .tooltip a {
     height: 28px;
   }
-  .upload-panel {
+  .modal_panel {
     display: none;
     font-family: "Stardew Valley Stonks", serif;
     font-size: 16px;
     color: #000000;
     position: fixed;
-    min-width: 20vw;
     padding: 25px 25px;
     top: 50%;
     left: 50%;
@@ -244,6 +250,26 @@ html {
     overflow-y: scroll;
     z-index: 1000;
     scrollbar-width: none;
+  }
+  .upload-panel {
+    display: none;
+    font-family: "Stardew Valley Stonks", serif;
+    font-size: 16px;
+    color: #000000;
+    position: fixed;
+    padding: 25px 25px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-clip: padding-box;
+    background-color: #ffc677;
+    border-image: url('../../medias/images/content/border_image.png') 15 stretch;
+    border-image-width: 10px;
+    border-image-outset: 8px;
+    overflow-y: scroll;
+    z-index: 1000;
+    scrollbar-width: none;
+    min-width: 20vw;
   }
   .upload-panel > span {
     display: flex;
@@ -285,7 +311,6 @@ html {
   }
   .settings-panel {
     display: none;
-    min-width: 20vw;
     font-family: "Stardew Valley Stonks", serif;
     font-size: 16px;
     color: #000000;
@@ -302,6 +327,7 @@ html {
     overflow-y: scroll;
     z-index: 1000;
     scrollbar-width: none;
+    min-width: 20vw;
   }
   .settings-panel .checkboxes {
     display: flex;
@@ -332,7 +358,6 @@ html {
   }
   .feedback-panel {
     display: none;
-    min-width: 40vw;
     font-family: "Stardew Valley Stonks", serif;
     font-size: 16px;
     color: #000000;
@@ -349,6 +374,7 @@ html {
     overflow-y: scroll;
     z-index: 1000;
     scrollbar-width: none;
+    min-width: 40vw;
   }
   .feedback-panel span form {
     display: flex;
@@ -381,6 +407,7 @@ html {
   }
   .feedback-panel span form .topic_selection > span {
     display: flex;
+    width: 150px;
     flex-direction: column;
     align-items: center;
     gap: 10px;
@@ -994,9 +1021,9 @@ html {
   ._100 {
     flex-basis: 100%;
   }
-  .unused {
+  .grey {
     filter: grayscale(1);
-    opacity: 1;
+    opacity: 0.2;
   }
   .not-found,
   .not-gifted,
@@ -1007,14 +1034,18 @@ html {
     filter: grayscale(1);
     opacity: 0.2;
   }
+  .unused {
+    filter: grayscale(1);
+    opacity: 1;
+  }
   .not-hide {
     display: block !important;
   }
   .no-spoil-title {
-    display: none;
     font-family: "Stardew Valley Stonks", serif;
     font-size: 12px;
     color: #000000;
+    display: none;
     font-size: 10.5px;
   }
   .data {
@@ -1029,6 +1060,9 @@ html {
   .buttons:hover {
     transform: scale(1.1);
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
+  }
+  .cant_select {
+    user-select: none;
   }
   .modal-window,
   .modal-opener,
@@ -1159,13 +1193,12 @@ html {
   .tooltip a {
     height: 21px;
   }
-  .upload-panel {
+  .modal_panel {
     display: none;
     font-family: "Stardew Valley Stonks", serif;
     font-size: 12px;
     color: #000000;
     position: fixed;
-    min-width: 20vw;
     padding: 18.75px 18.75px;
     top: 50%;
     left: 50%;
@@ -1178,6 +1211,26 @@ html {
     overflow-y: scroll;
     z-index: 1000;
     scrollbar-width: none;
+  }
+  .upload-panel {
+    display: none;
+    font-family: "Stardew Valley Stonks", serif;
+    font-size: 12px;
+    color: #000000;
+    position: fixed;
+    padding: 18.75px 18.75px;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-clip: padding-box;
+    background-color: #ffc677;
+    border-image: url('../../medias/images/content/border_image.png') 15 stretch;
+    border-image-width: 10px;
+    border-image-outset: 8px;
+    overflow-y: scroll;
+    z-index: 1000;
+    scrollbar-width: none;
+    min-width: 20vw;
   }
   .upload-panel > span {
     display: flex;
@@ -1219,7 +1272,6 @@ html {
   }
   .settings-panel {
     display: none;
-    min-width: 20vw;
     font-family: "Stardew Valley Stonks", serif;
     font-size: 12px;
     color: #000000;
@@ -1236,6 +1288,7 @@ html {
     overflow-y: scroll;
     z-index: 1000;
     scrollbar-width: none;
+    min-width: 20vw;
   }
   .settings-panel .checkboxes {
     display: flex;
@@ -1266,7 +1319,6 @@ html {
   }
   .feedback-panel {
     display: none;
-    min-width: 40vw;
     font-family: "Stardew Valley Stonks", serif;
     font-size: 12px;
     color: #000000;
@@ -1283,6 +1335,7 @@ html {
     overflow-y: scroll;
     z-index: 1000;
     scrollbar-width: none;
+    min-width: 40vw;
   }
   .feedback-panel span form {
     display: flex;
@@ -1315,6 +1368,7 @@ html {
   }
   .feedback-panel span form .topic_selection > span {
     display: flex;
+    width: 150px;
     flex-direction: column;
     align-items: center;
     gap: 7.5px;
