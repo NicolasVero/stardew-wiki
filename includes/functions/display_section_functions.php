@@ -100,6 +100,48 @@ function display_save_panel():string {
     ";
 }
 
+function display_feedback_panel():string {
+    return "
+        <section class='feedback-panel modal-window'>
+            <div class='panel-header'>
+                <h2 class='section-title panel-title'>Your feedback</h2>
+                <img src='" . get_images_folder() . "icons/exit.png' class='exit-feedback exit' />
+            </div>
+            <span>
+                <form>
+                    <span>
+                        <span class='label_and_input'>
+                            <label>Username</label>
+                            <input type='text'>
+                        </span>
+
+                        <span class='label_and_input'>
+                            <label>Email address</label>
+                            <input type='mail'>
+                        </span>
+                    </span>
+
+                    <span class='label_and_input full_width'>
+                        <label>Topic</label>
+                        <select size='3' id='custom_select'>
+                            <option>Feature request</option>
+                            <option>Bug report</option>
+                            <option>Other</option>
+                        </select>
+                    </span>
+
+                    <span class='label_and_input full_width'>
+                        <label>Message</label>
+                        <textarea rows='8'></textarea>
+                    </span>
+
+                    <input type='submit'>
+                </form>
+            </span>
+        </section>
+    ";
+}
+
 function display_header():string {
 
 	$player_id = $GLOBALS['player_id'];

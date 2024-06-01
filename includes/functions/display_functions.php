@@ -9,6 +9,8 @@ function display_landing_page():string {
     $settings_button = display_settings_button("landing");
     $settings_panel  = display_settings_panel();
 
+    $feedback_panel  = display_feedback_panel();
+
 
     return "
         <div id='landing' class='sur-header'>
@@ -17,6 +19,7 @@ function display_landing_page():string {
         </div>
         $save_panel
         $settings_panel
+        $feedback_panel
         <div id='landing-page'>
             <main>
                 <h1 class='section-title'>Welcome to Stardew Dashboard</h1>
@@ -61,6 +64,20 @@ function display_landing_page():string {
                         </span>
                     </span>
                 </section>
+                
+                <section class='feedback'>
+                    <h2 class='section-title'>We value your feedback</h2>
+                    <span>
+                        <span>
+                            Your experience with Stardew Dashboard is important to us.
+                            We continuously strive to improve and would love to hear your thoughts and suggestions. Whether it's a feature request, a bug report, or general feedback, your input helps us make Stardew Dashboard even better.
+                        </span>
+                        <span>
+                           <a class='feedback-opener modal-opener'>Click here</a> to open the feedback form and share your thoughts with us.
+                           Thank you for being a part of our community and helping us grow!
+                        </span>
+                    </span>
+
                 <section class='about'>
                     <h2 class='section-title'>About us</h2>
                     <span>

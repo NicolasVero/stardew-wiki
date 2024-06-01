@@ -16,6 +16,10 @@
 	flex-basis: 100%;
 }
 
+.option_clicked {
+	// Jsp quoi mettre
+}
+
 .unused {
 	filter: grayscale(1);
 	opacity: 1;
@@ -49,6 +53,7 @@
 
 .buttons {
 	transition: transform .2s ease-in-out;
+	transform: scale(1);
 	&:hover {
 		transform: scale(1.1);
 		cursor: @pointer;
@@ -194,5 +199,159 @@
 
 	a {
 		height: (@big-icon * @ratio);
+	}
+}
+
+.upload-panel {
+	display: none;
+
+	font-family: @primary-ff;
+	font-size: (@md-fs * @ratio);
+	color: @primary-fc;
+
+	position: fixed;
+	min-width: 20vw;
+	padding: (@big-gap * @ratio) (@big-gap * @ratio);
+	.absolute-panel;
+
+	& > span {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: (@big-gap * @ratio);
+		width: fit-content;
+
+		& > span {
+			&:first-of-type {
+				display: flex;
+				align-items: center;
+				gap: (@md-gap * @ratio);
+			}
+		}
+	}
+
+	.section-title {
+		font-size: (@big-fs * @ratio);
+	}
+
+	#browse-files {
+		.button-elements;
+		.filled-element;
+		cursor: @pointer;
+		padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @ratio);
+	}
+
+	#save-upload {
+		display: none;
+	}
+
+}
+
+.settings-panel {
+	display: none;
+	min-width: 20vw;
+
+	font-family: @primary-ff;
+	font-size: (@md-fs * @ratio);
+	color: @primary-fc;
+
+	position: fixed;
+	padding: (@big-gap * @ratio) (@big-gap * @ratio);
+	.absolute-panel;
+
+	.checkboxes {
+		display: flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: (@md-gap * @ratio);
+
+		.checkbox {
+			display: flex;
+			align-items: flex-end;
+			gap: (@md-gap * @ratio);
+
+			input {
+				.checkbox-elements;
+			}
+		}
+	}
+}
+
+.feedback-panel {
+	display: none;
+	min-width: 40vw;
+
+	font-family: @primary-ff;
+	font-size: (@md-fs * @ratio);
+	color: @primary-fc;
+
+	position: fixed;
+	padding: (@big-gap * @ratio) (@big-gap * @ratio);
+	.absolute-panel;
+
+	span {
+		form {
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			gap: (@big-gap * @ratio);
+
+			& > span {
+				&:first-of-type {
+					display: flex;
+					justify-content: space-between;
+					width: 100%;
+				}
+			}
+				
+			.label_and_input {
+				display: flex;
+				flex-direction: column;
+				gap: (@small-gap * @ratio);
+
+				&.full_width {
+					width: 100%;
+				}
+			
+				textarea {
+					resize: none;
+				}
+			}
+
+			input, textarea, select {
+				background-color: @stardew-bg;
+				border-top: solid 3px #5b2b2a;
+				border-right: solid 3px #5b2b2a;
+				border-left: solid 3px #965c3a;
+				border-bottom: solid 3px #965c3a;
+
+				padding: (@small-gap * @ratio) (@small-gap * @ratio);
+
+				border-radius: 2px;
+
+				box-shadow: inset -2px 2px 0 2px #dc7b05, -2px 2px 0 2px #cca36b;
+				scrollbar-width: none;
+
+				&:not(input[type=submit]) {
+					font-family: @dialogue-ff;
+				}
+			}
+
+			input[type=submit] {
+				font-family: @primary-ff;
+				font-size: @big-fs * @ratio;
+				margin: 0 auto;
+				.buttons;
+			}
+
+			option {
+				font-size: @big-fs * @ratio;
+				padding: (@small-gap * @ratio) (@small-gap * @ratio);
+
+				&:hover {
+					background-color: orange;
+				}
+			}
+		}
 	}
 }
