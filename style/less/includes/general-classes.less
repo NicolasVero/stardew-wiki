@@ -16,14 +16,18 @@
 	flex-basis: 100%;
 }
 
-.unused {
+.grey {
 	filter: grayscale(1);
-	opacity: 1;
+	opacity: 0.2;
 }
 
 .not-found, .not-gifted, .not-talked, .isnt_birthday, .isnt_festival, .topic_not_selected {
+	.grey;
+}
+
+.unused {
 	filter: grayscale(1);
-	opacity: 0.2;
+	opacity: 1;
 }
 
 .not-hide {
@@ -31,8 +35,8 @@
 }
 
 .no-spoil-title {
-	display: none;
 	.data-info;
+	display: none;
 	font-size: @small-fs * @ratio;
 }
 
@@ -46,14 +50,19 @@
 .buttons {
 	transition: transform .2s ease-in-out;
 	transform: scale(1);
+
 	&:hover {
 		transform: scale(1.1);
 		cursor: @pointer;
 	}
 }
 
-.modal-window, .modal-opener, .socials, img {
+.cant_select {
 	user-select: none;
+}
+
+.modal-window, .modal-opener, .socials, img {
+	.cant_select;
 }
 	
 .panel-header {
@@ -107,7 +116,7 @@
 .button-elements {
 	.data;
 	.buttons;
-	user-select: none;
+	.cant_select;
 }
 
 .checkbox-elements {
@@ -193,7 +202,7 @@
 	}
 }
 
-.upload-panel {
+.modal_panel {
 	display: none;
 
 	font-family: @primary-ff;
@@ -201,9 +210,13 @@
 	color: @primary-fc;
 
 	position: fixed;
-	min-width: 20vw;
 	padding: (@big-gap * @ratio) (@big-gap * @ratio);
 	.absolute-panel;
+}
+
+.upload-panel {
+	.modal_panel;
+	min-width: 20vw;
 
 	& > span {
 		display: flex;
@@ -239,16 +252,8 @@
 }
 
 .settings-panel {
-	display: none;
+	.modal_panel;
 	min-width: 20vw;
-
-	font-family: @primary-ff;
-	font-size: (@md-fs * @ratio);
-	color: @primary-fc;
-
-	position: fixed;
-	padding: (@big-gap * @ratio) (@big-gap * @ratio);
-	.absolute-panel;
 
 	.checkboxes {
 		display: flex;
@@ -269,16 +274,8 @@
 }
 
 .feedback-panel {
-	display: none;
+	.modal_panel;
 	min-width: 40vw;
-
-	font-family: @primary-ff;
-	font-size: (@md-fs * @ratio);
-	color: @primary-fc;
-
-	position: fixed;
-	padding: (@big-gap * @ratio) (@big-gap * @ratio);
-	.absolute-panel;
 
 	span {
 		form {
@@ -352,8 +349,6 @@
 			}
 
 			input[type=number] {
-				-moz-appearance: textfield;
-				
 				&::-webkit-outer-spin-button,
 				&::-webkit-inner-spin-button {
 					-webkit-appearance: none;

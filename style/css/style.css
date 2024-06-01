@@ -412,9 +412,6 @@ html {
     transform: scale(1.1);
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
-  .feedback-panel span form input[type=number] {
-    -moz-appearance: textfield;
-  }
   .feedback-panel span form input[type=number]::-webkit-outer-spin-button,
   .feedback-panel span form input[type=number]::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -1348,9 +1345,6 @@ html {
   .feedback-panel span form input[type=submit]:hover {
     transform: scale(1.1);
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
-  }
-  .feedback-panel span form input[type=number] {
-    -moz-appearance: textfield;
   }
   .feedback-panel span form input[type=number]::-webkit-outer-spin-button,
   .feedback-panel span form input[type=number]::-webkit-inner-spin-button {
