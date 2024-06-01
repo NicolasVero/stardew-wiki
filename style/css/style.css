@@ -371,6 +371,17 @@ html {
   .feedback-panel span form .label_and_input textarea {
     resize: none;
   }
+  .feedback-panel span form div.topic_selection {
+    display: flex;
+    gap: 60px;
+  }
+  .feedback-panel span form div.topic_selection > span {
+    text-align: center;
+  }
+  .feedback-panel span form div.topic_selection > span:not(.topic_selected) img {
+    opacity: 0.2;
+    filter: grayscale(1);
+  }
   .feedback-panel span form input,
   .feedback-panel span form textarea,
   .feedback-panel span form select {
@@ -1291,6 +1302,17 @@ html {
   }
   .feedback-panel span form .label_and_input textarea {
     resize: none;
+  }
+  .feedback-panel span form div.topic_selection {
+    display: flex;
+    gap: 60px;
+  }
+  .feedback-panel span form div.topic_selection > span {
+    text-align: center;
+  }
+  .feedback-panel span form div.topic_selection > span:not(.topic_selected) img {
+    opacity: 0.2;
+    filter: grayscale(1);
   }
   .feedback-panel span form input,
   .feedback-panel span form textarea,

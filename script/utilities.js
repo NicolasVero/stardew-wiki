@@ -178,17 +178,17 @@ function load_elements() {
 
 }
 
-function activate_option_inputs() {
-    const select_element = document.getElementById('custom_select');
+// function activate_option_inputs() {
+//     const select_element = document.getElementById('custom_select');
     
-    select_element.addEventListener('change', () => {
-        const select_element = document.getElementById('custom_select');
-        const options = select_element.querySelectorAll('option');
-        options.forEach(option => {
-                option.classList.remove('option_clicked');
-        });
+//     select_element.addEventListener('change', () => {
+//         const select_element = document.getElementById('custom_select');
+//         const options = select_element.querySelectorAll('option');
+//         options.forEach(option => {
+//                 option.classList.remove('option_clicked');
+//         });
 
-        const selected_option = select_element.options[select_element.selectedIndex];
-        selected_option.classList.add('option_clicked');
-    });
-}
+//         const selected_option = select_element.options[select_element.selectedIndex];
+//         selected_option.classList.add('option_clicked');
+//     });
+// }

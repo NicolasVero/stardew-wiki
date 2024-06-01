@@ -318,6 +318,21 @@
 				}
 			}
 
+			div.topic_selection {
+				// background-color: red;
+				display: flex;
+				gap: 60px;
+
+				& > span {
+					text-align: center;
+				}
+
+				& > span:not(.topic_selected) img {
+					opacity: .2;
+					filter: grayscale(1);
+				}
+			}
+
 			input, textarea, select {
 				background-color: @stardew-bg;
 				border-top: solid 3px #5b2b2a;

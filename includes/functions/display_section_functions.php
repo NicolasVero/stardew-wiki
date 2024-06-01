@@ -123,12 +123,23 @@ function display_feedback_panel():string {
 
                     <span class='label_and_input full_width'>
                         <label>Topic</label>
-                        <select size='3' id='custom_select'>
-                            <option>Feature request</option>
-                            <option>Bug report</option>
-                            <option>Other</option>
-                        </select>
-                    </span>
+
+                        <div class='topic_selection'>
+                            <span class='topic_selected'>
+                                <img src='" . get_images_folder() . "icons/exit.png' class=''/>
+                                <p>Feature request</p>
+                            </span>
+
+                            <span>
+                                <img src='" . get_images_folder() . "icons/exit.png' class=''/>
+                                <p>Bug report</p>
+                            </span>
+
+                            <span>
+                                <img src='" . get_images_folder() . "icons/exit.png' class=''/>
+                                <p>Other</p>
+                            </span>
+                        </div>
 
                     <span class='label_and_input full_width'>
                         <label>Message</label>

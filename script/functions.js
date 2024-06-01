@@ -15,7 +15,7 @@ window.addEventListener("load", () => {
     document.getElementById("toggle_versions_items_mode").addEventListener("change", toggle_versions_items_mode);
     document.getElementById("save-upload").addEventListener("change", file_choice);
 
-    activate_option_inputs();
+    // activate_option_inputs();
 	
     activate_buttons(".landing-upload", ".exit-upload", ".upload-panel", false);
     activate_buttons(".landing-settings", ".exit-settings", ".settings", false);
