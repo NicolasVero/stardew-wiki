@@ -144,9 +144,16 @@ header {
 			flex-basis: 33%;
 
 			&.date {
+				position: relative;
 				display: flex;
 				justify-content: center;
 				align-items: center;
+				
+				.tooltip {
+					position: absolute;
+					top: -2px;
+					right: (@bigger-gap * @ratio);
+				}
 			}
 
 			&.game_time {
@@ -156,11 +163,6 @@ header {
 				gap: (@small-gap * @ratio);
 			}
 
-			img.festival_icon {
-				position: relative;
-				top: 2px;
-				margin-left: 20px;
-			}
 		}
 
 
