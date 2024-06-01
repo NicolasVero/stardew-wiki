@@ -68,7 +68,8 @@ html {
   .not-gifted,
   .not-talked,
   .isnt_birthday,
-  .isnt_festival {
+  .isnt_festival,
+  .topic_not_selected {
     filter: grayscale(1);
     opacity: 0.2;
   }
@@ -371,20 +372,18 @@ html {
   .feedback-panel span form .label_and_input textarea {
     resize: none;
   }
-  .feedback-panel span form div.topic_selection {
+  .feedback-panel span form .topic_selection {
     display: flex;
-    gap: 60px;
+    justify-content: space-around;
   }
-  .feedback-panel span form div.topic_selection > span {
-    text-align: center;
-  }
-  .feedback-panel span form div.topic_selection > span:not(.topic_selected) img {
-    opacity: 0.2;
-    filter: grayscale(1);
+  .feedback-panel span form .topic_selection > span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
   }
   .feedback-panel span form input,
-  .feedback-panel span form textarea,
-  .feedback-panel span form select {
+  .feedback-panel span form textarea {
     background-color: #ffc677;
     border-top: solid 3px #5b2b2a;
     border-right: solid 3px #5b2b2a;
@@ -396,8 +395,7 @@ html {
     scrollbar-width: none;
   }
   .feedback-panel span form input:not(input[type=submit]),
-  .feedback-panel span form textarea:not(input[type=submit]),
-  .feedback-panel span form select:not(input[type=submit]) {
+  .feedback-panel span form textarea:not(input[type=submit]) {
     font-family: "SV Bold";
   }
   .feedback-panel span form input[type=submit] {
@@ -411,12 +409,8 @@ html {
     transform: scale(1.1);
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
-  .feedback-panel span form option {
-    font-size: 18px;
-    padding: 5px 5px;
-  }
-  .feedback-panel span form option:hover {
-    background-color: orange;
+  .feedback-panel span form input[type=radio] {
+    display: none;
   }
   body #landing-page main {
     font-family: "Stardew Valley Stonks", serif;
@@ -1000,7 +994,8 @@ html {
   .not-gifted,
   .not-talked,
   .isnt_birthday,
-  .isnt_festival {
+  .isnt_festival,
+  .topic_not_selected {
     filter: grayscale(1);
     opacity: 0.2;
   }
@@ -1303,20 +1298,18 @@ html {
   .feedback-panel span form .label_and_input textarea {
     resize: none;
   }
-  .feedback-panel span form div.topic_selection {
+  .feedback-panel span form .topic_selection {
     display: flex;
-    gap: 60px;
+    justify-content: space-around;
   }
-  .feedback-panel span form div.topic_selection > span {
-    text-align: center;
-  }
-  .feedback-panel span form div.topic_selection > span:not(.topic_selected) img {
-    opacity: 0.2;
-    filter: grayscale(1);
+  .feedback-panel span form .topic_selection > span {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 7.5px;
   }
   .feedback-panel span form input,
-  .feedback-panel span form textarea,
-  .feedback-panel span form select {
+  .feedback-panel span form textarea {
     background-color: #ffc677;
     border-top: solid 3px #5b2b2a;
     border-right: solid 3px #5b2b2a;
@@ -1328,8 +1321,7 @@ html {
     scrollbar-width: none;
   }
   .feedback-panel span form input:not(input[type=submit]),
-  .feedback-panel span form textarea:not(input[type=submit]),
-  .feedback-panel span form select:not(input[type=submit]) {
+  .feedback-panel span form textarea:not(input[type=submit]) {
     font-family: "SV Bold";
   }
   .feedback-panel span form input[type=submit] {
@@ -1343,12 +1335,8 @@ html {
     transform: scale(1.1);
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
-  .feedback-panel span form option {
-    font-size: 13.5px;
-    padding: 3.75px 3.75px;
-  }
-  .feedback-panel span form option:hover {
-    background-color: orange;
+  .feedback-panel span form input[type=radio] {
+    display: none;
   }
   body #landing-page main {
     font-family: "Stardew Valley Stonks", serif;

@@ -178,17 +178,33 @@ function load_elements() {
 
 }
 
-// function activate_option_inputs() {
-//     const select_element = document.getElementById('custom_select');
-    
-//     select_element.addEventListener('change', () => {
-//         const select_element = document.getElementById('custom_select');
-//         const options = select_element.querySelectorAll('option');
-//         options.forEach(option => {
-//                 option.classList.remove('option_clicked');
-//         });
+function feedback_custom_radio() {
+    const feedback_fake_radios = document.querySelectorAll('.feedback_custom_radio');
+    const feedback_real_radios = document.querySelectorAll('.feedback_real_radio');
 
-//         const selected_option = select_element.options[select_element.selectedIndex];
-//         selected_option.classList.add('option_clicked');
-//     });
-// }
+    feedback_fake_radios.forEach(fake_radio => {
+        fake_radio.addEventListener('click', () => {
+            const real_radio = fake_radio.previousElementSibling;
+            if (real_radio && real_radio.type === "radio") {
+                real_radio.checked = true;
+                real_radio.dispatchEvent(new Event("change"));
+            }
+        });
+    });
+
+    feedback_real_radios.forEach(real_radio => {
+        real_radio.addEventListener('change', () => {
+            feedback_fake_radios.forEach(fake_radio => {
+                fake_radio.classList.add('topic_not_selected');
+            });
+
+            const fake_radio = real_radio.nextElementSibling;
+            if (fake_radio && fake_radio.tagName === "IMG") {
+                if (real_radio.checked)
+                    fake_radio.classList.remove('topic_not_selected');
+                else
+                    fake_radio.classList.add('topic_not_selected');
+            }
+        });
+    });
+}

@@ -124,22 +124,25 @@ function display_feedback_panel():string {
                     <span class='label_and_input full_width'>
                         <label>Topic</label>
 
-                        <div class='topic_selection'>
-                            <span class='topic_selected'>
-                                <img src='" . get_images_folder() . "icons/exit.png' class=''/>
-                                <p>Feature request</p>
+                        <span class='topic_selection'>
+                            <span>
+                                <input type='radio' id='feature_request' value='Feature request' name='topic' class='feedback_real_radio'>
+                                <img src='" . get_images_folder() . "icons/exit.png' class='feedback_custom_radio'>
+                                <label for='feature_request'>Feature request</label>
                             </span>
 
                             <span>
-                                <img src='" . get_images_folder() . "icons/exit.png' class=''/>
-                                <p>Bug report</p>
+                                <input type='radio' id='bug_report' value='Bug report' name='topic' class='feedback_real_radio'>
+                                <img src='" . get_images_folder() . "icons/exit.png' class='feedback_custom_radio topic_not_selected'>
+                                <label for='bug_report'>Bug report</label>
                             </span>
 
                             <span>
-                                <img src='" . get_images_folder() . "icons/exit.png' class=''/>
-                                <p>Other</p>
+                                <input type='radio' id='other' value='Other' name='topic' class='feedback_real_radio'>
+                                <img src='" . get_images_folder() . "icons/exit.png' class='feedback_custom_radio topic_not_selected'>
+                                <label for='other'>Other</label>
                             </span>
-                        </div>
+                        </span>
 
                     <span class='label_and_input full_width'>
                         <label>Message</label>
