@@ -4,13 +4,14 @@
 	require 'functions/utility_functions.php';
 
 	ob_start();
+	extract($_POST);
 
 	$response = [
 		"success" => false,
-		"message" => ""
+		"message" => "Error while sending the email. Please try again"
 	];
-
-	if(!($_SERVER['REQUEST_METHOD'] == "POST")) {
+	
+	if($_SERVER['REQUEST_METHOD'] != "POST") {
 		echo json_encode($response);
 		exit;
 	}
@@ -24,29 +25,18 @@
 		exit;
 	}
 	
-	$to = "jsp quelle adresse";
-	$email_subject = $_POST["topic"];
+	$to         = "jsp quelle adresse";
+	$headers    = "De: $mail";
+	$coords     = "$username : $mail";
+	$date 	    = date("d/m/Y");
+	$heure 	    = date("H:i");
+	$email_body = "Message de $coords \nLe : $date à $heure \n $message";
 
-	$email 	= $_POST["mail"];
-	$headers = "De: $email";
-
-	$coords = $_POST["username"] . " : " . $email;
-
-	$date 	= date("d/m/Y");
-	$heure 	= date("H:i");
-
-	$message = $_POST["message"];
-	$email_body = "Message de " . $coords . "\nLe : " . $date . " à " . $heure . "\n" . $message;
-
-	// if (mail($to, $email_subject, $email_body, $headers)) {
-	if (true) {
+	// if (mail($to, $topic, $email_body, $headers)) {
+	if(true) {
 		$response["success"] = true;
 		$response["message"] = "Your mail has been delivered successfully";
-		echo json_encode($response);
-		exit;
 	}
-	else {
-		$response["message"] = "Error while sending the email. Please try again";
-		echo json_encode($response);
-		exit;
-	}
+	
+	exit;
+	echo json_encode($response);
