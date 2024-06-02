@@ -113,7 +113,7 @@ function display_feedback_panel():string {
                 <img src='" . get_images_folder() . "icons/exit.png' class='exit-feedback exit' />
             </div>
             <span>
-                <form>
+                <form id='feedback_form'>
                     <span>
                         <span class='label_and_input'>
                             <label for='username'>Username</label>
@@ -157,7 +157,7 @@ function display_feedback_panel():string {
 
                     <span class='label_and_input stay_start'>
                         <label for='security_captcha'>" . $random_captcha['question'] . "</label>
-                        <input type='" . $random_captcha['type'] . "' id='security_captcha' required>
+                        <input type='" . $random_captcha['type'] . "' id='security_captcha' name='captcha_answer' required>
                         <input type='hidden' name='captcha_id' value='" . $captcha_id . "'>
                     </span>
 

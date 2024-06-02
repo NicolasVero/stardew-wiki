@@ -1,3 +1,4 @@
+// Upload File AJAX
 async function AJAX_send() {
     const xml_upload = document.getElementById("save-upload");
     const file       = xml_upload.files[0];
@@ -55,3 +56,28 @@ async function AJAX_send() {
         alert("An error occured while uploading the file. Please Try again");
     }
 }
+
+// Feedback Form AJAX
+document.getElementById('feedback_form').addEventListener('submit', (event) => {
+    event.preventDefault();
+
+    const formData = new FormData(event.target);
+
+    fetch('./includes/sendmail.php', {
+        method: 'POST',
+        body: formData
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log(data);
+        if (data.success) {
+            alert(data.message);
+        } else {
+            alert('Error submitting form: ' + data.message);
+        }
+    })
+    .catch(error => {
+        console.error('Error:', error);
+        alert('An error occurred while submitting the form.');
+    });
+});
