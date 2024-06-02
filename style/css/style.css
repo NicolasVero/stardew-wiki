@@ -407,6 +407,7 @@ html {
   }
   .feedback-panel span form .topic_selection > span {
     display: flex;
+    width: 150px;
     flex-direction: column;
     align-items: center;
     gap: 10px;
@@ -1370,6 +1371,7 @@ html {
   }
   .feedback-panel span form .topic_selection > span {
     display: flex;
+    width: 150px;
     flex-direction: column;
     align-items: center;
     gap: 7.5px;

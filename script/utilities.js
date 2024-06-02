@@ -185,7 +185,7 @@ function feedback_custom_radio() {
     feedback_fake_radios.forEach(fake_radio => {
         fake_radio.addEventListener('click', () => {
             const real_radio = fake_radio.previousElementSibling;
-            if (real_radio && real_radio.type === "radio") {
+            if(real_radio && real_radio.type === "radio") {
                 real_radio.checked = true;
                 real_radio.dispatchEvent(new Event("change"));
             }
