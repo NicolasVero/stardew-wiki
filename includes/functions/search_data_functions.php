@@ -270,7 +270,7 @@ function get_fish_caught(object $data):array {
 function get_friendship_data(object $data):array {
     $friends_data = array();
     $villagers_json = sanitize_json_with_version('villagers');
-    $birthday_json = decode('villagers_birthday');
+    $birthday_json = sanitize_json_with_version('villagers_birthday');
 
     foreach($data->item as $item) {
         

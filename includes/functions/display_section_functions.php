@@ -1,7 +1,6 @@
 <?php 
 
 function display_sur_header():string {
-
     $structure = "<div class='sur-header'>";
         $structure .= display_player_selection();
         $structure .= "<span>";
@@ -15,7 +14,6 @@ function display_sur_header():string {
 }
 
 function display_player_selection():string {
-
 	$players = $GLOBALS['players_names'];
     
     if(count($players) < 2)
@@ -35,16 +33,12 @@ function display_player_selection():string {
 }
 
 function display_game_version():string {
-    $structure = "
-            <span class='game_version'>V " . $GLOBALS['game_version'] . "</span>
-    ";
+    $structure = "<span class='game_version'>V " . $GLOBALS['game_version'] . "</span>";
     return $structure;
 }
 
 function display_settings_button(string $prefix = 'main'):string {
-    $structure = "
-        <span class='$prefix-settings modal-opener'><img src='" . get_images_folder() ."icons/settings.png' class='modal-opener'></span>
-    ";
+    $structure = "<span class='$prefix-settings modal-opener'><img src='" . get_images_folder() ."icons/settings.png' class='modal-opener'></span>";
     return $structure;
 }
 
@@ -77,9 +71,7 @@ function display_settings_panel():string {
 }
 
 function display_save_button(string $prefix ='landing'):string {
-    return "
-        <span class='$prefix-upload modal-opener'><img src='" . get_images_folder() ."icons/file.png' class='modal-opener'></span>
-    ";
+    return "<span class='$prefix-upload modal-opener'><img src='" . get_images_folder() ."icons/file.png' class='modal-opener'></span>";
 }
 
 function display_save_panel():string {
@@ -101,7 +93,6 @@ function display_save_panel():string {
 }
 
 function display_feedback_panel():string {
-
     $captcha_json = sanitize_json_with_version('captcha_questions');
     $captcha_id = rand(0, count($captcha_json) - 1);
     $random_captcha = $captcha_json[$captcha_id];
@@ -169,13 +160,12 @@ function display_feedback_panel():string {
 }
 
 function display_header():string {
-
 	$player_id = $GLOBALS['player_id'];
-	$datas = $GLOBALS['all_players_data'][$player_id]['general'];
+	$all_players_data = $GLOBALS['all_players_data'][$player_id]['general'];
 
 	$festival_icon = display_festival_icon();
     
-    extract($datas);    
+    extract($all_players_data);    
     $images_path = get_images_folder();
 	$farm_name = str_contains(strtolower($farm_name), 'farm') ? $farm_name : $farm_name . ' farm';
 	$gender = ($gender == null) ? 'neutral' : $gender;
@@ -236,31 +226,27 @@ function display_header():string {
 }
 
 function display_crafts_button():string {
-	$player_id = $GLOBALS['player_id'];
-	return "<img src='" . get_images_folder() . "/icons/craft_icon.png' class='craft-icon view-all-crafts-$player_id button-elements modal-opener'>";
+	return "<img src='" . get_images_folder() . "/icons/craft_icon.png' class='craft-icon view-all-crafts-" . $GLOBALS['player_id'] . " button-elements modal-opener'>";
 }
 
 function display_quest_button():string {
-	$player_id = $GLOBALS['player_id'];
-	return "<img src='" . get_images_folder() . "/icons/quest_icon.png' class='quest-icon view-all-quests-$player_id button-elements modal-opener'>";
+	return "<img src='" . get_images_folder() . "/icons/quest_icon.png' class='quest-icon view-all-quests-" . $GLOBALS['player_id'] . " button-elements modal-opener'>";
 }
 
 function display_general_stats():string {
-
-
 	$player_id = $GLOBALS['player_id'];
-	$datas = $GLOBALS['all_players_data'][$player_id]['general'];
+	$all_players_data = $GLOBALS['all_players_data'][$player_id]['general'];
 
 	$quest_button = display_quest_button();
 
-    extract($datas);
+    extract($all_players_data);
     $images_path = get_images_folder();
     $deepest_mine_level = ($mine_level > 120) ? 120 : $mine_level; 
     $deepest_skull_mine_level = ($mine_level - 120 < 0) ? 0 : $mine_level - 120;
     
-    $deepest_mine_level_tooltip = "$deepest_mine_level floors in the Stardew Mine " . (($deepest_skull_mine_level > 0) ? "& $deepest_skull_mine_level floors in the Skull Mine" : "");
+    $deepest_mine_level_tooltip = "$deepest_mine_level floors in the Stardew Mine" . (($deepest_skull_mine_level > 0) ? " & $deepest_skull_mine_level floors in the Skull Mine" : "");
 
-    $structure = "
+    return "
         <section class='info-section general-stats'>
         	<h2 class='section-title'>General stats</h2>
 			$quest_button
@@ -294,16 +280,12 @@ function display_general_stats():string {
             </div>
         </section>
     ";
-
-    return $structure;
 }
 
 function display_quests():string {
-
 	$player_id = $GLOBALS['player_id'];
-	$datas = $GLOBALS['all_players_data'][$player_id]['quest_log'];
+	$this_player_data = $GLOBALS['all_players_data'][$player_id]['quest_log'];
 
-    extract($datas);
     $images_path = get_images_folder();
 
     $structure = "
@@ -315,7 +297,7 @@ function display_quests():string {
             <span class='quests'>
     ";
 
-	if(empty($datas)) {
+	if(empty($this_player_data)) {
 		$structure .= "
 					<h3>Nothing to see here yet</h3>
 				</span>
@@ -323,10 +305,8 @@ function display_quests():string {
 		";
 	}
 
-    foreach($datas as $data) {
-        $title = $data['title'];
-        $objective = $data['objective'];
-        $rewards = $data['rewards'];
+    foreach($this_player_data as $data) {
+		extract($data);
 
         $structure .= "
             <span class='quest'>
@@ -341,22 +321,29 @@ function display_quests():string {
 			continue;
 		}
         
-		if(isset($data['daysLeft']))
-			$structure .= " <span class='days-left'><img src='$images_path/icons/timer.png'/>" . $data['daysLeft'] . " days</span>";
+		if(isset($daysLeft)) {
+			$day_text = ($daysLeft > 1) ? "days" : "day";
+			$structure .= " <span class='days-left'><img src='$images_path/icons/timer.png'/>$daysLeft $day_text</span>";
+		}
 
 		$structure .= "<span class='quest-rewards'>";
 		
         for($i = 0; $i<count($rewards); $i++) {
-            $structure .= (is_numeric($rewards[$i])) ? "<span class='quest-reward'>" : "<span class='quest-reward tooltip'>";
+			// Does reward need a tooltip (gold and qi gems don't)
+            $structure .= ((is_numeric($rewards[$i]) || str_ends_with($rewards[$i], 'q'))) ? "<span class='quest-reward'>" : "<span class='quest-reward tooltip'>";
             
+			// If reward is Friendship hearts/points
             if(strstr($rewards[$i], "Friendship")) {
                 $reward_number = explode(" ", $rewards[$i])[0];
-                $structure .= "<img src='$images_path/icons/heart_" . $reward_number .".png'/>";
+                $structure .= "<img src='$images_path/icons/heart_$reward_number.png'/>";
             }
+			// If reward is Gold
             elseif(is_numeric($rewards[$i]))
                 $structure .= formate_number($rewards[$i]) . "<img src='$images_path/icons/gold.png'/>";
+			// If reward is Qi Gems
             elseif(str_ends_with($rewards[$i], 'q'))
                 $structure .= explode('_', $rewards[$i])[0] . "<img src='$images_path/icons/qi_gem.png'/>";
+			// If reward is something else
             else
                 $structure .= $rewards[$i];
 
@@ -378,8 +365,10 @@ function display_quests():string {
 }
 
 function display_skills():string {
-    
-	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
+	$this_player_data = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
+	$this_player_skills = $this_player_data['skills'];
+	$this_player_skills_levels = $this_player_data['levels'];
+	$this_player_masteries = $this_player_data['masteries'];
 
     $structure = "
 		<section class='skills-section info-section'>
@@ -387,14 +376,15 @@ function display_skills():string {
             <span>    
     ";
 
-    $mastery_visible_class = (empty($datas['masteries'])) ? "" : "not-hide";
+    $mastery_visible_class = (empty($this_player_masteries)) ? "" : "not-hide";
 
-    foreach($datas['levels'] as $key => $level) {
+    foreach($this_player_skills_levels as $key => $level) {
         
         $level_icon_name = explode('_', $key)[0];
         $level_icon      = get_images_folder() . "icons/$level_icon_name.png";
+
         $mastery_icon    = get_images_folder() . "icons/mastery.png";
-        $mastery_class   = (in_array(ucfirst(explode('_', $key)[0]) . " Mastery", $datas['masteries'])) ? 'found' : 'not-found';
+        $mastery_class   = (in_array(ucfirst(explode('_', $key)[0]) . " Mastery", $this_player_masteries)) ? 'found' : 'not-found';
         $mastery_tooltip = ucfirst(explode('_', $key)[0]) . " mastery";
 
         $structure .= "<span class='skill $key'>";
@@ -420,7 +410,7 @@ function display_skills():string {
             "<span class='level data'>$level</span>
                 <span>
                     <a class='wiki_link' href='https://stardewvalleywiki.com/Skills' target='_blank'>" 
-                        . get_skills_icons($datas['skills'], $level_icon_name) . "
+                        . get_skills_icons($this_player_skills, $level_icon_name) . "
                     </a>
                 </span>
             </span>
@@ -435,63 +425,21 @@ function display_skills():string {
     return $structure;
 }
 
-function get_level_progress_bar(int $level):string {
-
-    $structure = "<span class='level-progress-bar'>";
-
-    for($i = 1; $i <= 10; $i++) {
-        if($level >= $i) $level_bar = get_images_folder() . (($i % 5 == 0) ? "icons/big_level.png"       : "icons/level.png");
-        else             $level_bar = get_images_folder() . (($i % 5 == 0) ? "icons/big_level_empty.png" : "icons/level_empty.png");
-        
-        $structure .= "<img src='$level_bar' alt=''/>";        
-    }
-
-    $structure .= "</span>";
-
-    return $structure;
-}
-
-function get_skills_icons(array $skills, string $current_skill):string {
-
-    $structure = "<div class='skills-section'>";
-
-    foreach($skills as $skill) {
-        if($current_skill == strtolower($skill['source'])) {
-
-            $skill_icon = strtolower($skill['skill']);
-            $skill_icon_path = get_images_folder() . "skills/$skill_icon.png";
-            $skill_description = $skill['description'];
-            
-            $structure .= "
-			<span class='tooltip'>
-				<img src='$skill_icon_path' alt='$skill_description' />
-				<span>$skill_description</span>
-			</span>
-			";
-        }
-    }
-
-    $structure .= "</div>";
-
-    return $structure;
-}
-
 function display_top_friendships(int $limit = 4):string {
     return display_friendships($limit);
 }
 
 function display_friendships(int $limit = -1):string {
-
 	$player_id = $GLOBALS['player_id'];
-	$friends = $GLOBALS['all_players_data'][$player_id]['friendship'];
+	$friendship_data = $GLOBALS['all_players_data'][$player_id]['friendship'];
 
     $images_path = get_images_folder();
 
     $marriables_npc = sanitize_json_with_version('marriables');
     $villagers_json = sanitize_json_with_version('villagers');
+	$birthday_json = sanitize_json_with_version('villagers_birthday');
 	
     $json_with_version = sanitize_json_with_version('villagers', true);
-	// log_($json_with_version);
 
     $section_class = ($limit == -1) ? 'all-friends' : 'top-friends';
     $view_all = ($limit == -1) ? '' : "<span class='view-all-friends view-all-friendships-$player_id modal-opener'>View all friendships</span>";
@@ -512,7 +460,7 @@ function display_friendships(int $limit = -1):string {
     "
 	;
 
-    foreach($friends as $name => $friend) {
+    foreach($friendship_data as $name => $friend) {
         if($limit == 0)
             break;
 
@@ -524,8 +472,8 @@ function display_friendships(int $limit = -1):string {
 		$is_newer_version = (array_search($name, $json_with_version)) ? "older-version" : "newer-version";
 
         $is_birthday = (is_this_the_same_day($birthday)) ? "is_birthday" : "isnt_birthday";
-        $birthday = explode('/', $birthday);
-        $birthday = "Day " . $birthday[0] . " of " . $birthday[1];
+        $birthday_date = explode('/', $birthday);
+        $birthday_date = "Day " . $birthday_date[0] . " of " . $birthday_date[1];
 
         $wiki_url = get_wiki_link(get_item_id_by_name($name));
 
@@ -561,7 +509,7 @@ function display_friendships(int $limit = -1):string {
 				</span>
                 <span class='tooltip'>
                     <img src='{$images_path}icons/birthday_icon.png' class='birthday_icon $is_birthday' alt=''/>
-                    <span class='left'>$birthday</span>
+                    <span class='left'>$birthday_date</span>
                 </span>
 				<span class='interactions'>
                     <span class='tooltip'>
@@ -579,7 +527,7 @@ function display_friendships(int $limit = -1):string {
         if($limit == 0)
             break;
 
-		if(isset($friends[$villager_name]))
+		if(isset($friendship_data[$villager_name]))
 			continue;
 
         $limit--;
@@ -588,6 +536,11 @@ function display_friendships(int $limit = -1):string {
 		$is_newer_version = (array_search($villager_name, $json_with_version)) ? "older-version" : "newer-version";
 
         $can_be_married = in_array($villager_name, $marriables_npc);
+
+		$villager_birthday = $birthday_json[(get_custom_id($villager_name))];
+        $is_birthday = (is_this_the_same_day($villager_birthday)) ? "is_birthday" : "isnt_birthday";
+        $birthday_date = explode('/', $villager_birthday);
+        $birthday_date = "Day " . $birthday_date[0] . " of " . $birthday_date[1];
 
         $wiki_url = get_wiki_link(get_item_id_by_name($villager_name));
 
@@ -621,7 +574,7 @@ function display_friendships(int $limit = -1):string {
 				</span>
                 <span class='tooltip'>
                     <img src='{$images_path}icons/birthday_icon.png' class='birthday_icon $is_birthday' alt=''/>
-                    <span class='left'>$birthday</span>
+                    <span class='left'>$birthday_date</span>
                 </span>
 				<span class='interactions'>
                     <span class='tooltip'>
@@ -645,13 +598,11 @@ function display_friendships(int $limit = -1):string {
 }
 
 function display_unlockables():string {
-
-	$player_id = $GLOBALS['player_id'];
-	$player_elements = $GLOBALS['all_players_data'][$player_id]['has_element'];
+	$player_unlockables = $GLOBALS['all_players_data'][$GLOBALS['player_id']]['has_element'];
 
     $images_path = get_images_folder() . "unlockables/";
-    $elements = sanitize_json_with_version('unlockables');
-    sort($elements);
+    $unlockables = sanitize_json_with_version('unlockables');
+    sort($unlockables);
 
     $structure = "
         <section class='gallery unlockables-section _50'>
@@ -660,22 +611,22 @@ function display_unlockables():string {
 				<h3 class='no-spoil-title'>Nothing to see here yet</h2>
     ";
 
-	foreach($elements as $element) {
-		$formatted_name = formate_text_for_file($element);
-		if(!isset($player_elements[$formatted_name]['is_found']))
+	foreach($unlockables as $unlockable_name) {
+		$formatted_name = formate_text_for_file($unlockable_name);
+		if(!isset($player_unlockables[$formatted_name]['is_found']))
 			continue;
 
-		$element_class = ($player_elements[$formatted_name]['is_found']) ? "found" : "not-found";
-		$element_image = "$images_path$formatted_name.png";
+		$unlockable_class = ($player_unlockables[$formatted_name]['is_found']) ? "found" : "not-found";
+		$unlockable_image = "$images_path$formatted_name.png";
 
-		$wiki_url = get_wiki_link(get_item_id_by_name($element));
+		$wiki_url = get_wiki_link(get_item_id_by_name($unlockable_name));
 		
 		$structure .= "
 			<span class='tooltip'>
                 <a class='wiki_link' href='$wiki_url' target='_blank'>
-				    <img src='$element_image' alt='$element' class='gallery-item unlockables $element_class' />
+				    <img src='$unlockable_image' alt='$unlockable_name' class='gallery-item unlockables $unlockable_class' />
 				</a>
-                <span>$element</span>
+                <span>$unlockable_name</span>
 			</span>
 		";
 	}
@@ -750,43 +701,6 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
     return $structure;
 } 
 
-function get_tooltip_text(array $player_data, string $json_line_name, string $data_type):string {
-    
-    $data_array = $player_data[$json_line_name];
-
-    if(empty($data_array))
-        return $json_line_name;
-
-    extract($data_array);
-
-    switch($data_type) {
-        case 'fish' : 
-            if($max_length > 0) return "$json_line_name : caught $caught_counter times ($max_length inches)";
-            return "$json_line_name : caught $caught_counter times";
-
-        case 'enemies' : 
-            return "$json_line_name : $killed_counter killed";
-
-        case 'cooking_recipes' :
-            if(!$counter) return "$json_line_name : not cooked yet";
-            return "$json_line_name : cooked " . (int) $counter . " times";
-
-		case 'crafting_recipes' :
-			if(!$counter) return "$json_line_name : not crafted yet";
-			return "$json_line_name : crafted " . (int) $counter . " times";
-
-        case 'achievements' :
-            return "$json_line_name : $description";
-
-        case 'artifacts':
-        case 'minerals':  
-            if($counter == 0) return "$json_line_name : not given yet";
-            return "$json_line_name : given to museum";
-
-        default : return $json_line_name;
-    }
-}
-
 function display_festival_icon():string {
 
     $festivals = sanitize_json_with_version('festivals', true);
@@ -820,8 +734,6 @@ function display_festival_icon():string {
 		<span class='right'>$festival_name</span>
 	</span>";
 }
-
-
 
 function display_books():string {
 	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
@@ -869,7 +781,83 @@ function display_crafting_recipes():string {
 }
 
 
+function get_level_progress_bar(int $level):string {
 
+    $structure = "<span class='level-progress-bar'>";
+
+    for($i = 1; $i <= 10; $i++) {
+        if($level >= $i) $level_bar = get_images_folder() . (($i % 5 == 0) ? "icons/big_level.png"       : "icons/level.png");
+        else             $level_bar = get_images_folder() . (($i % 5 == 0) ? "icons/big_level_empty.png" : "icons/level_empty.png");
+        
+        $structure .= "<img src='$level_bar' alt=''/>";        
+    }
+
+    $structure .= "</span>";
+
+    return $structure;
+}
+
+function get_skills_icons(array $skills, string $current_skill):string {
+
+    $structure = "<div class='skills-section'>";
+
+    foreach($skills as $skill) {
+        if($current_skill == strtolower($skill['source'])) {
+
+            $skill_icon = strtolower($skill['skill']);
+            $skill_icon_path = get_images_folder() . "skills/$skill_icon.png";
+            $skill_description = $skill['description'];
+            
+            $structure .= "
+			<span class='tooltip'>
+				<img src='$skill_icon_path' alt='$skill_description' />
+				<span>$skill_description</span>
+			</span>
+			";
+        }
+    }
+
+    $structure .= "</div>";
+
+    return $structure;
+}
+
+function get_tooltip_text(array $player_data, string $json_line_name, string $data_type):string {
+    
+    $data_array = $player_data[$json_line_name];
+
+    if(empty($data_array))
+        return $json_line_name;
+
+    extract($data_array);
+
+    switch($data_type) {
+        case 'fish' : 
+            if($max_length > 0) return "$json_line_name : caught $caught_counter times ($max_length inches)";
+            return "$json_line_name : caught $caught_counter times";
+
+        case 'enemies' : 
+            return "$json_line_name : $killed_counter killed";
+
+        case 'cooking_recipes' :
+            if(!$counter) return "$json_line_name : not cooked yet";
+            return "$json_line_name : cooked " . (int) $counter . " times";
+
+		case 'crafting_recipes' :
+			if(!$counter) return "$json_line_name : not crafted yet";
+			return "$json_line_name : crafted " . (int) $counter . " times";
+
+        case 'achievements' :
+            return "$json_line_name : $description";
+
+        case 'artifacts':
+        case 'minerals':  
+            if($counter == 0) return "$json_line_name : not given yet";
+            return "$json_line_name : given to museum";
+
+        default : return $json_line_name;
+    }
+}
 
 function get_farmer_level(object $data):string {
     
