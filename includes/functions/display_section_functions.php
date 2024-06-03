@@ -489,6 +489,9 @@ function display_friendships(int $limit = -1):string {
 
     $marriables_npc = sanitize_json_with_version('marriables');
     $villagers_json = sanitize_json_with_version('villagers');
+	
+    $json_with_version = sanitize_json_with_version('villagers', true);
+	// log_($json_with_version);
 
     $section_class = ($limit == -1) ? 'all-friends' : 'top-friends';
     $view_all = ($limit == -1) ? '' : "<span class='view-all-friends view-all-friendships-$player_id modal-opener'>View all friendships</span>";
@@ -518,6 +521,8 @@ function display_friendships(int $limit = -1):string {
         extract($friend);
         $friend_icon = $images_path . "characters/" . strtolower($name) . ".png";
 
+		$is_newer_version = (array_search($name, $json_with_version)) ? "older-version" : "newer-version";
+
         $is_birthday = (is_this_the_same_day($birthday)) ? "is_birthday" : "isnt_birthday";
         $birthday = explode('/', $birthday);
         $birthday = "Day " . $birthday[0] . " of " . $birthday[1];
@@ -527,7 +532,7 @@ function display_friendships(int $limit = -1):string {
         $structure .= "
 			<span>
                 <a class='wiki_link' href='$wiki_url' target='_blank'>
-				    <img src='$friend_icon' class='character-icon' alt='$name icon' />
+				    <img src='$friend_icon' class='character-icon $is_newer_version' alt='$name icon'/>
 				</a>
                 <span class='character-name'>$name</span>
 			    <span class='hearts-level'>
@@ -580,6 +585,8 @@ function display_friendships(int $limit = -1):string {
         $limit--;
         $friend_icon = $images_path . "characters/" . strtolower($villager_name) . ".png";
 
+		$is_newer_version = (array_search($villager_name, $json_with_version)) ? "older-version" : "newer-version";
+
         $can_be_married = in_array($villager_name, $marriables_npc);
 
         $wiki_url = get_wiki_link(get_item_id_by_name($villager_name));
@@ -587,7 +594,7 @@ function display_friendships(int $limit = -1):string {
         $structure .= "
 			<span>
 				<a class='wiki_link' href='$wiki_url' target='_blank'>
-					<img src='$friend_icon' class='character-icon not-found' alt='$villager_name icon' />
+					<img src='$friend_icon' class='character-icon not-found $is_newer_version' alt='$villager_name icon' />
 				</a>
 				<span class='character-name'>$villager_name</span>
 			    <span class='hearts-level'>
