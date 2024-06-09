@@ -133,12 +133,10 @@ function in_bytes_conversion(size) {
 function load_elements() {
 
     deactivate_landing_inputs();
-
     toggle_checkboxes_actions();
 
     // Buttons & panels
-	let buttons =
-	[
+	const buttons = [
 		{
 			"open_button"    : ".main-settings",
 			"exit_button"    : ".exit-settings",

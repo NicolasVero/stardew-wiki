@@ -5,10 +5,11 @@ require 'display_section_functions.php';
 function display_landing_page():string {
     $save_button     = display_save_button();
     $save_panel      = display_save_panel();
-
+    
     $settings_button = display_settings_button("landing");
     $settings_panel  = display_settings_panel();
-
+    
+    $feedback_button = display_feedback_button();
     $feedback_panel  = display_feedback_panel();
 
 
@@ -16,6 +17,7 @@ function display_landing_page():string {
         <div id='landing' class='sur-header'>
             $save_button
             $settings_button
+            $feedback_button
         </div>
         $save_panel
         $settings_panel
