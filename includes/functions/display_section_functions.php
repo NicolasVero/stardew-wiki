@@ -93,7 +93,7 @@ function display_save_panel():string {
 }
 
 function display_feedback_button():string {
-    return "<span class='feedback-opener modal-opener'><img src='" . get_images_folder() ."icons/file.png' class='modal-opener'></span>";
+    return "<span class='feedback-opener modal-opener'><img src='" . get_images_folder() ."icons/feedback.png' class='modal-opener'></span>";
 }
 
 function display_feedback_panel():string {

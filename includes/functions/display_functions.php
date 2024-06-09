@@ -75,8 +75,12 @@ function display_landing_page():string {
                             We continuously strive to improve and would love to hear your thoughts and suggestions. Whether it's a feature request, a bug report, or general feedback, your input helps us make Stardew Dashboard even better.
                         </span>
                         <span>
-                           <a class='feedback-opener modal-opener'>Click here</a> to open the feedback form and share your thoughts with us.
-                           Thank you for being a part of our community and helping us grow!
+                            Click
+                            <span class='img-embed feedback-opener'>
+                                <img src='" . get_images_folder() ."icons/feedback.png' class='modal-opener'>
+                            </span>
+                            to open the feedback form and share your thoughts with us.
+                            Thank you for being a part of our community and helping us grow!
                         </span>
                     </span>
 
