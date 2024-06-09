@@ -663,11 +663,7 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  header .header > span.date .tooltip {
-    position: absolute;
-    top: -2px;
-    right: 50px;
+    gap: 20px;
   }
   header .header > span.game_time {
     display: flex;
@@ -953,6 +949,8 @@ html {
   }
   body main .gallery img {
     height: 28px;
+    min-width: 28px;
+    object-fit: contain;
   }
   body main > :last-child {
     margin-bottom: 25px;
@@ -1630,11 +1628,7 @@ html {
     display: flex;
     justify-content: center;
     align-items: center;
-  }
-  header .header > span.date .tooltip {
-    position: absolute;
-    top: -2px;
-    right: 37.5px;
+    gap: 20px;
   }
   header .header > span.game_time {
     display: flex;
@@ -1920,6 +1914,8 @@ html {
   }
   body main .gallery img {
     height: 21px;
+    min-width: 21px;
+    object-fit: contain;
   }
   body main > :last-child {
     margin-bottom: 18.75px;
