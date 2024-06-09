@@ -128,13 +128,13 @@ function display_feedback_panel():string {
                         <span class='topic_selection'>
                             <span>
                                 <input type='radio' id='feature_request' value='Feature request' name='topic' class='feedback_real_radio' required checked>
-                                <img src='" . get_images_folder() . "icons/exit.png' class='feedback_custom_radio'>
+                                <img src='" . get_images_folder() . "icons/feature.png' class='feedback_custom_radio'>
                                 <label for='feature_request'>Feature request</label>
                             </span>
 
                             <span>
                                 <input type='radio' id='bug_report' value='Bug report' name='topic' class='feedback_real_radio'>
-                                <img src='" . get_images_folder() . "icons/exit.png' class='feedback_custom_radio topic_not_selected'>
+                                <img src='" . get_images_folder() . "icons/bug.png' class='feedback_custom_radio topic_not_selected'>
                                 <label for='bug_report'>Bug report</label>
                             </span>
 
