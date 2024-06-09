@@ -407,10 +407,13 @@ html {
   }
   .feedback-panel span form .topic_selection > span {
     display: flex;
-    width: 150px;
+    flex-basis: 33%;
     flex-direction: column;
     align-items: center;
     gap: 10px;
+  }
+  .feedback-panel span form .topic_selection img {
+    width: 30px;
   }
   .feedback-panel span form input,
   .feedback-panel span form textarea {
@@ -1371,10 +1374,13 @@ html {
   }
   .feedback-panel span form .topic_selection > span {
     display: flex;
-    width: 150px;
+    flex-basis: 33%;
     flex-direction: column;
     align-items: center;
     gap: 7.5px;
+  }
+  .feedback-panel span form .topic_selection img {
+    width: 30px;
   }
   .feedback-panel span form input,
   .feedback-panel span form textarea {

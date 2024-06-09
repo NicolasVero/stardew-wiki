@@ -7,6 +7,7 @@ function display_sur_header():string {
             $structure .= display_game_version();
             $structure .= display_save_button('file');
             $structure .= display_settings_button();
+            // $structure .= display_feedback_button();
         $structure .= "</span>";
     $structure .= "</div>";
 
