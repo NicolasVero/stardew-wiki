@@ -181,7 +181,8 @@ function feedback_custom_radio() {
     const feedback_real_radios = document.querySelectorAll('.feedback_real_radio');
 
     feedback_fake_radios.forEach(fake_radio => {
-        fake_radio.addEventListener('click', () => {
+		span_topic = fake_radio.parentElement;
+        span_topic.addEventListener('click', () => {
             const real_radio = fake_radio.previousElementSibling;
             if(real_radio && real_radio.type === "radio") {
                 real_radio.checked = true;
