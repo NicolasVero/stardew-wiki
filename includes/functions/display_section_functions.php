@@ -389,7 +389,7 @@ function display_skills():string {
         $level_icon      = get_images_folder() . "icons/$level_icon_name.png";
 
         $mastery_icon    = get_images_folder() . "icons/mastery.png";
-        $mastery_class   = (in_array(ucfirst(explode('_', $key)[0]) . " Mastery", $this_player_masteries)) ? 'found' : 'not-found';
+        $mastery_class   = (array_key_exists(ucfirst(explode('_', $key)[0]) . " Mastery", $this_player_masteries)) ? 'found' : 'not-found';
         $mastery_tooltip = ucfirst(explode('_', $key)[0]) . " mastery";
 
         $structure .= "<span class='skill $key'>";
