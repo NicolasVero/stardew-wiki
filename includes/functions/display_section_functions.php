@@ -7,7 +7,7 @@ function display_sur_header():string {
             $structure .= display_game_version();
             $structure .= display_save_button('file');
             $structure .= display_settings_button();
-            // $structure .= display_feedback_button();
+            $structure .= display_feedback_button();
         $structure .= "</span>";
     $structure .= "</div>";
 
@@ -218,10 +218,6 @@ function display_header():string {
     ";
 
     return $structure;
-}
-
-function display_crafts_button():string {
-	return "<img src='" . get_images_folder() . "/icons/craft_icon.png' class='craft-icon view-all-crafts-" . $GLOBALS['player_id'] . " button-elements modal-opener'>";
 }
 
 function display_quest_button():string {
