@@ -98,10 +98,6 @@ function display_feedback_button():string {
 }
 
 function display_feedback_panel():string {
-    $captcha_json = sanitize_json_with_version('captcha_questions');
-    $captcha_id = rand(0, count($captcha_json) - 1);
-    $random_captcha = $captcha_json[$captcha_id];
-
     return "
         <section class='feedback-panel modal-window'>
             <div class='panel-header'>
@@ -149,12 +145,6 @@ function display_feedback_panel():string {
                     <span class='label_and_input full_width'>
                         <label for='message'>Message</label>
                         <textarea rows='8' id='message' name='message' required></textarea>
-                    </span>
-
-                    <span class='label_and_input stay_start'>
-                        <label for='security_captcha'>" . $random_captcha['question'] . "</label>
-                        <input type='" . $random_captcha['type'] . "' id='security_captcha' name='captcha_answer' required>
-                        <input type='hidden' name='captcha_id' value='" . $captcha_id . "'>
                     </span>
 
                     <input type='submit'>

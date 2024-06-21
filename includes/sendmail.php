@@ -15,15 +15,6 @@
 		echo json_encode($response);
 		exit;
 	}
-
-	$captcha_json = sanitize_json_with_version("captcha_questions");
-	$captcha_answer = $captcha_json[$_POST["captcha_id"]]["answer"];
-
-	if(($captcha_answer == $_POST["captcha_answer"]) == false) {
-		$response["message"] = "Incorrect captcha answer. Please try again";
-		echo json_encode($response);
-		exit;
-	}
 	
 	$to         = "jsp quelle adresse";
 	$headers    = "De: $mail";

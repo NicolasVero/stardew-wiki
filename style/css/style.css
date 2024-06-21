@@ -250,6 +250,7 @@ html {
     overflow-y: scroll;
     z-index: 1000;
     scrollbar-width: none;
+    max-height: 80vh;
   }
   .upload-panel {
     display: none;
@@ -269,6 +270,7 @@ html {
     overflow-y: scroll;
     z-index: 1000;
     scrollbar-width: none;
+    max-height: 80vh;
     min-width: 20vw;
   }
   .upload-panel > span {
@@ -327,6 +329,7 @@ html {
     overflow-y: scroll;
     z-index: 1000;
     scrollbar-width: none;
+    max-height: 80vh;
     min-width: 20vw;
   }
   .settings-panel .checkboxes {
@@ -374,6 +377,7 @@ html {
     overflow-y: scroll;
     z-index: 1000;
     scrollbar-width: none;
+    max-height: 80vh;
     min-width: 40vw;
   }
   .feedback-panel span form {
@@ -415,8 +419,8 @@ html {
   .feedback-panel span form .topic_selection img {
     width: 30px;
   }
-  .feedback-panel span form input,
-  .feedback-panel span form textarea {
+  .feedback-panel span form input:not(input[type=submit]),
+  .feedback-panel span form textarea:not(input[type=submit]) {
     background-color: #ffc677;
     border-top: solid 3px #5b2b2a;
     border-right: solid 3px #5b2b2a;
@@ -426,17 +430,24 @@ html {
     border-radius: 2px;
     box-shadow: inset -2px 2px 0 2px #dc7b05, -2px 2px 0 2px #cca36b;
     scrollbar-width: none;
-  }
-  .feedback-panel span form input:not(input[type=submit]),
-  .feedback-panel span form textarea:not(input[type=submit]) {
     font-family: "SV Bold";
   }
   .feedback-panel span form input[type=submit] {
+    margin: 0 auto;
     font-family: "Stardew Valley Stonks", serif;
     font-size: 18px;
-    margin: 0 auto;
+    color: #000000;
     transition: transform 0.2s ease-in-out;
     transform: scale(1);
+    user-select: none;
+    background-color: #ffc677;
+    border: solid 2px #a27845;
+    border-image: url('../../medias/images/content/border_image.png') 15 stretch;
+    border-image-width: 5px;
+    border-image-outset: 2px;
+    background-clip: padding-box;
+    cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
+    padding: 5px 10px;
   }
   .feedback-panel span form input[type=submit]:hover {
     transform: scale(1.1);
@@ -1215,6 +1226,7 @@ html {
     overflow-y: scroll;
     z-index: 1000;
     scrollbar-width: none;
+    max-height: 80vh;
   }
   .upload-panel {
     display: none;
@@ -1234,6 +1246,7 @@ html {
     overflow-y: scroll;
     z-index: 1000;
     scrollbar-width: none;
+    max-height: 80vh;
     min-width: 20vw;
   }
   .upload-panel > span {
@@ -1292,6 +1305,7 @@ html {
     overflow-y: scroll;
     z-index: 1000;
     scrollbar-width: none;
+    max-height: 80vh;
     min-width: 20vw;
   }
   .settings-panel .checkboxes {
@@ -1339,6 +1353,7 @@ html {
     overflow-y: scroll;
     z-index: 1000;
     scrollbar-width: none;
+    max-height: 80vh;
     min-width: 40vw;
   }
   .feedback-panel span form {
@@ -1380,8 +1395,8 @@ html {
   .feedback-panel span form .topic_selection img {
     width: 30px;
   }
-  .feedback-panel span form input,
-  .feedback-panel span form textarea {
+  .feedback-panel span form input:not(input[type=submit]),
+  .feedback-panel span form textarea:not(input[type=submit]) {
     background-color: #ffc677;
     border-top: solid 3px #5b2b2a;
     border-right: solid 3px #5b2b2a;
@@ -1391,17 +1406,24 @@ html {
     border-radius: 2px;
     box-shadow: inset -2px 2px 0 2px #dc7b05, -2px 2px 0 2px #cca36b;
     scrollbar-width: none;
-  }
-  .feedback-panel span form input:not(input[type=submit]),
-  .feedback-panel span form textarea:not(input[type=submit]) {
     font-family: "SV Bold";
   }
   .feedback-panel span form input[type=submit] {
+    margin: 0 auto;
     font-family: "Stardew Valley Stonks", serif;
     font-size: 13.5px;
-    margin: 0 auto;
+    color: #000000;
     transition: transform 0.2s ease-in-out;
     transform: scale(1);
+    user-select: none;
+    background-color: #ffc677;
+    border: solid 2px #a27845;
+    border-image: url('../../medias/images/content/border_image.png') 15 stretch;
+    border-image-width: 5px;
+    border-image-outset: 2px;
+    background-clip: padding-box;
+    cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
+    padding: 3.75px 7.5px;
   }
   .feedback-panel span form input[type=submit]:hover {
     transform: scale(1.1);
