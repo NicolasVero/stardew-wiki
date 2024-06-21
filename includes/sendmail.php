@@ -38,5 +38,5 @@
 		$response["message"] = "Your mail has been delivered successfully";
 	}
 	
-	exit;
 	echo json_encode($response);
+	exit;

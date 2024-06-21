@@ -488,14 +488,14 @@ function get_cooking_recipes(object $recipes, object $recipes_cooked):array {
                 continue;
         }
         
-        $cooking_recipes[$item_name] = array(
+        $cooking_recipes_data[$item_name] = array(
             'id'      => $index,
             'counter' => 0
         );
 
     }
     
-    return $cooking_recipes;
+    return $cooking_recipes_data;
 }
 
 function get_artifacts(object $artifacts, object $general_data):array {
