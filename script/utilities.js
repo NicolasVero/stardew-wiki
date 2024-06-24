@@ -22,9 +22,11 @@ function file_choice(event) {
     AJAX_send();
 }
 
-function deactivate_landing_inputs() {
-    document.getElementById("landing").style.display = "none";
-    document.getElementById("landing-page").style.display = "none";
+function toggle_landing_page(display) {
+	const landing_page = document.getElementById("landing_page");
+
+	if(landing_page)
+		landing_page.style.display = (display) ? "block" : "none";
 }
 
 function on_images_loaded(callback) {
@@ -132,7 +134,7 @@ function in_bytes_conversion(size) {
 
 function load_elements() {
 
-    deactivate_landing_inputs();
+    toggle_landing_page(false);
     toggle_checkboxes_actions();
 
     // Buttons & panels

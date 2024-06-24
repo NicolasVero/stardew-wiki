@@ -464,7 +464,7 @@ html {
   .feedback-panel span form input[type=radio] {
     display: none;
   }
-  body #landing-page main {
+  body #landing_page main {
     font-family: "Stardew Valley Stonks", serif;
     font-size: 16px;
     color: #000000;
@@ -473,35 +473,36 @@ html {
     gap: 25px;
     padding: 25px 50px;
     border-radius: 5px;
+    margin-bottom: 20px;
   }
-  body #landing-page main h1.section-title {
+  body #landing_page main h1.section-title {
     margin-inline: auto;
     font-size: 24px;
     font-family: 'SV Bold';
     font-weight: 100;
     letter-spacing: 2px;
   }
-  body #landing-page main a {
+  body #landing_page main a {
     text-decoration: underline;
     text-decoration-color: #ffc677;
     color: #ffc677;
   }
-  body #landing-page main a:hover {
+  body #landing_page main a:hover {
     opacity: 0.7;
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
-  body #landing-page main code {
+  body #landing_page main code {
     font-family: "Stardew Valley Stonks", serif;
     font-size: 16px;
     color: #000000;
     color: #6d6d6d;
   }
-  body #landing-page main section > span {
+  body #landing_page main section > span {
     display: flex;
     flex-direction: column;
     gap: 10px;
   }
-  body #landing-page main section > span.characters {
+  body #landing_page main section > span.characters {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -509,49 +510,49 @@ html {
     margin-top: 25px;
     font-size: 14px;
   }
-  body #landing-page main section > span.characters > span {
+  body #landing_page main section > span.characters > span {
     display: flex;
     justify-content: flex-start;
     flex-basis: 50%;
     gap: 25px;
   }
-  body #landing-page main section > span.characters > span > span {
+  body #landing_page main section > span.characters > span > span {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
-  body #landing-page main section > span.characters .character-image {
+  body #landing_page main section > span.characters .character-image {
     width: 50px;
   }
-  body #landing-page main section > span.characters .character-presentation {
+  body #landing_page main section > span.characters .character-presentation {
     display: flex;
     flex-direction: column;
     gap: 10px;
     max-width: 450px;
   }
-  body #landing-page main section > span.characters .socials {
+  body #landing_page main section > span.characters .socials {
     display: flex;
     gap: 10px;
   }
-  body #landing-page main section > span.characters .socials img {
+  body #landing_page main section > span.characters .socials img {
     width: 28px;
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
-  body #landing-page main section.about {
+  body #landing_page main section.about {
     display: flex;
     flex-direction: column;
   }
-  body #landing-page main .section-title {
+  body #landing_page main .section-title {
     font-weight: 600;
   }
-  body #landing-page main .img-embed {
+  body #landing_page main .img-embed {
     display: inline-block;
     position: relative;
     width: 28px;
     height: 28px;
     margin-bottom: -25px;
   }
-  body #landing-page main .img-embed img {
+  body #landing_page main .img-embed img {
     position: absolute;
     width: 28px;
     margin-top: -17.5px;
@@ -594,7 +595,7 @@ html {
     width: 100%;
     margin-bottom: 20px;
   }
-  .sur-header#landing {
+  .sur-header#landing_menu {
     justify-content: flex-end;
     gap: 10px;
   }
@@ -1439,7 +1440,7 @@ html {
   .feedback-panel span form input[type=radio] {
     display: none;
   }
-  body #landing-page main {
+  body #landing_page main {
     font-family: "Stardew Valley Stonks", serif;
     font-size: 12px;
     color: #000000;
@@ -1448,35 +1449,36 @@ html {
     gap: 18.75px;
     padding: 18.75px 37.5px;
     border-radius: 5px;
+    margin-bottom: 20px;
   }
-  body #landing-page main h1.section-title {
+  body #landing_page main h1.section-title {
     margin-inline: auto;
     font-size: 24px;
     font-family: 'SV Bold';
     font-weight: 100;
     letter-spacing: 2px;
   }
-  body #landing-page main a {
+  body #landing_page main a {
     text-decoration: underline;
     text-decoration-color: #ffc677;
     color: #ffc677;
   }
-  body #landing-page main a:hover {
+  body #landing_page main a:hover {
     opacity: 0.7;
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
-  body #landing-page main code {
+  body #landing_page main code {
     font-family: "Stardew Valley Stonks", serif;
     font-size: 12px;
     color: #000000;
     color: #6d6d6d;
   }
-  body #landing-page main section > span {
+  body #landing_page main section > span {
     display: flex;
     flex-direction: column;
     gap: 7.5px;
   }
-  body #landing-page main section > span.characters {
+  body #landing_page main section > span.characters {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
@@ -1484,49 +1486,49 @@ html {
     margin-top: 18.75px;
     font-size: 10.5px;
   }
-  body #landing-page main section > span.characters > span {
+  body #landing_page main section > span.characters > span {
     display: flex;
     justify-content: flex-start;
     flex-basis: 50%;
     gap: 18.75px;
   }
-  body #landing-page main section > span.characters > span > span {
+  body #landing_page main section > span.characters > span > span {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
   }
-  body #landing-page main section > span.characters .character-image {
+  body #landing_page main section > span.characters .character-image {
     width: 37.5px;
   }
-  body #landing-page main section > span.characters .character-presentation {
+  body #landing_page main section > span.characters .character-presentation {
     display: flex;
     flex-direction: column;
     gap: 7.5px;
     max-width: 450px;
   }
-  body #landing-page main section > span.characters .socials {
+  body #landing_page main section > span.characters .socials {
     display: flex;
     gap: 7.5px;
   }
-  body #landing-page main section > span.characters .socials img {
+  body #landing_page main section > span.characters .socials img {
     width: 21px;
     cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
   }
-  body #landing-page main section.about {
+  body #landing_page main section.about {
     display: flex;
     flex-direction: column;
   }
-  body #landing-page main .section-title {
+  body #landing_page main .section-title {
     font-weight: 600;
   }
-  body #landing-page main .img-embed {
+  body #landing_page main .img-embed {
     display: inline-block;
     position: relative;
     width: 21px;
     height: 21px;
     margin-bottom: -18.75px;
   }
-  body #landing-page main .img-embed img {
+  body #landing_page main .img-embed img {
     position: absolute;
     width: 21px;
     margin-top: -13.125px;
@@ -1569,7 +1571,7 @@ html {
     width: 100%;
     margin-bottom: 20px;
   }
-  .sur-header#landing {
+  .sur-header#landing_menu {
     justify-content: flex-end;
     gap: 7.5px;
   }

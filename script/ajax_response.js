@@ -7,10 +7,12 @@ async function AJAX_send() {
 
     const is_file_too_big = (file.size > max_upload_size);
 
-    document.getElementById("display").innerHTML = "";
-    document.getElementById("landing-page").innerHTML = "";
+	const page_display = document.getElementById("display");
+	const landing_menu = document.getElementById("landing_menu");
+	const landing_page = document.getElementById("landing_page").outerHTML;
 
-    
+	page_display.innerHTML = "";
+
     if(file) {
 
         let form_data = new FormData();
@@ -29,19 +31,21 @@ async function AJAX_send() {
 
                 const data = JSON.parse(xhr.responseText);
                 const html = data.html;
-
-                const page_display = document.getElementById("display");
                 
                 if(data.code == "success") {
 
                     const players_count = data.global_variables['players_names'].length;
 
-					page_display.innerHTML += html['sur_header'];
+					page_display.innerHTML = html['sur_header'];
+					page_display.innerHTML += landing_page;
 
                     for(let i = 0; i < players_count; i++)
                         page_display.innerHTML += html['player_' + i];
 
                     initialize_player_swapper(players_count);
+					
+					landing_menu.outerHTML = "";
+
 					load_elements();
                     
                 } else {
