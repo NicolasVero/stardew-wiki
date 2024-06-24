@@ -34,7 +34,6 @@ async function AJAX_send() {
                 
                 if(data.code == "success") {
 
-                    // const players_count = Object.keys(html).length;
                     const players_count = data.global_variables['players_names'].length;
 
 					page_display.innerHTML += html['sur_header'];
