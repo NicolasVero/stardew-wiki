@@ -25,6 +25,7 @@ try {
         $players_data = get_all_players_datas();
         $players = get_all_players();
 
+        $pages['sur_header'] = "";
         for($player_count = 0; $player_count < count($players); $player_count++) {
 			$GLOBALS['player_id'] = $player_count;
             $pages['player_' . $player_count] = "
@@ -33,7 +34,7 @@ try {
                 </div>
             ";
         }
-
+		
         $response['global_variables'] = $GLOBALS;
         $response['html'] = $pages;
         $response['code'] = "success";

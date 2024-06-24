@@ -137,8 +137,7 @@ function display_landing_page():string {
 
 function display_page():string {
 
-    $structure = display_sur_header();
-    $structure .= display_header();
+    $structure = display_header();
     $structure .= "<main>";
 
 		$structure .= display_general_stats();
