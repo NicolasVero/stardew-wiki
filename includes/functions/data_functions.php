@@ -48,8 +48,8 @@ function get_all_players():array {
 	if($GLOBALS['game_version_score'] < get_game_version_score("1.6.0"))  {
 		foreach($data->locations->GameLocation[0]->buildings->Building as $building) {
 			if(isset($building->indoors->farmhand)) {
-				$farmhand_info = $building->indoors->farmhand;
-				array_push($players_names, (string) $farmhand_info->name);
+				$farmhand_name = (string) $building->indoors->farmhand->name;
+				array_push($players_names, $farmhand_name);
 			}
 		}
 	} else {
