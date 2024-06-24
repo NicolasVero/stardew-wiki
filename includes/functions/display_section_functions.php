@@ -1,16 +1,18 @@
 <?php 
 
-function display_sur_header():string {
-    $structure = "<div class='sur-header'>";
-        $structure .= display_player_selection();
-        $structure .= "<span>";
-            $structure .= display_game_version();
-            $structure .= display_save_button('file');
-            $structure .= display_settings_button();
-            $structure .= display_feedback_button();
-			$structure .= display_home_button();
-        $structure .= "</span>";
-    $structure .= "</div>";
+function display_sur_header(bool $is_error_screen = false):string {
+
+	$menu_id = ($is_error_screen) ? "error_menu" : "dashboard_menu";
+	$structure = "<div id='$menu_id' class='sur-header'>";
+		$structure .= (!$is_error_screen) ? display_player_selection() : "";
+		$structure .= "<span>";
+			$structure .= (!$is_error_screen) ? display_game_version() : "";
+			$structure .= display_save_button('file');
+			$structure .= display_settings_button();
+			$structure .= display_feedback_button();
+			$structure .= (!$is_error_screen) ? display_home_button() : "";
+		$structure .= "</span>";
+	$structure .= "</div>";
 
     return $structure;
 }

@@ -1,3 +1,5 @@
+let surheader;
+
 window.addEventListener("load", () => {
 
     const os_path = get_os_path(detect_os());
@@ -15,6 +17,7 @@ window.addEventListener("load", () => {
     document.getElementById("toggle_versions_items_mode").addEventListener("change", toggle_versions_items_mode);
     document.getElementById("save-upload").addEventListener("change", file_choice);
 
+    save_landing_surheader();
     feedback_custom_radio();
 	
     activate_buttons(".landing-upload", ".exit-upload", ".upload-panel", false);

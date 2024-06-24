@@ -211,7 +211,7 @@ function display_error_page(Exception $exception):string {
     $structure = "
         <div class='error-wrapper'>
             <div class='dialogue-box-error-container'>
-                <img src='" . get_images_folder() . "dialogue_boxes/$image.png' alt='$image' alt='" . $exception->getMessage() . "'/>
+                <img src='" . get_images_folder() . "dialogue_boxes/$image.png' alt='" . $exception->getMessage() . "'/>
                 <span>$dialogue</span>
             </div>
         </div>

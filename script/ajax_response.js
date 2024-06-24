@@ -11,6 +11,9 @@ async function AJAX_send() {
 	const landing_menu = document.getElementById("landing_menu");
 	const landing_page = document.getElementById("landing_page").outerHTML;
 
+	if(landing_menu)
+		landing_menu.outerHTML = "";
+
 	page_display.innerHTML = "";
 
     if(file) {
@@ -43,14 +46,15 @@ async function AJAX_send() {
                         page_display.innerHTML += html['player_' + i];
 
                     initialize_player_swapper(players_count);
-					
-					if(landing_menu)
-						landing_menu.outerHTML = "";
 
 					load_elements();
                     
                 } else {
-                    page_display.innerHTML = html;
+					page_display.innerHTML = html['sur_header'];
+					page_display.innerHTML += landing_page;
+					toggle_landing_page(false);
+                    page_display.innerHTML += html['error_message'];
+					loard_error_page_items();
                 }
 
 				toggle_visibility_and_scroll(current_section, false, false);

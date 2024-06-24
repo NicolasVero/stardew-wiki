@@ -595,7 +595,8 @@ html {
     width: 100%;
     margin-bottom: 20px;
   }
-  .sur-header#landing_menu {
+  .sur-header#landing_menu,
+  .sur-header#error_menu {
     justify-content: flex-end;
     gap: 10px;
   }
@@ -1575,7 +1576,8 @@ html {
     width: 100%;
     margin-bottom: 20px;
   }
-  .sur-header#landing_menu {
+  .sur-header#landing_menu,
+  .sur-header#error_menu {
     justify-content: flex-end;
     gap: 7.5px;
   }

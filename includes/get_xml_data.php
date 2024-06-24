@@ -40,7 +40,9 @@ try {
         $response['code'] = "success";
     }
 } catch (Exception $exception) {
-    $response['html']  = display_error_page($exception);
+	$page['sur_header'] = display_sur_header(true);
+	$page['error_message'] = display_error_page($exception);
+    $response['html']  = $page;
     $response['code']  = "failed";
     $response['error'] = $exception->getMessage();
 }

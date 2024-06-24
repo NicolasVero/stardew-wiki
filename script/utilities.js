@@ -132,6 +132,33 @@ function in_bytes_conversion(size) {
     return value * Math.pow(1024, unit_to_power[unit]);
 }
 
+function loard_error_page_items() {
+	const buttons = [
+		{
+			"open_button"    : ".main-settings",
+			"exit_button"    : ".exit-settings",
+			"modal_panel"    : ".settings",
+			"disable_scroll" : false
+		},
+		{
+			"open_button"    : ".file-upload",
+			"exit_button"    : ".exit-upload",
+			"modal_panel"    : ".upload-panel",
+			"disable_scroll" : false
+		},
+		{
+			"open_button"    : ".feedback-opener",
+			"exit_button"    : ".exit-feedback",
+			"modal_panel"    : ".feedback-panel",
+			"disable_scroll" : false
+		}
+	];
+	
+	buttons.forEach(button => {
+		activate_buttons(button.open_button, button.exit_button, button.modal_panel, button.disable_scroll);
+	});
+}
+
 function load_elements() {
 
     toggle_landing_page(false);
@@ -219,4 +246,9 @@ function feedback_custom_radio() {
             }
         });
     });
+}
+
+function save_landing_surheader() {
+	const landing_menu = document.getElementById('landing_menu');
+	surheader = landing_menu.innerHTML;
 }
