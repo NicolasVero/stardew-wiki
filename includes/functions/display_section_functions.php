@@ -40,7 +40,7 @@ function display_game_version():string {
 }
 
 function display_settings_button(string $prefix = 'main'):string {
-    $structure = "<span class='$prefix-settings modal-opener'><img src='" . get_images_folder() ."icons/settings.png' class='modal-opener'></span>";
+    $structure = "<span class='$prefix-settings modal-opener'><img src='" . get_images_folder() ."icons/settings.png' class='modal-opener' alt='Settings icon'></span>";
     return $structure;
 }
 
@@ -49,22 +49,22 @@ function display_settings_panel():string {
         <section class='settings settings-panel modal-window'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Settings</h2>
-                <img src='" . get_images_folder() . "icons/exit.png' class='exit-settings exit' />
+                <img src='" . get_images_folder() . "icons/exit.png' class='exit-settings exit' alt=''/>
             </div>
             <span class='checkboxes'>
                 <span class='checkbox'>
                     <input type='checkbox' id='no_spoil_mode'>
-                    <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png'></span>
+                    <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png' alt=''></span>
                     <label for='no_spoil_mode' id='no-spoil-label'>No spoil mode</label>
                 </span>
                 <span class='checkbox'>
                     <input type='checkbox' id='toggle_versions_items_mode' checked>
-                    <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png'></span>
+                    <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png' alt=''></span>
                     <label for='toggle_versions_items_mode' id='toggle-versions-items-label'>Hide items from more recent versions</label>
                 </span>
                 <span class='checkbox'>
                     <input type='checkbox' id='wiki_redirections' checked>
-                    <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png'></span>
+                    <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png' alt=''></span>
                     <label for='wiki_redirections' id='wiki_redirections-label'>Activate wiki redirections</label>
                 </span>
             </span>
@@ -73,7 +73,7 @@ function display_settings_panel():string {
 }
 
 function display_save_button(string $prefix = 'landing'):string {
-    return "<span class='$prefix-upload modal-opener'><img src='" . get_images_folder() ."icons/file.png' class='modal-opener'></span>";
+    return "<span class='$prefix-upload modal-opener'><img src='" . get_images_folder() ."icons/file.png' class='modal-opener' alt='File upload icon'></span>";
 }
 
 function display_save_panel():string {
@@ -81,7 +81,7 @@ function display_save_panel():string {
         <section class='upload-panel to-keep-open modal-window'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Upload a save</h2>
-                <img src='" . get_images_folder() . "icons/exit.png' class='exit-upload exit' />
+                <img src='" . get_images_folder() . "icons/exit.png' class='exit-upload exit'/>
             </div>
             <span>
                 <span>
@@ -95,7 +95,7 @@ function display_save_panel():string {
 }
 
 function display_feedback_button():string {
-    return "<span class='feedback-opener modal-opener'><img src='" . get_images_folder() ."icons/feedback.png' class='modal-opener'></span>";
+    return "<span class='feedback-opener modal-opener'><img src='" . get_images_folder() ."icons/feedback.png' class='modal-opener' alt='Feedback icon'></span>";
 }
 
 function display_feedback_panel():string {
@@ -103,7 +103,7 @@ function display_feedback_panel():string {
         <section class='feedback-panel modal-window'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Your feedback</h2>
-                <img src='" . get_images_folder() . "icons/exit.png' class='exit-feedback exit' />
+                <img src='" . get_images_folder() . "icons/exit.png' class='exit-feedback exit' alt=''/>
             </div>
             <span>
                 <form id='feedback_form'>
@@ -125,19 +125,19 @@ function display_feedback_panel():string {
                         <span class='topic_selection'>
                             <span>
                                 <input type='radio' id='feature_request' value='Feature request' name='topic' class='feedback_real_radio' required checked>
-                                <img src='" . get_images_folder() . "icons/feature.png' class='feedback_custom_radio'>
+                                <img src='" . get_images_folder() . "icons/feature.png' class='feedback_custom_radio' alt='Feature request topic'>
                                 <label for='feature_request'>Feature request</label>
                             </span>
 
                             <span>
                                 <input type='radio' id='bug_report' value='Bug report' name='topic' class='feedback_real_radio'>
-                                <img src='" . get_images_folder() . "icons/bug.png' class='feedback_custom_radio topic_not_selected'>
+                                <img src='" . get_images_folder() . "icons/bug.png' class='feedback_custom_radio topic_not_selected' alt='Bug report topic'>
                                 <label for='bug_report'>Bug report</label>
                             </span>
 
                             <span>
                                 <input type='radio' id='other' value='Other' name='topic' class='feedback_real_radio'>
-                                <img src='" . get_images_folder() . "icons/exit.png' class='feedback_custom_radio topic_not_selected'>
+                                <img src='" . get_images_folder() . "icons/exit.png' class='feedback_custom_radio topic_not_selected' alt='Other topic'>
                                 <label for='other'>Other</label>
                             </span>
                         </span>
@@ -156,7 +156,7 @@ function display_feedback_panel():string {
 }
 
 function display_home_button():string {
-    return "<span class='landing-page-opener'><img src='" . get_images_folder() ."icons/home.png' id='home-icon'></span>";
+    return "<span class='landing-page-opener'><img src='" . get_images_folder() ."icons/home.png' id='home-icon' alt='Home icon'></span>";
 }
 
 function display_header():string {
@@ -174,7 +174,7 @@ function display_header():string {
         <header>
             <div class='header'>
                 <span class='player'>
-                    <img src='{$images_path}icons/" . strtolower($gender) . ".png' alt='Gender logo' class='player_gender_logo' />
+                    <img src='{$images_path}icons/" . strtolower($gender) . ".png' alt='Gender logo: $gender' class='player_gender_logo'/>
                     <span class='data player_name'>$name <span class='data-label'>$farmer_level</span></span>
                 </span>
 
@@ -192,25 +192,25 @@ function display_header():string {
             <div class='sub-header'>
                 <span class='all-money'>
                     <span>
-                        <img src='{$images_path}icons/gold.png' alt='Gold coin' />
+                        <img src='{$images_path}icons/gold.png' alt='Gold coins'/>
                         <span class='data actual-gold'>" . formate_number($golds) . "</span>
                         <span class='data-label'>golds</span>
                     </span>
 
                     <span>
-                        <img src='{$images_path}icons/golden_walnut.png' alt='Golden walnut' />
+                        <img src='{$images_path}icons/golden_walnut.png' alt='Golden walnuts'/>
                         <span class='data actual-golden-walnut'>" . formate_number($golden_walnuts) . "</span>
                         <span class='data-label'>golden walnut</span>
                     </span>
 
                     <span>
-                        <img src='{$images_path}icons/qi_gem.png' alt='Qi gems' />
+                        <img src='{$images_path}icons/qi_gem.png' alt='Qi gems'/>
                         <span class='data actual-qi-gem'>" . formate_number($qi_gems) . "</span>
                         <span class='data-label'>qi gem</span>
                     </span>
 
                     <span>
-                        <img src='{$images_path}icons/casino_coins.png' alt='Casino coins' />
+                        <img src='{$images_path}icons/casino_coins.png' alt='Casino coins'/>
                         <span class='data actual-golden-walnut'>" . formate_number($casino_coins) . "</span>
                         <span class='data-label'>casino coins</span>
                     </span>
@@ -226,7 +226,7 @@ function display_header():string {
 }
 
 function display_quest_button():string {
-	return "<img src='" . get_images_folder() . "/icons/quest_icon.png' class='quest-icon view-all-quests-" . $GLOBALS['player_id'] . " button-elements modal-opener'>";
+	return "<img src='" . get_images_folder() . "/icons/quest_icon.png' class='quest-icon view-all-quests-" . $GLOBALS['player_id'] . " button-elements modal-opener' alt='Quest icon'>";
 }
 
 function display_general_stats():string {
@@ -248,26 +248,26 @@ function display_general_stats():string {
 			$quest_button
             <div>
                 <span>
-                    <img src='{$images_path}icons/energy.png' alt='Energy' />
+                    <img src='{$images_path}icons/energy.png' alt='Energy'/>
                     <span class='data data-energy'>" . formate_number($max_stamina) . "</span>
                     <span class='data-label'>max stamina</span>
                 </span>
 
                 <span>
-                    <img src='{$images_path}icons/health.png' alt='Health' />
+                    <img src='{$images_path}icons/health.png' alt='Health'/>
                     <span class='data data-health'>" . formate_number($max_health) . "</span>
                     <span class='data-label'>max health</span>
                 </span>
 
                 <span>
-                    <img src='{$images_path}icons/inventory.png' alt='Inventory' />
+                    <img src='{$images_path}icons/inventory.png' alt='Inventory'/>
                     <span class='data data-inventory'>" . formate_number($max_items) . "</span>
                     <span class='data-label'>max inventory</span>
                 </span>
 
                 <span>
                     <span class='tooltip'>
-                        <img src='{$images_path}icons/mine_level.png' alt='Mine level' />
+                        <img src='{$images_path}icons/mine_level.png' alt='Mine level'/>
                         <span>$deepest_mine_level_tooltip</span>
                     </span>
                     <span class='data data-mine-level'>" . formate_number($mine_level) . "</span>
@@ -288,7 +288,7 @@ function display_quests():string {
         <section class='quests-section info-section all-quests-$player_id modal-window'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Quests in progress</h2>
-                <img src='" . get_images_folder() . "icons/exit.png' class='exit-all-quests-$player_id exit' />
+                <img src='" . get_images_folder() . "icons/exit.png' class='exit-all-quests-$player_id exit' alt=''/>
             </div>
             <span class='quests'>
     ";
@@ -319,7 +319,7 @@ function display_quests():string {
         
 		if(isset($daysLeft)) {
 			$day_text = ($daysLeft > 1) ? "days" : "day";
-			$structure .= " <span class='days-left'><img src='$images_path/icons/timer.png'/>$daysLeft $day_text</span>";
+			$structure .= " <span class='days-left'><img src='$images_path/icons/timer.png' alt='Time left'/>$daysLeft $day_text</span>";
 		}
 
 		$structure .= "<span class='quest-rewards'>";
@@ -331,14 +331,14 @@ function display_quests():string {
 			// If reward is Friendship hearts/points
             if(strstr($rewards[$i], "Friendship")) {
                 $reward_number = explode(" ", $rewards[$i])[0];
-                $structure .= "<img src='$images_path/icons/heart_$reward_number.png'/>";
+                $structure .= "<img src='$images_path/icons/heart_$reward_number.png' alt='Friendship reward'/>";
             }
 			// If reward is Gold
             elseif(is_numeric($rewards[$i]))
-                $structure .= formate_number($rewards[$i]) . "<img src='$images_path/icons/gold.png'/>";
+                $structure .= formate_number($rewards[$i]) . "<img src='$images_path/icons/gold.png' alt='Gold coins reward'/>";
 			// If reward is Qi Gems
             elseif(str_ends_with($rewards[$i], 'q'))
-                $structure .= explode('_', $rewards[$i])[0] . "<img src='$images_path/icons/qi_gem.png'/>";
+                $structure .= explode('_', $rewards[$i])[0] . "<img src='$images_path/icons/qi_gem.png' alt='Qi gems reward'/>";
 			// If reward is something else
             else
                 $structure .= $rewards[$i];
@@ -444,7 +444,7 @@ function display_friendships(int $limit = -1):string {
         <section class='info-section friends-section $section_class $section_class-$player_id modal-window'>
 			<div class='panel-header'>
            		<h2 class='section-title panel-title'>Friendship progression</h2>
-				<img src='" . get_images_folder() . "icons/exit.png' class='exit-all-friendships-$player_id exit' />
+				<img src='" . get_images_folder() . "icons/exit.png' class='exit-all-friendships-$player_id exit' alt=''/>
 			</div>
             <span>
     "
@@ -489,12 +489,12 @@ function display_friendships(int $limit = -1):string {
 
             if($i > 8 && $can_be_married) {
                 $heart_icon = get_images_folder() . "icons/locked_heart.png";
-                $structure .= "<img src='$heart_icon' class='hearts' alt='' />";
+                $structure .= "<img src='$heart_icon' class='hearts' alt=''/>";
                 continue;
             }
 
             $heart_icon = get_images_folder() . (($friend_level >= $i) ? "icons/heart.png" : "icons/empty_heart.png");
-            $structure .= "<img src='$heart_icon' class='hearts' alt='' />";
+            $structure .= "<img src='$heart_icon' class='hearts' alt=''/>";
         }
         
         $gifted = [];
@@ -543,7 +543,7 @@ function display_friendships(int $limit = -1):string {
         $structure .= "
 			<span>
 				<a class='wiki_link' href='$wiki_url' target='_blank'>
-					<img src='$friend_icon' class='character-icon not-found $is_newer_version' alt='$villager_name icon' />
+					<img src='$friend_icon' class='character-icon not-found $is_newer_version' alt='$villager_name icon'/>
 				</a>
 				<span class='character-name'>$villager_name</span>
 			    <span class='hearts-level'>
@@ -556,12 +556,12 @@ function display_friendships(int $limit = -1):string {
 
             if($i > 8 && $can_be_married) {
                 $heart_icon = get_images_folder() . "icons/locked_heart.png";
-                $structure .= "<img src='$heart_icon' class='hearts' alt='' />";
+                $structure .= "<img src='$heart_icon' class='hearts' alt=''/>";
                 continue;
             }
 
             $heart_icon = get_images_folder() . (($friend_level >= $i) ? "icons/heart.png" : "icons/empty_heart.png");
-            $structure .= "<img src='$heart_icon' class='hearts' alt='' />";
+            $structure .= "<img src='$heart_icon' class='hearts' alt=''/>";
         }
         
         $gifted = ["not-gifted", "not-gifted"];
@@ -620,7 +620,7 @@ function display_unlockables():string {
 		$structure .= "
 			<span class='tooltip'>
                 <a class='wiki_link' href='$wiki_url' target='_blank'>
-				    <img src='$unlockable_image' alt='$unlockable_name' class='gallery-item unlockables $unlockable_class' />
+				    <img src='$unlockable_image' alt='$unlockable_name' class='gallery-item unlockables $unlockable_class'/>
 				</a>
                 <span>$unlockable_name</span>
 			</span>
@@ -681,7 +681,7 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
 			$structure .= '<a class="wiki_link" href="' . $wiki_url . '" target="_blank">';
 
 			$structure .= "
-                        <img src='$element_image' alt='$json_line_name' class='gallery-item $json_filename $element_class $is_newer_version_class' />
+                        <img src='$element_image' alt='$json_line_name' class='gallery-item $json_filename $element_class $is_newer_version_class'/>
                     </a>
                     <span>$element_tooltip</span>
                 </span>
@@ -720,13 +720,13 @@ function display_festival_icon():string {
     ? 
 	"<span class='tooltip'>
 		<a class='wiki_link' href='$wiki_url' target='_blank'>
-			<img src='" . get_images_folder() . "/icons/festival_icon.gif' class='festival_icon $festival_class'>
+			<img src='" . get_images_folder() . "/icons/festival_icon.gif' class='festival_icon $festival_class' alt='Festival icon'>
 		</a>
 		<span class='right'>$festival_name</span>
 	</span>"
 	:
 	"<span class='tooltip'>
-		<img src='" . get_images_folder() . "/icons/festival_icon.png' class='festival_icon $festival_class'>
+		<img src='" . get_images_folder() . "/icons/festival_icon.png' class='festival_icon $festival_class' alt='Festival icon'>
 		<span class='right'>$festival_name</span>
 	</span>";
 }
@@ -806,7 +806,7 @@ function get_skills_icons(array $skills, string $current_skill):string {
             
             $structure .= "
 			<span class='tooltip'>
-				<img src='$skill_icon_path' alt='$skill_description' />
+				<img src='$skill_icon_path' alt='$skill_description'/>
 				<span>$skill_description</span>
 			</span>
 			";
