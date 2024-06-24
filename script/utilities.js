@@ -180,6 +180,11 @@ function load_elements() {
 		activate_buttons(button.open_button, button.exit_button, button.modal_panel, button.disable_scroll);
 	});
 
+	document.getElementById('home-icon').addEventListener('click', () => {
+		const display = (document.getElementById('landing_page').style.display == "none") ? true : false;
+		toggle_landing_page(display);
+	});
+
 	update_tooltips_after_ajax();
 
 }

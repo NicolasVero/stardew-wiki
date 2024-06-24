@@ -639,6 +639,10 @@ html {
   .sur-header > span .modal-opener {
     display: flex;
   }
+  .sur-header > span .landing-page-opener {
+    display: flex;
+    aspect-ratio: 1/1;
+  }
   .sur-header > span img {
     font-family: "Stardew Valley Stonks", serif;
     font-size: 18px;
@@ -1614,6 +1618,10 @@ html {
   }
   .sur-header > span .modal-opener {
     display: flex;
+  }
+  .sur-header > span .landing-page-opener {
+    display: flex;
+    aspect-ratio: 1/1;
   }
   .sur-header > span img {
     font-family: "Stardew Valley Stonks", serif;

@@ -44,7 +44,8 @@ async function AJAX_send() {
 
                     initialize_player_swapper(players_count);
 					
-					landing_menu.outerHTML = "";
+					if(landing_menu)
+						landing_menu.outerHTML = "";
 
 					load_elements();
                     

@@ -8,6 +8,7 @@ function display_sur_header():string {
             $structure .= display_save_button('file');
             $structure .= display_settings_button();
             $structure .= display_feedback_button();
+			$structure .= display_home_button();
         $structure .= "</span>";
     $structure .= "</div>";
 
@@ -152,6 +153,10 @@ function display_feedback_panel():string {
             </span>
         </section>
     ";
+}
+
+function display_home_button():string {
+    return "<span class='landing-page-opener'><img src='" . get_images_folder() ."icons/home.png' id='home-icon'></span>";
 }
 
 function display_header():string {
