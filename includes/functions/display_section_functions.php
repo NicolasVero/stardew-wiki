@@ -597,10 +597,11 @@ function display_friendships(int $limit = -1):string {
 
 function display_unlockables():string {
 	$player_unlockables = $GLOBALS['all_players_data'][$GLOBALS['player_id']]['has_element'];
+	
+	$version_score = $GLOBALS['game_version_score'];
 
     $images_path = get_images_folder() . "unlockables/";
-    $unlockables = sanitize_json_with_version('unlockables');
-    sort($unlockables);
+	$decoded_unlockables = decode('unlockables');
 
     $structure = "
         <section class='gallery unlockables-section _50'>
@@ -609,24 +610,29 @@ function display_unlockables():string {
 				<h3 class='no-spoil-title'>Nothing to see here yet</h2>
     ";
 
-	foreach($unlockables as $unlockable_name) {
-		$formatted_name = formate_text_for_file($unlockable_name);
-		if(!isset($player_unlockables[$formatted_name]['is_found']))
-			continue;
+	foreach($decoded_unlockables as $version => $unlockables) {
 
-		$unlockable_class = ($player_unlockables[$formatted_name]['is_found']) ? "found" : "not-found";
-		$unlockable_image = "$images_path$formatted_name.png";
-
-		$wiki_url = get_wiki_link(get_item_id_by_name($unlockable_name));
-		
-		$structure .= "
-			<span class='tooltip'>
-                <a class='wiki_link' href='$wiki_url' target='_blank'>
-				    <img src='$unlockable_image' alt='$unlockable_name' class='gallery-item unlockables $unlockable_class'/>
-				</a>
-                <span>$unlockable_name</span>
-			</span>
-		";
+        $is_newer_version_class = ($version_score < get_game_version_score($version)) ? 'newer-version' : 'older-version';
+        
+		foreach($unlockables as $unlockable) {
+			$formatted_name = formate_text_for_file($unlockable);
+			if(!isset($player_unlockables[$formatted_name]['is_found']))
+				continue;
+	
+			$unlockable_class = ($player_unlockables[$formatted_name]['is_found']) ? "found" : "not-found";
+			$unlockable_image = "$images_path$formatted_name.png";
+	
+			$wiki_url = get_wiki_link(get_item_id_by_name($unlockable));
+			
+			$structure .= "
+				<span class='tooltip'>
+					<a class='wiki_link' href='$wiki_url' target='_blank'>
+						<img src='$unlockable_image' alt='$unlockable' class='gallery-item unlockables $unlockable_class $is_newer_version_class'/>
+					</a>
+					<span>$unlockable</span>
+				</span>
+			";
+		}
 	}
 
     $structure .= "

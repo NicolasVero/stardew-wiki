@@ -83,6 +83,7 @@ function check_if_all_elements_hidden(id_command) {
 
     for(let i = 0; i < sections.length; i++) {
         no_items_to_show = true;
+        full_section_to_hide = true;
 
         const section = sections[i];
         const title = section.querySelector("h2");
@@ -90,17 +91,28 @@ function check_if_all_elements_hidden(id_command) {
         const spans = section.querySelectorAll(".tooltip");
 
         spans.forEach(span => {
-            if (span.style.display != "none")
+            if(span.style.display != "none")
                 no_items_to_show = false;
+						
+			const link_check = span.querySelector('a').querySelector('img');
+			const img_check = span.querySelector('img');
+
+			if(link_check)
+				if(link_check.classList.contains('older-version'))
+					full_section_to_hide = false;
+
+			if(img_check)
+				if(img_check.classList.contains('older-version'))
+					full_section_to_hide = false;
         });
         
 		switch(id_command) {
 			case 0:
-				title.style.display = tvim_checked ? (no_items_to_show ? "none" : title.style.display) : "block";
-				smaller_title.style.display = tvim_checked ? (no_items_to_show ? "none" : smaller_title.style.display) : (no_items_to_show && nsm_checked ? "block" : smaller_title.style.display);				
+				title.style.display = tvim_checked ? (no_items_to_show ? (full_section_to_hide ? "none" : title.style.display) : title.style.display) : "block";
+				smaller_title.style.display = tvim_checked ? (no_items_to_show ? (full_section_to_hide ? "none" : "block") : smaller_title.style.display) : (no_items_to_show && nsm_checked ? "block" : smaller_title.style.display);				
 				break;
 			case 1:
-				smaller_title.style.display = nsm_checked ? (no_items_to_show ? (!tvim_checked ? "block" : smaller_title.style.display) : smaller_title.style.display) : "none";
+				smaller_title.style.display = nsm_checked ? (no_items_to_show ? (tvim_checked ? (full_section_to_hide ? "none" : "block") : "block") : "none") : "none";
 				break;
 		}
     }
