@@ -35,7 +35,10 @@ try {
             ";
         }
 
-        $response['global_variables'] = $GLOBALS;
+		//! Trop d'informations envoyées
+        // $response['global_variables'] = $GLOBALS;
+
+        $response['players'] = $GLOBALS['players_names'];
         $response['html'] = $pages;
         $response['code'] = "success";
     }
