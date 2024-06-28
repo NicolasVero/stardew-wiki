@@ -105,7 +105,7 @@ function display_feedback_button():string {
 
 function display_feedback_panel():string {
     return "
-        <section class='feedback-panel modal-window'>
+        <section class='feedback-panel modal-window to-destroy'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Your feedback</h2>
                 <img src='" . get_images_folder() . "icons/exit.png' class='exit-feedback exit' alt=''/>

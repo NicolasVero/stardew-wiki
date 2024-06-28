@@ -7,10 +7,7 @@ function activate_buttons(show, hide, sections_to_show, disable_scroll) {
 
     show_button.forEach(function(button) {
         button.addEventListener("click", function() {
-			const other_sections = document.querySelectorAll('.modal-window');
-			other_sections.forEach(other_section => {
-				other_section.style.display = 'none';
-			});
+			hide_all_sections(true);
 
             current_section = sections;
             toggle_visibility_and_scroll(sections, true, disable_scroll);
@@ -19,10 +16,7 @@ function activate_buttons(show, hide, sections_to_show, disable_scroll) {
 
     hide_button.forEach(function(button) {
         button.addEventListener("click", function() {
-			const other_sections = document.querySelectorAll('.modal-window');
-			other_sections.forEach(other_section => {
-				other_section.style.display = 'none';
-			});
+			hide_all_sections(true);
             current_section = null;
         });
     });
@@ -49,10 +43,8 @@ function hide_panels(event) {
     event = event || {};
 	if(current_section && event.target !== current_section && !current_section.contains(event.target) && !event.target.classList.contains("modal-opener")) {
 		if(current_section.classList.contains('feedback-panel')) {
-			if(current_section.style.display != 'none') {
-				current_section.remove();
-				return;
-			}
+			current_section.remove();
+			return;
 		}
 
 		if(!current_section.classList.contains('to-keep-open'))

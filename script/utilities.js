@@ -240,3 +240,13 @@ function save_landing_surheader() {
 	const landing_menu = document.getElementById('landing_menu');
 	surheader = landing_menu.innerHTML;
 }
+
+function hide_all_sections(section_destroy = false) {
+	const sections = document.querySelectorAll('.modal-window');
+	sections.forEach(section => {
+		if(section.classList.contains('to-destroy') && section_destroy)
+			section.remove();
+		
+		section.style.display = 'none';
+	});
+}

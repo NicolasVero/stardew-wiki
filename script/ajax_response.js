@@ -71,31 +71,19 @@ async function AJAX_send() {
 
 // Create feedback form
 function activate_feedback_ajax_trigger() {
-	const trigger = document.querySelector('.feedback-opener');
+	const triggers = document.querySelectorAll('.feedback-opener');
 
-	trigger.addEventListener('click', () => {
+	triggers.forEach(trigger => {
+		trigger.addEventListener('click', () => {
+			hide_all_sections();
 
-		const sections = document.querySelectorAll('.modal-window');
-		sections.forEach(section => {
-			console.log(section);
-			section.style.display = 'none';
+			const existing_window = document.querySelector('.feedback-panel');
+			if(existing_window)
+				toggle_visibility_and_scroll(existing_window, true, false);
+			else
+				feedback_form_creation();
 		});
-
-		const existing_window = document.querySelector('.feedback-panel');
-		if(existing_window) {
-			current_section = existing_window;
-
-			if(existing_window.style.display == 'none') {
-				existing_window.style.display = 'block';
-			}
-			else {
-				return;
-			}
-		}
-		else {		
-			feedback_form_creation();
-		}
-	});
+	})
 }
 
 // Create feedback form
