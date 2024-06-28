@@ -1,16 +1,19 @@
 <?php 
 
-function display_sur_header(bool $is_error_screen = false):string {
+function display_sur_header(bool $is_landing_page = false, bool $is_error_screen = false):string {
 
-	$menu_id = ($is_error_screen) ? "error_menu" : "dashboard_menu";
+	$menu_id = ($is_landing_page) ? "landing_menu" : (($is_error_screen) ? "error_menu" : "dashboard_menu");
+	$save_id = ($is_landing_page) ? "landing" : "file";
+	$settings_id = ($is_landing_page) ? "landing" : "main";
+	
 	$structure = "<div id='$menu_id' class='sur-header'>";
-		$structure .= (!$is_error_screen) ? display_player_selection() : "";
+		$structure .= (!$is_landing_page && !$is_error_screen) ? display_player_selection() : "";
 		$structure .= "<span>";
-			$structure .= (!$is_error_screen) ? display_game_version() : "";
-			$structure .= display_save_button('file');
-			$structure .= display_settings_button();
+			$structure .= (!$is_landing_page && !$is_error_screen) ? display_game_version() : "";
+			$structure .= display_save_button($save_id);
+			$structure .= display_settings_button($settings_id);
 			$structure .= display_feedback_button();
-			$structure .= (!$is_error_screen) ? display_home_button() : "";
+			$structure .= (!$is_landing_page && !$is_error_screen) ? display_home_button() : "";
 		$structure .= "</span>";
 	$structure .= "</div>";
 
@@ -41,7 +44,7 @@ function display_game_version():string {
     return $structure;
 }
 
-function display_settings_button(string $prefix = 'main'):string {
+function display_settings_button(string $prefix):string {
     $structure = "<span class='$prefix-settings modal-opener'><img src='" . get_images_folder() ."icons/settings.png' class='modal-opener' alt='Settings icon'></span>";
     return $structure;
 }
@@ -74,7 +77,7 @@ function display_settings_panel():string {
     ";
 }
 
-function display_save_button(string $prefix = 'landing'):string {
+function display_save_button(string $prefix):string {
     return "<span class='$prefix-upload modal-opener'><img src='" . get_images_folder() ."icons/file.png' class='modal-opener' alt='File upload icon'></span>";
 }
 

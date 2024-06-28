@@ -3,22 +3,15 @@
 require 'display_section_functions.php';
 
 function display_landing_page():string {
-    $save_button     = display_save_button();
+
+	$sur_header = display_sur_header(true, false);
     $save_panel      = display_save_panel();
-    
-    $settings_button = display_settings_button('landing');
     $settings_panel  = display_settings_panel();
-    
-    $feedback_button = display_feedback_button();
     $feedback_panel  = display_feedback_panel();
 
-
     return "
-        <div id='landing_menu' class='sur-header'>
-            $save_button
-            $settings_button
-            $feedback_button
-        </div>
+        $sur_header
+		
         $save_panel
         $settings_panel
         $feedback_panel

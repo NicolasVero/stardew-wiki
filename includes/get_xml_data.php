@@ -25,7 +25,7 @@ try {
         $players_data = get_all_players_datas();
         $players = get_all_players();
 
-        $pages['sur_header'] = display_sur_header();
+        $pages['sur_header'] = display_sur_header(false, false);
         for($player_count = 0; $player_count < count($players); $player_count++) {
 			$GLOBALS['player_id'] = $player_count;
             $pages['player_' . $player_count] = "
@@ -43,7 +43,7 @@ try {
         $response['code'] = "success";
     }
 } catch (Exception $exception) {
-	$page['sur_header'] = display_sur_header(true);
+	$page['sur_header'] = display_sur_header(false, true);
 	$page['error_message'] = display_error_page($exception);
     $response['html']  = $page;
     $response['code']  = "failed";
