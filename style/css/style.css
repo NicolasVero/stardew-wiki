@@ -233,7 +233,6 @@ html {
     height: 28px;
   }
   .modal_panel {
-    display: none;
     font-family: "Stardew Valley Stonks", serif;
     font-size: 16px;
     color: #000000;
@@ -360,7 +359,6 @@ html {
     display: block;
   }
   .feedback-panel {
-    display: none;
     font-family: "Stardew Valley Stonks", serif;
     font-size: 16px;
     color: #000000;
@@ -1214,7 +1212,6 @@ html {
     height: 21px;
   }
   .modal_panel {
-    display: none;
     font-family: "Stardew Valley Stonks", serif;
     font-size: 12px;
     color: #000000;
@@ -1341,7 +1338,6 @@ html {
     display: block;
   }
   .feedback-panel {
-    display: none;
     font-family: "Stardew Valley Stonks", serif;
     font-size: 12px;
     color: #000000;

@@ -57,6 +57,7 @@ async function AJAX_send() {
 					loard_error_page_items();
                 }
 
+				activate_feedback_ajax_trigger();
 				toggle_visibility_and_scroll(current_section, false, false);
                 toggle_loading(false);
             }
@@ -68,27 +69,90 @@ async function AJAX_send() {
     }
 }
 
-// Feedback Form AJAX
-document.getElementById('feedback_form').addEventListener('submit', (event) => {
-    event.preventDefault();
+// Create feedback form
+function activate_feedback_ajax_trigger() {
+	const trigger = document.querySelector('.feedback-opener');
 
-    const formData = new FormData(event.target);
+	trigger.addEventListener('click', () => {
 
-    fetch('./includes/sendmail.php', {
+		const sections = document.querySelectorAll('.modal-window');
+		sections.forEach(section => {
+			console.log(section);
+			section.style.display = 'none';
+		});
+
+		const existing_window = document.querySelector('.feedback-panel');
+		if(existing_window) {
+			current_section = existing_window;
+
+			if(existing_window.style.display == 'none') {
+				existing_window.style.display = 'block';
+			}
+			else {
+				return;
+			}
+		}
+		else {		
+			feedback_form_creation();
+		}
+	});
+}
+
+// Create feedback form
+function feedback_form_creation() {
+    const xml_upload = document.querySelector("body");
+
+	fetch('./includes/functions/display_functions.php', {
         method: 'POST',
-        body: formData
+        headers: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+        },
+        body: new URLSearchParams({
+            'action': 'display_feedback_panel'
+        })
     })
-    .then(response => response.json())
+    .then(response => response.text())
     .then(data => {
-        console.log(data);
-        if (data.success) {
-            alert(data.message);
-        } else {
-            alert('Error submitting form: ' + data.message);
-        }
+
+		// Eviter de reparse le body entièrement
+		const tempContainer = document.createElement('div');
+        tempContainer.innerHTML = data;
+
+        while (tempContainer.firstChild)
+            xml_upload.appendChild(tempContainer.firstChild);
+
+		current_section = document.querySelector('.feedback-panel');
+
+        feedback_custom_radio();
+        activate_feedback_form();
+        activate_close_buttons(".exit-feedback", ".feedback-panel");
     })
-    .catch(error => {
-        console.error('Error:', error);
-        alert('An error occurred while submitting the form.');
-    });
-});
+    .catch(error => console.error('Error:', error));
+}
+
+// Feedback Form AJAX
+function activate_feedback_form() {
+	document.getElementById('feedback_form').addEventListener('submit', (event) => {
+		event.preventDefault();
+	
+		const formData = new FormData(event.target);
+	
+		fetch('./includes/sendmail.php', {
+			method: 'POST',
+			body: formData
+		})
+		.then(response => response.json())
+		.then(data => {
+			console.log(data);
+			if (data.success) {
+				alert(data.message);
+			} else {
+				alert('Error submitting form: ' + data.message);
+			}
+		})
+		.catch(error => {
+			console.error('Error:', error);
+			alert('An error occurred while submitting the form.');
+		});
+	});
+}

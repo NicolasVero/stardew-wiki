@@ -145,12 +145,6 @@ function loard_error_page_items() {
 			"exit_button"    : ".exit-upload",
 			"modal_panel"    : ".upload-panel",
 			"disable_scroll" : false
-		},
-		{
-			"open_button"    : ".feedback-opener",
-			"exit_button"    : ".exit-feedback",
-			"modal_panel"    : ".feedback-panel",
-			"disable_scroll" : false
 		}
 	];
 	
@@ -176,12 +170,6 @@ function load_elements() {
 			"open_button"    : ".file-upload",
 			"exit_button"    : ".exit-upload",
 			"modal_panel"    : ".upload-panel",
-			"disable_scroll" : false
-		},
-		{
-			"open_button"    : ".feedback-opener",
-			"exit_button"    : ".exit-feedback",
-			"modal_panel"    : ".feedback-panel",
 			"disable_scroll" : false
 		}
 	];

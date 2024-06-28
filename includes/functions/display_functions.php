@@ -7,14 +7,12 @@ function display_landing_page():string {
 	$sur_header = display_sur_header(true, false);
     $save_panel      = display_save_panel();
     $settings_panel  = display_settings_panel();
-    $feedback_panel  = display_feedback_panel();
 
     return "
         $sur_header
 		
         $save_panel
         $settings_panel
-        $feedback_panel
         <div id='display'>
 			<div id='landing_page'>
 				<main>
@@ -211,4 +209,9 @@ function display_error_page(Exception $exception):string {
     ";
 
     return $structure;
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'display_feedback_panel') {
+    require 'utility_functions.php';
+	echo display_feedback_panel();
 }

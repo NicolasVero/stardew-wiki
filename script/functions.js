@@ -18,10 +18,10 @@ window.addEventListener("load", () => {
     document.getElementById("save-upload").addEventListener("change", file_choice);
 
     save_landing_surheader();
-    feedback_custom_radio();
 	
     activate_buttons(".landing-upload", ".exit-upload", ".upload-panel", false);
     activate_buttons(".landing-settings", ".exit-settings", ".settings", false);
-    activate_buttons(".feedback-opener", ".exit-feedback", ".feedback-panel", false);
     toggle_custom_checkboxes(".checkmark");
+
+	activate_feedback_ajax_trigger();
 });
