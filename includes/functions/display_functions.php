@@ -4,6 +4,10 @@ require 'display_section_functions.php';
 
 function display_landing_page():string {
 
+	if(is_a_mobile_device()) {
+		return display_mobile_landing_page();
+	}
+
 	$sur_header = display_sur_header(true, false);
     $save_panel      = display_save_panel();
     $settings_panel  = display_settings_panel();
@@ -127,6 +131,74 @@ function display_landing_page():string {
         <img src='" . get_images_folder() . "content/loading.png' id='loading-strip' class='loading' alt=''>
     ";
 }
+
+
+function display_mobile_landing_page():string {
+	return "
+		<div id='display'>
+			<div id='mobile_landing_page'>
+				<main>
+					<h1 class='section-title'>Welcome to Stardew Dashboard</h1>
+					<section class='project-description'>
+						<h2 class='section-title'>Oh no!</h2>
+						<span>
+							<span>
+								Unfortunately, the tool is not available on smartphone. Go and try it on a computer !
+							</span>
+						</span>
+					</section>
+					
+					<section class='about'>
+						<h2 class='section-title'>About us</h2>
+						<span>
+							<span>
+								Stardew Dashboard is a project made by two French students in their third year of a bachelor's degree in web development.
+								Created during our spare time, this website serves as a tool for us to conveniently track our progress in Stardew Valley. 
+							</span>
+						</span>
+						<span class='characters'>
+							<span>
+								<img src='" . get_images_folder() ."content/romain.png' class='character-image' alt=''>
+								<span>
+									<span class='character-presentation'>
+										<span>
+											Romain is a hard-working web developer. He loves taking on challenges and always going the extra mile. 
+										</span>
+										<span>
+											He took care of the Front-End, and helped Nicolas with the Back-End.
+										</span>
+									</span>
+									<span class='socials'>
+										<a href='https://github.com/BreadyBred' target='_blank'><img src='" . get_images_folder() ."social/github.png' alt=''></a>
+										<a href='https://www.linkedin.com/in/romain-gerard/' target='_blank'><img src='" . get_images_folder() ."social/linkedin.png' alt=''></a>
+									</span>
+								</span>
+							</span>
+							<span>
+								<img src='" . get_images_folder() ."content/nico.png' class='character-image' alt=''>
+								<span>
+									<span class='character-presentation'>
+										<span>
+											Nicolas is a young man with a passion for development, sleep, and who loves to make web development during his weekends. 
+										</span>
+										<span>
+											He took care of the Back-End of the website, as well as the UX / UI design.
+										</span>
+									</span>
+									<span class='socials'>
+										<a href='https://github.com/NicolasVero' target='_blank'><img src='" . get_images_folder() ."social/github.png' alt=''></a>
+										<a href='https://www.linkedin.com/in/nicolas-vero/' target='_blank'><img src='" . get_images_folder() ."social/linkedin.png' alt=''></a>
+									</span>
+								</span>
+							</span>
+						</span>
+					</section>
+				</main>
+        	</div>
+        </div>
+	";
+}
+
 
 function display_page():string {
 

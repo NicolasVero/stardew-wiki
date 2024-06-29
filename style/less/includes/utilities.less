@@ -89,24 +89,3 @@
 html {
 	background: #0A0523 url("../../medias/images/content/bg.png") no-repeat fixed center center / cover;
 }
-
-// Media Queries
-@media (min-width: @desktop) {
-	.desktop-changes() !important;
-	@ratio: 1;
-	@import (multiple) "general-classes";
-	@import (multiple) "media-queries";
-	@import (multiple) "landing";
-	@import (multiple) "header";
-	@import (multiple) "main";
-}
-
-@media (max-width: @desktop) {
-	.mobile-changes() !important;
-	@ratio: 0.75;
-	@import (multiple) "general-classes";
-	@import (multiple) "media-queries";
-	@import (multiple) "landing";
-	@import (multiple) "header";
-	@import (multiple) "main";
-}

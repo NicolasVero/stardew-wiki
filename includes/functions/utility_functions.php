@@ -207,6 +207,8 @@ function get_php_max_upload_size():string {
 }
 
 function is_a_mobile_device():bool {
+	
+	return true;
 	return (
 		stristr($_SERVER['HTTP_USER_AGENT'], "Android") ||
 		strpos($_SERVER['HTTP_USER_AGENT'], "iPod") != false ||
