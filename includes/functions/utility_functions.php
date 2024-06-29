@@ -206,5 +206,13 @@ function get_php_max_upload_size():string {
     ]);
 }
 
-if (isset($_GET['action']) && $_GET['action'] == 'get_max_upload_size')
+function is_a_mobile_device():bool {
+	return (
+		stristr($_SERVER['HTTP_USER_AGENT'], "Android") ||
+		strpos($_SERVER['HTTP_USER_AGENT'], "iPod") != false ||
+		strpos($_SERVER['HTTP_USER_AGENT'], "iPhone") != false 
+	);
+}
+
+if(isset($_GET['action']) && $_GET['action'] == 'get_max_upload_size')
     echo get_php_max_upload_size();
