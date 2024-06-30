@@ -14,7 +14,8 @@ function get_json_folder():string {
 }
 
 function get_site_root():string {
-    return 'http://localhost/travail/stardew_wiki/';
+    // return 'http://localhost/travail/stardew_wiki/';
+    return 'http://192.168.1.15/travail/stardew_wiki/';
 }
 
 function formate_number(int $number, string $lang = 'en'):string {

@@ -90,7 +90,7 @@ function display_landing_page():string {
 						</span>
 						<span class='characters'>
 							<span>
-								<img src='" . get_images_folder() ."content/romain.png' class='character-image' alt=''>
+								<img src='" . get_images_folder() ."content/romain.png' class='character-image romain' alt=''>
 								<span>
 									<span class='character-presentation'>
 										<span>
@@ -107,7 +107,7 @@ function display_landing_page():string {
 								</span>
 							</span>
 							<span>
-								<img src='" . get_images_folder() ."content/nico.png' class='character-image' alt=''>
+								<img src='" . get_images_folder() ."content/nico.png' class='character-image nico' alt=''>
 								<span>
 									<span class='character-presentation'>
 										<span>
@@ -158,7 +158,7 @@ function display_mobile_landing_page():string {
 						</span>
 						<span class='characters'>
 							<span>
-								<img src='" . get_images_folder() ."content/romain.png' class='character-image' alt=''>
+								<img src='" . get_images_folder() ."content/romain.png' class='character-image romain' alt=''>
 								<span>
 									<span class='character-presentation'>
 										<span>
@@ -175,7 +175,7 @@ function display_mobile_landing_page():string {
 								</span>
 							</span>
 							<span>
-								<img src='" . get_images_folder() ."content/nico.png' class='character-image' alt=''>
+								<img src='" . get_images_folder() ."content/nico.png' class='character-image nico' alt=''>
 								<span>
 									<span class='character-presentation'>
 										<span>

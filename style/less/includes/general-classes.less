@@ -37,13 +37,13 @@
 .no-spoil-title {
 	.data-info;
 	display: none;
-	font-size: @small-fs * @ratio;
+	font-size: @small-fs;
 }
 
 // Basic classes
 .data {
 	font-family: @primary-ff;
-	font-size: @big-fs * @ratio;
+	font-size: @big-fs;
 	color: @primary-fc;
 }
 
@@ -69,7 +69,7 @@
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
-	margin-bottom: (@big-gap * @ratio);
+	margin-bottom: @big-gap;
 }
 	
 .panel-title {
@@ -93,13 +93,13 @@
 // Data classes
 .data-info {
 	font-family: @primary-ff;
-	font-size: @md-fs * @ratio;
+	font-size: @md-fs;
 	color: @primary-fc;
 }
 
 .data-label {
 	font-family: @secondary-ff;
-	font-size: @xsmall-fs * @ratio;
+	font-size: @xsmall-fs;
 	color: @secondary-fc;
 	font-weight: 200;
 }
@@ -144,7 +144,7 @@
 }
 
 .exit {
-	width: (@big-icon * @ratio);
+	width: @big-icon;
 	cursor: @pointer;
 }
 
@@ -198,17 +198,17 @@
     }
 
 	a {
-		height: (@big-icon * @ratio);
+		height: @big-icon;
 	}
 }
 
 .modal_panel {
 	font-family: @primary-ff;
-	font-size: (@md-fs * @ratio);
+	font-size: @md-fs;
 	color: @primary-fc;
 
 	position: fixed;
-	padding: (@big-gap * @ratio) (@big-gap * @ratio);
+	padding: @big-gap @big-gap;
 	.absolute-panel;
 	max-height: 80vh;
 }
@@ -222,20 +222,20 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		gap: (@big-gap * @ratio);
+		gap: @big-gap;
 		width: fit-content;
 
 		& > span {
 			&:first-of-type {
 				display: flex;
 				align-items: center;
-				gap: (@md-gap * @ratio);
+				gap: @md-gap;
 			}
 		}
 	}
 
 	.section-title {
-		font-size: (@big-fs * @ratio);
+		font-size: @big-fs;
 	}
 
 	#browse-files {
@@ -260,12 +260,12 @@
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
-		gap: (@md-gap * @ratio);
+		gap: @md-gap;
 
 		.checkbox {
 			display: flex;
 			align-items: flex-end;
-			gap: (@md-gap * @ratio);
+			gap: @md-gap;
 
 			input {
 				.checkbox-elements;
@@ -283,7 +283,7 @@
 			display: flex;
 			flex-direction: column;
 			align-items: flex-start;
-			gap: (@big-gap * @ratio);
+			gap: @big-gap;
 
 			& > span {
 				&:first-of-type {
@@ -296,7 +296,7 @@
 			.label_and_input {
 				display: flex;
 				flex-direction: column;
-				gap: (@small-gap * @ratio);
+				gap: @small-gap;
 
 				&.full_width {
 					width: 100%;
@@ -320,7 +320,7 @@
 					flex-basis: 33%;
 					flex-direction: column;
 					align-items: center;
-					gap: (@md-gap * @ratio);
+					gap: @md-gap;
 				}
 
 				& img {
@@ -336,7 +336,7 @@
 					border-left: solid 3px #965c3a;
 					border-bottom: solid 3px #965c3a;
 	
-					padding: (@small-gap * @ratio) (@small-gap * @ratio);
+					padding: @small-gap @small-gap;
 	
 					border-radius: 2px;
 	
@@ -348,7 +348,7 @@
 
 			input[type=submit] {
 				font-family: @primary-ff;
-				font-size: @big-fs * @ratio;
+				font-size: @big-fs;
 				margin: 0 auto;
 				.button-elements;
 				.filled-element;

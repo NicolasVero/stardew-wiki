@@ -9,32 +9,33 @@
 	
 	&#landing_menu, &#error_menu {
 		justify-content: flex-end;
-		gap: (@md-gap * @ratio);
+		gap: @md-gap;
 	}
 
 	#players_selection {
 		margin: 0;
+		width: 70%;
 		display: flex;
 		flex-wrap: wrap;
 		align-items: center;
-		gap: (@small-gap * @ratio) (@md-gap * @ratio);
+		gap: @small-gap @md-gap;
 		list-style-type: none;
 
 		li {
 			.button-elements;
 			.filled-element;
-			padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @d-ratio);
+			padding: extract(@button-gaps, 1) * @ratio extract(@button-gaps, 2) * @d-ratio;
 		}
 	}
 
 	& > span {
 		display: flex;
 		align-items: flex-end;
-		gap: (@md-gap * @ratio);
+		gap: @md-gap;
 
 		.game_version {
 			font-family: @primary-ff;
-			font-size: @md-fs * @ratio;
+			font-size: @md-fs;
 			color: @third-fc;
 		}
 
@@ -49,7 +50,7 @@
 
 		img {
 			.button-elements;
-			width: (@bigger-icon * @ratio);
+			width: @bigger-icon;
 		}
 	}
 
@@ -60,8 +61,8 @@ header {
 	flex-direction: column;
 	background-color: @primary-bg;
 	border-radius: 5px 5px 0 0;
-	padding: (@md-gap * @ratio) (@big-gap * @ratio);
-	gap: (@md-gap * @ratio);
+	padding: @md-gap @big-gap;
+	gap: @md-gap;
 
 	.header {
 		width: 100%;
@@ -84,7 +85,7 @@ header {
 				display: flex;
 				justify-content: flex-end;
   				align-items: center;
-				gap: (@small-gap * @ratio);
+				gap: @small-gap;
 			}
 
 		}
@@ -94,11 +95,11 @@ header {
 		& > span:first-of-type {
 			display: flex;
 			align-items: flex-end;
-			gap: (@md-gap * @ratio);
+			gap: @md-gap;
 		}
 
 		img {
-			width: (@md-icon * @ratio);
+			width: @md-icon;
 		}
 	}
 
@@ -110,11 +111,11 @@ header {
 
 		.all-money {
 			display: flex;
-			gap: (@bigger-gap * @ratio);
+			gap: @bigger-gap;
 		}
 
 		img {
-			height: (@xsmall-icon * @ratio);
+			height: @xsmall-icon;
 		}
 	}
 }

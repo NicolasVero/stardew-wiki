@@ -445,6 +445,17 @@ img {
 .feedback-panel span form input[type=radio] {
   display: none;
 }
+body #landing_page main {
+  padding: 25px 50px;
+}
+body #landing_page main section > span.characters {
+  font-size: 14px;
+  flex-direction: row;
+}
+body #mobile_landing_page main section > span.characters {
+  font-size: 12px;
+  flex-direction: column;
+}
 body #landing_page main,
 body #mobile_landing_page main {
   font-family: "Stardew Valley Stonks", serif;
@@ -453,13 +464,13 @@ body #mobile_landing_page main {
   display: flex;
   flex-direction: column;
   gap: 25px;
-  padding: 25px 50px;
   border-radius: 5px;
   margin-bottom: 20px;
 }
 body #landing_page main h1.section-title,
 body #mobile_landing_page main h1.section-title {
   margin-inline: auto;
+  text-align: center;
   font-size: 24px;
   font-family: 'SV Bold';
   font-weight: 100;
@@ -492,17 +503,14 @@ body #mobile_landing_page main section > span {
 body #landing_page main section > span.characters,
 body #mobile_landing_page main section > span.characters {
   display: flex;
-  flex-direction: row;
   justify-content: space-evenly;
   gap: 25px;
   margin-top: 25px;
-  font-size: 14px;
 }
 body #landing_page main section > span.characters > span,
 body #mobile_landing_page main section > span.characters > span {
   display: flex;
   justify-content: flex-start;
-  flex-basis: 50%;
   gap: 25px;
 }
 body #landing_page main section > span.characters > span > span,
@@ -514,6 +522,14 @@ body #mobile_landing_page main section > span.characters > span > span {
 body #landing_page main section > span.characters .character-image,
 body #mobile_landing_page main section > span.characters .character-image {
   width: 50px;
+}
+body #landing_page main section > span.characters .character-image.romain,
+body #mobile_landing_page main section > span.characters .character-image.romain {
+  aspect-ratio: 1/2.13;
+}
+body #landing_page main section > span.characters .character-image.nico,
+body #mobile_landing_page main section > span.characters .character-image.nico {
+  aspect-ratio: 1/1.99;
 }
 body #landing_page main section > span.characters .character-presentation,
 body #mobile_landing_page main section > span.characters .character-presentation {
@@ -553,7 +569,7 @@ body #landing_page main .img-embed img,
 body #mobile_landing_page main .img-embed img {
   position: absolute;
   width: 28px;
-  margin-top: -17.5px;
+  margin-top: -7.5px;
   cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
 }
 body .loading {
@@ -600,6 +616,7 @@ body .error-wrapper .dialogue-box-error-container span {
 }
 .sur-header #players_selection {
   margin: 0;
+  width: 70%;
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -706,6 +723,9 @@ header .sub-header .all-money {
 header .sub-header img {
   height: 16px;
 }
+body {
+  margin: 5vh 10vw;
+}
 body main {
   background-color: rgba(255, 255, 255, 0.7);
   display: flex;
@@ -729,6 +749,14 @@ body main .section-title {
 }
 body main .info-section {
   justify-content: flex-start;
+  width: fit-content;
+}
+body main .info-section:not(.general-stats) {
+  flex-basis: 50%;
+}
+body main .info-section:not(.general-stats).skills-section,
+body main .info-section:not(.general-stats).friends-section.top-friends {
+  flex-basis: 45%;
 }
 body main .info-section.general-stats {
   position: relative;
