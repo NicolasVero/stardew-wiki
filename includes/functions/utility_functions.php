@@ -14,7 +14,10 @@ function get_json_folder():string {
 }
 
 function get_site_root():string {
-    return 'http://localhost/travail/stardew_wiki/';
+	if($_SERVER['HTTP_HOST'] == "localhost")
+    	return 'http://localhost/travail/stardew_wiki/';
+	
+	return 'http://stardew-dashboard.42web.io/';
 }
 
 function formate_number(int $number, string $lang = 'en'):string {
@@ -207,8 +210,6 @@ function get_php_max_upload_size():string {
 }
 
 function is_a_mobile_device():bool {
-	
-	return true;
 	return (
 		stristr($_SERVER['HTTP_USER_AGENT'], "Android") ||
 		strpos($_SERVER['HTTP_USER_AGENT'], "iPod") != false ||
