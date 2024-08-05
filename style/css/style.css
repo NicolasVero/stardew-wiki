@@ -751,13 +751,6 @@ body main .info-section {
   justify-content: flex-start;
   width: fit-content;
 }
-body main .info-section:not(.general-stats) {
-  flex-basis: 50%;
-}
-body main .info-section:not(.general-stats).skills-section,
-body main .info-section:not(.general-stats).friends-section.top-friends {
-  flex-basis: 45%;
-}
 body main .info-section.general-stats {
   position: relative;
   flex-basis: 100%;

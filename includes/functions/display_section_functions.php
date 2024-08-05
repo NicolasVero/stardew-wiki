@@ -372,7 +372,7 @@ function display_skills():string {
 	$this_player_masteries = $this_player_data['masteries'];
 
     $structure = "
-		<section class='skills-section info-section'>
+		<section class='skills-section info-section _50'>
 			<h2 class='section-title'>Skills</h2>
             <span>    
     ";
@@ -455,7 +455,7 @@ function display_friendships(int $limit = -1):string {
     "
 	:
 	"
-        <section class='info-section friends-section $section_class'>
+        <section class='info-section friends-section $section_class _50'>
             <h2 class='section-title'>Friendship progression</h2>
             <span>
     "
