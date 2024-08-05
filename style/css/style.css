@@ -574,7 +574,7 @@ body #landing_page main .img-embed img,
 body #mobile_landing_page main .img-embed img {
   position: absolute;
   width: 28px;
-  margin-top: -7.5px;
+  margin-top: -15px;
   cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
 }
 body .loading {
