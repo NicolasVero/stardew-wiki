@@ -131,7 +131,7 @@ function get_unlockables(string $unlockable_name):int {
 			break;
 
 		case "magic_ink":
-			return ($is_older_version) ? has_element_ov($player_data->hasMagicInk) 			: has_element("HasPickedUpMagicInk", $player_data);
+			return ($is_older_version) ? has_element_ov($player_data->hasMagicInk) 			: has_element("hasPickedUpMagicInk", $player_data);
 			break;
 
 		case "town_key":
