@@ -371,6 +371,7 @@ img {
   display: flex;
   justify-content: space-between;
   width: 100%;
+  gap: 50px;
 }
 .feedback-panel span form .label_and_input {
   display: flex;
@@ -385,6 +386,9 @@ img {
 }
 .feedback-panel span form .label_and_input textarea {
   resize: none;
+}
+.feedback-panel span form .label_and_input.mail_input {
+  flex-grow: 1;
 }
 .feedback-panel span form .topic_selection {
   display: flex;

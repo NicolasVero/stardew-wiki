@@ -118,7 +118,7 @@ function display_feedback_panel():string {
                             <input type='text' id='username' name='username' required>
                         </span>
 
-                        <span class='label_and_input'>
+                        <span class='label_and_input mail_input'>
                             <label for='mail'>Email address</label>
                             <input type='email' id='mail' name='mail' required>
                         </span>
