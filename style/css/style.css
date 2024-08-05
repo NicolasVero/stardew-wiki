@@ -440,6 +440,7 @@ img {
 }
 .feedback-panel span form input[type=number] {
   -moz-appearance: textfield;
+  appearance: textfield;
 }
 .feedback-panel span form input[type=number]::-webkit-outer-spin-button,
 .feedback-panel span form input[type=number]::-webkit-inner-spin-button {
