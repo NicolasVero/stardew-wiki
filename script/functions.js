@@ -1,3 +1,5 @@
+let surheader;
+
 window.addEventListener("load", () => {
 
     const os_path = get_os_path(detect_os());
@@ -15,10 +17,11 @@ window.addEventListener("load", () => {
     document.getElementById("toggle_versions_items_mode").addEventListener("change", toggle_versions_items_mode);
     document.getElementById("save-upload").addEventListener("change", file_choice);
 
-    feedback_custom_radio();
+    save_landing_surheader();
 	
     activate_buttons(".landing-upload", ".exit-upload", ".upload-panel", false);
     activate_buttons(".landing-settings", ".exit-settings", ".settings", false);
-    activate_buttons(".feedback-opener", ".exit-feedback", ".feedback-panel", false);
     toggle_custom_checkboxes(".checkmark");
+
+	activate_feedback_ajax_trigger();
 });

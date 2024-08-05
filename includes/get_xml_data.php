@@ -25,6 +25,7 @@ try {
         $players_data = get_all_players_datas();
         $players = get_all_players();
 
+        $pages['sur_header'] = display_sur_header(false, false);
         for($player_count = 0; $player_count < count($players); $player_count++) {
 			$GLOBALS['player_id'] = $player_count;
             $pages['player_' . $player_count] = "
@@ -34,12 +35,17 @@ try {
             ";
         }
 
-        $response['global_variables'] = $GLOBALS;
+		//! Trop d'informations envoyées
+        // $response['global_variables'] = $GLOBALS;
+
+        $response['players'] = $GLOBALS['players_names'];
         $response['html'] = $pages;
         $response['code'] = "success";
     }
 } catch (Exception $exception) {
-    $response['html']  = display_error_page($exception);
+	$page['sur_header'] = display_sur_header(false, true);
+	$page['error_message'] = display_error_page($exception);
+    $response['html']  = $page;
     $response['code']  = "failed";
     $response['error'] = $exception->getMessage();
 }

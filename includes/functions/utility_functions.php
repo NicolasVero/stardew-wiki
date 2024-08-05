@@ -14,7 +14,10 @@ function get_json_folder():string {
 }
 
 function get_site_root():string {
-    return 'http://localhost/travail/stardew_wiki/';
+	if($_SERVER['HTTP_HOST'] == "localhost")
+    	return 'http://localhost/travail/stardew_wiki/';
+	
+	return 'http://stardew-dashboard.42web.io/';
 }
 
 function formate_number(int $number, string $lang = 'en'):string {
@@ -134,6 +137,12 @@ function sanitize_json_with_version(string $json_name, bool $version_controler =
 	return $sanitize_json;
 }
 
+function find_reference_in_json(mixed $id, string $file):mixed {
+    $json_file = sanitize_json_with_version($file);
+
+    return isset($json_file[$id]) ? $json_file[$id] : null;
+}
+
 function load_all_items():void {
 	$GLOBALS['all_items'] = decode('all_items');
 }
@@ -154,9 +163,38 @@ function decode(string $filename):array {
 	return json_decode(file_get_contents(get_json_folder() . "$filename.json"), true);
 }
 
+function get_formatted_date(bool $display_date = true):mixed {
+
+	$data = $GLOBALS['untreated_player_data'];
+
+    $day    = $data->dayOfMonthForSaveGame;
+    $season = array('spring', 'summer', 'fall', 'winter')[$data->seasonForSaveGame % 4];
+    $year   = $data->yearForSaveGame;
+
+    if($display_date)
+        return "Day $day of $season, Year $year";
+
+    return array(
+        'day' => $day,
+        'season' => $season,
+        'year' => $year
+    );
+}
+
 function is_this_the_same_day(string $date):bool {
     extract(get_formatted_date(false));
     return $date == "$day/$season";
+}
+
+function get_game_duration(int $duration):string {
+
+    $totalSeconds = intdiv($duration, 1000);
+    $seconds      = $totalSeconds % 60;
+    $totalMinutes = intdiv($totalSeconds, 60);
+    $minutes      = $totalMinutes % 60;
+    $hours        = intdiv($totalMinutes, 60);
+
+    return sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
 }
 
 function get_number_of_days_ingame():int {
@@ -171,5 +209,13 @@ function get_php_max_upload_size():string {
     ]);
 }
 
-if (isset($_GET['action']) && $_GET['action'] == 'get_max_upload_size')
+function is_a_mobile_device():bool {
+	return (
+		stristr($_SERVER['HTTP_USER_AGENT'], "Android") ||
+		strpos($_SERVER['HTTP_USER_AGENT'], "iPod") != false ||
+		strpos($_SERVER['HTTP_USER_AGENT'], "iPhone") != false 
+	);
+}
+
+if(isset($_GET['action']) && $_GET['action'] == 'get_max_upload_size')
     echo get_php_max_upload_size();

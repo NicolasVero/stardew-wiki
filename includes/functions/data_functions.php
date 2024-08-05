@@ -48,8 +48,8 @@ function get_all_players():array {
 	if($GLOBALS['game_version_score'] < get_game_version_score("1.6.0"))  {
 		foreach($data->locations->GameLocation[0]->buildings->Building as $building) {
 			if(isset($building->indoors->farmhand)) {
-				$farmhand_info = $building->indoors->farmhand;
-				array_push($players_names, (string) $farmhand_info->name);
+				$farmhand_name = (string) $building->indoors->farmhand->name;
+				array_push($players_names, $farmhand_name);
 			}
 		}
 	} else {
@@ -105,13 +105,13 @@ function get_aggregated_data(object $data):array {
         ),
         'has_element'     	=> get_unlockables_list($data),
         'crafting_recipes'	=> get_crafting_recipes($data->craftingRecipes),
-        'books'           	=> get_item_list_string($data->stats->Values, "books"),
-        'masteries'       	=> get_item_list_string($data->stats->Values, "masteries"),
+        'books'           	=> get_books($data->stats->Values),
+        'masteries'       	=> get_masteries($data->stats->Values),
         'fish_caught'     	=> get_fish_caught($data->fishCaught),
         'artifacts_found' 	=> get_artifacts($data->archaeologyFound, $general_data),
         'minerals_found'  	=> get_minerals($data->mineralsFound, $general_data),
         'cooking_recipes' 	=> get_cooking_recipes($data->cookingRecipes, $data->recipesCooked),
-        'shipped_items'   	=> get_shipped_items($data->basicShipped, 'shipped_items'),
+        'shipped_items'   	=> get_shipped_items($data->basicShipped),
         'achievements'    	=> get_achievement($data->achievements),
         'skills'          	=> get_skills_data((array) $data->professions->int),
         'friendship'      	=> get_friendship_data($data->friendshipData),

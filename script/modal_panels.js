@@ -7,8 +7,8 @@ function activate_buttons(show, hide, sections_to_show, disable_scroll) {
 
     show_button.forEach(function(button) {
         button.addEventListener("click", function() {
-            if (current_section !== null)
-                toggle_visibility_and_scroll(current_section, false, disable_scroll);
+			hide_all_sections(true);
+
             current_section = sections;
             toggle_visibility_and_scroll(sections, true, disable_scroll);
         });
@@ -16,7 +16,19 @@ function activate_buttons(show, hide, sections_to_show, disable_scroll) {
 
     hide_button.forEach(function(button) {
         button.addEventListener("click", function() {
-            toggle_visibility_and_scroll(sections, false, disable_scroll);
+			hide_all_sections(true);
+            current_section = null;
+        });
+    });
+}
+
+function activate_close_buttons(hide, sections_to_hide) {
+    const hide_button = document.querySelectorAll(hide);
+    const sections = document.querySelector(sections_to_hide);
+
+    hide_button.forEach(function(button) {
+        button.addEventListener("click", function() {
+            sections.remove();
             current_section = null;
         });
     });
@@ -29,6 +41,15 @@ function toggle_visibility_and_scroll(element, should_display, should_disable_sc
 
 function hide_panels(event) {
     event = event || {};
-	if (current_section && event.target !== current_section && !current_section.contains(event.target) &&  !current_section.classList.contains('to-keep-open') && !event.target.classList.contains("modal-opener"))
-		current_section.style.display = "none";
+	if(current_section && event.target !== current_section && !current_section.contains(event.target) && !event.target.classList.contains("modal-opener")) {
+		if(current_section.classList.contains('feedback-panel')) {
+			current_section.remove();
+			return;
+		}
+
+		if(!current_section.classList.contains('to-keep-open'))
+			current_section.style.display = "none";
+		
+	}
+
 }

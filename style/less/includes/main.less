@@ -1,19 +1,21 @@
 // out: false
 
 body {
+	margin: 5vh 10vw;
+
 	main {
 		background-color: @secondary-bg;
 		display: flex;
 		flex-wrap: wrap;
 		border-radius: 0 0 5px 5px;
-		padding: (@small-gap * @ratio) (@big-gap * @ratio);
-		gap: (@big-gap * @ratio) 0;
+		padding: @small-gap @big-gap;
+		gap: @big-gap 0;
 	
 		section {
 			&:not(.general-stats) {
 				display: flex;
 				flex-direction: column;
-				gap: (@md-gap * @ratio);
+				gap: @md-gap;
 			}
 		}
 		
@@ -26,7 +28,7 @@ body {
 		}
 
 		.section-title {
-			font-size: (@small-fs * @ratio);
+			font-size: @small-fs;
 			font-family: @primary-ff;
 			font-weight: 400;
 			color: @primary-fc;
@@ -36,24 +38,32 @@ body {
 	
 		.info-section {
 			justify-content: flex-start;
+			width: fit-content;
 	
+			&:not(.general-stats) {
+				&.skills-section, &.friends-section.top-friends {
+					flex-basis: 45%;
+				}
+				flex-basis: 50%;
+			}
+			
 			&.general-stats {
 				position: relative;
 				flex-basis: 100%;
 	
 				div {
 					display: flex;
-					gap: (@bigger-gap * @ratio);
+					gap: @bigger-gap;
 				}
 				
 				span {
 					display: flex;
 					align-items: flex-end;
-					gap: (@small-gap * @ratio);
+					gap: @small-gap;
 				}
 				
 				img {
-					height: (@big-icon * @ratio);
+					height: @big-icon;
 					&.quest-icon {
 						position: absolute;
 						top: 0;
@@ -67,11 +77,11 @@ body {
 				.skill {
 					display: flex;
 					align-items: center;
-					gap: (@md-gap * @ratio);
+					gap: @md-gap;
 
 					div {
 						display: flex;
-  						gap: (@md-gap * @ratio);
+  						gap: @md-gap;
 					}
 	
 					.level {
@@ -84,13 +94,13 @@ body {
 					.level-progress-bar {
 						display: flex;
 						align-items: center;
-						gap: (@small-gap * @ratio);
+						gap: @small-gap;
 					}
 	
 					img {
-						height: (@md-icon * @ratio);
+						height: @md-icon;
 						&.level-icon {
-							height: (@big-icon * @ratio);
+							height: @big-icon;
 						}
 					}
 				}
@@ -100,13 +110,13 @@ body {
 				display: none;
 
 				font-family: @primary-ff;
-				font-size: (@md-fs * @ratio);
+				font-size: @md-fs;
 				color: @primary-fc;
 		
 				position: fixed;
 				min-width: 30vw;
 				max-height: 80vh;
-				padding: (@big-gap * @ratio) (@big-gap * @ratio);
+				padding: @big-gap @big-gap;
 				.absolute-panel;
 
 				.section-title {
@@ -116,17 +126,17 @@ body {
 				.quests {
 					display: flex;
 					flex-direction: column;
-					gap: (@big-gap * @ratio);
+					gap: @big-gap;
 					white-space: nowrap;
 
 					.quest {
 						display: flex;
 						justify-content: space-between;
-						gap: (@bigger-gap * 2 * @ratio);
+						gap: @bigger-gap * 2;
 
 						& > span {
 							justify-content: center;
-							gap: (@small-gap * @ratio);
+							gap: @small-gap;
 						}
 
 						.quest-infos {
@@ -135,7 +145,7 @@ body {
 							width: 500px;
 
 							.quest-description {
-								font-size: (@big-fs * @ratio);
+								font-size: @big-fs;
 							}
 
 							.quest-title {
@@ -151,24 +161,24 @@ body {
 						.quest-rewards {
 							display: flex;
 							justify-content: flex-end;
-							gap: (@big-gap * @ratio);
+							gap: @big-gap;
 							width: 100px;
 
 							.quest-reward {
 								display: flex;
 								align-items: center;
-								gap: (@xsmall-gap * @ratio);
+								gap: @xsmall-gap;
 							}
 						}
 
 						img {
-							width: (@small-icon * @ratio);
+							width: @small-icon;
 						}
 					}
 				}
 	
 				.section-title {
-					font-size: (@big-fs * @ratio);
+					font-size: @big-fs;
 				}
 			}
 	
@@ -177,18 +187,18 @@ body {
 					display: flex;
 					flex-direction: column;
 					justify-content: center;
-					gap: (@md-gap * @ratio);
+					gap: @md-gap;
 	
 					& > span {
 						display: flex;
 						align-items: center;
-						// gap: (@bigger-gap * @ratio);
+						// gap: @bigger-gap;
 					}
 	
 	
 					.character-icon {
 						cursor: @help;
-						width: (@bigger-icon * @ratio);
+						width: @bigger-icon;
 					}
 
 					.character-name {
@@ -198,28 +208,28 @@ body {
 	
 					.hearts-level {
 						display: flex;
-						gap: (@small-gap * @ratio);
+						gap: @small-gap;
 						.hearts {
-							width: (@small-icon * @ratio);
+							width: @small-icon;
 						}
 					}
 
 					.birthday_icon {
-						width: (@md-icon * @ratio);
+						width: @md-icon;
 					}
 
 					.interactions {
 						display: flex;
 						align-items: center;
-						gap: (@big-gap * @ratio);
+						gap: @big-gap;
 
 						& > span {
 							display: flex;
-							gap: (@md-gap * @ratio);
+							gap: @md-gap;
 						}
 						
 						.interaction {
-							width: (@md-icon * @ratio);
+							width: @md-icon;
 						}
 
 						.gift-counter {
@@ -228,7 +238,7 @@ body {
 	
 						.week {
 							font-family: @secondary-ff;
-							font-size: (@xsmall-fs * @ratio);
+							font-size: @xsmall-fs;
 							color: @secondary-fc;
 							width: max-content;
 						}
@@ -236,13 +246,13 @@ body {
 	
 					.friend-status {
 						.data;
-						font-size: (@md-fs * @ratio);
+						font-size: @md-fs;
 					}
 	
 					.view-all-friends {
 						font-family: @primary-ff;
-						// font-size: (@md-fs * @ratio);
-						font-size: (@xsmall-fs * @ratio);
+						// font-size: @md-fs;
+						font-size: @xsmall-fs;
 						color: @secondary-fc;
 						align-self: flex-end;
 						cursor: @pointer;
@@ -262,17 +272,17 @@ body {
 		
 					position: fixed;
 					height: 80vh;
-					padding: (@md-gap * @ratio) (@big-gap * @ratio);
+					padding: @md-gap @big-gap;
 					.absolute-panel;
 	
 					& > span {
 						& > span {
-							gap: (@bigger-gap * @ratio);
+							gap: @bigger-gap;
 						}
 					}
 		
 					.section-title {
-						font-size: (@big-fs * @ratio);
+						font-size: @big-fs;
 					}
 				}
 			}
@@ -283,7 +293,7 @@ body {
 			display: flex;
 			flex-wrap: wrap;
 			justify-content: space-between;
-			gap: (@big-gap * @ratio) 0;
+			gap: @big-gap 0;
 		}
 	
 		.gallery {
@@ -292,24 +302,27 @@ body {
 	
 			&.monsters-section {
 				justify-content: space-between;
+
 				& > span {
-					gap: (@md-gap * @ratio);
+					gap: @md-gap;
 				}
 			}
 	
 			& > span {
 				display: flex;
 				flex-wrap: wrap;
-				gap: (@small-gap * @ratio);
+				gap: @small-gap;
 			}
 	
 			img {
-				height: (@big-icon * @ratio);
+				height: @big-icon;
+				min-width: @big-icon;
+				object-fit: contain;
 			}
 		}
 	
 		& > :last-child {
-			margin-bottom: (@big-gap * @ratio);
+			margin-bottom: @big-gap;
 		}
 	}
 }

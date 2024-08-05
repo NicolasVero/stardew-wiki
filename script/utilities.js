@@ -22,9 +22,11 @@ function file_choice(event) {
     AJAX_send();
 }
 
-function deactivate_landing_inputs() {
-    document.getElementById("landing").style.display = "none";
-    document.getElementById("landing-page").style.display = "none";
+function toggle_landing_page(display) {
+	const landing_page = document.getElementById("landing_page");
+
+	if(landing_page)
+		landing_page.style.display = (display) ? "block" : "none";
 }
 
 function on_images_loaded(callback) {
@@ -130,15 +132,34 @@ function in_bytes_conversion(size) {
     return value * Math.pow(1024, unit_to_power[unit]);
 }
 
+function loard_error_page_items() {
+	const buttons = [
+		{
+			"open_button"    : ".main-settings",
+			"exit_button"    : ".exit-settings",
+			"modal_panel"    : ".settings",
+			"disable_scroll" : false
+		},
+		{
+			"open_button"    : ".file-upload",
+			"exit_button"    : ".exit-upload",
+			"modal_panel"    : ".upload-panel",
+			"disable_scroll" : false
+		}
+	];
+	
+	buttons.forEach(button => {
+		activate_buttons(button.open_button, button.exit_button, button.modal_panel, button.disable_scroll);
+	});
+}
+
 function load_elements() {
 
-    deactivate_landing_inputs();
-
+    toggle_landing_page(false);
     toggle_checkboxes_actions();
 
     // Buttons & panels
-	let buttons =
-	[
+	const buttons = [
 		{
 			"open_button"    : ".main-settings",
 			"exit_button"    : ".exit-settings",
@@ -174,6 +195,11 @@ function load_elements() {
 		activate_buttons(button.open_button, button.exit_button, button.modal_panel, button.disable_scroll);
 	});
 
+	document.getElementById('home-icon').addEventListener('click', () => {
+		const display = (document.getElementById('landing_page').style.display == "none") ? true : false;
+		toggle_landing_page(display);
+	});
+
 	update_tooltips_after_ajax();
 
 }
@@ -183,7 +209,8 @@ function feedback_custom_radio() {
     const feedback_real_radios = document.querySelectorAll('.feedback_real_radio');
 
     feedback_fake_radios.forEach(fake_radio => {
-        fake_radio.addEventListener('click', () => {
+		span_topic = fake_radio.parentElement;
+        span_topic.addEventListener('click', () => {
             const real_radio = fake_radio.previousElementSibling;
             if(real_radio && real_radio.type === "radio") {
                 real_radio.checked = true;
@@ -207,4 +234,19 @@ function feedback_custom_radio() {
             }
         });
     });
+}
+
+function save_landing_surheader() {
+	const landing_menu = document.getElementById('landing_menu');
+	surheader = landing_menu.innerHTML;
+}
+
+function hide_all_sections(section_destroy = false) {
+	const sections = document.querySelectorAll('.modal-window');
+	sections.forEach(section => {
+		if(section.classList.contains('to-destroy') && section_destroy)
+			section.remove();
+		
+		section.style.display = 'none';
+	});
 }
