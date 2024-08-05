@@ -69,39 +69,42 @@ function get_aggregated_data(object $data):array {
 
     $general_data = $GLOBALS['untreated_all_players_data'];
     $game_version_score = (int) get_game_version_score((string) $general_data->gameVersion);
+    $should_spawn_monsters = $general_data->shouldSpawnMonsters;
 
 	$GLOBALS['untreated_player_data'] = $data;
 	$GLOBALS['game_version'] = $general_data->gameVersion;
 	$GLOBALS['game_version_score'] = $game_version_score;
+	$GLOBALS['should_spawn_monsters'] = $should_spawn_monsters;
     
     return array(
         'general' => array(
-            'game_version'       => (string) $general_data->gameVersion,
-            'game_version_score' => $game_version_score,
-            'name'               => (string) $data->name,
-            'gender'             => get_gender(array($data->gender, $data->isMale)),
-            'farm_name'          => (string) $data->farmName,
-            'farmer_level'       => get_farmer_level($data),
-            'favorite_thing'     => (string) $data->favoriteThing,
-            'animal_type'        => (string) $data->whichPetType,
-            'date'               => get_formatted_date(),
-            'game_duration'      => get_game_duration((int) $data->millisecondsPlayed),
-            'mine_level'         => (int) $data->deepestMineLevel,
-            'max_items'          => (int) $data->maxItems,
-            'max_health'         => (int) $data->maxHealth,
-            'max_stamina'        => (int) $data->maxStamina,
-            'golds'              => (int) $data->money,
-            'total_golds'        => (int) $data->totalMoneyEarned,
-            'golden_walnuts'     => (int) $general_data->goldenWalnuts,
-            'qi_gems'            => (int) $data->qiGems,
-            'casino_coins'       => (int) $data->clubCoins
+            'game_version'          => (string) $general_data->gameVersion,
+            'game_version_score'    => $game_version_score,
+            'should_spawn_monsters' => $should_spawn_monsters,
+            'name'                  => (string) $data->name,
+            'gender'                => get_gender(array($data->gender, $data->isMale)),
+            'farm_name'             => (string) $data->farmName,
+            'farmer_level'          => get_farmer_level($data),
+            'favorite_thing'        => (string) $data->favoriteThing,
+            'animal_type'           => (string) $data->whichPetType,
+            'date'                  => get_formatted_date(),
+            'game_duration'         => get_game_duration((int) $data->millisecondsPlayed),
+            'mine_level'            => (int) $data->deepestMineLevel,
+            'max_items'             => (int) $data->maxItems,
+            'max_health'            => (int) $data->maxHealth,
+            'max_stamina'           => (int) $data->maxStamina,
+            'golds'                 => (int) $data->money,
+            'total_golds'           => (int) $data->totalMoneyEarned,
+            'golden_walnuts'        => (int) $general_data->goldenWalnuts,
+            'qi_gems'               => (int) $data->qiGems,
+            'casino_coins'          => (int) $data->clubCoins
         ),
         'levels' => array(
-            'farming_level'      => (int) $data->farmingLevel,
-            'mining_level'       => (int) $data->miningLevel,
-            'combat_level'       => (int) $data->combatLevel,
-            'foraging_level'     => (int) $data->foragingLevel,
-            'fishing_level'      => (int) $data->fishingLevel,
+            'farming_level'  => (int) $data->farmingLevel,
+            'mining_level'   => (int) $data->miningLevel,
+            'combat_level'   => (int) $data->combatLevel,
+            'foraging_level' => (int) $data->foragingLevel,
+            'fishing_level'  => (int) $data->fishingLevel,
         ),
         'has_element'     	=> get_unlockables_list($data),
         'crafting_recipes'	=> get_crafting_recipes($data->craftingRecipes),

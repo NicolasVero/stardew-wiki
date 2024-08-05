@@ -671,6 +671,9 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
 
             $element_class   = ($is_found) ? 'found' : 'not-found';
 
+            // Wilderness Golem désactivé si pas la ferme wilderness
+            if($json_filename == 'enemies' && $json_line_name == 'Wilderness Golem' && $GLOBALS['should_spawn_monsters'] == 'false')
+                continue;
 
             if(in_array($json_filename, array('cooking_recipes', 'crafting_recipes', 'artifacts', 'minerals'))) 
                 if($is_found && $player_datas[$json_line_name]['counter'] == 0)
