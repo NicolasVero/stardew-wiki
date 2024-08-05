@@ -95,7 +95,7 @@ function get_aggregated_data(object $data):array {
             'max_stamina'           => (int) $data->maxStamina,
             'golds'                 => (int) $data->money,
             'total_golds'           => (int) $data->totalMoneyEarned,
-            'golden_walnuts'        => (int) $general_data->goldenWalnuts,
+            'golden_walnuts'        => (int) $general_data->goldenWalnutsFound,
             'qi_gems'               => (int) $data->qiGems,
             'casino_coins'          => (int) $data->clubCoins
         ),

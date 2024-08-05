@@ -204,7 +204,7 @@ function display_header():string {
 
                     <span>
                         <img src='{$images_path}icons/golden_walnut.png' alt='Golden walnuts'/>
-                        <span class='data actual-golden-walnut'>" . formate_number($golden_walnuts) . "</span>
+                        <span class='data actual-golden-walnut'>" . formate_number($golden_walnuts) . " / 130</span>
                         <span class='data-label'>golden walnut</span>
                     </span>
 
