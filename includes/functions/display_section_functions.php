@@ -740,8 +740,10 @@ function display_festival_icon():string {
 	</span>"
 	:
 	"<span class='tooltip'>
-		<img src='" . get_images_folder() . "/icons/festival_icon.png' class='festival_icon $festival_class' alt='Festival icon'>
-		<span class='right'>$festival_name</span>
+        <a class='wiki_link' href='https://stardewvalleywiki.com/Festivals' target='_blank'>
+		    <img src='" . get_images_folder() . "/icons/festival_icon.png' class='festival_icon $festival_class' alt='Festival icon'>
+		</a>
+        <span class='right'>$festival_name</span>
 	</span>";
 }
 
