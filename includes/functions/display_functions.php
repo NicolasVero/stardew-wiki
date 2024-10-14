@@ -8,9 +8,9 @@ function display_landing_page():string {
 		return display_mobile_landing_page();
 	}
 
-	$sur_header = display_sur_header(true, false);
-    $save_panel      = display_save_panel();
-    $settings_panel  = display_settings_panel();
+	$sur_header     = display_sur_header(true, false);
+    $save_panel     = display_save_panel();
+    $settings_panel = display_settings_panel();
 
     return "
         $sur_header
