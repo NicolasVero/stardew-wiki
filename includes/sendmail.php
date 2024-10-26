@@ -15,16 +15,15 @@
 		echo json_encode($response);
 		exit;
 	}
-	
-	$to         = "jsp quelle adresse";
-	$headers    = "De: $mail";
-	$coords     = "$username : $mail";
-	$date 	    = date("d/m/Y");
-	$heure 	    = date("H:i");
-	$email_body = "Message de $coords \nLe : $date à $heure \n $message";
 
-	// if (mail($to, $topic, $email_body, $headers)) {
-	if(true) {
+	$user_details = array(
+		"feedback_type" => $topic,
+		"email_adress" => $mail,
+		"username" => $username,
+		"message" => $message,
+	);
+
+	if(send_feedback_mail($user_details)) {
 		$response["success"] = true;
 		$response["message"] = "Your mail has been delivered successfully";
 	}

@@ -1,4 +1,8 @@
 <?php
+require __DIR__ . '/../PHPMailer/src/PHPMailer.php';
+require __DIR__ . '/../PHPMailer/src/SMTP.php';
+
+use PHPMailer\PHPMailer\PHPMailer;
 
 function log_(mixed $element, string $title = ''):void {
     if($title != '') echo "<h2>$title</h2>";
@@ -67,6 +71,36 @@ function formate_usernames(string $username):string {
 		'Ý' => 'Y'
 	);
 	return strtr($username, $regex);
+}
+
+function send_feedback_mail(array $user_details):bool {
+	extract($user_details);
+	
+	$date_time = new DateTime("now", new DateTimeZone("Europe/Paris")); // UTC+2
+	$date = $date_time->format("d/m/Y");
+	$time = $date_time->format("H:i");
+
+	$mail = new PHPMailer(true);
+
+	$mail->isSMTP();
+	$mail->Host = 'smtp.gmail.com';
+	$mail->SMTPAuth = true;
+	$mail->Username = 'stardewvalley.dashboard@gmail.com';
+	$mail->Password = 'xdrg oaot gtxk qrsw';
+	$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
+	$mail->Port = 587;
+	
+	$mail->setFrom('stardewvalley.dashboard@gmail.com', 'Feedback Notification');
+	$mail->addAddress('stardewvalley.dashboard@gmail.com');
+	
+	$mail->isHTML(false);
+	$mail->Subject = "A new feedback just came in: $feedback_type";
+	$mail->Body = "From: $email_adress - $date at $time" . PHP_EOL . "$message";
+	
+	if($mail->send())
+		return true;
+	else
+		return false;
 }
 
 function does_host_has_element(string $element):int {
