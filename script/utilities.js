@@ -252,14 +252,14 @@ function hide_all_sections(section_destroy = false) {
 }
 
 const get_parent_element = (element) => {
-	if (!element) return null;
-	const parent = element.parentElement;
-	return parent?.classList.contains('wiki_link') ? parent.parentElement : parent;
+    if (!element) return null;
+    const parent = element.parentElement;
+    return parent?.classList.contains('wiki_link') ? parent.parentElement : parent;
 };
 
 const set_element_display = (element, show) => {
-	if (element)
-		element.style.display = show ? "flex" : "none";
+    if (element)
+        element.style.display = show ? "flex" : "none";
 };
 
 const has_class = (element, class_name) => element.classList.contains(class_name);

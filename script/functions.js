@@ -13,8 +13,11 @@ window.addEventListener("load", () => {
 	});
 
 	document.addEventListener("click", hide_panels);
+	
 	document.getElementById("no_spoil_mode").addEventListener("change", handle_no_spoil_mode);
 	document.getElementById("toggle_versions_items_mode").addEventListener("change", handle_toggle_versions_mode);
+	document.getElementById("spoil_mode").addEventListener("change", handle_spoil_mode);
+
 	document.getElementById("save-upload").addEventListener("change", file_choice);
 
 	save_landing_surheader();
