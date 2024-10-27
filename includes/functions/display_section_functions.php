@@ -58,14 +58,14 @@ function display_settings_panel():string {
             </div>
             <span class='checkboxes'>
                 <span class='checkbox'>
-                    <input type='checkbox' id='no_spoil_mode'>
-                    <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png' alt=''></span>
-                    <label for='no_spoil_mode' id='no-spoil-label'>No spoil mode</label>
-                </span>
-                <span class='checkbox'>
                     <input type='checkbox' id='spoil_mode'>
                     <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png' alt=''></span>
                     <label for='spoil_mode' id='spoil-label'>Hide discovered items</label>
+                </span>
+                <span class='checkbox'>
+                    <input type='checkbox' id='no_spoil_mode'>
+                    <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png' alt=''></span>
+                    <label for='no_spoil_mode' id='no-spoil-label'>Hide undiscovered items</label>
                 </span>
                 <span class='checkbox'>
                     <input type='checkbox' id='toggle_versions_items_mode' checked>
