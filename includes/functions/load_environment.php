@@ -1,7 +1,6 @@
 <?php 
 
-
-$file_path = __DIR__ . '/.env';
+$file_path = __DIR__ . '/../../.env';
 
 if(!file_exists($file_path)) {
     throw new Exception("$file_path n'existe pas.");

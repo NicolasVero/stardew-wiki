@@ -1,8 +1,8 @@
 <?php
-// require __DIR__ . '/../PHPMailer/src/PHPMailer.php';
-// require __DIR__ . '/../PHPMailer/src/SMTP.php';
+require __DIR__ . '/../PHPMailer/src/PHPMailer.php';
+require __DIR__ . '/../PHPMailer/src/SMTP.php';
 
-// use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\PHPMailer;
 
 function log_(mixed $element, string $title = ''):void {
     if($title != '') echo "<h2>$title</h2>";
@@ -74,9 +74,10 @@ function formate_usernames(string $username):string {
 }
 
 function send_feedback_mail(array $user_details):bool {
+	require_once 'load_environment.php';
 	extract($user_details);
 	
-	$date_time = new DateTime("now", new DateTimeZone("Europe/Paris")); // UTC+2
+	$date_time = new DateTime("now", new DateTimeZone("Europe/Paris"));
 	$date = $date_time->format("d/m/Y");
 	$time = $date_time->format("H:i");
 
