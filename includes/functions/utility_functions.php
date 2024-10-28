@@ -1,8 +1,8 @@
 <?php
-require __DIR__ . '/../PHPMailer/src/PHPMailer.php';
-require __DIR__ . '/../PHPMailer/src/SMTP.php';
+// require __DIR__ . '/../PHPMailer/src/PHPMailer.php';
+// require __DIR__ . '/../PHPMailer/src/SMTP.php';
 
-use PHPMailer\PHPMailer\PHPMailer;
+// use PHPMailer\PHPMailer\PHPMailer;
 
 function log_(mixed $element, string $title = ''):void {
     if($title != '') echo "<h2>$title</h2>";
@@ -83,10 +83,10 @@ function send_feedback_mail(array $user_details):bool {
 	$mail = new PHPMailer(true);
 
 	$mail->isSMTP();
-	$mail->Host = 'smtp.gmail.com';
+	$mail->Host = $_ENV['SMTP_HOST'];
 	$mail->SMTPAuth = true;
-	$mail->Username = 'stardewvalley.dashboard@gmail.com';
-	$mail->Password = 'xdrg oaot gtxk qrsw';
+	$mail->Username = $_ENV['SMTP_USERNAME'];
+	$mail->Password = $_ENV['SMTP_PASSWORD'];
 	$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 	$mail->Port = 587;
 	
@@ -97,10 +97,7 @@ function send_feedback_mail(array $user_details):bool {
 	$mail->Subject = "A new feedback just came in: $feedback_type";
 	$mail->Body = "From: $email_adress - $date at $time" . PHP_EOL . "$message";
 	
-	if($mail->send())
-		return true;
-	else
-		return false;
+	return $mail->send();
 }
 
 function does_host_has_element(string $element):int {

@@ -1,6 +1,7 @@
 <?php
 
-require 'functions.php';
+require_once 'functions.php';
+require_once 'load_environment.php';
 
 include 'components/header.php';
 
