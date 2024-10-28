@@ -402,8 +402,8 @@ img {
   gap: 10px;
 }
 .feedback-panel span form .topic_selection img {
-  width: 30px;
-  height: 30px;
+  width: 28px;
+  height: 28px;
   object-fit: contain;
 }
 .feedback-panel span form input:not(input[type=submit]),
