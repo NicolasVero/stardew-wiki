@@ -3,7 +3,7 @@
 ## Hi everyone! 👋
 
 Some time ago, a friend and I created a website called "Stardew Dashboard" to help Stardew Valley players get a clear view of their in-game objectives, focusing on achievements. With Stardew Dashboard, you can easily track items to ship, fish to catch, enemies to defeat, and many other goals to keep your progress on track.
-> The dashboard url : http://stardew-dashboard.42web.io/
+> The dashboard url : https://stardew-dashboard.42web.io/
 
 ## Description
 Stardew Dashboard is your ultimate companion for managing your farm and tracking your progress in Stardew Valley. :deciduous_tree: 
