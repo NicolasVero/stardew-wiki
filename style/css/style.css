@@ -730,6 +730,11 @@ header .sub-header .all-money {
 header .sub-header img {
   height: 16px;
 }
+::selection,
+moz::selection {
+  color: #ffffff;
+  background: #8a5306;
+}
 body {
   margin: 5vh 10vw;
 }
