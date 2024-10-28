@@ -1,5 +1,10 @@
 # Stardew Dashboard
 
+## Hi everyone! 👋
+
+Some time ago, a friend and I created a website called "Stardew Dashboard" to help Stardew Valley players get a clear view of their in-game objectives, focusing on achievements. With Stardew Dashboard, you can easily track items to ship, fish to catch, enemies to defeat, and many other goals to keep your progress on track.
+> The dashboard url : http://stardew-dashboard.42web.io/
+
 ## Description
 Stardew Dashboard is your ultimate companion for managing your farm and tracking your progress in Stardew Valley. :deciduous_tree: 
 
@@ -10,7 +15,19 @@ Whether you're a seasoned veteran or just starting out, Stardew Dashboard is des
 - **For 100%** : Easily list items you haven't yet discovered.
 - **A link to the wiki**: Easy access to wiki pages directly from your Dashboard.
 
-> [!NOTE]
+> [!IMPORTANT]
 > Stardew Dashboard works with 1.4+ version.
+
+## How to use Stardew Dashboard?
+To start using Stardew Dashboard, retrieve your save *%AppData%/StardewValley/Saves/SaveName*. The save file is the one with the same name as your folder.
+
+> [!TIP]
+The place where your backup is stored differs from one OS to another.<br><br>
+> **Linux :** *users/steamuser/AppData/Roaming/StardewValley/Saves/*<br>
+> **MacOS :** */.config/StardewValley/Saves/*
+
+
+Well done! The hardest part is behind us! Now you just have to upload  your save directly to our website and let the magic happen. 🌠
+There's also a range of settings  to customize your experience!
 
 ![Stardew dashboard](https://github.com/NicolasVero/readme-elements/blob/master/images/stardew_dashboard.png)
