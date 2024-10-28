@@ -19,7 +19,7 @@ function get_json_folder():string {
 
 function get_site_root():string {
 	if($_SERVER['HTTP_HOST'] == "localhost")
-    	return 'http://localhost/travail/stardew_wiki/';
+    	return 'http://localhost/travail/stardew_dashboard/';
 	
 	return 'http://stardew-dashboard.42web.io/';
 }

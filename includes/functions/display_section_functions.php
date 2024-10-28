@@ -147,7 +147,7 @@ function display_feedback_panel():string {
 
                             <span>
                                 <input type='radio' id='other' value='Other' name='topic' class='feedback_real_radio'>
-                                <img src='" . get_images_folder() . "icons/exit.png' class='feedback_custom_radio topic_not_selected' alt='Other topic'>
+                                <img src='" . get_images_folder() . "icons/other.png' class='feedback_custom_radio topic_not_selected' alt='Other topic'>
                                 <label for='other'>Other</label>
                             </span>
                         </span>

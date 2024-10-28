@@ -403,6 +403,8 @@ img {
 }
 .feedback-panel span form .topic_selection img {
   width: 30px;
+  height: 30px;
+  object-fit: contain;
 }
 .feedback-panel span form input:not(input[type=submit]),
 .feedback-panel span form textarea:not(input[type=submit]) {
