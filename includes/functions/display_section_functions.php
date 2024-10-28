@@ -784,7 +784,7 @@ function display_enemies():string {
 
 function display_achievements():string {
 	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
-    return display_detailled_gallery($datas['achievements'], 'achievements', 'Achievements', "_50");
+    return display_detailled_gallery($datas['achievements'], 'achievements', 'In-game achievements', "_50");
 }
 
 function display_shipped_items():string {
