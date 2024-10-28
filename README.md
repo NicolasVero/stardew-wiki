@@ -19,7 +19,7 @@ Whether you're a seasoned veteran or just starting out, Stardew Dashboard is des
 > Stardew Dashboard works with 1.4+ version.
 
 ## How to use Stardew Dashboard?
-To start using Stardew Dashboard, retrieve your save *%AppData%/StardewValley/Saves/SaveName*. The save file is the one with the same name as your folder.
+To start using Stardew Dashboard, retrieve your save *%AppData%/StardewValley/Saves/SaveName*. <br> The save file is the one with the same name as your folder.
 
 > [!TIP]
 The place where your backup is stored differs from one OS to another.<br><br>
@@ -30,4 +30,5 @@ The place where your backup is stored differs from one OS to another.<br><br>
 Well done! The hardest part is behind us! Now you just have to upload  your save directly to our website and let the magic happen. 🌠
 There's also a range of settings  to customize your experience!
 
-![Stardew dashboard](https://github.com/NicolasVero/readme-elements/blob/master/images/stardew_dashboard.png)
+![Stardew dashboard](https://github.com/NicolasVero/readme-elements/blob/master/images/stardew_dashboard_landing.png)
+![Stardew dashboard](https://github.com/NicolasVero/readme-elements/blob/master/images/stardew_dashboard_save.png)
