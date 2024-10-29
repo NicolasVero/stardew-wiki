@@ -21,7 +21,7 @@ function get_site_root():string {
 	if($_SERVER['HTTP_HOST'] == "localhost")
     	return 'http://localhost/travail/stardew_dashboard/';
 	
-	return 'http://stardew-dashboard.42web.io/';
+	return 'https://stardew-dashboard.42web.io/';
 }
 
 function formate_number(int $number, string $lang = 'en'):string {
