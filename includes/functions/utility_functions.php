@@ -21,7 +21,7 @@ function get_site_root():string {
 	if($_SERVER['HTTP_HOST'] == "localhost")
     	return 'http://localhost/travail/stardew_dashboard/';
 	
-	return 'https://stardew-dashboard.42web.io/';
+	return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://stardew-dashboard.42web.io/' : 'http://stardew-dashboard.42web.io/';
 }
 
 function formate_number(int $number, string $lang = 'en'):string {
@@ -191,8 +191,18 @@ function get_wiki_link(int $id):string {
 	return $GLOBALS['wiki_links'][$id];
 }
 
-function decode(string $filename):array {
-	return json_decode(file_get_contents(get_json_folder() . "$filename.json"), true);
+function decode(string $filename): array {
+    $url = get_json_folder() . "$filename.json";
+    $ch = curl_init($url);
+    
+    curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+    curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+
+    $response = curl_exec($ch);
+
+    curl_close($ch);
+
+    return json_decode($response, true);
 }
 
 function get_formatted_date(bool $display_date = true):mixed {
