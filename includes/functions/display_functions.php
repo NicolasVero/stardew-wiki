@@ -128,7 +128,7 @@ function display_landing_page():string {
 				</main>
         	</div>
         </div>
-        <img src='" . get_images_folder() . "content/loading.png' id='loading-strip' class='loading' alt=''>
+        <img src='" . get_images_folder() . "content/loading.gif' id='loading-strip' class='loading' alt=''>
     ";
 }
 
