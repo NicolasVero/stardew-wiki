@@ -35,7 +35,7 @@ function display_player_selection():string {
     }
 
     $structure .= "</ul>";
-    
+
     return $structure;
 }
 
@@ -717,7 +717,6 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
 } 
 
 function display_festival_icon():string {
-
     $festivals = sanitize_json_with_version('festivals', true);
 
 	$festival_name = "Not a festival day";

@@ -583,11 +583,104 @@ function get_museum_index(object $locations):int {
 
     $locations = $locations->locations->GameLocation;
 
-    foreach ($locations as $location) {
-        if (isset($location->museumPieces))
+    foreach($locations as $location) {
+        if(isset($location->museumPieces))
             break;
         $index_museum++;
     }
 
     return $index_museum;
 }
+
+
+function get_adventurers_guild_data():array {
+    $categories = get_all_adventurers_guild_categories();
+    $player_id = $GLOBALS['player_id'];
+    $ennemies_killed = $GLOBALS['all_players_data'][$player_id]['enemies_killed'];
+    $adventurers_guild_data = array();
+    
+    foreach($categories as $monsters_name => $monters_data) {
+        
+        $counter = 0;
+        extract($monters_data);
+
+        foreach($ennemies_killed as $ennemie_killed) {
+            if(in_array($ennemie_killed['id'], $ids))
+                $counter += $ennemie_killed['killed_counter'];
+        }
+
+        $adventurers_guild_data[$monsters_name] = array(
+            "counter" => $counter,
+            "limit" => $limit,
+            "reward" => $reward
+        );
+    }
+
+    return $adventurers_guild_data;
+}
+
+function get_all_adventurers_guild_categories():array {
+    return array(
+        "slimes" => array(
+            "ids" => array(105001, 105009, 105042),
+            "limit" => null,
+            "reward" => null
+        ),
+        "void_spirits" => array(
+            "ids" => array(105018, 105019, 105038),
+            "limit" => null,
+            "reward" => null
+        ),
+        "bats" => array(
+            "ids" => array(105000, 105006, 105011, 105024),
+            "limit" => null,
+            "reward" => null
+        ),
+        "skeletons" => array(
+            "ids" => array(105020),
+            "limit" => null,
+            "reward" => null
+        ),
+        "cave_insects" => array(
+            "ids" => array(105002, 105041, 105003, 105010),
+            "limit" => null,
+            "reward" => null
+        ),
+        "duggies" => array(
+            "ids" => array(105004, 105034),
+            "limit" => null,
+            "reward" => null
+        ),
+        "dust_sprites" => array(
+            "ids" => array(105005),
+            "limit" => null,
+            "reward" => null
+        ),
+        "rocks_crabs" => array(
+            "ids" => array(105016, 105012, 105024),
+            "limit" => null,
+            "reward" => null
+        ),
+        "mummies" => array(
+            "ids" => array(105014),
+            "limit" => null,
+            "reward" => null
+        ),
+        "pepper_rex" => array(
+            "ids" => array(105028),
+            "limit" => null,
+            "reward" => null
+        ),
+        "serpents" => array(
+            "ids" => array(105017),
+            "limit" => null,
+            "reward" => null
+        ),
+        "magma_sprites" => array(
+            "ids" => array(105036),
+            "limit" => null,
+            "reward" => null
+        )
+    );    
+}
+

@@ -1,8 +1,8 @@
 <?php
-require __DIR__ . '/../PHPMailer/src/PHPMailer.php';
-require __DIR__ . '/../PHPMailer/src/SMTP.php';
+// require __DIR__ . '/../PHPMailer/src/PHPMailer.php';
+// require __DIR__ . '/../PHPMailer/src/SMTP.php';
 
-use PHPMailer\PHPMailer\PHPMailer;
+// use PHPMailer\PHPMailer\PHPMailer;
 
 function log_(mixed $element, string $title = ''):void {
     if($title != '') echo "<h2>$title</h2>";
