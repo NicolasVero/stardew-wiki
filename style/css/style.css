@@ -1018,7 +1018,6 @@ body main .info-section.monster-eradication-goals-section > * {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  letter-spacing: 3px;
 }
 body main .info-section.monster-eradication-goals-section > .header {
   position: relative;
@@ -1027,6 +1026,7 @@ body main .info-section.monster-eradication-goals-section > .header > .title {
   display: flex;
   flex-direction: column;
   font-weight: 900;
+  letter-spacing: 3px;
 }
 body main .info-section.monster-eradication-goals-section > .header > .dashes {
   width: 507px;
@@ -1044,6 +1044,10 @@ body main .info-section.monster-eradication-goals-section > .goals > .goal {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+body main .info-section.monster-eradication-goals-section > .goals > .goal > *:not(.tooltip) {
+  font-weight: 900;
+  letter-spacing: 3px;
 }
 body main .info-section.monster-eradication-goals-section > .goals > .goal img.reward {
   width: 28px;

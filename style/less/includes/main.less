@@ -294,7 +294,6 @@ body {
 					display: flex;
 					flex-direction: column;
 					gap: @md-gap;
-					letter-spacing: 3px;
 				}
 
 				& > .header {
@@ -304,6 +303,7 @@ body {
 						display: flex;
 						flex-direction: column;
 						font-weight: 900;
+						letter-spacing: 3px;
 					}
 
 					& > .dashes {
@@ -326,6 +326,11 @@ body {
 						display: flex;
 						align-items: center;
 						gap: @md-gap;
+
+						& > *:not(.tooltip) {
+							font-weight: 900;
+							letter-spacing: 3px;
+						}
 
 						& img.reward {
 							width: @big-icon;
