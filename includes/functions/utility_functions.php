@@ -1,8 +1,8 @@
 <?php
-// require __DIR__ . '/../PHPMailer/src/PHPMailer.php';
-// require __DIR__ . '/../PHPMailer/src/SMTP.php';
+require __DIR__ . '/../PHPMailer/src/PHPMailer.php';
+require __DIR__ . '/../PHPMailer/src/SMTP.php';
 
-// use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\PHPMailer;
 
 function log_(mixed $element, string $title = ''):void {
     if($title != '') echo "<h2>$title</h2>";
@@ -225,6 +225,10 @@ function get_formatted_date(bool $display_date = true):mixed {
         'season' => $season,
         'year' => $year
     );
+}
+
+function is_objective_completed(int $current_counter, int $limit):bool {
+    return ($current_counter > $limit);
 }
 
 function is_this_the_same_day(string $date):bool {
