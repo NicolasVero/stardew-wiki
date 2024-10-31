@@ -290,18 +290,20 @@ body {
 			display: flex;
 			flex-direction: column;
 	
-			&.monsters-section {
-				justify-content: space-between;
-
-				& > span {
-					gap: @md-gap;
-				}
-			}
-	
 			& > span {
 				display: flex;
 				flex-wrap: wrap;
 				gap: @small-gap;
+			}
+
+			& > .has_panel {
+				.view-monster-eradication-goals {
+					font-family: @primary-ff;
+					font-size: @xsmall-fs;
+					color: @secondary-fc;
+					align-self: flex-end;
+					cursor: @pointer;
+				}
 			}
 	
 			img {

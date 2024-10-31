@@ -983,16 +983,17 @@ body main .gallery {
   display: flex;
   flex-direction: column;
 }
-body main .gallery.monsters-section {
-  justify-content: space-between;
-}
-body main .gallery.monsters-section > span {
-  gap: 10px;
-}
 body main .gallery > span {
   display: flex;
   flex-wrap: wrap;
   gap: 5px;
+}
+body main .gallery > .has_panel .view-monster-eradication-goals {
+  font-family: "Stardew Valley Stonks", serif;
+  font-size: 12px;
+  color: rgba(0, 0, 0, 0.64);
+  align-self: flex-end;
+  cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
 }
 body main .gallery img {
   height: 28px;

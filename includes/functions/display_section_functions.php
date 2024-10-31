@@ -651,16 +651,26 @@ function display_unlockables():string {
     return $structure;
 }
 
-function display_detailled_gallery(array $player_datas, string $json_filename, string $section_title, string $width):string {
+function display_detailled_gallery(array $player_datas, string $json_filename, string $section_title, string $width, bool $has_panel = false, array $panel_details = array()):string {
     
 	$version_score = $GLOBALS['game_version_score'];
 
 	$images_path = get_images_folder() . "$json_filename/";
     $json_datas = decode($json_filename);
 
+    extract($panel_details);
+    $player_id = $GLOBALS['player_id'];
+    $title = ($has_panel) ?
+        "<span class='has_panel'>
+            <h2 class='section-title'>$section_title</h2>
+            <span class='view-$panel_alt view-$panel_alt-$player_id modal-opener'>- View $panel_name</span>
+        </span>"
+        :
+        "<h2 class='section-title'>$section_title</h2>";
+
     $structure = "
         <section class='gallery $json_filename-section $width'>
-            <h2 class='section-title'>$section_title</h2>
+            $title
             <span>
 				<h3 class='no-spoil-title'>Nothing to see here yet</h2>
     ";
@@ -778,7 +788,11 @@ function display_artifacts():string {
 
 function display_enemies():string {
 	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
-    return display_detailled_gallery($datas['enemies_killed'], 'enemies', 'Enemies killed', "_50");
+    $panel_details = array(
+        "panel_alt"     => "monster-eradication-goals",
+        "panel_name"    => "Monster Eradication Goals"
+    );
+    return display_detailled_gallery($datas['enemies_killed'], 'enemies', 'Enemies killed', "_50", true, $panel_details);
 }
 
 function display_achievements():string {
@@ -795,7 +809,6 @@ function display_crafting_recipes():string {
 	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
     return display_detailled_gallery($datas['crafting_recipes'], 'crafting_recipes', 'Crafting recipes', "_100");
 }
-
 
 function get_level_progress_bar(int $level):string {
 

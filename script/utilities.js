@@ -196,6 +196,13 @@ function load_elements() {
 			"modal_panel"    : ".all-quests-" + i,
 			"disable_scroll" : false
 		});
+
+		buttons.push({
+			"open_button"    : ".view-monster-eradication-goals-" + i,
+			"exit_button"    : ".exit-monster-eradication-goals-" + i,
+			"modal_panel"    : ".monster-eradication-goals-" + i,
+			"disable_scroll" : false
+		});
 	}
 
 	buttons.forEach(button => {
