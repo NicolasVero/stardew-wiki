@@ -615,7 +615,7 @@ function display_unlockables():string {
         <section class='gallery unlockables-section _50'>
             <h2 class='section-title'>Unlockables</h2>
             <span>
-				<h3 class='no-spoil-title'>Nothing to see here yet</h2>
+				<h3 class='no-spoil-title'>Nothing to see here yet</h3>
     ";
 
 	foreach($decoded_unlockables as $version => $unlockables) {
