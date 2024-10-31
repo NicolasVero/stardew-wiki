@@ -9,7 +9,7 @@ function log_(mixed $element, string $title = ''):void {
     echo "<pre>" . print_r($element, true) . "</pre>";
 } 
 
-function get_images_folder(bool $is_external = true):string {
+function get_images_folder(bool $is_external = false):string {
 	return ($is_external) ? get_github_medias_url() : get_site_root() . 'medias/images/';
 }
 

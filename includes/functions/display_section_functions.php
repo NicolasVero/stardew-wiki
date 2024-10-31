@@ -831,6 +831,7 @@ function display_monster_eradication_goals_panel():string {
                     <span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;\"Help us keep the valley safe.\"</span>
                 </span>
                 <img src='" . get_images_folder() . "content/dashes.png' class='dashes' alt=''>
+                <img src='" . get_images_folder() . "icons/exit.png' class='exit' alt=''>
             </span>
             <span class='goals'>
                 $goals

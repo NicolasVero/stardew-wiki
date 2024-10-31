@@ -299,6 +299,8 @@ body {
 				}
 
 				& > .header {
+					position: relative;
+
 					& > .title {
 						display: flex;
 						flex-direction: column;
@@ -307,6 +309,13 @@ body {
 					& > .dashes {
 						// 30 dashes
 						width: 30 * 14px + 29 * 3px;
+					}
+
+					& > .exit {
+						position: absolute;
+						top: @md-gap;
+						right: @md-gap;
+						width: @big-icon;
 					}
 				}
 

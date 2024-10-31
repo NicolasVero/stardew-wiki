@@ -1021,12 +1021,21 @@ body main .info-section.monster-eradication-goals-section > * {
   font-weight: 900;
   letter-spacing: 3px;
 }
+body main .info-section.monster-eradication-goals-section > .header {
+  position: relative;
+}
 body main .info-section.monster-eradication-goals-section > .header > .title {
   display: flex;
   flex-direction: column;
 }
 body main .info-section.monster-eradication-goals-section > .header > .dashes {
   width: 507px;
+}
+body main .info-section.monster-eradication-goals-section > .header > .exit {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  width: 28px;
 }
 body main .info-section.monster-eradication-goals-section > .goals {
   margin-top: 10px;
