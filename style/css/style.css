@@ -1018,7 +1018,6 @@ body main .info-section.monster-eradication-goals-section > * {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  font-weight: 900;
   letter-spacing: 3px;
 }
 body main .info-section.monster-eradication-goals-section > .header {
@@ -1027,6 +1026,7 @@ body main .info-section.monster-eradication-goals-section > .header {
 body main .info-section.monster-eradication-goals-section > .header > .title {
   display: flex;
   flex-direction: column;
+  font-weight: 900;
 }
 body main .info-section.monster-eradication-goals-section > .header > .dashes {
   width: 507px;
