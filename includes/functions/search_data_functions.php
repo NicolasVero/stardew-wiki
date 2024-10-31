@@ -625,7 +625,7 @@ function get_adventurers_guild_data():array {
 function is_all_the_adventurers_guild_categories_completed(array $adventurers_guild_data):bool {
     $counter = 0;
     foreach($adventurers_guild_data as $data) {
-        if(is_objective_completed($data["counter"], $data["limit"]))
+        if($data["is_completed"])
             $counter++;
     }
 
