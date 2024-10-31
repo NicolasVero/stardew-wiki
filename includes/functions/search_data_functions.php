@@ -641,7 +641,7 @@ function get_all_adventurers_guild_categories():array {
 			"reward" => array(
 				"alt" => "Slime Charmer Ring",
 				"src" => "slime_charmer_ring",
-                "wiki_link" => null
+                "wiki_link" => "https://stardewvalleywiki.com/Slime_Charmer_Ring"
 			)
 		),
 		"void_spirits" => array(
@@ -651,7 +651,7 @@ function get_all_adventurers_guild_categories():array {
 			"reward" => array(
 				"alt" => "Savage Ring",
 				"src" => "savage_ring",
-                "wiki_link" => null
+                "wiki_link" => "https://stardewvalleywiki.com/Savage_Ring"
 			)
 		),
 		"bats" => array(
@@ -661,7 +661,7 @@ function get_all_adventurers_guild_categories():array {
 			"reward" => array(
 				"alt" => "Vampire Ring",
 				"src" => "vampire_ring",
-                "wiki_link" => null
+                "wiki_link" => "https://stardewvalleywiki.com/Vampire_Ring"
 			)
 		),
 		"skeletons" => array(
@@ -671,7 +671,7 @@ function get_all_adventurers_guild_categories():array {
 			"reward" => array(
 				"alt" => "Skeleton Mask",
 				"src" => "skeleton_mask",
-                "wiki_link" => null
+                "wiki_link" => "https://stardewvalleywiki.com/Skeleton_Mask"
 			)
 		),
 		"cave_insects" => array(
@@ -681,7 +681,7 @@ function get_all_adventurers_guild_categories():array {
 			"reward" => array(
 				"alt" => "Insect Head",
 				"src" => "insect_head",
-                "wiki_link" => null
+                "wiki_link" => "https://stardewvalleywiki.com/Insect_Head"
 			)
 		),
 		"duggies" => array(
@@ -691,7 +691,7 @@ function get_all_adventurers_guild_categories():array {
 			"reward" => array(
 				"alt" => "Hard Hat",
 				"src" => "hard_hat",
-                "wiki_link" => null
+                "wiki_link" => "https://stardewvalleywiki.com/Hard_Hat"
 			)
 		),
 		"dust_sprites" => array(
@@ -701,7 +701,7 @@ function get_all_adventurers_guild_categories():array {
 			"reward" => array(
 				"alt" => "Burglar's Ring",
 				"src" => "burglars_ring",
-                "wiki_link" => null
+                "wiki_link" => "https://stardewvalleywiki.com/Burglar%27s_Ring"
 			)
 		),
 		"rocks_crabs" => array(
@@ -711,7 +711,7 @@ function get_all_adventurers_guild_categories():array {
 			"reward" => array(
 				"alt" => "Crabshell Ring",
 				"src" => "crabshell_ring",
-                "wiki_link" => null
+                "wiki_link" => "https://stardewvalleywiki.com/Crabshell_Ring"
 			)
 		),
 		"mummies" => array(
@@ -721,7 +721,7 @@ function get_all_adventurers_guild_categories():array {
 			"reward" => array(
 				"alt" => "Arcane Hat",
 				"src" => "arcane_hat",
-                "wiki_link" => null
+                "wiki_link" => "https://stardewvalleywiki.com/Arcane_Hat"
 			)
 		),
 		"pepper_rex" => array(
@@ -731,7 +731,7 @@ function get_all_adventurers_guild_categories():array {
 			"reward" => array(
 				"alt" => "Knight's helmet",
 				"src" => "knights_helmet",
-                "wiki_link" => null
+                "wiki_link" => "https://stardewvalleywiki.com/Knight%27s_Helmet"
 			)
 		),
 		"serpents" => array(
@@ -741,7 +741,7 @@ function get_all_adventurers_guild_categories():array {
 			"reward" => array(
 				"alt" => "Napalm Ring",
 				"src" => "napalm_ring",
-                "wiki_link" => null
+                "wiki_link" => "https://stardewvalleywiki.com/Napalm_Ring"
 			)
 		),
 		"magma_sprites" => array(
@@ -751,7 +751,7 @@ function get_all_adventurers_guild_categories():array {
 			"reward" => array(
 				"alt" => "Marlon's Phone Number",
 				"src" => "phone_number",
-                "wiki_link" => null
+                "wiki_link" => "https://stardewvalleywiki.com/Telephone"
 			)
 		)
 	);
