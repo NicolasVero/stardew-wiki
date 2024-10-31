@@ -807,11 +807,13 @@ function display_monster_eradication_goals_panel():string {
         extract($goal_data);
         extract($reward);
 
+        $wiki_linkuwu = get_wiki_link(get_item_id_by_name($alt));
+
         $is_found = ($counter < $limit) ? "not-found" : "found";
         $reward_icon = "
             <span class='tooltip' style='display: flex;'>
-                <a class='wiki_link' href='$wiki_link' target='_blank'>
-                    <img src='" . get_images_folder(false) . "rewards/$src.png' alt='$alt' class='reward $is_found' />
+                <a class='wiki_link' href='$wiki_linkuwu' target='_blank'>
+                    <img src='" . get_images_folder(false) . "rewards/$src.png' alt='$alt' class='reward $is_found always-on-display' />
                 </a>
                 <span class='right'>$alt</span>
             </span>

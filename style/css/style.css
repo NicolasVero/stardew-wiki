@@ -56,6 +56,14 @@ html {
   filter: grayscale(1);
   opacity: 0.2;
 }
+.not-found.always-on-display,
+.not-gifted.always-on-display,
+.not-talked.always-on-display,
+.isnt_birthday.always-on-display,
+.isnt_festival.always-on-display,
+.topic_not_selected.always-on-display {
+  opacity: 0 !important;
+}
 .unused {
   filter: grayscale(1);
   opacity: 1;
@@ -1039,6 +1047,7 @@ body main .info-section.monster-eradication-goals-section > .header > .exit {
 }
 body main .info-section.monster-eradication-goals-section > .goals {
   margin-top: 10px;
+  margin-left: 15px;
 }
 body main .info-section.monster-eradication-goals-section > .goals > .goal {
   display: flex;
