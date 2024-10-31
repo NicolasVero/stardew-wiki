@@ -810,7 +810,7 @@ function display_monster_eradication_goals_panel():string {
         $goals .= "<span class='goal'>$total $target $is_completed_icon</span>";
     }
 
-    $structure = "
+    return "
         <section class='monster-eradication-goals-section info-section monster-eradication-goals-$player_id modal-window'>
             <span class='header'>
                 <img src='" . get_images_folder() . "content/dashes.png' class='dashes' alt=''>
@@ -819,14 +819,13 @@ function display_monster_eradication_goals_panel():string {
                     <span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;\"Help us keep the valley safe.\"</span>
                 </span>
                 <img src='" . get_images_folder() . "content/dashes.png' class='dashes' alt=''>
+                <img src='" . get_images_folder() . "icons/exit.png' class='exit' alt=''>
             </span>
             <span class='goals'>
                 $goals
             </span>
         </section>
     ";
-
-    return $structure;
 }
 
 function display_achievements():string {
