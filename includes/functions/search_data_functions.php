@@ -194,7 +194,6 @@ function get_enemies_killed_data(object $data):array {
 			'killed_counter' => (int) $enemy->value->int
 		);
 	}
-	
 	return $enemies_data;
 }
 
@@ -727,7 +726,7 @@ function get_all_adventurers_guild_categories():array {
 		),
 		"serpents" => array(
 			"target_name" => "Serpents",
-			"ids" => array(105017),
+			"ids" => array(105017, 105043),
 			"limit" => 250,
 			"reward" => array(
 				"alt" => "Napalm Ring",

@@ -696,7 +696,7 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
 
             $element_image = $images_path . formate_text_for_file((string) explode('µ', $json_line_name)[0]). '.png';
             $element_tooltip = ($is_found) ? get_tooltip_text($player_datas, $json_line_name, $json_filename) : $json_line_name;
-           
+
             if(!in_array($json_filename, array('achievements')))
                 $wiki_url = get_wiki_link(get_item_id_by_name($json_line_name));
             else 
@@ -813,12 +813,12 @@ function display_monster_eradication_goals_panel():string {
     $structure = "
         <section class='monster-eradication-goals-section info-section monster-eradication-goals-$player_id modal-window'>
             <span class='header'>
-                <img src='" . get_images_folder(false) . "content/dashes.png' class='dashes' alt=''>
+                <img src='" . get_images_folder() . "content/dashes.png' class='dashes' alt=''>
                 <span class='title'>
                     <span>&emsp;&emsp;&emsp;&emsp;--Monster Eradication Goals</span>
                     <span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;\"Help us keep the valley safe.\"</span>
                 </span>
-                <img src='" . get_images_folder(false) . "content/dashes.png' class='dashes' alt=''>
+                <img src='" . get_images_folder() . "content/dashes.png' class='dashes' alt=''>
             </span>
             <span class='goals'>
                 $goals
