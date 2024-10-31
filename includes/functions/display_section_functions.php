@@ -805,9 +805,21 @@ function display_monster_eradication_goals_panel():string {
             continue;
 
         extract($goal_data);
+        extract($reward);
+
+        $is_found = ($counter < $limit) ? "not-found" : "found";
+        $reward_icon = "
+            <span class='tooltip' style='display: flex;'>
+                <a class='wiki_link' href='$wiki_link' target='_blank'>
+                    <img src='" . get_images_folder(false) . "rewards/$src.png' alt='$alt' class='reward $is_found' />
+                </a>
+                <span class='right'>$alt</span>
+            </span>
+        ";
+
         $is_completed_icon = ($is_completed) ? "<img src='" . get_images_folder(false) . "content/goal_star.png' class='star'>" : "";
         $total = ($is_completed) ? $counter : "$counter/$limit";
-        $goals .= "<span class='goal'>$total $target $is_completed_icon</span>";
+        $goals .= "<span class='goal'>$reward_icon $total $target $is_completed_icon</span>";
     }
 
     return "
