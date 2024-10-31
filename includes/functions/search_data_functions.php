@@ -622,63 +622,63 @@ function get_adventurers_guild_data():array {
 function get_all_adventurers_guild_categories():array {
     return array(
         "slimes" => array(
-            "ids" => array(105001, 105009, 105042),
-            "limit" => null,
+            "ids" => array(105007, 105009, 105015, 105042),
+            "limit" => 1000,
             "reward" => null
         ),
         "void_spirits" => array(
             "ids" => array(105018, 105019, 105038),
-            "limit" => null,
+            "limit" => 150,
             "reward" => null
         ),
         "bats" => array(
             "ids" => array(105000, 105006, 105011, 105024),
-            "limit" => null,
+            "limit" => 200,
             "reward" => null
         ),
         "skeletons" => array(
             "ids" => array(105020),
-            "limit" => null,
+            "limit" => 50,
             "reward" => null
         ),
         "cave_insects" => array(
-            "ids" => array(105002, 105041, 105003, 105010),
-            "limit" => null,
+            "ids" => array(105002, 105003, 105010),
+            "limit" => 80,
             "reward" => null
         ),
         "duggies" => array(
             "ids" => array(105004, 105034),
-            "limit" => null,
+            "limit" => 30,
             "reward" => null
         ),
         "dust_sprites" => array(
             "ids" => array(105005),
-            "limit" => null,
+            "limit" => 500,
             "reward" => null
         ),
         "rocks_crabs" => array(
-            "ids" => array(105016, 105012, 105024),
-            "limit" => null,
+            "ids" => array(105012, 105016, 105024),
+            "limit" => 60,
             "reward" => null
         ),
         "mummies" => array(
             "ids" => array(105014),
-            "limit" => null,
+            "limit" => 100,
             "reward" => null
         ),
         "pepper_rex" => array(
             "ids" => array(105028),
-            "limit" => null,
+            "limit" => 50,
             "reward" => null
         ),
         "serpents" => array(
             "ids" => array(105017),
-            "limit" => null,
+            "limit" => 250,
             "reward" => null
         ),
         "magma_sprites" => array(
-            "ids" => array(105036),
-            "limit" => null,
+            "ids" => array(105035, 105036),
+            "limit" => 150,
             "reward" => null
         )
     );    
