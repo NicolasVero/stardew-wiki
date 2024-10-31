@@ -596,7 +596,7 @@ function get_museum_index(object $locations):int {
 function get_adventurers_guild_data():array {
     $categories = get_all_adventurers_guild_categories();
     $player_id = $GLOBALS['player_id'];
-    $ennemies_killed = $GLOBALS['all_players_data'][$player_id]['enemies_killed'];
+    $enemies_killed = $GLOBALS['all_players_data'][$player_id]['enemies_killed'];
     $adventurers_guild_data = array();
     
     foreach($categories as $monsters_name => $monters_data) {
@@ -604,9 +604,9 @@ function get_adventurers_guild_data():array {
         $counter = 0;
         extract($monters_data);
 
-        foreach($ennemies_killed as $ennemie_killed) {
-            if(in_array($ennemie_killed['id'], $ids))
-                $counter += $ennemie_killed['killed_counter'];
+        foreach($enemies_killed as $enemy_killed) {
+            if(in_array($enemy_killed['id'], $ids))
+                $counter += $enemy_killed['killed_counter'];
         }
 
         $adventurers_guild_data[$monsters_name] = array(
@@ -624,63 +624,98 @@ function get_all_adventurers_guild_categories():array {
         "slimes" => array(
             "ids" => array(105007, 105009, 105015, 105042),
             "limit" => 1000,
-            "reward" => null
+            "reward" => array(
+                "alt" => "Slime Charmer Ring",
+                "src" => "slime_charmer_ring"
+            )
         ),
         "void_spirits" => array(
             "ids" => array(105018, 105019, 105038),
             "limit" => 150,
-            "reward" => null
+            "reward" => array(
+                "alt" => "Savage Ring",
+                "src" => "savage_ring"
+            )
         ),
         "bats" => array(
             "ids" => array(105000, 105006, 105011, 105024),
             "limit" => 200,
-            "reward" => null
+            "reward" => array(
+                "alt" => "Vampire Ring",
+                "src" => "vampire_ring"
+            )
         ),
         "skeletons" => array(
             "ids" => array(105020),
             "limit" => 50,
-            "reward" => null
+            "reward" => array(
+                "alt" => "Skeleton Mask",
+                "src" => "skeleton_mask"
+            )
         ),
         "cave_insects" => array(
             "ids" => array(105002, 105003, 105010),
             "limit" => 80,
-            "reward" => null
+            "reward" => array(
+                "alt" => "Insect Head",
+                "src" => "insect_head"
+            )
         ),
         "duggies" => array(
             "ids" => array(105004, 105034),
             "limit" => 30,
-            "reward" => null
+            "reward" => array(
+                "alt" => "Hard Hat",
+                "src" => "hard_hat"
+            )
         ),
         "dust_sprites" => array(
             "ids" => array(105005),
             "limit" => 500,
-            "reward" => null
+            "reward" => array(
+                "alt" => "Burglar's Ring",
+                "src" => "burglars_ring"
+            )
         ),
         "rocks_crabs" => array(
             "ids" => array(105012, 105016, 105024),
             "limit" => 60,
-            "reward" => null
+            "reward" => array(
+                "alt" => "Crabshell Ring",
+                "src" => "crabshell_ring"
+            )
         ),
         "mummies" => array(
             "ids" => array(105014),
             "limit" => 100,
-            "reward" => null
+            "reward" => array(
+                "alt" => "Arcane Hat",
+                "src" => "arcane_hat"
+            )
         ),
         "pepper_rex" => array(
             "ids" => array(105028),
             "limit" => 50,
-            "reward" => null
+            "reward" => array(
+                "alt" => "Knight's helmet",
+                "src" => "knights_helmet"
+            )
         ),
         "serpents" => array(
             "ids" => array(105017),
             "limit" => 250,
-            "reward" => null
+            "reward" => array(
+                "alt" => "Napalm Ring",
+                "src" => "napalm_ring"
+            )
         ),
         "magma_sprites" => array(
             "ids" => array(105035, 105036),
             "limit" => 150,
-            "reward" => null
+            "reward" => array(
+                "alt" => "Marlon's Phone Number",
+                "src" => "phone_number"
+            )
         )
     );    
 }
-

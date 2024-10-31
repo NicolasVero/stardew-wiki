@@ -341,14 +341,14 @@ function display_quests():string {
 			// If reward is Friendship hearts/points
             if(strstr($rewards[$i], "Friendship")) {
                 $reward_number = explode(" ", $rewards[$i])[0];
-                $structure .= "<img src='$images_path/icons/heart_$reward_number.png' alt='Friendship reward'/>";
+                $structure .= "<img src='$images_path/rewards/heart_$reward_number.png' alt='Friendship reward'/>";
             }
 			// If reward is Gold
             elseif(is_numeric($rewards[$i]))
-                $structure .= formate_number($rewards[$i]) . "<img src='$images_path/icons/gold.png' alt='Gold coins reward'/>";
+                $structure .= formate_number($rewards[$i]) . "<img src='$images_path/rewards/gold.png' alt='Gold coins reward'/>";
 			// If reward is Qi Gems
             elseif(str_ends_with($rewards[$i], 'q'))
-                $structure .= explode('_', $rewards[$i])[0] . "<img src='$images_path/icons/qi_gem.png' alt='Qi gems reward'/>";
+                $structure .= explode('_', $rewards[$i])[0] . "<img src='$images_path/rewards/qi_gem.png' alt='Qi gems reward'/>";
 			// If reward is something else
             else
                 $structure .= $rewards[$i];
