@@ -276,6 +276,52 @@ body {
 					}
 				}
 			}
+
+			&.monster-eradication-goals-section {
+				display: none;
+
+				font-family: @dialogue-ff;
+				font-size: @giant-fs;
+				color: @goal-fc;
+		
+				position: fixed;
+				min-width: 60vw;
+				aspect-ratio: 1.79;
+				padding: @big-gap @big-gap;
+				.goal-panel;
+
+				& > * {
+					display: flex;
+					flex-direction: column;
+					gap: @md-gap;
+					font-weight: 900;
+					letter-spacing: 3px;
+				}
+
+				& > .header {
+					& > .title {
+						display: flex;
+						flex-direction: column;
+					}
+
+					& > .dashes {
+						// 30 dashes
+						width: 30 * 14px + 29 * 3px;
+					}
+				}
+
+				& > .goals {
+					margin-top: @md-gap;
+
+					& > .goal {
+						display: flex;
+
+						& > .star {
+							align-self: flex-start;
+						}
+					}
+				}
+			}
 		}
 	
 		.separated-galleries {

@@ -795,6 +795,40 @@ function display_enemies():string {
     return display_detailled_gallery($datas['enemies_killed'], 'enemies', 'Enemies killed', "_50", true, $panel_details);
 }
 
+function display_monster_eradication_goals_panel():string {
+	$player_id = $GLOBALS['player_id'];
+    $goals_data = get_adventurers_guild_data();
+    $goals = '';
+
+    foreach($goals_data as $goal_data) {
+        if(is_bool($goal_data))
+            continue;
+
+        extract($goal_data);
+        $is_completed_icon = ($is_completed) ? "<img src='" . get_images_folder(false) . "content/goal_star.png' class='star'>" : "";
+        $total = ($is_completed) ? $counter : "$counter/$limit";
+        $goals .= "<span class='goal'>$total $target $is_completed_icon</span>";
+    }
+
+    $structure = "
+        <section class='monster-eradication-goals-section info-section monster-eradication-goals-$player_id modal-window'>
+            <span class='header'>
+                <img src='" . get_images_folder(false) . "content/dashes.png' class='dashes' alt=''>
+                <span class='title'>
+                    <span>&emsp;&emsp;&emsp;&emsp;--Monster Eradication Goals</span>
+                    <span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;\"Help us keep the valley safe.\"</span>
+                </span>
+                <img src='" . get_images_folder(false) . "content/dashes.png' class='dashes' alt=''>
+            </span>
+            <span class='goals'>
+                $goals
+            </span>
+        </section>
+    ";
+
+    return $structure;
+}
+
 function display_achievements():string {
 	$datas = $GLOBALS['all_players_data'][$GLOBALS['player_id']];
     return display_detailled_gallery($datas['achievements'], 'achievements', 'In-game achievements', "_50");

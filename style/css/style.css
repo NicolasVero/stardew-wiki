@@ -103,15 +103,35 @@ img {
   font-size: 18px;
   color: #000000;
 }
+.panel {
+  background-clip: padding-box;
+  overflow-y: scroll;
+  z-index: 1000;
+  scrollbar-width: none;
+}
 .absolute-panel {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-clip: padding-box;
   background-color: #ffc677;
   border-image: url('../../medias/images/content/border_image.png') 15 stretch;
   border-image-width: 10px;
   border-image-outset: 8px;
+  background-clip: padding-box;
+  overflow-y: scroll;
+  z-index: 1000;
+  scrollbar-width: none;
+}
+.goal-panel {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url('../../medias/images/content/adventurers_guild_background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  background-clip: padding-box;
   overflow-y: scroll;
   z-index: 1000;
   scrollbar-width: none;
@@ -224,11 +244,11 @@ img {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-clip: padding-box;
   background-color: #ffc677;
   border-image: url('../../medias/images/content/border_image.png') 15 stretch;
   border-image-width: 10px;
   border-image-outset: 8px;
+  background-clip: padding-box;
   overflow-y: scroll;
   z-index: 1000;
   scrollbar-width: none;
@@ -244,11 +264,11 @@ img {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-clip: padding-box;
   background-color: #ffc677;
   border-image: url('../../medias/images/content/border_image.png') 15 stretch;
   border-image-width: 10px;
   border-image-outset: 8px;
+  background-clip: padding-box;
   overflow-y: scroll;
   z-index: 1000;
   scrollbar-width: none;
@@ -303,11 +323,11 @@ img {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-clip: padding-box;
   background-color: #ffc677;
   border-image: url('../../medias/images/content/border_image.png') 15 stretch;
   border-image-width: 10px;
   border-image-outset: 8px;
+  background-clip: padding-box;
   overflow-y: scroll;
   z-index: 1000;
   scrollbar-width: none;
@@ -350,11 +370,11 @@ img {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-clip: padding-box;
   background-color: #ffc677;
   border-image: url('../../medias/images/content/border_image.png') 15 stretch;
   border-image-width: 10px;
   border-image-outset: 8px;
+  background-clip: padding-box;
   overflow-y: scroll;
   z-index: 1000;
   scrollbar-width: none;
@@ -823,11 +843,11 @@ body main .info-section.quests-section {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-clip: padding-box;
   background-color: #ffc677;
   border-image: url('../../medias/images/content/border_image.png') 15 stretch;
   border-image-width: 10px;
   border-image-outset: 8px;
+  background-clip: padding-box;
   overflow-y: scroll;
   z-index: 1000;
   scrollbar-width: none;
@@ -957,11 +977,11 @@ body main .info-section.friends-section.all-friends {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-clip: padding-box;
   background-color: #ffc677;
   border-image: url('../../medias/images/content/border_image.png') 15 stretch;
   border-image-width: 10px;
   border-image-outset: 8px;
+  background-clip: padding-box;
   overflow-y: scroll;
   z-index: 1000;
   scrollbar-width: none;
@@ -971,6 +991,51 @@ body main .info-section.friends-section.all-friends > span > span {
 }
 body main .info-section.friends-section.all-friends .section-title {
   font-size: 18px;
+}
+body main .info-section.monster-eradication-goals-section {
+  display: none;
+  font-family: "SV Bold";
+  font-size: 24px;
+  color: #814737;
+  position: fixed;
+  min-width: 60vw;
+  aspect-ratio: 1.79;
+  padding: 25px 25px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-image: url('../../medias/images/content/adventurers_guild_background.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  box-sizing: border-box;
+  background-clip: padding-box;
+  overflow-y: scroll;
+  z-index: 1000;
+  scrollbar-width: none;
+}
+body main .info-section.monster-eradication-goals-section > * {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-weight: 900;
+  letter-spacing: 3px;
+}
+body main .info-section.monster-eradication-goals-section > .header > .title {
+  display: flex;
+  flex-direction: column;
+}
+body main .info-section.monster-eradication-goals-section > .header > .dashes {
+  width: 507px;
+}
+body main .info-section.monster-eradication-goals-section > .goals {
+  margin-top: 10px;
+}
+body main .info-section.monster-eradication-goals-section > .goals > .goal {
+  display: flex;
+}
+body main .info-section.monster-eradication-goals-section > .goals > .goal > .star {
+  align-self: flex-start;
 }
 body main .separated-galleries {
   width: 100%;

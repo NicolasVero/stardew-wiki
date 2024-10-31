@@ -210,6 +210,7 @@ function display_page():string {
 		// Modal panels
 		$structure .= display_friendships();
 		$structure .= display_quests();
+		$structure .= display_monster_eradication_goals_panel();
 
 		$structure .= "<div class='separated-galleries'>";
 			$structure .= display_skills();

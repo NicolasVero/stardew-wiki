@@ -599,17 +599,18 @@ function get_adventurers_guild_data():array {
 	$enemies_killed = $GLOBALS['all_players_data'][$player_id]['enemies_killed'];
 	$adventurers_guild_data = array();
 	
-	foreach($categories as $monsters_name => $monters_data) {
+	foreach($categories as $monsters_name => $monster_data) {
 
 		$counter = 0;
-		extract($monters_data);
+		extract($monster_data);
 
 		foreach($enemies_killed as $enemy_killed) {
-			if(in_array($enemy_killed['id'], $ids))
+			if(in_array($enemy_killed['id'], $ids)) 
 				$counter += $enemy_killed['killed_counter'];
 		}
 
 		$adventurers_guild_data[$monsters_name] = array(
+			"target"		=> $target_name,
 			"counter"		=> $counter,
 			"limit"			=> $limit,
 			"reward"		=> $reward,
@@ -635,6 +636,7 @@ function is_all_the_adventurers_guild_categories_completed(array $adventurers_gu
 function get_all_adventurers_guild_categories():array {
 	return array(
 		"slimes" => array(
+			"target_name" => "Slimes",
 			"ids" => array(105007, 105009, 105015, 105042),
 			"limit" => 1000,
 			"reward" => array(
@@ -643,6 +645,7 @@ function get_all_adventurers_guild_categories():array {
 			)
 		),
 		"void_spirits" => array(
+			"target_name" => "Void Spirits",
 			"ids" => array(105018, 105019, 105038),
 			"limit" => 150,
 			"reward" => array(
@@ -651,6 +654,7 @@ function get_all_adventurers_guild_categories():array {
 			)
 		),
 		"bats" => array(
+			"target_name" => "Bats",
 			"ids" => array(105000, 105006, 105011, 105024),
 			"limit" => 200,
 			"reward" => array(
@@ -659,6 +663,7 @@ function get_all_adventurers_guild_categories():array {
 			)
 		),
 		"skeletons" => array(
+			"target_name" => "Skeletons",
 			"ids" => array(105020),
 			"limit" => 50,
 			"reward" => array(
@@ -667,6 +672,7 @@ function get_all_adventurers_guild_categories():array {
 			)
 		),
 		"cave_insects" => array(
+			"target_name" => "Cave Insects",
 			"ids" => array(105002, 105003, 105010),
 			"limit" => 80,
 			"reward" => array(
@@ -675,6 +681,7 @@ function get_all_adventurers_guild_categories():array {
 			)
 		),
 		"duggies" => array(
+			"target_name" => "Duggies",
 			"ids" => array(105004, 105034),
 			"limit" => 30,
 			"reward" => array(
@@ -683,6 +690,7 @@ function get_all_adventurers_guild_categories():array {
 			)
 		),
 		"dust_sprites" => array(
+			"target_name" => "Dust Sprites",
 			"ids" => array(105005),
 			"limit" => 500,
 			"reward" => array(
@@ -691,7 +699,8 @@ function get_all_adventurers_guild_categories():array {
 			)
 		),
 		"rocks_crabs" => array(
-			"ids" => array(105012, 105016, 105024),
+			"target_name" => "Rocks Crabs",
+			"ids" => array(105012, 105016, 105026),
 			"limit" => 60,
 			"reward" => array(
 				"alt" => "Crabshell Ring",
@@ -699,6 +708,7 @@ function get_all_adventurers_guild_categories():array {
 			)
 		),
 		"mummies" => array(
+			"target_name" => "Mummies",
 			"ids" => array(105014),
 			"limit" => 100,
 			"reward" => array(
@@ -707,6 +717,7 @@ function get_all_adventurers_guild_categories():array {
 			)
 		),
 		"pepper_rex" => array(
+			"target_name" => "Pepper Rex",
 			"ids" => array(105028),
 			"limit" => 50,
 			"reward" => array(
@@ -715,6 +726,7 @@ function get_all_adventurers_guild_categories():array {
 			)
 		),
 		"serpents" => array(
+			"target_name" => "Serpents",
 			"ids" => array(105017),
 			"limit" => 250,
 			"reward" => array(
@@ -723,6 +735,7 @@ function get_all_adventurers_guild_categories():array {
 			)
 		),
 		"magma_sprites" => array(
+			"target_name" => "Magma Sprites",
 			"ids" => array(105035, 105036),
 			"limit" => 150,
 			"reward" => array(
