@@ -89,7 +89,8 @@ html {
 .modal-window,
 .modal-opener,
 .socials,
-img {
+img,
+.tooltip {
   user-select: none;
 }
 .panel-header {

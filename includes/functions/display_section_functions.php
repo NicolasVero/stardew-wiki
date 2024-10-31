@@ -813,7 +813,7 @@ function display_monster_eradication_goals_panel():string {
         $reward_icon = "
             <span class='tooltip' style='display: flex;'>
                 <a class='wiki_link' href='$wiki_link' target='_blank'>
-                    <img src='" . get_images_folder() . "rewards/$src.png' alt='$alt' class='reward $is_found always-on-display' />
+                    <img src='" . get_images_folder() . "rewards/$src.png' alt='$alt' class='reward $is_found always-on-display'/>
                 </a>
                 <span class='right'>$alt</span>
             </span>
