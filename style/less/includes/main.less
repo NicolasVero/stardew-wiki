@@ -315,10 +315,18 @@ body {
 
 					& > .goal {
 						display: flex;
+						align-items: center;
+						gap: @md-gap;
 
-						& > .star {
-							align-self: flex-start;
+						& img.reward {
+							width: @big-icon;
+							height: @big-icon;
+							object-fit: contain;
 						}
+
+						// & > .star {
+						// 	align-self: flex-start;
+						// }
 					}
 				}
 			}

@@ -1033,9 +1033,13 @@ body main .info-section.monster-eradication-goals-section > .goals {
 }
 body main .info-section.monster-eradication-goals-section > .goals > .goal {
   display: flex;
+  align-items: center;
+  gap: 10px;
 }
-body main .info-section.monster-eradication-goals-section > .goals > .goal > .star {
-  align-self: flex-start;
+body main .info-section.monster-eradication-goals-section > .goals > .goal img.reward {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
 }
 body main .separated-galleries {
   width: 100%;

@@ -640,7 +640,8 @@ function get_all_adventurers_guild_categories():array {
 			"limit" => 1000,
 			"reward" => array(
 				"alt" => "Slime Charmer Ring",
-				"src" => "slime_charmer_ring"
+				"src" => "slime_charmer_ring",
+                "wiki_link" => null
 			)
 		),
 		"void_spirits" => array(
@@ -649,7 +650,8 @@ function get_all_adventurers_guild_categories():array {
 			"limit" => 150,
 			"reward" => array(
 				"alt" => "Savage Ring",
-				"src" => "savage_ring"
+				"src" => "savage_ring",
+                "wiki_link" => null
 			)
 		),
 		"bats" => array(
@@ -658,7 +660,8 @@ function get_all_adventurers_guild_categories():array {
 			"limit" => 200,
 			"reward" => array(
 				"alt" => "Vampire Ring",
-				"src" => "vampire_ring"
+				"src" => "vampire_ring",
+                "wiki_link" => null
 			)
 		),
 		"skeletons" => array(
@@ -667,7 +670,8 @@ function get_all_adventurers_guild_categories():array {
 			"limit" => 50,
 			"reward" => array(
 				"alt" => "Skeleton Mask",
-				"src" => "skeleton_mask"
+				"src" => "skeleton_mask",
+                "wiki_link" => null
 			)
 		),
 		"cave_insects" => array(
@@ -676,7 +680,8 @@ function get_all_adventurers_guild_categories():array {
 			"limit" => 80,
 			"reward" => array(
 				"alt" => "Insect Head",
-				"src" => "insect_head"
+				"src" => "insect_head",
+                "wiki_link" => null
 			)
 		),
 		"duggies" => array(
@@ -685,7 +690,8 @@ function get_all_adventurers_guild_categories():array {
 			"limit" => 30,
 			"reward" => array(
 				"alt" => "Hard Hat",
-				"src" => "hard_hat"
+				"src" => "hard_hat",
+                "wiki_link" => null
 			)
 		),
 		"dust_sprites" => array(
@@ -694,7 +700,8 @@ function get_all_adventurers_guild_categories():array {
 			"limit" => 500,
 			"reward" => array(
 				"alt" => "Burglar's Ring",
-				"src" => "burglars_ring"
+				"src" => "burglars_ring",
+                "wiki_link" => null
 			)
 		),
 		"rocks_crabs" => array(
@@ -703,7 +710,8 @@ function get_all_adventurers_guild_categories():array {
 			"limit" => 60,
 			"reward" => array(
 				"alt" => "Crabshell Ring",
-				"src" => "crabshell_ring"
+				"src" => "crabshell_ring",
+                "wiki_link" => null
 			)
 		),
 		"mummies" => array(
@@ -712,7 +720,8 @@ function get_all_adventurers_guild_categories():array {
 			"limit" => 100,
 			"reward" => array(
 				"alt" => "Arcane Hat",
-				"src" => "arcane_hat"
+				"src" => "arcane_hat",
+                "wiki_link" => null
 			)
 		),
 		"pepper_rex" => array(
@@ -721,7 +730,8 @@ function get_all_adventurers_guild_categories():array {
 			"limit" => 50,
 			"reward" => array(
 				"alt" => "Knight's helmet",
-				"src" => "knights_helmet"
+				"src" => "knights_helmet",
+                "wiki_link" => null
 			)
 		),
 		"serpents" => array(
@@ -730,7 +740,8 @@ function get_all_adventurers_guild_categories():array {
 			"limit" => 250,
 			"reward" => array(
 				"alt" => "Napalm Ring",
-				"src" => "napalm_ring"
+				"src" => "napalm_ring",
+                "wiki_link" => null
 			)
 		),
 		"magma_sprites" => array(
@@ -739,7 +750,8 @@ function get_all_adventurers_guild_categories():array {
 			"limit" => 150,
 			"reward" => array(
 				"alt" => "Marlon's Phone Number",
-				"src" => "phone_number"
+				"src" => "phone_number",
+                "wiki_link" => null
 			)
 		)
 	);
