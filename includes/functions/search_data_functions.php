@@ -758,12 +758,22 @@ function get_pet_frienship_points():int {
 	$locations = $GLOBALS['untreated_all_players_data']->locations->GameLocation;
 	foreach($locations as $location) {
 		if(isset($location->characters))
-			foreach($location->characters as $npc)
+			foreach($location->characters->NPC as $npc)
 				if(isset($npc->petType))
-					return $npc->friendshipTowardFarmer;
+					return (int) $npc->friendshipTowardFarmer;
 	}
 
 	return 0;
+}
+
+function get_is_married():bool {
+	$data = $GLOBALS['untreated_player_data'];
+	return isset($data->spouse);
+}
+
+function get_house_upgrade_level():int {
+	$data = $GLOBALS['untreated_player_data'];
+	return (int) $data->houseUpgradeLevel;
 }
 
 function get_grandpa_score():int {
@@ -814,6 +824,11 @@ function get_grandpa_score():int {
 		34
 	);
 
+	$friendship_goals = array(
+		5,
+		10
+	);
+
 	$cc_rooms = array(
 		"ccBoilerRoom",
 		"ccCraftsRoom",
@@ -844,10 +859,27 @@ function get_grandpa_score():int {
 		if(does_player_have_achievement($data->achievements, $achievement_id))
 			$grandpa_points++;
 
+	// Married + 2 house upgrades
+	$house_level = get_house_upgrade_level();
+	$is_married = get_is_married();
+	if($house_level >= 2 && $is_married)
+		$grandpa_points++;
+
 	// Friendship
+	$friendships = get_friendship_data($data->friendshipData);
+	$friendship_count = 0;
+	foreach($friendships as $friendship) {
+		extract($friendship);
+		if($friend_level >= 10)
+			$friendship_count++;
+	}
+
+	foreach($friendship_goals as $friendship_goal) {
+		if($friendship_count >= $friendship_goal)
+			$grandpa_points++;
+	}
 
 	// Pet Friendship
-	// log_(get_pet_frienship_points());
 	if(get_pet_frienship_points() >= 999)
 		$grandpa_points++;
 
@@ -861,15 +893,15 @@ function get_grandpa_score():int {
 		$grandpa_points++;
 
 	// Community Center restored
-	if(in_array(191393 , (array) $data->eventsSeen->int))		// +2
+	if(in_array(191393 , (array) $data->eventsSeen->int))
 		$grandpa_points+=2;
 
 	// Skull Key
-	if(get_unlockables("skull_key"))							// +1
+	if(get_unlockables("skull_key"))
 		$grandpa_points++;
 	
 	// Rusty Key
-	if(get_unlockables("rusty_key"))							// +1
+	if(get_unlockables("rusty_key"))
 		$grandpa_points++;
 
 	return $grandpa_points;
