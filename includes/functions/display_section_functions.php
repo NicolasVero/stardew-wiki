@@ -466,7 +466,7 @@ function display_friendships(int $limit = -1):string {
     $json_with_version = sanitize_json_with_version('villagers', true);
 
     $section_class = ($limit == -1) ? 'all-friends' : 'top-friends';
-    $view_all = ($limit == -1) ? '' : "<span class='view-all-friends view-all-friendships-$player_id modal-opener'>View all friendships</span>";
+    $view_all = ($limit == -1) ? '' : "<span class='view-all-friends view-all-friendships-$player_id modal-opener'>- View all friendships</span>";
     $structure = ($limit == -1) ? 
 	"
         <section class='info-section friends-section $section_class $section_class-$player_id modal-window'>
@@ -474,13 +474,16 @@ function display_friendships(int $limit = -1):string {
            		<h2 class='section-title panel-title'>Friendship progression</h2>
 				<img src='" . get_images_folder() . "icons/exit.png' class='exit-all-friendships-$player_id exit' alt=''/>
 			</div>
-            <span>
+            <span class='friendlist'>
     "
 	:
 	"
         <section class='info-section friends-section $section_class _50'>
-            <h2 class='section-title'>Friendship progression</h2>
-            <span>
+            <span class='has_panel'>
+                <h2 class='section-title'>Friendship progression</h2>
+                $view_all
+            </span>
+            <span class='friendlist'>
     "
 	;
 
@@ -614,7 +617,6 @@ function display_friendships(int $limit = -1):string {
 
 
     $structure .= "
-			$view_all
         </span>
     </section>";
 

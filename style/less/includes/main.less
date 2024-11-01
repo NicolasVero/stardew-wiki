@@ -173,7 +173,21 @@ body {
 			}
 	
 			&.friends-section {
-				& > span {
+				& > .has_panel {
+					display: flex;
+					flex-wrap: wrap;
+					gap: @small-gap;
+
+					.view-all-friends {
+						font-family: @primary-ff;
+						font-size: @xsmall-fs;
+						color: @secondary-fc;
+						height: fit-content;
+						align-self: flex-end;
+						cursor: @pointer;
+					}
+				}
+				& > .friendlist {
 					display: flex;
 					flex-direction: column;
 					justify-content: center;
@@ -237,15 +251,6 @@ body {
 					.friend-status {
 						.data;
 						font-size: @md-fs;
-					}
-	
-					.view-all-friends {
-						font-family: @primary-ff;
-						// font-size: @md-fs;
-						font-size: @xsmall-fs;
-						color: @secondary-fc;
-						align-self: flex-end;
-						cursor: @pointer;
 					}
 				}
 	
