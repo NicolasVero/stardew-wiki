@@ -32,7 +32,17 @@ function get_achievement(object $achievements):array {
 	return $achievements_data;
 }
 
-function get_unlockables_list(object $data):array {
+function does_player_have_achievement(object $achievements, int $achievement_id):bool {
+	foreach($achievements->int as $achievement) {
+		if($achievement_id == $achievement)
+			return true;
+	}
+	return false;
+}
+
+function get_unlockables_list():array {
+
+	$data = $GLOBALS['untreated_player_data'];
 	return array(
 		'forest_magic' => array(
 			'id'       => 107004,
@@ -56,7 +66,7 @@ function get_unlockables_list(object $data):array {
 		),
 		'skull_key' => array(
 			'id'       => 107003,
-			'is_found' => get_unlockables("skull_key"),
+			'is_found' => get_unlockables("skull_key")
 		),
 		'magnifying_glass' => array(
 			'id'       => 107008,
@@ -591,7 +601,6 @@ function get_museum_index(object $locations):int {
 	return $index_museum;
 }
 
-
 function get_adventurers_guild_data():array {
 	$categories = get_all_adventurers_guild_categories();
 	$player_id = $GLOBALS['player_id'];
@@ -743,4 +752,125 @@ function get_all_adventurers_guild_categories():array {
 			)
 		)
 	);
+}
+
+function get_pet_frienship_points():int {
+	$locations = $GLOBALS['untreated_all_players_data']->locations->GameLocation;
+	foreach($locations as $location) {
+		if(isset($location->characters))
+			foreach($location->characters as $npc)
+				if(isset($npc->petType))
+					return $npc->friendshipTowardFarmer;
+	}
+
+	return 0;
+}
+
+function get_grandpa_score():int {
+
+	$data = $GLOBALS['untreated_player_data'];
+	$grandpa_points = 0;
+	$money_earned_goals = array(
+		array(
+			"goal" => 50000, 
+			"points" => 1
+		),
+		array(
+			"goal" => 100000, 
+			"points" => 1
+		),
+		array(
+			"goal" => 200000, 
+			"points" => 1
+		),
+		array(
+			"goal" => 300000, 
+			"points" => 1
+		),
+		array(
+			"goal" => 500000, 
+			"points" => 1
+		),
+		array(
+			"goal" => 1000000, 
+			"points" => 2
+		)
+	);
+
+	$skill_goals = array(
+		array(
+			"goal" => 30, 
+			"points" => 1
+		),
+		array(
+			"goal" => 50, 
+			"points" => 1
+		)
+	);
+
+	$achievement_ids = array(
+		5,
+		26,
+		34
+	);
+
+	$cc_rooms = array(
+		"ccBoilerRoom",
+		"ccCraftsRoom",
+		"ccPantry",
+		"ccFishTank",
+		"ccVault",
+		"ccBulletin"
+	);
+
+	// Gains totaux
+	$total_money_earned = $data->totalMoneyEarned;
+	foreach($money_earned_goals as $money_earned_goal) {
+		extract($money_earned_goal);
+		if($total_money_earned > $goal)
+			$grandpa_points+=$points;
+	}
+
+	// Skill level
+	$total_skills_level = get_total_skills_level($data);
+	foreach($skill_goals as $skill_goal) {
+		extract($skill_goal);
+		if($total_skills_level > $goal)
+			$grandpa_points+=$points;
+	}
+
+	// Achievements
+	foreach($achievement_ids as $achievement_id)
+		if(does_player_have_achievement($data->achievements, $achievement_id))
+			$grandpa_points++;
+
+	// Friendship
+
+	// Pet Friendship
+	// log_(get_pet_frienship_points());
+	if(get_pet_frienship_points() >= 999)
+		$grandpa_points++;
+
+	// Community Center completed
+	$cc_completed = true;
+	foreach($cc_rooms as $cc_room) {
+		if(!has_element($cc_room, $data))
+			$cc_completed = false;
+	}
+	if($cc_completed)
+		$grandpa_points++;
+
+	// Community Center restored
+	if(in_array(191393 , (array) $data->eventsSeen->int))		// +2
+		$grandpa_points+=2;
+
+	// Skull Key
+	if(get_unlockables("skull_key"))							// +1
+		$grandpa_points++;
+	
+	// Rusty Key
+	if(get_unlockables("rusty_key"))							// +1
+		$grandpa_points++;
+
+	return $grandpa_points;
 }

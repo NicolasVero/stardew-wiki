@@ -154,7 +154,6 @@ function in_bytes_conversion(string $size, string $use = 'local'):int {
     return $value * pow(1024, $unit_to_power[$unite]);
 }
 
-
 function array_keys_exists(array $keys, array $array):bool {
     return count(array_diff_key(array_flip($keys), $array)) === 0;
 }
@@ -225,6 +224,10 @@ function get_formatted_date(bool $display_date = true):mixed {
         'season' => $season,
         'year' => $year
     );
+}
+
+function get_total_skills_level(object $data):int {
+	return ($data->farmingLevel + $data->miningLevel + $data->combatLevel + $data->foragingLevel + $data->fishingLevel);
 }
 
 function is_objective_completed(int $current_counter, int $limit):bool {

@@ -289,7 +289,7 @@ function display_general_stats():string {
                         <img src='{$images_path}characters/grandpa.png' alt='GrandPa candles'/>
                         <span>Number of candles lit on the altar</span>
                     </span>
-                    <span class='data data-mine-level'>" . formate_number(-1) . "</span>
+                    <span class='data data-mine-level'>" . formate_number($grandpa_score) . "</span>
                     <span class='data-label'>grandpa candles</span>
                 </span>
 
@@ -976,7 +976,7 @@ function get_farmer_level(object $data):string {
         'Farm King'
     );
 
-    $level = ($data->farmingLevel + $data->miningLevel + $data->combatLevel + $data->foragingLevel + $data->fishingLevel + $data->luckLevel) / 2;
+    $level = (get_total_skills_level($data) + $data->luckLevel) / 2;
 
     return $level_names[floor($level / 2)];
 }
