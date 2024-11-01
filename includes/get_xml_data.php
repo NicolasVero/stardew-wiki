@@ -14,32 +14,11 @@ try {
     $external_error = ($name_check[0] == "Error") ? explode(".", ($name_check[1]))[0] : null;
 
     if(is_file_secure($_FILES['save-upload'], $external_error)) {
-        $uploadedFile = $_FILES['save-upload']['tmp_name'];
-        $data = simplexml_load_file($uploadedFile);
+        $responses = load_save($_FILES['save-upload']['tmp_name']);
 
-        load_all_items();
-        load_wiki_links();
-        $GLOBALS['untreated_all_players_data'] = $data;
-
-        $players_data = get_all_players_datas();
-        $players = get_all_players();
-
-        $pages['sur_header'] = display_sur_header(false, false);
-        for($player_count = 0; $player_count < count($players); $player_count++) {
-			$GLOBALS['player_id'] = $player_count;
-            $pages['player_' . $player_count] = "
-                <div class='player_container player_{$player_count}_container'>" . 
-                    display_page() . "
-                </div>
-            ";
-        }
-
-		//! Trop d'informations envoyées
-        // $response['global_variables'] = $GLOBALS;
-
-        $response['players'] = $GLOBALS['players_names'];
-        $response['html'] = $pages;
-        $response['code'] = "success";
+        $response['players'] = $responses["players"];
+        $response['html'] = $responses["html"];
+        $response['code'] = $responses["code"];
     }
 } catch (Exception $exception) {
 	$page['sur_header'] = display_sur_header(false, true);

@@ -3,6 +3,39 @@
 require 'search_data_functions.php';
 
 
+function load_save($save_file, $use_ajax = true):mixed {
+    $uploadedFile = $save_file;
+    $data = simplexml_load_file($uploadedFile);
+
+    load_all_items();
+    load_wiki_links();
+    $GLOBALS['untreated_all_players_data'] = $data;
+
+    $players_data = get_all_players_datas();
+    $players = get_all_players();
+
+    $pages['sur_header'] = display_sur_header(false, false);
+    for($player_count = 0; $player_count < count($players); $player_count++) {
+        $GLOBALS['player_id'] = $player_count;
+        $pages['player_' . $player_count] = "
+            <div class='player_container player_{$player_count}_container'>" . 
+                display_page() . "
+            </div>
+        ";
+    }
+
+    if($use_ajax) {
+        return array(
+            "players" => $GLOBALS['players_names'],
+            "html" => $pages,
+            "code" => "success"
+        );
+    } else {   
+        foreach($pages as $page)
+            echo $page;
+    }
+}
+
 function get_all_players_datas():array {
     $players_data = array();
     $data = $GLOBALS['untreated_all_players_data'];
