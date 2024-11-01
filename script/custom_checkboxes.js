@@ -34,12 +34,13 @@ const get_settings = () => ({
 const should_show_element = (element, settings) => {
     const is_newer = has_class(element, "newer-version");
     const is_not_found = has_class(element, "not-found");
+    const should_keep_on_display = has_class(element, "always-on-display");
     const is_found = has_class(element, "found");
     const is_not_hide = has_class(element, "not-hide");
 
     if (is_not_hide) return true;
     if (settings.toggle_versions && is_newer) return false;
-    if (settings.no_spoil && is_not_found) return false;
+    if (settings.no_spoil && is_not_found && !should_keep_on_display) return false;
     if (settings.spoil && is_found) return false;
     
     return true;
