@@ -289,7 +289,7 @@ function display_general_stats():string {
                         <img src='{$images_path}characters/grandpa.png' alt='GrandPa candles'/>
                         <span>Number of candles lit on the altar ($grandpa_score points)</span>
                     </span>
-                    <span class='data data-mine-level'>" . get_candles_lit($grandpa_score) . "</span>
+                    <span class='data data-candles'>" . get_candles_lit($grandpa_score) . "</span>
                     <span class='data-label'>candles lit</span>
                 </span>
 
@@ -298,7 +298,7 @@ function display_general_stats():string {
                         <img src='{$images_path}icons/stardrop.png' alt='Perfection'/>
                         <span>Percentage of perfection</span>
                     </span>
-                    <span class='data data-mine-level'>" . -1 . "%</span>
+                    <span class='data data-perfection'>" . get_perfection_percentage() . "%</span>
                     <span class='data-label'>perfection progression</span>
                 </span>
             </div>
@@ -817,7 +817,7 @@ function display_enemies():string {
 
 function display_monster_eradication_goals_panel():string {
 	$player_id = $GLOBALS['player_id'];
-    $goals_data = get_adventurers_guild_data();
+    $goals_data = get_adventurers_guild_data($player_id);
     $goals = '';
 
     foreach($goals_data as $goal_data) {
@@ -853,7 +853,7 @@ function display_monster_eradication_goals_panel():string {
                     <span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;\"Help us keep the valley safe.\"</span>
                 </span>
                 <img src='" . get_images_folder() . "content/dashes.png' class='dashes' alt=''>
-                <img src='" . get_images_folder() . "icons/exit.png' class='exit' alt=''>
+                <img src='" . get_images_folder() . "icons/exit.png' class='exit-monster-eradication-goals exit-monster-eradication-goals-$player_id exit' alt=''>
             </span>
             <span class='goals'>
                 $goals

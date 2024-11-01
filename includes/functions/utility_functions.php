@@ -194,6 +194,10 @@ function get_wiki_link(int $id):string {
 	return $GLOBALS['wiki_links'][$id];
 }
 
+function get_number_of_player():int {
+	return count($GLOBALS['all_players_data']);
+}
+
 function decode(string $filename): array {
     $url = get_json_folder() . "$filename.json";
     $ch = curl_init($url);
@@ -231,7 +235,7 @@ function get_total_skills_level(object $data):int {
 }
 
 function is_objective_completed(int $current_counter, int $limit):bool {
-    return ($current_counter > $limit);
+    return ($current_counter >= $limit);
 }
 
 function is_this_the_same_day(string $date):bool {
@@ -250,6 +254,45 @@ function get_candles_lit(int $grandpa_score):int {
 		return 3;
 	
 	return 4;
+}
+
+function get_element_completion_percentage(int $max_amount, int $current_amount):float {
+	return round(($current_amount / $max_amount), 3, PHP_ROUND_HALF_DOWN);
+}
+
+function get_amount_obelisk_on_map():int {
+	$locations = $GLOBALS['untreated_all_players_data']->locations->GameLocation;
+	$obelisk_names = array(
+		'Earth Obelisk',
+		'Water Obelisk',
+		'Island Obelisk',
+		'Desert Obelisk',
+	);
+	$obelisk_count = 0;
+
+	foreach($locations as $location) {
+		if(isset($location->buildings->Building)) {
+			foreach($location->buildings->Building as $building) {
+				if(in_array((string) $building->buildingType, $obelisk_names))
+					$obelisk_count++;
+			}
+		}
+	}
+
+	return $obelisk_count;
+}
+
+function is_golden_clock_on_farm():bool {
+	$locations = $GLOBALS['untreated_all_players_data']->locations->GameLocation;
+	foreach($locations as $location) {
+		if(isset($location->buildings->Building)) {
+			foreach($location->buildings->Building as $building) {
+				if((string) $building->buildingType == 'Gold Clock')
+					return true;
+			}
+		}
+	}
+	return false;
 }
 
 function get_game_duration(int $duration):string {

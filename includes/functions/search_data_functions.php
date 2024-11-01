@@ -601,9 +601,8 @@ function get_museum_index(object $locations):int {
 	return $index_museum;
 }
 
-function get_adventurers_guild_data():array {
+function get_adventurers_guild_data(int $player_id):array {
 	$categories = get_all_adventurers_guild_categories();
-	$player_id = $GLOBALS['player_id'];
 	$enemies_killed = $GLOBALS['all_players_data'][$player_id]['enemies_killed'];
 	$adventurers_guild_data = array();
 	
@@ -905,4 +904,205 @@ function get_grandpa_score():int {
 		$grandpa_points++;
 
 	return $grandpa_points;
+}
+
+function get_highest_count_for_category(string $category):array {
+	$game_version = substr($GLOBALS['game_version'], 0, 3);
+	$total_players = get_number_of_player();
+	$all_datas = $GLOBALS['all_players_data'];
+	$highest_player = 0;
+	$max_elements = 0;
+
+	for($current_player = 0; $current_player < $total_players; $current_player++) {
+		$amount_elements = count($all_datas[$current_player][$category]);
+		if($max_elements < $amount_elements) {
+			$max_elements = $amount_elements;
+			$highest_player = $current_player;
+		}
+	}
+
+	$perfection_max = get_perfection_max_elements()[$game_version][$category];
+	$max_elements = min($max_elements, $perfection_max);
+
+	return array(
+		'player_id' => $highest_player,
+		'highest_count' => $max_elements
+	);
+}
+
+function get_highest_count_for_recipes(string $category):array {
+	$game_version = substr($GLOBALS['game_version'], 0, 3);
+	$total_players = get_number_of_player();
+	$all_datas = $GLOBALS['all_players_data'];
+	$highest_player = 0;
+	$max_elements = 0;
+
+	for($current_player = 0; $current_player < $total_players; $current_player++) {
+
+		$filtered_elements = array_filter($all_datas[$current_player][$category], function($item) {
+			return $item['counter'] > 0;
+		});
+		$amount_elements = count($filtered_elements);
+
+		if($max_elements < $amount_elements) {
+			$max_elements = $amount_elements;
+			$highest_player = $current_player;
+		}
+	}
+
+	$perfection_max = get_perfection_max_elements()[$game_version][$category];
+	$max_elements = min($max_elements, $perfection_max);
+
+	return array(
+		'player_id' => $highest_player,
+		'highest_count' => $max_elements
+	);
+}
+
+function get_highest_farmer_level():array {
+	$game_version = substr($GLOBALS['game_version'], 0, 3);
+	$total_players = get_number_of_player();
+	$all_datas = $GLOBALS['all_players_data'];
+	$all_level = 0;
+	$highest_player = 0;
+	$max_elements = 0;
+
+	for($current_player = 0; $current_player < $total_players; $current_player++) {
+		$level_category = $all_datas[$current_player]['levels'];
+		$all_level = 0;
+		
+		foreach($level_category as $level) {
+			$all_level += $level;
+		}
+
+		if($max_elements < $all_level) {
+			$max_elements = $all_level;
+			$highest_player = $current_player;
+		}
+	}
+
+	$perfection_max = get_perfection_max_elements()[$game_version]['farmer_level'];
+	$max_elements = min($max_elements, $perfection_max);
+
+	return array(
+		'player_id' => $highest_player,
+		'highest_count' => $max_elements
+	);
+}
+
+function has_players_done_monster_slayer_hero():bool {
+	$total_players = get_number_of_player();
+	
+	for($current_player = 0; $current_player < $total_players; $current_player++) {
+		if(get_adventurers_guild_data($current_player)['is_all_completed'])
+			return true;
+	}
+
+	return false;
+}
+
+function has_any_player_gotten_all_stardrops():bool {
+	$total_players = get_number_of_player();
+	$all_datas = $GLOBALS['all_players_data'];
+
+	for($current_player = 0; $current_player < $total_players; $current_player++) {
+		$amount_elements = $all_datas[$current_player]['general']['max_stamina'];
+		if($amount_elements == 508)
+			return true;
+	}
+
+	return false;
+}
+
+function get_player_with_highest_friendships():array {
+	$game_version = substr($GLOBALS['game_version'], 0, 3);
+	$total_players = get_number_of_player();
+	$all_datas = $GLOBALS['all_players_data'];
+	$highest_player = 0;
+	$max_elements = 0;
+	
+    $marriables_npc = sanitize_json_with_version('marriables');
+
+	for($current_player = 0; $current_player < $total_players; $current_player++) {
+		$friendships = $all_datas[$current_player]['friendship'];
+		$friend_counter = 0;
+
+		foreach($friendships as $friendship_name => $friendship) {
+			extract($friendship);
+			$can_be_married = in_array($friendship_name, $marriables_npc) && $status == "Friendly";
+
+			if(($can_be_married && $friend_level >= 8) || (!$can_be_married && $friend_level >= 10))
+				$friend_counter++;
+		}
+
+		if($friend_counter > $max_elements) $max_elements = $friend_counter;
+	}
+
+	$perfection_max = get_perfection_max_elements()[$game_version]['friendship'];
+	$max_elements = min($max_elements, $perfection_max);
+
+	return array(
+		'player_id' => $highest_player,
+		'highest_count' => $max_elements
+	);
+}
+
+function get_perfection_max_elements():array {
+	return array(
+		'1.5' => array(
+			'farmer_level' => 25,
+			'golden_walnuts' => 130,
+			'obelisks' => 4,
+			'crafting_recipes' => 129,
+			'cooking_recipes' => 80,
+			'shipped_items' => 145,
+			'friendship' => 33,
+			'fish_caught' => 67
+		),
+		'1.6' => array(
+			'farmer_level' => 25,
+			'golden_walnuts' => 130,
+			'obelisks' => 4,
+			'crafting_recipes' => 149,
+			'cooking_recipes' => 81,
+			'shipped_items' => 155,
+			'friendship' => 34,
+			'fish_caught' => 72
+		)
+	);
+}
+
+function get_perfection_elements():array {
+	$general_data = $GLOBALS['host_player_data']['general'];
+	$game_version = substr($GLOBALS['game_version'], 0, 3);
+
+	$highest_items_shipped = get_highest_count_for_category('shipped_items')['highest_count'];
+	$highest_farmer_level = get_highest_farmer_level()['highest_count'];
+	$highest_fish_caught = get_highest_count_for_category('fish_caught')['highest_count'];
+	$highest_cooking_recipes = get_highest_count_for_recipes('cooking_recipes')['highest_count'];
+	$highest_crafting_recipes = get_highest_count_for_recipes('crafting_recipes')['highest_count'];
+	$highest_friendship = get_player_with_highest_friendships()['highest_count'];
+
+	return array(
+		"Golden Walnuts found"		=> get_element_completion_percentage(get_perfection_max_elements()[$game_version]['golden_walnuts'], (int) $general_data['golden_walnuts']) * 5,
+		"Crafting Recipes Made"		=> get_element_completion_percentage(get_perfection_max_elements()[$game_version]['crafting_recipes'], $highest_crafting_recipes) * 10,
+		"Cooking Recipes Made"		=> get_element_completion_percentage(get_perfection_max_elements()[$game_version]['cooking_recipes'], $highest_cooking_recipes) * 10,
+		"Produce & Forage Shipped"	=> get_element_completion_percentage(get_perfection_max_elements()[$game_version]['shipped_items'], $highest_items_shipped) * 15,
+		"Obelisks on Farm"			=> get_element_completion_percentage(get_perfection_max_elements()[$game_version]['obelisks'], get_amount_obelisk_on_map()) * 4 ,
+		"Farmer Level"				=> get_element_completion_percentage(get_perfection_max_elements()[$game_version]['farmer_level'], $highest_farmer_level) * 5 ,
+		"Fish Caught"				=> get_element_completion_percentage(get_perfection_max_elements()[$game_version]['fish_caught'], $highest_fish_caught) * 10,
+		"Great Friends"				=> get_element_completion_percentage(get_perfection_max_elements()[$game_version]['friendship'], $highest_friendship) * 11,
+		"Monster Slayer Hero"		=> get_element_completion_percentage(1, (int) has_players_done_monster_slayer_hero()) * 10,
+		"Found All Stardrops"		=> get_element_completion_percentage(1, (int) has_any_player_gotten_all_stardrops()) * 10,
+		"Golden Clock on Farm"		=> get_element_completion_percentage(1, (int) is_golden_clock_on_farm()) * 10
+	);
+}
+
+function get_perfection_percentage():int {
+	$perfection_elements = get_perfection_elements();
+	$percentage = 0;
+	foreach($perfection_elements as $element_percent)
+		$percentage += $element_percent;
+
+	return round($percentage);
 }
