@@ -287,10 +287,10 @@ function display_general_stats():string {
                 <span>
                     <span class='tooltip'>
                         <img src='{$images_path}characters/grandpa.png' alt='GrandPa candles'/>
-                        <span>Number of candles lit on the altar</span>
+                        <span>Number of candles lit on the altar ($grandpa_score points)</span>
                     </span>
-                    <span class='data data-mine-level'>" . formate_number($grandpa_score) . "</span>
-                    <span class='data-label'>grandpa candles</span>
+                    <span class='data data-mine-level'>" . get_candles_lit($grandpa_score) . "</span>
+                    <span class='data-label'>candles lit</span>
                 </span>
 
                 <span>
@@ -298,7 +298,7 @@ function display_general_stats():string {
                         <img src='{$images_path}icons/stardrop.png' alt='Perfection'/>
                         <span>Percentage of perfection</span>
                     </span>
-                    <span class='data data-mine-level'>" . formate_number(-1) . "%</span>
+                    <span class='data data-mine-level'>" . -1 . "%</span>
                     <span class='data-label'>perfection progression</span>
                 </span>
             </div>

@@ -239,6 +239,19 @@ function is_this_the_same_day(string $date):bool {
     return $date == "$day/$season";
 }
 
+function get_candles_lit(int $grandpa_score):int {
+	if($grandpa_score <= 3)
+		return 1;
+	
+	if($grandpa_score > 3 && $grandpa_score <= 7)
+		return 2;
+	
+	if($grandpa_score > 7 && $grandpa_score <= 11)
+		return 3;
+	
+	return 4;
+}
+
 function get_game_duration(int $duration):string {
 
     $totalSeconds = intdiv($duration, 1000);
