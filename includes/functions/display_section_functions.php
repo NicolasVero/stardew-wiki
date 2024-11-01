@@ -283,6 +283,24 @@ function display_general_stats():string {
                     <span class='data data-mine-level'>" . formate_number($mine_level) . "</span>
                     <span class='data-label'>deepest mine level</span>
                 </span>
+
+                <span>
+                    <span class='tooltip'>
+                        <img src='{$images_path}characters/grandpa.png' alt='GrandPa candles'/>
+                        <span>Number of candles lit on the altar</span>
+                    </span>
+                    <span class='data data-mine-level'>" . formate_number(-1) . "</span>
+                    <span class='data-label'>grandpa candles</span>
+                </span>
+
+                <span>
+                    <span class='tooltip'>
+                        <img src='{$images_path}icons/stardrop.png' alt='Perfection'/>
+                        <span>Percentage of perfection</span>
+                    </span>
+                    <span class='data data-mine-level'>" . -1 . "%</span>
+                    <span class='data-label'>perfection progression</span>
+                </span>
             </div>
         </section>
     ";
