@@ -298,7 +298,7 @@ function display_general_stats():string {
                         <img src='{$images_path}icons/stardrop.png' alt='Perfection'/>
                         <span>Percentage of perfection</span>
                     </span>
-                    <span class='data data-mine-level'>" . -1 . "%</span>
+                    <span class='data data-mine-level'>" . formate_number(-1) . "%</span>
                     <span class='data-label'>perfection progression</span>
                 </span>
             </div>

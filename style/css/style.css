@@ -1090,6 +1090,9 @@ body main .gallery img {
   min-width: 28px;
   object-fit: contain;
 }
+body main .gallery img.enemies {
+  width: 28px !important;
+}
 body main > :last-child {
   margin-bottom: 25px;
 }
