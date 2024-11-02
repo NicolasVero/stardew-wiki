@@ -937,6 +937,8 @@ body main .info-section.friends-section > .friendlist .character-name {
 body main .info-section.friends-section > .friendlist .hearts-level {
   display: flex;
   gap: 5px;
+  flex-wrap: wrap;
+  max-width: 245px;
 }
 body main .info-section.friends-section > .friendlist .hearts-level .hearts {
   width: 20px;

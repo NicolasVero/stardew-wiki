@@ -516,11 +516,15 @@ function display_friendships(int $limit = -1):string {
 		
         $can_be_married = in_array($name, $marriables_npc) && $status == "Friendly";
 
-        for($i = 1; $i <= 10; $i++) {
+        for($i = 1; $i <= 14; $i++) {
 
             if($i > 8 && $can_be_married) {
                 $heart_icon = get_images_folder() . "icons/locked_heart.png";
                 $structure .= "<img src='$heart_icon' class='hearts' alt=''/>";
+                continue;
+            }
+
+            if($i > 10 && $status == "Friendly") {
                 continue;
             }
 
