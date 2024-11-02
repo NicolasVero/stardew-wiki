@@ -772,6 +772,11 @@ function get_is_married():bool {
 	return isset($data->spouse);
 }
 
+function get_spouse():mixed {
+	$data = $GLOBALS['untreated_player_data'];
+	return (!empty($data->spouse)) ? $data->spouse : null;
+}
+
 function get_house_upgrade_level():int {
 	$data = $GLOBALS['untreated_player_data'];
 	return (int) $data->houseUpgradeLevel;

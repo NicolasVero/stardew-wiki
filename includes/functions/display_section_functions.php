@@ -959,8 +959,9 @@ function get_tooltip_text(array $player_data, string $json_line_name, string $da
     }
 }
 
-function get_farmer_level(object $data):string {
-    
+function get_farmer_level():string {
+	$data = $GLOBALS['untreated_player_data'];
+
     $level_names = array(
         'Newcomer',
         'Greenhorn',
