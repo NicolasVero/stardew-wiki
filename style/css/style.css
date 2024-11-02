@@ -790,7 +790,8 @@ body main .info-section.general-stats {
 }
 body main .info-section.general-stats div {
   display: flex;
-  gap: 50px;
+  gap: 10px 50px;
+  flex-wrap: wrap;
 }
 body main .info-section.general-stats span {
   display: flex;
