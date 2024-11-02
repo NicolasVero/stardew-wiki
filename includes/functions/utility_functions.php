@@ -117,12 +117,6 @@ function has_element_ov(object $element):int {
     return !empty((array) $element);
 }
 
-function get_custom_id(string $item):int {
-	$custom_ids = decode('custom_ids');
-    return array_search($item, $custom_ids);
-}
-
-
 function get_game_version_score(string $version):int {
 	$version_numbers = explode('.', $version);
 
@@ -176,6 +170,14 @@ function find_reference_in_json(mixed $id, string $file):mixed {
     $json_file = sanitize_json_with_version($file);
 
     return isset($json_file[$id]) ? $json_file[$id] : null;
+}
+
+function load_custom_ids():void {
+	$GLOBALS['custom_ids'] = decode('custom_ids');
+}
+
+function get_custom_id(string $item):int {
+    return array_search($item, $GLOBALS['custom_ids']);
 }
 
 function load_all_items():void {
