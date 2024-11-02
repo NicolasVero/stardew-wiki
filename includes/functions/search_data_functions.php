@@ -484,7 +484,9 @@ function get_cooking_recipes(object $recipes, object $recipes_cooked):array {
 				if($version_score < get_game_version_score("1.6.0"))
 					$recipe_id = (int) $recipe_cooked->key->int;
 				else
-					$recipe_id = (int) $recipe_cooked->key->string;
+					$recipe_id = $recipe_cooked->key->string;
+
+				$recipe_id = (filter_var((int) $recipe_id, FILTER_VALIDATE_INT)) ? (int) $recipe_id : get_custom_id((string) $recipe_id);
 
 				if($recipe_id == $index) {
 					$cooking_recipes_data[$item_name] = array(
