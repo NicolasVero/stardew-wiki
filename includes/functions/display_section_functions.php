@@ -405,9 +405,9 @@ function display_skills():string {
     foreach($this_player_skills_levels as $key => $level) {
         
         $level_icon_name = explode('_', $key)[0];
-        $level_icon      = get_images_folder() . "icons/$level_icon_name.png";
+        $level_icon      = get_images_folder() . "skills/$level_icon_name.png";
 
-        $mastery_icon    = get_images_folder() . "icons/mastery.png";
+        $mastery_icon    = get_images_folder() . "skills/mastery.png";
         $mastery_class   = (array_key_exists(ucfirst(explode('_', $key)[0]) . " Mastery", $this_player_masteries)) ? 'found' : 'not-found';
         $mastery_tooltip = ucfirst(explode('_', $key)[0]) . " mastery";
 
