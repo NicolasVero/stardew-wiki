@@ -1106,6 +1106,10 @@ function get_perfection_elements():array {
 }
 
 function get_perfection_percentage():int {
+	$untreated_data = $GLOBALS['untreated_all_players_data'];
+	if((string) $untreated_data->farmPerfect == 'true')
+		return 100;
+
 	$perfection_elements = get_perfection_elements();
 	$percentage = 0;
 	foreach($perfection_elements as $element_percent)
