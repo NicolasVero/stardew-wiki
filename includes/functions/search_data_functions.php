@@ -755,33 +755,6 @@ function get_all_adventurers_guild_categories():array {
 	);
 }
 
-function get_pet_frienship_points():int {
-	$locations = $GLOBALS['untreated_all_players_data']->locations->GameLocation;
-	foreach($locations as $location) {
-		if(isset($location->characters))
-			foreach($location->characters->NPC as $npc)
-				if(isset($npc->petType))
-					return (int) $npc->friendshipTowardFarmer;
-	}
-
-	return 0;
-}
-
-function get_is_married():bool {
-	$data = $GLOBALS['untreated_player_data'];
-	return isset($data->spouse);
-}
-
-function get_spouse():mixed {
-	$data = $GLOBALS['untreated_player_data'];
-	return (!empty($data->spouse)) ? $data->spouse : null;
-}
-
-function get_house_upgrade_level():int {
-	$data = $GLOBALS['untreated_player_data'];
-	return (int) $data->houseUpgradeLevel;
-}
-
 function get_grandpa_score():int {
 
 	$data = $GLOBALS['untreated_player_data'];
@@ -920,8 +893,34 @@ function get_highest_count_for_category(string $category):array {
 	$highest_player = 0;
 	$max_elements = 0;
 
+	$exceptions_recipes = array(
+		'cooking_recipes',
+		'crafting_recipes'
+	);
+
+	$exceptions_level = array(
+		'farmer_level'
+	);
+
 	for($current_player = 0; $current_player < $total_players; $current_player++) {
-		$amount_elements = count($all_datas[$current_player][$category]);
+		if(in_array($category, $exceptions_recipes)) {
+			$filtered_elements = array_filter($all_datas[$current_player][$category], function($item) {
+				return $item['counter'] > 0;
+			});
+			$amount_elements = count($filtered_elements);
+		}
+		else if(in_array($category, $exceptions_level)) {
+			$level_category = $all_datas[$current_player]['levels'];
+			$amount_elements = 0;
+			
+			foreach($level_category as $level) {
+				$amount_elements += $level;
+			}
+		}
+		else {
+			$amount_elements = count($all_datas[$current_player][$category]);	
+		}
+
 		if($max_elements < $amount_elements) {
 			$max_elements = $amount_elements;
 			$highest_player = $current_player;
@@ -929,66 +928,6 @@ function get_highest_count_for_category(string $category):array {
 	}
 
 	$perfection_max = get_perfection_max_elements()[$game_version][$category];
-	$max_elements = min($max_elements, $perfection_max);
-
-	return array(
-		'player_id' => $highest_player,
-		'highest_count' => $max_elements
-	);
-}
-
-function get_highest_count_for_recipes(string $category):array {
-	$game_version = substr($GLOBALS['game_version'], 0, 3);
-	$total_players = get_number_of_player();
-	$all_datas = $GLOBALS['all_players_data'];
-	$highest_player = 0;
-	$max_elements = 0;
-
-	for($current_player = 0; $current_player < $total_players; $current_player++) {
-
-		$filtered_elements = array_filter($all_datas[$current_player][$category], function($item) {
-			return $item['counter'] > 0;
-		});
-		$amount_elements = count($filtered_elements);
-
-		if($max_elements < $amount_elements) {
-			$max_elements = $amount_elements;
-			$highest_player = $current_player;
-		}
-	}
-
-	$perfection_max = get_perfection_max_elements()[$game_version][$category];
-	$max_elements = min($max_elements, $perfection_max);
-
-	return array(
-		'player_id' => $highest_player,
-		'highest_count' => $max_elements
-	);
-}
-
-function get_highest_farmer_level():array {
-	$game_version = substr($GLOBALS['game_version'], 0, 3);
-	$total_players = get_number_of_player();
-	$all_datas = $GLOBALS['all_players_data'];
-	$all_level = 0;
-	$highest_player = 0;
-	$max_elements = 0;
-
-	for($current_player = 0; $current_player < $total_players; $current_player++) {
-		$level_category = $all_datas[$current_player]['levels'];
-		$all_level = 0;
-		
-		foreach($level_category as $level) {
-			$all_level += $level;
-		}
-
-		if($max_elements < $all_level) {
-			$max_elements = $all_level;
-			$highest_player = $current_player;
-		}
-	}
-
-	$perfection_max = get_perfection_max_elements()[$game_version]['farmer_level'];
 	$max_elements = min($max_elements, $perfection_max);
 
 	return array(
@@ -1083,12 +1022,12 @@ function get_perfection_elements():array {
 	$general_data = $GLOBALS['host_player_data']['general'];
 	$game_version = substr($GLOBALS['game_version'], 0, 3);
 
-	$highest_items_shipped = get_highest_count_for_category('shipped_items')['highest_count'];
-	$highest_farmer_level = get_highest_farmer_level()['highest_count'];
-	$highest_fish_caught = get_highest_count_for_category('fish_caught')['highest_count'];
-	$highest_cooking_recipes = get_highest_count_for_recipes('cooking_recipes')['highest_count'];
-	$highest_crafting_recipes = get_highest_count_for_recipes('crafting_recipes')['highest_count'];
-	$highest_friendship = get_player_with_highest_friendships()['highest_count'];
+	$highest_items_shipped 		= get_highest_count_for_category('shipped_items')['highest_count'];
+	$highest_farmer_level 		= get_highest_count_for_category('farmer_level')['highest_count'];
+	$highest_fish_caught 		= get_highest_count_for_category('fish_caught')['highest_count'];
+	$highest_cooking_recipes 	= get_highest_count_for_category('cooking_recipes')['highest_count'];
+	$highest_crafting_recipes 	= get_highest_count_for_category('crafting_recipes')['highest_count'];
+	$highest_friendship 		= get_player_with_highest_friendships()['highest_count'];
 
 	return array(
 		"Golden Walnuts found"		=> get_element_completion_percentage(get_perfection_max_elements()[$game_version]['golden_walnuts'], (int) $general_data['golden_walnuts']) * 5,

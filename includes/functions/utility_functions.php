@@ -236,6 +236,28 @@ function get_total_skills_level(object $data):int {
 	return ($data->farmingLevel + $data->miningLevel + $data->combatLevel + $data->foragingLevel + $data->fishingLevel);
 }
 
+function get_pet_frienship_points():int {
+	$locations = $GLOBALS['untreated_all_players_data']->locations->GameLocation;
+	foreach($locations as $location) {
+		if(isset($location->characters))
+			foreach($location->characters->NPC as $npc)
+				if(isset($npc->petType))
+					return (int) $npc->friendshipTowardFarmer;
+	}
+
+	return 0;
+}
+
+function get_is_married():bool {
+	$data = $GLOBALS['untreated_player_data'];
+	return isset($data->spouse);
+}
+
+function get_spouse():mixed {
+	$data = $GLOBALS['untreated_player_data'];
+	return (!empty($data->spouse)) ? $data->spouse : null;
+}
+
 function is_objective_completed(int $current_counter, int $limit):bool {
     return ($current_counter >= $limit);
 }
@@ -295,6 +317,11 @@ function is_golden_clock_on_farm():bool {
 		}
 	}
 	return false;
+}
+
+function get_house_upgrade_level():int {
+	$data = $GLOBALS['untreated_player_data'];
+	return (int) $data->houseUpgradeLevel;
 }
 
 function get_game_duration(int $duration):string {
