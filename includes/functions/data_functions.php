@@ -112,6 +112,7 @@ function get_aggregated_data(object $data):array {
     
     return array(
         'general' => array(
+            'id'                    => (int) $data->UniqueMultiplayerID,
             'game_version'          => (string) $general_data->gameVersion,
             'game_version_score'    => $game_version_score,
             'should_spawn_monsters' => $should_spawn_monsters,
@@ -122,6 +123,7 @@ function get_aggregated_data(object $data):array {
             'favorite_thing'        => (string) $data->favoriteThing,
             'animal_type'           => (string) $data->whichPetType,
             'spouse'                => get_spouse(),
+            'children'              => get_children_amount((int) $data->UniqueMultiplayerID),
             'house_level'           => get_house_upgrade_level(),
             'date'                  => get_formatted_date(),
             'game_duration'         => get_game_duration((int) $data->millisecondsPlayed),

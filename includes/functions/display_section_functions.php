@@ -185,7 +185,7 @@ function display_header():string {
             <div class='header'>
                 <span class='player'>
                     <img src='{$images_path}icons/" . strtolower($gender) . ".png' alt='Gender logo: $gender' class='player_gender_logo'/>
-                    <span class='data player_name'>" . formate_usernames($name) . "<span class='data-label'>$farmer_level</span></span>
+                    <span class='data player_name'>" . formate_usernames($name) . "$children<span class='data-label'>$farmer_level</span></span>
                 </span>
 
                 <span class='date'>
