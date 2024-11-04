@@ -16,4 +16,3 @@
     <title>Stardew Dashboard</title>
 </head>
 <body>
-
