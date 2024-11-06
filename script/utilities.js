@@ -168,6 +168,18 @@ function load_elements() {
 	// Buttons & panels
 	const buttons = [
 		{
+			"open_button"    : ".landing-settings",
+			"exit_button"    : ".exit-settings",
+			"modal_panel"    : ".settings",
+			"disable_scroll" : false
+		},
+		{
+			"open_button"    : ".landing-upload",
+			"exit_button"    : ".exit-upload",
+			"modal_panel"    : ".upload-panel",
+			"disable_scroll" : false
+		},
+		{
 			"open_button"    : ".main-settings",
 			"exit_button"    : ".exit-settings",
 			"modal_panel"    : ".settings",
