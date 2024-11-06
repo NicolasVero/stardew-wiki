@@ -227,7 +227,6 @@ function load_elements() {
 	});
 
 	update_tooltips_after_ajax();
-
 }
 
 function feedback_custom_radio() {
