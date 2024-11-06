@@ -154,7 +154,7 @@ function array_keys_exists(array $keys, array $array):bool {
 
 function sanitize_json_with_version(string $json_name, bool $version_controler = false):array {
 
-	$original_json = decode($json_name);
+	$original_json = $GLOBALS['json'][$json_name];
 	$game_version_score = (isset($GLOBALS['game_version_score'])) ? $GLOBALS['game_version_score'] : "";
 
 	$sanitize_json = array();
@@ -172,28 +172,46 @@ function find_reference_in_json(mixed $id, string $file):mixed {
     return isset($json_file[$id]) ? $json_file[$id] : null;
 }
 
-function load_custom_ids():void {
-	$GLOBALS['custom_ids'] = decode('custom_ids');
+function load_all_json():void {
+	$all_json = array(
+		'achievements_details',
+		'achievements',
+		'all_items',
+		'artifacts',
+		'books',
+		'cooking_recipes',
+		'crafting_recipes',
+		'custom_ids',
+		'enemies',
+		'festivals',
+		'fish',
+		'marriables',
+		'masteries',
+		'minerals',
+		'quests',
+		'shipped_items',
+		'skills',
+		'special_orders',
+		'unlockables',
+		'villagers_birthday',
+		'villagers',
+		'wiki_links'
+	);
+
+	foreach($all_json as $json_file)
+		$GLOBALS['json'][$json_file] = decode($json_file);
 }
 
 function get_custom_id(string $item):int {
-    return array_search($item, $GLOBALS['custom_ids']);
-}
-
-function load_all_items():void {
-	$GLOBALS['all_items'] = decode('all_items');
+    return array_search($item, $GLOBALS['json']['custom_ids']);
 }
 
 function get_item_id_by_name(string $name):int {
-	return array_search($name, $GLOBALS['all_items']);
-}
-
-function load_wiki_links():void {
-	$GLOBALS['wiki_links'] = decode('wiki_links');
+	return array_search($name, $GLOBALS['json']['all_items']);
 }
 
 function get_wiki_link(int $id):string {
-	return $GLOBALS['wiki_links'][$id];
+	return $GLOBALS['json']['wiki_links'][$id];
 }
 
 function get_number_of_player():int {

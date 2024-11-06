@@ -7,9 +7,7 @@ function load_save($save_file, $use_ajax = true):mixed {
     $uploadedFile = $save_file;
     $data = simplexml_load_file($uploadedFile);
 
-    load_custom_ids();
-    load_all_items();
-    load_wiki_links();
+    load_all_json();
     $GLOBALS['untreated_all_players_data'] = $data;
 
     $players_data = get_all_players_datas();

@@ -652,7 +652,7 @@ function display_unlockables():string {
 	$version_score = $GLOBALS['game_version_score'];
 
     $images_path = get_images_folder() . "unlockables/";
-	$decoded_unlockables = decode('unlockables');
+	$decoded_unlockables = $GLOBALS['json']['unlockables'];
 
     $structure = "
         <section class='gallery unlockables-section _50'>
@@ -699,7 +699,7 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
 	$version_score = $GLOBALS['game_version_score'];
 
 	$images_path = get_images_folder() . "$json_filename/";
-    $json_datas = decode($json_filename);
+    $json_datas = $GLOBALS['json'][$json_filename];
 
     extract($panel_details);
     $player_id = $GLOBALS['player_id'];
