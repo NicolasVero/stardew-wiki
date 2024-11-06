@@ -376,28 +376,28 @@ function get_children_amount(int $id):array {
 	return $children_name;
 }
 
-function get_child_tooltip(string $married, array $children):string {
+function get_child_tooltip(string $spouse, array $children):string {
 
-	$gender = get_the_married_person_gender($married);
+	$gender = get_the_married_person_gender($spouse);
 	$children_count = count($children);
 	$children_names = ($children_count == 1) ? $children[0] : implode(" and ", $children);
 
 	if($children_count == 0) {
-		return "With $gender $married, haven't yet had children";
+		return "With $gender $spouse, haven't yet had children";
 	}
 
-	return "With $gender $married, you had $children_count children : $children_names";
+	return "With $gender $spouse, you had $children_count children : $children_names";
 }
 
-function get_the_married_person_gender(string $married):string {
-	$spouses = array("abigail", "emily", "haley", "leah", "maru", "penny");
+function get_the_married_person_gender(string $spouse):string {
+	$wifes = array("abigail", "emily", "haley", "leah", "maru", "penny");
 	$husbands = array("alex", "elliott", "harvey", "sam", "sebastian", "shane");
 
-	if(in_array(strtolower($married), $spouses)) {
-		return "your spouse";
+	if(in_array(strtolower($spouse), $wifes)) {
+		return "your wife";
 	}
 
-	if(in_array(strtolower($married), $husbands)) {
+	if(in_array(strtolower($spouse), $husbands)) {
 		return "your husband";
 	}
 

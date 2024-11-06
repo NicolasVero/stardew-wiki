@@ -315,8 +315,11 @@ function display_general_stats():string {
                 .
                 "
                 <span>
-                    <img src='{$images_path}icons/house.png' alt='House upgrades'/>
-                    <span class='data data-house-upgrade'>$house_level / 3</span>
+                    <span class='tooltip'>
+                        <img src='{$images_path}icons/house.png' alt='House upgrades'/>
+                        <span>$house_level / 3 improvements</span>
+                    </span>
+                    <span class='data data-house-upgrade'>$house_level</span>
                     <span class='data-label'>upgrades done</span>
                 </span>
             </div>
