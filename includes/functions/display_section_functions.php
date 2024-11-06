@@ -328,7 +328,7 @@ function display_general_stats():string {
                         <img src='{$images_path}icons/house.png' alt='House upgrades'/>
                         <span>Upgrades done to the house</span>
                     </span>
-                    <span class='data data-house-upgrade'>$house_level</span>
+                    <span class='data data-house-upgrade'>$house_level / 3</span>
                     <span class='data-label'>upgrades done</span>
                 </span>
             </div>
