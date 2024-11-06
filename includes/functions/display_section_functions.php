@@ -301,6 +301,28 @@ function display_general_stats():string {
                     <span class='data data-perfection'>" . get_perfection_percentage() . "%</span>
                     <span class='data-label'>perfection progression</span>
                 </span>
+
+                "
+                .
+                (($spouse) ?
+                "
+                <span>
+                    <span class='tooltip'>
+                        <img src='{$images_path}characters/" . lcfirst($spouse) . ".png' alt='$spouse'/>
+                        <span>
+                            Spouse: $spouse
+                            <br>
+                            Children: " . ((count($children) == 0) ? "none" : implode(", ", $children)) . "
+                        </span>
+                    </span>
+                    <span class='data data-family'>" . count($children) . "</span>
+                    <span class='data-label'>children</span>
+                </span>
+                "
+                : 
+                "")
+                .
+                "
             </div>
         </section>
     ";

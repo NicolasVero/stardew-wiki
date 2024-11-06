@@ -324,9 +324,9 @@ function get_house_upgrade_level():int {
 	return (int) $data->houseUpgradeLevel;
 }
 
-function get_children_amount(int $id):int {
+function get_children_amount(int $id):array {
 	$locations = $GLOBALS['untreated_all_players_data']->locations->GameLocation;
-	$children_count = 0;
+	$children_name = array();
 
 	foreach($locations as $location) {
 		if(isset($location->characters)) {
@@ -335,7 +335,7 @@ function get_children_amount(int $id):int {
 					continue;
 
 				if((int) $npc->idOfParent == $id)
-					$children_count++;
+					array_push($children_name, $npc->name);
 			}
 		}
 	}
@@ -349,13 +349,13 @@ function get_children_amount(int $id):int {
 							continue;
 
 						if((int) $npc->idOfParent == $id)
-							$children_count++;
+							array_push($children_name, $npc->name);
 					}
 				}
 			}
 		}
 	}
-	return $children_count;
+	return $children_name;
 }
 
 function get_game_duration(int $duration):string {
