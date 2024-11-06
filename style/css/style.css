@@ -748,8 +748,15 @@ header .sub-header .all-money {
   display: flex;
   gap: 50px;
 }
-header .sub-header img {
+header .sub-header .all-money img {
   height: 16px;
+}
+header .sub-header .perfection-stats {
+  display: flex;
+  gap: 50px;
+}
+header .sub-header .perfection-stats img {
+  height: 24px;
 }
 ::selection,
 moz::selection {

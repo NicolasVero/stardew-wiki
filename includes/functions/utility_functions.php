@@ -376,6 +376,34 @@ function get_children_amount(int $id):array {
 	return $children_name;
 }
 
+function get_child_tooltip(string $married, array $children):string {
+
+	$gender = get_the_married_person_gender($married);
+	$children_count = count($children);
+	$children_names = ($children_count == 1) ? $children[0] : implode(" and ", $children);
+
+	if($children_count == 0) {
+		return "With $gender $married, haven't yet had children";
+	}
+
+	return "With $gender $married, you had $children_count children : $children_names";
+}
+
+function get_the_married_person_gender(string $married):string {
+	$spouses = array("abigail", "emily", "haley", "leah", "maru", "penny");
+	$husbands = array("alex", "elliott", "harvey", "sam", "sebastian", "shane");
+
+	if(in_array(strtolower($married), $spouses)) {
+		return "your spouse";
+	}
+
+	if(in_array(strtolower($married), $husbands)) {
+		return "your husband";
+	}
+
+	return "";
+}
+
 function get_game_duration(int $duration):string {
 
     $totalSeconds = intdiv($duration, 1000);

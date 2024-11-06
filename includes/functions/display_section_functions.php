@@ -185,7 +185,8 @@ function display_header():string {
             <div class='header'>
                 <span class='player'>
                     <img src='{$images_path}icons/" . strtolower($gender) . ".png' alt='Gender logo: $gender' class='player_gender_logo'/>
-                    <span class='data player_name'>" . formate_usernames($name) . "<span class='data-label'>$farmer_level</span></span>
+                    <span class='data player_name'>" . formate_usernames($name) . "<span class='data-label'> $farmer_level</span></span>
+                    <span class='data player_name'> works at : $farm_name</span>
                 </span>
 
                 <span class='date'>
@@ -225,8 +226,21 @@ function display_header():string {
                         <span class='data-label'>casino coins</span>
                     </span>
                 </span>
-                <span>
-                    <span class='data-info farm-name'>$farm_name</span>
+                <span class='perfection-stats'>
+                    <span>
+                        <span class='tooltip'>
+                            <img src='{$images_path}characters/grandpa.png' alt='GrandPa candles'/>
+                            <span>Number of candles lit on the altar ($grandpa_score points)</span>
+                        </span>
+                        <span class='data data-candles'>" . get_candles_lit($grandpa_score) . "</span>
+                        <span class='data-label'>candles lit</span>
+                    </span>
+
+                    <span>
+                        <img src='{$images_path}icons/stardrop.png' alt='Perfection'/>
+                        <span class='data data-perfection'>" . get_perfection_percentage() . "%</span>
+                        <span class='data-label'>perfection progression</span>
+                    </span>
                 </span>
             </div>
         </header>
@@ -283,25 +297,6 @@ function display_general_stats():string {
                     <span class='data data-mine-level'>" . formate_number($mine_level) . "</span>
                     <span class='data-label'>deepest mine level</span>
                 </span>
-
-                <span>
-                    <span class='tooltip'>
-                        <img src='{$images_path}characters/grandpa.png' alt='GrandPa candles'/>
-                        <span>Number of candles lit on the altar ($grandpa_score points)</span>
-                    </span>
-                    <span class='data data-candles'>" . get_candles_lit($grandpa_score) . "</span>
-                    <span class='data-label'>candles lit</span>
-                </span>
-
-                <span>
-                    <span class='tooltip'>
-                        <img src='{$images_path}icons/stardrop.png' alt='Perfection'/>
-                        <span>Percentage of perfection</span>
-                    </span>
-                    <span class='data data-perfection'>" . get_perfection_percentage() . "%</span>
-                    <span class='data-label'>perfection progression</span>
-                </span>
-
                 "
                 .
                 (($spouse) ?
@@ -309,11 +304,7 @@ function display_general_stats():string {
                 <span>
                     <span class='tooltip'>
                         <img src='{$images_path}characters/" . lcfirst($spouse) . ".png' alt='$spouse'/>
-                        <span>
-                            Spouse: $spouse
-                            <br>
-                            Children: " . ((count($children) == 0) ? "none" : implode(", ", $children)) . "
-                        </span>
+                        <span> " . get_child_tooltip($spouse, $children) . "</span>
                     </span>
                     <span class='data data-family'>" . count($children) . "</span>
                     <span class='data-label'>children</span>
@@ -324,10 +315,7 @@ function display_general_stats():string {
                 .
                 "
                 <span>
-                    <span class='tooltip'>
-                        <img src='{$images_path}icons/house.png' alt='House upgrades'/>
-                        <span>Upgrades done to the house</span>
-                    </span>
+                    <img src='{$images_path}icons/house.png' alt='House upgrades'/>
                     <span class='data data-house-upgrade'>$house_level / 3</span>
                     <span class='data-label'>upgrades done</span>
                 </span>
