@@ -185,8 +185,7 @@ function display_header():string {
             <div class='header'>
                 <span class='player'>
                     <img src='{$images_path}icons/" . strtolower($gender) . ".png' alt='Gender logo: $gender' class='player_gender_logo'/>
-                    <span class='data player_name'>" . formate_usernames($name) . "<span class='data-label'> $farmer_level</span></span>
-                    <span class='data player_name'> works at : $farm_name</span>
+                    <span class='data player_name'>" . formate_usernames($name) . "<span class='data-label'> $farmer_level at $farm_name</span></span>
                 </span>
 
                 <span class='date'>
@@ -205,19 +204,19 @@ function display_header():string {
                     <span>
                         <img src='{$images_path}icons/gold.png' alt='Gold coins'/>
                         <span class='data actual-gold'>" . formate_number($golds) . "</span>
-                        <span class='data-label'>golds</span>
+                        <span class='data-label'>gold coins</span>
                     </span>
 
                     <span>
                         <img src='{$images_path}icons/golden_walnut.png' alt='Golden walnuts'/>
                         <span class='data actual-golden-walnut'>" . formate_number($golden_walnuts) . " / 130</span>
-                        <span class='data-label'>golden walnut</span>
+                        <span class='data-label'>golden walnuts</span>
                     </span>
 
                     <span>
                         <img src='{$images_path}icons/qi_gem.png' alt='Qi gems'/>
                         <span class='data actual-qi-gem'>" . formate_number($qi_gems) . "</span>
-                        <span class='data-label'>qi gem</span>
+                        <span class='data-label'>qi gems</span>
                     </span>
 
                     <span>
@@ -286,7 +285,7 @@ function display_general_stats():string {
                 <span>
                     <img src='{$images_path}icons/inventory.png' alt='Inventory'/>
                     <span class='data data-inventory'>" . formate_number($max_items) . "</span>
-                    <span class='data-label'>max inventory</span>
+                    <span class='data-label'>inventory spaces</span>
                 </span>
 
                 <span>
@@ -307,7 +306,7 @@ function display_general_stats():string {
                         <span> " . get_child_tooltip($spouse, $children) . "</span>
                     </span>
                     <span class='data data-family'>" . count($children) . "</span>
-                    <span class='data-label'>children</span>
+                    <span class='data-label'>" . ((count($children) > 1) ? 'children' : 'child') . "</span>
                 </span>
                 "
                 : 
