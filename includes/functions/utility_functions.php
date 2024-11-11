@@ -9,7 +9,7 @@ function log_(mixed $element, string $title = ''):void {
     echo "<pre>" . print_r($element, true) . "</pre>";
 } 
 
-function get_images_folder(bool $is_external = true):string {
+function get_images_folder(bool $is_external = false):string {
 	return ($is_external) ? get_github_medias_url() : get_site_root() . 'medias/images/';
 }
 
@@ -174,6 +174,7 @@ function find_reference_in_json(mixed $id, string $file):mixed {
 
 function load_all_json():void {
 	$all_json = array(
+		'all_dates',
 		'achievements_details',
 		'achievements',
 		'all_items',
@@ -248,6 +249,10 @@ function get_formatted_date(bool $display_date = true):mixed {
         'season' => $season,
         'year' => $year
     );
+}
+
+function get_player_season():string {
+	return get_formatted_date(false)['season'];
 }
 
 function get_total_skills_level(object $data):int {

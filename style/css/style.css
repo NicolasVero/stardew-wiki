@@ -137,6 +137,15 @@ img,
   z-index: 1000;
   scrollbar-width: none;
 }
+.other-panel {
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-clip: padding-box;
+  overflow-y: scroll;
+  z-index: 1000;
+  scrollbar-width: none;
+}
 .data-info {
   font-family: "Stardew Valley Stonks", serif;
   font-size: 16px;
@@ -1071,6 +1080,53 @@ body main .info-section.monster-eradication-goals-section > .goals > .goal img.r
   width: 28px;
   height: 28px;
   object-fit: contain;
+}
+body main .info-section.calendar-section {
+  display: none;
+  position: fixed;
+  width: 960px;
+  aspect-ratio: 1.43;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-clip: padding-box;
+  overflow-y: scroll;
+  z-index: 1000;
+  scrollbar-width: none;
+}
+body main .info-section.calendar-section > .calendar-block {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+body main .info-section.calendar-section > .calendar-block > img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+body main .info-section.calendar-section > .calendar-block > table {
+  position: absolute;
+  border-collapse: collapse;
+  top: 128px;
+  left: 32px;
+  width: fit-content;
+  height: fit-content;
+}
+body main .info-section.calendar-section > .calendar-block > table > tbody > tr {
+  display: block;
+  width: fit-content;
+  height: 128px;
+}
+body main .info-section.calendar-section > .calendar-block > table > tbody > tr > td {
+  box-sizing: border-box;
+  padding: 0;
+  width: 128px;
+  height: 128px;
+  cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
+}
+body main .info-section.calendar-section > .calendar-block > table > tbody > tr > td:hover {
+  border: solid 2px blue;
 }
 body main .separated-galleries {
   width: 100%;

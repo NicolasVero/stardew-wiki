@@ -189,7 +189,7 @@ function display_header():string {
                 </span>
 
                 <span class='date'>
-                    <span class='data date-in-game'>$date</span>
+                    <span class='data date-in-game view-calendar-$player_id modal-opener'>$date</span>
 					$festival_icon
                 </span>
 
@@ -1001,4 +1001,37 @@ function get_farmer_level():string {
     $level = (get_total_skills_level($data) + $data->luckLevel) / 2;
 
     return $level_names[floor($level / 2)];
+}
+
+function display_calendar_panel():string {
+	$player_id = $GLOBALS['player_id'];
+    $season = get_player_season();
+
+    $table_structure = '
+        <table>
+            <tbody>';
+
+    for($lines = 0; $lines < 4; $lines++) {
+        $table_structure .= '<tr>';
+
+        for($columns = 0; $columns < 7; $columns++) {
+            $table_structure .= '<td>';
+            $table_structure .= '</td>';
+        }
+
+        $table_structure .= '</tr>';
+    }
+
+    $table_structure .= '
+            </tbody>
+        </table>';
+
+    return "
+        <section class='calendar-section info-section calendar-$player_id modal-window'>
+            <span class='calendar-block'>
+                <img src='" . get_images_folder() . "content/calendar_$season.png'>
+                $table_structure
+            </span>
+        </section>
+    ";
 }

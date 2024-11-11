@@ -215,6 +215,13 @@ function load_elements() {
 			"modal_panel"    : ".monster-eradication-goals-" + i,
 			"disable_scroll" : false
 		});
+
+		buttons.push({
+			"open_button"    : ".view-calendar-" + i,
+			"exit_button"    : ".exit-calendar-" + i,
+			"modal_panel"    : ".calendar-" + i,
+			"disable_scroll" : false
+		});
 	}
 
 	buttons.forEach(button => {

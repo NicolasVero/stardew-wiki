@@ -354,6 +354,54 @@ body {
 					}
 				}
 			}
+
+			&.calendar-section {
+				display: none;
+				position: fixed;
+				width: (480px * 2);
+				aspect-ratio: 1.43;
+				.other-panel;
+				
+				& > .calendar-block {
+					position: relative;
+					display: block;
+					width: 100%;
+					height: 100%;
+
+					& > img {
+						position: absolute;
+						width: 100%;
+						height: 100%;
+					}
+
+					& > table {
+						position: absolute;
+						border-collapse: collapse;
+						top: (64px * 2);
+						left: (16px * 2);
+						width: fit-content;
+						height: fit-content;
+						
+						& > tbody > tr {
+							display: block;
+							width: fit-content;
+							height: (64px * 2);
+
+							& > td {
+								box-sizing: border-box;
+								padding: 0;
+								width: (64px * 2);
+								height: (64px * 2);
+								cursor: @pointer;
+
+								&:hover {
+									border: solid 2px blue;
+								}
+							}
+						}
+					}
+				}
+			}
 		}
 	
 		.separated-galleries {
