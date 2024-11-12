@@ -905,8 +905,8 @@ function get_level_progress_bar(int $level):string {
     $structure = "<span class='level-progress-bar'>";
 
     for($i = 1; $i <= $max_level; $i++) {
-        if($level >= $i) $level_bar = get_images_folder() . (($i % $max_level / 2 == 0) ? "icons/big_level.png"       : "icons/level.png");
-        else             $level_bar = get_images_folder() . (($i % $max_level / 2 == 0) ? "icons/big_level_empty.png" : "icons/level_empty.png");
+        if($level >= $i) $level_bar = get_images_folder() . (($i % ($max_level / 2) == 0) ? "icons/big_level.png"       : "icons/level.png");
+        else             $level_bar = get_images_folder() . (($i % ($max_level / 2) == 0) ? "icons/big_level_empty.png" : "icons/level_empty.png");
         
         $structure .= "<img src='$level_bar' alt=''/>";        
     }

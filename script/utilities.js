@@ -308,7 +308,7 @@ function easter_egg_kaaris() {
         }
     };
 
-    element.addEventListener('click', play_once);
+    element.addEventListener('dblclick', play_once);
 }
 
 function easter_egg_haley() {
@@ -349,4 +349,3 @@ function easter_egg_haley() {
         element.addEventListener('dblclick', play_once);
     });
 }
-
