@@ -223,6 +223,7 @@ function load_elements() {
 		toggle_landing_page(display);
 	});
 
+	load_easter_eggs();
 	update_tooltips_after_ajax();
 }
 
@@ -285,3 +286,26 @@ const set_element_display = (element, show) => {
 };
 
 const has_class = (element, class_name) => element.classList.contains(class_name);
+
+function load_easter_eggs() {
+	easter_egg_kaaris();
+}
+
+function easter_egg_kaaris() {
+    const element = document.querySelector('.easter_egg_kaaris');
+    if (!element) return;
+
+    const audio = new Audio(get_site_root() + 'medias/audio/kaaris_maison-citrouille.mp3');
+    let isPlaying = false;
+
+    const play_once = () => {
+        if (!isPlaying) {
+            isPlaying = true;
+            audio.play().finally(() => {
+                isPlaying = false;
+            });
+        }
+    };
+
+    element.addEventListener('click', play_once);
+}
