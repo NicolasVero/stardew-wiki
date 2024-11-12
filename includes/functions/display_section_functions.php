@@ -158,7 +158,7 @@ function display_feedback_panel():string {
                         <textarea rows='8' id='message' name='message' required></textarea>
                     </span>
 
-                    <input type='submit'>
+                    <input type='submit' value='Send feedback'>
                 </form>
             </span>
         </section>
