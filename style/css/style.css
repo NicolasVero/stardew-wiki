@@ -1181,3 +1181,18 @@ body main .gallery img.enemies {
 body main > :last-child {
   margin-bottom: 25px;
 }
+.fullscreen-image {
+  position: fixed ;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  object-fit: cover;
+  z-index: 1000;
+  opacity: 0;
+  transition: opacity 1s ease;
+  pointer-events: none;
+}
+.fullscreen-image.show {
+  opacity: 1;
+}
