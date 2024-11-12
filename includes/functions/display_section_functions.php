@@ -1006,25 +1006,55 @@ function get_farmer_level():string {
 function display_calendar_panel():string {
 	$player_id = $GLOBALS['player_id'];
     $season = get_player_season();
+    $all_dates = $GLOBALS['json']['all_dates'];
 
-    $table_structure = '
+    $table_structure = "
         <table>
-            <tbody>';
+            <tbody>";
 
     for($lines = 0; $lines < 4; $lines++) {
-        $table_structure .= '<tr>';
+        $table_structure .= "<tr>";
 
-        for($columns = 0; $columns < 7; $columns++) {
-            $table_structure .= '<td>';
-            $table_structure .= '</td>';
+        for($columns = 1; $columns <= 7; $columns++) {
+            $day_digit = ($lines * 7) + $columns;
+            $date = $day_digit . "/" . $season;
+
+            if(array_key_exists($date, $all_dates)) {
+                $wiki_link = (is_array($all_dates[$date])) ?
+                    array(
+                        get_wiki_link(get_custom_id($all_dates[$date][0])),
+                        get_wiki_link(get_custom_id($all_dates[$date][1]))
+                    )
+                    :
+                    get_wiki_link(get_custom_id($all_dates[$date]));
+                $table_structure .= (is_array($all_dates[$date])) ?
+                    "<td class='double-event'>
+                        <div>
+                            <a href='" . $wiki_link[0] . "' target='_blank'></a>
+                        </div>
+                        <div>
+                            <a href='" . $wiki_link[1] . "' target='_blank'></a>
+                        </div>
+                    </td>"
+                    :
+                    "<td class='simple-event'>
+                        <div>
+                            <a href='$wiki_link' target='_blank'></a>
+                        </div>
+                    </td>";
+            } else $table_structure .= "
+                <td class='simple-event'>
+                    <div></div>
+                </td>";
+
         }
 
-        $table_structure .= '</tr>';
+        $table_structure .= "</tr>";
     }
 
-    $table_structure .= '
+    $table_structure .= "
             </tbody>
-        </table>';
+        </table>";
 
     return "
         <section class='calendar-section info-section calendar-$player_id modal-window'>

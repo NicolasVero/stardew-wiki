@@ -1108,8 +1108,8 @@ body main .info-section.calendar-section > .calendar-block > img {
 body main .info-section.calendar-section > .calendar-block > table {
   position: absolute;
   border-collapse: collapse;
-  top: 128px;
-  left: 32px;
+  top: 130px;
+  left: 34px;
   width: fit-content;
   height: fit-content;
 }
@@ -1120,13 +1120,32 @@ body main .info-section.calendar-section > .calendar-block > table > tbody > tr 
 }
 body main .info-section.calendar-section > .calendar-block > table > tbody > tr > td {
   box-sizing: border-box;
+  text-align: center;
   padding: 0;
   width: 128px;
   height: 128px;
+}
+body main .info-section.calendar-section > .calendar-block > table > tbody > tr > td > div {
+  height: 90%;
+  margin: 0 auto;
+  vertical-align: middle;
+}
+body main .info-section.calendar-section > .calendar-block > table > tbody > tr > td > div > a {
+  display: block;
+  width: 100%;
+  height: 100%;
   cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
 }
-body main .info-section.calendar-section > .calendar-block > table > tbody > tr > td:hover {
+body main .info-section.calendar-section > .calendar-block > table > tbody > tr > td > div:hover {
   border: solid 2px blue;
+}
+body main .info-section.calendar-section > .calendar-block > table > tbody > tr > td.simple-event > div {
+  display: block;
+  width: 90%;
+}
+body main .info-section.calendar-section > .calendar-block > table > tbody > tr > td.double-event > div {
+  display: inline-block;
+  width: 45%;
 }
 body main .separated-galleries {
   width: 100%;

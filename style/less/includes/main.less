@@ -377,8 +377,8 @@ body {
 					& > table {
 						position: absolute;
 						border-collapse: collapse;
-						top: (64px * 2);
-						left: (16px * 2);
+						top: ((64px + (2px / 2)) * 2);
+						left: ((16px + (2px / 2)) * 2);
 						width: fit-content;
 						height: fit-content;
 						
@@ -389,13 +389,40 @@ body {
 
 							& > td {
 								box-sizing: border-box;
+								text-align: center;
 								padding: 0;
 								width: (64px * 2);
 								height: (64px * 2);
-								cursor: @pointer;
 
-								&:hover {
-									border: solid 2px blue;
+								& > div {
+									height: 90%;
+									margin: 0 auto;
+									vertical-align: middle;
+
+									& > a {
+										display: block;
+										width: 100%;
+										height: 100%;
+										cursor: @pointer;
+									}
+
+									&:hover {
+										border: solid 2px blue;
+									}
+								}
+							}
+
+							& > td.simple-event {
+								& > div {
+									display: block;
+									width: 90%;
+								}
+							}
+
+							& > td.double-event {
+								& > div {
+									display: inline-block;
+									width: 45%;
 								}
 							}
 						}
