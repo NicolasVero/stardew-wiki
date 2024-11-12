@@ -315,29 +315,32 @@ function easter_egg_haley() {
 
     const elements = document.querySelectorAll(".character-name.Haley");
 
-    if(!elements) return;
+    if (!elements) return;
 
     const audio = new Audio(get_site_root() + 'medias/audio/haley.mp3');
     let isPlaying = false;
 
-    const fullScreenImage = document.createElement('img');
-    fullScreenImage.src = 'https://raw.githubusercontent.com/NicolasVero/stardew-dashboard/refs/heads/master/medias/images/characters/haley.png';  // Assigne l'URL de l'image ici
-    fullScreenImage.classList.add('fullscreen-image');
-    document.body.appendChild(fullScreenImage);
-
     const play_once = () => {
-        console.log('test');
-        if(!isPlaying) {
+        if (!isPlaying) {
             isPlaying = true;
 
-            fullScreenImage.classList.add('show');
-            
+            const full_screen_image = document.createElement('img');
+            full_screen_image.src = 'https://raw.githubusercontent.com/NicolasVero/stardew-dashboard/refs/heads/master/medias/images/characters/haley.png';
+            full_screen_image.classList.add('fullscreen-image');
+            document.body.appendChild(full_screen_image);
+
+            full_screen_image.classList.add('show');
+
             audio.play().finally(() => {
                 isPlaying = false;
             });
 
             setTimeout(() => {
-                fullScreenImage.classList.remove('show');
+                full_screen_image.classList.remove('show');
+                
+                full_screen_image.addEventListener('transitionend', () => {
+                    full_screen_image.remove();
+                });
             }, 1000);
         }
     };
@@ -346,3 +349,4 @@ function easter_egg_haley() {
         element.addEventListener('dblclick', play_once);
     });
 }
+

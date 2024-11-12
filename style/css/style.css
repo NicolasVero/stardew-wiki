@@ -1182,10 +1182,10 @@ body main > :last-child {
   margin-bottom: 25px;
 }
 .fullscreen-image {
-  position: fixed ;
+  position: fixed;
   top: 0;
-  left: 0;
-  width: 100vw;
+  left: -40vw;
+  width: 180vw;
   height: 100vh;
   object-fit: cover;
   z-index: 1000;
