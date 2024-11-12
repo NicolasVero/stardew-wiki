@@ -144,19 +144,17 @@ function loard_error_page_items() {
 		{
 			"open_button"    : ".main-settings",
 			"exit_button"    : ".exit-settings",
-			"modal_panel"    : ".settings",
-			"disable_scroll" : false
+			"modal_panel"    : ".settings"
 		},
 		{
 			"open_button"    : ".file-upload",
 			"exit_button"    : ".exit-upload",
-			"modal_panel"    : ".upload-panel",
-			"disable_scroll" : false
+			"modal_panel"    : ".upload-panel"
 		}
 	];
 	
 	buttons.forEach(button => {
-		activate_buttons(button.open_button, button.exit_button, button.modal_panel, button.disable_scroll);
+		activate_buttons(button.open_button, button.exit_button, button.modal_panel);
 	});
 }
 
@@ -170,26 +168,22 @@ function load_elements() {
 		{
 			"open_button"    : ".landing-settings",
 			"exit_button"    : ".exit-settings",
-			"modal_panel"    : ".settings",
-			"disable_scroll" : false
+			"modal_panel"    : ".settings"
 		},
 		{
 			"open_button"    : ".landing-upload",
 			"exit_button"    : ".exit-upload",
-			"modal_panel"    : ".upload-panel",
-			"disable_scroll" : false
+			"modal_panel"    : ".upload-panel"
 		},
 		{
 			"open_button"    : ".main-settings",
 			"exit_button"    : ".exit-settings",
-			"modal_panel"    : ".settings",
-			"disable_scroll" : false
+			"modal_panel"    : ".settings"
 		},
 		{
 			"open_button"    : ".file-upload",
 			"exit_button"    : ".exit-upload",
-			"modal_panel"    : ".upload-panel",
-			"disable_scroll" : false
+			"modal_panel"    : ".upload-panel"
 		}
 	];
 
@@ -198,34 +192,30 @@ function load_elements() {
 		buttons.push({
 			"open_button"    : ".view-all-friendships-" + i,
 			"exit_button"    : ".exit-all-friendships-" + i,
-			"modal_panel"    : ".all-friends-" + i,
-			"disable_scroll" : false
+			"modal_panel"    : ".all-friends-" + i
 		});
 
 		buttons.push({
 			"open_button"    : ".view-all-quests-" + i,
 			"exit_button"    : ".exit-all-quests-" + i,
-			"modal_panel"    : ".all-quests-" + i,
-			"disable_scroll" : false
+			"modal_panel"    : ".all-quests-" + i
 		});
 
 		buttons.push({
 			"open_button"    : ".view-monster-eradication-goals-" + i,
 			"exit_button"    : ".exit-monster-eradication-goals-" + i,
-			"modal_panel"    : ".monster-eradication-goals-" + i,
-			"disable_scroll" : false
+			"modal_panel"    : ".monster-eradication-goals-" + i
 		});
 
 		buttons.push({
 			"open_button"    : ".view-calendar-" + i,
 			"exit_button"    : ".exit-calendar-" + i,
-			"modal_panel"    : ".calendar-" + i,
-			"disable_scroll" : false
+			"modal_panel"    : ".calendar-" + i
 		});
 	}
 
 	buttons.forEach(button => {
-		activate_buttons(button.open_button, button.exit_button, button.modal_panel, button.disable_scroll);
+		activate_buttons(button.open_button, button.exit_button, button.modal_panel);
 	});
 
 	document.getElementById('home-icon').addEventListener('click', () => {

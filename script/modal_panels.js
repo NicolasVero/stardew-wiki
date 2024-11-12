@@ -1,6 +1,6 @@
 let current_section = null;
 
-function activate_buttons(show, hide, sections_to_show, disable_scroll) {
+function activate_buttons(show, hide, sections_to_show) {
     const show_button = document.querySelectorAll(show);
     const hide_button = document.querySelectorAll(hide);
     const sections = document.querySelector(sections_to_show);
@@ -10,7 +10,7 @@ function activate_buttons(show, hide, sections_to_show, disable_scroll) {
 			hide_all_sections(true);
 
             current_section = sections;
-            toggle_visibility_and_scroll(sections, true, disable_scroll);
+            toggle_visibility(sections, true);
         });
     });
 
@@ -34,7 +34,7 @@ function activate_close_buttons(hide, sections_to_hide) {
     });
 }
 
-function toggle_visibility_and_scroll(element, should_display) {
+function toggle_visibility(element, should_display) {
     element.style.display = (should_display) ? "block" : "none";
 }
 
