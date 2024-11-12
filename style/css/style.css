@@ -1125,8 +1125,11 @@ body main .info-section.calendar-section > .calendar-block > table > tbody > tr 
   width: 128px;
   height: 128px;
 }
+body main .info-section.calendar-section > .calendar-block > table > tbody > tr > td:hover {
+  border: solid 2px blue;
+}
 body main .info-section.calendar-section > .calendar-block > table > tbody > tr > td > div {
-  height: 90%;
+  height: 100%;
   margin: 0 auto;
   vertical-align: middle;
 }
@@ -1136,12 +1139,9 @@ body main .info-section.calendar-section > .calendar-block > table > tbody > tr 
   height: 100%;
   cursor: url("../../medias/images/cursors/pointer.cur"), pointer;
 }
-body main .info-section.calendar-section > .calendar-block > table > tbody > tr > td > div:hover {
-  border: solid 2px blue;
-}
 body main .info-section.calendar-section > .calendar-block > table > tbody > tr > td.simple-event > div {
   display: block;
-  width: 90%;
+  width: 100%;
 }
 body main .info-section.calendar-section > .calendar-block > table > tbody > tr > td.double-event > div {
   display: inline-block;

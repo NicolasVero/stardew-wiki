@@ -59,7 +59,7 @@ async function AJAX_send() {
 				}
 
 				activate_feedback_ajax_trigger();
-				toggle_visibility_and_scroll(current_section, false, false);
+				toggle_visibility(current_section, false);
 				toggle_loading(false);
 			}
 		};
@@ -80,7 +80,7 @@ function activate_feedback_ajax_trigger() {
 
 			const existing_window = document.querySelector('.feedback-panel');
 			if(existing_window)
-				toggle_visibility_and_scroll(existing_window, true, false);
+				toggle_visibility(existing_window, true);
 			else
 				feedback_form_creation();
 		});

@@ -193,8 +193,8 @@ function load_elements() {
 		}
 	];
 
-	//& Remplacer 8 par le nombre de joueur de la save ?
-	for(let i = 0; i < 8; i++){
+	const max_players_in_a_save = 8;
+	for(let i = 0; i < max_players_in_a_save; i++){
 		buttons.push({
 			"open_button"    : ".view-all-friendships-" + i,
 			"exit_button"    : ".exit-all-friendships-" + i,

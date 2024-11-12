@@ -394,10 +394,16 @@ body {
 								width: (64px * 2);
 								height: (64px * 2);
 
+								&:hover {
+									border: solid 2px blue;
+								}
+
 								& > div {
-									height: 90%;
+									height: 100%;
 									margin: 0 auto;
 									vertical-align: middle;
+
+
 
 									& > a {
 										display: block;
@@ -406,16 +412,14 @@ body {
 										cursor: @pointer;
 									}
 
-									&:hover {
-										border: solid 2px blue;
-									}
+
 								}
 							}
 
 							& > td.simple-event {
 								& > div {
 									display: block;
-									width: 90%;
+									width: 100%;
 								}
 							}
 

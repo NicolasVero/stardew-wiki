@@ -260,8 +260,9 @@ function display_general_stats():string {
 
     extract($all_players_data);
     $images_path = get_images_folder();
-    $deepest_mine_level = ($mine_level > 120) ? 120 : $mine_level; 
-    $deepest_skull_mine_level = ($mine_level - 120 < 0) ? 0 : $mine_level - 120;
+    $max_mine_level = 120;
+    $deepest_mine_level = ($mine_level > $max_mine_level) ? $max_mine_level : $mine_level; 
+    $deepest_skull_mine_level = ($mine_level - $max_mine_level < 0) ? 0 : $mine_level - $max_mine_level;
     
     $deepest_mine_level_tooltip = "$deepest_mine_level floors in the Stardew Mine" . (($deepest_skull_mine_level > 0) ? " & $deepest_skull_mine_level floors in the Skull Mine" : "");
 
@@ -900,11 +901,12 @@ function display_crafting_recipes():string {
 
 function get_level_progress_bar(int $level):string {
 
+    $max_level = 10;
     $structure = "<span class='level-progress-bar'>";
 
-    for($i = 1; $i <= 10; $i++) {
-        if($level >= $i) $level_bar = get_images_folder() . (($i % 5 == 0) ? "icons/big_level.png"       : "icons/level.png");
-        else             $level_bar = get_images_folder() . (($i % 5 == 0) ? "icons/big_level_empty.png" : "icons/level_empty.png");
+    for($i = 1; $i <= $max_level; $i++) {
+        if($level >= $i) $level_bar = get_images_folder() . (($i % $max_level / 2 == 0) ? "icons/big_level.png"       : "icons/level.png");
+        else             $level_bar = get_images_folder() . (($i % $max_level / 2 == 0) ? "icons/big_level_empty.png" : "icons/level_empty.png");
         
         $structure .= "<img src='$level_bar' alt=''/>";        
     }
@@ -926,10 +928,10 @@ function get_skills_icons(array $skills, string $current_skill):string {
             $skill_description = $skill['description'];
             
             $structure .= "
-			<span class='tooltip'>
-				<img src='$skill_icon_path' alt='$skill_description'/>
-				<span>$skill_description</span>
-			</span>
+                <span class='tooltip'>
+                    <img src='$skill_icon_path' alt='$skill_description'/>
+                    <span>$skill_description</span>
+                </span>
 			";
         }
     }
@@ -1007,16 +1009,18 @@ function display_calendar_panel():string {
 	$player_id = $GLOBALS['player_id'];
     $season = get_player_season();
     $all_dates = $GLOBALS['json']['all_dates'];
+    $week_count = 4;
+    $day_count = 7;
 
     $table_structure = "
         <table>
             <tbody>";
 
-    for($lines = 0; $lines < 4; $lines++) {
+    for($lines = 0; $lines < $week_count; $lines++) {
         $table_structure .= "<tr>";
 
-        for($columns = 1; $columns <= 7; $columns++) {
-            $day_digit = ($lines * 7) + $columns;
+        for($columns = 1; $columns <= $day_count; $columns++) {
+            $day_digit = ($lines * $day_count) + $columns;
             $date = $day_digit . "/" . $season;
 
             if(array_key_exists($date, $all_dates)) {

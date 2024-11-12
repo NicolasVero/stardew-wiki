@@ -34,9 +34,8 @@ function activate_close_buttons(hide, sections_to_hide) {
     });
 }
 
-function toggle_visibility_and_scroll(element, should_display, should_disable_scroll) {
+function toggle_visibility_and_scroll(element, should_display) {
     element.style.display = (should_display) ? "block" : "none";
-    // document.body.style.overflow = (should_disable_scroll) ? "hidden" : "auto";
 }
 
 function hide_panels(event) {
