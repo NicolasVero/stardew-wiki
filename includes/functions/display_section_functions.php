@@ -316,7 +316,7 @@ function display_general_stats():string {
                 "
                 <span>
                     <span class='tooltip'>
-                        <img src='{$images_path}icons/house.png' alt='House upgrades'/>
+                        <img src='{$images_path}icons/house.png' alt='House upgrades' class='easter_egg_kaaris'/>
                         <span>$house_level / 3 improvements</span>
                     </span>
                     <span class='data data-house-upgrade'>$house_level</span>
