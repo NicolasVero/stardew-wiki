@@ -1056,3 +1056,17 @@ function get_perfection_percentage():int {
 
 	return round($percentage);
 }
+
+function get_pet():array {
+	$data = $GLOBALS['untreated_player_data'];
+	$type = ($GLOBALS['game_version_score'] < get_game_version_score("1.6.0")) ?
+		(((string) $data->catPerson == 'true') ? 'cat' : 'dog')
+		:
+		lcfirst((string) $data->whichPetType);
+	$breed = (int) $data->whichPetBreed;
+
+	return array(
+		'type'  => $type,
+		'breed' => $breed
+	);
+}

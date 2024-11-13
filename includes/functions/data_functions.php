@@ -119,7 +119,7 @@ function get_aggregated_data(object $data):array {
             'farm_name'             => (string) $data->farmName,
             'farmer_level'          => get_farmer_level(),
             'favorite_thing'        => (string) $data->favoriteThing,
-            'animal_type'           => (string) $data->whichPetType,
+            'pet'                   => get_pet(),
             'spouse'                => get_spouse(),
             'children'              => get_children_amount((int) $data->UniqueMultiplayerID),
             'house_level'           => get_house_upgrade_level(),

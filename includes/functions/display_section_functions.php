@@ -322,6 +322,10 @@ function display_general_stats():string {
                     <span class='data data-house-upgrade'>$house_level</span>
                     <span class='data-label'>upgrades done</span>
                 </span>
+
+                <span>
+                    <img src='{$images_path}icons/" . $pet['type'] . "_" . $pet['breed'] . ".png' alt='Pet type'/>
+                </span>
             </div>
         </section>
     ";
