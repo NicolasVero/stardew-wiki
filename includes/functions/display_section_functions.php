@@ -184,6 +184,7 @@ function display_header():string {
         <header>
             <div class='header'>
                 <span class='player'>
+                    <img src='{$images_path}icons/" . $pet['type'] . "_" . $pet['breed'] . ".png' alt='Pet type'/>
                     <img src='{$images_path}icons/" . strtolower($gender) . ".png' alt='Gender logo: $gender' class='player_gender_logo'/>
                     <span class='data player_name'>" . formate_usernames($name) . "<span class='data-label'> $farmer_level at $farm_name</span></span>
                 </span>
@@ -321,10 +322,6 @@ function display_general_stats():string {
                     </span>
                     <span class='data data-house-upgrade'>$house_level</span>
                     <span class='data-label'>upgrades done</span>
-                </span>
-
-                <span>
-                    <img src='{$images_path}icons/" . $pet['type'] . "_" . $pet['breed'] . ".png' alt='Pet type'/>
                 </span>
             </div>
         </section>
