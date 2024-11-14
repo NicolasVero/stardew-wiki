@@ -23,8 +23,9 @@ function display_sur_header(bool $is_landing_page = false, bool $is_error_screen
 function display_player_selection():string {
 	$players = $GLOBALS["players_names"];
     
-    if(count($players) < 2)
+    if(count($players) < 2) {
         return "<ul id='players_selection'></ul>";
+    }
 
     $structure = "
 		<ul id='players_selection'>
@@ -838,8 +839,9 @@ function display_monster_eradication_goals_panel():string {
     $goals = "";
 
     foreach($goals_data as $goal_data) {
-        if(is_bool($goal_data))
+        if(is_bool($goal_data)) {
             continue;
+        }
 
         extract($goal_data);
         extract($reward);
@@ -900,8 +902,11 @@ function get_level_progress_bar(int $level):string {
     $structure = "<span class='level-progress-bar'>";
 
     for($i = 1; $i <= $max_level; $i++) {
-        if($level >= $i) $level_bar = get_images_folder() . (($i % ($max_level / 2) == 0) ? "icons/big_level.png"       : "icons/level.png");
-        else             $level_bar = get_images_folder() . (($i % ($max_level / 2) == 0) ? "icons/big_level_empty.png" : "icons/level_empty.png");
+        if($level >= $i) {
+            $level_bar = get_images_folder() . (($i % ($max_level / 2) == 0) ? "icons/big_level.png"       : "icons/level.png");
+        } else {
+            $level_bar = get_images_folder() . (($i % ($max_level / 2) == 0) ? "icons/big_level_empty.png" : "icons/level_empty.png");
+        }
         
         $structure .= "<img src='$level_bar' alt=''/>";        
     }
@@ -940,8 +945,9 @@ function get_tooltip_text(array $player_data, string $json_line_name, string $da
     
     $data_array = $player_data[$json_line_name];
 
-    if(empty($data_array))
+    if(empty($data_array)) {
         return $json_line_name;
+    }
 
     extract($data_array);
 

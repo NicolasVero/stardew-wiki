@@ -9,7 +9,6 @@ $response = array();
 $response["file_content"] = $_FILES;
 
 try {
-
 	$name_check = explode("_", $_FILES["save-upload"]["name"]);	
     $external_error = ($name_check[0] == "Error") ? explode(".", ($name_check[1]))[0] : null;
 

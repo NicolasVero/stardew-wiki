@@ -1,12 +1,16 @@
 <?php
 require __DIR__ . "/../../vendor/autoload.php";
+require "subsearch_data.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 function log_(mixed $element, string $title = ""):void {
-    if($title != "") echo "<h2>$title</h2>";
-    echo "<pre>" . print_r($element, true) . "</pre>";
+    if($title != "") {
+		echo "<h2>$title</h2>";
+	}
+    
+	echo "<pre>" . print_r($element, true) . "</pre>";
 } 
 
 function get_images_folder(bool $is_external = false):string {
@@ -29,8 +33,9 @@ function get_site_root():string {
 }
 
 function formate_number(int $number, string $lang = "en"):string {
-	if($lang == "fr") 
+	if($lang == "fr") {
 		return number_format($number, 0, ",", " ");
+	}
 
 	return number_format($number);
 } 
@@ -77,68 +82,11 @@ function formate_usernames(string $username):string {
 	return strtr($username, $regex);
 }
 
-function send_feedback_mail(array $user_details):bool {
-	require_once "load_environment.php";
-	extract($user_details);
-	
-	$date_time = new DateTime("now", new DateTimeZone("Europe/Paris"));
-	$date = $date_time->format("d/m/Y");
-	$time = $date_time->format("H:i");
-
-	$mail = new PHPMailer(true);
-
-	$mail->isSMTP();
-	$mail->Host = $_ENV["SMTP_HOST"];
-	$mail->SMTPAuth = true;
-	$mail->Username = $_ENV["SMTP_USERNAME"];
-	$mail->Password = $_ENV["SMTP_PASSWORD"];
-	$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
-	$mail->Port = 587;
-	
-	$mail->setFrom("stardewvalley.dashboard@gmail.com", "Feedback Notification");
-	$mail->addAddress("stardewvalley.dashboard@gmail.com");
-	
-	$mail->isHTML(false);
-	$mail->Subject = "A new feedback just came in: $feedback_type";
-	$mail->Body = "From: $email_adress - $date at $time" . PHP_EOL . "$message";
-	
-	return $mail->send();
-}
-
-function does_host_has_element(string $element):int {
-	return ($GLOBALS["host_player_data"]["has_element"][$element]["is_found"]);
-}
-
-function has_element(string $element, object $data):int {
-    return (in_array($element, (array) $data->mailReceived->string)) ? 1 : 0;
-}
-
-function has_element_ov(object $element):int {
-    return !empty((array) $element);
-}
-
-function get_game_version_score(string $version):int {
-	$version_numbers = explode(".", $version);
-
-	while(count($version_numbers) < 3)
-		$version_numbers[] = 0;
-
-	$version_numbers = array_reverse($version_numbers);
-	$score = 0;
-
-	for($i = 0; $i < count($version_numbers); $i++)
-		$score += $version_numbers[$i] * pow(1000, $i); 
-
-	return (int) $score;
-}
-
-
 function in_bytes_conversion(string $size, string $use = "local"):int {
 
-    $unit_to_power = ($use == "local") ? 
-		array("o"  => 0, "Ko" => 1, "Mo" => 2, "Go" => 3)
-		:
-		array("K" => 1, "M" => 2, "G" => 3);
+    $unit_to_power = ($use == "local") 
+		? array("o"  => 0, "Ko" => 1, "Mo" => 2, "Go" => 3)
+		: array("K" => 1, "M" => 2, "G" => 3);
 
     preg_match("/(\d+)([a-zA-Z]+)/", $size, $matches);
     
@@ -159,9 +107,11 @@ function sanitize_json_with_version(string $json_name, bool $version_controler =
 
 	$sanitize_json = array();
 
-	foreach($original_json as $key => $json_version)
-		if($game_version_score > get_game_version_score($key) || !$version_controler)
+	foreach($original_json as $key => $json_version) {
+		if($game_version_score > get_game_version_score($key) || !$version_controler) {
 			$sanitize_json += $json_version;
+		}
+	}
 	
 	return $sanitize_json;
 }
@@ -241,171 +191,15 @@ function get_formatted_date(bool $display_date = true):mixed {
     $season = array("spring", "summer", "fall", "winter")[$data->seasonForSaveGame % 4];
     $year   = $data->yearForSaveGame;
 
-    if($display_date)
-        return "Day $day of $season, Year $year";
+    if($display_date) {
+		return "Day $day of $season, Year $year";
+	}
 
     return array(
         "day" => $day,
         "season" => $season,
         "year" => $year
     );
-}
-
-function get_player_season():string {
-	return get_formatted_date(false)["season"];
-}
-
-function get_total_skills_level(object $data):int {
-	return ($data->farmingLevel + $data->miningLevel + $data->combatLevel + $data->foragingLevel + $data->fishingLevel);
-}
-
-function get_pet_frienship_points():int {
-	$locations = $GLOBALS["untreated_all_players_data"]->locations->GameLocation;
-	foreach($locations as $location) {
-		if(isset($location->characters))
-			foreach($location->characters->NPC as $npc)
-				if(isset($npc->petType))
-					return (int) $npc->friendshipTowardFarmer;
-	}
-
-	return 0;
-}
-
-function get_is_married():bool {
-	$data = $GLOBALS["untreated_player_data"];
-	return isset($data->spouse);
-}
-
-function get_spouse():mixed {
-	$data = $GLOBALS["untreated_player_data"];
-	return (!empty($data->spouse)) ? $data->spouse : null;
-}
-
-function is_objective_completed(int $current_counter, int $limit):bool {
-    return ($current_counter >= $limit);
-}
-
-function is_this_the_same_day(string $date):bool {
-    extract(get_formatted_date(false));
-    return $date == "$day/$season";
-}
-
-function get_candles_lit(int $grandpa_score):int {
-	if($grandpa_score <= 3)
-		return 1;
-	
-	if($grandpa_score > 3 && $grandpa_score <= 7)
-		return 2;
-	
-	if($grandpa_score > 7 && $grandpa_score <= 11)
-		return 3;
-	
-	return 4;
-}
-
-function get_element_completion_percentage(int $max_amount, int $current_amount):float {
-	return round(($current_amount / $max_amount), 3, PHP_ROUND_HALF_DOWN);
-}
-
-function get_amount_obelisk_on_map():int {
-	$locations = $GLOBALS["untreated_all_players_data"]->locations->GameLocation;
-	$obelisk_names = array(
-		"Earth Obelisk",
-		"Water Obelisk",
-		"Island Obelisk",
-		"Desert Obelisk",
-	);
-	$obelisk_count = 0;
-
-	foreach($locations as $location) {
-		if(isset($location->buildings->Building)) {
-			foreach($location->buildings->Building as $building) {
-				if(in_array((string) $building->buildingType, $obelisk_names))
-					$obelisk_count++;
-			}
-		}
-	}
-
-	return $obelisk_count;
-}
-
-function is_golden_clock_on_farm():bool {
-	$locations = $GLOBALS["untreated_all_players_data"]->locations->GameLocation;
-	foreach($locations as $location) {
-		if(isset($location->buildings->Building)) {
-			foreach($location->buildings->Building as $building) {
-				if((string) $building->buildingType == "Gold Clock")
-					return true;
-			}
-		}
-	}
-	return false;
-}
-
-function get_house_upgrade_level():int {
-	$data = $GLOBALS["untreated_player_data"];
-	return (int) $data->houseUpgradeLevel;
-}
-
-function get_children_amount(int $id):array {
-	$locations = $GLOBALS["untreated_all_players_data"]->locations->GameLocation;
-	$children_name = array();
-
-	foreach($locations as $location) {
-		if(isset($location->characters)) {
-			foreach($location->characters->NPC as $npc) {
-				if(!isset($npc->idOfParent))
-					continue;
-
-				if((int) $npc->idOfParent == $id)
-					array_push($children_name, $npc->name);
-			}
-		}
-	}
-
-	foreach($locations as $location) {
-		if(isset($location->buildings)) {
-			foreach($location->buildings->Building as $building) {
-				if(isset($building->indoors->characters)) {
-					foreach($building->indoors->characters->NPC as $npc) {
-						if(!isset($npc->idOfParent))
-							continue;
-
-						if((int) $npc->idOfParent == $id)
-							array_push($children_name, $npc->name);
-					}
-				}
-			}
-		}
-	}
-	return $children_name;
-}
-
-function get_child_tooltip(string $spouse, array $children):string {
-	$gender = get_the_married_person_gender($spouse);
-	$children_count = count($children);
-	$children_names = ($children_count == 1) ? $children[0] : implode(" and ", $children);
-	$nombre = ($children_count > 1) ? "children" : "child";
-
-	if($children_count == 0)
-		return "With $gender $spouse, haven't yet had $nombre";
-
-	return "With $gender $spouse, you had $children_count $nombre : $children_names";
-}
-
-function get_the_married_person_gender(string $spouse):string {
-	$wifes = array("abigail", "emily", "haley", "leah", "maru", "penny");
-	$husbands = array("alex", "elliott", "harvey", "sam", "sebastian", "shane");
-
-	if(in_array(strtolower($spouse), $wifes)) {
-		return "your wife";
-	}
-
-	if(in_array(strtolower($spouse), $husbands)) {
-		return "your husband";
-	}
-
-	return "";
 }
 
 function get_game_duration(int $duration):string {
@@ -437,6 +231,13 @@ function is_a_mobile_device():bool {
 		strpos($_SERVER["HTTP_USER_AGENT"], "iPod") != false ||
 		strpos($_SERVER["HTTP_USER_AGENT"], "iPhone") != false 
 	);
+}
+
+
+function get_correct_id(mixed &$id):void {
+	if(!ctype_digit($id)) {
+		$id = get_custom_id($id);
+	} 
 }
 
 if(isset($_GET["action"]) && $_GET["action"] == "get_max_upload_size")

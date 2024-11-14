@@ -4,10 +4,11 @@ function get_gender(array $genders):string {
 
 	foreach($genders as $gender) {
 		if(!empty($gender)) {
-			if(is_numeric($gender[0]))
+			if(is_numeric($gender[0])) {
 				return ($gender[0] == 0) ? "Male" : "Female";
-			else 
+			} else {
 				return ($gender[0]) ? "Male" : "Female";
+			} 
 		}
 	}
 
@@ -34,9 +35,11 @@ function get_achievement(object $achievements):array {
 
 function does_player_have_achievement(object $achievements, int $achievement_id):bool {
 	foreach($achievements->int as $achievement) {
-		if($achievement_id == $achievement)
+		if($achievement_id == $achievement) {
 			return true;
+		}
 	}
+
 	return false;
 }
 
@@ -102,55 +105,45 @@ function get_unlockables(string $unlockable_name):int {
 
 	$is_older_version = ($version_score < get_game_version_score("1.6.0"));
 
-
 	switch($unlockable_name) {
 		case "forest_magic":
 			return has_element("canReadJunimoText", $player_data);
-			break;
 
 		case "dwarvish_translation_guide":
 			return ($is_older_version)
 				? has_element_ov($player_data->canUnderstandDwarves) : 
 					((isset($GLOBALS["host_player_data"]))
 						? does_host_has_element("dwarvish_translation_guide") : has_element("HasDwarvishTranslationGuide", $player_data));
-			break;
 
 		case "rusty_key":
 			return ($is_older_version)
 				? has_element_ov($player_data->hasRustyKey) :
 					((isset($GLOBALS["host_player_data"]))
 						? does_host_has_element("rusty_key") : has_element("HasRustyKey", $player_data));
-			break;
+		
 		case "club_card":
 			return ($is_older_version) ? has_element_ov($player_data->hasClubCard) : has_element("HasClubCard", $player_data);
-			break;
 
 		case "special_charm":
 			return ($is_older_version) ? has_element_ov($player_data->hasSpecialCharm) : has_element("HasSpecialCharm", $player_data);
-			break;
 
 		case "skull_key":
 			return ($is_older_version)
 				? has_element_ov($player_data->hasSkullKey) :
 					((isset($GLOBALS["host_player_data"]))
 						? does_host_has_element("skull_key") : has_element("HasSkullKey", $player_data));
-			break;
 
 		case "magnifying_glass":
 			return ($is_older_version) ? has_element_ov($player_data->hasMagnifyingGlass) : has_element("HasMagnifyingGlass", $player_data);
-			break;
 
 		case "dark_talisman":
 			return ($is_older_version) ? has_element_ov($player_data->hasDarkTalisman) : has_element("HasDarkTalisman", $player_data);
-			break;
 
 		case "magic_ink":
 			return ($is_older_version) ? has_element_ov($player_data->hasMagicInk) : has_element("hasPickedUpMagicInk", $player_data);
-			break;
 
 		case "town_key":
 			return ($is_older_version) ? has_element_ov($player_data->HasTownKey) : has_element("HasTownKey", $player_data);
-			break;
 	}
 }
 
@@ -161,19 +154,20 @@ function get_shipped_items(object $items):array {
 
 	foreach($items->item as $item) {
 
-		if($version_score < get_game_version_score("1.6.0")) 
+		if($version_score < get_game_version_score("1.6.0")) {
 			$item_id = formate_original_data_string($item->key->int);
-		else 
+		} else {
 			$item_id = formate_original_data_string($item->key->string);
+		} 
 		
-
-		if(!ctype_digit($item_id))
-			$item_id = get_custom_id($item_id);
+		get_correct_id($item_id);
+		// if(!ctype_digit($item_id)) {
+		// 	$item_id = get_custom_id($item_id);
+		// }
 
 		$shipped_items_reference = find_reference_in_json($item_id, "shipped_items");
 		
 		if(!empty($shipped_items_reference)) {
-
 			$shipped_items_data[$shipped_items_reference] = array(
 				"id" => $item_id
 			);
@@ -188,8 +182,9 @@ function get_skills_data(array $skills):array {
 	$skills_datas = array();
 
 	foreach($json_skills as $key => $skill) {
-		if(in_array($key, $skills))
+		if(in_array($key, $skills)) {
 			$skills_datas[] = $json_skills[$key];
+		}
 	}
 
 	return $skills_datas;
@@ -204,6 +199,7 @@ function get_enemies_killed_data(object $data):array {
 			"killed_counter" => (int) $enemy->value->int
 		);
 	}
+
 	return $enemies_data;
 }
 
@@ -219,22 +215,22 @@ function get_item_list(object $data, string $filename):array {
 	
 	$version_score = $GLOBALS["game_version_score"];
 
-	if($version_score < get_game_version_score("1.6.0")) 
+	if($version_score < get_game_version_score("1.6.0")) {
 		return array();
+	}
 	
 	$items_data = array();
 
 	foreach($data->item as $item) {
 
 		$item_id = formate_original_data_string($item->key->string);
-
-		if(!ctype_digit($item_id)) 
-			$item_id = get_custom_id($item_id);
+		get_correct_id($item_id);
 
 		$item_reference = find_reference_in_json($item_id, $filename);
 
-		if(empty($item_reference)) 
+		if(empty($item_reference)) {
 			continue;
+		}
 
 		$items_data[$item_reference] = array(
 			"id" => $item_id
@@ -251,14 +247,13 @@ function get_fish_caught(object $data):array {
 
 	foreach($data->item as $item) {
 
-		if($version_score < get_game_version_score("1.6.0")) 
+		if($version_score < get_game_version_score("1.6.0")) {
 			$item_id = formate_original_data_string($item->key->int);
-		else 
+		} else {
 			$item_id = formate_original_data_string($item->key->string);
+		} 
 
-
-		if(!ctype_digit($item_id)) 
-			$item_id = get_custom_id($item_id);
+		get_correct_id($item_id);
 
 		$values_array = (array) $item->value->ArrayOfInt->int;
 		$fish_reference = find_reference_in_json(
@@ -266,8 +261,9 @@ function get_fish_caught(object $data):array {
 			"fish"
 		);
 
-		if(empty($fish_reference) || $fish_reference == "") 
+		if(empty($fish_reference) || $fish_reference == "") {
 			continue;
+		}
 		
 		$fishes_data[$fish_reference] = array(
 			"id"             => (int) $item_id,
@@ -288,7 +284,9 @@ function get_friendship_data(object $data):array {
 		
 		$friend_name = (string) $item->key->string;
 
-		if(!in_array($friend_name, $villagers_json)) continue;
+		if(!in_array($friend_name, $villagers_json)) {
+			continue;
+		}
 
 		$friends_data[$friend_name] = array(
 			"id"              => get_custom_id($friend_name),
@@ -327,10 +325,8 @@ function get_quest_log(object $data):array {
 				"title"       	=> $quest_reference["title"],
 				"rewards"     	=> $quest_reference["reward"]
 			);
-		}
-
-		// Quêtes daily
-		else {
+		} else {
+			// Quêtes daily
 			$quest_type = (int) $item->questType;
 
 			$days_left = (int) $item->daysLeft;
@@ -409,8 +405,9 @@ function get_quest_log(object $data):array {
 	$special_orders_json = sanitize_json_with_version("special_orders", true);
 
 	foreach($entire_data->specialOrders->SpecialOrder as $special_order) {
-		if(((string) $special_order->questState) != "InProgress")
+		if(((string) $special_order->questState) != "InProgress") {
 			continue;
+		}
 
 		$target = (string) $special_order->requester;
 		$is_qi_order = ((string) $special_order->orderType == "Qi");
@@ -498,8 +495,9 @@ function get_cooking_recipes(object $recipes, object $recipes_cooked):array {
 				
 			}
 
-			if(isset($cooking_recipes_data[$item_name]))
+			if(isset($cooking_recipes_data[$item_name])) {
 				continue;
+			}
 		}
 		
 		$cooking_recipes_data[$item_name] = array(
@@ -519,16 +517,15 @@ function get_artifacts(object $artifacts, object $general_data):array {
 
 	foreach($artifacts->item as $artifact) {
 
-		if($version_score < get_game_version_score("1.6.0")) 
+		if($version_score < get_game_version_score("1.6.0")) {
 			$artifact_id = formate_original_data_string($artifact->key->int);
-		else 
+		} else {
 			$artifact_id = formate_original_data_string($artifact->key->string);
+		} 
 
-		if(!ctype_digit($artifact_id)) 
-			$artifact_id = get_custom_id($artifact_id);
+		get_correct_id($artifact_id);
 
 		$artifacts_reference = find_reference_in_json($artifact_id, "artifacts");
-		
 		$museum_index = get_museum_index($general_data);
 
 		if(!empty($artifacts_reference)) {
@@ -549,15 +546,15 @@ function get_minerals(object $minerals, object $general_data):array {
 
 	foreach($minerals->item as $mineral) {
 
-		if($version_score < get_game_version_score("1.6.0")) 
+		if($version_score < get_game_version_score("1.6.0")) {
 			$mineral_id = formate_original_data_string($mineral->key->int);
-		else 
+		} else {
 			$mineral_id = formate_original_data_string($mineral->key->string);
+		} 
 
 
-		if(!ctype_digit($mineral_id)) 
-			$mineral_id = get_custom_id($mineral_id);
-
+		get_correct_id($mineral_id);
+		
 		$minerals_reference = find_reference_in_json($mineral_id, "minerals");
 		
 		$museum_index = get_museum_index($general_data);

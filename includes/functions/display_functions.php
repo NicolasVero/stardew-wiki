@@ -14,7 +14,6 @@ function display_landing_page():string {
 
     return "
         $sur_header
-		
         $save_panel
         $settings_panel
         <div id='display'>

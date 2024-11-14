@@ -30,8 +30,9 @@ function load_save($save_file, $use_ajax = true):mixed {
             "code" => "success"
         );
     } else {   
-        foreach($pages as $page)
+        foreach($pages as $page) {
             echo $page;
+        }
     }
 }
 
@@ -60,9 +61,9 @@ function get_all_players_datas():array {
 			return $players_data;
 		}
 	
-		foreach($data->farmhands->Farmer as $side_player)
-			array_push($players_data, get_aggregated_data($side_player));
-	
+		foreach($data->farmhands->Farmer as $side_player) {
+            array_push($players_data, get_aggregated_data($side_player));
+        }
 	}
 
 	$GLOBALS["all_players_data"] = $players_data;
@@ -77,7 +78,7 @@ function get_all_players():array {
 
     array_push($players_names, (string) $data->player->name);
 	
-	if($GLOBALS["game_version_score"] < get_game_version_score("1.6.0"))  {
+	if($GLOBALS["game_version_score"] < get_game_version_score("1.6.0")) {
 		foreach($data->locations->GameLocation[0]->buildings->Building as $building) {
 			if(isset($building->indoors->farmhand)) {
 				$farmhand_name = (string) $building->indoors->farmhand->name;
@@ -86,8 +87,9 @@ function get_all_players():array {
 		}
 	} else {
 		foreach($data->farmhands->Farmer as $side_player) {
-			if(!empty($side_player->name))
-				array_push($players_names, (string) $side_player->name);
+			if(!empty($side_player->name)) {
+                array_push($players_names, (string) $side_player->name);
+            }
 		}
 	}
 
