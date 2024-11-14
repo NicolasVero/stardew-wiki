@@ -849,7 +849,7 @@ function get_grandpa_score():int {
 	$friendship_count = 0;
 	foreach($friendships as $friendship) {
 		extract($friendship);
-		if($friend_level >= 10)
+		if($friend_level >= 8)
 			$friendship_count++;
 	}
 
