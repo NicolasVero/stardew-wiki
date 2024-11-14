@@ -1,7 +1,7 @@
 <?php
 
-header('Content-Type: application/json');
-require 'functions/utility_functions.php';
+header("Content-Type: application/json");
+require "functions/utility_functions.php";
 
 ob_start();
 extract($_POST);
@@ -10,7 +10,7 @@ $response = [
 	"message" => "Error while sending the email. Please try again"
 ];
 
-if($_SERVER['REQUEST_METHOD'] != "POST") {
+if($_SERVER["REQUEST_METHOD"] != "POST") {
 	echo json_encode($response);
 	exit;
 }
