@@ -1,6 +1,6 @@
 <?php 
 
-require 'display_section_functions.php';
+require "display_section_functions.php";
 
 function display_landing_page():string {
 
@@ -285,7 +285,7 @@ function display_error_page(Exception $exception):string {
     return $structure;
 }
 
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'display_feedback_panel') {
-    require 'utility_functions.php';
+if ($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"]) && $_POST["action"] === "display_feedback_panel") {
+    require "utility_functions.php";
 	echo display_feedback_panel();
 }

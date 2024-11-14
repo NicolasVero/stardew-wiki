@@ -1,20 +1,20 @@
 <?php
-require __DIR__ . '/../../vendor/autoload.php';
+require __DIR__ . "/../../vendor/autoload.php";
 
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-function log_(mixed $element, string $title = ''):void {
-    if($title != '') echo "<h2>$title</h2>";
+function log_(mixed $element, string $title = ""):void {
+    if($title != "") echo "<h2>$title</h2>";
     echo "<pre>" . print_r($element, true) . "</pre>";
 } 
 
 function get_images_folder(bool $is_external = false):string {
-	return ($is_external) ? get_github_medias_url() : get_site_root() . 'medias/images/';
+	return ($is_external) ? get_github_medias_url() : get_site_root() . "medias/images/";
 }
 
 function get_github_medias_url():string {
-	return 'https://raw.githubusercontent.com/NicolasVero/stardew-dashboard/refs/heads/master/medias/images/';
+	return "https://raw.githubusercontent.com/NicolasVero/stardew-dashboard/refs/heads/master/medias/images/";
 }
 
 function get_json_folder():string {
@@ -22,29 +22,29 @@ function get_json_folder():string {
 }
 
 function get_site_root():string {
-	if($_SERVER['HTTP_HOST'] == "localhost")
-    	return 'http://localhost/travail/stardew_dashboard/';
+	if($_SERVER["HTTP_HOST"] == "localhost")
+    	return "http://localhost/travail/stardew_dashboard/";
 	
-	return (!empty($_SERVER['HTTPS']) && $_SERVER['HTTPS'] !== 'off') ? 'https://stardew-dashboard.42web.io/' : 'http://stardew-dashboard.42web.io/';
+	return (!empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] !== "off") ? "https://stardew-dashboard.42web.io/" : "http://stardew-dashboard.42web.io/";
 }
 
-function formate_number(int $number, string $lang = 'en'):string {
-	if($lang == 'fr') 
-		return number_format($number, 0, ',', ' ');
+function formate_number(int $number, string $lang = "en"):string {
+	if($lang == "fr") 
+		return number_format($number, 0, ",", " ");
 
 	return number_format($number);
 } 
 
 function formate_text_for_file(string $string):string {
 
-    $search =  [' ', '\'', '(', ')', ',', '.', ':'];
-    $replace = ['_', ''  , '' , '', '', '', ''    ];
+    $search =  [" ", "'", "(", ")", ",", ".", ":"];
+    $replace = ["_", ""  , "" , "", "", "", ""   ];
 
     $string = str_replace($search, $replace, $string);
 
     $string = strtolower($string);
 
-    if(substr($string, -1) === '_') {
+    if(substr($string, -1) === "_") {
         $string = substr($string, 0, -1);
     }
 
@@ -52,33 +52,33 @@ function formate_text_for_file(string $string):string {
 }
 
 function formate_original_data_string(string $data):string {
-    return str_replace('(O)', '', $data);
+    return str_replace("(O)", "", $data);
 }
 
 function formate_usernames(string $username):string {
 	$regex = array(
-		'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' => 'a', 'å' => 'a', 'æ' => 'ae',
-		'ç' => 'c',
-		'è' => 'e', 'é' => 'e', 'ê' => 'e', 'ë' => 'e',
-		'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i',
-		'ñ' => 'n',
-		'ò' => 'o', 'ó' => 'o', 'ô' => 'o', 'õ' => 'o', 'ö' => 'o', 'ø' => 'o',
-		'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ü' => 'u',
-		'ý' => 'y', 'ÿ' => 'y',
-		'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A', 'Æ' => 'AE',
-		'Ç' => 'C',
-		'È' => 'E', 'É' => 'E', 'Ê' => 'E', 'Ë' => 'E',
-		'Ì' => 'I', 'Í' => 'I', 'Î' => 'I', 'Ï' => 'I',
-		'Ñ' => 'N',
-		'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O', 'Õ' => 'O', 'Ö' => 'O', 'Ø' => 'O',
-		'Ù' => 'U', 'Ú' => 'U', 'Û' => 'U', 'Ü' => 'U',
-		'Ý' => 'Y'
+		"à" => "a", "á" => "a", "â" => "a", "ã" => "a", "ä" => "a", "å" => "a", "æ" => "ae",
+		"ç" => "c",
+		"è" => "e", "é" => "e", "ê" => "e", "ë" => "e",
+		"ì" => "i", "í" => "i", "î" => "i", "ï" => "i",
+		"ñ" => "n",
+		"ò" => "o", "ó" => "o", "ô" => "o", "õ" => "o", "ö" => "o", "ø" => "o",
+		"ù" => "u", "ú" => "u", "û" => "u", "ü" => "u",
+		"ý" => "y", "ÿ" => "y",
+		"À" => "A", "Á" => "A", "Â" => "A", "Ã" => "A", "Ä" => "A", "Å" => "A", "Æ" => "AE",
+		"Ç" => "C",
+		"È" => "E", "É" => "E", "Ê" => "E", "Ë" => "E",
+		"Ì" => "I", "Í" => "I", "Î" => "I", "Ï" => "I",
+		"Ñ" => "N",
+		"Ò" => "O", "Ó" => "O", "Ô" => "O", "Õ" => "O", "Ö" => "O", "Ø" => "O",
+		"Ù" => "U", "Ú" => "U", "Û" => "U", "Ü" => "U",
+		"Ý" => "Y"
 	);
 	return strtr($username, $regex);
 }
 
 function send_feedback_mail(array $user_details):bool {
-	require_once 'load_environment.php';
+	require_once "load_environment.php";
 	extract($user_details);
 	
 	$date_time = new DateTime("now", new DateTimeZone("Europe/Paris"));
@@ -88,15 +88,15 @@ function send_feedback_mail(array $user_details):bool {
 	$mail = new PHPMailer(true);
 
 	$mail->isSMTP();
-	$mail->Host = $_ENV['SMTP_HOST'];
+	$mail->Host = $_ENV["SMTP_HOST"];
 	$mail->SMTPAuth = true;
-	$mail->Username = $_ENV['SMTP_USERNAME'];
-	$mail->Password = $_ENV['SMTP_PASSWORD'];
+	$mail->Username = $_ENV["SMTP_USERNAME"];
+	$mail->Password = $_ENV["SMTP_PASSWORD"];
 	$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 	$mail->Port = 587;
 	
-	$mail->setFrom('stardewvalley.dashboard@gmail.com', 'Feedback Notification');
-	$mail->addAddress('stardewvalley.dashboard@gmail.com');
+	$mail->setFrom("stardewvalley.dashboard@gmail.com", "Feedback Notification");
+	$mail->addAddress("stardewvalley.dashboard@gmail.com");
 	
 	$mail->isHTML(false);
 	$mail->Subject = "A new feedback just came in: $feedback_type";
@@ -106,7 +106,7 @@ function send_feedback_mail(array $user_details):bool {
 }
 
 function does_host_has_element(string $element):int {
-	return ($GLOBALS['host_player_data']['has_element'][$element]['is_found']);
+	return ($GLOBALS["host_player_data"]["has_element"][$element]["is_found"]);
 }
 
 function has_element(string $element, object $data):int {
@@ -118,7 +118,7 @@ function has_element_ov(object $element):int {
 }
 
 function get_game_version_score(string $version):int {
-	$version_numbers = explode('.', $version);
+	$version_numbers = explode(".", $version);
 
 	while(count($version_numbers) < 3)
 		$version_numbers[] = 0;
@@ -133,14 +133,14 @@ function get_game_version_score(string $version):int {
 }
 
 
-function in_bytes_conversion(string $size, string $use = 'local'):int {
+function in_bytes_conversion(string $size, string $use = "local"):int {
 
-    $unit_to_power = ($use == 'local') ? 
-		array('o'  => 0, 'Ko' => 1, 'Mo' => 2, 'Go' => 3)
+    $unit_to_power = ($use == "local") ? 
+		array("o"  => 0, "Ko" => 1, "Mo" => 2, "Go" => 3)
 		:
-		array('K' => 1, 'M' => 2, 'G' => 3);
+		array("K" => 1, "M" => 2, "G" => 3);
 
-    preg_match('/(\d+)([a-zA-Z]+)/', $size, $matches);
+    preg_match("/(\d+)([a-zA-Z]+)/", $size, $matches);
     
     $value = (int) $matches[1];
     $unite = $matches[2];
@@ -154,8 +154,8 @@ function array_keys_exists(array $keys, array $array):bool {
 
 function sanitize_json_with_version(string $json_name, bool $version_controler = false):array {
 
-	$original_json = $GLOBALS['json'][$json_name];
-	$game_version_score = (isset($GLOBALS['game_version_score'])) ? $GLOBALS['game_version_score'] : "";
+	$original_json = $GLOBALS["json"][$json_name];
+	$game_version_score = (isset($GLOBALS["game_version_score"])) ? $GLOBALS["game_version_score"] : "";
 
 	$sanitize_json = array();
 
@@ -174,49 +174,49 @@ function find_reference_in_json(mixed $id, string $file):mixed {
 
 function load_all_json():void {
 	$all_json = array(
-		'all_dates',
-		'achievements_details',
-		'achievements',
-		'all_items',
-		'artifacts',
-		'books',
-		'cooking_recipes',
-		'crafting_recipes',
-		'custom_ids',
-		'enemies',
-		'festivals',
-		'fish',
-		'marriables',
-		'masteries',
-		'minerals',
-		'quests',
-		'shipped_items',
-		'skills',
-		'special_orders',
-		'unlockables',
-		'villagers_birthday',
-		'villagers',
-		'wiki_links'
+		"all_dates",
+		"achievements_details",
+		"achievements",
+		"all_items",
+		"artifacts",
+		"books",
+		"cooking_recipes",
+		"crafting_recipes",
+		"custom_ids",
+		"enemies",
+		"festivals",
+		"fish",
+		"marriables",
+		"masteries",
+		"minerals",
+		"quests",
+		"shipped_items",
+		"skills",
+		"special_orders",
+		"unlockables",
+		"villagers_birthday",
+		"villagers",
+		"wiki_links"
 	);
 
 	foreach($all_json as $json_file)
-		$GLOBALS['json'][$json_file] = decode($json_file);
+		$GLOBALS["json"][$json_file] = decode($json_file);
 }
 
 function get_custom_id(string $item):int {
-    return array_search($item, $GLOBALS['json']['custom_ids']);
+    return array_search($item, $GLOBALS["json"]["custom_ids"]);
 }
 
 function get_item_id_by_name(string $name):int {
-	return array_search($name, $GLOBALS['json']['all_items']);
+	return array_search($name, $GLOBALS["json"]["all_items"]);
 }
 
 function get_wiki_link(int $id):string {
-	return $GLOBALS['json']['wiki_links'][$id];
+	return $GLOBALS["json"]["wiki_links"][$id];
 }
 
 function get_number_of_player():int {
-	return count($GLOBALS['all_players_data']);
+	return count($GLOBALS["all_players_data"]);
 }
 
 function decode(string $filename): array {
@@ -235,24 +235,24 @@ function decode(string $filename): array {
 
 function get_formatted_date(bool $display_date = true):mixed {
 
-	$data = $GLOBALS['untreated_player_data'];
+	$data = $GLOBALS["untreated_player_data"];
 
     $day    = $data->dayOfMonthForSaveGame;
-    $season = array('spring', 'summer', 'fall', 'winter')[$data->seasonForSaveGame % 4];
+    $season = array("spring", "summer", "fall", "winter")[$data->seasonForSaveGame % 4];
     $year   = $data->yearForSaveGame;
 
     if($display_date)
         return "Day $day of $season, Year $year";
 
     return array(
-        'day' => $day,
-        'season' => $season,
-        'year' => $year
+        "day" => $day,
+        "season" => $season,
+        "year" => $year
     );
 }
 
 function get_player_season():string {
-	return get_formatted_date(false)['season'];
+	return get_formatted_date(false)["season"];
 }
 
 function get_total_skills_level(object $data):int {
@@ -260,7 +260,7 @@ function get_total_skills_level(object $data):int {
 }
 
 function get_pet_frienship_points():int {
-	$locations = $GLOBALS['untreated_all_players_data']->locations->GameLocation;
+	$locations = $GLOBALS["untreated_all_players_data"]->locations->GameLocation;
 	foreach($locations as $location) {
 		if(isset($location->characters))
 			foreach($location->characters->NPC as $npc)
@@ -272,12 +272,12 @@ function get_pet_frienship_points():int {
 }
 
 function get_is_married():bool {
-	$data = $GLOBALS['untreated_player_data'];
+	$data = $GLOBALS["untreated_player_data"];
 	return isset($data->spouse);
 }
 
 function get_spouse():mixed {
-	$data = $GLOBALS['untreated_player_data'];
+	$data = $GLOBALS["untreated_player_data"];
 	return (!empty($data->spouse)) ? $data->spouse : null;
 }
 
@@ -308,12 +308,12 @@ function get_element_completion_percentage(int $max_amount, int $current_amount)
 }
 
 function get_amount_obelisk_on_map():int {
-	$locations = $GLOBALS['untreated_all_players_data']->locations->GameLocation;
+	$locations = $GLOBALS["untreated_all_players_data"]->locations->GameLocation;
 	$obelisk_names = array(
-		'Earth Obelisk',
-		'Water Obelisk',
-		'Island Obelisk',
-		'Desert Obelisk',
+		"Earth Obelisk",
+		"Water Obelisk",
+		"Island Obelisk",
+		"Desert Obelisk",
 	);
 	$obelisk_count = 0;
 
@@ -330,11 +330,11 @@ function get_amount_obelisk_on_map():int {
 }
 
 function is_golden_clock_on_farm():bool {
-	$locations = $GLOBALS['untreated_all_players_data']->locations->GameLocation;
+	$locations = $GLOBALS["untreated_all_players_data"]->locations->GameLocation;
 	foreach($locations as $location) {
 		if(isset($location->buildings->Building)) {
 			foreach($location->buildings->Building as $building) {
-				if((string) $building->buildingType == 'Gold Clock')
+				if((string) $building->buildingType == "Gold Clock")
 					return true;
 			}
 		}
@@ -343,12 +343,12 @@ function is_golden_clock_on_farm():bool {
 }
 
 function get_house_upgrade_level():int {
-	$data = $GLOBALS['untreated_player_data'];
+	$data = $GLOBALS["untreated_player_data"];
 	return (int) $data->houseUpgradeLevel;
 }
 
 function get_children_amount(int $id):array {
-	$locations = $GLOBALS['untreated_all_players_data']->locations->GameLocation;
+	$locations = $GLOBALS["untreated_all_players_data"]->locations->GameLocation;
 	$children_name = array();
 
 	foreach($locations as $location) {
@@ -385,7 +385,7 @@ function get_child_tooltip(string $spouse, array $children):string {
 	$gender = get_the_married_person_gender($spouse);
 	$children_count = count($children);
 	$children_names = ($children_count == 1) ? $children[0] : implode(" and ", $children);
-	$nombre = ($children_count > 1) ? 'children' : 'child';
+	$nombre = ($children_count > 1) ? "children" : "child";
 
 	if($children_count == 0)
 		return "With $gender $spouse, haven't yet had $nombre";
@@ -420,24 +420,24 @@ function get_game_duration(int $duration):string {
 }
 
 function get_number_of_days_ingame():int {
-	$data = $GLOBALS['untreated_player_data'];
+	$data = $GLOBALS["untreated_player_data"];
     return ((($data->dayOfMonthForSaveGame - 1)) + ($data->seasonForSaveGame * 28) + (($data->yearForSaveGame - 1) * 112));
 }
 
 function get_php_max_upload_size():string {
-	$post_max_size_bytes = in_bytes_conversion(ini_get('post_max_size'), 'server');
+	$post_max_size_bytes = in_bytes_conversion(ini_get("post_max_size"), "server");
 	return json_encode([
-        'post_max_size' => $post_max_size_bytes
+        "post_max_size" => $post_max_size_bytes
     ]);
 }
 
 function is_a_mobile_device():bool {
 	return (
-		stristr($_SERVER['HTTP_USER_AGENT'], "Android") ||
-		strpos($_SERVER['HTTP_USER_AGENT'], "iPod") != false ||
-		strpos($_SERVER['HTTP_USER_AGENT'], "iPhone") != false 
+		stristr($_SERVER["HTTP_USER_AGENT"], "Android") ||
+		strpos($_SERVER["HTTP_USER_AGENT"], "iPod") != false ||
+		strpos($_SERVER["HTTP_USER_AGENT"], "iPhone") != false 
 	);
 }
 
-if(isset($_GET['action']) && $_GET['action'] == 'get_max_upload_size')
+if(isset($_GET["action"]) && $_GET["action"] == "get_max_upload_size")
     echo get_php_max_upload_size();
