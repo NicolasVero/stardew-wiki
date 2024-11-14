@@ -289,7 +289,7 @@ const has_class = (element, class_name) => element.classList.contains(class_name
 
 function load_easter_eggs() {
 	easter_egg_kaaris();
-	easter_egg_haley();
+	easter_egg_characters();
 }
 
 function easter_egg_kaaris() {
@@ -297,13 +297,13 @@ function easter_egg_kaaris() {
     if (!element) return;
 
     const audio = new Audio(get_site_root() + 'medias/audio/kaaris_maison-citrouille.mp3');
-    let isPlaying = false;
+    let is_playing = false;
 
     const play_once = () => {
-        if (!isPlaying) {
-            isPlaying = true;
+        if (!is_playing) {
+            is_playing = true;
             audio.play().finally(() => {
-                isPlaying = false;
+                is_playing = false;
             });
         }
     };
@@ -311,28 +311,36 @@ function easter_egg_kaaris() {
     element.addEventListener('dblclick', play_once);
 }
 
-function easter_egg_haley() {
+function easter_egg_characters() {
 
-    const elements = document.querySelectorAll(".character-name.Haley");
+	const characters = [
+		"abigail", "alex", "caroline", "clint", "demetrius", "elliott", "emily",
+		"evelyn", "george", "gus", "haley", "harvey", "jas", "jodi", "kent", "leah",
+		"lewis", "linus", "marnie", "maru", "pam", "penny", "pierre", "robin",
+		"sam", "sandy", "sebastian", "shane", "vincent", "willy", "wizard"
+	];
+	
+	const character = characters[Math.floor(Math.random() * characters.length)];
+    const elements = document.querySelectorAll(".character-name." + character);
+    
+	if(!elements) return;
 
-    if (!elements) return;
-
-    const audio = new Audio(get_site_root() + 'medias/audio/haley.mp3');
-    let isPlaying = false;
+    const audio = new Audio(get_site_root() + 'medias/audio/trigger.mp3');
+    let is_playing = false;
 
     const play_once = () => {
-        if (!isPlaying) {
-            isPlaying = true;
+        if (!is_playing) {
+            is_playing = true;
 
             const full_screen_image = document.createElement('img');
-            full_screen_image.src = 'https://raw.githubusercontent.com/NicolasVero/stardew-dashboard/refs/heads/master/medias/images/characters/haley.png';
+            full_screen_image.src = `https://raw.githubusercontent.com/NicolasVero/stardew-dashboard/refs/heads/master/medias/images/characters/${character}.png`;
             full_screen_image.classList.add('fullscreen-image');
             document.body.appendChild(full_screen_image);
 
             full_screen_image.classList.add('show');
 
             audio.play().finally(() => {
-                isPlaying = false;
+                is_playing = false;
             });
 
             setTimeout(() => {

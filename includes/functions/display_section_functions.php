@@ -531,7 +531,7 @@ function display_friendships(int $limit = -1):string {
                 <a class='wiki_link' href='$wiki_url' target='_blank'>
 				    <img src='$friend_icon' class='character-icon $is_newer_version' alt='$name icon'/>
 				</a>
-                <span class='character-name $name'>$name</span>
+                <span class='character-name " . strtolower($name) . "'>$name</span>
 			    <span class='hearts-level'>
         ";
 
@@ -599,7 +599,7 @@ function display_friendships(int $limit = -1):string {
 				<a class='wiki_link' href='$wiki_url' target='_blank'>
 					<img src='$friend_icon' class='character-icon not-found $is_newer_version' alt='$villager_name icon'/>
 				</a>
-				<span class='character-name $villager_name'>$villager_name</span>
+				<span class='character-name " . strtolower($villager_name) . "'>$villager_name</span>
 			    <span class='hearts-level'>
         ";
 		

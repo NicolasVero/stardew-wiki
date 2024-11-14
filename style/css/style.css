@@ -958,7 +958,6 @@ body main .info-section.friends-section > .friendlist .hearts-level {
   display: flex;
   gap: 5px;
   flex-wrap: wrap;
-  min-width: fit-content;
   max-width: 245px;
 }
 body main .info-section.friends-section > .friendlist .hearts-level .hearts {
