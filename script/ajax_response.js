@@ -39,11 +39,11 @@ async function AJAX_send() {
 
 					const players_count = data.players.length;
 
-					page_display.innerHTML = html['sur_header'];
+					page_display.innerHTML = html["sur_header"];
 					page_display.innerHTML += landing_page;
 
 					for(let i = 0; i < players_count; i++)
-						page_display.innerHTML += html['player_' + i];
+						page_display.innerHTML += html["player_" + i];
 
 					initialize_player_swapper(players_count);
 
@@ -51,10 +51,10 @@ async function AJAX_send() {
 					load_elements();
 					
 				} else {
-					page_display.innerHTML = html['sur_header'];
+					page_display.innerHTML = html["sur_header"];
 					page_display.innerHTML += landing_page;
 					toggle_landing_page(false);
-					page_display.innerHTML += html['error_message'];
+					page_display.innerHTML += html["error_message"];
 					loard_error_page_items();
 				}
 
@@ -72,13 +72,13 @@ async function AJAX_send() {
 
 // Create feedback form
 function activate_feedback_ajax_trigger() {
-	const triggers = document.querySelectorAll('.feedback-opener');
+	const triggers = document.querySelectorAll(".feedback-opener");
 
 	triggers.forEach(trigger => {
-		trigger.addEventListener('click', () => {
+		trigger.addEventListener("click", () => {
 			hide_all_sections();
 
-			const existing_window = document.querySelector('.feedback-panel');
+			const existing_window = document.querySelector(".feedback-panel");
 			if(existing_window)
 				toggle_visibility(existing_window, true);
 			else
@@ -91,57 +91,57 @@ function activate_feedback_ajax_trigger() {
 function feedback_form_creation() {
 	const xml_upload = document.querySelector("body");
 
-	fetch('./includes/functions/display_functions.php', {
-		method: 'POST',
+	fetch("./includes/functions/display_functions.php", {
+		method: "POST",
 		headers: {
-			'Content-Type': 'application/x-www-form-urlencoded'
+			"Content-Type": "application/x-www-form-urlencoded"
 		},
 		body: new URLSearchParams({
-			'action': 'display_feedback_panel'
+			"action": "display_feedback_panel"
 		})
 	})
 	.then(response => response.text())
 	.then(data => {
 
 		// Eviter de reparse le body entièrement
-		const tempContainer = document.createElement('div');
+		const tempContainer = document.createElement("div");
 		tempContainer.innerHTML = data;
 
 		while (tempContainer.firstChild)
 			xml_upload.appendChild(tempContainer.firstChild);
 
-		current_section = document.querySelector('.feedback-panel');
+		current_section = document.querySelector(".feedback-panel");
 
 		feedback_custom_radio();
 		activate_feedback_form();
 		activate_close_buttons(".exit-feedback", ".feedback-panel");
 	})
-	.catch(error => console.error('Error:', error));
+	.catch(error => console.error("Error:", error));
 }
 
 // Feedback Form AJAX
 function activate_feedback_form() {
-	document.getElementById('feedback_form').addEventListener('submit', (event) => {
+	document.getElementById("feedback_form").addEventListener("submit", (event) => {
 		event.preventDefault();
 	
 		const formData = new FormData(event.target);
 	
-		fetch('./includes/sendmail.php', {
-			method: 'POST',
+		fetch("./includes/sendmail.php", {
+			method: "POST",
 			body: formData
 		})
 		.then(response => response.json())
 		.then(data => {
 			console.log(data);
-			if (data.success) {
+			if(data.success) {
 				alert(data.message);
 			} else {
-				alert('Error submitting form: ' + data.message);
+				alert("Error submitting form : " + data.message);
 			}
 		})
 		.catch(error => {
-			console.error('Error:', error);
-			alert('An error occurred while submitting the form.');
+			console.error("Error : ", error);
+			alert("An error occurred while submitting the form.");
 		});
 	});
 }

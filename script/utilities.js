@@ -2,7 +2,7 @@ function get_site_root() {
 	const protocol = window.location.protocol;
 	const host = window.location.host;
 
-	return (host === 'localhost') ? `${protocol}//localhost/travail/stardew_dashboard/` : `${protocol}//stardew-dashboard.42web.io/`;
+	return (host === "localhost") ? `${protocol}//localhost/travail/stardew_dashboard/` : `${protocol}//stardew-dashboard.42web.io/`;
 }
 
 function detect_os() {
@@ -38,33 +38,33 @@ function toggle_landing_page(display) {
 
 function on_images_loaded(callback) {
 	toggle_scroll(false);
-	var images = document.querySelectorAll('img');
-	var images_loaded = 0;
-	var total_images = images.length;
+	const images = document.querySelectorAll("img");
+	let images_loaded = 0;
+	const total_images = images.length;
 
-	if (total_images === 0) {
+	if(total_images === 0) {
 		callback();
 		return;
 	}
 
 	images.forEach(function(image) {
-		if (image.complete) {
+		if(image.complete) {
 			images_loaded++;
 		} else {
-			image.addEventListener('load', function() {
+			image.addEventListener("load", function() {
 				images_loaded++;
-				if (images_loaded === total_images)
+				if(images_loaded === total_images)
 					callback();
 			});
-			image.addEventListener('error', function() {
+			image.addEventListener("error", function() {
 				images_loaded++;
-				if (images_loaded === total_images)
+				if(images_loaded === total_images)
 					callback();
 			});
 		}
 	});
 
-	if (images_loaded === total_images)
+	if(images_loaded === total_images)
 		callback();
 }
 
@@ -77,7 +77,7 @@ function update_tooltips_after_ajax() {
 }
 
 function initialize_tooltips() {
-	const tooltips = document.querySelectorAll('.tooltip');
+	const tooltips = document.querySelectorAll(".tooltip");
 	
 	tooltips.forEach((tooltip) => {
 
@@ -85,13 +85,12 @@ function initialize_tooltips() {
 		const rect = tooltip.getBoundingClientRect();
 		const span = tooltip.querySelector("span");
 		
-		if (!span.classList.contains("left") && !span.classList.contains("right")){
-			if (rect.left < window_width / 2)
+		if(!span.classList.contains("left") && !span.classList.contains("right")) {
+			if(rect.left < window_width / 2)
 				span.classList.add("right");
 			else
 				span.classList.add("left");
 		}
-
 	});
 }
 
@@ -106,7 +105,6 @@ function initialize_player_swapper(players_count) {
 }
 
 function swap_displayed_player(player_id) {
-
 	const players_display = document.getElementsByClassName("player_container");
 
 	for(let i = 0; i < players_display.length; i++) 
@@ -114,7 +112,7 @@ function swap_displayed_player(player_id) {
 }
 
 async function get_max_upload_size() {
-	return fetch('./includes/functions/utility_functions.php?action=get_max_upload_size')
+	return fetch("./includes/functions/utility_functions.php?action=get_max_upload_size")
 	.then(response => response.json())
 	.then(data => {
 		return data.post_max_size;
@@ -130,7 +128,7 @@ function toggle_loading(shown) {
 }
 
 function in_bytes_conversion(size) {
-	const unit_to_power = { 'o': 0, 'Ko': 1, 'Mo': 2, 'Go': 3 };
+	const unit_to_power = { "o": 0, "Ko": 1, "Mo": 2, "Go": 3 };
 
 	const matches = size.match(/(\d+)([a-zA-Z]+)/);
 	const value = parseInt(matches[1], 10);
@@ -218,8 +216,8 @@ function load_elements() {
 		activate_buttons(button.open_button, button.exit_button, button.modal_panel);
 	});
 
-	document.getElementById('home-icon').addEventListener('click', () => {
-		const display = (document.getElementById('landing_page').style.display == "none") ? true : false;
+	document.getElementById("home-icon").addEventListener("click", () => {
+		const display = (document.getElementById("landing_page").style.display == "none") ? true : false;
 		toggle_landing_page(display);
 	});
 
@@ -228,12 +226,12 @@ function load_elements() {
 }
 
 function feedback_custom_radio() {
-	const feedback_fake_radios = document.querySelectorAll('.feedback_custom_radio');
-	const feedback_real_radios = document.querySelectorAll('.feedback_real_radio');
+	const feedback_fake_radios = document.querySelectorAll(".feedback_custom_radio");
+	const feedback_real_radios = document.querySelectorAll(".feedback_real_radio");
 
 	feedback_fake_radios.forEach(fake_radio => {
 		span_topic = fake_radio.parentElement;
-		span_topic.addEventListener('click', () => {
+		span_topic.addEventListener("click", () => {
 			const real_radio = fake_radio.previousElementSibling;
 			if(real_radio && real_radio.type === "radio") {
 				real_radio.checked = true;
@@ -243,45 +241,45 @@ function feedback_custom_radio() {
 	});
 
 	feedback_real_radios.forEach(real_radio => {
-		real_radio.addEventListener('change', () => {
+		real_radio.addEventListener("change", () => {
 			feedback_fake_radios.forEach(fake_radio => {
-				fake_radio.classList.add('topic_not_selected');
+				fake_radio.classList.add("topic_not_selected");
 			});
 
 			const fake_radio = real_radio.nextElementSibling;
-			if (fake_radio && fake_radio.tagName === "IMG") {
-				if (real_radio.checked)
-					fake_radio.classList.remove('topic_not_selected');
+			if(fake_radio && fake_radio.tagName === "IMG") {
+				if(real_radio.checked)
+					fake_radio.classList.remove("topic_not_selected");
 				else
-					fake_radio.classList.add('topic_not_selected');
+					fake_radio.classList.add("topic_not_selected");
 			}
 		});
 	});
 }
 
 function save_landing_surheader() {
-	const landing_menu = document.getElementById('landing_menu');
+	const landing_menu = document.getElementById("landing_menu");
 	surheader = landing_menu.innerHTML;
 }
 
 function hide_all_sections(section_destroy = false) {
-	const sections = document.querySelectorAll('.modal-window');
+	const sections = document.querySelectorAll(".modal-window");
 	sections.forEach(section => {
-		if(section.classList.contains('to-destroy') && section_destroy)
+		if(section.classList.contains("to-destroy") && section_destroy)
 			section.remove();
 		
-		section.style.display = 'none';
+		section.style.display = "none";
 	});
 }
 
 const get_parent_element = (element) => {
-    if (!element) return null;
+    if(!element) return null;
     const parent = element.parentElement;
-    return parent?.classList.contains('wiki_link') ? parent.parentElement : parent;
+    return parent?.classList.contains("wiki_link") ? parent.parentElement : parent;
 };
 
 const set_element_display = (element, show) => {
-    if (element)
+    if(element)
         element.style.display = show ? "flex" : "none";
 };
 
@@ -293,10 +291,10 @@ function load_easter_eggs() {
 }
 
 function easter_egg_kaaris() {
-    const element = document.querySelector('.easter_egg_kaaris');
-    if (!element) return;
+    const element = document.querySelector(".easter_egg_kaaris");
+    if(!element) return;
 
-    const audio = new Audio(get_site_root() + 'medias/audio/kaaris_maison-citrouille.mp3');
+    const audio = new Audio(get_site_root() + "medias/audio/kaaris_maison-citrouille.mp3");
     let is_playing = false;
 
     const play_once = () => {
@@ -308,7 +306,7 @@ function easter_egg_kaaris() {
         }
     };
 
-    element.addEventListener('dblclick', play_once);
+    element.addEventListener("dblclick", play_once);
 }
 
 function easter_egg_characters() {
@@ -325,28 +323,28 @@ function easter_egg_characters() {
     
 	if(!elements) return;
 
-    const audio = new Audio(get_site_root() + 'medias/audio/trigger.mp3');
+    const audio = new Audio(get_site_root() + "medias/audio/trigger.mp3");
     let is_playing = false;
 
     const play_once = () => {
         if (!is_playing) {
             is_playing = true;
 
-            const full_screen_image = document.createElement('img');
+            const full_screen_image = document.createElement("img");
             full_screen_image.src = `https://raw.githubusercontent.com/NicolasVero/stardew-dashboard/refs/heads/master/medias/images/characters/${character}.png`;
-            full_screen_image.classList.add('fullscreen-image');
+            full_screen_image.classList.add("fullscreen-image");
             document.body.appendChild(full_screen_image);
 
-            full_screen_image.classList.add('show');
+            full_screen_image.classList.add("show");
 
             audio.play().finally(() => {
                 is_playing = false;
             });
 
             setTimeout(() => {
-                full_screen_image.classList.remove('show');
+                full_screen_image.classList.remove("show");
                 
-                full_screen_image.addEventListener('transitionend', () => {
+                full_screen_image.addEventListener("transitionend", () => {
                     full_screen_image.remove();
                 });
             }, 1000);
@@ -354,6 +352,6 @@ function easter_egg_characters() {
     };
 
     elements.forEach(element => {
-        element.addEventListener('dblclick', play_once);
+        element.addEventListener("dblclick", play_once);
     });
 }

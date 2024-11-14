@@ -3,7 +3,7 @@ function toggle_custom_checkboxes(checkmark_class) {
 	checkmarks.forEach(function(checkbox) {
 		checkbox.addEventListener("click", function() {
 			const adjacent_checkbox = checkbox.previousElementSibling;
-			if (adjacent_checkbox && adjacent_checkbox.type === "checkbox") {
+			if(adjacent_checkbox && adjacent_checkbox.type === "checkbox") {
 				adjacent_checkbox.checked = (!adjacent_checkbox.checked) ? true : false;
 				adjacent_checkbox.dispatchEvent(new Event("change"));
 			}
@@ -15,11 +15,11 @@ function toggle_checkboxes_actions() {
 	const checkboxes = document.querySelectorAll(".checkbox");
 	checkboxes.forEach(function(checkbox) {
 		const checkbox_input = checkbox.querySelector("input[type='checkbox']");
-		if (checkbox_input) {
+		if(checkbox_input) {
 			const function_name = checkbox_input.id;
 			const is_checked = checkbox_input.checked;
 
-			if (is_checked && typeof window[function_name] === "function")
+			if(is_checked && typeof window[function_name] === "function")
 				window[function_name]();
 		}
 	});
@@ -38,10 +38,10 @@ const should_show_element = (element, settings) => {
     const is_found = has_class(element, "found");
     const is_not_hide = has_class(element, "not-hide");
 
-    if (is_not_hide) return true;
-    if (settings.toggle_versions && is_newer) return false;
-    if (settings.no_spoil && is_not_found && !should_keep_on_display) return false;
-    if (settings.spoil && is_found) return false;
+    if(is_not_hide) return true;
+    if(settings.toggle_versions && is_newer) return false;
+    if(settings.no_spoil && is_not_found && !should_keep_on_display) return false;
+    if(settings.spoil && is_found) return false;
     
     return true;
 };
@@ -52,8 +52,8 @@ const is_section_empty = (section) => {
 };
 
 const has_section_older_version_items = (section) => {
-    return Array.from(section.querySelectorAll('img')).some(img => 
-        has_class(img, 'older-version')
+    return Array.from(section.querySelectorAll("img")).some(img => 
+        has_class(img, "older-version")
     );
 };
 
@@ -63,16 +63,16 @@ const update_section_visibility = (section, settings) => {
     const is_empty = is_section_empty(section);
     const has_older_items = has_section_older_version_items(section);
 
-    if (settings.toggle_versions && is_empty && !has_older_items) {
-        if (title) title.style.display = "none";
-        if (smaller_title) smaller_title.style.display = "none";
+    if(settings.toggle_versions && is_empty && !has_older_items) {
+        if(title) title.style.display = "none";
+        if(smaller_title) smaller_title.style.display = "none";
         return;
     }
 
-    if (title)
+    if(title)
         title.style.display = "block";
 
-    if (smaller_title) {
+    if(smaller_title) {
         const should_show_smaller_title = 
             settings.no_spoil ? 
                 is_empty :
@@ -84,12 +84,12 @@ const update_section_visibility = (section, settings) => {
 
 const update_display = (target_classes) => {
     const settings = get_settings();
-    if (Array.isArray(target_classes)) {
+    if(Array.isArray(target_classes)) {
         target_classes.forEach(class_name => {
             const elements = document.getElementsByClassName(class_name);
             Array.from(elements).forEach(element => {
                 const parent = get_parent_element(element);
-                if (parent)
+                if(parent)
                     set_element_display(parent, should_show_element(element, settings));
             });
         });
@@ -97,7 +97,7 @@ const update_display = (target_classes) => {
         const elements = document.getElementsByClassName(target_classes);
         Array.from(elements).forEach(element => {
             const parent = get_parent_element(element);
-            if (parent)
+            if(parent)
                 set_element_display(parent, should_show_element(element, settings));
         });
     }
@@ -110,7 +110,7 @@ const update_display = (target_classes) => {
 
 const handle_no_spoil_mode = () => {
     const spoil_checkbox = document.getElementById("spoil_mode");
-    if (document.getElementById("no_spoil_mode").checked && spoil_checkbox.checked)
+    if(document.getElementById("no_spoil_mode").checked && spoil_checkbox.checked)
         spoil_checkbox.checked = false;
     update_display(["not-found", "found"]);
 };
@@ -121,7 +121,7 @@ const handle_toggle_versions_mode = () => {
 
 const handle_spoil_mode = () => {
     const no_spoil_checkbox = document.getElementById("no_spoil_mode");
-    if (document.getElementById("spoil_mode").checked && no_spoil_checkbox.checked) {
+    if(document.getElementById("spoil_mode").checked && no_spoil_checkbox.checked) {
         no_spoil_checkbox.checked = false;
         update_display(["not-found", "found"]);
     } else {

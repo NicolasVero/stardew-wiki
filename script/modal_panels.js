@@ -38,17 +38,15 @@ function toggle_visibility(element, should_display) {
     element.style.display = (should_display) ? "block" : "none";
 }
 
-function hide_panels(event) {
-    event = event || {};
+function hide_panels(event = {}) {
 	if(current_section && event.target !== current_section && !current_section.contains(event.target) && !event.target.classList.contains("modal-opener")) {
-		if(current_section.classList.contains('feedback-panel')) {
+		if(current_section.classList.contains("feedback-panel")) {
 			current_section.remove();
 			return;
 		}
 
-		if(!current_section.classList.contains('to-keep-open'))
+		if(!current_section.classList.contains("to-keep-open"))
 			current_section.style.display = "none";
 		
 	}
-
 }

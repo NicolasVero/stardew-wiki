@@ -8,7 +8,7 @@ window.addEventListener("load", () => {
 	tag.innerHTML = os_path;
 
 	document.addEventListener("keyup", (event) => {
-		if(event.key === 'Escape')
+		if(event.key === "Escape")
 			hide_panels(event);
 	});
 
