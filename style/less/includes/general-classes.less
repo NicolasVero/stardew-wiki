@@ -86,21 +86,21 @@
 
 .absolute-panel {
 	.center-absolute;
+	.panel;
 	background-color: @stardew-bg;
-	border-image: url('../../medias/images/content/border_image.png') 15 stretch;
+	border-image: url("../../medias/images/content/border_image.png") 15 stretch;
 	border-image-width: 10px;
 	border-image-outset: 8px;
-	.panel;
 }
 
 .goal-panel {
 	.center-absolute;
-	background-image: url('../../medias/images/content/adventurers_guild_background.png');
+	.panel;
+	background-image: url("../../medias/images/content/adventurers_guild_background.png");
 	background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
     box-sizing: border-box;
-	.panel;
 }
 
 .other-panel {
@@ -124,8 +124,8 @@
 
 .filled-element {	
 	background-color: @stardew-bg;
-	border: solid 2px rgba(162, 120, 69, 1);
-	border-image: url('../../medias/images/content/border_image.png') 15 stretch;
+	border: solid 2px @filled-element-bc;
+	border-image: url("../../medias/images/content/border_image.png") 15 stretch;
 	border-image-width: 5px;
 	border-image-outset: 2px;
 	background-clip: padding-box;
@@ -143,7 +143,7 @@
 	& ~ .checkmark {
 		width: 20px;
 		aspect-ratio: 1/1;
-		border: solid 3px #5b2b2a;
+		border: solid 3px @checkboxes-bc;
 		background-color: @stardew-bg;
 
 		img {
@@ -179,7 +179,7 @@
         width: max-content;
         padding: 5px 7.5px;
         background-color: @stardew-bg;
-        border-image: url('../../medias/images/content/border_image.png') 15 stretch;
+        border-image: url("../../medias/images/content/border_image.png") 15 stretch;
         border-image-width: 2px;
 		max-width: calc(100vw / 2);
 
@@ -221,19 +221,19 @@
 }
 
 .modal_panel {
+	.absolute-panel;
 	font-family: @primary-ff;
 	font-size: @md-fs;
 	color: @primary-fc;
 
 	position: fixed;
 	padding: @big-gap @big-gap;
-	.absolute-panel;
 	max-height: 80vh;
 }
 
 .upload-panel {
-	display: none;
 	.modal_panel;
+	display: none;
 	min-width: 20vw;
 
 	& > span {
@@ -270,8 +270,8 @@
 }
 
 .settings-panel {
-	display: none;
 	.modal_panel;
+	display: none;
 	min-width: 20vw;
 
 	.checkboxes {
@@ -372,11 +372,11 @@
 			}
 
 			input[type=submit] {
+				.button-elements;
+				.filled-element;
 				font-family: @primary-ff;
 				font-size: @big-fs;
 				margin: 0 auto;
-				.button-elements;
-				.filled-element;
 				cursor: @pointer;
 				padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @ratio);
 			}
