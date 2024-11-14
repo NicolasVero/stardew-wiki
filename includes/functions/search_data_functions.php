@@ -1070,3 +1070,55 @@ function get_pet():array {
 		'breed' => $breed
 	);
 }
+
+function get_all_farm_animals():array {
+    $data = $GLOBALS['untreated_all_players_data'];
+    $all_animals = [
+        'Duck' 				=> 'duck',
+        'White Chicken' 	=> 'chicken',
+        'Brown Chicken' 	=> 'chicken',
+        'Blue Chicken' 		=> 'chicken',
+        'Golden Chicken' 	=> 'chicken',
+        'Void Chicken' 		=> 'chicken',
+        'Rabbit' 			=> 'rabbit',
+        'Dinosaur' 			=> 'dinosaur',
+        'Brown Cow'			=> 'cow',
+        'White Cow'			=> 'cow',
+        'Pig'				=> 'pig',
+        'Goat'				=> 'goat',
+        'Sheep'				=> 'sheep',
+        'Ostrich'			=> 'ostrich'
+    ];
+
+	$counters = array(
+        'duck'      => 0,
+        'chicken'   => 0,
+        'rabbit'    => 0,
+        'dinosaur'  => 0,
+        'cow'       => 0,
+        'pig'       => 0,
+        'goat'      => 0,
+        'sheep'     => 0,
+        'ostrich'   => 0,
+	);
+
+	foreach($data->locations->GameLocation as $location) {
+		if(isset($location->buildings)) {
+			foreach($location->buildings->Building as $building) {
+				if(isset($building->indoors->animals)) {
+					foreach($building->indoors->animals->item as $animal) {
+						$current_animal_type = (string) $animal->value->FarmAnimal->type;
+
+						if (isset($all_animals[$current_animal_type])) {
+							$animal_type = $all_animals[$current_animal_type];
+							$counters[$animal_type]++;
+						}
+					}
+				}
+			}
+			break;
+		}
+	}
+
+	return $counters;
+}

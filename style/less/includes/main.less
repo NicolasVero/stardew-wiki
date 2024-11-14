@@ -35,7 +35,7 @@ body {
 	
 		.info-section {
 			justify-content: flex-start;
-			width: fit-content;
+			min-width: fit-content;
 			
 			&.general-stats {
 				position: relative;
@@ -188,6 +188,7 @@ body {
 						cursor: @pointer;
 					}
 				}
+
 				& > .friendlist {
 					display: flex;
 					flex-direction: column;
@@ -207,7 +208,7 @@ body {
 					}
 
 					.character-name {
-						width: 90px;
+						min-width: 75px;
 						font-family: @primary-ff;
 					}
 	
@@ -215,6 +216,7 @@ body {
 						display: flex;
 						gap: @small-gap;
 						flex-wrap: wrap;
+						min-width: fit-content;
 						max-width: 245px;
 					
 						.hearts {
@@ -259,9 +261,15 @@ body {
 				}
 	
 				&.top-friends {
-					& > span {
+
+					& > .friendlist {
 						& > span {
 							justify-content: space-between;
+							gap: @md-gap;
+
+							.character-name {
+								text-align: center;
+							}
 						}
 					}
 				}

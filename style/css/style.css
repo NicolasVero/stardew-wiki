@@ -753,6 +753,9 @@ header .sub-header {
   justify-content: space-between;
   align-items: center;
 }
+header .sub-header > span > span {
+  min-width: fit-content;
+}
 header .sub-header .all-money {
   display: flex;
   gap: 50px;
@@ -798,7 +801,7 @@ body main .section-title {
 }
 body main .info-section {
   justify-content: flex-start;
-  width: fit-content;
+  min-width: fit-content;
 }
 body main .info-section.general-stats {
   position: relative;
@@ -948,13 +951,14 @@ body main .info-section.friends-section > .friendlist .character-icon {
   width: 40px;
 }
 body main .info-section.friends-section > .friendlist .character-name {
-  width: 90px;
+  min-width: 75px;
   font-family: "Stardew Valley Stonks", serif;
 }
 body main .info-section.friends-section > .friendlist .hearts-level {
   display: flex;
   gap: 5px;
   flex-wrap: wrap;
+  min-width: fit-content;
   max-width: 245px;
 }
 body main .info-section.friends-section > .friendlist .hearts-level .hearts {
@@ -992,8 +996,12 @@ body main .info-section.friends-section > .friendlist .friend-status {
   color: #000000;
   font-size: 16px;
 }
-body main .info-section.friends-section.top-friends > span > span {
+body main .info-section.friends-section.top-friends > .friendlist > span {
   justify-content: space-between;
+  gap: 10px;
+}
+body main .info-section.friends-section.top-friends > .friendlist > span .character-name {
+  text-align: center;
 }
 body main .info-section.friends-section.all-friends {
   display: none;

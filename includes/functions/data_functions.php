@@ -134,7 +134,9 @@ function get_aggregated_data(object $data):array {
             'total_golds'           => (int) $data->totalMoneyEarned,
             'golden_walnuts'        => (int) $general_data->goldenWalnutsFound,
             'qi_gems'               => (int) $data->qiGems,
-            'casino_coins'          => (int) $data->clubCoins
+            'casino_coins'          => (int) $data->clubCoins,
+            'raccoons'              => (int) $general_data->timesFedRaccoons,
+            'farm_animals'          =>  get_all_farm_animals()
         ),
         'levels' => array(
             'farming_level'  => (int) $data->farmingLevel,
