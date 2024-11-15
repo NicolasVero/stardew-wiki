@@ -31,4 +31,4 @@ Well done! The hardest part is behind us! Now you just have to upload  your save
 There's also a range of settings  to customize your experience!
 
 ![Stardew dashboard](https://github.com/NicolasVero/readme-elements/blob/master/images/stardew_dashboard_landing.png)
-![Stardew dashboard](https://github.com/NicolasVero/readme-elements/blob/master/images/stardew_dashboard_save.png)
+![Stardew dashboard](https://github.com/NicolasVero/readme-elements/blob/master/images/stardew_dashboard_save_3.png)
