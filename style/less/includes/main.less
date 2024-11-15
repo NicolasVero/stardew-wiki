@@ -1,8 +1,8 @@
 // out: false
 
 ::selection, moz::selection {
-	color: @text-selection-fc;
 	background: @text-selection-bg;
+	color: @text-selection-fc;
 }
 
 body {
@@ -10,11 +10,11 @@ body {
 
 	main {
 		background-color: @secondary-bg;
+		border-radius: 0 0 5px 5px;
 		display: flex;
 		flex-wrap: wrap;
-		border-radius: 0 0 5px 5px;
-		padding: @small-gap @big-gap;
 		gap: @big-gap 0;
+		padding: @small-gap @big-gap;
 	
 		section {
 			&:not(.general-stats) {
@@ -25,11 +25,11 @@ body {
 		}
 		
 		.section-title {
+			align-self: flex-start;
+			color: @primary-fc;
 			font-size: @small-fs;
 			font-family: @primary-ff;
 			font-weight: 400;
-			color: @primary-fc;
-			align-self: flex-start;
 			margin-bottom: 0;
 		}
 	
@@ -38,36 +38,37 @@ body {
 			min-width: fit-content;
 			
 			&.general-stats {
-				position: relative;
 				flex-basis: 100%;
+				position: relative;
 	
 				div {
 					display: flex;
-					gap: @md-gap @bigger-gap;
 					flex-wrap: wrap;
+					gap: @md-gap @bigger-gap;
 				}
 				
 				span {
-					display: flex;
 					align-items: flex-end;
+					display: flex;
 					gap: @small-gap;
 				}
 				
 				img {
 					height: @big-icon;
+					
 					&.quest-icon {
-						position: absolute;
-						top: 0;
-						right: 0;
 						cursor: @pointer;
+						position: absolute;
+						right: 0;
+						top: 0;
 					}
 				}
 			}
 	
 			&.skills-section {
 				.skill {
-					display: flex;
 					align-items: center;
+					display: flex;
 					gap: @md-gap;
 
 					div {
@@ -76,20 +77,21 @@ body {
 					}
 	
 					.level {
+						align-items: center;
 						display: flex;
 						justify-content: center;
-						align-items: center;
 						width: 20px;
 					}
 	
 					.level-progress-bar {
-						display: flex;
 						align-items: center;
+						display: flex;
 						gap: @small-gap;
 					}
 	
 					img {
 						height: @md-icon;
+					
 						&.level-icon {
 							height: @big-icon;
 						}
@@ -98,17 +100,15 @@ body {
 			}
 
 			&.quests-section {
+				.absolute-panel;
+				color: @primary-fc;
 				display: none;
-
 				font-family: @primary-ff;
 				font-size: @md-fs;
-				color: @primary-fc;
-		
-				position: fixed;
-				min-width: 30vw;
 				max-height: 80vh;
+				min-width: 30vw;
 				padding: @big-gap @big-gap;
-				.absolute-panel;
+				position: fixed;
 
 				.section-title {
 					margin: 0;
@@ -122,12 +122,12 @@ body {
 
 					.quest {
 						display: flex;
-						justify-content: space-between;
 						gap: @bigger-gap * 2;
+						justify-content: space-between;
 
 						& > span {
-							justify-content: center;
 							gap: @small-gap;
+							justify-content: center;
 						}
 
 						.quest-infos {
@@ -145,19 +145,19 @@ body {
 						}
 
 						.days-left {
-							display: flex;
 							align-items: center;
+							display: flex;
 						}
 
 						.quest-rewards {
 							display: flex;
-							justify-content: flex-end;
 							gap: @big-gap;
+							justify-content: flex-end;
 							width: 100px;
 
 							.quest-reward {
-								display: flex;
 								align-items: center;
+								display: flex;
 								gap: @xsmall-gap;
 							}
 						}
@@ -180,42 +180,40 @@ body {
 					gap: @small-gap;
 
 					.view-all-friends {
+						align-self: flex-end;
+						color: @secondary-fc;
+						cursor: @pointer;
 						font-family: @primary-ff;
 						font-size: @xsmall-fs;
-						color: @secondary-fc;
 						height: fit-content;
-						align-self: flex-end;
-						cursor: @pointer;
 					}
 				}
 
 				& > .friendlist {
 					display: flex;
 					flex-direction: column;
-					justify-content: center;
 					gap: @md-gap;
+					justify-content: center;
 	
 					& > span {
-						display: flex;
 						align-items: center;
-						// gap: @bigger-gap;
+						display: flex;
 					}
-	
-	
+		
 					.character-icon {
 						cursor: @help;
 						width: @bigger-icon;
 					}
 
 					.character-name {
-						min-width: 75px;
 						font-family: @primary-ff;
+						min-width: 75px;
 					}
 	
 					.hearts-level {
 						display: flex;
-						gap: @small-gap;
 						flex-wrap: wrap;
+						gap: @small-gap;
 						max-width: 245px;
 					
 						.hearts {
@@ -228,8 +226,8 @@ body {
 					}
 
 					.interactions {
-						display: flex;
 						align-items: center;
+						display: flex;
 						gap: @big-gap;
 
 						& > span {
@@ -246,9 +244,9 @@ body {
 						}
 	
 						.week {
+							color: @secondary-fc;
 							font-family: @secondary-ff;
 							font-size: @xsmall-fs;
-							color: @secondary-fc;
 							width: max-content;
 						}
 					}
@@ -263,8 +261,8 @@ body {
 
 					& > .friendlist {
 						& > span {
-							justify-content: space-between;
 							gap: @md-gap;
+							justify-content: space-between;
 
 							.character-name {
 								text-align: center;
@@ -274,12 +272,11 @@ body {
 				}
 	
 				&.all-friends {
-					display: none;
-		
-					position: fixed;
+					.absolute-panel;
+					display: none;	
 					height: 80vh;
 					padding: @md-gap @big-gap;
-					.absolute-panel;
+					position: fixed;
 	
 					& > span {
 						& > span {
@@ -294,17 +291,15 @@ body {
 			}
 
 			&.monster-eradication-goals-section {
+				.goal-panel;
+				aspect-ratio: 1.79;
+				color: @goal-fc;
 				display: none;
-
 				font-family: @dialogue-ff;
 				font-size: @giant-fs;
-				color: @goal-fc;
-		
-				position: fixed;
 				min-width: 60vw;
-				aspect-ratio: 1.79;
 				padding: @big-gap @big-gap;
-				.goal-panel;
+				position: fixed;
 
 				& > * {
 					display: flex;
@@ -323,25 +318,27 @@ body {
 					}
 
 					& > .dashes {
-						// 30 dashes
-						width: 30 * 14px + 29 * 3px;
+						@dash-amount: 30;
+						@dash-gap: 3px;
+						@dash-width: 14px;
+						width: @dash-amount * @dash-width + (@dash-amount - 1) * @dash-gap;
 					}
 
 					& > .exit {
 						position: absolute;
-						top: @md-gap;
 						right: @md-gap;
+						top: @md-gap;
 						width: @big-icon;
 					}
 				}
 
 				& > .goals {
-					margin-top: @md-gap;
 					margin-left: @md-gap + @small-gap;
+					margin-top: @md-gap;
 
 					& > .goal {
-						display: flex;
 						align-items: center;
+						display: flex;
 						gap: @md-gap;
 
 						& > *:not(.tooltip) {
@@ -350,52 +347,58 @@ body {
 						}
 
 						& img.reward {
-							width: @big-icon;
 							height: @big-icon;
 							object-fit: contain;
+							width: @big-icon;
 						}
 					}
 				}
 			}
 
 			&.calendar-section {
+				@calendar-block: 64px * @calendar-ratio;
+				@calendar-border-width: 2px * @calendar-ratio;
+				@calendar-left-margin: 16px * @calendar-ratio;
+				@calendar-ratio: 2;
+				@calendar-real-width: 480px * @calendar-ratio;
+				@calendar-top-margin: 64px * @calendar-ratio;
+				.other-panel;
+				aspect-ratio: 1.43;
 				display: none;
 				position: fixed;
 				width: (480px * 2);
-				aspect-ratio: 1.43;
-				.other-panel;
 				
 				& > .calendar-block {
-					position: relative;
 					display: block;
-					width: 100%;
 					height: 100%;
+					position: relative;
+					width: 100%;
 
 					& > img {
+						height: 100%;
 						position: absolute;
 						width: 100%;
-						height: 100%;
 					}
 
 					& > table {
-						position: absolute;
 						border-collapse: collapse;
-						top: ((64px + (2px / 2)) * 2);
-						left: ((16px + (2px / 2)) * 2);
-						width: fit-content;
 						height: fit-content;
+						left: @calendar-left-margin + (@calendar-border-width / 2);
+						position: absolute;
+						top: @calendar-top-margin + (@calendar-border-width / 2);
+						width: fit-content;
 						
 						& > tbody > tr {
 							display: block;
+							height: @calendar-block;
 							width: fit-content;
-							height: (64px * 2);
 
 							& > td {
 								box-sizing: border-box;
-								text-align: center;
+								height: @calendar-block;
 								padding: 0;
-								width: (64px * 2);
-								height: (64px * 2);
+								text-align: center;
+								width: @calendar-block;
 
 								&:hover {
 									border: solid 2px @calendar-bc;
@@ -407,10 +410,10 @@ body {
 									vertical-align: middle;
 
 									& > a {
-										display: block;
-										width: 100%;
-										height: 100%;
 										cursor: @pointer;
+										display: block;
+										height: 100%;
+										width: 100%;
 									}
 								}
 							}
@@ -435,11 +438,11 @@ body {
 		}
 	
 		.separated-galleries {
-			width: 100%;
 			display: flex;
 			flex-wrap: wrap;
-			justify-content: space-between;
 			gap: @big-gap 0;
+			justify-content: space-between;
+			width: 100%;
 		}
 	
 		.gallery {
@@ -454,21 +457,22 @@ body {
 
 			& > .has_panel {
 				.view-monster-eradication-goals {
+					align-self: flex-end;
+					color: @secondary-fc;
+					cursor: @pointer;
 					font-family: @primary-ff;
 					font-size: @xsmall-fs;
-					color: @secondary-fc;
-					align-self: flex-end;
-					cursor: @pointer;
 				}
 			}
 	
 			img {
 				height: @big-icon;
 				min-width: @big-icon;
+				object-fit: contain;
+
 				&.enemies {
 					width: @big-icon !important;
 				}
-				object-fit: contain;
 			}
 		}
 	
@@ -476,24 +480,4 @@ body {
 			margin-bottom: @big-gap;
 		}
 	}
-}
-
-
-// Easter eggs
-
-.fullscreen-image {
-	position: fixed;
-    top: 0;
-    left: -40vw;
-    width: 180vw;
-    height: 100vh;
-    object-fit: cover;
-    z-index: 1000;
-    opacity: 0;
-    transition: opacity 1s ease;
-    pointer-events: none;
-}
-
-.fullscreen-image.show {
-    opacity: 1;
 }

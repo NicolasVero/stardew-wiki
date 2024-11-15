@@ -1,11 +1,11 @@
 // out: false
 
 .sur-header {
+	align-items: flex-end;
 	display: flex;
 	justify-content: space-between;
-	align-items: flex-end;
-	width: 100%;
 	margin-bottom: 20px;
+	width: 100%;
 	
 	&#landing_menu, &#error_menu {
 		justify-content: flex-end;
@@ -13,13 +13,13 @@
 	}
 
 	#players_selection {
-		margin: 0;
-		width: 70%;
+		align-items: center;
 		display: flex;
 		flex-wrap: wrap;
-		align-items: center;
 		gap: @small-gap @md-gap;
 		list-style-type: none;
+		margin: 0;
+		width: 70%;
 
 		li {
 			.button-elements;
@@ -29,14 +29,14 @@
 	}
 
 	& > span {
-		display: flex;
 		align-items: flex-end;
+		display: flex;
 		gap: @md-gap;
 
 		.game_version {
+			color: @third-fc;
 			font-family: @primary-ff;
 			font-size: @md-fs;
-			color: @third-fc;
 		}
 
 		.modal-opener {
@@ -44,8 +44,8 @@
 		}
 
 		.landing-page-opener {
-			display: flex;
 			aspect-ratio: 1/1;
+			display: flex;
 		}
 
 		img {
@@ -56,41 +56,41 @@
 }
 
 header {
-	display: flex;
-	flex-direction: column;
 	background-color: @primary-bg;
 	border-radius: 5px 5px 0 0;
-	padding: @md-gap @big-gap;
+	display: flex;
+	flex-direction: column;
 	gap: @md-gap;
+	padding: @md-gap @big-gap;
 
 	.header {
-		width: 100%;
+		align-items: center;
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
+		width: 100%;
 
 		& > span {
 			flex-basis: 33%;
 
 			&.date {
-				position: relative;
-				display: flex;
-				justify-content: center;
 				align-items: center;
+				display: flex;
 				gap: 20px;
+				justify-content: center;
+				position: relative;
 			}
 
 			&.game_time {
+				align-items: center;
 				display: flex;
-				justify-content: flex-end;
-  				align-items: center;
 				gap: @small-gap;
+				justify-content: flex-end;
 			}
 		}
 
 		& > span:first-of-type {
-			display: flex;
 			align-items: flex-end;
+			display: flex;
 			gap: @md-gap;
 		}
 
@@ -100,10 +100,10 @@ header {
 	}
 
 	.sub-header {
-		width: 100%;
+		align-items: center;
 		display: flex;
 		justify-content: space-between;
-		align-items: center;
+		width: 100%;
 		
 		& > span {
 			& > span {

@@ -2,8 +2,8 @@
 
 // Center absolute
 .center-absolute {
-	top: 50%;
 	left: 50%;
+	top: 50%;
 	transform: translate(-50%,-50%);
 }
 
@@ -42,18 +42,18 @@
 
 // Basic classes
 .data {
+	color: @primary-fc;
 	font-family: @primary-ff;
 	font-size: @big-fs;
-	color: @primary-fc;
 }
 
 .buttons {
-	transition: transform .2s ease-in-out;
 	transform: scale(1);
+	transition: transform .2s ease-in-out;
 
 	&:hover {
-		transform: scale(1.1);
 		cursor: @pointer;
+		transform: scale(1.1);
 	}
 }
 
@@ -66,9 +66,9 @@
 }
 	
 .panel-header {
+	align-items: center;
 	display: flex;
 	justify-content: space-between;
-	align-items: center;
 	margin-bottom: @big-gap;
 }
 	
@@ -79,9 +79,9 @@
 .panel {
 	background-clip: padding-box;
 	overflow-y: scroll;
+	scrollbar-width: none;
 	// 1000 -> Au dessus de tout / 998 Laisse le tooltip passer par dessus
 	z-index: 1000;
-	scrollbar-width: none;
 }
 
 .absolute-panel {
@@ -89,17 +89,17 @@
 	.panel;
 	background-color: @stardew-bg;
 	border-image: url("../../medias/images/content/border_image.png") 15 stretch;
-	border-image-width: 10px;
 	border-image-outset: 8px;
+	border-image-width: 10px;
 }
 
 .goal-panel {
 	.center-absolute;
 	.panel;
 	background-image: url("../../medias/images/content/adventurers_guild_background.png");
-	background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+	background-size: cover;
     box-sizing: border-box;
 }
 
@@ -110,45 +110,45 @@
 
 // Data classes
 .data-info {
+	color: @primary-fc;
 	font-family: @primary-ff;
 	font-size: @md-fs;
-	color: @primary-fc;
 }
 
 .data-label {
+	color: @secondary-fc;
 	font-family: @secondary-ff;
 	font-size: @xsmall-fs;
-	color: @secondary-fc;
 	font-weight: 200;
 }
 
 .filled-element {	
 	background-color: @stardew-bg;
+	background-clip: padding-box;
 	border: solid 2px @filled-element-bc;
 	border-image: url("../../medias/images/content/border_image.png") 15 stretch;
-	border-image-width: 5px;
 	border-image-outset: 2px;
-	background-clip: padding-box;
+	border-image-width: 5px;
 }
 
 .button-elements {
-	.data;
 	.buttons;
 	.cant_select;
+	.data;
 }
 
 .checkbox-elements {
 	display: none;
 
 	& ~ .checkmark {
-		width: 20px;
 		aspect-ratio: 1/1;
-		border: solid 3px @checkboxes-bc;
 		background-color: @stardew-bg;
+		border: solid 3px @checkboxes-bc;
+		width: @small-icon;
 
 		img {
-			width: 100%;
 			display: none;
+			width: 100%;
 		}
 	}
 
@@ -162,8 +162,8 @@
 }
 
 .exit {
-	width: @big-icon;
 	cursor: @pointer;
+	width: @big-icon;
 }
 
 // Tooltips
@@ -174,14 +174,14 @@
 
     span {
         .data;
-        position: absolute;
-        display: none !important;
-        width: max-content;
-        padding: 5px 7.5px;
         background-color: @stardew-bg;
         border-image: url("../../medias/images/content/border_image.png") 15 stretch;
         border-image-width: 2px;
+        display: none !important;
 		max-width: calc(100vw / 2);
+        padding: 5px 7.5px;
+        position: absolute;
+        width: max-content;
 
         &.left {
             right: 100%;
@@ -199,8 +199,8 @@
             cursor: @help;
 
             & ~ span {
-                z-index: 100;
                 display: inline !important;
+                z-index: 100;
 
                	&.left {
                	    left: auto;
@@ -222,13 +222,12 @@
 
 .modal_panel {
 	.absolute-panel;
+	color: @primary-fc;
 	font-family: @primary-ff;
 	font-size: @md-fs;
-	color: @primary-fc;
-
-	position: fixed;
-	padding: @big-gap @big-gap;
 	max-height: 80vh;
+	padding: @big-gap @big-gap;
+	position: fixed;
 }
 
 .upload-panel {
@@ -239,14 +238,14 @@
 	& > span {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
 		gap: @big-gap;
+		justify-content: center;
 		width: fit-content;
 
 		& > span {
 			&:first-of-type {
-				display: flex;
 				align-items: center;
+				display: flex;
 				gap: @md-gap;
 			}
 		}
@@ -266,7 +265,6 @@
 	#save-upload {
 		display: none;
 	}
-
 }
 
 .settings-panel {
@@ -277,12 +275,12 @@
 	.checkboxes {
 		display: flex;
 		flex-direction: column;
-		justify-content: center;
 		gap: @md-gap;
+		justify-content: center;
 
 		.checkbox {
-			display: flex;
 			align-items: flex-end;
+			display: flex;
 			gap: @md-gap;
 
 			input {
@@ -298,17 +296,17 @@
 
 	span {
 		form {
-			display: flex;
-			flex-direction: column;
 			align-items: flex-start;
+			display: flex;
 			gap: @big-gap;
+			flex-direction: column;
 
 			& > span {
 				&:first-of-type {
 					display: flex;
+					gap: @bigger-gap;
 					justify-content: space-between;
 					width: 100%;
-					gap: @bigger-gap;
 				}
 			}
 				
@@ -339,55 +337,52 @@
 				justify-content: space-around;
 				
 				& > span {
+					align-items: center;
 					display: flex;
 					flex-basis: 33%;
 					flex-direction: column;
-					align-items: center;
 					gap: @md-gap;
 				}
 
 				& img {
-					width: @big-icon;
 					height: @big-icon;
 					object-fit: contain;
+					width: @big-icon;
 				}
 			}
 
 			input, textarea {
 				&:not(input[type=submit]) {
 					background-color: @stardew-bg;
-					border-top: solid 3px #5b2b2a;
-					border-right: solid 3px #5b2b2a;
-					border-left: solid 3px #965c3a;
 					border-bottom: solid 3px #965c3a;
-	
-					padding: @small-gap @small-gap;
-	
+					border-left: solid 3px #965c3a;
 					border-radius: 2px;
-	
+					border-right: solid 3px #5b2b2a;
+					border-top: solid 3px #5b2b2a;
 					box-shadow: inset -2px 2px 0 2px #dc7b05, -2px 2px 0 2px #cca36b;
-					scrollbar-width: none;
 					font-family: @dialogue-ff;
+					padding: @small-gap @small-gap;
+					scrollbar-width: none;
 				}
 			}
 
 			input[type=submit] {
 				.button-elements;
 				.filled-element;
+				cursor: @pointer;
 				font-family: @primary-ff;
 				font-size: @big-fs;
 				margin: 0 auto;
-				cursor: @pointer;
 				padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @ratio);
 			}
 
 			input[type=number] {
-				-moz-appearance:textfield;
 				appearance: textfield;
+				-moz-appearance: textfield;
 				
 				&::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
-					-webkit-appearance: none;
 					margin: 0;
+					-webkit-appearance: none;
 				}
 			}
 
@@ -396,4 +391,22 @@
 			}
 		}
 	}
+}
+
+// Easter eggs
+.fullscreen-image {
+	height: 100vh;
+    left: -40vw;
+    object-fit: cover;
+    opacity: 0;
+    pointer-events: none;
+	position: fixed;
+    top: 0;
+    transition: opacity 1s ease;
+    width: 180vw;
+    z-index: 1000;
+}
+
+.fullscreen-image.show {
+    opacity: 1;
 }
