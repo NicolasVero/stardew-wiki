@@ -8,8 +8,8 @@ body {
 			section {
 				& > span {
 					&.characters {
-						font-size: @small-fs;
 						flex-direction: row;
+						font-size: @small-fs;
 					}
 				}
 			}
@@ -20,9 +20,8 @@ body {
 			section {
 				& > span {
 					&.characters {
-						font-size: @xsmall-fs;
 						flex-direction: column;
-
+						font-size: @xsmall-fs;
 					}
 				}
 			}
@@ -32,29 +31,29 @@ body {
 	#landing_page, #mobile_landing_page {
 		main {
 			.data-info;
+			border-radius: 5px;
 			display: flex;
 			flex-direction: column;
 			gap: @big-gap;
-			border-radius: 5px;
 			margin-bottom: 20px;
 	
 			h1.section-title {
-				margin-inline: auto;
-				text-align: center;
-				font-size: @giant-fs;
 				font-family: @dialogue-ff;
+				font-size: @giant-fs;
 				font-weight: 100;
 				letter-spacing: 2px;
+				text-align: center;
+				margin-inline: auto;
 			}
 
 			a {
+				color: @stardew-bg;
 				text-decoration: underline;
 				text-decoration-color: @stardew-bg;
-				color: @stardew-bg;
 
 				&:hover {
-					opacity: 0.7;
 					cursor: @pointer;
+					opacity: 0.7;
 				}
 			}
 
@@ -71,14 +70,14 @@ body {
 
 					&.characters {
 						display: flex;
-						justify-content: space-evenly;
 						gap: @big-gap;
+						justify-content: space-evenly;
 						margin-top: @big-gap;
 
 						& > span {
 							display: flex;
-							justify-content: flex-start;
 							gap: @big-gap;
+							justify-content: flex-start;
 
 							& > span {
 								display: flex;
@@ -111,8 +110,8 @@ body {
 							gap: @md-gap; 
 							
 							img {
-								width: @big-icon;
 								cursor: @pointer;
+								width: @big-icon;
 							}
 						}
 					}
@@ -130,51 +129,51 @@ body {
 
 			.img-embed {
 				display: inline-block;
-				position: relative;
-				width: @big-icon;
 				height: @big-icon;
 				margin-bottom: -@big-gap;
+				position: relative;
+				width: @big-icon;
 				
 				img {
+					cursor: @pointer;
+					margin-top: -(@big-gap - @md-gap);
 					position: absolute;
 					width: @big-icon;
-					margin-top: -(@big-gap - @md-gap);
-					cursor: @pointer;
 				}
 			}
 		}
 	}
 
 	.loading {
+		bottom: @md-gap;
 		display: none;
-		position: fixed;
 		height: @giant-icon;
 		left: @big-gap;
-		bottom: @md-gap;
+		position: fixed;
 	}
 
 	.error-wrapper {
-		position: absolute;
-		left: 0;
 		bottom: 0;
+		left: 0;
+		position: absolute;
 		width: 100%;
 
 		.dialogue-box-error-container {
+			margin: 0 auto;
 			position: relative; 
 			width: fit-content;
-			margin: 0 auto;
 			
 			span {
-				position: absolute;
-				width: 57%;
-				font-family: @dialogue-ff;
 				color: @dialogue-fc;
-				font-size:@giant-fs;
+				font-family: @dialogue-ff;
+				font-size: @giant-fs;
+				left: @big-gap;
 				letter-spacing: 2px;
 				line-height: 1.4;
-				top: @big-gap;
-				left: @big-gap;
 				padding: @small-gap;
+				position: absolute;
+				top: @big-gap;
+				width: 57%;
 			}
 		}
 	}
