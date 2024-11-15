@@ -317,7 +317,7 @@ function get_quest_log(object $data):array {
 		);
 
 		// Quêtes histoire
-		if (!empty($quest_reference)){
+		if(!empty($quest_reference)){
 			$quests_data[] = array(
 				"time_limited"	=> false,
 				"objective"   	=> $quest_reference["objective"],
@@ -478,12 +478,13 @@ function get_cooking_recipes(object $recipes, object $recipes_cooked):array {
 		if($has_ever_cooked) {
 			foreach($recipes_cooked->item as $recipe_cooked) {
 
-				if($version_score < get_game_version_score("1.6.0"))
+				if($version_score < get_game_version_score("1.6.0")) {
 					$recipe_id = (int) $recipe_cooked->key->int;
-				else
+				} else {
 					$recipe_id = $recipe_cooked->key->string;
+				}
 
-				$recipe_id = (filter_var((int) $recipe_id, FILTER_VALIDATE_INT)) ? (int) $recipe_id : get_custom_id((string) $recipe_id);
+				get_correct_id($recipe_id);
 
 				if($recipe_id == $index) {
 					$cooking_recipes_data[$item_name] = array(
@@ -540,7 +541,6 @@ function get_artifacts(object $artifacts, object $general_data):array {
 }
 
 function get_minerals(object $minerals, object $general_data):array {
-	
 	$version_score = $GLOBALS["game_version_score"];
 	$minerals_data = array();
 
@@ -577,9 +577,13 @@ function is_given_to_museum(int $item_id, object $general_data, int $museum_inde
 
 	foreach($museum_items->item as $museum_item) {
 		if($version_score < get_game_version_score("1.6.0")) {
-			if($item_id == (int) $museum_item->value->int) return 1;
+			if($item_id == (int) $museum_item->value->int) {
+				return 1;
+			}
 		} else {
-			if($item_id == (int) $museum_item->value->string) return 1;
+			if($item_id == (int) $museum_item->value->string) {
+				return 1;
+			}
 		}
 	}
 
@@ -592,8 +596,9 @@ function get_museum_index(object $locations):int {
 	$locations = $locations->locations->GameLocation;
 
 	foreach($locations as $location) {
-		if(isset($location->museumPieces))
+		if(isset($location->museumPieces)) {
 			break;
+		}
 		$index_museum++;
 	}
 
@@ -611,8 +616,9 @@ function get_adventurers_guild_data(int $player_id):array {
 		extract($monster_data);
 
 		foreach($enemies_killed as $enemy_killed) {
-			if(in_array($enemy_killed["id"], $ids)) 
+			if(in_array($enemy_killed["id"], $ids)) {
 				$counter += $enemy_killed["killed_counter"];
+			}
 		}
 
 		$adventurers_guild_data[$monsters_name] = array(
@@ -632,8 +638,9 @@ function get_adventurers_guild_data(int $player_id):array {
 function is_all_the_adventurers_guild_categories_completed(array $adventurers_guild_data):bool {
     $counter = 0;
     foreach($adventurers_guild_data as $data) {
-        if($data["is_completed"])
-            $counter++;
+        if($data["is_completed"]) {	
+			$counter++;
+		}
     }
 
     return $counter == count($adventurers_guild_data);
@@ -818,8 +825,9 @@ function get_grandpa_score():int {
 	$total_money_earned = $data->totalMoneyEarned;
 	foreach($money_earned_goals as $money_earned_goal) {
 		extract($money_earned_goal);
-		if($total_money_earned > $goal)
+		if($total_money_earned > $goal) {
 			$grandpa_points+=$points;
+		}
 	}
 
 	// Skill level
@@ -950,8 +958,9 @@ function has_any_player_gotten_all_stardrops():bool {
 
 	for($current_player = 0; $current_player < $total_players; $current_player++) {
 		$amount_elements = $all_datas[$current_player]["general"]["max_stamina"];
-		if($amount_elements == 508)
+		if($amount_elements == 508) {
 			return true;
+		}
 	}
 
 	return false;
@@ -1070,33 +1079,21 @@ function get_pet():array {
 
 function get_all_farm_animals():array {
     $data = $GLOBALS["untreated_all_players_data"];
-    $all_animals = [
-        "Duck" 				=> "duck",
-        "White Chicken" 	=> "chicken",
-        "Brown Chicken" 	=> "chicken",
-        "Blue Chicken" 		=> "chicken",
-        "Golden Chicken" 	=> "chicken",
-        "Void Chicken" 		=> "chicken",
-        "Rabbit" 			=> "rabbit",
-        "Dinosaur" 			=> "dinosaur",
-        "Brown Cow"			=> "cow",
-        "White Cow"			=> "cow",
-        "Pig"				=> "pig",
-        "Goat"				=> "goat",
-        "Sheep"				=> "sheep",
-        "Ostrich"			=> "ostrich"
-    ];
-
-	$counters = array(
-        "duck"      => 0,
-        "chicken"   => 0,
-        "rabbit"    => 0,
-        "dinosaur"  => 0,
-        "cow"       => 0,
-        "pig"       => 0,
-        "goat"      => 0,
-        "sheep"     => 0,
-        "ostrich"   => 0,
+    $all_animals = array(
+        "Duck" 			 => "Duck",
+        "White Chicken"  => "Chicken",
+        "Brown Chicken"  => "Chicken",
+        "Blue Chicken" 	 => "Chicken",
+        "Golden Chicken" => "Chicken",
+        "Void Chicken" 	 => "Chicken",
+        "Rabbit" 		 => "Rabbit",
+        "Dinosaur" 		 => "Dinosaur",
+        "Brown Cow"		 => "Cow",
+        "White Cow"		 => "Cow",
+        "Pig"			 => "Pig",
+        "Goat"			 => "Goat",
+        "Sheep"			 => "Sheep",
+        "Ostrich"		 => "Ostrich"
 	);
 
 	foreach($data->locations->GameLocation as $location) {
@@ -1106,9 +1103,17 @@ function get_all_farm_animals():array {
 					foreach($building->indoors->animals->item as $animal) {
 						$current_animal_type = (string) $animal->value->FarmAnimal->type;
 
-						if (isset($all_animals[$current_animal_type])) {
+				
+						if(isset($all_animals[$current_animal_type])) {
 							$animal_type = $all_animals[$current_animal_type];
-							$counters[$animal_type]++;
+							if(!isset($animals_data[$animal_type])) {
+								$animals_data[$animal_type] = array(
+									"id"      => get_custom_id($animal_type),
+									"counter" => 0 
+								);
+							}
+
+							$animals_data[$animal_type]["counter"]++;
 						}
 					}
 				}
@@ -1117,5 +1122,5 @@ function get_all_farm_animals():array {
 		}
 	}
 
-	return $counters;
+	return $animals_data;
 }

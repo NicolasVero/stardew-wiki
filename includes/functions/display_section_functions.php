@@ -896,6 +896,11 @@ function display_crafting_recipes():string {
     return display_detailled_gallery($datas["crafting_recipes"], "crafting_recipes", "Crafting recipes", "_100");
 }
 
+function display_farm_animals():string {
+    $datas = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
+    return display_detailled_gallery($datas["farm_animals"], "farm_animals", "Farm animals", "_100");
+}
+
 function get_level_progress_bar(int $level):string {
 
     $max_level = 10;
@@ -952,6 +957,10 @@ function get_tooltip_text(array $player_data, string $json_line_name, string $da
     extract($data_array);
 
     switch($data_type) {
+
+        case "farm_animals" : 
+            return "$json_line_name : $counter in your farm";
+
         case "fish" : 
             if($max_length > 0) return "$json_line_name : caught $caught_counter times ($max_length inches)";
             return "$json_line_name : caught $caught_counter times";

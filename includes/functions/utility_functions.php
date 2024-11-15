@@ -134,6 +134,7 @@ function load_all_json():void {
 		"crafting_recipes",
 		"custom_ids",
 		"enemies",
+		"farm_animals",
 		"festivals",
 		"fish",
 		"marriables",
@@ -235,9 +236,9 @@ function is_a_mobile_device():bool {
 
 
 function get_correct_id(mixed &$id):void {
-	if(!ctype_digit($id)) {
+	if(!filter_var((int) $id, FILTER_VALIDATE_INT)) {
 		$id = get_custom_id($id);
-	} 
+	}
 }
 
 if(isset($_GET["action"]) && $_GET["action"] == "get_max_upload_size")

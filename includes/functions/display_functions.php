@@ -215,9 +215,10 @@ function display_page():string {
 		$structure .= "<div class='separated-galleries'>";
 			$structure .= display_skills();
 			$structure .= display_top_friendships();
-		$structure .= "</div>";
+			$structure .= "</div>";
 			
-		$structure .= "<div class='separated-galleries'>";
+			$structure .= "<div class='separated-galleries'>";
+			$structure .= display_farm_animals();
 			$structure .= display_unlockables();
 			$structure .= display_books();
 
@@ -234,6 +235,7 @@ function display_page():string {
 			
 			$structure .= display_crafting_recipes();
 		$structure .= "</div>";
+
 
 
     $structure .= "</main>";
