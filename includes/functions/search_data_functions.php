@@ -1079,6 +1079,7 @@ function get_pet():array {
 
 function get_all_farm_animals():array {
     $data = $GLOBALS["untreated_all_players_data"];
+	$animals_data = array();
     $all_animals = array(
         "Duck" 			 => "Duck",
         "White Chicken"  => "Chicken",
@@ -1101,9 +1102,7 @@ function get_all_farm_animals():array {
 			foreach($location->buildings->Building as $building) {
 				if(isset($building->indoors->animals)) {
 					foreach($building->indoors->animals->item as $animal) {
-						$current_animal_type = (string) $animal->value->FarmAnimal->type;
-
-				
+						$current_animal_type = (string) $animal->value->FarmAnimal->type;				
 						if(isset($all_animals[$current_animal_type])) {
 							$animal_type = $all_animals[$current_animal_type];
 							if(!isset($animals_data[$animal_type])) {

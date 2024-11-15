@@ -213,12 +213,14 @@ function display_page():string {
 		$structure .= display_calendar_panel();
 
 		$structure .= "<div class='separated-galleries'>";
-			$structure .= display_skills();
-			$structure .= display_top_friendships();
+			$structure .= "<div class='intra-gallery _50'>";
+				$structure .= display_skills();
+				$structure .= display_farm_animals();
 			$structure .= "</div>";
+			$structure .= display_top_friendships();
+		$structure .= "</div>";
 			
 			$structure .= "<div class='separated-galleries'>";
-			$structure .= display_farm_animals();
 			$structure .= display_unlockables();
 			$structure .= display_books();
 

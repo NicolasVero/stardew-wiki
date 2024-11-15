@@ -192,8 +192,6 @@ body {
 				& > .friendlist {
 					display: flex;
 					flex-direction: column;
-					gap: @md-gap;
-					justify-content: center;
 	
 					& > span {
 						align-items: center;
@@ -258,8 +256,10 @@ body {
 				}
 	
 				&.top-friends {
-
 					& > .friendlist {
+						height: 100%;
+						justify-content: space-between;
+
 						& > span {
 							gap: @md-gap;
 							justify-content: space-between;
@@ -286,6 +286,11 @@ body {
 		
 					.section-title {
 						font-size: @big-fs;
+					}
+					
+					& > .friendlist {
+						gap: @md-gap;
+						justify-content: center;
 					}
 				}
 			}
@@ -435,6 +440,12 @@ body {
 					}
 				}
 			}
+		}
+
+		.intra-gallery {
+			display: flex;
+			flex-direction: column;
+			gap: @big-gap;
 		}
 	
 		.separated-galleries {

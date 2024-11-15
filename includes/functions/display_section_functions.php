@@ -418,7 +418,7 @@ function display_skills():string {
 	$this_player_masteries = $this_player_data["masteries"];
 
     $structure = "
-		<section class='skills-section info-section _50'>
+		<section class='skills-section info-section'>
 			<h2 class='section-title'>Skills</h2>
             <span>    
     ";
@@ -472,7 +472,7 @@ function display_skills():string {
     return $structure;
 }
 
-function display_top_friendships(int $limit = 4):string {
+function display_top_friendships(int $limit = 5):string {
     return display_friendships($limit);
 }
 
@@ -695,7 +695,7 @@ function display_unlockables():string {
     return $structure;
 }
 
-function display_detailled_gallery(array $player_datas, string $json_filename, string $section_title, string $width, bool $has_panel = false, array $panel_details = array()):string {
+function display_detailled_gallery(array $player_datas, string $json_filename, string $section_title, string $width = "", bool $has_panel = false, array $panel_details = array()):string {
     
 	$version_score = $GLOBALS["game_version_score"];
 
@@ -898,7 +898,7 @@ function display_crafting_recipes():string {
 
 function display_farm_animals():string {
     $datas = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
-    return display_detailled_gallery($datas["farm_animals"], "farm_animals", "Farm animals", "_100");
+    return display_detailled_gallery($datas["farm_animals"], "farm_animals", "Farm animals");
 }
 
 function get_level_progress_bar(int $level):string {
