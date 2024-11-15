@@ -324,6 +324,15 @@ function display_general_stats():string {
                     <span class='data data-house-upgrade'>$house_level</span>
                     <span class='data-label'>upgrades done</span>
                 </span>
+
+                <span>
+                    <span class='tooltip'>
+                        <img src='{$images_path}icons/raccoons.png' alt='Raccoons'/>
+                        <span>$raccoons / 10 missions for the raccoon family</span>
+                    </span>
+                    <span class='data data-inventory'>" . formate_number($raccoons) . "</span>
+                    <span class='data-label'>helping raccoons </span>
+                </span>
             </div>
         </section>
     ";
