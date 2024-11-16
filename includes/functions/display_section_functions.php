@@ -204,25 +204,33 @@ function display_header():string {
             <div class='sub-header'>
                 <span class='all-money'>
                     <span>
-                        <img src='{$images_path}icons/gold.png' alt='Gold coins'/>
+                        <a class='wiki_link' href='https://stardewvalleywiki.com/Gold' target='_blank'>
+                            <img src='{$images_path}icons/gold.png' alt='Gold coins'/>
+                        </a>
                         <span class='data actual-gold'>" . formate_number($golds) . "</span>
                         <span class='data-label'>gold coins</span>
                     </span>
 
                     <span>
-                        <img src='{$images_path}icons/golden_walnut.png' alt='Golden walnuts'/>
+                        <a class='wiki_link' href='https://stardewvalleywiki.com/Golden_Walnut' target='_blank'>
+                            <img src='{$images_path}icons/golden_walnut.png' alt='Golden walnuts'/>
+                        </a>
                         <span class='data actual-golden-walnut'>" . formate_number($golden_walnuts) . " / 130</span>
                         <span class='data-label'>golden walnuts</span>
                     </span>
 
                     <span>
-                        <img src='{$images_path}icons/qi_gem.png' alt='Qi gems'/>
+                        <a class='wiki_link' href='https://stardewvalleywiki.com/Qi_Gem' target='_blank'>
+                            <img src='{$images_path}icons/qi_gem.png' alt='Qi gems'/>
+                        </a>
                         <span class='data actual-qi-gem'>" . formate_number($qi_gems) . "</span>
                         <span class='data-label'>qi gems</span>
                     </span>
 
                     <span>
-                        <img src='{$images_path}icons/casino_coins.png' alt='Casino coins'/>
+                        <a class='wiki_link' href='https://stardewvalleywiki.com/Casino' target='_blank'>
+                            <img src='{$images_path}icons/casino_coins.png' alt='Casino coins'/>
+                        </a>
                         <span class='data actual-golden-walnut'>" . formate_number($casino_coins) . "</span>
                         <span class='data-label'>casino coins</span>
                     </span>
@@ -230,7 +238,9 @@ function display_header():string {
                 <span class='perfection-stats'>
                     <span>
                         <span class='tooltip'>
-                            <img src='{$images_path}characters/grandpa.png' alt='GrandPa candles'/>
+                            <a class='wiki_link' href='https://stardewvalleywiki.com/Grandpa' target='_blank'>
+                                <img src='{$images_path}characters/grandpa.png' alt='GrandPa candles'/>
+                            </a>
                             <span>Number of candles lit on the altar ($grandpa_score points)</span>
                         </span>
                         <span class='data data-candles'>" . get_candles_lit($grandpa_score) . "</span>
@@ -238,7 +248,9 @@ function display_header():string {
                     </span>
 
                     <span>
-                        <img src='{$images_path}icons/stardrop.png' alt='Perfection'/>
+                        <a class='wiki_link' href='https://stardewvalleywiki.com/Perfection' target='_blank'>
+                            <img src='{$images_path}icons/stardrop.png' alt='Perfection'/>
+                        </a>
                         <span class='data data-perfection'>" . get_perfection_percentage() . "%</span>
                         <span class='data-label'>perfection progression</span>
                     </span>
@@ -274,26 +286,34 @@ function display_general_stats():string {
 			$quest_button
             <div>
                 <span>
-                    <img src='{$images_path}icons/energy.png' alt='Energy'/>
+                    <a class='wiki_link' href='https://stardewvalleywiki.com/Energy' target='_blank'>
+                        <img src='{$images_path}icons/energy.png' alt='Energy'/>
+                    </a>
                     <span class='data data-energy'>" . formate_number($max_stamina) . "</span>
-                    <span class='data-label'>max stamina</span>
+                    <span class='data-label'>max energy</span>
                 </span>
 
                 <span>
+                <a class='wiki_link' href='https://stardewvalleywiki.com/Health' target='_blank'>
                     <img src='{$images_path}icons/health.png' alt='Health'/>
+                </a>
                     <span class='data data-health'>" . formate_number($max_health) . "</span>
                     <span class='data-label'>max health</span>
                 </span>
 
                 <span>
-                    <img src='{$images_path}icons/inventory.png' alt='Inventory'/>
+                    <a class='wiki_link' href='https://stardewvalleywiki.com/Inventory' target='_blank'>
+                        <img src='{$images_path}icons/inventory.png' alt='Inventory'/>
+                    </a>
                     <span class='data data-inventory'>" . formate_number($max_items) . "</span>
                     <span class='data-label'>inventory spaces</span>
                 </span>
 
                 <span>
                     <span class='tooltip'>
-                        <img src='{$images_path}icons/mine_level.png' alt='Mine level'/>
+                        <a class='wiki_link' href='https://stardewvalleywiki.com/The_Mines' target='_blank'>
+                            <img src='{$images_path}icons/mine_level.png' alt='Mine level'/>
+                        </a>
                         <span>$deepest_mine_level_tooltip</span>
                     </span>
                     <span class='data data-mine-level'>" . formate_number($mine_level) . "</span>
@@ -305,7 +325,9 @@ function display_general_stats():string {
                 "
                 <span>
                     <span class='tooltip'>
-                        <img src='{$images_path}characters/" . lcfirst($spouse) . ".png' alt='$spouse'/>
+                        <a class='wiki_link' href='https://stardewvalleywiki.com/Children' target='_blank'>
+                            <img src='{$images_path}characters/" . lcfirst($spouse) . ".png' alt='$spouse'/>
+                        </a>
                         <span> " . get_child_tooltip($spouse, $children) . "</span>
                     </span>
                     <span class='data data-family'>" . count($children) . "</span>
@@ -318,11 +340,26 @@ function display_general_stats():string {
                 "
                 <span>
                     <span class='tooltip'>
-                        <img src='{$images_path}icons/house.png' alt='House upgrades' class='easter_egg_kaaris'/>
+                        <a class='wiki_link' href='https://stardewvalleywiki.com/Farmhouse' target='_blank'>
+                            <img src='{$images_path}icons/house.png' alt='House upgrades' class='easter_egg_kaaris'/>
+                        </a>
                         <span>$house_level / 3 improvements</span>
                     </span>
                     <span class='data data-house-upgrade'>$house_level</span>
                     <span class='data-label'>upgrades done</span>
+                </span>
+
+
+
+                <span>
+                    <span class='tooltip'>
+                        <a class='wiki_link' href='https://stardewvalleywiki.com/Giant_Stump' target='_blank'>
+                            <img src='{$images_path}icons/raccoons.png' alt='Raccoons'/>
+                        </a>
+                        <span>$raccoons / 10 missions for the raccoon family</span>
+                    </span>
+                    <span class='data data-inventory'>" . formate_number($raccoons) . "</span>
+                    <span class='data-label'>helping raccoons </span>
                 </span>
             </div>
         </section>
