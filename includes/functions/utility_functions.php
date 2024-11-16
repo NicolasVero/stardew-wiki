@@ -1,9 +1,5 @@
 <?php
-require __DIR__ . "/../../vendor/autoload.php";
 require "subsearch_data.php";
-
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\Exception;
 
 function log_(mixed $element, string $title = ""):void {
     if($title != "") {
@@ -13,7 +9,7 @@ function log_(mixed $element, string $title = ""):void {
 	echo "<pre>" . print_r($element, true) . "</pre>";
 } 
 
-function get_images_folder(bool $is_external = false):string {
+function get_images_folder(bool $is_external = true):string {
 	return ($is_external) ? get_github_medias_url() : get_site_root() . "medias/images/";
 }
 
@@ -41,12 +37,9 @@ function formate_number(int $number, string $lang = "en"):string {
 } 
 
 function formate_text_for_file(string $string):string {
-
     $search =  [" ", "'", "(", ")", ",", ".", ":"];
     $replace = ["_", ""  , "" , "", "", "", ""   ];
-
     $string = str_replace($search, $replace, $string);
-
     $string = strtolower($string);
 
     if(substr($string, -1) === "_") {
@@ -83,7 +76,6 @@ function formate_usernames(string $username):string {
 }
 
 function in_bytes_conversion(string $size, string $use = "local"):int {
-
     $unit_to_power = ($use == "local") 
 		? array("o"  => 0, "Ko" => 1, "Mo" => 2, "Go" => 3)
 		: array("K" => 1, "M" => 2, "G" => 3);
@@ -101,10 +93,8 @@ function array_keys_exists(array $keys, array $array):bool {
 }
 
 function sanitize_json_with_version(string $json_name, bool $version_controler = false):array {
-
 	$original_json = $GLOBALS["json"][$json_name];
 	$game_version_score = (isset($GLOBALS["game_version_score"])) ? $GLOBALS["game_version_score"] : "";
-
 	$sanitize_json = array();
 
 	foreach($original_json as $key => $json_version) {
@@ -118,7 +108,6 @@ function sanitize_json_with_version(string $json_name, bool $version_controler =
 
 function find_reference_in_json(mixed $id, string $file):mixed {
     $json_file = sanitize_json_with_version($file);
-
     return isset($json_file[$id]) ? $json_file[$id] : null;
 }
 
@@ -185,9 +174,7 @@ function decode(string $filename): array {
 }
 
 function get_formatted_date(bool $display_date = true):mixed {
-
 	$data = $GLOBALS["untreated_player_data"];
-
     $day    = $data->dayOfMonthForSaveGame;
     $season = array("spring", "summer", "fall", "winter")[$data->seasonForSaveGame % 4];
     $year   = $data->yearForSaveGame;
@@ -204,13 +191,12 @@ function get_formatted_date(bool $display_date = true):mixed {
 }
 
 function get_game_duration(int $duration):string {
-
     $totalSeconds = intdiv($duration, 1000);
     $seconds      = $totalSeconds % 60;
     $totalMinutes = intdiv($totalSeconds, 60);
     $minutes      = $totalMinutes % 60;
     $hours        = intdiv($totalMinutes, 60);
-
+	
     return sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
 }
 

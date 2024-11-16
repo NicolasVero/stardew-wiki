@@ -3,7 +3,6 @@
 require "display_section_functions.php";
 
 function display_landing_page():string {
-
 	if(is_a_mobile_device()) {
 		return display_mobile_landing_page();
 	}
@@ -200,7 +199,6 @@ function display_mobile_landing_page():string {
 
 
 function display_page():string {
-
     $structure = display_header();
     $structure .= "<main>";
 
@@ -238,15 +236,12 @@ function display_page():string {
 			$structure .= display_crafting_recipes();
 		$structure .= "</div>";
 
-
-
     $structure .= "</main>";
 
     return $structure;
 }
 
 function display_error_page(Exception $exception):string {
-
     $exception_dialogues = array(
         "The file is not in xml format." => array(
             "dialogue" => "Oh, my stars! It appears this file has lost its way in the tangled underbrush of incompatible formats. XML, my dear friend, is the language of precision and organization, much like the delicate balance of ecosystems on our beloved Ginger Island!",

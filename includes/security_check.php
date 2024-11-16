@@ -1,7 +1,6 @@
 <?php 
 
 function is_file_secure(mixed $file, string $external_error = null):bool {
-    
 	$finfo = finfo_open(FILEINFO_MIME_TYPE);
 
     if($external_error) {

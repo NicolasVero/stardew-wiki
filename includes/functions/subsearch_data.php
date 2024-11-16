@@ -37,7 +37,6 @@ function get_total_skills_level(object $data):int {
 	return ($data->farmingLevel + $data->miningLevel + $data->combatLevel + $data->foragingLevel + $data->fishingLevel);
 }
 
-
 function get_pet_frienship_points():int {
 	$locations = $GLOBALS["untreated_all_players_data"]->locations->GameLocation;
 	foreach($locations as $location) {
@@ -72,7 +71,6 @@ function is_this_the_same_day(string $date):bool {
     return $date == "$day/$season";
 }
 
-
 function get_candles_lit(int $grandpa_score):int {
 	if($grandpa_score <= 3) {
         return 1;
@@ -95,13 +93,13 @@ function get_element_completion_percentage(int $max_amount, int $current_amount)
 
 function get_amount_obelisk_on_map():int {
 	$locations = $GLOBALS["untreated_all_players_data"]->locations->GameLocation;
+	$obelisk_count = 0;
 	$obelisk_names = array(
 		"Earth Obelisk",
 		"Water Obelisk",
 		"Island Obelisk",
 		"Desert Obelisk",
 	);
-	$obelisk_count = 0;
 
 	foreach($locations as $location) {
 		if(isset($location->buildings->Building)) {
@@ -171,6 +169,7 @@ function get_children_amount(int $id):array {
 			}
 		}
 	}
+	
 	return $children_name;
 }
 

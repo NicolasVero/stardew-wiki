@@ -1,7 +1,5 @@
 <?php
-
 require_once "functions.php";
-
 include "components/header.php";
 
 if(isset($_GET["dev"])) {

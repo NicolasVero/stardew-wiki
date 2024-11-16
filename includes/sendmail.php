@@ -1,15 +1,18 @@
 <?php
+require __DIR__ . "/../vendor/autoload.php";
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 function send_feedback_mail(array $user_details):bool {
 	require_once "load_environment.php";
+	
 	extract($user_details);
 	
 	$date_time = new DateTime("now", new DateTimeZone("Europe/Paris"));
 	$date = $date_time->format("d/m/Y");
 	$time = $date_time->format("H:i");
-
 	$mail = new PHPMailer(true);
-
 	$mail->isSMTP();
 	$mail->Host = $_ENV["SMTP_HOST"];
 	$mail->SMTPAuth = true;
@@ -17,10 +20,8 @@ function send_feedback_mail(array $user_details):bool {
 	$mail->Password = $_ENV["SMTP_PASSWORD"];
 	$mail->SMTPSecure = PHPMailer::ENCRYPTION_STARTTLS;
 	$mail->Port = 587;
-	
 	$mail->setFrom("stardewvalley.dashboard@gmail.com", "Feedback Notification");
 	$mail->addAddress("stardewvalley.dashboard@gmail.com");
-	
 	$mail->isHTML(false);
 	$mail->Subject = "A new feedback just came in: $feedback_type";
 	$mail->Body = "From: $email_adress - $date at $time" . PHP_EOL . "$message";

@@ -572,7 +572,6 @@ function get_minerals(object $minerals, object $general_data):array {
 
 function is_given_to_museum(int $item_id, object $general_data, int $museum_index, int $version_score):int { 
 
-	// $location_index = ($version_score < get_game_version_score("1.6.0")) ? 31 : 32;
 	$museum_items = $general_data->locations->GameLocation[$museum_index]->museumPieces;
 
 	foreach($museum_items->item as $museum_item) {

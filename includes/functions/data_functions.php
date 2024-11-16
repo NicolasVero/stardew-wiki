@@ -8,12 +8,12 @@ function load_save($save_file, $use_ajax = true):mixed {
     $data = simplexml_load_file($uploadedFile);
 
     load_all_json();
-    $GLOBALS["untreated_all_players_data"] = $data;
 
+    $GLOBALS["untreated_all_players_data"] = $data;
     $players_data = get_all_players_datas();
     $players = get_all_players();
-
     $pages["sur_header"] = display_sur_header(false, false);
+
     for($player_count = 0; $player_count < count($players); $player_count++) {
         $GLOBALS["player_id"] = $player_count;
         $pages["player_" . $player_count] = "
@@ -41,6 +41,7 @@ function get_all_players_datas():array {
     $data = $GLOBALS["untreated_all_players_data"];
 
     array_push($players_data, get_aggregated_data($data->player));
+
 	$GLOBALS["host_player_data"] = $players_data[0];
 
 	if($GLOBALS["game_version_score"] < get_game_version_score("1.6.0"))  {
@@ -67,7 +68,6 @@ function get_all_players_datas():array {
 	}
 
 	$GLOBALS["all_players_data"] = $players_data;
-
     return $players_data;
 }
 
@@ -94,17 +94,14 @@ function get_all_players():array {
 	}
 
 	$GLOBALS["players_names"] = $players_names;
-
     return $players_names;
 }
 
 
 function get_aggregated_data(object $data):array {
-
     $general_data = $GLOBALS["untreated_all_players_data"];
     $game_version_score = (int) get_game_version_score((string) $general_data->gameVersion);
     $should_spawn_monsters = $general_data->shouldSpawnMonsters;
-
 	$GLOBALS["untreated_player_data"] = $data;
 	$GLOBALS["game_version"] = $general_data->gameVersion;
 	$GLOBALS["game_version_score"] = $game_version_score;
