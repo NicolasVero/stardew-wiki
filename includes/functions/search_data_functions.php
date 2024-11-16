@@ -1049,7 +1049,7 @@ function get_perfection_elements():array {
 	);
 }
 
-function get_perfection_percentage():int {
+function get_perfection_percentage():string {
 	$untreated_data = $GLOBALS["untreated_all_players_data"];
 	if((string) $untreated_data->farmPerfect == "true")
 		return 100;
