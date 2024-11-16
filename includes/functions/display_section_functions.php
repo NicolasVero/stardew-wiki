@@ -200,39 +200,25 @@ function display_header():string {
             </div>
 
             <div class='sub-header'>
-                <span class='all-money'>
-                    <span>
-                        <a class='wiki_link' href='https://stardewvalleywiki.com/Gold' target='_blank'>
-                            <img src='{$images_path}icons/gold.png' alt='Gold coins'/>
-                        </a>
-                        <span class='data actual-gold'>" . formate_number($golds) . "</span>
-                        <span class='data-label'>gold coins</span>
-                    </span>
+                <span class='all-money'>" .
+                    display_stat(array(
+                        "icon" => "Gold coins", "value" => $golds, "wiki_link" => "Gold"
+                    ))
+                    .
+                    display_stat(array(
+                        "icon" => "Golden Walnuts", "value" => $golden_walnuts, "wiki_link" => "Golden_Walnut", "tooltip" => "$golden_walnuts / 130 golden walnuts found"
+                    ))
+                    .
+                    display_stat(array(
+                        "icon" => "Qi gems", "value" => $qi_gems, "wiki_link" => "Qi_Gem"
+                    ))
+                    .
+                    display_stat(array(
+                        "icon" => "Casino coins", "value" => $casino_coins, "wiki_link" => "Casino"
+                    ))
+                    .
 
-                    <span>
-                        <a class='wiki_link' href='https://stardewvalleywiki.com/Golden_Walnut' target='_blank'>
-                            <img src='{$images_path}icons/golden_walnut.png' alt='Golden walnuts'/>
-                        </a>
-                        <span class='data actual-golden-walnut'>" . formate_number($golden_walnuts) . " / 130</span>
-                        <span class='data-label'>golden walnuts</span>
-                    </span>
-
-                    <span>
-                        <a class='wiki_link' href='https://stardewvalleywiki.com/Qi_Gem' target='_blank'>
-                            <img src='{$images_path}icons/qi_gem.png' alt='Qi gems'/>
-                        </a>
-                        <span class='data actual-qi-gem'>" . formate_number($qi_gems) . "</span>
-                        <span class='data-label'>qi gems</span>
-                    </span>
-
-                    <span>
-                        <a class='wiki_link' href='https://stardewvalleywiki.com/Casino' target='_blank'>
-                            <img src='{$images_path}icons/casino_coins.png' alt='Casino coins'/>
-                        </a>
-                        <span class='data actual-golden-walnut'>" . formate_number($casino_coins) . "</span>
-                        <span class='data-label'>casino coins</span>
-                    </span>
-                </span>
+                "</span>
                 <span class='perfection-stats'>
                     <span>
                         <span class='tooltip'>
@@ -1081,4 +1067,42 @@ function display_calendar_panel():string {
             </span>
         </section>
     ";
+}
+
+
+// array() --> *icon, *value, tooltip, alt, label, wiki_link
+function display_stat(array $parameters):string {
+    extract($parameters);
+    $images_path = get_images_folder();
+    $formatted_icon = formate_text_for_file($icon);
+    $alt = $alt ?? $icon;
+    $label = $label ?? $icon;
+    $image = "<img src='{$images_path}icons/$formatted_icon.png' alt='$alt' />";
+
+    if(isset($tooltip)) {
+        $image = "
+            <span class='tooltip'>
+                $image
+                <span>$tooltip</span>
+            </span>
+        ";
+    }
+
+    $image_field = "
+        <span>
+            $image
+            <span class='data $formatted_icon'>" . formate_number($value) . "</span>
+            <span class='data-label'>$label</span>
+        </span>
+    ";
+
+    if(isset($wiki_link)) {
+        return "
+            <a class='wiki_link' href='https://stardewvalleywiki.com/$wiki_link' target='_blank'>
+                $image_field
+            </a>
+        ";
+    }
+
+    return $image_field;
 }
