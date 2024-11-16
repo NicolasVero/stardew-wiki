@@ -680,13 +680,15 @@
 	"110011" : "Napalm Ring",
 	"110012" : "Marlon's Phone Number",
 
-    "111001" : "Chicken",
-	"111002" : "Rabbit",
-	"111003" : "Duck",
-	"111004" : "Cow",
-	"111005" : "Goat",
-	"111006" : "Sheep",
-	"111007" : "Pig",
-	"111008" : "Dinosaur",
-	"111009" : "Ostrich"
+	"111001" : "Chicken",
+	"111002" : "Void Chicken",
+	"111003" : "Rabbit",
+	"111004" : "Duck",
+	"111005" : "Cow",
+	"111006" : "Goat",
+	"111007" : "Sheep",
+	"111008" : "Pig",
+	"111009" : "Dinosaur",
+	"111010" : "Golden Chicken",
+    "111011" : "Ostrich"
 }
