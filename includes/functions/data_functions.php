@@ -24,11 +24,11 @@ function load_save($save_file, $use_ajax = true):mixed {
     }
 
     if($use_ajax) {
-        return array(
+        return [
             "players" => $GLOBALS["players_names"],
             "html" => $pages,
             "code" => "success"
-        );
+        ];
     } else {   
         foreach($pages as $page) {
             echo $page;
@@ -37,7 +37,7 @@ function load_save($save_file, $use_ajax = true):mixed {
 }
 
 function get_all_players_datas():array {
-    $players_data = array();
+    $players_data = [];
     $data = $GLOBALS["untreated_all_players_data"];
 
     array_push($players_data, get_aggregated_data($data->player));
@@ -73,7 +73,7 @@ function get_all_players_datas():array {
 
 
 function get_all_players():array {
-    $players_names = array();
+    $players_names = [];
     $data = $GLOBALS["untreated_all_players_data"];
 
     array_push($players_names, (string) $data->player->name);
@@ -107,14 +107,14 @@ function get_aggregated_data(object $data):array {
 	$GLOBALS["game_version_score"] = $game_version_score;
 	$GLOBALS["should_spawn_monsters"] = $should_spawn_monsters;
     
-    return array(
-        "general" => array(
+    return [
+        "general" => [
             "id"                    => (int) $data->UniqueMultiplayerID,
             "game_version"          => (string) $general_data->gameVersion,
             "game_version_score"    => $game_version_score,
             "should_spawn_monsters" => $should_spawn_monsters,
             "name"                  => (string) $data->name,
-            "gender"                => get_gender(array($data->gender, $data->isMale)),
+            "gender"                => get_gender([$data->gender, $data->isMale]),
             "farm_name"             => (string) $data->farmName,
             "farmer_level"          => get_farmer_level(),
             "favorite_thing"        => (string) $data->favoriteThing,
@@ -135,14 +135,14 @@ function get_aggregated_data(object $data):array {
             "qi_gems"               => (int) $data->qiGems,
             "casino_coins"          => (int) $data->clubCoins,
             "raccoons"              => (int) $general_data->timesFedRaccoons,
-        ),
-        "levels" => array(
+        ],
+        "levels" => [
             "farming_level"  => (int) $data->farmingLevel,
             "mining_level"   => (int) $data->miningLevel,
             "combat_level"   => (int) $data->combatLevel,
             "foraging_level" => (int) $data->foragingLevel,
             "fishing_level"  => (int) $data->fishingLevel,
-        ),
+        ],
         "has_element"     	=> get_unlockables_list(),
         "crafting_recipes"	=> get_crafting_recipes($data->craftingRecipes),
         "books"           	=> get_books($data->stats->Values),
@@ -158,5 +158,5 @@ function get_aggregated_data(object $data):array {
         "enemies_killed"  	=> get_enemies_killed_data($data->stats),
         "quest_log"       	=> get_quest_log($data->questLog),
         "farm_animals"      => get_all_farm_animals()
-    );
+    ];
 }

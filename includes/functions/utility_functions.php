@@ -54,7 +54,7 @@ function formate_original_data_string(string $data):string {
 }
 
 function formate_usernames(string $username):string {
-	$regex = array(
+	$regex = [
 		"à" => "a", "á" => "a", "â" => "a", "ã" => "a", "ä" => "a", "å" => "a", "æ" => "ae",
 		"ç" => "c",
 		"è" => "e", "é" => "e", "ê" => "e", "ë" => "e",
@@ -71,14 +71,14 @@ function formate_usernames(string $username):string {
 		"Ò" => "O", "Ó" => "O", "Ô" => "O", "Õ" => "O", "Ö" => "O", "Ø" => "O",
 		"Ù" => "U", "Ú" => "U", "Û" => "U", "Ü" => "U",
 		"Ý" => "Y"
-	);
+	];
 	return strtr($username, $regex);
 }
 
 function in_bytes_conversion(string $size, string $use = "local"):int {
     $unit_to_power = ($use == "local") 
-		? array("o"  => 0, "Ko" => 1, "Mo" => 2, "Go" => 3)
-		: array("K" => 1, "M" => 2, "G" => 3);
+		? ["o"  => 0, "Ko" => 1, "Mo" => 2, "Go" => 3]
+		: ["K" => 1, "M" => 2, "G" => 3];
 
     preg_match("/(\d+)([a-zA-Z]+)/", $size, $matches);
     
@@ -95,7 +95,7 @@ function array_keys_exists(array $keys, array $array):bool {
 function sanitize_json_with_version(string $json_name, bool $version_controler = false):array {
 	$original_json = $GLOBALS["json"][$json_name];
 	$game_version_score = (isset($GLOBALS["game_version_score"])) ? $GLOBALS["game_version_score"] : "";
-	$sanitize_json = array();
+	$sanitize_json = [];
 
 	foreach($original_json as $key => $json_version) {
 		if($game_version_score > get_game_version_score($key) || !$version_controler) {
@@ -112,10 +112,11 @@ function find_reference_in_json(mixed $id, string $file):mixed {
 }
 
 function load_all_json():void {
-	$all_json = array(
-		"all_dates",
+	$all_json = [
 		"achievements_details",
 		"achievements",
+		"adventurer's_guild_goals",
+		"all_dates",
 		"all_items",
 		"artifacts",
 		"books",
@@ -129,6 +130,7 @@ function load_all_json():void {
 		"marriables",
 		"masteries",
 		"minerals",
+		"perfection_elements",
 		"quests",
 		"shipped_items",
 		"skills",
@@ -137,7 +139,7 @@ function load_all_json():void {
 		"villagers_birthday",
 		"villagers",
 		"wiki_links"
-	);
+	];
 
 	foreach($all_json as $json_file)
 		$GLOBALS["json"][$json_file] = decode($json_file);
@@ -176,18 +178,18 @@ function decode(string $filename): array {
 function get_formatted_date(bool $display_date = true):mixed {
 	$data = $GLOBALS["untreated_player_data"];
     $day    = $data->dayOfMonthForSaveGame;
-    $season = array("spring", "summer", "fall", "winter")[$data->seasonForSaveGame % 4];
+    $season = ["spring", "summer", "fall", "winter"][$data->seasonForSaveGame % 4];
     $year   = $data->yearForSaveGame;
 
     if($display_date) {
 		return "Day $day of $season, Year $year";
 	}
 
-    return array(
+    return [
         "day" => $day,
         "season" => $season,
         "year" => $year
-    );
+	];
 }
 
 function get_game_duration(int $duration):string {

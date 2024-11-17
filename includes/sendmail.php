@@ -43,12 +43,12 @@ if($_SERVER["REQUEST_METHOD"] != "POST") {
 	exit;
 }
 
-$user_details = array(
+$user_details = [
 	"feedback_type" => $topic,
 	"email_adress" => $mail,
 	"username" => $username,
 	"message" => $message,
-);
+];
 
 if(send_feedback_mail($user_details)) {
 	$response["success"] = true;

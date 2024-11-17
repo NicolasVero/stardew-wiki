@@ -94,12 +94,12 @@ function get_element_completion_percentage(int $max_amount, int $current_amount)
 function get_amount_obelisk_on_map():int {
 	$locations = $GLOBALS["untreated_all_players_data"]->locations->GameLocation;
 	$obelisk_count = 0;
-	$obelisk_names = array(
+	$obelisk_names = [
 		"Earth Obelisk",
 		"Water Obelisk",
 		"Island Obelisk",
 		"Desert Obelisk",
-	);
+	];
 
 	foreach($locations as $location) {
 		if(isset($location->buildings->Building)) {
@@ -136,7 +136,7 @@ function get_house_upgrade_level():int {
 
 function get_children_amount(int $id):array {
 	$locations = $GLOBALS["untreated_all_players_data"]->locations->GameLocation;
-	$children_name = array();
+	$children_name = [];
 
 	foreach($locations as $location) {
 		if(isset($location->characters)) {
@@ -187,8 +187,8 @@ function get_child_tooltip(string $spouse, array $children):string {
 }
 
 function get_the_married_person_gender(string $spouse):string {
-	$wifes = array("abigail", "emily", "haley", "leah", "maru", "penny");
-	$husbands = array("alex", "elliott", "harvey", "sam", "sebastian", "shane");
+	$wifes = ["abigail", "emily", "haley", "leah", "maru", "penny"];
+	$husbands = ["alex", "elliott", "harvey", "sam", "sebastian", "shane"];
 
 	if(in_array(strtolower($spouse), $wifes)) {
 		return "your wife";
@@ -199,4 +199,12 @@ function get_the_married_person_gender(string $spouse):string {
 	}
 
 	return "";
+}
+
+function get_all_adventurers_guild_categories():array {
+	return $GLOBALS["json"]["adventurer's_guild_goals"];
+}
+
+function get_perfection_max_elements():array {
+	return $GLOBALS["json"]["perfection_elements"];
 }

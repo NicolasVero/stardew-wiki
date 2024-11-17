@@ -1,0 +1,22 @@
+{
+	"1.5" : {
+		"farmer_level" : 25,
+		"golden_walnuts" : 130,
+		"obelisks" : 4,
+		"crafting_recipes" : 129,
+		"cooking_recipes" : 80,
+		"shipped_items" : 145,
+		"friendship" : 33,
+		"fish_caught" : 67
+	},
+	"1.6" : {
+		"farmer_level" : 25,
+		"golden_walnuts" : 130,
+		"obelisks" : 4,
+		"crafting_recipes" : 149,
+		"cooking_recipes" : 81,
+		"shipped_items" : 155,
+		"friendship" : 34,
+		"fish_caught" : 72
+	}
+}
