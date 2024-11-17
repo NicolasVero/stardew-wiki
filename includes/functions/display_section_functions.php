@@ -200,7 +200,8 @@ function display_header():string {
             </div>
 
             <div class='sub-header'>
-                <span class='all-money'>" .
+                <span class='all-money'>" 
+                    .
                     display_stat(array(
                         "icon" => "Gold coins", "value" => $golds, "wiki_link" => "Gold"
                     ))
@@ -217,7 +218,6 @@ function display_header():string {
                         "icon" => "Casino coins", "value" => $casino_coins, "wiki_link" => "Casino"
                     ))
                     .
-
                 "</span>
                 <span class='perfection-stats'>
                     <span>

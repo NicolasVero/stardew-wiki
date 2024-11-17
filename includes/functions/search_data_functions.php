@@ -758,137 +758,98 @@ function get_all_adventurers_guild_categories():array {
 	);
 }
 
-function get_grandpa_score():int {
+function get_grandpa_score(): int {
+    $data = $GLOBALS["untreated_player_data"];
+    $grandpa_points = 0;
 
-	$data = $GLOBALS["untreated_player_data"];
-	$grandpa_points = 0;
-	$money_earned_goals = array(
-		array(
-			"goal" => 50000, 
-			"points" => 1
-		),
-		array(
-			"goal" => 100000, 
-			"points" => 1
-		),
-		array(
-			"goal" => 200000, 
-			"points" => 1
-		),
-		array(
-			"goal" => 300000, 
-			"points" => 1
-		),
-		array(
-			"goal" => 500000, 
-			"points" => 1
-		),
-		array(
-			"goal" => 1000000, 
-			"points" => 2
-		)
-	);
+    $money_earned_goals = [
+        ["goal" => 50000, "points" => 1],
+        ["goal" => 100000, "points" => 1],
+        ["goal" => 200000, "points" => 1],
+        ["goal" => 300000, "points" => 1],
+        ["goal" => 500000, "points" => 1],
+        ["goal" => 1000000, "points" => 2]
+    ];
 
-	$skill_goals = array(
-		array(
-			"goal" => 30, 
-			"points" => 1
-		),
-		array(
-			"goal" => 50, 
-			"points" => 1
-		)
-	);
+    $skill_goals = [
+        ["goal" => 30, "points" => 1],
+        ["goal" => 50, "points" => 1]
+    ];
 
-	$achievement_ids = array(
-		5,
-		26,
-		34
-	);
+    $achievement_ids = [5, 26, 34];
+    $friendship_goals = [5, 10];
+    $cc_rooms = [
+        "ccBoilerRoom", "ccCraftsRoom", "ccPantry", 
+        "ccFishTank", "ccVault", "ccBulletin"
+    ];
 
-	$friendship_goals = array(
-		5,
-		10
-	);
+    $total_money_earned = $data->totalMoneyEarned;
+    foreach($money_earned_goals as $goal_data) {
+        if($total_money_earned > $goal_data["goal"]) {
+            $grandpa_points += $goal_data["points"];
+        }
+    }
 
-	$cc_rooms = array(
-		"ccBoilerRoom",
-		"ccCraftsRoom",
-		"ccPantry",
-		"ccFishTank",
-		"ccVault",
-		"ccBulletin"
-	);
+    $total_skills_level = get_total_skills_level($data);
+    foreach($skill_goals as $goal_data) {
+        if($total_skills_level > $goal_data["goal"]) {
+            $grandpa_points += $goal_data["points"];
+        }
+    }
 
-	// Gains totaux
-	$total_money_earned = $data->totalMoneyEarned;
-	foreach($money_earned_goals as $money_earned_goal) {
-		extract($money_earned_goal);
-		if($total_money_earned > $goal) {
-			$grandpa_points+=$points;
-		}
-	}
+    foreach($achievement_ids as $achievement_id) {
+        if(does_player_have_achievement($data->achievements, $achievement_id)) {
+            $grandpa_points++;
+        }
+    }
 
-	// Skill level
-	$total_skills_level = get_total_skills_level($data);
-	foreach($skill_goals as $skill_goal) {
-		extract($skill_goal);
-		if($total_skills_level > $goal)
-			$grandpa_points+=$points;
-	}
+    $house_level = get_house_upgrade_level();
+    $is_married = get_is_married();
+    if($house_level >= 2 && $is_married) {
+        $grandpa_points++;
+    }
 
-	// Achievements
-	foreach($achievement_ids as $achievement_id)
-		if(does_player_have_achievement($data->achievements, $achievement_id))
-			$grandpa_points++;
+    $friendships = get_friendship_data($data->friendshipData);
+    $friendship_count = 0;
+    foreach($friendships as $friendship) {
+        if($friendship["friend_level"] >= 8) {
+            $friendship_count++;
+        }
+    }
 
-	// Married + 2 house upgrades
-	$house_level = get_house_upgrade_level();
-	$is_married = get_is_married();
-	if($house_level >= 2 && $is_married)
-		$grandpa_points++;
+    foreach($friendship_goals as $goal) {
+        if($friendship_count >= $goal) {
+            $grandpa_points++;
+        }
+    }
 
-	// Friendship
-	$friendships = get_friendship_data($data->friendshipData);
-	$friendship_count = 0;
-	foreach($friendships as $friendship) {
-		extract($friendship);
-		if($friend_level >= 8)
-			$friendship_count++;
-	}
+    if(get_pet_frienship_points() >= 999) {
+        $grandpa_points++;
+    }
 
-	foreach($friendship_goals as $friendship_goal) {
-		if($friendship_count >= $friendship_goal)
-			$grandpa_points++;
-	}
+    $cc_completed = array_reduce($cc_rooms, function($completed, $room) use ($data) {
+        return $completed && has_element($room, $data);
+    }, true);
 
-	// Pet Friendship
-	if(get_pet_frienship_points() >= 999)
-		$grandpa_points++;
+    if($cc_completed) {
+        $grandpa_points++;
+    }
 
-	// Community Center completed
-	$cc_completed = true;
-	foreach($cc_rooms as $cc_room) {
-		if(!has_element($cc_room, $data))
-			$cc_completed = false;
-	}
-	if($cc_completed)
-		$grandpa_points++;
+    if(in_array(191393, (array)$data->eventsSeen->int)) {
+        $grandpa_points += 2;
+    }
 
-	// Community Center restored
-	if(in_array(191393 , (array) $data->eventsSeen->int))
-		$grandpa_points+=2;
+    if(get_unlockables("skull_key")) {
+        $grandpa_points++;
+    }
 
-	// Skull Key
-	if(get_unlockables("skull_key"))
-		$grandpa_points++;
-	
-	// Rusty Key
-	if(get_unlockables("rusty_key"))
-		$grandpa_points++;
+    if(get_unlockables("rusty_key")) {
+        $grandpa_points++;
+    }
 
-	return $grandpa_points;
+    return $grandpa_points;
 }
+
 
 function get_highest_count_for_category(string $category):array {
 	$game_version = substr($GLOBALS["game_version"], 0, 3);
@@ -982,8 +943,9 @@ function get_player_with_highest_friendships():array {
 			extract($friendship);
 			$can_be_married = in_array($friendship_name, $marriables_npc) && $status == "Friendly";
 
-			if(($can_be_married && $friend_level >= 8) || (!$can_be_married && $friend_level >= 10))
+			if(($can_be_married && $friend_level >= 8) || (!$can_be_married && $friend_level >= 10)) {
 				$friend_counter++;
+			}
 		}
 
 		if($friend_counter > $max_elements) $max_elements = $friend_counter;
@@ -1076,49 +1038,60 @@ function get_pet():array {
 	);
 }
 
-function get_all_farm_animals():array {
+
+function get_all_farm_animals(): array {
     $data = $GLOBALS["untreated_all_players_data"];
-	$animals_data = array();
-    $all_animals = array(
-        "Duck" 			 => "Duck",
-        "White Chicken"  => "Chicken",
-        "Brown Chicken"  => "Chicken",
-        "Blue Chicken" 	 => "Chicken",
-        "Golden Chicken" => "Golden Chicken",
-        "Void Chicken" 	 => "Void Chicken",
-        "Rabbit" 		 => "Rabbit",
-        "Dinosaur" 		 => "Dinosaur",
-        "Brown Cow"		 => "Cow",
-        "White Cow"		 => "Cow",
-        "Pig"			 => "Pig",
-        "Goat"			 => "Goat",
-        "Sheep"			 => "Sheep",
-        "Ostrich"		 => "Ostrich"
-	);
+    $animals_data = [];
+    
+    $all_animals = [
+        "Duck"              => "Duck",
+        "White Chicken"     => "Chicken",
+        "Brown Chicken"     => "Chicken",
+        "Blue Chicken"      => "Chicken",
+        "Golden Chicken"    => "Golden Chicken",
+        "Void Chicken"      => "Void Chicken",
+        "Rabbit"            => "Rabbit",
+        "Dinosaur"          => "Dinosaur",
+        "Brown Cow"         => "Cow",
+        "White Cow"         => "Cow",
+        "Pig"               => "Pig",
+        "Goat"              => "Goat",
+        "Sheep"             => "Sheep",
+        "Ostrich"           => "Ostrich"
+    ];
 
-	foreach($data->locations->GameLocation as $location) {
-		if(isset($location->buildings)) {
-			foreach($location->buildings->Building as $building) {
-				if(isset($building->indoors->animals)) {
-					foreach($building->indoors->animals->item as $animal) {
-						$current_animal_type = (string) $animal->value->FarmAnimal->type;				
-						if(isset($all_animals[$current_animal_type])) {
-							$animal_type = $all_animals[$current_animal_type];
-							if(!isset($animals_data[$animal_type])) {
-								$animals_data[$animal_type] = array(
-									"id"      => get_custom_id($animal_type),
-									"counter" => 0 
-								);
-							}
+    foreach($data->locations->GameLocation as $location) {
+        if(!isset($location->buildings)) {
+            continue;
+        }
 
-							$animals_data[$animal_type]["counter"]++;
-						}
-					}
-				}
-			}
-			break;
-		}
-	}
+        foreach($location->buildings->Building as $building) {
+            if(!isset($building->indoors->animals)) {
+                continue;
+            }
 
-	return $animals_data;
+            foreach($building->indoors->animals->item as $animal) {
+                $current_animal_type = (string)$animal->value->FarmAnimal->type;
+
+                if(!isset($all_animals[$current_animal_type])) {
+                    continue;
+                }
+
+                $animal_type = $all_animals[$current_animal_type];
+
+                if(!isset($animals_data[$animal_type])) {
+                    $animals_data[$animal_type] = [
+                        "id"      => get_custom_id($animal_type),
+                        "counter" => 0
+                    ];
+                }
+
+                $animals_data[$animal_type]["counter"]++;
+            }
+        }
+
+        break;
+    }
+
+    return $animals_data;
 }
