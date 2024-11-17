@@ -427,96 +427,43 @@ function display_top_friendships(int $limit = 5):string {
     return display_friendships($limit);
 }
 
-function display_friendships(int $limit = -1):string {
-	$player_id = $GLOBALS["player_id"];
-	$friendship_data = $GLOBALS["all_players_data"][$player_id]["friendship"];
+function display_friendships(int $limit = -1): string {
+    $player_id = $GLOBALS["player_id"];
+    $friendship_data = $GLOBALS["all_players_data"][$player_id]["friendship"];
     $images_path = get_images_folder();
+    
     $marriables_npc = sanitize_json_with_version("marriables");
     $villagers_json = sanitize_json_with_version("villagers");
-	$birthday_json = sanitize_json_with_version("villagers_birthday");
+    $birthday_json = sanitize_json_with_version("villagers_birthday");
     $json_with_version = sanitize_json_with_version("villagers", true);
+    
     $section_class = ($limit == -1) ? "all-friends" : "top-friends";
     $view_all = ($limit == -1) ? "" : "<span class='view-all-friends view-all-friendships-$player_id modal-opener'>- View all friendships</span>";
-
-    $structure = ($limit == -1) ? 
-	"
+    $structure = ($limit == -1)
+        ? "
         <section class='info-section friends-section $section_class $section_class-$player_id modal-window'>
-			<div class='panel-header'>
-           		<h2 class='section-title panel-title'>Friendship progression</h2>
-				<img src='" . get_images_folder() . "icons/exit.png' class='exit-all-friendships-$player_id exit' alt=''/>
-			</div>
+            <div class='panel-header'>
+                <h2 class='section-title panel-title'>Friendship progression</h2>
+                <img src='{$images_path}icons/exit.png' class='exit-all-friendships-$player_id exit' alt=''/>
+            </div>
             <span class='friendlist'>
-    "
-	:
-	"
+        "
+        : "
         <section class='info-section friends-section $section_class _50'>
             <span class='has_panel'>
                 <h2 class='section-title'>Friendship progression</h2>
                 $view_all
             </span>
             <span class='friendlist'>
-    "
-	;
+        ";
 
     foreach($friendship_data as $name => $friend) {
         if($limit == 0) {
-			break;
-        }
-
-        $limit--;
-
-        extract($friend);
-
-        $friend_icon = $images_path . "characters/" . strtolower($name) . ".png";
-		$is_newer_version = (array_search($name, $json_with_version)) ? "older-version" : "newer-version";
-        $is_birthday = (is_this_the_same_day($birthday)) ? "is_birthday" : "isnt_birthday";
-        $birthday_date = explode("/", $birthday);
-        $birthday_date = "Day " . $birthday_date[0] . " of " . $birthday_date[1];
-        $wiki_url = get_wiki_link(get_item_id_by_name($name));
-
-        $structure .= "
-			<span>
-                <a class='wiki_link' href='$wiki_url' target='_blank'>
-				    <img src='$friend_icon' class='character-icon $is_newer_version' alt='$name icon'/>
-				</a>
-                <span class='character-name " . strtolower($name) . "'>$name</span>
-			    <span class='hearts-level'>
-        ";
-
-        $can_be_married = in_array($name, $marriables_npc) && $status == "Friendly";
-        $max_heart = ($status == "Married") ? 14 : 10;
-
-        for($i = 1; $i <= $max_heart; $i++) {
-            if($i > 8 && $can_be_married) {
-                $heart_icon = get_images_folder() . "icons/locked_heart.png";
-                $structure .= "<img src='$heart_icon' class='hearts' alt=''/>";
-                continue;
-            }
-
-            $heart_icon = get_images_folder() . (($friend_level >= $i) ? "icons/heart.png" : "icons/empty_heart.png");
-            $structure .= "<img src='$heart_icon' class='hearts' alt=''/>";
+            break;
         }
         
-        $gifted = [];
-        $gifted[0] = ($week_gifts > 0) ? "gifted" : "not-gifted";
-        $gifted[1] = ($week_gifts == 2) ? "gifted" : "not-gifted";
-
-        $structure .= "
-				</span>
-                <span class='tooltip'>
-                    <img src='{$images_path}icons/birthday_icon.png' class='birthday_icon $is_birthday' alt=''/>
-                    <span class='left'>$birthday_date</span>
-                </span>
-				<span class='interactions'>
-                    <span class='tooltip'>
-                        <img src='{$images_path}icons/gift.png' class='interaction $gifted[0]' alt=''/>
-                        <img src='{$images_path}icons/gift.png' class='interaction $gifted[1]' alt=''/>
-                        <span class='left'>Gifts made in the last week</span>
-                    </span>
-				</span>
-				<span class='friend-status'>$status</span>
-			</span>
-        ";
+        $limit--;
+        $structure .= build_friendship_entry($name, $friend, $images_path, $marriables_npc, $birthday_json, $json_with_version);
     }
 
     foreach($villagers_json as $villager_name) {
@@ -524,69 +471,71 @@ function display_friendships(int $limit = -1):string {
             break;
         }
 
-		if(isset($friendship_data[$villager_name])) {
-			continue;
+        if(isset($friendship_data[$villager_name])) {   
+            continue;
         }
 
         $limit--;
-        $friend_icon = $images_path . "characters/" . strtolower($villager_name) . ".png";
-		$is_newer_version = (array_search($villager_name, $json_with_version)) ? "older-version" : "newer-version";
-        $can_be_married = in_array($villager_name, $marriables_npc);
-		$villager_birthday = $birthday_json[(get_custom_id($villager_name))];
-        $is_birthday = (is_this_the_same_day($villager_birthday)) ? "is_birthday" : "isnt_birthday";
-        $birthday_date = explode("/", $villager_birthday);
-        $birthday_date = "Day " . $birthday_date[0] . " of " . $birthday_date[1];
-        $wiki_url = get_wiki_link(get_item_id_by_name($villager_name));
-
-        $structure .= "
-			<span>
-				<a class='wiki_link' href='$wiki_url' target='_blank'>
-					<img src='$friend_icon' class='character-icon not-found $is_newer_version' alt='$villager_name icon'/>
-				</a>
-				<span class='character-name " . strtolower($villager_name) . "'>$villager_name</span>
-			    <span class='hearts-level'>
-        ";
-		
-		$status = "Unknown";
-        $can_be_married = in_array($villager_name, $marriables_npc);
-
-        for($i = 1; $i <= 10; $i++) {
-            if($i > 8 && $can_be_married) {
-                $heart_icon = get_images_folder() . "icons/locked_heart.png";
-                $structure .= "<img src='$heart_icon' class='hearts' alt=''/>";
-                continue;
-            }
-
-            $heart_icon = get_images_folder() . (($friend_level >= $i) ? "icons/heart.png" : "icons/empty_heart.png");
-            $structure .= "<img src='$heart_icon' class='hearts' alt=''/>";
-        }
-        
-        $gifted = ["not-gifted", "not-gifted"];
-
-        $structure .= "
-				</span>
-                <span class='tooltip'>
-                    <img src='{$images_path}icons/birthday_icon.png' class='birthday_icon $is_birthday' alt=''/>
-                    <span class='left'>$birthday_date</span>
-                </span>
-				<span class='interactions'>
-                    <span class='tooltip'>
-                        <img src='{$images_path}icons/gift.png' class='interaction $gifted[0]' alt=''/>
-                        <img src='{$images_path}icons/gift.png' class='interaction $gifted[1]' alt=''/>
-                        <span class='left'>Gifts made in the last week</span>
-                    </span>
-				</span>
-				<span class='friend-status'>$status</span>
-			</span>
-        ";
+        $structure .= build_friendship_entry($villager_name, null, $images_path, $marriables_npc, $birthday_json, $json_with_version);
     }
 
     $structure .= "
-        </span>
-    </section>";
-
+            </span>
+        </section>";
     return $structure;
 }
+
+function build_friendship_entry(string $name, ?array $friend, string $images_path, array $marriables_npc, array $birthday_json, array $json_with_version):string {
+    $friend_icon = $images_path . "characters/" . strtolower($name) . ".png";
+    $is_newer_version = array_search($name, $json_with_version) ? "older-version" : "newer-version";
+    
+    $birthday = $birthday_json[get_custom_id($name)] ?? null;
+    $is_birthday = $birthday && is_this_the_same_day($birthday) ? "is_birthday" : "isnt_birthday";
+    $birthday_date = $birthday ? "Day " . explode("/", $birthday)[0] . " of " . explode("/", $birthday)[1] : "Unknown";
+    
+    $wiki_url = get_wiki_link(get_item_id_by_name($name));
+    
+    $friend_level = $friend["friend_level"] ?? 0;
+    $status = $friend["status"] ?? "Unknown";
+    $can_be_married = in_array($name, $marriables_npc) && $status == "Friendly";
+    $max_heart = ($status) == "Married" ? 14 : 10;
+    $is_found = ($status == "Unknown") ? "not-found" : "found";
+    
+    $hearts_html = "";
+
+    for($i = 1; $i <= $max_heart; $i++) {
+        $heart_icon = $images_path . "icons/" . (($i > 8 && $can_be_married) ? "locked_heart.png" : (($friend_level >= $i) ? "heart.png" : "empty_heart.png"));
+        $hearts_html .= "<img src='$heart_icon' class='hearts' alt=''/>";
+    }
+
+    $gifted = ($friend) ? [
+        $friend["week_gifts"] > 0 ? "gifted" : "not-gifted",
+        $friend["week_gifts"] == 2 ? "gifted" : "not-gifted"
+    ] : ["not-gifted", "not-gifted"];
+
+    return "
+        <span>
+            <a class='wiki_link' href='$wiki_url' target='_blank'>
+                <img src='$friend_icon' class='character-icon $is_newer_version $is_found' alt='$name icon'/>
+            </a>
+            <span class='character-name " . strtolower($name) . "'>$name</span>
+            <span class='hearts-level'>$hearts_html</span>
+            <span class='tooltip'> 
+                <img src='{$images_path}icons/birthday_icon.png' class='birthday_icon $is_birthday' alt=''/>
+                <span class='left'>$birthday_date</span>
+            </span>
+            <span class='interactions'>
+                <span class='tooltip'>
+                    <img src='{$images_path}icons/gift.png' class='interaction {$gifted[0]}' alt=''/>
+                    <img src='{$images_path}icons/gift.png' class='interaction {$gifted[1]}' alt=''/>
+                    <span class='left'>Gifts made in the last week</span>
+                </span>
+            </span>
+            <span class='friend-status'>$status</span>
+        </span>
+    ";
+}
+
 
 function display_unlockables():string {
 	$player_unlockables = $GLOBALS["all_players_data"][$GLOBALS["player_id"]]["has_element"];
