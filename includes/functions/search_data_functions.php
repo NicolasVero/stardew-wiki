@@ -17,7 +17,7 @@ function get_gender(array $genders):string {
 
 function get_achievement(object $achievements):array {
    
-	$achievements_data = array();
+	$achievements_data = [];
 	
 	foreach($achievements->int as $achievement) {
 		$achievement_reference = find_reference_in_json((int) $achievement, "achievements_details");
@@ -25,9 +25,7 @@ function get_achievement(object $achievements):array {
 		$achievement_title = explode("µ", $achievement_reference)[0]; 
 		$achievement_description = explode("µ", $achievement_reference)[1]; 
 
-		$achievements_data[$achievement_title] = array(
-			"description" => $achievement_description
-		);
+		$achievements_data[$achievement_title] = [ "description" => $achievement_description ];
 	}
 	
 	return $achievements_data;
@@ -46,56 +44,56 @@ function does_player_have_achievement(object $achievements, int $achievement_id)
 function get_unlockables_list():array {
 
 	$data = $GLOBALS["untreated_player_data"];
-	return array(
-		"forest_magic" => array(
+	return [
+		"forest_magic" => [
 			"id"       => 107004,
 			"is_found" => get_unlockables("forest_magic")
-		),
-		"dwarvish_translation_guide" => array(
+		],
+		"dwarvish_translation_guide" => [
 			"id"       => 107000,
 			"is_found" => get_unlockables("dwarvish_translation_guide")
-		),
-		"rusty_key" => array(
+		],
+		"rusty_key" => [
 			"id"       => 107001,
 			"is_found" => get_unlockables("rusty_key")
-		),
-		"club_card" => array(
+		],
+		"club_card" => [
 			"id"       => 107002,
 			"is_found" => get_unlockables("club_card")
-		),
-		"special_charm" => array(
+		],
+		"special_charm" => [
 			"id"       => 107007,
 			"is_found" => get_unlockables("special_charm")
-		),
-		"skull_key" => array(
+		],
+		"skull_key" => [
 			"id"       => 107003,
 			"is_found" => get_unlockables("skull_key")
-		),
-		"magnifying_glass" => array(
+		],
+		"magnifying_glass" => [
 			"id"       => 107008,
 			"is_found" => get_unlockables("magnifying_glass")
-		),            
-		"dark_talisman" => array(
+		],            
+		"dark_talisman" => [
 			"id"       => 107005,
 			"is_found" => get_unlockables("dark_talisman")
-		),
-		"magic_ink" => array(
+		],
+		"magic_ink" => [
 			"id"       => 107006,
 			"is_found" => get_unlockables("magic_ink")
-		),
-		"bears_knowledge" => array(
+		],
+		"bears_knowledge" => [
 			"id"       => 107009,
 			"is_found" => (int) in_array(2120303, (array) $data->eventsSeen->int)
-		),
-		"spring_onion_mastery" => array(
+		],
+		"spring_onion_mastery" => [
 			"id"       => 107010,
 			"is_found" => (int) in_array(3910979, (array) $data->eventsSeen->int)
-		),
-		"town_key" => array(
+		],
+		"town_key" => [
 			"id"       => 107011,
 			"is_found" => get_unlockables("town_key")
-		)
-	);
+		]
+	];
 }
 
 function get_unlockables(string $unlockable_name):int {
@@ -150,7 +148,7 @@ function get_unlockables(string $unlockable_name):int {
 function get_shipped_items(object $items):array {
 
 	$version_score = $GLOBALS["game_version_score"];
-	$shipped_items_data = array();
+	$shipped_items_data = [];
 
 	foreach($items->item as $item) {
 
@@ -161,16 +159,10 @@ function get_shipped_items(object $items):array {
 		} 
 		
 		get_correct_id($item_id);
-		// if(!ctype_digit($item_id)) {
-		// 	$item_id = get_custom_id($item_id);
-		// }
-
 		$shipped_items_reference = find_reference_in_json($item_id, "shipped_items");
 		
 		if(!empty($shipped_items_reference)) {
-			$shipped_items_data[$shipped_items_reference] = array(
-				"id" => $item_id
-			);
+			$shipped_items_data[$shipped_items_reference] = [ "id" => $item_id ];
 		}
 	}
 	
@@ -179,7 +171,7 @@ function get_shipped_items(object $items):array {
 
 function get_skills_data(array $skills):array {
 	$json_skills = sanitize_json_with_version("skills");
-	$skills_datas = array();
+	$skills_datas = [];
 
 	foreach($json_skills as $key => $skill) {
 		if(in_array($key, $skills)) {
@@ -191,13 +183,13 @@ function get_skills_data(array $skills):array {
 }
 
 function get_enemies_killed_data(object $data):array { 
-	$enemies_data = array();
+	$enemies_data = [];
 	
 	foreach($data->specificMonstersKilled->item as $enemy) {
-		$enemies_data[(string) $enemy->key->string] = array(
+		$enemies_data[(string) $enemy->key->string] = [
 			"id"             => get_custom_id((string) $enemy->key->string),
 			"killed_counter" => (int) $enemy->value->int
-		);
+		];
 	}
 
 	return $enemies_data;
@@ -216,10 +208,10 @@ function get_item_list(object $data, string $filename):array {
 	$version_score = $GLOBALS["game_version_score"];
 
 	if($version_score < get_game_version_score("1.6.0")) {
-		return array();
+		return [];
 	}
 	
-	$items_data = array();
+	$items_data = [];
 
 	foreach($data->item as $item) {
 
@@ -232,9 +224,7 @@ function get_item_list(object $data, string $filename):array {
 			continue;
 		}
 
-		$items_data[$item_reference] = array(
-			"id" => $item_id
-		);
+		$items_data[$item_reference] = [ "id" => $item_id ];
 	}
 	
 	return $items_data;
@@ -243,7 +233,7 @@ function get_item_list(object $data, string $filename):array {
 function get_fish_caught(object $data):array {
 	
 	$version_score = $GLOBALS["game_version_score"];
-	$fishes_data = array();
+	$fishes_data = [];
 
 	foreach($data->item as $item) {
 
@@ -265,18 +255,18 @@ function get_fish_caught(object $data):array {
 			continue;
 		}
 		
-		$fishes_data[$fish_reference] = array(
+		$fishes_data[$fish_reference] = [
 			"id"             => (int) $item_id,
 			"caught_counter" => (int) $values_array[0],
 			"max_length"     => (int) $values_array[1]
-		);
+		];
 	}
 
 	return $fishes_data;
 }
 
 function get_friendship_data(object $data):array {
-	$friends_data = array();
+	$friends_data = [];
 	$villagers_json = sanitize_json_with_version("villagers");
 	$birthday_json = sanitize_json_with_version("villagers_birthday");
 
@@ -288,7 +278,7 @@ function get_friendship_data(object $data):array {
 			continue;
 		}
 
-		$friends_data[$friend_name] = array(
+		$friends_data[$friend_name] = [
 			"id"              => get_custom_id($friend_name),
 			"points"          => (int) $item->value->Friendship->Points,
 			"friend_level"    => (int) floor(($item->value->Friendship->Points) / 250),
@@ -296,7 +286,7 @@ function get_friendship_data(object $data):array {
 			"status"          => (string) $item->value->Friendship->Status,
 			"week_gifts"      => (int) $item->value->Friendship->GiftsThisWeek,
 			"talked_to_today" => (int) $item->value->Friendship->TalkedToToday
-		);
+		];
 	}
 
 	uasort($friends_data, function ($a, $b) {
@@ -307,7 +297,7 @@ function get_friendship_data(object $data):array {
 }
 
 function get_quest_log(object $data):array {
-	$quests_data = array();
+	$quests_data = [];
 
 	foreach($data->Quest as $item) {
 		$quest_id = (int) $item->id;
@@ -318,13 +308,13 @@ function get_quest_log(object $data):array {
 
 		// Quêtes histoire
 		if(!empty($quest_reference)){
-			$quests_data[] = array(
+			$quests_data[] = [
 				"time_limited"	=> false,
 				"objective"   	=> $quest_reference["objective"],
 				"description" 	=> $quest_reference["description"],
 				"title"       	=> $quest_reference["title"],
 				"rewards"     	=> $quest_reference["reward"]
-			);
+			];
 		} else {
 			// Quêtes daily
 			$quest_type = (int) $item->questType;
@@ -389,14 +379,14 @@ function get_quest_log(object $data):array {
 			$title = "$keyword_ing Quest";
 			$description = "Help $target with his $keyword_ing request.";
 			$objective = "$keyword $number_to_get $goal_name for $target: $number_obtained/$number_to_get";
-			$quests_data[] = array(
+			$quests_data[] = [
 				"time_limited"	=> true,
 				"objective"   	=> $objective,
 				"description" 	=> $description,
 				"title"       	=> $title,
 				"daysLeft"    	=> $days_left,
 				"rewards"     	=> $rewards
-			);
+			];
 		}
 	}
 
@@ -422,7 +412,7 @@ function get_quest_log(object $data):array {
 
 		$days_left = (int) $special_order->dueDate - get_number_of_days_ingame();
 
-		$rewards = array();
+		$rewards = [];
 
 		foreach($special_order->rewards as $reward) {
 			if($reward->amount) {
@@ -430,14 +420,14 @@ function get_quest_log(object $data):array {
 			}
 		}
 			
-		$quests_data[] = array(
+		$quests_data[] = [
 			"time_limited"	=> true,
 			"objective"   	=> $objective,
 			"description" 	=> $description,
 			"title"       	=> $title,
 			"daysLeft"    	=> $days_left,
 			"rewards"     	=> $rewards
-		);
+		];
 	}
 
 	return $quests_data;
@@ -445,7 +435,7 @@ function get_quest_log(object $data):array {
 
 function get_crafting_recipes(object $recipes):array {
 
-	$crafting_recipes_data = array();
+	$crafting_recipes_data = [];
 	$crafting_recipes_json = sanitize_json_with_version("crafting_recipes");
 
 	foreach($recipes->item as $recipe) {
@@ -453,10 +443,10 @@ function get_crafting_recipes(object $recipes):array {
 		$item_name = formate_original_data_string($recipe->key->string);
 		$index = array_search($item_name, $crafting_recipes_json);
 
-		$crafting_recipes_data[$item_name] = array(
+		$crafting_recipes_data[$item_name] = [
 			"id" => $index,
 			"counter" => (int) $recipe->value->int
-		);
+		];
 	}
 	
 	return $crafting_recipes_data;
@@ -465,7 +455,7 @@ function get_crafting_recipes(object $recipes):array {
 function get_cooking_recipes(object $recipes, object $recipes_cooked):array {
 
 	$version_score = $GLOBALS["game_version_score"];
-	$cooking_recipes_data = array();
+	$cooking_recipes_data = [];
 	$cooking_recipes_json = sanitize_json_with_version("cooking_recipes");
 
 	$has_ever_cooked = (empty((array) $recipes_cooked)) ? false : true;
@@ -487,10 +477,10 @@ function get_cooking_recipes(object $recipes, object $recipes_cooked):array {
 				get_correct_id($recipe_id);
 
 				if($recipe_id == $index) {
-					$cooking_recipes_data[$item_name] = array(
+					$cooking_recipes_data[$item_name] = [
 						"id"      => $recipe_id,
 						"counter" => (int) $recipe_cooked->value->int
-					);
+					];
 					break;
 				}
 				
@@ -501,10 +491,10 @@ function get_cooking_recipes(object $recipes, object $recipes_cooked):array {
 			}
 		}
 		
-		$cooking_recipes_data[$item_name] = array(
+		$cooking_recipes_data[$item_name] = [
 			"id"      => $index,
 			"counter" => 0
-		);
+		];
 
 	}
 	
@@ -514,7 +504,7 @@ function get_cooking_recipes(object $recipes, object $recipes_cooked):array {
 function get_artifacts(object $artifacts, object $general_data):array {
 
 	$version_score = $GLOBALS["game_version_score"];
-	$artifacts_data = array();
+	$artifacts_data = [];
 
 	foreach($artifacts->item as $artifact) {
 
@@ -530,10 +520,10 @@ function get_artifacts(object $artifacts, object $general_data):array {
 		$museum_index = get_museum_index($general_data);
 
 		if(!empty($artifacts_reference)) {
-			$artifacts_data[$artifacts_reference] = array(
+			$artifacts_data[$artifacts_reference] = [
 				"id"      => $artifact_id,
 				"counter" => is_given_to_museum($artifact_id, $general_data, $museum_index, $version_score)
-			);
+			];
 		}
 	}
 	
@@ -542,7 +532,7 @@ function get_artifacts(object $artifacts, object $general_data):array {
 
 function get_minerals(object $minerals, object $general_data):array {
 	$version_score = $GLOBALS["game_version_score"];
-	$minerals_data = array();
+	$minerals_data = [];
 
 	foreach($minerals->item as $mineral) {
 
@@ -560,10 +550,10 @@ function get_minerals(object $minerals, object $general_data):array {
 		$museum_index = get_museum_index($general_data);
 
 		if(!empty($minerals_reference)) {
-			$minerals_data[$minerals_reference] = array(
+			$minerals_data[$minerals_reference] = [
 				"id"      => $mineral_id,
 				"counter" => is_given_to_museum($mineral_id, $general_data, $museum_index, $version_score)
-			);
+			];
 		}
 	}
 	
@@ -607,7 +597,7 @@ function get_museum_index(object $locations):int {
 function get_adventurers_guild_data(int $player_id):array {
 	$categories = get_all_adventurers_guild_categories();
 	$enemies_killed = $GLOBALS["all_players_data"][$player_id]["enemies_killed"];
-	$adventurers_guild_data = array();
+	$adventurers_guild_data = [];
 	
 	foreach($categories as $monsters_name => $monster_data) {
 
@@ -620,13 +610,13 @@ function get_adventurers_guild_data(int $player_id):array {
 			}
 		}
 
-		$adventurers_guild_data[$monsters_name] = array(
+		$adventurers_guild_data[$monsters_name] = [
 			"target"		=> $target_name,
 			"counter"		=> $counter,
 			"limit"			=> $limit,
 			"reward"		=> $reward,
 			"is_completed"	=> is_objective_completed($counter, $limit)
-		);
+		];
 	}
 
     $adventurers_guild_data["is_all_completed"] = is_all_the_adventurers_guild_categories_completed($adventurers_guild_data);
@@ -643,119 +633,6 @@ function is_all_the_adventurers_guild_categories_completed(array $adventurers_gu
     }
 
     return $counter == count($adventurers_guild_data);
-}
-
-function get_all_adventurers_guild_categories():array {
-	return array(
-		"slimes" => array(
-			"target_name" => "Slimes",
-			"ids" => array(105007, 105009, 105015, 105042),
-			"limit" => 1000,
-			"reward" => array(
-				"alt" => "Slime Charmer Ring",
-				"src" => "slime_charmer_ring"
-			)
-		),
-		"void_spirits" => array(
-			"target_name" => "Void Spirits",
-			"ids" => array(105018, 105019, 105038),
-			"limit" => 150,
-			"reward" => array(
-				"alt" => "Savage Ring",
-				"src" => "savage_ring"
-			)
-		),
-		"bats" => array(
-			"target_name" => "Bats",
-			"ids" => array(105000, 105006, 105011, 105024),
-			"limit" => 200,
-			"reward" => array(
-				"alt" => "Vampire Ring",
-				"src" => "vampire_ring"
-			)
-		),
-		"skeletons" => array(
-			"target_name" => "Skeletons",
-			"ids" => array(105020),
-			"limit" => 50,
-			"reward" => array(
-				"alt" => "Skeleton Mask",
-				"src" => "skeleton_mask"
-			)
-		),
-		"cave_insects" => array(
-			"target_name" => "Cave Insects",
-			"ids" => array(105002, 105003, 105010),
-			"limit" => 80,
-			"reward" => array(
-				"alt" => "Insect Head",
-				"src" => "insect_head"
-			)
-		),
-		"duggies" => array(
-			"target_name" => "Duggies",
-			"ids" => array(105004, 105034),
-			"limit" => 30,
-			"reward" => array(
-				"alt" => "Hard Hat",
-				"src" => "hard_hat"
-			)
-		),
-		"dust_sprites" => array(
-			"target_name" => "Dust Sprites",
-			"ids" => array(105005),
-			"limit" => 500,
-			"reward" => array(
-				"alt" => "Burglar's Ring",
-				"src" => "burglars_ring"
-			)
-		),
-		"rocks_crabs" => array(
-			"target_name" => "Rocks Crabs",
-			"ids" => array(105012, 105016, 105026),
-			"limit" => 60,
-			"reward" => array(
-				"alt" => "Crabshell Ring",
-				"src" => "crabshell_ring"
-			)
-		),
-		"mummies" => array(
-			"target_name" => "Mummies",
-			"ids" => array(105014),
-			"limit" => 100,
-			"reward" => array(
-				"alt" => "Arcane Hat",
-				"src" => "arcane_hat"
-			)
-		),
-		"pepper_rex" => array(
-			"target_name" => "Pepper Rex",
-			"ids" => array(105028),
-			"limit" => 50,
-			"reward" => array(
-				"alt" => "Knight's helmet",
-				"src" => "knights_helmet"
-			)
-		),
-		"serpents" => array(
-			"target_name" => "Serpents",
-			"ids" => array(105017, 105043),
-			"limit" => 250,
-			"reward" => array(
-				"alt" => "Napalm Ring",
-				"src" => "napalm_ring"
-			)
-		),
-		"magma_sprites" => array(
-			"target_name" => "Magma Sprites",
-			"ids" => array(105035, 105036),
-			"limit" => 150,
-			"reward" => array(
-				"alt" => "Marlon's Phone Number",
-				"src" => "phone_number"
-			)
-		)
-	);
 }
 
 function get_grandpa_score(): int {
@@ -858,14 +735,14 @@ function get_highest_count_for_category(string $category):array {
 	$highest_player = 0;
 	$max_elements = 0;
 
-	$exceptions_recipes = array(
+	$exceptions_recipes = [
 		"cooking_recipes",
 		"crafting_recipes"
-	);
+	];
 
-	$exceptions_level = array(
+	$exceptions_level = [
 		"farmer_level"
-	);
+	];
 
 	for($current_player = 0; $current_player < $total_players; $current_player++) {
 		if(in_array($category, $exceptions_recipes)) {
@@ -895,10 +772,10 @@ function get_highest_count_for_category(string $category):array {
 	$perfection_max = get_perfection_max_elements()[$game_version][$category];
 	$max_elements = min($max_elements, $perfection_max);
 
-	return array(
+	return [
 		"player_id" => $highest_player,
 		"highest_count" => $max_elements
-	);
+	];
 }
 
 function has_players_done_monster_slayer_hero():bool {
@@ -954,35 +831,10 @@ function get_player_with_highest_friendships():array {
 	$perfection_max = get_perfection_max_elements()[$game_version]["friendship"];
 	$max_elements = min($max_elements, $perfection_max);
 
-	return array(
+	return [
 		"player_id" => $highest_player,
 		"highest_count" => $max_elements
-	);
-}
-
-function get_perfection_max_elements():array {
-	return array(
-		"1.5" => array(
-			"farmer_level" => 25,
-			"golden_walnuts" => 130,
-			"obelisks" => 4,
-			"crafting_recipes" => 129,
-			"cooking_recipes" => 80,
-			"shipped_items" => 145,
-			"friendship" => 33,
-			"fish_caught" => 67
-		),
-		"1.6" => array(
-			"farmer_level" => 25,
-			"golden_walnuts" => 130,
-			"obelisks" => 4,
-			"crafting_recipes" => 149,
-			"cooking_recipes" => 81,
-			"shipped_items" => 155,
-			"friendship" => 34,
-			"fish_caught" => 72
-		)
-	);
+	];
 }
 
 function get_perfection_elements():array {
@@ -996,7 +848,7 @@ function get_perfection_elements():array {
 	$highest_crafting_recipes 	= get_highest_count_for_category("crafting_recipes")["highest_count"];
 	$highest_friendship 		= get_player_with_highest_friendships()["highest_count"];
 
-	return array(
+	return [
 		"Golden Walnuts found"		=> get_element_completion_percentage(get_perfection_max_elements()[$game_version]["golden_walnuts"], (int) $general_data["golden_walnuts"]) * 5,
 		"Crafting Recipes Made"		=> get_element_completion_percentage(get_perfection_max_elements()[$game_version]["crafting_recipes"], $highest_crafting_recipes) * 10,
 		"Cooking Recipes Made"		=> get_element_completion_percentage(get_perfection_max_elements()[$game_version]["cooking_recipes"], $highest_cooking_recipes) * 10,
@@ -1008,7 +860,7 @@ function get_perfection_elements():array {
 		"Monster Slayer Hero"		=> get_element_completion_percentage(1, (int) has_players_done_monster_slayer_hero()) * 10,
 		"Found All Stardrops"		=> get_element_completion_percentage(1, (int) has_any_player_gotten_all_stardrops()) * 10,
 		"Golden Clock on Farm"		=> get_element_completion_percentage(1, (int) is_golden_clock_on_farm()) * 10
-	);
+	];
 }
 
 function get_perfection_percentage():string {
@@ -1032,10 +884,10 @@ function get_pet():array {
 		lcfirst((string) $data->whichPetType);
 	$breed = (int) $data->whichPetBreed;
 
-	return array(
+	return [
 		"type"  => $type,
 		"breed" => $breed
-	);
+	];
 }
 
 

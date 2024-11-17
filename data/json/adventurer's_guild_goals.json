@@ -1,0 +1,110 @@
+{
+	"slimes" : {
+		"target_name" : "Slimes",
+		"ids" : [105007, 105009, 105015, 105042],
+		"limit" : 1000,
+		"reward" : {
+			"alt" : "Slime Charmer Ring",
+			"src" : "slime_charmer_ring"
+		}
+	},
+	"void_spirits" : {
+		"target_name" : "Void Spirits",
+		"ids" : [105018, 105019, 105038],
+		"limit" : 150,
+		"reward" : {
+			"alt" : "Savage Ring",
+			"src" : "savage_ring"
+		}
+	},
+	"bats" : {
+		"target_name" : "Bats",
+		"ids" : [105000, 105006, 105011, 105024],
+		"limit" : 200,
+		"reward" : {
+			"alt" : "Vampire Ring",
+			"src" : "vampire_ring"
+		}
+	},
+	"skeletons" : {
+		"target_name" : "Skeletons",
+		"ids" : [105020],
+		"limit" : 50,
+		"reward" : {
+			"alt" : "Skeleton Mask",
+			"src" : "skeleton_mask"
+		}
+	},
+	"cave_insects" : {
+		"target_name" : "Cave Insects",
+		"ids" : [105002, 105003, 105010],
+		"limit" : 80,
+		"reward" : {
+			"alt" : "Insect Head",
+			"src" : "insect_head"
+		}
+	},
+	"duggies" : {
+		"target_name" : "Duggies",
+		"ids" : [105004, 105034],
+		"limit" : 30,
+		"reward" : {
+			"alt" : "Hard Hat",
+			"src" : "hard_hat"
+		}
+	},
+	"dust_sprites" : {
+		"target_name" : "Dust Sprites",
+		"ids" : [105005],
+		"limit" : 500,
+		"reward" : {
+			"alt" : "Burglar's Ring",
+			"src" : "burglars_ring"
+		}
+	},
+	"rocks_crabs" : {
+		"target_name" : "Rocks Crabs",
+		"ids" : [105012, 105016, 105026],
+		"limit" : 60,
+		"reward" : {
+			"alt" : "Crabshell Ring",
+			"src" : "crabshell_ring"
+		}
+	},
+	"mummies" : {
+		"target_name" : "Mummies",
+		"ids" : [105014],
+		"limit" : 100,
+		"reward" : {
+			"alt" : "Arcane Hat",
+			"src" : "arcane_hat"
+		}
+	},
+	"pepper_rex" : {
+		"target_name" : "Pepper Rex",
+		"ids" : [105028],
+		"limit" : 50,
+		"reward" : {
+			"alt" : "Knight's helmet",
+			"src" : "knights_helmet"
+		}
+	},
+	"serpents" : {
+		"target_name" : "Serpents",
+		"ids" : [105017, 105043],
+		"limit" : 250,
+		"reward" : {
+			"alt" : "Napalm Ring",
+			"src" : "napalm_ring"
+		}
+	},
+	"magma_sprites" : {
+		"target_name" : "Magma Sprites",
+		"ids" : [105035, 105036],
+		"limit" : 150,
+		"reward" : {
+			"alt" : "Marlon's Phone Number",
+			"src" : "phone_number"
+		}
+	}
+}

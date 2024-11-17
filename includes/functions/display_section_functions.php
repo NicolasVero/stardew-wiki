@@ -202,30 +202,30 @@ function display_header():string {
             <div class='sub-header'>
                 <span class='all-money'>" 
                     .
-                    display_stat(array(
+                    display_stat([
                         "icon" => "Gold coins", "value" => $golds, "wiki_link" => "Gold"
-                    ))
+                    ])
                     .
-                    display_stat(array(
+                    display_stat([
                         "icon" => "Golden Walnuts", "value" => $golden_walnuts, "wiki_link" => "Golden_Walnut", "tooltip" => "$golden_walnuts / 130 golden walnuts found"
-                    ))
+                    ])
                     .
-                    display_stat(array(
+                    display_stat([
                         "icon" => "Qi gems", "value" => $qi_gems, "wiki_link" => "Qi_Gem"
-                    ))
+                    ])
                     .
-                    display_stat(array(
+                    display_stat([
                         "icon" => "Casino coins", "value" => $casino_coins, "wiki_link" => "Casino"
-                    ))
+                    ])
                 . "</span>
                 <span class='perfection-stats'> ".
-                    display_stat(array(
+                    display_stat([
                         "icon" => "Grandpa", "alt" => "GrandPa candles", "label" => "candles lit", "value" => get_candles_lit($grandpa_score), "wiki_link" => "Grandpa", "tooltip" => "Number of candles lit on the altar ($grandpa_score points)"
-                    ))
+                    ])
                     .
-                    display_stat(array(
+                    display_stat([
                         "icon" => "Stardrop", "alt" => "Perfection", "label" => "perfection progression", "value" => get_perfection_percentage() . "%", "wiki_link" => "Perfection"
-                    ))
+                    ])
                 . "</span>
             </div>
         </header>
@@ -256,31 +256,31 @@ function display_general_stats():string {
         	<h2 class='section-title'>General stats</h2>
 			$quest_button
             <div>" .
-                display_stat(array(
+                display_stat([
                     "icon" => "Energy", "label" => "max energy", "value" => $max_stamina, "wiki_link" => "Energy"
-                ))
+                ])
                 .
-                display_stat(array(
+                display_stat([
                     "icon" => "Health", "label" => "max health", "value" => $max_health, "wiki_link" => "Health"
-                ))
+                ])
                 .
-                display_stat(array(
+                display_stat([
                     "icon" => "Inventory", "label" => "inventory spaces", "value" => $max_items, "wiki_link" => "Inventory"
-                ))
+                ])
                 .
-                display_stat(array(
+                display_stat([
                     "icon" => "Mine level", "label" => "deepest mine level", "value" => $mine_level, "wiki_link" => "The_Mines", "tooltip" => $deepest_mine_level_tooltip
-                ))
+                ])
                 .
                 display_spouse($spouse, $children)
                 .
-                display_stat(array(
+                display_stat([
                     "icon" => "House", "alt" => "House upgrades", "label" => "upgrades done", "value" => $house_level, "wiki_link" => "Farmhouse", "tooltip" => "$house_level / 3 improvements"
-                ))
+                ])
                 .
-                display_stat(array(
+                display_stat([
                     "icon" => "Raccoons", "label" => "raccoons helped", "value" => $raccoons, "wiki_link" => "Giant_Stump", "tooltip" => "$raccoons / 10 missions for the raccoon family"
-                ))
+                ])
             . "</div>
         </section>
     ";
@@ -633,7 +633,7 @@ function display_unlockables():string {
     return $structure;
 }
 
-function display_detailled_gallery(array $player_datas, string $json_filename, string $section_title, string $width = "", bool $has_panel = false, array $panel_details = array()):string {
+function display_detailled_gallery(array $player_datas, string $json_filename, string $section_title, string $width = "", bool $has_panel = false, array $panel_details = []):string {
     
 	$version_score = $GLOBALS["game_version_score"];
 	$images_path = get_images_folder() . "$json_filename/";
@@ -669,7 +669,7 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
                 continue;
             }
 
-            if(in_array($json_filename, array("cooking_recipes", "crafting_recipes", "artifacts", "minerals"))) {
+            if(in_array($json_filename, ["cooking_recipes", "crafting_recipes", "artifacts", "minerals"])) {
                 if($is_found && $player_datas[$json_line_name]["counter"] == 0) {
                     $element_class .= " unused";
                 }
@@ -678,7 +678,7 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
             $element_image = $images_path . formate_text_for_file((string) explode('µ', $json_line_name)[0]). ".png";
             $element_tooltip = ($is_found) ? get_tooltip_text($player_datas, $json_line_name, $json_filename) : $json_line_name;
 
-            if(!in_array($json_filename, array("achievements"))) {
+            if(!in_array($json_filename, ["achievements"])) {
                 $wiki_url = get_wiki_link(get_item_id_by_name($json_line_name));
             } else {
                 $wiki_url = "https://stardewvalleywiki.com/Achievements";
@@ -763,10 +763,10 @@ function display_artifacts():string {
 
 function display_enemies():string {
 	$datas = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
-    $panel_details = array(
+    $panel_details = [
         "panel_alt"     => "monster-eradication-goals",
         "panel_name"    => "Monster Eradication Goals"
-    );
+    ];
     return display_detailled_gallery($datas["enemies_killed"], "enemies", "Enemies killed", "_50", true, $panel_details);
 }
 
@@ -919,7 +919,7 @@ function get_tooltip_text(array $player_data, string $json_line_name, string $da
 
 function get_farmer_level():string {
 	$data = $GLOBALS["untreated_player_data"];
-    $level_names = array(
+    $level_names = [
         "Newcomer",
         "Greenhorn",
         "Bumpkin",
@@ -936,7 +936,7 @@ function get_farmer_level():string {
         "Agriculturist",
         "Cropmaster",
         "Farm King"
-    );
+    ];
     $level = (get_total_skills_level($data) + $data->luckLevel) / 2;
     return $level_names[floor($level / 2)];
 }
@@ -961,31 +961,33 @@ function display_calendar_panel():string {
 
             if(array_key_exists($date, $all_dates)) {
                 $wiki_link = (is_array($all_dates[$date])) ?
-                    array(
+                    [
                         get_wiki_link(get_custom_id($all_dates[$date][0])),
                         get_wiki_link(get_custom_id($all_dates[$date][1]))
-                    )
+                    ]
                     :
                     get_wiki_link(get_custom_id($all_dates[$date]));
                 $table_structure .= (is_array($all_dates[$date])) ?
                     "<td class='double-event'>
                         <div>
-                            <a href='" . $wiki_link[0] . "' target='_blank'></a>
+                            <a href='" . $wiki_link[0] . "' class='wiki_link' target='_blank'></a>
                         </div>
                         <div>
-                            <a href='" . $wiki_link[1] . "' target='_blank'></a>
+                            <a href='" . $wiki_link[1] . "' class='wiki_link' target='_blank'></a>
                         </div>
                     </td>"
                     :
                     "<td class='simple-event'>
                         <div>
-                            <a href='$wiki_link' target='_blank'></a>
+                            <a href='$wiki_link' class='wiki_link' target='_blank'></a>
                         </div>
                     </td>";
-            } else $table_structure .= "
+            } else {
+                $table_structure .= "
                 <td class='simple-event'>
                     <div></div>
                 </td>";
+            }
 
         }
 
@@ -1007,7 +1009,7 @@ function display_calendar_panel():string {
 }
 
 
-// array() --> *icon, *value, tooltip, alt, label, wiki_link
+// [] --> *icon, *value, tooltip, alt, label, wiki_link
 function display_stat(array $parameters):string {
     extract($parameters);
     $images_path = get_images_folder();
