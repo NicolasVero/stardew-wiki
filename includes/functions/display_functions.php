@@ -45,11 +45,11 @@ function display_landing_page():string {
 								The save file is the one with the same name as your folder.
 							</span>
 							<span>
-								Well done! The hardest part is behind us! Now you just have to upload
+								Well done! The hardest part is behind us! Now you just have to upload your save 
 								<span class='img-embed landing-upload'>
 									<img src='" . get_images_folder() ."icons/file.png' class='modal-opener' alt='File upload icon'>
 								</span>
-								your save directly to our website and let the magic happen.
+								directly to our website and let the magic happen.
 							</span>
 							<span>
 								There's also a range of settings
@@ -77,6 +77,7 @@ function display_landing_page():string {
 								Thank you for being a part of our community and helping us grow!
 							</span>
 						</span>
+					</section>
 
 					<section class='about'>
 						<h2 class='section-title'>About us</h2>
