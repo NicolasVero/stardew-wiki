@@ -1,7 +1,5 @@
 <?php 
 
-require "display_section_functions.php";
-
 function display_landing_page():string {
 	if(is_a_mobile_device()) {
 		return display_mobile_landing_page();

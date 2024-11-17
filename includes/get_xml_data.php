@@ -1,8 +1,6 @@
 <?php
 
-require "functions/data_functions.php";
-require "functions/display_functions.php";
-require "functions/utility_functions.php";
+require __DIR__ . "/../functions.php";
 require "security_check.php";
 
 $response = [];

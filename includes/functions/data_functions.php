@@ -1,8 +1,5 @@
 <?php
 
-require "search_data_functions.php";
-
-
 function load_save($save_file, $use_ajax = true):mixed {
     $uploadedFile = $save_file;
     $data = simplexml_load_file($uploadedFile);
