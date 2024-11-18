@@ -9,7 +9,7 @@ function log_(mixed $element, string $title = ""):void {
 }
 
 function get_images_folder(bool $is_external = false):string {
-	return ($is_external) ? get_github_medias_url() : get_site_root() . "medias/images/";
+	return ($is_external || !is_on_localhost()) ? get_github_medias_url() : get_site_root() . "medias/images/";
 }
 
 function get_github_medias_url():string {
@@ -21,10 +21,15 @@ function get_json_folder():string {
 }
 
 function get_site_root():string {
-	if($_SERVER["HTTP_HOST"] == "localhost")
-    	return "http://localhost/travail/stardew_dashboard/";
+	if(is_on_localhost()) {
+		return "http://localhost/travail/stardew_dashboard/";
+	}
 	
 	return (!empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] !== "off") ? "https://stardew-dashboard.42web.io/" : "http://stardew-dashboard.42web.io/";
+}
+
+function is_on_localhost():bool {
+	return $_SERVER["HTTP_HOST"] == "localhost";
 }
 
 function formate_number(int $number, string $lang = "en"):string {
