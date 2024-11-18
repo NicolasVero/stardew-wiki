@@ -890,7 +890,6 @@ function get_pet():array {
 	];
 }
 
-
 function get_all_farm_animals(): array {
     $data = $GLOBALS["untreated_all_players_data"];
     $animals_data = [];
@@ -923,22 +922,39 @@ function get_all_farm_animals(): array {
             }
 
             foreach($building->indoors->animals->item as $animal) {
-                $current_animal_type = (string)$animal->value->FarmAnimal->type;
+				$name = (string) $animal->value->FarmAnimal->name;
+                $full_animal_type = (string) $animal->value->FarmAnimal->type;
+				$friendship = (int) $animal->value->FarmAnimal->friendshipTowardFarmer;
+				$happiness = (int) $animal->value->FarmAnimal->happiness;
 
-                if(!isset($all_animals[$current_animal_type])) {
+				$pet = ((string) $animal->value->FarmAnimal->wasPet == "true") ? true : false;
+				$auto_pet = ((string) $animal->value->FarmAnimal->wasAutoPet == "true") ? true : false;
+				$was_pet = (($pet) || ($auto_pet));
+
+				$animal_data = [
+					"name" => $name,
+					"type" => $full_animal_type,
+					"friendship_level" => floor($friendship / 100) / 2,
+					"happiness" => $happiness,
+					"was_pet" => $was_pet
+				];
+
+                if(!isset($all_animals[$full_animal_type])) {
                     continue;
                 }
 
-                $animal_type = $all_animals[$current_animal_type];
+                $animal_type = $all_animals[$full_animal_type];
 
                 if(!isset($animals_data[$animal_type])) {
                     $animals_data[$animal_type] = [
-                        "id"      => get_custom_id($animal_type),
+                        "id" => get_custom_id($animal_type),
+						"animals_data" => [],
                         "counter" => 0
                     ];
                 }
 
                 $animals_data[$animal_type]["counter"]++;
+				array_push($animals_data[$animal_type]["animals_data"], $animal_data);
             }
         }
 

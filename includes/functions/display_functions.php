@@ -208,6 +208,7 @@ function display_page():string {
 		$structure .= display_quests();
 		$structure .= display_monster_eradication_goals_panel();
 		$structure .= display_calendar_panel();
+		$structure .= display_farm_animals_panel();
 
 		$structure .= "<div class='separated-galleries'>";
 			$structure .= "<div class='intra-gallery _50'>";

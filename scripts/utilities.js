@@ -210,6 +210,12 @@ function load_elements() {
 			"exit_button"    : ".exit-calendar-" + i,
 			"modal_panel"    : ".calendar-" + i
 		});
+
+		buttons.push({
+			"open_button"    : ".view-all-animals-" + i,
+			"exit_button"    : ".exit-all-animals-" + i,
+			"modal_panel"    : ".all-animals-" + i
+		});
 	}
 
 	buttons.forEach(button => {

@@ -167,7 +167,7 @@ body {
 						}
 					}
 				}
-	
+
 				.section-title {
 					font-size: @big-fs;
 				}
@@ -248,7 +248,7 @@ body {
 							width: max-content;
 						}
 					}
-	
+
 					.friend-status {
 						.data;
 						font-size: @md-fs;
@@ -273,7 +273,7 @@ body {
 	
 				&.all-friends {
 					.absolute-panel;
-					display: none;	
+					display: none;
 					height: 80vh;
 					padding: @md-gap @big-gap;
 					position: fixed;
@@ -440,6 +440,71 @@ body {
 					}
 				}
 			}
+
+			&.all-animals-section {
+				.absolute-panel;
+				display: none;
+				height: 80vh;
+				padding: @md-gap @big-gap;
+				position: fixed;
+
+				& > .panel-header {
+					& > .section-title {
+						font-size: @big-fs;
+					}
+				}
+
+				& > .friendlist {
+					display: flex;
+					flex-direction: column;
+	
+					& > span {
+						align-items: center;
+						display: flex;
+						gap: @bigger-gap;
+					}
+		
+					.animal-icon {
+						cursor: @help;
+						width: @giant-icon;
+					}
+
+					.animal-name {
+						font-family: @primary-ff;
+						min-width: 100px;
+					}
+	
+					.hearts-level {
+						display: flex;
+						flex-wrap: wrap;
+						gap: @small-gap;
+					
+						.hearts {
+							width: @small-icon;
+						}
+					}
+
+					.interactions {
+						align-items: center;
+						display: flex;
+						gap: @big-gap;
+
+						& > span {
+							display: flex;
+							gap: @md-gap;
+						}
+						
+						.interaction {
+							width: @md-icon;
+						}
+					}
+
+					.animal-status {
+						.data;
+						font-size: @md-fs;
+					}
+				}
+			}
 		}
 
 		.intra-gallery {
@@ -467,7 +532,7 @@ body {
 			}
 
 			& > .has_panel {
-				.view-monster-eradication-goals {
+				span {
 					align-self: flex-end;
 					color: @secondary-fc;
 					cursor: @pointer;

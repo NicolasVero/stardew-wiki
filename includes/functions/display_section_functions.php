@@ -782,7 +782,11 @@ function display_crafting_recipes():string {
 
 function display_farm_animals():string {
     $datas = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
-    return display_detailled_gallery($datas["farm_animals"], "farm_animals", "Farm animals");
+    $panel_details = [
+        "panel_alt"     => "all-animals",
+        "panel_name"    => "all farm animals"
+    ];
+    return display_detailled_gallery($datas["farm_animals"], "farm_animals", "Farm animals", "_50" , true, $panel_details);
 }
 
 function get_level_progress_bar(int $level):string {
@@ -1014,4 +1018,68 @@ function display_spouse(mixed $spouse, array $children):string {
             <span class='data-label'>" . ((count($children) > 1) ? 'children' : 'child') . "</span>
         </span>
     ";
+}
+
+function display_farm_animals_panel():string {
+    $player_id = $GLOBALS["player_id"];
+    $animals_friendship = $GLOBALS["all_players_data"][$player_id]["farm_animals"];
+    $images_path = get_images_folder();
+    $friendships = "";
+
+    foreach($animals_friendship as $animal_friendship) {
+        extract($animal_friendship);
+
+        foreach($animals_data as $animal_data) {
+            extract($animal_data);
+
+            $formatted_name = formate_usernames($name);
+            $formatted_type = formate_text_for_file($type);
+            $wiki_url = get_wiki_link($id);
+            $animal_icon = "{$images_path}farm_animals/$formatted_type.png";
+            $pet_class = ($was_pet) ? "pet" : "not-petted";
+            $pet_tooltip = ($was_pet) ? "Has been pet" : "Has not been pet";
+            $status = ($happiness > 200) ? "really happy today!" : (($happiness > 30) ? "fine" : "sad");
+
+            $hearts_html = "";
+            $max_heart = 5;
+            for($i = 1; $i <= $max_heart; $i++) {
+                $heart_icon = 
+                (($friendship_level >= $i) ?
+                    "heart.png" :
+                        (($friendship_level == ($i - 0.5)) ?
+                            "half_heart.png" : "empty_heart.png"));
+                $hearts_html .= "<img src='{$images_path}icons/$heart_icon' class='hearts' alt=''/>";
+            }
+
+            $friendships .= "
+            <span>
+                <a class='wiki_link' href='$wiki_url' target='_blank'>
+                    <img src='$animal_icon' class='animal-icon' alt='$type icon'/>
+                </a>
+                <span class='animal-name'>$formatted_name</span>
+                <span class='hearts-level'>$hearts_html</span>
+                <span class='interactions'>
+                    <span class='tooltip'>
+                        <img src='{$images_path}icons/pet.png' class='interaction $pet_class' alt=''/>
+                        <span class='left'>$pet_tooltip</span>
+                    </span>
+                </span>
+                <span class='animal-status'>looks $status</span>
+            </span>";
+        }
+    }
+
+    $structure = "       
+        <section class='info-section all-animals-section all-animals-$player_id modal-window'>
+            <div class='panel-header'>
+                <h2 class='section-title panel-title'>Farm animals friendships</h2>
+                <img src='{$images_path}icons/exit.png' class='exit-all-animals-$player_id exit' alt=''/>
+            </div>
+            <span class='friendlist'>
+                $friendships
+            </span>
+        </section>
+        ";
+
+    return $structure;
 }
