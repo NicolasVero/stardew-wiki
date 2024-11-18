@@ -466,12 +466,16 @@ body {
 		
 					.animal-icon {
 						cursor: @help;
+						height: @bigger-icon;
+						object-fit: contain;
 						width: @giant-icon;
 					}
 
 					.animal-name {
 						font-family: @primary-ff;
-						min-width: 100px;
+						overflow: hidden;
+						text-overflow: ellipsis;
+						width: 100px;
 					}
 	
 					.hearts-level {
@@ -494,7 +498,7 @@ body {
 							gap: @md-gap;
 						}
 						
-						.interaction {
+						.interaction, .status {
 							width: @md-icon;
 						}
 					}

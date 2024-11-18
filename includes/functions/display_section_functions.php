@@ -1037,8 +1037,10 @@ function display_farm_animals_panel():string {
             $wiki_url = get_wiki_link($id);
             $animal_icon = "{$images_path}farm_animals/$formatted_type.png";
             $pet_class = ($was_pet) ? "pet" : "not-petted";
-            $pet_tooltip = ($was_pet) ? "Has been pet" : "Has not been pet";
-            $status = ($happiness > 200) ? "really happy today!" : (($happiness > 30) ? "fine" : "sad");
+            $pet_tooltip = ($was_pet) ? "Caressed by the auto-petter" : "No auto-petter in this building";
+            $status = ($happiness > 200) ? "happy" : (($happiness > 30) ? "fine" : "sad");
+            $status_icon = "{$images_path}icons/{$status}_emote.png";
+
 
             $hearts_html = "";
             $max_heart = 5;
@@ -1063,8 +1065,11 @@ function display_farm_animals_panel():string {
                         <img src='{$images_path}icons/pet.png' class='interaction $pet_class' alt=''/>
                         <span class='left'>$pet_tooltip</span>
                     </span>
+                    <span class='tooltip'>
+                        <img src='$status_icon' class='status' alt='$status'/>
+                        <span class='left'>" . get_animal_status_tooltip($status, $formatted_name) . "</span>
+                    </span>
                 </span>
-                <span class='animal-status'>looks $status</span>
             </span>";
         }
     }
@@ -1082,4 +1087,13 @@ function display_farm_animals_panel():string {
         ";
 
     return $structure;
+}
+
+
+function get_animal_status_tooltip(string $status, string $animal_name):string {
+    return [
+        "happy" => "$animal_name looks really happy today!",
+        "fine"  => "$animal_name looks fine today!",
+        "angry" => "$animal_name looks sad today :("
+    ][$status];
 }

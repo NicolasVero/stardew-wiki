@@ -324,7 +324,14 @@ function easter_egg_characters() {
 		"sam", "sandy", "sebastian", "shane", "vincent", "willy", "wizard"
 	];
 	
-	const character = characters[Math.floor(Math.random() * characters.length)];
+	const date = new Date(); 
+	const index_picker = [
+		new Date(date.getFullYear(), 0, 1).getTime(),
+		date.getUTCMonth(),
+		date.getUTCDate()
+	].reduce((acc, val) => acc + val, 0) % characters.length;
+
+	const character = characters[index_picker];
     const elements = document.querySelectorAll(".character-name." + character);
     
 	if(!elements) return;
@@ -333,7 +340,7 @@ function easter_egg_characters() {
     let is_playing = false;
 
     const play_once = () => {
-        if (!is_playing) {
+        if(!is_playing) {
             is_playing = true;
 
             const full_screen_image = document.createElement("img");
