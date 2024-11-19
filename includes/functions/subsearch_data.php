@@ -202,7 +202,7 @@ function get_the_married_person_gender(string $spouse):string {
 }
 
 
-function get_weather_tooltip($weather):string {
+function get_weather_tooltip(string $weather):string {
 	return [
 		"sun"        => "It's going to be clear and sunny all day",
 		"rain"       => "It's going to rain all day tomorrow",

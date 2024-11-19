@@ -155,6 +155,7 @@ function get_aggregated_data(object $data):array {
         "enemies_killed"  	=> get_enemies_killed_data($data->stats),
         "quest_log"       	=> get_quest_log($data->questLog),
         "farm_animals"      => get_all_farm_animals(),
-        "weather"           => get_weather()
+        "weather"           => get_weather(),
+        "secret_notes"      => get_secret_notes($data->secretNotesSeen)
     ];
 }

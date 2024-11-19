@@ -890,7 +890,7 @@ function get_pet():array {
 	];
 }
 
-function get_all_farm_animals(): array {
+function get_all_farm_animals():array {
     $data = $GLOBALS["untreated_all_players_data"];
     $animals_data = [];
     
@@ -964,8 +964,7 @@ function get_all_farm_animals(): array {
     return $animals_data;
 }
 
-
-function get_weather($weather_location = "Default"):string {
+function get_weather(string $weather_location = "Default"):string {
     $data = $GLOBALS["untreated_all_players_data"];
     $locations = $data->locationWeather;
 
@@ -996,4 +995,18 @@ function get_weather($weather_location = "Default"):string {
     }
 
 	return "sun";
+}
+
+function get_secret_notes(object $notes):array {
+	$notes = (array) $notes->int;
+	sort($notes);
+	$all_notes = [];
+
+	foreach($notes as $key => $note) {
+		$all_notes["Secret Note #$key"] = [
+			"id" => $note
+		];
+	}
+
+	return $all_notes;
 }

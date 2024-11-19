@@ -627,14 +627,22 @@ function display_detailled_gallery(array $player_datas, string $json_filename, s
             }
 
             $element_image = $images_path . formate_text_for_file((string) explode('µ', $json_line_name)[0]). ".png";
+            if(in_array($json_filename, ["secret_notes"])) {
+                $element_image = get_images_folder() . "icons/secret_notes.png";
+            }
+
             $element_tooltip = ($is_found) ? get_tooltip_text($player_datas, $json_line_name, $json_filename) : $json_line_name;
 
-            if(!in_array($json_filename, ["achievements"])) {
-                $wiki_url = get_wiki_link(get_item_id_by_name($json_line_name));
+            if(in_array($json_filename, ["achievements", "secret_notes"])) {
+                $wiki_url = [
+                    "achievements" => "https://stardewvalleywiki.com/Achievements",
+                    "secret_notes" => "https://stardewvalleywiki.com/Secret_Notes"
+                ][$json_filename];
             } else {
-                $wiki_url = "https://stardewvalleywiki.com/Achievements";
+                $wiki_url = get_wiki_link(get_item_id_by_name($json_line_name));
             }
             
+
 			$structure .= "
 				<span class='tooltip'>
 					<a class='wiki_link' href='$wiki_url' target='_blank'>
@@ -699,6 +707,14 @@ function display_weather_icon():string {
             <span class='left'>" . get_weather_tooltip($weather) . "</span>
         </span>
     ";
+}
+
+function display_secret_notes():string {
+    $data = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
+    log_($data["secret_notes"], "coucou");
+
+    // return ":)";
+    return display_detailled_gallery($data["secret_notes"], "secret_notes", "Secret notes", "_50");
 }
 
 function display_books():string {
@@ -783,6 +799,7 @@ function display_monster_eradication_goals_panel():string {
 
 function display_achievements():string {
 	$datas = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
+    log_($datas["achievements"]);
     return display_detailled_gallery($datas["achievements"], "achievements", "In-game achievements", "_50");
 }
 

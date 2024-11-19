@@ -221,6 +221,7 @@ function display_page():string {
 			$structure .= "<div class='separated-galleries'>";
 			$structure .= display_unlockables();
 			$structure .= display_books();
+			$structure .= display_secret_notes();
 
 			$structure .= display_cooking_recipes();
 			$structure .= display_fish();

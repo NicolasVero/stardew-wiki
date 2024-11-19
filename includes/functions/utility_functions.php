@@ -136,6 +136,7 @@ function load_all_json():void {
 		"minerals",
 		"perfection_elements",
 		"quests",
+		"secret_notes",
 		"shipped_items",
 		"skills",
 		"special_orders",
