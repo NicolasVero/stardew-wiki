@@ -31,6 +31,8 @@ function load_save($save_file, $use_ajax = true):mixed {
             echo $page;
         }
     }
+    
+    return true;
 }
 
 function get_all_players_datas():array {

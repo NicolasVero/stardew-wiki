@@ -711,9 +711,6 @@ function display_weather_icon():string {
 
 function display_secret_notes():string {
     $data = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
-    log_($data["secret_notes"], "coucou");
-
-    // return ":)";
     return display_detailled_gallery($data["secret_notes"], "secret_notes", "Secret notes", "_50");
 }
 
@@ -799,7 +796,6 @@ function display_monster_eradication_goals_panel():string {
 
 function display_achievements():string {
 	$datas = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
-    log_($datas["achievements"]);
     return display_detailled_gallery($datas["achievements"], "achievements", "In-game achievements", "_50");
 }
 
