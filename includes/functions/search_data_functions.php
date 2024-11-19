@@ -963,3 +963,37 @@ function get_all_farm_animals(): array {
 
     return $animals_data;
 }
+
+
+function get_weather($weather_location = "Default"):string {
+    $data = $GLOBALS["untreated_all_players_data"];
+    $locations = $data->locationWeather;
+
+    foreach($locations as $complex_location) {
+		foreach($complex_location as $location) {
+			if($location->key->string == $weather_location) {
+				if($location->value->LocationWeather->weather->string != "Festival") {
+					return formate_text_for_file((string)$location->value->LocationWeather->weather->string);
+				}
+
+				if($location->value->LocationWeather->isRaining->string == true) {
+					return "rain";
+				}
+
+				if($location->value->LocationWeather->isSnowing->string == true) {
+					return "snow";
+				}
+
+				if($location->value->LocationWeather->isLightning->string == true) {
+					return "storm";
+				}
+
+				if($location->value->LocationWeather->isGreenRain->string == true) {
+					return "green_rain";
+				}
+			}
+        }
+    }
+
+	return "sun";
+}

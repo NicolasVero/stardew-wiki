@@ -172,6 +172,7 @@ function display_header():string {
 	$player_id = $GLOBALS["player_id"];
 	$all_players_data = $GLOBALS["all_players_data"][$player_id]["general"];
 	$festival_icon = display_festival_icon();
+    $weather_icon = display_weather_icon();
     
     extract($all_players_data);  
 
@@ -189,6 +190,7 @@ function display_header():string {
                 </span>
 
                 <span class='date'>
+                    $weather_icon
                     <span class='data date-in-game view-calendar-$player_id modal-opener'>$date</span>
 					$festival_icon
                 </span>
@@ -683,6 +685,20 @@ function display_festival_icon():string {
 		</a>
         <span class='right'>$festival_name</span>
 	</span>";
+}
+
+function display_weather_icon():string {
+    $data = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
+    $weather = $data["weather"];
+
+    return "
+        <span class='tooltip'>
+            <a class='wiki_link' href='https://stardewvalleywiki.com/Weather' target='_blank'>
+                <img src='" . get_images_folder() . "/icons/$weather.png' class='weather_icon' alt='Weather icon'>
+            </a>
+            <span class='left'>" . get_weather_tooltip($weather) . "</span>
+        </span>
+    ";
 }
 
 function display_books():string {
