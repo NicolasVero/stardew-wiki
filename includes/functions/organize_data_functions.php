@@ -70,7 +70,6 @@ function get_all_players_datas():array {
     return $players_data;
 }
 
-
 function get_all_players():array {
     $players_names = [];
     $data = $GLOBALS["untreated_all_players_data"];
@@ -96,7 +95,6 @@ function get_all_players():array {
     return $players_names;
 }
 
-
 function get_aggregated_data(object $data):array {
     $general_data = $GLOBALS["untreated_all_players_data"];
     $game_version_score = (int) get_game_version_score((string) $general_data->gameVersion);
@@ -113,11 +111,11 @@ function get_aggregated_data(object $data):array {
             "game_version_score"    => $game_version_score,
             "should_spawn_monsters" => $should_spawn_monsters,
             "name"                  => (string) $data->name,
-            "gender"                => get_gender([$data->gender, $data->isMale]),
+            "gender"                => get_player_gender([$data->gender, $data->isMale]),
             "farm_name"             => (string) $data->farmName,
             "farmer_level"          => get_farmer_level(),
             "favorite_thing"        => (string) $data->favoriteThing,
-            "pet"                   => get_pet(),
+            "pet"                   => get_player_pet(),
             "spouse"                => get_spouse(),
             "children"              => get_children_amount((int) $data->UniqueMultiplayerID),
             "house_level"           => get_house_upgrade_level(),
@@ -142,22 +140,22 @@ function get_aggregated_data(object $data):array {
             "foraging_level" => (int) $data->foragingLevel,
             "fishing_level"  => (int) $data->fishingLevel,
         ],
-        "has_element"     	=> get_unlockables_list(),
-        "crafting_recipes"	=> get_crafting_recipes($data->craftingRecipes),
-        "books"           	=> get_books($data->stats->Values),
-        "masteries"       	=> get_masteries($data->stats->Values),
-        "fish_caught"     	=> get_fish_caught($data->fishCaught),
-        "artifacts_found" 	=> get_artifacts($data->archaeologyFound, $general_data),
-        "minerals_found"  	=> get_minerals($data->mineralsFound, $general_data),
-        "cooking_recipes" 	=> get_cooking_recipes($data->cookingRecipes, $data->recipesCooked),
-        "shipped_items"   	=> get_shipped_items($data->basicShipped),
-        "achievements"    	=> get_achievement($data->achievements),
-        "skills"          	=> get_skills_data((array) $data->professions->int),
-        "friendship"      	=> get_friendship_data($data->friendshipData),
-        "enemies_killed"  	=> get_enemies_killed_data($data->stats),
-        "quest_log"       	=> get_quest_log($data->questLog),
-        "farm_animals"      => get_all_farm_animals(),
+        "has_element"     	=> get_player_unlockables_list(),
+        "crafting_recipes"	=> get_player_crafting_recipes($data->craftingRecipes),
+        "books"           	=> get_player_books($data->stats->Values),
+        "masteries"       	=> get_player_masteries($data->stats->Values),
+        "fish_caught"     	=> get_player_fishes_caught($data->fishCaught),
+        "artifacts_found" 	=> get_player_artifacts($data->archaeologyFound, $general_data),
+        "minerals_found"  	=> get_player_minerals($data->mineralsFound, $general_data),
+        "cooking_recipes" 	=> get_player_cooking_recipes($data->cookingRecipes, $data->recipesCooked),
+        "shipped_items"   	=> get_player_shipped_items($data->basicShipped),
+        "achievements"    	=> get_player_achievements($data->achievements),
+        "skills"          	=> get_player_skills_data((array) $data->professions->int),
+        "friendship"      	=> get_player_friendship_data($data->friendshipData),
+        "enemies_killed"  	=> get_player_enemies_killed_data($data->stats),
+        "quest_log"       	=> get_player_quest_log($data->questLog),
+        "farm_animals"      => get_player_farm_animals(),
         "weather"           => get_weather(),
-        "secret_notes"      => get_secret_notes($data->secretNotesSeen)
+        "secret_notes"      => get_player_secret_notes($data->secretNotesSeen)
     ];
 }

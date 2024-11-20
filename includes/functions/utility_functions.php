@@ -8,16 +8,39 @@ function log_(mixed $element, string $title = ""):void {
 	echo "<pre>" . print_r($element, true) . "</pre>";
 }
 
-function get_images_folder(bool $is_external = false):string {
-	return ($is_external || !is_on_localhost()) ? get_github_medias_url() : get_site_root() . "medias/images/";
-}
+function load_all_json():void {
+	$all_json = [
+		"achievements_details",
+		"achievements",
+		"adventurer's_guild_goals",
+		"all_dates",
+		"all_items",
+		"artifacts",
+		"books",
+		"cooking_recipes",
+		"crafting_recipes",
+		"custom_ids",
+		"enemies",
+		"farm_animals",
+		"festivals",
+		"fish",
+		"marriables",
+		"masteries",
+		"minerals",
+		"perfection_elements",
+		"quests",
+		"secret_notes",
+		"shipped_items",
+		"skills",
+		"special_orders",
+		"unlockables",
+		"villagers_birthday",
+		"villagers",
+		"wiki_links"
+	];
 
-function get_github_medias_url():string {
-	return "https://raw.githubusercontent.com/NicolasVero/stardew-dashboard/refs/heads/master/medias/images/";
-}
-
-function get_json_folder():string {
-    return get_site_root() . "data/json/";
+	foreach($all_json as $json_file)
+		$GLOBALS["json"][$json_file] = decode($json_file);
 }
 
 function get_site_root():string {
@@ -28,8 +51,37 @@ function get_site_root():string {
 	return (!empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] !== "off") ? "https://stardew-dashboard.42web.io/" : "http://stardew-dashboard.42web.io/";
 }
 
+function get_json_folder():string {
+    return get_site_root() . "data/json/";
+}
+
+function get_images_folder(bool $is_external = false):string {
+	return ($is_external || !is_on_localhost()) ? get_github_medias_url() : get_site_root() . "medias/images/";
+}
+
+function get_github_medias_url():string {
+	return "https://raw.githubusercontent.com/NicolasVero/stardew-dashboard/refs/heads/master/medias/images/";
+}
+
 function is_on_localhost():bool {
 	return $_SERVER["HTTP_HOST"] == "localhost";
+}
+
+function get_formatted_date(bool $display_date = true):mixed {
+	$data = $GLOBALS["untreated_player_data"];
+    $day    = $data->dayOfMonthForSaveGame;
+    $season = ["spring", "summer", "fall", "winter"][$data->seasonForSaveGame % 4];
+    $year   = $data->yearForSaveGame;
+
+    if($display_date) {
+		return "Day $day of $season, Year $year";
+	}
+
+    return [
+        "day" => $day,
+        "season" => $season,
+        "year" => $year
+	];
 }
 
 function formate_number(int $number, string $lang = "en"):string {
@@ -92,10 +144,6 @@ function in_bytes_conversion(string $size, string $use = "local"):int {
     return $value * pow(1024, $unit_to_power[$unite]);
 }
 
-function array_keys_exists(array $keys, array $array):bool {
-    return count(array_diff_key(array_flip($keys), $array)) === 0;
-}
-
 function sanitize_json_with_version(string $json_name, bool $version_controler = false):array {
 	$original_json = $GLOBALS["json"][$json_name];
 	$game_version_score = (isset($GLOBALS["game_version_score"])) ? $GLOBALS["game_version_score"] : "";
@@ -115,39 +163,10 @@ function find_reference_in_json(mixed $id, string $file):mixed {
     return isset($json_file[$id]) ? $json_file[$id] : null;
 }
 
-function load_all_json():void {
-	$all_json = [
-		"achievements_details",
-		"achievements",
-		"adventurer's_guild_goals",
-		"all_dates",
-		"all_items",
-		"artifacts",
-		"books",
-		"cooking_recipes",
-		"crafting_recipes",
-		"custom_ids",
-		"enemies",
-		"farm_animals",
-		"festivals",
-		"fish",
-		"marriables",
-		"masteries",
-		"minerals",
-		"perfection_elements",
-		"quests",
-		"secret_notes",
-		"shipped_items",
-		"skills",
-		"special_orders",
-		"unlockables",
-		"villagers_birthday",
-		"villagers",
-		"wiki_links"
-	];
-
-	foreach($all_json as $json_file)
-		$GLOBALS["json"][$json_file] = decode($json_file);
+function get_correct_id(mixed &$id):void {
+	if(!filter_var((int) $id, FILTER_VALIDATE_INT)) {
+		$id = get_custom_id($id);
+	}
 }
 
 function get_custom_id(string $item):int {
@@ -162,8 +181,8 @@ function get_wiki_link(int $id):string {
 	return $GLOBALS["json"]["wiki_links"][$id];
 }
 
-function get_number_of_player():int {
-	return count($GLOBALS["all_players_data"]);
+function array_keys_exists(array $keys, array $array):bool {
+    return count(array_diff_key(array_flip($keys), $array)) === 0;
 }
 
 function decode(string $filename): array {
@@ -180,23 +199,6 @@ function decode(string $filename): array {
     return json_decode($response, true);
 }
 
-function get_formatted_date(bool $display_date = true):mixed {
-	$data = $GLOBALS["untreated_player_data"];
-    $day    = $data->dayOfMonthForSaveGame;
-    $season = ["spring", "summer", "fall", "winter"][$data->seasonForSaveGame % 4];
-    $year   = $data->yearForSaveGame;
-
-    if($display_date) {
-		return "Day $day of $season, Year $year";
-	}
-
-    return [
-        "day" => $day,
-        "season" => $season,
-        "year" => $year
-	];
-}
-
 function get_game_duration(int $duration):string {
     $totalSeconds = intdiv($duration, 1000);
     $seconds      = $totalSeconds % 60;
@@ -205,6 +207,10 @@ function get_game_duration(int $duration):string {
     $hours        = intdiv($totalMinutes, 60);
 	
     return sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
+}
+
+function get_number_of_player():int {
+	return count($GLOBALS["all_players_data"]);
 }
 
 function get_number_of_days_ingame():int {
@@ -225,13 +231,6 @@ function is_a_mobile_device():bool {
 		strpos($_SERVER["HTTP_USER_AGENT"], "iPod") != false ||
 		strpos($_SERVER["HTTP_USER_AGENT"], "iPhone") != false 
 	);
-}
-
-
-function get_correct_id(mixed &$id):void {
-	if(!filter_var((int) $id, FILTER_VALIDATE_INT)) {
-		$id = get_custom_id($id);
-	}
 }
 
 if(isset($_GET["action"]) && $_GET["action"] == "get_max_upload_size")

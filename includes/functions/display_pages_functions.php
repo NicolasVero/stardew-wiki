@@ -196,7 +196,6 @@ function display_mobile_landing_page():string {
 	";
 }
 
-
 function display_page():string {
     $structure = display_header();
     $structure .= "<main>";
@@ -221,7 +220,6 @@ function display_page():string {
 			$structure .= "<div class='separated-galleries'>";
 			$structure .= display_unlockables();
 			$structure .= display_books();
-			$structure .= display_secret_notes();
 
 			$structure .= display_cooking_recipes();
 			$structure .= display_fish();
@@ -229,8 +227,9 @@ function display_page():string {
 			$structure .= display_minerals();
 			$structure .= display_artifacts();
 
-			$structure .= display_enemies();
 			$structure .= display_achievements();
+			$structure .= display_secret_notes();
+			// $structure .= display_enemies();
 
 			$structure .= display_shipped_items();
 			
