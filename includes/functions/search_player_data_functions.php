@@ -1,15 +1,16 @@
 <?php 
 
 function get_player_gender(array $genders):string {
-
 	foreach($genders as $gender) {
-		if(!empty($gender)) {
-			if(is_numeric($gender[0])) {
-				return ($gender[0] == 0) ? "Male" : "Female";
-			} else {
-				return ($gender[0]) ? "Male" : "Female";
-			} 
+		if(empty($gender)) {
+			continue;
 		}
+
+		if(is_numeric($gender[0])) {
+			return ($gender[0] == 0) ? "Male" : "Female";
+		} else {
+			return ($gender[0]) ? "Male" : "Female";
+		} 
 	}
 
 	return "Neutral";

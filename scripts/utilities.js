@@ -331,7 +331,7 @@ function easter_egg_characters() {
 		new Date(date.getFullYear(), 0, 1).getTime(),
 		date.getUTCMonth(),
 		date.getUTCDate()
-	].reduce((acc, val) => acc + val, 0) % characters.length;
+	].reduce((acc, val) => acc * val, 1) % characters.length;
 
 	const character = characters[index_picker];
     const elements = document.querySelectorAll(".character-name." + character);
