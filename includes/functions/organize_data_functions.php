@@ -7,7 +7,7 @@ function load_save($save_file, $use_ajax = true):mixed {
     load_all_json();
 
     $GLOBALS["untreated_all_players_data"] = $data;
-    $players_data = get_all_players_datas();
+    $players_data = get_all_players_data();
     $players = get_all_players();
     $pages["sur_header"] = display_sur_header(false, false);
 
@@ -35,7 +35,7 @@ function load_save($save_file, $use_ajax = true):mixed {
     return true;
 }
 
-function get_all_players_datas():array {
+function get_all_players_data():array {
     $players_data = [];
     $data = $GLOBALS["untreated_all_players_data"];
 

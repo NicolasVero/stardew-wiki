@@ -421,7 +421,7 @@ function get_perfection_percentage():string {
 function get_highest_count_for_category(string $category):array {
 	$game_version = substr($GLOBALS["game_version"], 0, 3);
 	$total_players = get_number_of_player();
-	$all_datas = $GLOBALS["all_players_data"];
+	$all_data = $GLOBALS["all_players_data"];
 	$highest_player = 0;
 	$max_elements = 0;
 
@@ -436,13 +436,13 @@ function get_highest_count_for_category(string $category):array {
 
 	for($current_player = 0; $current_player < $total_players; $current_player++) {
 		if(in_array($category, $exceptions_recipes)) {
-			$filtered_elements = array_filter($all_datas[$current_player][$category], function($item) {
+			$filtered_elements = array_filter($all_data[$current_player][$category], function($item) {
 				return $item["counter"] > 0;
 			});
 			$amount_elements = count($filtered_elements);
 		}
 		else if(in_array($category, $exceptions_level)) {
-			$level_category = $all_datas[$current_player]["levels"];
+			$level_category = $all_data[$current_player]["levels"];
 			$amount_elements = 0;
 			
 			foreach($level_category as $level) {
@@ -450,7 +450,7 @@ function get_highest_count_for_category(string $category):array {
 			}
 		}
 		else {
-			$amount_elements = count($all_datas[$current_player][$category]);	
+			$amount_elements = count($all_data[$current_player][$category]);	
 		}
 
 		if($max_elements < $amount_elements) {
@@ -471,14 +471,14 @@ function get_highest_count_for_category(string $category):array {
 function get_player_with_highest_friendships():array {
 	$game_version = substr($GLOBALS["game_version"], 0, 3);
 	$total_players = get_number_of_player();
-	$all_datas = $GLOBALS["all_players_data"];
+	$all_data = $GLOBALS["all_players_data"];
 	$highest_player = 0;
 	$max_elements = 0;
 	
     $marriables_npc = sanitize_json_with_version("marriables");
 
 	for($current_player = 0; $current_player < $total_players; $current_player++) {
-		$friendships = $all_datas[$current_player]["friendship"];
+		$friendships = $all_data[$current_player]["friendship"];
 		$friend_counter = 0;
 
 		foreach($friendships as $friendship_name => $friendship) {
@@ -515,10 +515,10 @@ function has_players_done_monster_slayer_hero():bool {
 
 function has_any_player_gotten_all_stardrops():bool {
 	$total_players = get_number_of_player();
-	$all_datas = $GLOBALS["all_players_data"];
+	$all_data = $GLOBALS["all_players_data"];
 
 	for($current_player = 0; $current_player < $total_players; $current_player++) {
-		$amount_elements = $all_datas[$current_player]["general"]["max_stamina"];
+		$amount_elements = $all_data[$current_player]["general"]["max_stamina"];
 		if($amount_elements == 508) {
 			return true;
 		}

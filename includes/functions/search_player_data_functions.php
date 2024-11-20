@@ -167,15 +167,15 @@ function get_player_shipped_items(object $items):array {
 
 function get_player_skills_data(array $skills):array {
 	$json_skills = sanitize_json_with_version("skills");
-	$skills_datas = [];
+	$skills_data = [];
 
 	foreach($json_skills as $key => $skill) {
 		if(in_array($key, $skills)) {
-			$skills_datas[] = $json_skills[$key];
+			$skills_data[] = $json_skills[$key];
 		}
 	}
 
-	return $skills_datas;
+	return $skills_data;
 }
 
 function get_player_enemies_killed_data(object $data):array { 
