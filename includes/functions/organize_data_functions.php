@@ -156,6 +156,7 @@ function get_aggregated_data(object $data):array {
         "quest_log"       	=> get_player_quest_log($data->questLog),
         "farm_animals"      => get_player_farm_animals(),
         "weather"           => get_weather(),
-        "secret_notes"      => get_player_secret_notes($data->secretNotesSeen)
+        "secret_notes"      => get_player_secret_notes($data->secretNotesSeen),
+        "jumino_kart"       => get_jumino_kart_leaderboard()
     ];
 }
