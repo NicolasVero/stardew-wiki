@@ -16,16 +16,13 @@ function get_player_gender(array $genders):string {
 }
 
 function get_player_achievements(object $achievements):array {
-   
 	$achievements_data = [];
 	
 	foreach($achievements->int as $achievement) {
-		$achievement_reference = find_reference_in_json((int) $achievement, "achievements_details");
+		$achievement = find_reference_in_json((int) $achievement, "achievements_details");
+		extract($achievement);
 
-		$achievement_title = explode("µ", $achievement_reference)[0]; 
-		$achievement_description = explode("µ", $achievement_reference)[1]; 
-
-		$achievements_data[$achievement_title] = [ "description" => $achievement_description ];
+		$achievements_data[$title] = [ "description" => $description ];
 	}
 	
 	return $achievements_data;

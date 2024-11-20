@@ -97,30 +97,30 @@ function get_tooltip_text(array $player_data, string $json_line_name, string $da
 
     switch($data_type) {
         case "farm_animals" : 
-            return "$json_line_name : $counter in your farm";
+            return "$json_line_name: $counter in your farm";
 
         case "fish" : 
             if($max_length > 0) return "$json_line_name : caught $caught_counter times ($max_length inches)";
-            return "$json_line_name : caught $caught_counter times";
+            return "$json_line_name: caught $caught_counter times";
 
         case "enemies" : 
-            return "$json_line_name : $killed_counter killed";
+            return "$json_line_name: $killed_counter killed";
 
         case "cooking_recipes" :
             if(!$counter) return "$json_line_name : not cooked yet";
-            return "$json_line_name : cooked " . (int) $counter . " times";
+            return "$json_line_name: cooked " . (int) $counter . " times";
 
 		case "crafting_recipes" :
 			if(!$counter) return "$json_line_name : not crafted yet";
-			return "$json_line_name : crafted " . (int) $counter . " times";
+			return "$json_line_name: crafted " . (int) $counter . " times";
 
         case "achievements" :
-            return "$json_line_name : $description";
+            return "$json_line_name: $description";
 
         case "artifacts":
         case "minerals":  
             if($counter == 0) return "$json_line_name : not given yet";
-            return "$json_line_name : given to museum";
+            return "$json_line_name: given to museum";
 
         default : return $json_line_name;
     }
