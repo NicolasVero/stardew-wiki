@@ -297,7 +297,9 @@ function load_easter_eggs() {
 }
 
 function easter_egg_kaaris() {
-    const element = document.querySelector(".easter_egg_kaaris");
+    let element = document.querySelector(".house");
+    element = Array.from(element.previousElementSibling.children).find(child => child.tagName === "IMG");
+	element.classList.add("easter_egg_kaaris");
     if(!element) return;
 
     const audio = new Audio(get_site_root() + "medias/audio/kaaris_maison-citrouille.mp3");

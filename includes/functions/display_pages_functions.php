@@ -129,7 +129,6 @@ function display_landing_page():string {
     ";
 }
 
-
 function display_mobile_landing_page():string {
 	return "
 		<div id='display'>
@@ -226,10 +225,10 @@ function display_page():string {
 
 			$structure .= display_minerals();
 			$structure .= display_artifacts();
-
+			
+			$structure .= display_enemies();
 			$structure .= display_achievements();
-			$structure .= display_secret_notes();
-			// $structure .= display_enemies();
+			// $structure .= display_secret_notes();
 
 			$structure .= display_shipped_items();
 			
@@ -281,9 +280,4 @@ function display_error_page(Exception $exception):string {
     ";
 
     return $structure;
-}
-
-if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"]) && $_POST["action"] === "display_feedback_panel") {
-    require "utility_functions.php";
-	echo display_feedback_panel();
 }

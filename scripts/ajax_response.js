@@ -91,7 +91,7 @@ function activate_feedback_ajax_trigger() {
 function feedback_form_creation() {
 	const xml_upload = document.querySelector("body");
 
-	fetch("./includes/functions/display_functions.php", {
+	fetch("./includes/functions/display_panels_functions.php", {
 		method: "POST",
 		headers: {
 			"Content-Type": "application/x-www-form-urlencoded"

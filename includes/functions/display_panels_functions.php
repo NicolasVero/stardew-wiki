@@ -289,3 +289,8 @@ function display_farm_animals_panel():string {
 
     return $structure;
 }
+
+if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"]) && $_POST["action"] === "display_feedback_panel") {
+    require "utility_functions.php";
+	echo display_feedback_panel();
+}
