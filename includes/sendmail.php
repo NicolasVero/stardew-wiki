@@ -57,4 +57,3 @@ if(send_feedback_mail($user_details)) {
 
 echo json_encode($response);
 exit;
-

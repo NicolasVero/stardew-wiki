@@ -683,8 +683,9 @@ function get_player_secret_notes(object $notes):array {
 	sort($notes);
 	$all_notes = [];
 
-	foreach($notes as $key => $note) {
-		$all_notes["Secret Note #$key"] = [
+	foreach($notes as $note) {
+		$note_name = find_reference_in_json($note, "secret_notes");
+		$all_notes[$note_name] = [
 			"id" => $note
 		];
 	}

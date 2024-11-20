@@ -499,20 +499,22 @@ function display_detailled_gallery(array $gallery_details, string $width = "", a
 
             $element_image = $images_path . formate_text_for_file((string) explode('µ', $json_line_name)[0]). ".png";
             if(in_array($json_filename, ["secret_notes"])) {
-                $element_image = get_images_folder() . "icons/secret_notes.png";
+                $line_name = explode(" ", $json_line_name);
+                $icon_name = formate_text_for_file(implode(" ", array_slice($line_name, 0, 2)));
+                $element_image = get_images_folder() . "icons/$icon_name.png";
             }
-
-            $element_tooltip = ($is_found) ? get_tooltip_text($player_data, $json_line_name, $json_filename) : $json_line_name;
 
             if(in_array($json_filename, ["achievements", "secret_notes"])) {
                 $wiki_url = [
                     "achievements" => "https://stardewvalleywiki.com/Achievements",
                     "secret_notes" => "https://stardewvalleywiki.com/Secret_Notes"
                 ][$json_filename];
-            } else {
+            }
+            else {
                 $wiki_url = get_wiki_link(get_item_id_by_name($json_line_name));
             }
-            
+
+            $element_tooltip = ($is_found) ? get_tooltip_text($player_data, $json_line_name, $json_filename) : $json_line_name;
 
 			$structure .= "
 				<span class='tooltip'>
