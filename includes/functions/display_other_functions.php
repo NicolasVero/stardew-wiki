@@ -1,22 +1,22 @@
 <?php
 
 function display_player_selection():string {
-	$players = $GLOBALS["players_names"];
+	$players_names = $GLOBALS["players_names"];
     
-    if(count($players) < 2) {
+    if(count($players_names) < 2) {
         return "<ul id='players_selection'></ul>";
     }
 
-    $structure = "
-		<ul id='players_selection'>
-	";
-
-    for($i = 0; $i < count($players); $i++) {
-        $structure .= "<li class='player_selection' value='player_$i'>" . formate_usernames($players[$i]) . "</option>";
+    $players = "";
+    for($i = 0; $i < count($players_names); $i++) {
+        $players .= "<li class='player_selection' value='player_$i'>" . formate_usernames($players_names[$i]) . "</option>";
     }
 
-    $structure .= "</ul>";
-    return $structure;
+    return "
+		<ul id='players_selection'>
+            $players
+        </ul>
+    ";
 }
 
 function display_game_version():string {
