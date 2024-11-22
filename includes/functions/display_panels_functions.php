@@ -386,13 +386,10 @@ function display_junimo_kart_panel():string {
                 <span class='scores'>
         ";
 
-    $untreated_scores = (!empty($untreated_data->junimoKartLeaderboards->entries))
-        ? $untreated_data->junimoKartLeaderboards
-        :
-        get_junimo_kart_fake_leaderboard();
+    $untreated_scores = $untreated_data->junimoKartLeaderboards->entries ?? get_junimo_kart_fake_leaderboard();
     $counter = 1;
 
-    foreach($untreated_scores->entries->NetLeaderboardsEntry as $untreated_score) {
+    foreach($untreated_scores->NetLeaderboardsEntry as $untreated_score) {
         if($counter > 5) {
             break;
         }
