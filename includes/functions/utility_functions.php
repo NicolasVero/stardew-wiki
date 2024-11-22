@@ -67,6 +67,10 @@ function is_on_localhost():bool {
 	return $_SERVER["HTTP_HOST"] == "localhost";
 }
 
+function is_game_older_than_1_6():bool {
+	return ($GLOBALS["game_version_score"] < get_game_version_score("1.6.0"));
+}
+
 function get_formatted_date(bool $display_date = true):mixed {
 	$data = $GLOBALS["untreated_player_data"];
     $day    = $data->dayOfMonthForSaveGame;
@@ -146,7 +150,7 @@ function in_bytes_conversion(string $size, string $use = "local"):int {
 
 function sanitize_json_with_version(string $json_name, bool $version_controler = false):array {
 	$original_json = $GLOBALS["json"][$json_name];
-	$game_version_score = (isset($GLOBALS["game_version_score"])) ? $GLOBALS["game_version_score"] : "";
+	$game_version_score = $GLOBALS["game_version_score"] ?? "";
 	$sanitize_json = [];
 
 	foreach($original_json as $key => $json_version) {

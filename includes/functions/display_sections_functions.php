@@ -215,7 +215,7 @@ function display_skills():string {
         $mastery_icon    = get_images_folder() . "skills/mastery.png";
         $mastery_class   = (array_key_exists(ucfirst(explode('_', $key)[0]) . " Mastery", $this_player_masteries)) ? 'found' : 'not-found';
         $mastery_tooltip = ucfirst(explode('_', $key)[0]) . " mastery";
-        $is_newer_version_class = ($GLOBALS["game_version_score"] < get_game_version_score("1.6.0")) ? "newer-version" : "older-version";
+        $is_newer_version_class = (is_game_older_than_1_6()) ? "newer-version" : "older-version";
 
         $structure .= "
             <span class='skill $key'>
