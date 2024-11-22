@@ -1,8 +1,9 @@
 {
-  "dependencies": {
-    "typescript": "^5.7.2"
-  },
   "scripts": {
-    "build": "tsc scripts/app.ts --outFile scripts/script.js"
+    "build": "tsc",
+    "watch-less": "lessc styles/less/app.less styles/css/style.css --watch"
+  },
+  "devDependencies": {
+    "typescript": "^5.7.2"
   }
 }

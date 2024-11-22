@@ -1,9 +1,9 @@
-function get_site_root() {
-	const protocol = window.location.protocol;
-	const host = window.location.host;
+// function get_site_root() {
+// 	const protocol = window.location.protocol;
+// 	const host = window.location.host;
 
-	return (host === "localhost") ? `${protocol}//localhost/travail/stardew_dashboard/` : `${protocol}//stardew-dashboard.42web.io/`;
-}
+// 	return (host === "localhost") ? `${protocol}//localhost/travail/stardew_dashboard/` : `${protocol}//stardew-dashboard.42web.io/`;
+// }
 
 function detect_os() {
 	const user_agent = window.navigator.userAgent.toLowerCase();

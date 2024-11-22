@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "target": "ES2015",
+        "module": "amd",
+        "outFile": "./scripts/js/script.js",
+        "rootDir": "./scripts",
+        "strict": true,
+        "esModuleInterop": true,
+        "moduleResolution": "node"
+    },
+    "files": [
+        "./scripts/app.ts"
+    ]
+}
