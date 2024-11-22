@@ -38,12 +38,10 @@ function load_save($save_file, $use_ajax = true):mixed {
 function get_all_players_data():array {
     $players_data = [];
     $data = $GLOBALS["untreated_all_players_data"];
-
     array_push($players_data, get_aggregated_data($data->player));
-
 	$GLOBALS["host_player_data"] = $players_data[0];
 
-	if($GLOBALS["game_version_score"] < get_game_version_score("1.6.0"))  {
+	if(is_game_older_than_1_6()) {
 		foreach($data->locations->GameLocation as $game_location) {
 			if(isset($game_location->buildings)) {
 				foreach($game_location->buildings->Building as $building) {
@@ -73,10 +71,9 @@ function get_all_players_data():array {
 function get_all_players():array {
     $players_names = [];
     $data = $GLOBALS["untreated_all_players_data"];
-
     array_push($players_names, (string) $data->player->name);
 	
-	if($GLOBALS["game_version_score"] < get_game_version_score("1.6.0")) {
+	if(is_game_older_than_1_6()) {
 		foreach($data->locations->GameLocation[0]->buildings->Building as $building) {
 			if(isset($building->indoors->farmhand)) {
 				$farmhand_name = (string) $building->indoors->farmhand->name;

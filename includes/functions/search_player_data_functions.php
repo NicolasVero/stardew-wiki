@@ -141,16 +141,12 @@ function get_player_unlockable(string $unlockable_name):int {
 }
 
 function get_player_shipped_items(object $items):array {
-	$version_score = $GLOBALS["game_version_score"];
 	$shipped_items_data = [];
 
 	foreach($items->item as $item) {
 
-		if($version_score < get_game_version_score("1.6.0")) {
-			$item_id = formate_original_data_string($item->key->int);
-		} else {
-			$item_id = formate_original_data_string($item->key->string);
-		} 
+		$item_id = (is_game_older_than_1_6()) ? $item->key->int : $item->key->string;
+		$item_id = formate_original_data_string($item_id);
 		
 		get_correct_id($item_id);
 		$shipped_items_reference = find_reference_in_json($item_id, "shipped_items");
@@ -229,11 +225,8 @@ function get_player_fishes_caught(object $data):array {
 
 	foreach($data->item as $item) {
 
-		if($version_score < get_game_version_score("1.6.0")) {
-			$item_id = formate_original_data_string($item->key->int);
-		} else {
-			$item_id = formate_original_data_string($item->key->string);
-		} 
+		$item_id = (is_game_older_than_1_6()) ? $item->key->int : $item->key->string;
+		$item_id = formate_original_data_string($item_id);
 
 		get_correct_id($item_id);
 
@@ -590,11 +583,11 @@ function are_all_adventurers_guild_categories_completed(array $adventurers_guild
 
 function get_player_pet():array {
 	$data = $GLOBALS["untreated_player_data"];
-	$type = ($GLOBALS["game_version_score"] < get_game_version_score("1.6.0")) ?
+	$breed = (int) $data->whichPetBreed;
+	$type = (is_game_older_than_1_6()) ?
 		(((string) $data->catPerson == "true") ? "cat" : "dog")
 		:
 		lcfirst((string) $data->whichPetType);
-	$breed = (int) $data->whichPetBreed;
 
 	return [
 		"type"  => $type,
