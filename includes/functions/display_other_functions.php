@@ -3,20 +3,16 @@
 function display_player_selection():string {
 	$players_names = $GLOBALS["players_names"];
     
-    if(count($players_names) < 2) {
-        return "<ul id='players_selection'></ul>";
+    $structure = "<ul id='players_selection'>";
+
+    if(count($players_names) > 1) {
+        for($i = 0; $i < count($players_names); $i++) {
+            $structure .= "<li class='player_selection' value='player_$i'>" . formate_usernames($players_names[$i]) . "</option>";
+        }
     }
 
-    $players = "";
-    for($i = 0; $i < count($players_names); $i++) {
-        $players .= "<li class='player_selection' value='player_$i'>" . formate_usernames($players_names[$i]) . "</option>";
-    }
-
-    return "
-		<ul id='players_selection'>
-            $players
-        </ul>
-    ";
+    $structure .= "</ul>";
+    return $structure;
 }
 
 function display_game_version():string {
