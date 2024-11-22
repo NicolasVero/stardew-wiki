@@ -203,10 +203,11 @@ function display_page():string {
 
 		// Modal panels
 		$structure .= display_friendships();
-		$structure .= display_quests();
+		$structure .= display_quest_panel();
 		$structure .= display_monster_eradication_goals_panel();
 		$structure .= display_calendar_panel();
 		$structure .= display_farm_animals_panel();
+		$structure .= display_junimo_kart_panel();
 
 		$structure .= "<div class='separated-galleries'>";
 			$structure .= "<div class='intra-gallery _50'>";

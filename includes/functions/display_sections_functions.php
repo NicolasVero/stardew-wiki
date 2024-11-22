@@ -148,6 +148,7 @@ function display_header():string {
 function display_general_stats():string {
 	$player_id = $GLOBALS["player_id"];
 	$all_players_data = $GLOBALS["all_players_data"][$player_id]["general"];
+	$junimo_kart_button = display_junimo_kart_button();
 	$quest_button = display_quest_button();
 
     extract($all_players_data);
@@ -161,6 +162,7 @@ function display_general_stats():string {
     return "
         <section class='info-section general-stats'>
         	<h2 class='section-title'>General stats</h2>
+            $junimo_kart_button
 			$quest_button
             <div>" .
                 display_stat([
@@ -191,87 +193,6 @@ function display_general_stats():string {
             . "</div>
         </section>
     ";
-}
-
-function display_quests():string {
-	$player_id = $GLOBALS["player_id"];
-	$this_player_data = $GLOBALS["all_players_data"][$player_id]["quest_log"];
-    $images_path = get_images_folder();
-
-    $structure = "
-        <section class='quests-section info-section all-quests-$player_id modal-window'>
-            <div class='panel-header'>
-                <h2 class='section-title panel-title'>Quests in progress</h2>
-                <img src='" . get_images_folder() . "icons/exit.png' class='exit-all-quests-$player_id exit' alt=''/>
-            </div>
-            <span class='quests'>
-    ";
-
-	if(empty($this_player_data)) {
-		$structure .= "
-					<h3>Nothing to see here yet</h3>
-				</span>
-			</section>
-		";
-	}
-
-    foreach($this_player_data as $data) {
-		extract($data);
-
-        $structure .= "
-            <span class='quest'>
-                <span class='quest-infos'>
-                    <span class='quest-description'>$objective</span>
-                    <span class='quest-title'>$title</span>
-                </span>
-        ";
-
-        if(empty($rewards)) {
-			$structure .= "</span>";
-			continue;
-		}
-        
-		if(isset($daysLeft)) {
-			$day_text = ($daysLeft > 1) ? "days" : "day";
-			$structure .= " <span class='days-left'><img src='$images_path/icons/timer.png' alt='Time left'/>$daysLeft $day_text</span>";
-		}
-
-		$structure .= "<span class='quest-rewards'>";
-		
-        for($i = 0; $i<count($rewards); $i++) {
-			// Does reward need a tooltip (gold and qi gems don't)
-            $structure .= ((is_numeric($rewards[$i]) || str_ends_with($rewards[$i], 'q'))) ? "<span class='quest-reward'>" : "<span class='quest-reward tooltip'>";
-            
-			// If reward is Friendship hearts/points
-            if(strstr($rewards[$i], "Friendship")) {
-                $reward_number = explode(" ", $rewards[$i])[0];
-                $structure .= "<img src='$images_path/rewards/heart_$reward_number.png' alt='Friendship reward'/>";
-            }
-			// If reward is Gold
-            elseif(is_numeric($rewards[$i]))
-                $structure .= formate_number($rewards[$i]) . "<img src='$images_path/rewards/gold.png' alt='Gold coins reward'/>";
-			// If reward is Qi Gems
-            elseif(str_ends_with($rewards[$i], 'q'))
-                $structure .= explode('_', $rewards[$i])[0] . "<img src='$images_path/rewards/qi_gem.png' alt='Qi gems reward'/>";
-			// If reward is something else
-            else
-                $structure .= $rewards[$i];
-
-            $structure .= (is_numeric($rewards[$i])) ? "" : "<span class='left'>$rewards[$i]</span>";
-            $structure .= "</span>";
-        }
-        $structure .= "
-                </span>
-            </span>
-        ";
-    }
-
-    $structure .= "
-            </span>
-        </section>
-    ";
-
-    return $structure;
 }
 
 function display_skills():string {

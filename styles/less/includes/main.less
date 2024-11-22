@@ -56,11 +56,18 @@ body {
 				img {
 					height: @big-icon;
 					
-					&.quest-icon {
+					&.icon {
 						cursor: @pointer;
 						position: absolute;
-						right: 0;
 						top: 0;
+
+						&.quest-icon {
+							right: 0;
+						}
+
+						&.controller-icon {
+							right: (@big-icon + @small-gap);
+						}
 					}
 				}
 			}
@@ -96,80 +103,6 @@ body {
 							height: @big-icon;
 						}
 					}
-				}
-			}
-
-			&.quests-section {
-				.absolute-panel;
-				color: @primary-fc;
-				display: none;
-				font-family: @primary-ff;
-				font-size: @md-fs;
-				max-height: 80vh;
-				min-width: 30vw;
-				padding: @big-gap @big-gap;
-				position: fixed;
-
-				.section-title {
-					margin: 0;
-				}
-
-				.quests {
-					display: flex;
-					flex-direction: column;
-					gap: @big-gap;
-					white-space: nowrap;
-
-					.quest {
-						display: flex;
-						gap: @bigger-gap * 2;
-						justify-content: space-between;
-
-						& > span {
-							gap: @small-gap;
-							justify-content: center;
-						}
-
-						.quest-infos {
-							display: flex;
-							flex-direction: column;
-							width: 500px;
-
-							.quest-description {
-								font-size: @big-fs;
-							}
-
-							.quest-title {
-								font-style: italic;
-							}
-						}
-
-						.days-left {
-							align-items: center;
-							display: flex;
-						}
-
-						.quest-rewards {
-							display: flex;
-							gap: @big-gap;
-							justify-content: flex-end;
-							width: 100px;
-
-							.quest-reward {
-								align-items: center;
-								display: flex;
-								gap: @xsmall-gap;
-							}
-						}
-
-						img {
-							width: @small-icon;
-						}
-					}
-				}
-
-				.section-title {
-					font-size: @big-fs;
 				}
 			}
 	
@@ -272,11 +205,10 @@ body {
 				}
 	
 				&.all-friends {
-					.absolute-panel;
-					display: none;
+					.invisible-panel;
+					.panel;
 					height: 80vh;
 					padding: @md-gap @big-gap;
-					position: fixed;
 	
 					& > span {
 						& > span {
@@ -291,221 +223,6 @@ body {
 					& > .friendlist {
 						gap: @md-gap;
 						justify-content: center;
-					}
-				}
-			}
-
-			&.monster-eradication-goals-section {
-				.goal-panel;
-				aspect-ratio: 1.79;
-				color: @goal-fc;
-				display: none;
-				font-family: @dialogue-ff;
-				font-size: @giant-fs;
-				min-width: 60vw;
-				padding: @big-gap @big-gap;
-				position: fixed;
-
-				& > * {
-					display: flex;
-					flex-direction: column;
-					gap: @md-gap;
-				}
-
-				& > .header {
-					position: relative;
-
-					& > .title {
-						display: flex;
-						flex-direction: column;
-						font-weight: 900;
-						letter-spacing: 3px;
-					}
-
-					& > .dashes {
-						@dash-amount: 30;
-						@dash-gap: 3px;
-						@dash-width: 14px;
-						width: @dash-amount * @dash-width + (@dash-amount - 1) * @dash-gap;
-					}
-
-					& > .exit {
-						position: absolute;
-						right: @md-gap;
-						top: @md-gap;
-						width: @big-icon;
-					}
-				}
-
-				& > .goals {
-					margin-left: @md-gap + @small-gap;
-					margin-top: @md-gap;
-
-					& > .goal {
-						align-items: center;
-						display: flex;
-						gap: @md-gap;
-
-						& > *:not(.tooltip) {
-							font-weight: 900;
-							letter-spacing: 3px;
-						}
-
-						& img.reward {
-							height: @big-icon;
-							object-fit: contain;
-							width: @big-icon;
-						}
-					}
-				}
-			}
-
-			&.calendar-section {
-				@calendar-block: 64px * @calendar-ratio;
-				@calendar-border-width: 2px * @calendar-ratio;
-				@calendar-left-margin: 16px * @calendar-ratio;
-				@calendar-ratio: 2;
-				@calendar-real-width: 480px * @calendar-ratio;
-				@calendar-top-margin: 64px * @calendar-ratio;
-				.other-panel;
-				aspect-ratio: 1.43;
-				display: none;
-				position: fixed;
-				width: (480px * 2);
-				
-				& > .calendar-block {
-					display: block;
-					height: 100%;
-					position: relative;
-					width: 100%;
-
-					& > img {
-						height: 100%;
-						position: absolute;
-						width: 100%;
-					}
-
-					& > table {
-						border-collapse: collapse;
-						height: fit-content;
-						left: @calendar-left-margin + (@calendar-border-width / 2);
-						position: absolute;
-						top: @calendar-top-margin + (@calendar-border-width / 2);
-						width: fit-content;
-						
-						& > tbody > tr {
-							display: block;
-							height: @calendar-block;
-							width: fit-content;
-
-							& > td {
-								box-sizing: border-box;
-								height: @calendar-block;
-								padding: 0;
-								text-align: center;
-								width: @calendar-block;
-
-								&:hover {
-									border: solid 2px @calendar-bc;
-								}
-
-								& > div {
-									height: 100%;
-									margin: 0 auto;
-									vertical-align: middle;
-
-									& > a {
-										cursor: @pointer;
-										display: block;
-										height: 100%;
-										width: 100%;
-									}
-								}
-							}
-
-							& > td.simple-event {
-								& > div {
-									display: block;
-									width: 100%;
-								}
-							}
-
-							& > td.double-event {
-								& > div {
-									display: inline-block;
-									width: 45%;
-								}
-							}
-						}
-					}
-				}
-			}
-
-			&.all-animals-section {
-				.absolute-panel;
-				display: none;
-				height: 80vh;
-				padding: @md-gap @big-gap;
-				position: fixed;
-
-				& > .panel-header {
-					& > .section-title {
-						font-size: @big-fs;
-					}
-				}
-
-				& > .friendlist {
-					display: flex;
-					flex-direction: column;
-	
-					& > span {
-						align-items: center;
-						display: flex;
-						gap: @bigger-gap;
-					}
-		
-					.animal-icon {
-						cursor: @help;
-						height: @bigger-icon;
-						object-fit: contain;
-						width: @giant-icon;
-					}
-
-					.animal-name {
-						font-family: @primary-ff;
-						overflow: hidden;
-						text-overflow: ellipsis;
-						width: 100px;
-					}
-	
-					.hearts-level {
-						display: flex;
-						flex-wrap: wrap;
-						gap: @small-gap;
-					
-						.hearts {
-							width: @small-icon;
-						}
-					}
-
-					.interactions {
-						align-items: center;
-						display: flex;
-						gap: @big-gap;
-
-						& > span {
-							display: flex;
-							gap: @md-gap;
-						}
-						
-						.interaction, .status {
-							width: @md-icon;
-						}
-					}
-
-					.animal-status {
-						.data;
-						font-size: @md-fs;
 					}
 				}
 			}

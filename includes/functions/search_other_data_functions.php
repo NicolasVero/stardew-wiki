@@ -526,3 +526,60 @@ function has_any_player_gotten_all_stardrops():bool {
 
 	return false;
 }
+
+function get_junimo_kart_fake_leaderboard():object {
+	return (object) [
+		"entries" => (object) [
+			"NetLeaderboardsEntry" => [
+				(object) [
+					"name" => (object) [
+						"string" => "Lewis"
+					],
+					"score" => (object) [
+						"int" => 50000
+					]
+				]
+			],
+			"NetLeaderboardsEntry" => [
+				(object) [
+					"name" => (object) [
+						"string" => "Shane"
+					],
+					"score" => (object) [
+						"int" => 25000
+					]
+				]
+			],
+			"NetLeaderboardsEntry" => [
+				(object) [
+					"name" => (object) [
+						"string" => "Lewis"
+					],
+					"score" => (object) [
+						"int" => 10000
+					]
+				]
+			],
+			"NetLeaderboardsEntry" => [
+				(object) [
+					"name" => (object) [
+						"string" => "Lewis"
+					],
+					"score" => (object) [
+						"int" => 5000
+					]
+				]
+			],
+			"NetLeaderboardsEntry" => [
+				(object) [
+					"name" => (object) [
+						"string" => "Lewis"
+					],
+					"score" => (object) [
+						"int" => 250
+					]
+				]
+			]
+		]
+	];
+}

@@ -216,6 +216,12 @@ function load_elements() {
 			"exit_button"    : ".exit-all-animals-" + i,
 			"modal_panel"    : ".all-animals-" + i
 		});
+
+		buttons.push({
+			"open_button"    : ".view-junimo-kart-leaderboard-" + i,
+			"exit_button"    : ".exit-junimo-kart-leaderboard-" + i,
+			"modal_panel"    : ".junimo-kart-leaderboard-" + i
+		});
 	}
 
 	buttons.forEach(button => {

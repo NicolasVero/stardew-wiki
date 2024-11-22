@@ -73,49 +73,6 @@ pre {
 .modal-window, .modal-opener, .socials, img, .tooltip {
 	.cant_select;
 }
-	
-.panel-header {
-	align-items: center;
-	display: flex;
-	justify-content: space-between;
-	margin-bottom: @big-gap;
-}
-	
-.panel-title {
-	.data;
-}
-
-.panel {
-	background-clip: padding-box;
-	overflow-y: scroll;
-	scrollbar-width: none;
-	// 1000 -> Au dessus de tout / 998 Laisse le tooltip passer par dessus
-	z-index: 1000;
-}
-
-.absolute-panel {
-	.center-absolute;
-	.panel;
-	background-color: @stardew-bg;
-	border-image: url("../../medias/images/content/border_image.png") 15 stretch;
-	border-image-outset: 8px;
-	border-image-width: 10px;
-}
-
-.goal-panel {
-	.center-absolute;
-	.panel;
-	background-image: url("../../medias/images/content/adventurers_guild_background.png");
-    background-position: center;
-    background-repeat: no-repeat;
-	background-size: cover;
-    box-sizing: border-box;
-}
-
-.other-panel {
-	.center-absolute;
-	.panel;
-}
 
 // Data classes
 .data-info {
@@ -235,179 +192,6 @@ pre {
 	}
 }
 
-.modal_panel {
-	.absolute-panel;
-	color: @primary-fc;
-	font-family: @primary-ff;
-	font-size: @md-fs;
-	max-height: 80vh;
-	padding: @big-gap @big-gap;
-	position: fixed;
-}
-
-.upload-panel {
-	.modal_panel;
-	display: none;
-	min-width: 20vw;
-
-	& > span {
-		display: flex;
-		flex-direction: column;
-		gap: @big-gap;
-		justify-content: center;
-		width: fit-content;
-
-		& > span {
-			&:first-of-type {
-				align-items: center;
-				display: flex;
-				gap: @md-gap;
-			}
-		}
-	}
-
-	.section-title {
-		font-size: @big-fs;
-	}
-
-	#browse-files {
-		.button-elements;
-		.filled-element;
-		cursor: @pointer;
-		padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @ratio);
-	}
-
-	#save-upload {
-		display: none;
-	}
-}
-
-.settings-panel {
-	.modal_panel;
-	display: none;
-	min-width: 20vw;
-
-	.checkboxes {
-		display: flex;
-		flex-direction: column;
-		gap: @md-gap;
-		justify-content: center;
-
-		.checkbox {
-			align-items: flex-end;
-			display: flex;
-			gap: @md-gap;
-
-			input {
-				.checkbox-elements;
-			}
-		}
-	}
-}
-
-.feedback-panel {
-	.modal_panel;
-	min-width: 40vw;
-
-	span {
-		form {
-			align-items: flex-start;
-			display: flex;
-			gap: @big-gap;
-			flex-direction: column;
-
-			& > span {
-				&:first-of-type {
-					display: flex;
-					gap: @bigger-gap;
-					justify-content: space-between;
-					width: 100%;
-				}
-			}
-				
-			.label_and_input {
-				display: flex;
-				flex-direction: column;
-				gap: @small-gap;
-
-				&.full_width {
-					width: 100%;
-				}
-
-				&.stay_start {
-					align-items: flex-start;
-				}
-			
-				textarea {
-					resize: none;
-				}
-
-				&.mail_input {
-					flex-grow: 1;
-				}
-			}
-
-			.topic_selection {
-				display: flex;
-				justify-content: space-around;
-				
-				& > span {
-					align-items: center;
-					display: flex;
-					flex-basis: 33%;
-					flex-direction: column;
-					gap: @md-gap;
-				}
-
-				& img {
-					height: @big-icon;
-					object-fit: contain;
-					width: @big-icon;
-				}
-			}
-
-			input, textarea {
-				&:not(input[type=submit]) {
-					background-color: @stardew-bg;
-					border-bottom: solid 3px #965c3a;
-					border-left: solid 3px #965c3a;
-					border-radius: 2px;
-					border-right: solid 3px #5b2b2a;
-					border-top: solid 3px #5b2b2a;
-					box-shadow: inset -2px 2px 0 2px #dc7b05, -2px 2px 0 2px #cca36b;
-					font-family: @dialogue-ff;
-					padding: @small-gap @small-gap;
-					scrollbar-width: none;
-				}
-			}
-
-			input[type=submit] {
-				.button-elements;
-				.filled-element;
-				cursor: @pointer;
-				font-family: @primary-ff;
-				font-size: @big-fs;
-				margin: 0 auto;
-				padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @ratio);
-			}
-
-			input[type=number] {
-				appearance: textfield;
-				-moz-appearance: textfield;
-				
-				&::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
-					margin: 0;
-					-webkit-appearance: none;
-				}
-			}
-
-			input[type=radio] {
-				display: none;
-			}
-		}
-	}
-}
-
 // Easter eggs
 .fullscreen-image {
 	height: 100vh;
@@ -424,4 +208,14 @@ pre {
 
 .fullscreen-image.show {
     opacity: 1;
+}
+
+@keyframes rainbow {
+	0% { color: red; }
+	17% { color: orange; }
+	33% { color: yellow; }
+	50% { color: lime; }
+	67% { color: cyan; }
+	83% { color: violet; }
+	100% { color: purple; }
 }

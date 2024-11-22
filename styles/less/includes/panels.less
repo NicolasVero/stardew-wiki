@@ -1,0 +1,580 @@
+// out: false
+
+.small-panel {
+	min-width: 20vw;
+}
+
+.medium-panel {
+	min-width: 40vw;
+}
+
+.big-panel {
+	min-width: 60vw;
+}
+
+.large-panel {
+	max-height: 80vh;
+}
+
+.panel-header {
+	align-items: center;
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: @big-gap;
+}
+	
+.panel-title {
+	.data;
+}
+
+.invisible-panel {
+	display: none;
+}
+
+.panel {
+	.center-absolute;
+	background-clip: padding-box;
+	overflow-y: scroll;
+	position: fixed;
+	scrollbar-width: none;
+	// 1000 -> Au dessus de tout / 998 Laisse le tooltip passer par dessus
+	z-index: 1000;
+}
+
+.modal-panel {
+	.large-panel;
+	.panel-with-border;
+	color: @primary-fc;
+	font-family: @primary-ff;
+	font-size: @md-fs;
+	padding: @big-gap @big-gap;
+}
+
+.panel-with-border {
+	background-color: @stardew-bg;
+	border-image: url("../../medias/images/content/border_image.png") 15 stretch;
+	border-image-outset: 8px;
+	border-image-width: 10px;
+}
+
+.panel-with-background {
+	background-image: url("../../medias/images/content/adventurers_guild_background.png");
+    background-position: center;
+    background-repeat: no-repeat;
+	background-size: cover;
+    box-sizing: border-box;
+}
+
+.panel {
+	&.upload-panel {
+		.invisible-panel;
+		.modal-panel;
+		.small-panel;
+
+		& > span {
+			display: flex;
+			flex-direction: column;
+			gap: @big-gap;
+			justify-content: center;
+			width: fit-content;
+
+			& > span {
+				&:first-of-type {
+					align-items: center;
+					display: flex;
+					gap: @md-gap;
+				}
+			}
+		}
+
+		.section-title {
+			font-size: @big-fs;
+		}
+
+		#browse-files {
+			.button-elements;
+			.filled-element;
+			cursor: @pointer;
+			padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @ratio);
+		}
+
+		#save-upload {
+			display: none;
+		}
+	}
+
+	&.settings-panel {
+		.invisible-panel;
+		.modal-panel;
+		.small-panel;
+
+		.checkboxes {
+			display: flex;
+			flex-direction: column;
+			gap: @md-gap;
+			justify-content: center;
+
+			.checkbox {
+				align-items: flex-end;
+				display: flex;
+				gap: @md-gap;
+
+				input {
+					.checkbox-elements;
+				}
+			}
+		}
+	}
+
+	&.feedback-panel {
+		.medium-panel;
+		.modal-panel;
+
+		span {
+			form {
+				align-items: flex-start;
+				display: flex;
+				gap: @big-gap;
+				flex-direction: column;
+
+				& > span {
+					&:first-of-type {
+						display: flex;
+						gap: @bigger-gap;
+						justify-content: space-between;
+						width: 100%;
+					}
+				}
+					
+				.label_and_input {
+					display: flex;
+					flex-direction: column;
+					gap: @small-gap;
+
+					&.full_width {
+						width: 100%;
+					}
+
+					&.stay_start {
+						align-items: flex-start;
+					}
+				
+					textarea {
+						resize: none;
+					}
+
+					&.mail_input {
+						flex-grow: 1;
+					}
+				}
+
+				.topic_selection {
+					display: flex;
+					justify-content: space-around;
+					
+					& > span {
+						align-items: center;
+						display: flex;
+						flex-basis: 33%;
+						flex-direction: column;
+						gap: @md-gap;
+					}
+
+					& img {
+						height: @big-icon;
+						object-fit: contain;
+						width: @big-icon;
+					}
+				}
+
+				input, textarea {
+					&:not(input[type=submit]) {
+						background-color: @stardew-bg;
+						border-bottom: solid 3px #965c3a;
+						border-left: solid 3px #965c3a;
+						border-radius: 2px;
+						border-right: solid 3px #5b2b2a;
+						border-top: solid 3px #5b2b2a;
+						box-shadow: inset -2px 2px 0 2px #dc7b05, -2px 2px 0 2px #cca36b;
+						font-family: @dialogue-ff;
+						padding: @small-gap @small-gap;
+						scrollbar-width: none;
+					}
+				}
+
+				input[type=submit] {
+					.button-elements;
+					.filled-element;
+					cursor: @pointer;
+					font-family: @primary-ff;
+					font-size: @big-fs;
+					margin: 0 auto;
+					padding: (extract(@button-gaps, 1) * @ratio) (extract(@button-gaps, 2) * @ratio);
+				}
+
+				input[type=number] {
+					appearance: textfield;
+					-moz-appearance: textfield;
+					
+					&::-webkit-outer-spin-button, &::-webkit-inner-spin-button {
+						margin: 0;
+						-webkit-appearance: none;
+					}
+				}
+
+				input[type=radio] {
+					display: none;
+				}
+			}
+		}
+	}
+
+	&.quests-panel {
+		.invisible-panel;
+		.large-panel;
+		.medium-panel;
+		.panel-with-border;
+		color: @primary-fc;
+		font-family: @primary-ff;
+		font-size: @md-fs;
+		padding: @big-gap @big-gap;
+	
+		.section-title {
+			margin: 0;
+		}
+	
+		.quests {
+			display: flex;
+			flex-direction: column;
+			gap: @big-gap;
+			white-space: nowrap;
+	
+			.quest {
+				display: flex;
+				gap: @bigger-gap * 2;
+				justify-content: space-between;
+	
+				& > span {
+					gap: @small-gap;
+					justify-content: center;
+				}
+	
+				.quest-infos {
+					display: flex;
+					flex-direction: column;
+					width: 500px;
+	
+					.quest-description {
+						font-size: @big-fs;
+					}
+	
+					.quest-title {
+						font-style: italic;
+					}
+				}
+	
+				.days-left {
+					align-items: center;
+					display: flex;
+				}
+	
+				.quest-rewards {
+					display: flex;
+					gap: @big-gap;
+					justify-content: flex-end;
+					width: 100px;
+	
+					.quest-reward {
+						align-items: center;
+						display: flex;
+						gap: @xsmall-gap;
+					}
+				}
+	
+				img {
+					width: @small-icon;
+				}
+			}
+		}
+	
+		.section-title {
+			font-size: @big-fs;
+		}
+	}
+	
+	&.monster-eradication-goals-panel {
+		.big-panel;
+		.invisible-panel;
+		.panel-with-background;
+		aspect-ratio: 1.79;
+		background-image: url("../../medias/images/content/adventurers_guild_background.png");
+		color: @goal-fc;
+		font-family: @dialogue-ff;
+		font-size: @giant-fs;
+		padding: @big-gap @big-gap;
+	
+		& > * {
+			display: flex;
+			flex-direction: column;
+			gap: @md-gap;
+		}
+	
+		& > .header {
+			position: relative;
+	
+			& > .title {
+				display: flex;
+				flex-direction: column;
+				font-weight: 900;
+				letter-spacing: 3px;
+			}
+	
+			& > .dashes {
+				@dash-amount: 30;
+				@dash-gap: 3px;
+				@dash-width: 14px;
+				width: @dash-amount * @dash-width + (@dash-amount - 1) * @dash-gap;
+			}
+	
+			& > .exit {
+				position: absolute;
+				right: @md-gap;
+				top: @md-gap;
+				width: @big-icon;
+			}
+		}
+	
+		& > .goals {
+			margin-left: @md-gap + @small-gap;
+			margin-top: @md-gap;
+	
+			& > .goal {
+				align-items: center;
+				display: flex;
+				gap: @md-gap;
+	
+				& > *:not(.tooltip) {
+					font-weight: 900;
+					letter-spacing: 3px;
+				}
+	
+				& img.reward {
+					height: @big-icon;
+					object-fit: contain;
+					width: @big-icon;
+				}
+			}
+		}
+	}
+	
+	&.calendar-panel {
+		.invisible-panel;
+		@calendar-block: 64px * @calendar-ratio;
+		@calendar-border-width: 2px * @calendar-ratio;
+		@calendar-left-margin: 16px * @calendar-ratio;
+		@calendar-ratio: 2;
+		@calendar-real-width: 480px * @calendar-ratio;
+		@calendar-top-margin: 64px * @calendar-ratio;
+
+		aspect-ratio: 1.43;
+		width: (480px * 2);
+		
+		& > .calendar-block {
+			display: block;
+			height: 100%;
+			position: relative;
+			width: 100%;
+			
+			& > .absolute-exit {
+				position: absolute;
+				top: @big-gap;
+				right: @big-gap;
+				z-index: 1001;
+			}
+
+			& > .calendar-bg {
+				height: 100%;
+				position: absolute;
+				width: 100%;
+			}
+	
+			& > table {
+				border-collapse: collapse;
+				height: fit-content;
+				left: @calendar-left-margin + (@calendar-border-width / 2);
+				position: absolute;
+				top: @calendar-top-margin + (@calendar-border-width / 2);
+				width: fit-content;
+				
+				& > tbody > tr {
+					display: block;
+					height: @calendar-block;
+					width: fit-content;
+	
+					& > td {
+						box-sizing: border-box;
+						height: @calendar-block;
+						padding: 0;
+						text-align: center;
+						width: @calendar-block;
+	
+						&:hover {
+							border: solid 2px @calendar-bc;
+						}
+	
+						& > div {
+							height: 100%;
+							margin: 0 auto;
+							vertical-align: middle;
+	
+							& > a {
+								cursor: @pointer;
+								display: block;
+								height: 100%;
+								width: 100%;
+							}
+						}
+					}
+	
+					& > td.simple-event {
+						& > div {
+							display: block;
+							width: 100%;
+						}
+					}
+	
+					& > td.double-event {
+						& > div {
+							display: inline-block;
+							width: 45%;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+	&.all-animals-panel {
+		.invisible-panel;
+		height: 80vh;
+		padding: @md-gap @big-gap;
+	
+		& > .panel-header {
+			& > .section-title {
+				font-size: @big-fs;
+			}
+		}
+	
+		& > .friendlist {
+			display: flex;
+			flex-direction: column;
+	
+			& > span {
+				align-items: center;
+				display: flex;
+				gap: @bigger-gap;
+			}
+	
+			.animal-icon {
+				cursor: @help;
+				height: @bigger-icon;
+				object-fit: contain;
+				width: @giant-icon;
+			}
+	
+			.animal-name {
+				font-family: @primary-ff;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				width: 100px;
+			}
+	
+			.hearts-level {
+				display: flex;
+				flex-wrap: wrap;
+				gap: @small-gap;
+			
+				.hearts {
+					width: @small-icon;
+				}
+			}
+	
+			.interactions {
+				align-items: center;
+				display: flex;
+				gap: @big-gap;
+	
+				& > span {
+					display: flex;
+					gap: @md-gap;
+				}
+				
+				.interaction, .status {
+					width: @md-icon;
+				}
+			}
+	
+			.animal-status {
+				.data;
+				font-size: @md-fs;
+			}
+		}
+	}
+	
+	&.junimo-kart-leaderboard-panel {
+		.big-panel;
+		.invisible-panel;
+		.panel-with-background;
+		aspect-ratio: 2/1;
+		background-image: url("../../medias/images/content/junimo_leaderboard_bg.png");
+		min-height: 70vh;
+		padding: @md-gap @big-gap;
+
+		& > .leaderboard {
+			display: flex;
+			flex-direction: column;
+			gap: @giant-gap;
+
+			& > .absolute-exit {
+				position: absolute;
+				top: @big-gap;
+				right: @big-gap;
+			}
+			
+			& > .image-title {
+				margin: @bigger-gap auto 0 auto;
+				width: 50%;
+			}
+	
+			& > .scores {
+				display: flex;
+				flex-direction: column;
+				gap: @md-gap;
+				margin: 0 auto @bigger-gap auto;
+				width: 25%;
+	
+				& > .record-holder {
+					color: @third-fc;
+					display: flex;
+					font-family: @primary-ff;
+					font-size: @bigger-fs;
+					justify-content: space-between;
+					text-shadow: 3px 3px 3px @primary-fc;
+	
+					& > .record-holder-details {
+						display: flex;
+						gap: @md-gap;
+						
+						& > .record-holder-counter {
+							width: 33px;
+						}
+					}
+	
+					&.leader {
+						animation: rainbow 10s infinite linear;
+					}
+				}
+			}
+		}
+	}
+}
