@@ -6,3 +6,4 @@ export function get_site_root(): string {
         ? `${protocol}//localhost/travail/stardew_dashboard/` 
         : `${protocol}//stardew-dashboard.42web.io/`;
 }
+
