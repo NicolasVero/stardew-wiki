@@ -19,8 +19,9 @@ function toggle_checkboxes_actions() {
 			const function_name = checkbox_input.id;
 			const is_checked = checkbox_input.checked;
 
-			if(is_checked && typeof window[function_name] === "function")
-				window[function_name]();
+			if(is_checked && typeof window[function_name] === "function") {
+                window[function_name]();
+            }
 		}
 	});
 }
