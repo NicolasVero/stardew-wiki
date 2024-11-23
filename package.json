@@ -1,0 +1,18 @@
+{
+	"name": "stardew_dashboard",
+	"version": "1.0.0",
+	"description": "Some time ago, a friend and I created a website called \"Stardew Dashboard\" to help Stardew Valley players get a clear view of their in-game objectives, focusing on achievements. With Stardew Dashboard, you can easily track items to ship, fish to catch, enemies to defeat, and many other goals to keep your progress on track.\r > The dashboard url: https://stardew-dashboard.42web.io/",
+	"main": "index.js",
+	"scripts": {
+		"test": "echo \"Error: no test specified\" && exit 1",
+		"build": "tsc",
+		"watch": "tsc --watch"
+	},
+	"keywords": [],
+	"author": "",
+	"license": "ISC",
+	"devDependencies": {
+		"@types/node": "^22.9.3",
+		"typescript": "^5.7.2"
+	}
+}

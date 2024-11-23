@@ -1,0 +1,21 @@
+{
+    "compilerOptions": {
+        "target": "es6",
+        "lib": ["es2018", "dom"],
+        "module": "none",
+        "rootDir": "./scripts",
+        "outFile": "./scripts/javascript/scripts.js",
+        "strict": false,
+        "noImplicitAny": false,
+        "types": [],
+        "skipLibCheck": true,
+        "moduleResolution": "node"
+    },
+    "include": [
+        "scripts/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "scripts/js"
+    ]
+}
