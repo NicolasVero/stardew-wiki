@@ -228,10 +228,10 @@ function is_given_to_museum(int $item_id, object $general_data, int $museum_inde
 	return 0;
 }
 
-function get_museum_index(object $locations):int {
+function get_museum_index(object $general_data):int {
 	$index_museum = 0;
 
-	$locations = $locations->locations->GameLocation;
+	$locations = $general_data->locations->GameLocation;
 
 	foreach($locations as $location) {
 		if(isset($location->museumPieces)) {
@@ -580,4 +580,31 @@ function get_junimo_kart_fake_leaderboard():object {
 			]
 		]
 	];
+}
+
+function get_museum_pieces_coords(object $data):array {
+	$museum_index = get_museum_index($data);
+	$in_game_museum_pieces = $data->locations->GameLocation[$museum_index]->museumPieces;
+
+	foreach($in_game_museum_pieces->item as $museum_piece) {
+		$museum_piece_name = get_item_name_by_id((int) $museum_piece->value->string);
+		$museum_piece_details[$museum_piece_name] = [
+			"id" => (int) $museum_piece->value->string,
+			"type" => get_museum_piece_type($museum_piece_name),
+			"coords" => [
+				"X" => (int) $museum_piece->key->Vector2->X,
+				"Y" => (int) $museum_piece->key->Vector2->Y
+			]
+		];
+	}
+
+	usort($museum_piece_details, function($a, $b) {
+		return $a["coords"]["X"] <=> $b["coords"]["X"];
+	});
+	return $museum_piece_details;
+}
+
+function get_museum_piece_type(string $piece_name):string {
+	$artifacts = sanitize_json_with_version("artifacts", true);
+	return (in_array($piece_name, $artifacts)) ? "artifacts" : "minerals";
 }

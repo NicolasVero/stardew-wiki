@@ -198,17 +198,10 @@ function display_mobile_landing_page():string {
 function display_page():string {
     $structure = display_header();
     $structure .= "<main>";
+		$structure .= display_panels();
 
 		$structure .= display_general_stats();
-
-		// Modal panels
-		$structure .= display_friendships();
-		$structure .= display_quest_panel();
-		$structure .= display_monster_eradication_goals_panel();
-		$structure .= display_calendar_panel();
-		$structure .= display_farm_animals_panel();
-		$structure .= display_junimo_kart_panel();
-
+		
 		$structure .= "<div class='separated-galleries'>";
 			$structure .= "<div class='intra-gallery _50'>";
 				$structure .= display_skills();
