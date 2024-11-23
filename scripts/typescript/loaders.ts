@@ -80,6 +80,12 @@ function load_elements():void {
 			exit_button: `.exit-junimo-kart-leaderboard-${i}`,
 			modal_panel: `.junimo-kart-leaderboard-${i}`
 		});
+
+		buttons.push({
+            open_button: `.view-museum-${i}`,
+            exit_button: `.exit-museum-${i}`,
+            modal_panel: `.museum-${i}`
+        });
 	}
 
 	buttons.forEach(button => {

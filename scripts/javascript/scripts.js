@@ -404,6 +404,11 @@ function load_elements() {
             exit_button: `.exit-junimo-kart-leaderboard-${i}`,
             modal_panel: `.junimo-kart-leaderboard-${i}`
         });
+        buttons.push({
+            open_button: `.view-museum-${i}`,
+            exit_button: `.exit-museum-${i}`,
+            modal_panel: `.museum-${i}`
+        });
     }
     buttons.forEach(button => {
         activate_buttons(button.open_button, button.exit_button, button.modal_panel);
