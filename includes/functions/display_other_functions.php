@@ -141,7 +141,7 @@ function get_friendship_structure(array $friendship_info):string {
     $status = $friend["status"] ?? "Unknown";
     $can_be_married = in_array($name, $marriables_npc) && $status == "Friendly";
     $max_heart = ($status) == "Married" ? 14 : 10;
-    $is_found = ($status == "Unknown") ? "not-found" : "found";
+    $is_met = ($status == "Unknown") ? "not-met" : "met";
     
     $hearts_html = "";
 
@@ -158,7 +158,7 @@ function get_friendship_structure(array $friendship_info):string {
     return "
         <span>
             <a class='wiki_link' href='$wiki_url' target='_blank'>
-                <img src='$friend_icon' class='character-icon $is_newer_version $is_found' alt='$name icon'/>
+                <img src='$friend_icon' class='character-icon $is_newer_version $is_met' alt='$name icon'/>
             </a>
             <span class='character-name " . strtolower($name) . "'>$name</span>
             <span class='hearts-level'>$hearts_html</span>

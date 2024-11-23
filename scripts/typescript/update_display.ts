@@ -10,8 +10,14 @@ function update_section_visibility(section: HTMLElement, settings: Settings):voi
     const has_older_items = has_section_older_version_items(section);
 
     if(settings.toggle_versions && is_empty && !has_older_items) {
-        if(title) title.style.display = "none";
-        if(smaller_title) smaller_title.style.display = "none";
+        if(title) {
+            title.style.display = "none";
+        }
+
+        if(smaller_title) {
+            smaller_title.style.display = "none";
+        } 
+        
         return;
     }
 
@@ -24,9 +30,9 @@ function update_section_visibility(section: HTMLElement, settings: Settings):voi
             ? is_empty 
             : (settings.toggle_versions && is_empty && has_older_items);
 
-        smaller_title.style.display = should_show_smaller_title ? "block" : "none"; 
+        smaller_title.style.display = (should_show_smaller_title) ? "block" : "none"; 
     }
-};
+}
 
 function update_display(target_classes: string | string[]):void {
     const settings = get_settings();
