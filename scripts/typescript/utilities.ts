@@ -8,7 +8,7 @@ function get_site_root():string {
 }
 
 async function get_max_upload_size():Promise<number> {
-	return fetch("./../includes/functions/utility_functions.php?action=get_max_upload_size")
+	return fetch("./includes/functions/utility_functions.php?action=get_max_upload_size")
 		.then(response => response.json())
 		.then((data: { post_max_size: number }) => {
 			return data.post_max_size;

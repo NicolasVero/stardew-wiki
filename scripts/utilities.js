@@ -94,22 +94,22 @@ function initialize_tooltips() {
 	});
 }
 
-function initialize_player_swapper(players_count) {
-	const players_selection = document.getElementsByClassName("player_selection");
+// function initialize_player_swapper(players_count) {
+// 	const players_selection = document.getElementsByClassName("player_selection");
 
-	for(let i = 0; i < players_selection.length; i++) {
-		players_selection[i].addEventListener("click", () => {
-			swap_displayed_player(i % players_count);
-		});
-	}
-}
+// 	for(let i = 0; i < players_selection.length; i++) {
+// 		players_selection[i].addEventListener("click", () => {
+// 			swap_displayed_player(i % players_count);
+// 		});
+// 	}
+// }
 
-function swap_displayed_player(player_id) {
-	const players_display = document.getElementsByClassName("player_container");
+// function swap_displayed_player(player_id) {
+// 	const players_display = document.getElementsByClassName("player_container");
 
-	for(let i = 0; i < players_display.length; i++) 
-		players_display[i].style.display = (player_id != i) ? "none" : "block"; 
-}
+// 	for(let i = 0; i < players_display.length; i++) 
+// 		players_display[i].style.display = (player_id != i) ? "none" : "block"; 
+// }
 
 // async function get_max_upload_size() {
 // 	return fetch("./includes/functions/utility_functions.php?action=get_max_upload_size")
@@ -274,15 +274,15 @@ function save_landing_surheader() {
 	surheader = landing_menu.innerHTML;
 }
 
-function hide_all_sections(section_destroy = false) {
-	const sections = document.querySelectorAll(".modal-window");
-	sections.forEach(section => {
-		if(section.classList.contains("to-destroy") && section_destroy)
-			section.remove();
+// function hide_all_sections(section_destroy = false) {
+// 	const sections = document.querySelectorAll(".modal-window");
+// 	sections.forEach(section => {
+// 		if(section.classList.contains("to-destroy") && section_destroy)
+// 			section.remove();
 		
-		section.style.display = "none";
-	});
-}
+// 		section.style.display = "none";
+// 	});
+// }
 
 const get_parent_element = (element) => {
     if(!element) return null;
@@ -297,82 +297,82 @@ const set_element_display = (element, show) => {
 
 const has_class = (element, class_name) => element.classList.contains(class_name);
 
-function load_easter_eggs() {
-	easter_egg_kaaris();
-	easter_egg_characters();
-}
+// function load_easter_eggs() {
+// 	easter_egg_kaaris();
+// 	easter_egg_characters();
+// }
 
-function easter_egg_kaaris() {
-    let element = document.querySelector(".house");
-    element = Array.from(element.previousElementSibling.children).find(child => child.tagName === "IMG");
-	element.classList.add("easter_egg_kaaris");
-    if(!element) return;
+// function easter_egg_kaaris() {
+//     let element = document.querySelector(".house");
+//     element = Array.from(element.previousElementSibling.children).find(child => child.tagName === "IMG");
+// 	element.classList.add("easter_egg_kaaris");
+//     if(!element) return;
 
-    const audio = new Audio(get_site_root() + "medias/audio/kaaris_maison-citrouille.mp3");
-    let is_playing = false;
+//     const audio = new Audio(get_site_root() + "medias/audio/kaaris_maison-citrouille.mp3");
+//     let is_playing = false;
 
-    const play_once = () => {
-        if (!is_playing) {
-            is_playing = true;
-            audio.play().finally(() => {
-                is_playing = false;
-            });
-        }
-    };
+//     const play_once = () => {
+//         if (!is_playing) {
+//             is_playing = true;
+//             audio.play().finally(() => {
+//                 is_playing = false;
+//             });
+//         }
+//     };
 
-    element.addEventListener("dblclick", play_once);
-}
+//     element.addEventListener("dblclick", play_once);
+// }
 
-function easter_egg_characters() {
+// function easter_egg_characters() {
 
-	const characters = [
-		"abigail", "alex", "caroline", "clint", "demetrius", "elliott", "emily",
-		"evelyn", "george", "gus", "haley", "harvey", "jas", "jodi", "kent", "leah",
-		"lewis", "linus", "marnie", "maru", "pam", "penny", "pierre", "robin",
-		"sam", "sandy", "sebastian", "shane", "vincent", "willy", "wizard"
-	];
+// 	const characters = [
+// 		"abigail", "alex", "caroline", "clint", "demetrius", "elliott", "emily",
+// 		"evelyn", "george", "gus", "haley", "harvey", "jas", "jodi", "kent", "leah",
+// 		"lewis", "linus", "marnie", "maru", "pam", "penny", "pierre", "robin",
+// 		"sam", "sandy", "sebastian", "shane", "vincent", "willy", "wizard"
+// 	];
 	
-	const date = new Date(); 
-	const index_picker = [
-		new Date(date.getFullYear(), 0, 1).getTime(),
-		date.getUTCMonth(),
-		date.getUTCDate()
-	].reduce((acc, val) => acc * val, 1) % characters.length;
+// 	const date = new Date(); 
+// 	const index_picker = [
+// 		new Date(date.getFullYear(), 0, 1).getTime(),
+// 		date.getUTCMonth(),
+// 		date.getUTCDate()
+// 	].reduce((acc, val) => acc * val, 1) % characters.length;
 
-	const character = characters[index_picker];
-    const elements = document.querySelectorAll(".character-name." + character);
+// 	const character = characters[index_picker];
+//     const elements = document.querySelectorAll(".character-name." + character);
     
-	if(!elements) return;
+// 	if(!elements) return;
 
-    const audio = new Audio(get_site_root() + "medias/audio/trigger.mp3");
-    let is_playing = false;
+//     const audio = new Audio(get_site_root() + "medias/audio/trigger.mp3");
+//     let is_playing = false;
 
-    const play_once = () => {
-        if(!is_playing) {
-            is_playing = true;
+//     const play_once = () => {
+//         if(!is_playing) {
+//             is_playing = true;
 
-            const full_screen_image = document.createElement("img");
-            full_screen_image.src = `https://raw.githubusercontent.com/NicolasVero/stardew-dashboard/refs/heads/master/medias/images/characters/${character}.png`;
-            full_screen_image.classList.add("fullscreen-image");
-            document.body.appendChild(full_screen_image);
+//             const full_screen_image = document.createElement("img");
+//             full_screen_image.src = `https://raw.githubusercontent.com/NicolasVero/stardew-dashboard/refs/heads/master/medias/images/characters/${character}.png`;
+//             full_screen_image.classList.add("fullscreen-image");
+//             document.body.appendChild(full_screen_image);
 
-            full_screen_image.classList.add("show");
+//             full_screen_image.classList.add("show");
 
-            audio.play().finally(() => {
-                is_playing = false;
-            });
+//             audio.play().finally(() => {
+//                 is_playing = false;
+//             });
 
-            setTimeout(() => {
-                full_screen_image.classList.remove("show");
+//             setTimeout(() => {
+//                 full_screen_image.classList.remove("show");
                 
-                full_screen_image.addEventListener("transitionend", () => {
-                    full_screen_image.remove();
-                });
-            }, 1000);
-        }
-    };
+//                 full_screen_image.addEventListener("transitionend", () => {
+//                     full_screen_image.remove();
+//                 });
+//             }, 1000);
+//         }
+//     };
 
-    elements.forEach(element => {
-        element.addEventListener("dblclick", play_once);
-    });
-}
+//     elements.forEach(element => {
+//         element.addEventListener("dblclick", play_once);
+//     });
+// }

@@ -1,9 +1,10 @@
 {
     "compilerOptions": {
         "target": "es6",
+        "lib": ["es2018", "dom"],
         "module": "none",
         "rootDir": "./scripts",
-        "outFile": "./scripts/js/scripts.js",
+        "outFile": "./scripts/javascript/scripts.js",
         "strict": false,
         "noImplicitAny": false,
         "types": [],
