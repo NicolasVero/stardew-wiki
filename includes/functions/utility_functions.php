@@ -241,5 +241,54 @@ function is_a_mobile_device():bool {
 	);
 }
 
+function get_contributors():array {
+	return [
+		[
+			"name" => "Romain",
+			"icon" => "romain",
+			"texts" => [
+				"Romain is a hard-working web developer. He loves taking on challenges and always going the extra mile.",
+				"He took care of the Front-End, and helped Nicolas with the Back-End."
+			],
+			"socials" => [
+				"github" => [
+					"url" => "https://github.com/BreadyBred",
+					"on_display" => true
+				],
+				"linkedin" => [
+					"url" => "https://www.linkedin.com/in/romain-gerard/",
+					"on_display" => true
+				],
+				"website" => [
+					"url" => "https://romain-gerard.com/index.php",
+					"on_display" => false
+				]
+			]
+		],
+		[
+			"name" => "Nicolas",
+			"icon" => "nicolas",
+			"texts" => [
+				"Nicolas is a young man with a passion for development, sleep, and who loves to make web development during his weekends.",
+				"He took care of the Back-End of the website, as well as the UX / UI design."
+			],
+			"socials" => [
+				"github" => [
+					"url" => "https://github.com/NicolasVero",
+					"on_display" => true
+				],
+				"linkedin" => [
+					"url" => "https://www.linkedin.com/in/nicolas-vero/",
+					"on_display" => true
+				],
+				"website" => [
+					"url" => "https://nicolas-vero.fr/",
+					"on_display" => false
+				]
+			]
+		]
+	];
+}
+
 if(isset($_GET["action"]) && $_GET["action"] == "get_max_upload_size")
     echo get_php_max_upload_size();

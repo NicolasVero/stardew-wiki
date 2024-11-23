@@ -256,3 +256,58 @@ function display_weather_icon():string {
         </span>
     ";
 }
+
+function display_project_contributor(array $options):string {
+    extract($options);
+
+    $portrait =  get_images_folder() . "content/$icon.png";
+    $presentation = "";
+
+    foreach($texts as $text) {
+        $presentation .= "<span>$text</span>";
+    }
+
+    $socials_links = "";
+
+    foreach($socials as $social_name => $social) {
+        extract($social);
+        if($on_display) {
+            $socials_links .= "<a href='$url' target='_blank'><img src='" . get_images_folder() . "social/$social_name.png' alt='$social_name'/></a>";
+        }
+    }
+
+    return "
+        <span>
+            <img src='$portrait' class='character-image $icon' alt='$name'>
+            <span>
+                <span class='character-presentation'>
+                    $presentation
+                </span>
+                <span class='socials'>
+                    $socials_links
+                </span>
+            </span>
+        </span>
+
+    ";
+
+
+    // <span>
+    //     <img src='" . get_images_folder() ."content/romain.png' class='character-image romain' alt=''>
+    //     <span>
+    //         <span class='character-presentation'>
+    //             <span>
+    //                 Romain is a hard-working web developer. He loves taking on challenges and always going the extra mile. 
+    //             </span>
+    //             <span>
+    //                 He took care of the Front-End, and helped Nicolas with the Back-End.
+    //             </span>
+    //         </span>
+    //         <span class='socials'>
+    //             <a href='https://github.com/BreadyBred' target='_blank'><img src='" . get_images_folder() ."social/github.png' alt=''></a>
+    //             <a href='https://www.linkedin.com/in/romain-gerard/' target='_blank'><img src='" . get_images_folder() ."social/linkedin.png' alt=''></a>
+    //             <a href='https://www.linkedin.com/in/romain-gerard/' target='_blank'><img src='" . get_images_folder() ."social/linkedin.png' alt=''></a>
+    //         </span>
+    //     </span>
+    // </span>
+}

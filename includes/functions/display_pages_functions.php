@@ -9,6 +9,13 @@ function display_landing_page():string {
     $save_panel     = display_save_panel();
     $settings_panel = display_settings_panel();
 
+	$contributors_structure = "";
+	$contributors = get_contributors();
+
+	foreach($contributors as $contributor) {
+		$contributors_structure .= display_project_contributor($contributor);
+	}
+
     return "
         $sur_header
         $save_panel
@@ -86,40 +93,7 @@ function display_landing_page():string {
 							</span>
 						</span>
 						<span class='characters'>
-							<span>
-								<img src='" . get_images_folder() ."content/romain.png' class='character-image romain' alt=''>
-								<span>
-									<span class='character-presentation'>
-										<span>
-											Romain is a hard-working web developer. He loves taking on challenges and always going the extra mile. 
-										</span>
-										<span>
-											He took care of the Front-End, and helped Nicolas with the Back-End.
-										</span>
-									</span>
-									<span class='socials'>
-										<a href='https://github.com/BreadyBred' target='_blank'><img src='" . get_images_folder() ."social/github.png' alt=''></a>
-										<a href='https://www.linkedin.com/in/romain-gerard/' target='_blank'><img src='" . get_images_folder() ."social/linkedin.png' alt=''></a>
-									</span>
-								</span>
-							</span>
-							<span>
-								<img src='" . get_images_folder() ."content/nico.png' class='character-image nico' alt=''>
-								<span>
-									<span class='character-presentation'>
-										<span>
-											Nicolas is a young man with a passion for development, sleep, and who loves to make web development during his weekends. 
-										</span>
-										<span>
-											He took care of the Back-End of the website, as well as the UX / UI design.
-										</span>
-									</span>
-									<span class='socials'>
-										<a href='https://github.com/NicolasVero' target='_blank'><img src='" . get_images_folder() ."social/github.png' alt=''></a>
-										<a href='https://www.linkedin.com/in/nicolas-vero/' target='_blank'><img src='" . get_images_folder() ."social/linkedin.png' alt=''></a>
-									</span>
-								</span>
-							</span>
+							$contributors_structure
 						</span>
 					</section>
 				</main>
