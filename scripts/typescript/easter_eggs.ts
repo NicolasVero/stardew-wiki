@@ -28,7 +28,7 @@ function easter_egg_characters():void {
 	const audio: HTMLAudioElement = new Audio(get_site_root() + "medias/audio/trigger.mp3");
 	let is_playing: boolean = false;
 
-	const play_once = (): void => {
+	const play_once = ():void => {
 		if(!is_playing) {
 			is_playing = true;
 

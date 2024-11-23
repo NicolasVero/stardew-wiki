@@ -3,7 +3,7 @@ interface Settings {
     no_spoil: boolean;
 }
 
-const update_section_visibility = (section: HTMLElement, settings: Settings):void => {
+function update_section_visibility(section: HTMLElement, settings: Settings):void {
     const title = section.querySelector("h2");
     const smaller_title = section.children[1]?.querySelector("span .no-spoil-title") as HTMLElement;
     const is_empty = is_section_empty(section);
@@ -15,20 +15,20 @@ const update_section_visibility = (section: HTMLElement, settings: Settings):voi
         return;
     }
 
-    if(title) title.style.display = "block";
+    if(title) {   
+        title.style.display = "block";
+    }
 
     if(smaller_title) {
-        const should_show_smaller_title =
-            settings.no_spoil ? 
-                is_empty : 
-                (settings.toggle_versions && is_empty && has_older_items);
+        const should_show_smaller_title = (settings.no_spoil) 
+            ? is_empty 
+            : (settings.toggle_versions && is_empty && has_older_items);
 
-         smaller_title.style.display = should_show_smaller_title ? "block" : "none";
-        
+        smaller_title.style.display = should_show_smaller_title ? "block" : "none"; 
     }
 };
 
-const update_display = (target_classes: string | string[]):void => {
+function update_display(target_classes: string | string[]):void {
     const settings = get_settings();
 
     const update_elements = (class_name: string) => {

@@ -31,17 +31,17 @@ function in_bytes_conversion(size: string):number {
 }
 
 function toggle_scroll(can_scroll: boolean):void {
-    document.body.style.overflow = can_scroll ? "auto" : "hidden";
+    document.body.style.overflow = (can_scroll) ? "auto" : "hidden";
 }
 
 function toggle_loading(shown: boolean):void {
     const loadingStrip = document.getElementById("loading-strip");
     if(loadingStrip) {
-        loadingStrip.style.display = shown ? "block" : "none";
+        loadingStrip.style.display = (shown) ? "block" : "none";
     }
 }
 
-const get_parent_element = (element: HTMLElement | null): HTMLElement | null => {
+function get_parent_element(element: HTMLElement | null): HTMLElement | null {
     if(!element) {
         return null;
     }
@@ -50,28 +50,28 @@ const get_parent_element = (element: HTMLElement | null): HTMLElement | null => 
     return parent?.classList.contains("wiki_link") ? parent.parentElement : parent;
 };
 
-const set_element_display = (element: HTMLElement | null, show: boolean):void => {
+function set_element_display(element: HTMLElement | null, show: boolean):void {
     if(element) {
         element.style.display = show ? "flex" : "none";
     }
 };
 
-const has_class = (element: HTMLElement, class_name: string):boolean => {
+function has_class(element: HTMLElement, class_name: string):boolean {
     return element.classList.contains(class_name);
 };
 
-const is_section_empty = (section: HTMLElement):boolean => {
+function is_section_empty(section: HTMLElement):boolean {
     const spans = section.querySelectorAll(".tooltip") as NodeListOf<HTMLElement>;
     return Array.from(spans).every(span => span.style.display === "none");
 };
 
-const has_section_older_version_items = (section: HTMLElement):boolean => {
+function has_section_older_version_items (section: HTMLElement):boolean {
     return Array.from(section.querySelectorAll("img")).some((img: HTMLImageElement) => 
         has_class(img, "older-version")
     );
 };
 
-const should_show_element = (element, settings) => {
+function should_show_element(element, settings) {
     const is_newer = has_class(element, "newer-version");
     const is_not_found = has_class(element, "not-found");
     const should_keep_on_display = has_class(element, "always-on-display");

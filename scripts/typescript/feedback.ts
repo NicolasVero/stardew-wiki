@@ -29,22 +29,22 @@ function feedback_form_creation():void {
             "action": "display_feedback_panel"
         })
     })
-        .then(response => response.text())
-        .then(data => {
-            const temp_container = document.createElement("div");
-            temp_container.innerHTML = data;
+    .then(response => response.text())
+    .then(data => {
+        const temp_container = document.createElement("div");
+        temp_container.innerHTML = data;
 
-            while(temp_container.firstChild) {
-                xml_upload?.appendChild(temp_container.firstChild);
-            }
+        while(temp_container.firstChild) {
+            xml_upload?.appendChild(temp_container.firstChild);
+        }
 
-            current_section = document.querySelector(".feedback-panel");
+        current_section = document.querySelector(".feedback-panel");
 
-            feedback_custom_radio();
-            activate_feedback_form();
-            activate_close_buttons(".exit-feedback", ".feedback-panel");
-        })
-        .catch(error => console.error("Error:", error));
+        feedback_custom_radio();
+        activate_feedback_form();
+        activate_close_buttons(".exit-feedback", ".feedback-panel");
+    })
+    .catch(error => console.error("Error:", error));
 }
 
 // Feedback Form AJAX
@@ -59,15 +59,15 @@ function activate_feedback_form():void {
             method: "POST",
             body: formData
         })
-            .then(response => response.json())
-            .then((data: FeedbackResponse) => {
-                const alert_message = data.success ? data.message : "Error submitting form: " + data.message;
-                alert(alert_message);
-            })
-            .catch(error => {
-                console.error("Error:", error);
-                alert("An error occurred while submitting the form.");
-            });
+        .then(response => response.json())
+        .then((data: FeedbackResponse) => {
+            const alert_message = data.success ? data.message : "Error submitting form: " + data.message;
+            alert(alert_message);
+        })
+        .catch(error => {
+            console.error("Error:", error);
+            alert("An error occurred while submitting the form.");
+        });
     });
 }
 

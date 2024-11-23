@@ -9,7 +9,7 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 function file_choice(event) {
     const input = event.target;
-    const new_filename = input.files ? input.files[0].name.substring(0, 12) : '';
+    const new_filename = input.files ? input.files[0].name.substring(0, 12) : "";
     const filenameElement = document.getElementById("new-filename");
     if (filenameElement) {
         filenameElement.innerHTML = new_filename;
@@ -31,7 +31,7 @@ function AJAX_send() {
         const is_file_too_big = file.size > max_upload_size;
         const page_display = document.getElementById("display");
         const landing_menu = document.getElementById("landing_menu");
-        const landing_page = (_c = (_b = document.getElementById("landing_page")) === null || _b === void 0 ? void 0 : _b.outerHTML) !== null && _c !== void 0 ? _c : '';
+        const landing_page = (_c = (_b = document.getElementById("landing_page")) === null || _b === void 0 ? void 0 : _b.outerHTML) !== null && _c !== void 0 ? _c : "";
         if (landing_menu) {
             landing_menu.outerHTML = "";
         }
@@ -86,21 +86,21 @@ window.addEventListener("load", () => {
         }
     });
     document.addEventListener("click", hide_panels);
-    const toggleVersionsItemsMode = document.getElementById("toggle_versions_items_mode");
-    const noSpoilMode = document.getElementById("no_spoil_mode");
-    const spoilMode = document.getElementById("spoil_mode");
-    if (toggleVersionsItemsMode) {
-        toggleVersionsItemsMode.addEventListener("change", handle_toggle_versions_mode);
+    const toggle_versions_items_mode = document.getElementById("toggle_versions_items_mode");
+    const no_spoil_mode = document.getElementById("no_spoil_mode");
+    const spoil_mode = document.getElementById("spoil_mode");
+    if (toggle_versions_items_mode) {
+        toggle_versions_items_mode.addEventListener("change", handle_toggle_versions_mode);
     }
-    if (noSpoilMode) {
-        noSpoilMode.addEventListener("change", handle_no_spoil_mode);
+    if (no_spoil_mode) {
+        no_spoil_mode.addEventListener("change", handle_no_spoil_mode);
     }
-    if (spoilMode) {
-        spoilMode.addEventListener("change", handle_spoil_mode);
+    if (spoil_mode) {
+        spoil_mode.addEventListener("change", handle_spoil_mode);
     }
-    const saveUpload = document.getElementById("save-upload");
-    if (saveUpload) {
-        saveUpload.addEventListener("change", file_choice);
+    const save_upload = document.getElementById("save-upload");
+    if (save_upload) {
+        save_upload.addEventListener("change", file_choice);
     }
     save_landing_surheader();
     activate_buttons(".landing-upload", ".exit-upload", ".upload-panel");
@@ -108,18 +108,20 @@ window.addEventListener("load", () => {
     toggle_custom_checkboxes(".checkmark");
     activate_feedback_ajax_trigger();
 });
-const handle_no_spoil_mode = () => {
+function handle_no_spoil_mode() {
     const spoil_checkbox = document.getElementById("spoil_mode");
     const no_spoil_checkbox = document.getElementById("no_spoil_mode");
     if (no_spoil_checkbox && spoil_checkbox && no_spoil_checkbox.checked && spoil_checkbox.checked) {
         spoil_checkbox.checked = false;
     }
     update_display(["not-found", "found"]);
-};
-const handle_toggle_versions_mode = () => {
+}
+;
+function handle_toggle_versions_mode() {
     update_display("newer-version");
-};
-const handle_spoil_mode = () => {
+}
+;
+function handle_spoil_mode() {
     const no_spoil_checkbox = document.getElementById("no_spoil_mode");
     const spoil_checkbox = document.getElementById("spoil_mode");
     if (no_spoil_checkbox && spoil_checkbox) {
@@ -131,12 +133,14 @@ const handle_spoil_mode = () => {
             update_display(["found"]);
         }
     }
-};
-const initialize_settings = () => {
+}
+;
+function initialize_settings() {
     handle_toggle_versions_mode();
     handle_no_spoil_mode();
     handle_spoil_mode();
-};
+}
+;
 function toggle_custom_checkboxes(checkmark_class) {
     const checkmarks = document.querySelectorAll(checkmark_class);
     checkmarks.forEach((checkbox) => {
@@ -566,7 +570,7 @@ function on_images_loaded(callback) {
         callback();
     }
 }
-const update_section_visibility = (section, settings) => {
+function update_section_visibility(section, settings) {
     var _a;
     const title = section.querySelector("h2");
     const smaller_title = (_a = section.children[1]) === null || _a === void 0 ? void 0 : _a.querySelector("span .no-spoil-title");
@@ -579,16 +583,18 @@ const update_section_visibility = (section, settings) => {
             smaller_title.style.display = "none";
         return;
     }
-    if (title)
+    if (title) {
         title.style.display = "block";
+    }
     if (smaller_title) {
-        const should_show_smaller_title = settings.no_spoil ?
-            is_empty :
-            (settings.toggle_versions && is_empty && has_older_items);
+        const should_show_smaller_title = (settings.no_spoil)
+            ? is_empty
+            : (settings.toggle_versions && is_empty && has_older_items);
         smaller_title.style.display = should_show_smaller_title ? "block" : "none";
     }
-};
-const update_display = (target_classes) => {
+}
+;
+function update_display(target_classes) {
     const settings = get_settings();
     const update_elements = (class_name) => {
         const elements = document.getElementsByClassName(class_name);
@@ -607,7 +613,8 @@ const update_display = (target_classes) => {
     }
     const sections = document.getElementsByClassName("gallery");
     Array.from(sections).forEach((section) => update_section_visibility(section, settings));
-};
+}
+;
 function get_site_root() {
     const protocol = window.location.protocol;
     const host = window.location.host;
@@ -635,37 +642,42 @@ function in_bytes_conversion(size) {
     return value * Math.pow(1024, unit_to_power[unit]);
 }
 function toggle_scroll(can_scroll) {
-    document.body.style.overflow = can_scroll ? "auto" : "hidden";
+    document.body.style.overflow = (can_scroll) ? "auto" : "hidden";
 }
 function toggle_loading(shown) {
     const loadingStrip = document.getElementById("loading-strip");
     if (loadingStrip) {
-        loadingStrip.style.display = shown ? "block" : "none";
+        loadingStrip.style.display = (shown) ? "block" : "none";
     }
 }
-const get_parent_element = (element) => {
+function get_parent_element(element) {
     if (!element) {
         return null;
     }
     const parent = element.parentElement;
     return (parent === null || parent === void 0 ? void 0 : parent.classList.contains("wiki_link")) ? parent.parentElement : parent;
-};
-const set_element_display = (element, show) => {
+}
+;
+function set_element_display(element, show) {
     if (element) {
         element.style.display = show ? "flex" : "none";
     }
-};
-const has_class = (element, class_name) => {
+}
+;
+function has_class(element, class_name) {
     return element.classList.contains(class_name);
-};
-const is_section_empty = (section) => {
+}
+;
+function is_section_empty(section) {
     const spans = section.querySelectorAll(".tooltip");
     return Array.from(spans).every(span => span.style.display === "none");
-};
-const has_section_older_version_items = (section) => {
+}
+;
+function has_section_older_version_items(section) {
     return Array.from(section.querySelectorAll("img")).some((img) => has_class(img, "older-version"));
-};
-const should_show_element = (element, settings) => {
+}
+;
+function should_show_element(element, settings) {
     const is_newer = has_class(element, "newer-version");
     const is_not_found = has_class(element, "not-found");
     const should_keep_on_display = has_class(element, "always-on-display");
@@ -680,7 +692,8 @@ const should_show_element = (element, settings) => {
     if (settings.spoil && is_found)
         return false;
     return true;
-};
+}
+;
 function toggle_landing_page(display) {
     const landing_page = document.getElementById("landing_page");
     if (landing_page) {

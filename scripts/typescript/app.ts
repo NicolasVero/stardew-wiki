@@ -17,25 +17,25 @@ window.addEventListener("load", () => {
 
     document.addEventListener("click", hide_panels);
     
-    const toggleVersionsItemsMode = document.getElementById("toggle_versions_items_mode");
-    const noSpoilMode = document.getElementById("no_spoil_mode");
-    const spoilMode = document.getElementById("spoil_mode");
+    const toggle_versions_items_mode = document.getElementById("toggle_versions_items_mode");
+    const no_spoil_mode = document.getElementById("no_spoil_mode");
+    const spoil_mode = document.getElementById("spoil_mode");
     
-    if(toggleVersionsItemsMode) {
-        toggleVersionsItemsMode.addEventListener("change", handle_toggle_versions_mode);
+    if(toggle_versions_items_mode) {
+        toggle_versions_items_mode.addEventListener("change", handle_toggle_versions_mode);
     }
     
-    if(noSpoilMode) {
-        noSpoilMode.addEventListener("change", handle_no_spoil_mode);
+    if(no_spoil_mode) {
+        no_spoil_mode.addEventListener("change", handle_no_spoil_mode);
     }
 
-    if(spoilMode) {
-        spoilMode.addEventListener("change", handle_spoil_mode);
+    if(spoil_mode) {
+        spoil_mode.addEventListener("change", handle_spoil_mode);
     }
 
-    const saveUpload = document.getElementById("save-upload");
-    if(saveUpload) {
-        saveUpload.addEventListener("change", file_choice);
+    const save_upload = document.getElementById("save-upload");
+    if(save_upload) {
+        save_upload.addEventListener("change", file_choice);
     }
 
     save_landing_surheader();
@@ -50,7 +50,7 @@ window.addEventListener("load", () => {
 
 
 
-const handle_no_spoil_mode = () => {
+function handle_no_spoil_mode() {
     const spoil_checkbox = document.getElementById("spoil_mode") as HTMLInputElement;
     const no_spoil_checkbox = document.getElementById("no_spoil_mode") as HTMLInputElement;
 
@@ -61,11 +61,11 @@ const handle_no_spoil_mode = () => {
     update_display(["not-found", "found"]);
 };
 
-const handle_toggle_versions_mode = () => {
+function handle_toggle_versions_mode() {
     update_display("newer-version");
 };
 
-const handle_spoil_mode = () => {
+function handle_spoil_mode() {
     const no_spoil_checkbox = document.getElementById("no_spoil_mode") as HTMLInputElement;
     const spoil_checkbox = document.getElementById("spoil_mode") as HTMLInputElement;
 
@@ -79,7 +79,7 @@ const handle_spoil_mode = () => {
     }
 };
 
-const initialize_settings = () => {
+function initialize_settings() {
     handle_toggle_versions_mode();
     handle_no_spoil_mode();
     handle_spoil_mode();

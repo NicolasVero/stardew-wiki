@@ -45,6 +45,7 @@ body {
 					display: flex;
 					flex-wrap: wrap;
 					gap: @md-gap @bigger-gap;
+					margin-top: @md-gap;
 				}
 				
 				span {
@@ -54,7 +55,7 @@ body {
 				}
 				
 				img {
-					height: @big-icon;
+					height: @md-icon;
 					
 					&.icon {
 						cursor: @pointer;
@@ -63,7 +64,8 @@ body {
 
 						&.quest-icon {
 							right: 0;
-							top: 2px;
+							top: 3px;
+							height: 24px;
 						}
 
 						&.controller-icon {

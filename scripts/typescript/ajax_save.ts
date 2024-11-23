@@ -12,7 +12,7 @@ interface FeedbackResponse {
 
 function file_choice(event: Event):void {
     const input = event.target as HTMLInputElement;
-    const new_filename = input.files ? input.files[0].name.substring(0, 12) : '';
+    const new_filename = input.files ? input.files[0].name.substring(0, 12) : "";
     const filenameElement = document.getElementById("new-filename");
 
     if (filenameElement) {
@@ -37,7 +37,7 @@ async function AJAX_send():Promise<void> {
     const is_file_too_big = file.size > max_upload_size;
     const page_display = document.getElementById("display") as HTMLElement;
     const landing_menu = document.getElementById("landing_menu");
-    const landing_page = document.getElementById("landing_page")?.outerHTML ?? '';
+    const landing_page = document.getElementById("landing_page")?.outerHTML ?? "";
 
     if(landing_menu) {
         landing_menu.outerHTML = "";
