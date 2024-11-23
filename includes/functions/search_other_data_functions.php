@@ -587,9 +587,10 @@ function get_museum_pieces_coords(object $data):array {
 	$in_game_museum_pieces = $data->locations->GameLocation[$museum_index]->museumPieces;
 
 	foreach($in_game_museum_pieces->item as $museum_piece) {
-		$museum_piece_name = get_item_name_by_id((int) $museum_piece->value->string);
+		$museum_piece_id = (is_game_older_than_1_6()) ? (int) $museum_piece->value->int : (int) $museum_piece->value->string;
+		$museum_piece_name = get_item_name_by_id($museum_piece_id);
 		$museum_piece_details[$museum_piece_name] = [
-			"id" => (int) $museum_piece->value->string,
+			"id" => $museum_piece_id,
 			"type" => get_museum_piece_type($museum_piece_name),
 			"coords" => [
 				"X" => (int) $museum_piece->key->Vector2->X,
