@@ -1,14 +1,20 @@
 {
     "compilerOptions": {
-        "target": "ES2015",
-        "module": "amd",
-        "outFile": "./scripts/js/script.js",
+        "target": "es6",
+        "module": "none",
         "rootDir": "./scripts",
-        "strict": true,
-        "esModuleInterop": true,
+        "outFile": "./scripts/js/scripts.js",
+        "strict": false,
+        "noImplicitAny": false,
+        "types": [],
+        "skipLibCheck": true,
         "moduleResolution": "node"
     },
-    "files": [
-        "./scripts/app.ts"
+    "include": [
+        "scripts/**/*.ts"
+    ],
+    "exclude": [
+        "node_modules",
+        "scripts/js"
     ]
 }

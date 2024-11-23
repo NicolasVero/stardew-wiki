@@ -5,22 +5,22 @@
 // 	return (host === "localhost") ? `${protocol}//localhost/travail/stardew_dashboard/` : `${protocol}//stardew-dashboard.42web.io/`;
 // }
 
-function detect_os() {
-	const user_agent = window.navigator.userAgent.toLowerCase();
+// function detect_os() {
+// 	const user_agent = window.navigator.userAgent.toLowerCase();
 
-	if(user_agent.includes("mac"))   return "Mac";
-	if(user_agent.includes("linux")) return "Linux";
+// 	if(user_agent.includes("mac"))   return "Mac";
+// 	if(user_agent.includes("linux")) return "Linux";
 	
-	return "Windows";
-}
+// 	return "Windows";
+// }
 
-function get_os_path(os = "Windows") {
-	switch(os) {
-		case "Windows" : return "(%AppData%/StardewValley/Saves/SaveName).";
-		case "Mac"     : return "(~/.config/StardewValley/Saves/).";
-		case "Linux"   : return "(~/.steam/debian-installation/steamapps/compatdata/413150/pfx/drive_c/users/steamuser/AppData/Roaming/StardewValley/Saves/).";
-	}
-}
+// function get_os_path(os = "Windows") {
+// 	switch(os) {
+// 		case "Windows" : return "(%AppData%/StardewValley/Saves/SaveName).";
+// 		case "Mac"     : return "(~/.config/StardewValley/Saves/).";
+// 		case "Linux"   : return "(~/.steam/debian-installation/steamapps/compatdata/413150/pfx/drive_c/users/steamuser/AppData/Roaming/StardewValley/Saves/).";
+// 	}
+// }
 
 function file_choice(event) {
 	const new_filename = event.target.files[0].name.substring(0, 12);
@@ -111,13 +111,13 @@ function swap_displayed_player(player_id) {
 		players_display[i].style.display = (player_id != i) ? "none" : "block"; 
 }
 
-async function get_max_upload_size() {
-	return fetch("./includes/functions/utility_functions.php?action=get_max_upload_size")
-	.then(response => response.json())
-	.then(data => {
-		return data.post_max_size;
-	});
-}
+// async function get_max_upload_size() {
+// 	return fetch("./includes/functions/utility_functions.php?action=get_max_upload_size")
+// 	.then(response => response.json())
+// 	.then(data => {
+// 		return data.post_max_size;
+// 	});
+// }
 
 function toggle_scroll(can_scroll) {
 	document.body.style.overflow = (can_scroll) ? "auto" : "hidden";
