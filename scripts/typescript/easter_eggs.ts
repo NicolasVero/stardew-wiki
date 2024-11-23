@@ -21,7 +21,9 @@ function easter_egg_characters():void {
 	const character: string = characters[index_picker];
 	const elements: NodeListOf<Element> = document.querySelectorAll(".character-name." + character);
 
-	if(!elements.length) return;
+	if(!elements.length) {
+		return;
+	}
 
 	const audio: HTMLAudioElement = new Audio(get_site_root() + "medias/audio/trigger.mp3");
 	let is_playing: boolean = false;
@@ -59,13 +61,17 @@ function easter_egg_characters():void {
 function easter_egg_kaaris():void {
     let element: HTMLElement | null = document.querySelector(".house");
 
-    if(!element) return;
+    if(!element) {
+		return;
+	}
 
     element = Array.from(element.previousElementSibling?.children || []).find(
         (child) => child.tagName === "IMG"
     ) as HTMLElement | null;
 
-    if(!element) return;
+    if(!element) {
+		return;
+	}
 
     element.classList.add("easter_egg_kaaris");
 
@@ -73,7 +79,7 @@ function easter_egg_kaaris():void {
     let is_playing: boolean = false;
 
     const play_once = (): void => {
-        if (!is_playing) {
+        if(!is_playing) {
             is_playing = true;
             audio.play().finally(() => {
                 is_playing = false;

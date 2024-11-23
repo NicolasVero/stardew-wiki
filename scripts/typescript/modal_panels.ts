@@ -1,6 +1,6 @@
 let current_section: HTMLElement | null = null;
 
-function activate_buttons(show: string, hide: string, sections_to_show: string): void {
+function activate_buttons(show: string, hide: string, sections_to_show: string):void {
     const show_button: NodeListOf<HTMLElement> = document.querySelectorAll(show);
     const hide_button: NodeListOf<HTMLElement> = document.querySelectorAll(hide);
     const sections: HTMLElement | null = document.querySelector(sections_to_show);
@@ -23,7 +23,7 @@ function activate_buttons(show: string, hide: string, sections_to_show: string):
     });
 }
 
-function activate_close_buttons(hide: string, sections_to_hide: string): void {
+function activate_close_buttons(hide: string, sections_to_hide: string):void {
     const hide_button: NodeListOf<HTMLElement> = document.querySelectorAll(hide);
     const sections: HTMLElement | null = document.querySelector(sections_to_hide);
 
@@ -37,11 +37,11 @@ function activate_close_buttons(hide: string, sections_to_hide: string): void {
     });
 }
 
-function toggle_visibility(element: HTMLElement, should_display: boolean): void {
+function toggle_visibility(element: HTMLElement, should_display: boolean):void {
     element.style.display = should_display ? "block" : "none";
 }
 
-function hide_panels(event: MouseEvent = {} as MouseEvent): void {
+function hide_panels(event: MouseEvent = {} as MouseEvent):void {
     if(current_section && event.target instanceof HTMLElement && event.target !== current_section && !current_section.contains(event.target) && !event.target.classList.contains("modal-opener")) {
         if(current_section.classList.contains("feedback-panel")) {
             current_section.remove();
@@ -54,7 +54,7 @@ function hide_panels(event: MouseEvent = {} as MouseEvent): void {
     }
 }
 
-function hide_all_sections(section_destroy: boolean = false): void {
+function hide_all_sections(section_destroy: boolean = false):void {
 	const sections: NodeListOf<HTMLElement> = document.querySelectorAll(".modal-window");
 
 	sections.forEach((section) => {

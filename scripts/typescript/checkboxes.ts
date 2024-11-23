@@ -1,4 +1,4 @@
-function toggle_custom_checkboxes(checkmark_class: string): void {
+function toggle_custom_checkboxes(checkmark_class: string):void {
     const checkmarks: NodeListOf<HTMLElement> = document.querySelectorAll(checkmark_class);
 
     checkmarks.forEach((checkbox) => {
@@ -12,7 +12,7 @@ function toggle_custom_checkboxes(checkmark_class: string): void {
     });
 }
 
-function toggle_checkboxes_actions(): void {
+function toggle_checkboxes_actions():void {
     const checkboxes: NodeListOf<HTMLElement> = document.querySelectorAll(".checkbox");
 
     checkboxes.forEach((checkbox) => {

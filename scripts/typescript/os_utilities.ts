@@ -24,6 +24,6 @@ function detect_os():OS {
 	return OS.windows;
 }
 
-function get_os_path(os:OS = OS.windows):string {
+function get_os_path(os: OS = OS.windows):string {
 	return os_paths.get(os) || "";
 }

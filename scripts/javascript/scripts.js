@@ -7,6 +7,16 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+function file_choice(event) {
+    const input = event.target;
+    const new_filename = input.files ? input.files[0].name.substring(0, 12) : '';
+    const filenameElement = document.getElementById("new-filename");
+    if (filenameElement) {
+        filenameElement.innerHTML = new_filename;
+    }
+    toggle_loading(true);
+    AJAX_send();
+}
 // Upload File AJAX
 function AJAX_send() {
     return __awaiter(this, void 0, void 0, function* () {
@@ -53,7 +63,7 @@ function AJAX_send() {
                 }
                 else {
                     page_display.innerHTML += html["error_message"];
-                    loard_error_page_items();
+                    load_error_page_items();
                 }
                 activate_feedback_ajax_trigger();
                 toggle_visibility(current_section, false);
@@ -61,70 +71,6 @@ function AJAX_send() {
             }
         };
         xhr.send(form_data);
-    });
-}
-// Create feedback form
-function activate_feedback_ajax_trigger() {
-    const triggers = document.querySelectorAll(".feedback-opener");
-    triggers.forEach(trigger => {
-        trigger.addEventListener("click", () => {
-            hide_all_sections();
-            const existing_window = document.querySelector(".feedback-panel");
-            if (existing_window) {
-                toggle_visibility(existing_window, true);
-            }
-            else {
-                feedback_form_creation();
-            }
-        });
-    });
-}
-// Create feedback form
-function feedback_form_creation() {
-    const xml_upload = document.querySelector("body");
-    fetch("./includes/functions/display_panels_functions.php", {
-        method: "POST",
-        headers: {
-            "Content-Type": "application/x-www-form-urlencoded"
-        },
-        body: new URLSearchParams({
-            "action": "display_feedback_panel"
-        })
-    })
-        .then(response => response.text())
-        .then(data => {
-        // Eviter de reparser le body entièrement
-        const tempContainer = document.createElement("div");
-        tempContainer.innerHTML = data;
-        while (tempContainer.firstChild) {
-            xml_upload === null || xml_upload === void 0 ? void 0 : xml_upload.appendChild(tempContainer.firstChild);
-        }
-        current_section = document.querySelector(".feedback-panel");
-        feedback_custom_radio();
-        activate_feedback_form();
-        activate_close_buttons(".exit-feedback", ".feedback-panel");
-    })
-        .catch(error => console.error("Error:", error));
-}
-// Feedback Form AJAX
-function activate_feedback_form() {
-    const form = document.getElementById("feedback_form");
-    form === null || form === void 0 ? void 0 : form.addEventListener("submit", (event) => {
-        event.preventDefault();
-        const formData = new FormData(form);
-        fetch("./includes/sendmail.php", {
-            method: "POST",
-            body: formData
-        })
-            .then(response => response.json())
-            .then((data) => {
-            const alert_message = data.success ? data.message : "Error submitting form: " + data.message;
-            alert(alert_message);
-        })
-            .catch(error => {
-            console.error("Error:", error);
-            alert("An error occurred while submitting the form.");
-        });
     });
 }
 let surheader;
@@ -235,8 +181,9 @@ function easter_egg_characters() {
     ].reduce((acc, val) => acc * val, 1) % characters.length;
     const character = characters[index_picker];
     const elements = document.querySelectorAll(".character-name." + character);
-    if (!elements.length)
+    if (!elements.length) {
         return;
+    }
     const audio = new Audio(get_site_root() + "medias/audio/trigger.mp3");
     let is_playing = false;
     const play_once = () => {
@@ -265,11 +212,13 @@ function easter_egg_characters() {
 function easter_egg_kaaris() {
     var _a;
     let element = document.querySelector(".house");
-    if (!element)
+    if (!element) {
         return;
+    }
     element = Array.from(((_a = element.previousElementSibling) === null || _a === void 0 ? void 0 : _a.children) || []).find((child) => child.tagName === "IMG");
-    if (!element)
+    if (!element) {
         return;
+    }
     element.classList.add("easter_egg_kaaris");
     const audio = new Audio(get_site_root() + "medias/audio/kaaris_maison-citrouille.mp3");
     let is_playing = false;
@@ -282,6 +231,186 @@ function easter_egg_kaaris() {
         }
     };
     element.addEventListener("dblclick", play_once);
+}
+// Create feedback form
+function activate_feedback_ajax_trigger() {
+    const triggers = document.querySelectorAll(".feedback-opener");
+    triggers.forEach(trigger => {
+        trigger.addEventListener("click", () => {
+            hide_all_sections();
+            const existing_window = document.querySelector(".feedback-panel");
+            if (existing_window) {
+                toggle_visibility(existing_window, true);
+            }
+            else {
+                feedback_form_creation();
+            }
+        });
+    });
+}
+// Create feedback form
+function feedback_form_creation() {
+    const xml_upload = document.querySelector("body");
+    fetch("./includes/functions/display_panels_functions.php", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/x-www-form-urlencoded"
+        },
+        body: new URLSearchParams({
+            "action": "display_feedback_panel"
+        })
+    })
+        .then(response => response.text())
+        .then(data => {
+        const temp_container = document.createElement("div");
+        temp_container.innerHTML = data;
+        while (temp_container.firstChild) {
+            xml_upload === null || xml_upload === void 0 ? void 0 : xml_upload.appendChild(temp_container.firstChild);
+        }
+        current_section = document.querySelector(".feedback-panel");
+        feedback_custom_radio();
+        activate_feedback_form();
+        activate_close_buttons(".exit-feedback", ".feedback-panel");
+    })
+        .catch(error => console.error("Error:", error));
+}
+// Feedback Form AJAX
+function activate_feedback_form() {
+    const form = document.getElementById("feedback_form");
+    form === null || form === void 0 ? void 0 : form.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const formData = new FormData(form);
+        fetch("./includes/sendmail.php", {
+            method: "POST",
+            body: formData
+        })
+            .then(response => response.json())
+            .then((data) => {
+            const alert_message = data.success ? data.message : "Error submitting form: " + data.message;
+            alert(alert_message);
+        })
+            .catch(error => {
+            console.error("Error:", error);
+            alert("An error occurred while submitting the form.");
+        });
+    });
+}
+function feedback_custom_radio() {
+    const feedback_fake_radios = document.querySelectorAll(".feedback_custom_radio");
+    const feedback_real_radios = document.querySelectorAll(".feedback_real_radio");
+    feedback_fake_radios.forEach(fake_radio => {
+        const span_topic = fake_radio.parentElement;
+        span_topic.addEventListener("click", () => {
+            const real_radio = fake_radio.previousElementSibling;
+            if (real_radio && real_radio.type === "radio") {
+                real_radio.checked = true;
+                real_radio.dispatchEvent(new Event("change"));
+            }
+        });
+    });
+    feedback_real_radios.forEach(real_radio => {
+        real_radio.addEventListener("change", () => {
+            feedback_fake_radios.forEach(fake_radio => {
+                fake_radio.classList.add("topic_not_selected");
+            });
+            const fake_radio = real_radio.nextElementSibling;
+            if (fake_radio && fake_radio.tagName === "IMG") {
+                if (real_radio.checked) {
+                    fake_radio.classList.remove("topic_not_selected");
+                }
+                else {
+                    fake_radio.classList.add("topic_not_selected");
+                }
+            }
+        });
+    });
+}
+function load_error_page_items() {
+    const buttons = [
+        {
+            open_button: ".main-settings",
+            exit_button: ".exit-settings",
+            modal_panel: ".settings"
+        },
+        {
+            open_button: ".file-upload",
+            exit_button: ".exit-upload",
+            modal_panel: ".upload-panel"
+        }
+    ];
+    buttons.forEach(button => {
+        activate_buttons(button.open_button, button.exit_button, button.modal_panel);
+    });
+}
+function load_elements() {
+    var _a;
+    toggle_landing_page(false);
+    toggle_checkboxes_actions();
+    const buttons = [
+        {
+            open_button: ".landing-settings",
+            exit_button: ".exit-settings",
+            modal_panel: ".settings"
+        },
+        {
+            open_button: ".landing-upload",
+            exit_button: ".exit-upload",
+            modal_panel: ".upload-panel"
+        },
+        {
+            open_button: ".main-settings",
+            exit_button: ".exit-settings",
+            modal_panel: ".settings"
+        },
+        {
+            open_button: ".file-upload",
+            exit_button: ".exit-upload",
+            modal_panel: ".upload-panel"
+        }
+    ];
+    const max_players_in_a_save = 8;
+    for (let i = 0; i < max_players_in_a_save; i++) {
+        buttons.push({
+            open_button: `.view-all-friendships-${i}`,
+            exit_button: `.exit-all-friendships-${i}`,
+            modal_panel: `.all-friends-${i}`
+        });
+        buttons.push({
+            open_button: `.view-all-quests-${i}`,
+            exit_button: `.exit-all-quests-${i}`,
+            modal_panel: `.all-quests-${i}`
+        });
+        buttons.push({
+            open_button: `.view-monster-eradication-goals-${i}`,
+            exit_button: `.exit-monster-eradication-goals-${i}`,
+            modal_panel: `.monster-eradication-goals-${i}`
+        });
+        buttons.push({
+            open_button: `.view-calendar-${i}`,
+            exit_button: `.exit-calendar-${i}`,
+            modal_panel: `.calendar-${i}`
+        });
+        buttons.push({
+            open_button: `.view-all-animals-${i}`,
+            exit_button: `.exit-all-animals-${i}`,
+            modal_panel: `.all-animals-${i}`
+        });
+        buttons.push({
+            open_button: `.view-junimo-kart-leaderboard-${i}`,
+            exit_button: `.exit-junimo-kart-leaderboard-${i}`,
+            modal_panel: `.junimo-kart-leaderboard-${i}`
+        });
+    }
+    buttons.forEach(button => {
+        activate_buttons(button.open_button, button.exit_button, button.modal_panel);
+    });
+    (_a = document.getElementById("home-icon")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
+        var _a;
+        const display = (((_a = document.getElementById("landing_page")) === null || _a === void 0 ? void 0 : _a.style.display) === "none") ? true : false;
+        toggle_landing_page(display);
+    });
+    load_easter_eggs();
+    update_tooltips_after_ajax();
 }
 let current_section = null;
 function activate_buttons(show, hide, sections_to_show) {
@@ -382,175 +511,6 @@ const get_settings = () => ({
     toggle_versions: document.getElementById("toggle_versions_items_mode").checked,
     spoil: document.getElementById("spoil_mode").checked
 });
-const should_show_element = (element, settings) => {
-    const is_newer = has_class(element, "newer-version");
-    const is_not_found = has_class(element, "not-found");
-    const should_keep_on_display = has_class(element, "always-on-display");
-    const is_found = has_class(element, "found");
-    const is_not_hide = has_class(element, "not-hide");
-    if (is_not_hide)
-        return true;
-    if (settings.toggle_versions && is_newer)
-        return false;
-    if (settings.no_spoil && is_not_found && !should_keep_on_display)
-        return false;
-    if (settings.spoil && is_found)
-        return false;
-    return true;
-};
-const is_section_empty = (section) => {
-    const spans = section.querySelectorAll(".tooltip");
-    return Array.from(spans).every(span => span.style.display === "none");
-};
-const has_section_older_version_items = (section) => {
-    return Array.from(section.querySelectorAll("img")).some((img) => has_class(img, "older-version"));
-};
-function wiki_redirections() {
-    const links = document.querySelectorAll("a");
-    links.forEach((link) => {
-        link.addEventListener("click", (event) => {
-            const wikiRedirectionsCheckbox = document.getElementById("wiki_redirections");
-            if (!wikiRedirectionsCheckbox.checked) {
-                event.preventDefault();
-                event.stopImmediatePropagation();
-            }
-        });
-    });
-}
-function file_choice(event) {
-    const new_filename = event.target.files[0].name.substring(0, 12);
-    document.getElementById("new-filename").innerHTML = new_filename;
-    toggle_loading(true);
-    AJAX_send();
-}
-function toggle_landing_page(display) {
-    const landing_page = document.getElementById("landing_page");
-    if (landing_page)
-        landing_page.style.display = (display) ? "block" : "none";
-}
-function loard_error_page_items() {
-    const buttons = [
-        {
-            open_button: ".main-settings",
-            exit_button: ".exit-settings",
-            modal_panel: ".settings"
-        },
-        {
-            open_button: ".file-upload",
-            exit_button: ".exit-upload",
-            modal_panel: ".upload-panel"
-        }
-    ];
-    buttons.forEach(button => {
-        activate_buttons(button.open_button, button.exit_button, button.modal_panel);
-    });
-}
-function load_elements() {
-    var _a;
-    toggle_landing_page(false);
-    toggle_checkboxes_actions();
-    const buttons = [
-        {
-            open_button: ".landing-settings",
-            exit_button: ".exit-settings",
-            modal_panel: ".settings"
-        },
-        {
-            open_button: ".landing-upload",
-            exit_button: ".exit-upload",
-            modal_panel: ".upload-panel"
-        },
-        {
-            open_button: ".main-settings",
-            exit_button: ".exit-settings",
-            modal_panel: ".settings"
-        },
-        {
-            open_button: ".file-upload",
-            exit_button: ".exit-upload",
-            modal_panel: ".upload-panel"
-        }
-    ];
-    const max_players_in_a_save = 8;
-    for (let i = 0; i < max_players_in_a_save; i++) {
-        buttons.push({
-            open_button: `.view-all-friendships-${i}`,
-            exit_button: `.exit-all-friendships-${i}`,
-            modal_panel: `.all-friends-${i}`
-        });
-        buttons.push({
-            open_button: `.view-all-quests-${i}`,
-            exit_button: `.exit-all-quests-${i}`,
-            modal_panel: `.all-quests-${i}`
-        });
-        buttons.push({
-            open_button: `.view-monster-eradication-goals-${i}`,
-            exit_button: `.exit-monster-eradication-goals-${i}`,
-            modal_panel: `.monster-eradication-goals-${i}`
-        });
-        buttons.push({
-            open_button: `.view-calendar-${i}`,
-            exit_button: `.exit-calendar-${i}`,
-            modal_panel: `.calendar-${i}`
-        });
-        buttons.push({
-            open_button: `.view-all-animals-${i}`,
-            exit_button: `.exit-all-animals-${i}`,
-            modal_panel: `.all-animals-${i}`
-        });
-        buttons.push({
-            open_button: `.view-junimo-kart-leaderboard-${i}`,
-            exit_button: `.exit-junimo-kart-leaderboard-${i}`,
-            modal_panel: `.junimo-kart-leaderboard-${i}`
-        });
-    }
-    buttons.forEach(button => {
-        activate_buttons(button.open_button, button.exit_button, button.modal_panel);
-    });
-    (_a = document.getElementById("home-icon")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
-        var _a;
-        const display = (((_a = document.getElementById("landing_page")) === null || _a === void 0 ? void 0 : _a.style.display) === "none") ? true : false;
-        toggle_landing_page(display);
-    });
-    load_easter_eggs();
-    update_tooltips_after_ajax();
-}
-function feedback_custom_radio() {
-    const feedback_fake_radios = document.querySelectorAll(".feedback_custom_radio");
-    const feedback_real_radios = document.querySelectorAll(".feedback_real_radio");
-    feedback_fake_radios.forEach(fake_radio => {
-        const span_topic = fake_radio.parentElement;
-        span_topic.addEventListener("click", () => {
-            const real_radio = fake_radio.previousElementSibling;
-            if (real_radio && real_radio.type === "radio") {
-                real_radio.checked = true;
-                real_radio.dispatchEvent(new Event("change"));
-            }
-        });
-    });
-    feedback_real_radios.forEach(real_radio => {
-        real_radio.addEventListener("change", () => {
-            feedback_fake_radios.forEach(fake_radio => {
-                fake_radio.classList.add("topic_not_selected");
-            });
-            const fake_radio = real_radio.nextElementSibling;
-            if (fake_radio && fake_radio.tagName === "IMG") {
-                if (real_radio.checked) {
-                    fake_radio.classList.remove("topic_not_selected");
-                }
-                else {
-                    fake_radio.classList.add("topic_not_selected");
-                }
-            }
-        });
-    });
-}
-function save_landing_surheader() {
-    const landing_menu = document.getElementById("landing_menu");
-    if (landing_menu) {
-        const surheader = landing_menu.innerHTML;
-    }
-}
 function update_tooltips_after_ajax() {
     on_images_loaded(() => {
         initialize_tooltips();
@@ -684,10 +644,10 @@ function toggle_loading(shown) {
     }
 }
 const get_parent_element = (element) => {
-    if (!element)
+    if (!element) {
         return null;
+    }
     const parent = element.parentElement;
-    // Vérifie si le parent a la classe "wiki_link", dans ce cas on retourne le grand-parent
     return (parent === null || parent === void 0 ? void 0 : parent.classList.contains("wiki_link")) ? parent.parentElement : parent;
 };
 const set_element_display = (element, show) => {
@@ -698,3 +658,50 @@ const set_element_display = (element, show) => {
 const has_class = (element, class_name) => {
     return element.classList.contains(class_name);
 };
+const is_section_empty = (section) => {
+    const spans = section.querySelectorAll(".tooltip");
+    return Array.from(spans).every(span => span.style.display === "none");
+};
+const has_section_older_version_items = (section) => {
+    return Array.from(section.querySelectorAll("img")).some((img) => has_class(img, "older-version"));
+};
+const should_show_element = (element, settings) => {
+    const is_newer = has_class(element, "newer-version");
+    const is_not_found = has_class(element, "not-found");
+    const should_keep_on_display = has_class(element, "always-on-display");
+    const is_found = has_class(element, "found");
+    const is_not_hide = has_class(element, "not-hide");
+    if (is_not_hide)
+        return true;
+    if (settings.toggle_versions && is_newer)
+        return false;
+    if (settings.no_spoil && is_not_found && !should_keep_on_display)
+        return false;
+    if (settings.spoil && is_found)
+        return false;
+    return true;
+};
+function toggle_landing_page(display) {
+    const landing_page = document.getElementById("landing_page");
+    if (landing_page) {
+        landing_page.style.display = display ? "block" : "none";
+    }
+}
+function save_landing_surheader() {
+    const landing_menu = document.getElementById("landing_menu");
+    if (landing_menu) {
+        const surheader = landing_menu.innerHTML;
+    }
+}
+function wiki_redirections() {
+    const links = document.querySelectorAll("a");
+    links.forEach((link) => {
+        link.addEventListener("click", (event) => {
+            const wikiRedirectionsCheckbox = document.getElementById("wiki_redirections");
+            if (!wikiRedirectionsCheckbox.checked) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+            }
+        });
+    });
+}

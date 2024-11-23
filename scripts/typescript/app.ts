@@ -5,12 +5,12 @@ window.addEventListener("load", () => {
     const os_path: string = get_os_path(detect_os());
     const tag: HTMLElement | null = document.getElementById("save_os_path");
     
-    if (tag) {
+    if(tag) {
         tag.innerHTML = os_path;
     }
 
     document.addEventListener("keyup", (event: KeyboardEvent) => {
-        if (event.key === "Escape") {
+        if(event.key === "Escape") {
             hide_panels({} as MouseEvent);
         }
     });
@@ -21,20 +21,20 @@ window.addEventListener("load", () => {
     const noSpoilMode = document.getElementById("no_spoil_mode");
     const spoilMode = document.getElementById("spoil_mode");
     
-    if (toggleVersionsItemsMode) {
+    if(toggleVersionsItemsMode) {
         toggleVersionsItemsMode.addEventListener("change", handle_toggle_versions_mode);
     }
     
-    if (noSpoilMode) {
+    if(noSpoilMode) {
         noSpoilMode.addEventListener("change", handle_no_spoil_mode);
     }
 
-    if (spoilMode) {
+    if(spoilMode) {
         spoilMode.addEventListener("change", handle_spoil_mode);
     }
 
     const saveUpload = document.getElementById("save-upload");
-    if (saveUpload) {
+    if(saveUpload) {
         saveUpload.addEventListener("change", file_choice);
     }
 
@@ -54,7 +54,7 @@ const handle_no_spoil_mode = () => {
     const spoil_checkbox = document.getElementById("spoil_mode") as HTMLInputElement;
     const no_spoil_checkbox = document.getElementById("no_spoil_mode") as HTMLInputElement;
 
-    if (no_spoil_checkbox && spoil_checkbox && no_spoil_checkbox.checked && spoil_checkbox.checked) {
+    if(no_spoil_checkbox && spoil_checkbox && no_spoil_checkbox.checked && spoil_checkbox.checked) {
         spoil_checkbox.checked = false;
     }
 
@@ -69,8 +69,8 @@ const handle_spoil_mode = () => {
     const no_spoil_checkbox = document.getElementById("no_spoil_mode") as HTMLInputElement;
     const spoil_checkbox = document.getElementById("spoil_mode") as HTMLInputElement;
 
-    if (no_spoil_checkbox && spoil_checkbox) {
-        if (spoil_checkbox.checked && no_spoil_checkbox.checked) {
+    if(no_spoil_checkbox && spoil_checkbox) {
+        if(spoil_checkbox.checked && no_spoil_checkbox.checked) {
             no_spoil_checkbox.checked = false;
             update_display(["not-found", "found"]);
         } else {
