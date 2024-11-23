@@ -243,9 +243,7 @@ function display_calendar_panel():string {
     $week_count = 4;
     $day_count = 7;
 
-    $table_structure = "
-        <table>
-            <tbody>";
+    $table_structure = "";
 
     for($lines = 0; $lines < $week_count; $lines++) {
         $table_structure .= "<tr>";
@@ -289,16 +287,16 @@ function display_calendar_panel():string {
         $table_structure .= "</tr>";
     }
 
-    $table_structure .= "
-            </tbody>
-        </table>";
-
     return "
         <section class='panel calendar-panel calendar-$player_id modal-window'>
             <span class='calendar-block'>
                 <img src='{$images_path}icons/exit.png' class='absolute-exit exit exit-calendar-$player_id' alt=''/>
                 <img src='{$images_path}content/calendar_$season.png' alt='Calendar background' class='calendar-bg'>
-                $table_structure
+                <table>
+                    <tbody>
+                        $table_structure
+                    </tbody>
+                </table>
             </span>
         </section>
     ";
@@ -416,6 +414,72 @@ function display_junimo_kart_panel():string {
     ";
 
     return $structure;
+}
+
+function display_museum_panel():string {
+	$player_id = $GLOBALS["player_id"];
+    $museum_data = $GLOBALS["all_players_data"][$player_id]["museum_coords"];
+    $images_path = get_images_folder();
+    $column_start = 26;
+    $column_end = 49;
+    $column_breakpoints = [
+        27,
+        38
+    ];
+
+    $row_start = 5;
+    $row_end = 17;
+    $row_breakpoints = [
+        12
+    ];
+
+    $table_structure = "";
+
+    for($row_count = $row_start; $row_count < $row_end; $row_count++) {
+        $table_structure .= "<tr>";
+
+        for($column_count = $column_start; $column_count < $column_end; $column_count++) {
+            if(in_array($row_count, $row_breakpoints) || in_array($column_count, $column_breakpoints)) {
+                $table_structure .= "<td class='non-fillable-space'></td>";
+                continue;
+            }
+
+            $current_col = ($column_count - $column_start) + 1;
+            $current_row = ($row_count - $row_start) + 1;
+
+            $museum_piece = "";
+            foreach($museum_data as $piece_index => $piece_details) {
+                if($piece_details["coords"]["X"] == $column_count && $piece_details["coords"]["Y"] == $row_count) {
+                    $piece_filename = formate_text_for_file(get_item_name_by_id($piece_details["id"]));
+                    $piece_type = $piece_details["type"];
+                    $museum_piece = "<img src='{$images_path}{$piece_type}/{$piece_filename}.png' class='museum-piece' alt='$piece_filename'/>";
+
+                    unset($museum_data[$piece_index]);
+                }
+            }
+
+            $table_structure .= "
+                <td class='fillable-space col{$current_col} row{$current_row}'>
+                    $museum_piece
+                </td>
+            ";
+        }
+
+        $table_structure .= "</tr>";
+    }
+
+    return "
+        <section class='panel museum-panel museum-$player_id modal-window'>
+            <span class='museum-block'>
+                <img src='{$images_path}icons/exit.png' class='absolute-exit exit exit-museum-$player_id' alt=''/>
+                <table>
+                    <tbody>
+                        $table_structure
+                    </tbody>
+                </table>
+            </span>
+        </section>
+    ";
 }
 
 if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"]) && $_POST["action"] === "display_feedback_panel") {

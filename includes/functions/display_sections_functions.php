@@ -1,5 +1,16 @@
 <?php
 
+function display_panels():string {
+	$structure = display_friendships();
+	$structure .= display_quest_panel();
+	$structure .= display_monster_eradication_goals_panel();
+	$structure .= display_calendar_panel();
+	$structure .= display_farm_animals_panel();
+	$structure .= display_junimo_kart_panel();
+	$structure .= display_museum_panel();
+
+    return $structure;
+}
 // [] --> *icon, *value, tooltip, alt, label, wiki_link
 function display_stat(array $parameters):string {
     extract($parameters);
@@ -493,7 +504,11 @@ function display_minerals():string {
         "json_filename" => "minerals",
         "section_title" => "Minerals"
     ];
-    return display_detailled_gallery($gallery_details, "_50");
+    $panel_details = [
+        "panel_alt"     => "museum",
+        "panel_name"    => "museum pieces"
+    ];
+    return display_detailled_gallery($gallery_details, "_50", $panel_details);
 }
 
 function display_artifacts():string {
@@ -503,7 +518,11 @@ function display_artifacts():string {
         "json_filename" => "artifacts",
         "section_title" => "Artifacts"
     ];
-    return display_detailled_gallery($gallery_details, "_50");
+    $panel_details = [
+        "panel_alt"     => "museum",
+        "panel_name"    => "museum pieces"
+    ];
+    return display_detailled_gallery($gallery_details, "_50", $panel_details);
 }
 
 function display_enemies():string {

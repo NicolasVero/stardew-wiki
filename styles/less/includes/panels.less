@@ -31,6 +31,14 @@
 	display: none;
 }
 
+			
+.absolute-exit {
+	position: absolute;
+	top: @big-gap;
+	right: @big-gap;
+	z-index: 1001;
+}
+
 .panel {
 	.center-absolute;
 	background-clip: padding-box;
@@ -58,7 +66,6 @@
 }
 
 .panel-with-background {
-	background-image: url("../../medias/images/content/adventurers_guild_background.png");
     background-position: center;
     background-repeat: no-repeat;
 	background-size: cover;
@@ -307,7 +314,7 @@
 		.invisible-panel;
 		.panel-with-background;
 		aspect-ratio: 1.79;
-		background-image: url("../../medias/images/content/adventurers_guild_background.png");
+		background-image: url("../../medias/images/content/adventurers_guild_bg.png");
 		color: @goal-fc;
 		font-family: @dialogue-ff;
 		font-size: @giant-fs;
@@ -369,28 +376,21 @@
 	
 	&.calendar-panel {
 		.invisible-panel;
+		@calendar-ratio: 2;
 		@calendar-block: 64px * @calendar-ratio;
 		@calendar-border-width: 2px * @calendar-ratio;
 		@calendar-left-margin: 16px * @calendar-ratio;
-		@calendar-ratio: 2;
 		@calendar-real-width: 480px * @calendar-ratio;
 		@calendar-top-margin: 64px * @calendar-ratio;
 
 		aspect-ratio: 1.43;
-		width: (480px * 2);
+		width: @calendar-real-width;
 		
 		& > .calendar-block {
 			display: block;
 			height: 100%;
 			position: relative;
 			width: 100%;
-			
-			& > .absolute-exit {
-				position: absolute;
-				top: @big-gap;
-				right: @big-gap;
-				z-index: 1001;
-			}
 
 			& > .calendar-bg {
 				height: 100%;
@@ -525,6 +525,7 @@
 		.big-panel;
 		.invisible-panel;
 		.panel-with-background;
+		.panel-with-border;
 		aspect-ratio: 2/1;
 		background-image: url("../../medias/images/content/junimo_leaderboard_bg.png");
 		min-height: 70vh;
@@ -572,6 +573,59 @@
 	
 					&.leader {
 						animation: rainbow 10s infinite linear;
+					}
+				}
+			}
+		}
+	}
+
+	&.museum-panel {
+		.invisible-panel;
+		.panel-with-background;
+		.panel-with-border;
+		@museum-ratio: 1.5;
+		@museum-block: 31.75px * @museum-ratio;
+		@museum-left-margin: 14px * @museum-ratio;
+		@museum-real-width: 757px * @museum-ratio;
+		@museum-top-margin: 144px * @museum-ratio;
+		
+		aspect-ratio: 1.29;
+		background-image: url("../../medias/images/content/museum_bg.png");
+		width: @museum-real-width;
+
+		& > .museum-block {
+			display: block;
+			height: 100%;
+			position: relative;
+			width: 100%;
+	
+			& > table {
+				border-collapse: collapse;
+				height: fit-content;
+				left: @museum-left-margin;
+				position: absolute;
+				top: @museum-top-margin;
+				width: fit-content;
+				
+				& > tbody > tr {
+					display: block;
+					height: @museum-block;
+					width: fit-content;
+	
+					& > td {
+						box-sizing: border-box;
+						height: @museum-block;
+						padding: 0;
+						position: relative;
+						width: @museum-block;
+
+						& > .museum-piece {
+							margin: 0;
+							position: absolute;
+							left: 50%;
+							transform: translate(-50%, -50%);
+							width: @big-icon;
+						}
 					}
 				}
 			}
