@@ -700,3 +700,9 @@ function get_jumino_kart_leaderboard():array {
 
 	return $leaderboard;
 }
+
+function get_player_stardrops_found(int $player_stamina):int {
+	$min_stamina = 270;
+	$stamina_per_stardrop = 34;
+	return ($player_stamina - $min_stamina) / $stamina_per_stardrop;
+}

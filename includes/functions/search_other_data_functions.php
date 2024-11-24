@@ -518,8 +518,8 @@ function has_any_player_gotten_all_stardrops():bool {
 	$all_data = $GLOBALS["all_players_data"];
 
 	for($current_player = 0; $current_player < $total_players; $current_player++) {
-		$amount_elements = $all_data[$current_player]["general"]["max_stamina"];
-		if($amount_elements == 508) {
+		$stardrops_founds = $all_data[$current_player]["general"]["stardrops_found"];
+		if($stardrops_founds == 7) {
 			return true;
 		}
 	}

@@ -129,6 +129,7 @@ function get_aggregated_data(object $data):array {
             "qi_gems"               => (int) $data->qiGems,
             "casino_coins"          => (int) $data->clubCoins,
             "raccoons"              => (int) $general_data->timesFedRaccoons,
+            "stardrops_found"       => get_player_stardrops_found((int) $data->maxStamina)
         ],
         "levels" => [
             "farming_level"  => (int) $data->farmingLevel,
