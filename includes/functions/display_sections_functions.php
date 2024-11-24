@@ -177,7 +177,7 @@ function display_general_stats():string {
 			$quest_button
             <div>" .
                 display_stat([
-                    "icon" => "Energy", "label" => "max energy", "value" => $max_stamina, "wiki_link" => "Energy"
+                    "icon" => "Energy", "label" => "max energy", "value" => $max_stamina, "wiki_link" => "Energy", "tooltip" => "$stardrops_found / 7 stardrops found" 
                 ])
                 .
                 display_stat([
