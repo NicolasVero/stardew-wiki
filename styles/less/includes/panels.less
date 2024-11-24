@@ -376,12 +376,12 @@
 	
 	&.calendar-panel {
 		.invisible-panel;
-		@calendar-ratio: 2;
-		@calendar-block: 64px * @calendar-ratio;
-		@calendar-border-width: 2px * @calendar-ratio;
-		@calendar-left-margin: 16px * @calendar-ratio;
-		@calendar-real-width: 480px * @calendar-ratio;
-		@calendar-top-margin: 64px * @calendar-ratio;
+		@calendar-ratio: 1;
+		@calendar-block: 9.33vw * @calendar-ratio;
+		@calendar-border-width: 0.29vw * @calendar-ratio;
+		@calendar-left-margin: 2.33vw * @calendar-ratio;
+		@calendar-real-width: 70vw * @calendar-ratio;
+		@calendar-top-margin: 9.33vw * @calendar-ratio;
 
 		aspect-ratio: 1.43;
 		width: @calendar-real-width;
@@ -584,11 +584,11 @@
 		.invisible-panel;
 		.panel-with-background;
 		.panel-with-border;
-		@museum-ratio: 1.5;
-		@museum-block: 31.75px * @museum-ratio;
-		@museum-left-margin: 14px * @museum-ratio;
-		@museum-real-width: 757px * @museum-ratio;
-		@museum-top-margin: 144px * @museum-ratio;
+		@museum-ratio: 1;
+		@museum-block: 2.94vw * @museum-ratio;
+		@museum-left-margin: 1.29vw * @museum-ratio;
+		@museum-real-width: 70vw * @museum-ratio;
+		@museum-top-margin: 13.33vw * @museum-ratio;
 		
 		aspect-ratio: 1.29;
 		background-image: url("../../medias/images/content/museum_bg.png");
@@ -625,7 +625,7 @@
 							position: absolute;
 							left: 50%;
 							transform: translate(-50%, -50%);
-							width: @big-icon;
+							width: @md-icon;
 						}
 					}
 				}
