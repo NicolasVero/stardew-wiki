@@ -5,17 +5,18 @@
 		"112003" : "Cindersap Forest",
 		"112004" : "Greenhouse",
 		"112005" : "The Mountain",
-		"112006" : "The Sewers"
+		"112006" : "The Sewers",
+		"112007" : "Quarry"
 	},
 	"1.1.0" : {
-		"112007" : "Witch's Swamp"
+		"112008" : "Witch's Swamp"
 	},
 	"1.5.0" : {
-		"112008" : "Ginger Island",
-		"112009" : "Qi's Walnut Room",
-		"112010" : "The Summit"
+		"112009" : "Ginger Island",
+		"112010" : "Qi's Walnut Room",
+		"112011" : "The Summit"
 	},
 	"1.6.0" : {
-		"112011" : "Mastery Cave"
+		"112012" : "Mastery Cave"
 	}
 }
