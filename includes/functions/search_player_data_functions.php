@@ -705,3 +705,20 @@ function get_player_stardrops_found(int $player_stamina):int {
 	$stamina_per_stardrop = 34;
 	return ($player_stamina - $min_stamina) / $stamina_per_stardrop;
 }
+
+function get_player_visited_location(object $locations_visited):array {
+	$locations_to_visit = sanitize_json_with_version("locations_to_visit");
+	$player_visited_locations = [];
+
+	foreach($locations_visited->string as $location_visited) {
+		$location_name = (string) $location_visited;
+
+		if(in_array($location_name, $locations_to_visit)) {
+			$player_visited_locations[$location_name] = [
+				"id"      => get_custom_id($location_name)
+			];
+		}
+	}
+
+	return $player_visited_locations;
+}
