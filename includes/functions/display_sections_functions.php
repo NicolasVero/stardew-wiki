@@ -435,11 +435,24 @@ function display_detailled_gallery(array $gallery_details, string $width = "", a
                 $icon_name = formate_text_for_file(implode(" ", array_slice($line_name, 0, 2)));
                 $element_image = $images_path . "icons/$icon_name.png";
             }
-
+            
+            
             if(in_array($json_filename, ["locations_to_visit"])) {
+                log_($json_line_name);
                 $element_image = [
-                    "locations_to_visit" => "{$images_path}icons/none.png",
-                ][$json_filename];
+                    "casino"           => "{$images_path}icons/casino_coins.png",
+                    "calico_desert"    => "{$images_path}shipped_items/cactus_fruit.png",
+                    "cindersap_forest" => "{$images_path}shipped_items/fiber.png",
+                    "greenhouse"       => "{$images_path}crafting_recipes/quality_sprinkler.png",
+                    "the_mountain"     => "{$images_path}icons/mine_level.png",
+                    "the_sewers"       => "{$images_path}icons/trash.png",
+                    "witchs_swamp"     => "{$images_path}fish/void_salmon.png",
+                    "quarry"           => "{$images_path}crafting_recipes/bomb.png",
+                    "ginger_island"    => "{$images_path}shipped_items/ginger.png",
+                    "qis_walnut_room"  => "{$images_path}icons/qi_gems.png",
+                    "the_summit"       => "{$images_path}icons/stardrop.png",
+                    "mastery_cave"     => "{$images_path}skills/mastery.png",
+                ][formate_text_for_file($json_line_name)];
             }
 
             if(in_array($json_filename, ["achievements", "secret_notes"])) {
