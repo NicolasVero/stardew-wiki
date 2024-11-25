@@ -465,7 +465,6 @@ function get_player_cooking_recipes(object $recipes, object $recipes_cooked):arr
 					];
 					break;
 				}
-				
 			}
 
 			if(isset($cooking_recipes_data[$item_name])) {

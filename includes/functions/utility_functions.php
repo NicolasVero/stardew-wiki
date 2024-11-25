@@ -1,7 +1,7 @@
 <?php
 
-function log_(mixed $element, string $title = ""):void {
-    if($title != "") {
+function log_(mixed $element, string $title = null):void {
+    if($title !== null) {
 		echo "<h2>$title</h2>";
 	}
     
@@ -39,8 +39,9 @@ function load_all_json():void {
 		"wiki_links"
 	];
 
-	foreach($all_json as $json_file)
+	foreach($all_json as $json_file) {
 		$GLOBALS["json"][$json_file] = decode($json_file);
+	}
 }
 
 function get_site_root():string {
@@ -48,7 +49,8 @@ function get_site_root():string {
 		return "http://localhost/travail/stardew_dashboard/";
 	}
 	
-	return (!empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] !== "off") ? "https://stardew-dashboard.42web.io/" : "http://stardew-dashboard.42web.io/";
+	$protocol = (empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] === "off") ? "http" : "https";
+	return "$protocol://stardew-dashboard.42web.io/";
 }
 
 function get_json_folder():string {
@@ -97,7 +99,7 @@ function formate_number(int $number, string $lang = "en"):string {
 } 
 
 function formate_text_for_file(string $string):string {
-    $search =  [" ", "'", "(", ")", ",", ".", ":"];
+    $search  = [" ", "'", "(", ")", ",", ".", ":"];
     $replace = ["_", ""  , "" , "", "", "", ""   ];
     $string = str_replace($search, $replace, $string);
     $string = strtolower($string);
@@ -132,6 +134,7 @@ function formate_usernames(string $username):string {
 		"Ù" => "U", "Ú" => "U", "Û" => "U", "Ü" => "U",
 		"Ý" => "Y"
 	];
+
 	return strtr($username, $regex);
 }
 
@@ -290,5 +293,6 @@ function get_contributors():array {
 	];
 }
 
-if(isset($_GET["action"]) && $_GET["action"] == "get_max_upload_size")
-    echo get_php_max_upload_size();
+if(isset($_GET["action"]) && $_GET["action"] == "get_max_upload_size") {	
+	echo get_php_max_upload_size();
+}
