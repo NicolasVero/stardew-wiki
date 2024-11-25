@@ -390,7 +390,7 @@ function display_unlockables():string {
 function display_detailled_gallery(array $gallery_details, string $width = "", array $panel_details = []):string {
     extract($gallery_details);
 	$version_score = $GLOBALS["game_version_score"];
-	$images_path = get_images_folder() . "$json_filename/";
+	$images_path = get_images_folder();
     $json_data = $GLOBALS["json"][$json_filename];
 
     extract($panel_details);
@@ -429,11 +429,17 @@ function display_detailled_gallery(array $gallery_details, string $width = "", a
                 }
             }
 
-            $element_image = $images_path . formate_text_for_file((string) explode('µ', $json_line_name)[0]). ".png";
+            $element_image = $images_path . "$json_filename/" . formate_text_for_file((string) explode('µ', $json_line_name)[0]). ".png";
             if(in_array($json_filename, ["secret_notes"])) {
                 $line_name = explode(" ", $json_line_name);
                 $icon_name = formate_text_for_file(implode(" ", array_slice($line_name, 0, 2)));
-                $element_image = get_images_folder() . "icons/$icon_name.png";
+                $element_image = $images_path . "icons/$icon_name.png";
+            }
+
+            if(in_array($json_filename, ["locations_to_visit"])) {
+                $element_image = [
+                    "locations_to_visit" => "{$images_path}icons/none.png",
+                ][$json_filename];
             }
 
             if(in_array($json_filename, ["achievements", "secret_notes"])) {

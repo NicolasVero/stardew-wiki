@@ -195,9 +195,9 @@ function display_page():string {
 			$structure .= display_artifacts();
 			
 			$structure .= display_enemies();
-			$structure .= display_achievements();
-
 			$structure .= display_locations_visited();
+			
+			$structure .= display_achievements();
 			$structure .= display_secret_notes();
 
 			$structure .= display_shipped_items();
