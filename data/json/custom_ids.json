@@ -322,5 +322,17 @@
 	"111008" : "Pig",
 	"111009" : "Dinosaur",
 	"111010" : "Golden Chicken",
-    "111011" : "Ostrich"
+    "111011" : "Ostrich",
+
+	"112001" : "Casino",
+	"112002" : "The Calico Desert",
+	"112003" : "Cindersap Forest",
+	"112004" : "Greenhouse",
+	"112005" : "The Mountain",
+	"112006" : "The Sewers",
+	"112007" : "Witch's Swamp",
+	"112008" : "Ginger Island",
+	"112009" : "Qi's Walnut Room",
+	"112010" : "The Summit",
+	"112011" : "The Mastery Cave"
 }

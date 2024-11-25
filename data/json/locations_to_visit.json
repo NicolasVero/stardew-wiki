@@ -1,0 +1,21 @@
+{
+	"1.0.0" : {
+		"112001" : "Club",
+		"112002" : "Desert",
+		"112003" : "Forest",
+		"112004" : "Greenhouse",
+		"112005" : "Mountain",
+		"112006" : "Sewer"
+	},
+	"1.1.0" : {
+		"112007" : "WitchSwamp"
+	},
+	"1.5.0" : {
+		"112008" : "IslandSouth (première visite)",
+		"112009" : "QiNutRoom",
+		"112010" : "Summit"
+	},
+	"1.6.0" : {
+		"112011" : "MasteryCave"
+	}
+}
