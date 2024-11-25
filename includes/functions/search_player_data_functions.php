@@ -706,7 +706,7 @@ function get_player_stardrops_found(int $player_stamina):int {
 	return ($player_stamina - $min_stamina) / $stamina_per_stardrop;
 }
 
-function get_player_visited_location(object $player_data):array {
+function get_player_visited_locations(object $player_data):array {
 	$locations_to_visit = sanitize_json_with_version("locations_to_visit");
 	$player_visited_locations = [];
 	$locations_real_name = [
