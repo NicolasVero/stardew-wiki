@@ -5,11 +5,13 @@
 		"112003" : "Cindersap Forest",
 		"112004" : "Greenhouse",
 		"112005" : "The Mountain",
-		"112006" : "The Sewers",
-		"112007" : "Quarry"
+		"112006" : "The Sewers"
 	},
 	"1.1.0" : {
-		"112008" : "Witch's Swamp"
+		"112007" : "Witch's Swamp"
+	},
+	"1.4.0" : {
+		"112008" : "Quarry"
 	},
 	"1.5.0" : {
 		"112009" : "Ginger Island",
