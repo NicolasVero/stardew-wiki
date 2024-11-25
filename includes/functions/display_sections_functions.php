@@ -438,7 +438,6 @@ function display_detailled_gallery(array $gallery_details, string $width = "", a
             
             
             if(in_array($json_filename, ["locations_to_visit"])) {
-                log_($json_line_name);
                 $element_image = [
                     "casino"           => "{$images_path}icons/casino_coins.png",
                     "calico_desert"    => "{$images_path}shipped_items/cactus_fruit.png",
