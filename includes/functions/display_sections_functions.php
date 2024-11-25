@@ -592,3 +592,13 @@ function display_secret_notes():string {
     ];
     return display_detailled_gallery($gallery_details, "_50");
 }
+
+function display_locations_visited():string {
+    $data = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
+    $gallery_details = [
+        "player_data" => $data["locations_visited"],
+        "json_filename" => "locations_to_visit",
+        "section_title" => "Locations visited"
+    ];
+    return display_detailled_gallery($gallery_details, "_50");
+}

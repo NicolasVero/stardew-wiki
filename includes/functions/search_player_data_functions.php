@@ -709,13 +709,27 @@ function get_player_stardrops_found(int $player_stamina):int {
 function get_player_visited_location(object $locations_visited):array {
 	$locations_to_visit = sanitize_json_with_version("locations_to_visit");
 	$player_visited_locations = [];
+	$locations_real_name = [
+		"Club" => "Casino",
+		"Desert" => "Calico Desert",
+		"Forest" => "Cindersap Forest",
+		"Greenhouse" => "Greenhouse",
+		"Mountain" => "The Mountain",
+		"Sewer" => "The Sewers",
+		"WitchSwamp" => "Witch's Swamp",
+		"IslandSouth" => "Ginger Island",
+		"QiNutRoom" => "Qi's Walnut Room",
+		"Summit" => "The Summit",
+		"MasteryCave" => "Mastery Cave"
+	];
 
 	foreach($locations_visited->string as $location_visited) {
 		$location_name = (string) $location_visited;
+		$location_real_name = $locations_real_name[$location_name] ?? "";
 
-		if(in_array($location_name, $locations_to_visit)) {
-			$player_visited_locations[$location_name] = [
-				"id"      => get_custom_id($location_name)
+		if(in_array($location_real_name, $locations_to_visit)) {
+			$player_visited_locations[$location_real_name] = [
+				"id" => get_item_id_by_name($location_real_name)
 			];
 		}
 	}
