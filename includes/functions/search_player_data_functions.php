@@ -705,3 +705,46 @@ function get_player_stardrops_found(int $player_stamina):int {
 	$stamina_per_stardrop = 34;
 	return ($player_stamina - $min_stamina) / $stamina_per_stardrop;
 }
+
+function get_player_visited_location(object $player_data):array {
+	$locations_to_visit = sanitize_json_with_version("locations_to_visit");
+	$player_visited_locations = [];
+	$locations_real_name = [
+		"Club" => "Casino",
+		"Desert" => "Calico Desert",
+		"Forest" => "Cindersap Forest",
+		"Greenhouse" => "Greenhouse",
+		"Mountain" => "The Mountain",
+		"Sewer" => "The Sewers",
+		"WitchSwamp" => "Witch's Swamp",
+		"IslandSouth" => "Ginger Island",
+		"QiNutRoom" => "Qi's Walnut Room",
+		"Summit" => "The Summit",
+		"MasteryCave" => "Mastery Cave"
+	];
+
+	foreach($player_data->locationsVisited->string as $location_visited) {
+		$location_name = (string) $location_visited;
+		$location_real_name = $locations_real_name[$location_name] ?? "";
+
+		if(in_array($location_real_name, $locations_to_visit)) {
+			$player_visited_locations[$location_real_name] = [
+				"id" => get_item_id_by_name($location_real_name)
+			];
+		}
+	}
+
+	$additional_locations = [
+		"VisitedQuarryMine" => "Quarry"
+	];
+
+	foreach($additional_locations as $additional_location => $location_real_name) {
+		if(has_element($additional_location, $player_data)) {
+			$player_visited_locations[$location_real_name] = [
+				"id" => get_item_id_by_name($location_real_name)
+			];
+		}
+	}
+
+	return $player_visited_locations;
+}

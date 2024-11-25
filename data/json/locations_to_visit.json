@@ -1,0 +1,22 @@
+{
+	"1.0.0" : {
+		"112001" : "Casino",
+		"112002" : "Calico Desert",
+		"112003" : "Cindersap Forest",
+		"112004" : "Greenhouse",
+		"112005" : "The Mountain",
+		"112006" : "The Sewers",
+		"112007" : "Quarry"
+	},
+	"1.1.0" : {
+		"112008" : "Witch's Swamp"
+	},
+	"1.5.0" : {
+		"112009" : "Ginger Island",
+		"112010" : "Qi's Walnut Room",
+		"112011" : "The Summit"
+	},
+	"1.6.0" : {
+		"112012" : "Mastery Cave"
+	}
+}

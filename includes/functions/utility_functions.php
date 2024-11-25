@@ -24,6 +24,7 @@ function load_all_json():void {
 		"farm_animals",
 		"festivals",
 		"fish",
+		"locations_to_visit",
 		"marriables",
 		"masteries",
 		"minerals",
