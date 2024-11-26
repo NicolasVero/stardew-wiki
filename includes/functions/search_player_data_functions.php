@@ -712,9 +712,9 @@ function get_player_visited_locations(object $player_data):array {
 	$locations_real_name = [
 		"Club" => "Casino",
 		"Desert" => "Calico Desert",
-		"Forest" => "Cindersap Forest",
+		"SkullCave" => "Skull Cavern",
 		"Greenhouse" => "Greenhouse",
-		"Mountain" => "The Mountain",
+		"Woods" => "Secret Woods",
 		"Sewer" => "The Sewers",
 		"WitchSwamp" => "Witch's Swamp",
 		"IslandSouth" => "Ginger Island",
