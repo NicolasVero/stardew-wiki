@@ -1,11 +1,11 @@
 <?php 
 
-function display_landing_page():string {
+function display_landing_page(bool $with_surheader = true):string {
 	if(is_a_mobile_device()) {
 		return display_mobile_landing_page();
 	}
 
-	$sur_header     = display_sur_header(true, false);
+	$sur_header     = ($with_surheader) ? display_sur_header(true, false) : "";
     $save_panel     = display_save_panel();
     $settings_panel = display_settings_panel();
 
