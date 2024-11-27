@@ -11,6 +11,7 @@ function display_panels():string {
 
     return $structure;
 }
+
 // [] --> *icon, *value, tooltip, alt, label, wiki_link
 function display_stat(array $parameters):string {
     extract($parameters);

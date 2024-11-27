@@ -27,8 +27,12 @@ function load_save($save_file, $use_ajax = true):mixed {
             "code" => "success"
         ];
     } else {
-        $structure = display_save_panel();
-        $structure .= display_settings_panel();
+        $structure = display_landing_page(false);
+
+        foreach($pages as $page) {
+            $structure .= $page;
+        }
+        
         $structure .= "
             <script>
                 document.addEventListener('DOMContentLoaded', function() {
@@ -39,10 +43,6 @@ function load_save($save_file, $use_ajax = true):mixed {
                 });
             </script>
         ";
-
-        foreach($pages as $page) {
-            $structure .= $page;
-        }
 
         echo $structure;
     }
