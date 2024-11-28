@@ -610,9 +610,54 @@ function get_museum_piece_type(string $piece_name):string {
 	return (in_array($piece_name, $artifacts)) ? "artifacts" : "minerals";
 }
 
-function get_player_bundle_progress(object $bundle_data, object $bundle_progress):array {
+function get_player_bundle_progress(object $bundle_data, array $bundle_progress):array {
+	$host_untreated_data = $GLOBALS["untreated_all_players_data"]->player;
+	$cc_rooms = [
+        "Boiler Room" => "ccBoilerRoom",
+		"Crafts Room" => "ccCraftsRoom",
+		"Pantry" => "ccPantry", 
+        "Fish Tank" => "ccFishTank",
+		"Vault" => "ccVault",
+		"Bulletin Board" => "ccBulletin",
+		"Abandoned JojaMart" => "ccMovieTheater"
+    ];
+
+
 	$bundle_details = get_player_bundle_details($bundle_data);
-	return [];
+	$bundle_details["is_complete"] = false;
+	$bundle_details["items_added"] = [];
+
+	// Les bundles sont entièrement constitués de "true" si il a été complété SAUF pour les bundles de "Vault"
+	$is_bundle_completed = ($bundle_progress["room_name"] != "Vault") ?
+	(
+		!in_array("false", $bundle_progress["progress"], true)
+		||
+		has_element($cc_rooms[$bundle_progress["room_name"]], $host_untreated_data)
+	)
+	:
+	(
+		$bundle_progress["progress"][0] == "true"
+		||
+		has_element($cc_rooms[$bundle_progress["room_name"]], $host_untreated_data)
+	)
+	;
+
+	if(empty($bundle_details["limit"])) {
+		$bundle_details["limit"] = count($bundle_details["requirements"]);
+	}
+
+	if($is_bundle_completed) {
+		$bundle_details["is_complete"] = true;
+		return $bundle_details;
+	}
+
+	for($item_in_bundle = 0; $item_in_bundle < count($bundle_details["requirements"]); $item_in_bundle++) {
+		if($bundle_progress["progress"][$item_in_bundle] == "true") {
+			array_push($bundle_details["items_added"], $bundle_details["requirements"][$item_in_bundle]);
+		}
+	}
+
+	return $bundle_details;
 }
 
 function get_player_bundle_details(object $bundle_data):array {

@@ -307,6 +307,12 @@ function get_player_quest_log(object $data):array {
 			$days_left = (int) $item->daysLeft;
 			$rewards = [(int) $item->reward];
 			$target = $item->target;
+
+			$goal_name = "";
+			$keyword = "";
+			$keyword_ing = "";
+			$number_to_get = 0;
+			$number_obtained = 0;
 			
 			switch($quest_type) {
 
@@ -753,20 +759,11 @@ function get_player_bundles(object $general_data):array {
 	$bundles_index = get_gamelocation_index($general_data, "bundles");
 	$bundles_json = sanitize_json_with_version("bundles", true);
 	$bundles_data = $general_data->bundleData;
-	$bundles_progress = $general_data->locations->GameLocation[$bundles_index]->bundles;
-	
-	$cc_rooms = [
-        "Boiler Room" => "ccBoilerRoom",
-		"Crafts Room" => "ccCraftsRoom",
-		"Pantry" => "ccPantry", 
-        "Fish Tank" => "ccFishTank",
-		"Vault" => "ccVault",
-		"Bulletin Board" => "ccBulletin",
-		"Abandoned JojaMart" => "ccMovieTheater"
-    ];
+	$bundle_arrays = $general_data->locations->GameLocation[$bundles_index]->bundles;
 
-	foreach($bundles_progress->item as $bundle_progress) {
-		$bundle_id = (int) $bundle_progress->key->int;
+	foreach($bundle_arrays->item as $bundle_array) {
+		$bundle_id = (int) $bundle_array->key->int;
+		$bundle_booleans = (array) $bundle_array->value->ArrayOfBoolean->boolean;
 
 		foreach($bundles_json as $bundle_room_name => $bundle_room_details) {
 			if(!in_array($bundle_id, $bundle_room_details["bundle_ids"])) {
@@ -777,9 +774,14 @@ function get_player_bundles(object $general_data):array {
 		}
 
 		$bundle_data_name = "$bundle_room/$bundle_id";
+		$bundle_progress = [
+			"room_name" => $bundle_room,
+			"bundle_id" => $bundle_id,
+			"progress"  => $bundle_booleans
+		];
 
 		foreach($bundles_data->item as $bundle_data) {
-			if($bundle_data_name != (string) $bundle_data->key->string) {
+			if((string) $bundle_data->key->string != $bundle_data_name) {
 				continue;
 			}
 
@@ -787,5 +789,5 @@ function get_player_bundles(object $general_data):array {
 		}
 	}
 
-	return [];
+	return $player_bundles;
 }
