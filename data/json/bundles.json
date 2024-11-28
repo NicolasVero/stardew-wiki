@@ -1,0 +1,87 @@
+{
+    "1.0.0" : {
+        "Pantry" : {
+            "bundle_ids" : [
+                0,
+                1,
+                2,
+                3,
+                4,
+                5
+            ],
+            "reward" : {
+                "item_name" : "Greenhouse"
+            }
+        },
+        "Fish Tank" : {
+            "bundle_ids" : [
+                6,
+                7,
+                8,
+                9,
+                10,
+                11           
+            ],
+            "reward" : {
+                "item_name" : "Glittering Boulder Removed"
+            }
+        },
+        "Crafts Room" : {
+            "bundle_ids" : [
+                13,
+                14,
+                15,
+                16,
+                17,
+                18,
+                19
+            ],
+            "reward" : {
+                "item_name" : "Bridge Repair"
+            }
+        },
+        "Boiler Room" : {
+            "bundle_ids" : [
+                20,
+                21,
+                22
+            ],
+            "reward" : {
+                "item_name" : "Minecarts Repaired"
+            }
+        },
+        "Vault" : {
+            "bundle_ids" : [
+                23,
+                24,
+                25,
+                26
+            ],
+            "reward" : {
+                "item_name" : "Bus Repair"
+            }
+        },
+        "Bulletin Board" : {
+            "bundle_ids" : [
+                31,
+                32,
+                33,
+                34,
+                35
+            ],
+            "reward" : {
+                "item_name" : "Friendship ♡"
+            }
+        }
+    },
+    "1.4.0" : {
+        "Abandoned JojaMart" : {
+            "bundle_ids" : [
+                36
+            ],
+            "reward" : {
+                "item_name" : "Movie Theater"
+            }
+        }
+    }
+}

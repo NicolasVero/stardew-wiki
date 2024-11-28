@@ -279,12 +279,13 @@
 	"108140" : "Blue Grass Starter",
 	"108141" : "Mystic Tree Seed",
 	"108142" : "Sonar Bobber",
-	"108143" : "Deluxe Bait",
+	"108143" : "DeluxeBait",
 	"108144" : "Treasure Totem",
 	"108145" : "Heavy Furnace",
 	"108146" : "Fish Smoker",
 	"108147" : "Dehydrator",
 	"108148" : "Bait Maker",
+	"108149" : "Heater",
 
 	"109001" : "Egg Festival",
 	"109002" : "Flower Dance",
@@ -335,5 +336,8 @@
 	"112009" : "Ginger Island",
 	"112010" : "Qi's Walnut Room",
 	"112011" : "The Summit",
-	"112012" : "Mastery Cave"
+	"112012" : "Mastery Cave",
+
+    "113001" : "PrizeTicket",
+    "113002" : "MysteryBox"
 }

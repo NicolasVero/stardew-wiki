@@ -497,7 +497,7 @@ function get_player_artifacts(object $artifacts, object $general_data):array {
 		get_correct_id($artifact_id);
 
 		$artifacts_reference = find_reference_in_json($artifact_id, "artifacts");
-		$museum_index = get_museum_index($general_data);
+		$museum_index = get_gamelocation_index($general_data, "museumPieces");
 
 		if(!empty($artifacts_reference)) {
 			$artifacts_data[$artifacts_reference] = [
@@ -527,7 +527,7 @@ function get_player_minerals(object $minerals, object $general_data):array {
 		
 		$minerals_reference = find_reference_in_json($mineral_id, "minerals");
 		
-		$museum_index = get_museum_index($general_data);
+		$museum_index = get_gamelocation_index($general_data, "museumPieces");
 
 		if(!empty($minerals_reference)) {
 			$minerals_data[$minerals_reference] = [
@@ -747,4 +747,109 @@ function get_player_visited_locations(object $player_data):array {
 	}
 
 	return $player_visited_locations;
+}
+
+function get_player_bundles(object $general_data):array {
+	$bundles_index = get_gamelocation_index($general_data, "bundles");
+	$bundles_json = sanitize_json_with_version("bundles", true);
+	$bundles_data = $general_data->bundleData;
+	$bundles_progress = $general_data->locations->GameLocation[$bundles_index]->bundles;
+	
+	$cc_rooms = [
+        "Boiler Room" => "ccBoilerRoom",
+		"Crafts Room" => "ccCraftsRoom",
+		"Pantry" => "ccPantry", 
+        "Fish Tank" => "ccFishTank",
+		"Vault" => "ccVault",
+		"Bulletin Board" => "ccBulletin",
+		"Abandoned JojaMart" => "ccMovieTheater"
+    ];
+
+	foreach($bundles_progress->item as $bundle_progress) {
+		$bundle_id = (int) $bundle_progress->key->int;
+
+		foreach($bundles_json as $bundle_room_name => $bundle_room_details) {
+			if(!in_array($bundle_id, $bundle_room_details["bundle_ids"])) {
+				continue;
+			}
+
+			$bundle_room = $bundle_room_name;
+		}
+
+		$bundle_data_name = "$bundle_room/$bundle_id";
+
+		foreach($bundles_data->item as $bundle_data) {
+			if($bundle_data_name != (string) $bundle_data->key->string) {
+				continue;
+			}
+
+			$player_bundles[$bundle_data_name] = get_player_bundle_progress($bundle_data, $bundle_progress);
+		}
+	}
+
+	return [];
+}
+
+function get_player_bundle_progress(object $bundle_data, object $bundle_progress):array {
+	$bundle_details = get_player_bundle_details($bundle_data);
+	return [];
+}
+
+function get_player_bundle_details(object $bundle_data):array {
+	$formatted_bundle = explode("/", (string) $bundle_data->value->string);
+	$bundle_name = $formatted_bundle[0];
+	log_($bundle_name);
+	$bundle_reward = get_bundle_reward($formatted_bundle[1]);
+	$bundle_requirements = get_bundle_requirements($formatted_bundle[2]);
+	$bundle_limit = $formatted_bundle[4];
+	
+	$bundle_details = [
+		"name" => $bundle_name,
+		"requirements" => $bundle_requirements,
+		"limit" => $bundle_limit,
+		"reward" => $bundle_reward
+	];
+	log_($bundle_details);
+
+	return $bundle_details;
+}
+
+function get_bundle_requirements(string $requirements):array {
+	$formatted_requirements = array_chunk(preg_split('/\s+/', $requirements), 3);
+	$bundle_requirements = [];
+	foreach($formatted_requirements as $item) {
+		get_correct_id($item[0]);
+		$item[0] = abs($item[0]);
+		$item_name = ($item[0] == 1) ? "Gold Coins" : get_item_name_by_id($item[0]);
+
+		$bundle_requirement_item = [
+			"id" => $item[0],
+			"name" => $item_name,
+			"quantity" => $item[1],
+			"quality" => $item[2],
+		];
+
+		array_push($bundle_requirements, $bundle_requirement_item);
+	}
+
+	return $bundle_requirements;
+}
+
+function get_bundle_reward(string $reward):array {
+	$big_objects_json = $GLOBALS["json"]["big_objects"];
+	$formatted_reward = explode(" ", $reward);
+
+	$reward_type = $formatted_reward[0];
+	log_($formatted_reward);
+	get_correct_id($formatted_reward[1]);
+	$reward_id = ($reward_type != "BO") ? $formatted_reward[1] : get_custom_id($big_objects_json[$formatted_reward[1]]);
+
+	$bundle_reward = [
+		"type" => $reward_type,
+		"id" => $reward_id,
+		"name" => "",
+		"quantity" => $formatted_reward[2]
+	];
+
+	return $bundle_reward;
 }

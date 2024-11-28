@@ -228,19 +228,18 @@ function is_given_to_museum(int $item_id, object $general_data, int $museum_inde
 	return 0;
 }
 
-function get_museum_index(object $general_data):int {
-	$index_museum = 0;
-
+function get_gamelocation_index(object $general_data, string $searched_location):int {
+	$index = 0;
 	$locations = $general_data->locations->GameLocation;
 
 	foreach($locations as $location) {
-		if(isset($location->museumPieces)) {
+		if(isset($location->$searched_location)) {
 			break;
 		}
-		$index_museum++;
+		$index++;
 	}
 
-	return $index_museum;
+	return $index;
 }
 
 function get_farmer_level():string {
@@ -583,8 +582,9 @@ function get_junimo_kart_fake_leaderboard():object {
 }
 
 function get_museum_pieces_coords(object $data):array {
-	$museum_index = get_museum_index($data);
+	$museum_index = get_gamelocation_index($data, "museumPieces");
 	$in_game_museum_pieces = $data->locations->GameLocation[$museum_index]->museumPieces;
+	$museum_piece_details = [];
 
 	foreach($in_game_museum_pieces->item as $museum_piece) {
 		$museum_piece_id = (is_game_older_than_1_6()) ? (int) $museum_piece->value->int : (int) $museum_piece->value->string;

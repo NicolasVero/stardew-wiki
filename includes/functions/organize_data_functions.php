@@ -172,6 +172,7 @@ function get_aggregated_data(object $data):array {
         "secret_notes"      => get_player_secret_notes($data->secretNotesSeen),
         "jumino_kart"       => get_jumino_kart_leaderboard(),
         "museum_coords"     => get_museum_pieces_coords($general_data),
-        "locations_visited" => get_player_visited_locations($data)
+        "locations_visited" => get_player_visited_locations($data),
+        "cc_bundles"        => get_player_bundles($general_data)
     ];
 }
