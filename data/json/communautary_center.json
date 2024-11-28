@@ -1,274 +1,9 @@
 {
     "1.0.0" : {
-        "Crafts Room" : {
-            "bundles" : {
-                "Spring Foraging Bundle" : {
-                    "donations" : [
-                        {
-                            "item_name" : "Wild Horseradish",
-                            "id" : 16,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        },
-                        {
-                            "item_name" : "Daffodil",
-                            "id" : 18,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        },
-                        {
-                            "item_name" : "Leek",
-                            "id" : 20,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        },
-                        {
-                            "item_name" : "Dandelion",
-                            "id" : 22,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        }
-                    ],
-                    "reward" : {
-                        "item_name" : "Wild Seeds (Sp)",
-                        "id" : 108024,
-                        "quantity" : 30,
-                        "type" : "crafting_recipes"
-                    }
-                },
-                "Summer Foraging Bundle" : {
-                    "donations" : [
-                        {
-                            "item_name" : "Grape",
-                            "id" : 398,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        },
-                        {
-                            "item_name" : "Spice Berry",
-                            "id" : 396,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        },
-                        {
-                            "item_name" : "Sweet Pea",
-                            "id" : 402,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        }
-                    ],
-                    "reward" : {
-                        "item_name" : "Wild Seeds (Su)",
-                        "id" : 108025,
-                        "quantity" : 30,
-                        "type" : "crafting_recipes"
-                    }
-                },
-                "Fall Foraging Bundle" : {
-                    "donations" : [
-                        {
-                            "item_name" : "Common Mushroom",
-                            "id" : 404,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        },
-                        {
-                            "item_name" : "Wild Plum",
-                            "id" : 406,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        },
-                        {
-                            "item_name" : "Hazelnut",
-                            "id" : 408,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        },
-                        {
-                            "item_name" : "Blackberry",
-                            "id" : 410,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        }
-                    ],
-                    "reward" : {
-                        "item_name" : "Wild Seeds (Fa)",
-                        "id" : 108026,
-                        "quantity" : 30,
-                        "type" : "crafting_recipes"
-                    }
-                },
-                "Winter Foraging Bundle" : {
-                    "donations" : [
-                        {
-                            "item_name" : "Winter Root",
-                            "id" : 412,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        },
-                        {
-                            "item_name" : "Crystal Fruit",
-                            "id" : 414,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        },
-                        {
-                            "item_name" : "Snow Yam",
-                            "id" : 416,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        },
-                        {
-                            "item_name" : "Crocus",
-                            "id" : 418,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        }
-                    ],
-                    "reward" : {
-                        "item_name" : "Wild Seeds (Wi)",
-                        "id" : 108027,
-                        "quantity" : 30,
-                        "type" : "crafting_recipes"
-                    }
-                },
-                "Construction Bundle" : {
-                    "donations" : [
-                        {
-                            "item_name" : "Wood",
-                            "id" : 0,
-                            "quantity" : 99,
-                            "quality" : 0,
-                            "type" : "basic_items"
-                        },
-                        {
-                            "item_name" : "Wood",
-                            "id" : 0,
-                            "quantity" : 99,
-                            "quality" : 0,
-                            "type" : "basic_items"
-                        },
-                        {
-                            "item_name" : "Stone",
-                            "id" : 0,
-                            "quantity" : 99,
-                            "quality" : 0,
-                            "type" : "basic_items"
-                        },
-                        {
-                            "item_name" : "Hardwood",
-                            "id" : 0,
-                            "quantity" : 10,
-                            "quality" : 0,
-                            "type" : "basic_items"
-                        }
-                    ],
-                    "reward" : {
-                        "item_name" : "Charcoal Klin",
-                        "id" : 108073,
-                        "quantity" : 1,
-                        "type" : "crafting_recipes"
-                    }
-                },
-                "Exotic Foraging Bundle" : {
-                    "donations" : [
-                        {
-                            "item_name" : "Coconut",
-                            "id" : 88,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        },
-                        {
-                            "item_name" : "Cactus Fruit",
-                            "id" : 90,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        },
-                        {
-                            "item_name" : "Cave Carrot",
-                            "id" : 78,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        },
-                        {
-                            "item_name" : "Red Mushroom",
-                            "id" : 420,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        },
-                        {
-                            "item_name" : "Purple Mushroom",
-                            "id" : 422,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        },
-                        {
-                            "item_name" : "Maple Syrup",
-                            "id" : 724,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        },
-                        {
-                            "item_name" : "Oak Resin",
-                            "id" : 725,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        },
-                        {
-                            "item_name" : "Pine Tar",
-                            "id" : 726,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        },
-                        {
-                            "item_name" : "Morel",
-                            "id" : 257,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        }
-                    ],
-                    "reward" : {
-                        "item_name" : "Autumn's Bounty",
-                        "id" : 235,
-                        "quantity" : 5,
-                        "type" : "cooking_recipes"
-                    }
-                }
-            },
-            "reward" : {
-                "item_name" : "Bridge Repair",
-                "id" : null,
-                "quantity" : 1,
-                "type" : "other"
-            }
-        },
         "Pantry" : {
             "bundles" : {
-                "Spring Crops Bundle" : {
+                "Spring Crops" : {
+                    "id" : 0,
                     "donations" : [
                         {
                             "item_name" : "Parsnip",
@@ -306,7 +41,8 @@
                         "type" : "crafting_recipes"
                     }
                 },
-                "Summer Crops Bundle" : {
+                "Summer Crops" : {
+                    "id" : 1,
                     "donations" : [
                         {
                             "item_name" : "Tomato",
@@ -344,7 +80,8 @@
                         "type" : "crafting_recipes"
                     }
                 },
-                "Fall Crops Bundle" : {
+                "Fall Crops" : {
+                    "id" : 2,
                     "donations" : [
                         {
                             "item_name" : "Corn",
@@ -382,7 +119,8 @@
                         "type" : "crafting_recipes"
                     }
                 },
-                "Quality Crops Bundle" : {
+                "Quality Crops" : {
+                    "id" : 3,
                     "donations" : [
                         {
                             "item_name" : "Parsnip",
@@ -420,7 +158,8 @@
                         "type" : "crafting_recipes"
                     }
                 },
-                "Animal Bundle" : {
+                "Animal" : {
+                    "id" : 4,
                     "donations" : [
                         {
                             "item_name" : "Large Milk",
@@ -472,7 +211,8 @@
                         "type" : "crafting_recipes"
                     }
                 },
-                "Artisan Bundle" : {
+                "Artisan" : {
+                    "id" : 5,
                     "donations" : [
                         {
                             "item_name" : "Truffle Oil",
@@ -576,7 +316,8 @@
         },
         "Fish Tank" : {
             "bundles" : {
-                "River Fish Bundle" : {
+                "River Fish" : {
+                    "id" : 6,
                     "donations" : [
                         {
                             "item_name" : "Sunfish",
@@ -614,7 +355,8 @@
                         "type" : "crafting_recipes"
                     }
                 },
-                "Lake Fish Bundle" : {
+                "Lake Fish" : {
+                    "id" : 7,
                     "donations" : [
                         {
                             "item_name" : "Largemouth Bass",
@@ -652,7 +394,8 @@
                         "type" : "crafting_recipes"
                     }
                 },
-                "Ocean Fish Bundle" : {
+                "Ocean Fish" : {
+                    "id" : 8,
                     "donations" : [
                         {
                             "item_name" : "Sardine",
@@ -690,7 +433,8 @@
                         "type" : "crafting_recipes"
                     }
                 },
-                "Night Fishing Bundle" : {
+                "Night Fishing" : {
+                    "id" : 9,
                     "donations" : [
                         {
                             "item_name" : "Walleye",
@@ -716,12 +460,52 @@
                     ],
                     "reward" : {
                         "item_name" : "Glow Ring",
-                        "id" : 0,
+                        "id" : 113002,
                         "quantity" : 1,
                         "type" : "equipment"
                     }
                 },
-                "Crab Pot Bundle" : {
+                "Specialty Fish" : {
+                    "id" : 10,
+                    "donations" : [
+                        {
+                            "item_name" : "Pufferfish",
+                            "id" : 128,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "fish"
+                        },
+                        {
+                            "item_name" : "Ghostfish",
+                            "id" : 156,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "fish"
+                        },
+                        {
+                            "item_name" : "Sandfish",
+                            "id" : 164,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "fish"
+                        },
+                        {
+                            "item_name" : "Woodskip",
+                            "id" : 734,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "fish"
+                        }
+                    ],
+                    "reward" : {
+                        "item_name" : "Dish o' The Sea",
+                        "id" : 242,
+                        "quantity" : 5,
+                        "type" : "cooking_recipes"
+                    }
+                },
+                "Crab Pot" : {
+                    "id" : 11,
                     "donations" : [
                         {
                             "item_name" : "Lobster",
@@ -800,44 +584,6 @@
                         "quantity" : 3,
                         "type" : "crafting_recipes"
                     }
-                },
-                "Specialty Fish Bundle" : {
-                    "donations" : [
-                        {
-                            "item_name" : "Pufferfish",
-                            "id" : 128,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "fish"
-                        },
-                        {
-                            "item_name" : "Ghostfish",
-                            "id" : 156,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "fish"
-                        },
-                        {
-                            "item_name" : "Sandfish",
-                            "id" : 164,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "fish"
-                        },
-                        {
-                            "item_name" : "Woodskip",
-                            "id" : 734,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "fish"
-                        }
-                    ],
-                    "reward" : {
-                        "item_name" : "Dish o' The Sea",
-                        "id" : 242,
-                        "quantity" : 5,
-                        "type" : "cooking_recipes"
-                    }
                 }
             },
             "reward" : {
@@ -847,9 +593,282 @@
                 "type" : "other"
             }
         },
+        "Crafts Room" : {
+            "bundles" : {
+                "Spring Foraging" : {
+                    "id" : 13,
+                    "donations" : [
+                        {
+                            "item_name" : "Wild Horseradish",
+                            "id" : 16,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        },
+                        {
+                            "item_name" : "Daffodil",
+                            "id" : 18,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        },
+                        {
+                            "item_name" : "Leek",
+                            "id" : 20,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        },
+                        {
+                            "item_name" : "Dandelion",
+                            "id" : 22,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        }
+                    ],
+                    "reward" : {
+                        "item_name" : "Wild Seeds (Sp)",
+                        "id" : 108024,
+                        "quantity" : 30,
+                        "type" : "crafting_recipes"
+                    }
+                },
+                "Summer Foraging" : {
+                    "id" : 14,
+                    "donations" : [
+                        {
+                            "item_name" : "Grape",
+                            "id" : 398,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        },
+                        {
+                            "item_name" : "Spice Berry",
+                            "id" : 396,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        },
+                        {
+                            "item_name" : "Sweet Pea",
+                            "id" : 402,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        }
+                    ],
+                    "reward" : {
+                        "item_name" : "Wild Seeds (Su)",
+                        "id" : 108025,
+                        "quantity" : 30,
+                        "type" : "crafting_recipes"
+                    }
+                },
+                "Fall Foraging" : {
+                    "id" : 15,
+                    "donations" : [
+                        {
+                            "item_name" : "Common Mushroom",
+                            "id" : 404,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        },
+                        {
+                            "item_name" : "Wild Plum",
+                            "id" : 406,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        },
+                        {
+                            "item_name" : "Hazelnut",
+                            "id" : 408,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        },
+                        {
+                            "item_name" : "Blackberry",
+                            "id" : 410,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        }
+                    ],
+                    "reward" : {
+                        "item_name" : "Wild Seeds (Fa)",
+                        "id" : 108026,
+                        "quantity" : 30,
+                        "type" : "crafting_recipes"
+                    }
+                },
+                "Winter Foraging" : {
+                    "id" : 16,
+                    "donations" : [
+                        {
+                            "item_name" : "Winter Root",
+                            "id" : 412,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        },
+                        {
+                            "item_name" : "Crystal Fruit",
+                            "id" : 414,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        },
+                        {
+                            "item_name" : "Snow Yam",
+                            "id" : 416,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        },
+                        {
+                            "item_name" : "Crocus",
+                            "id" : 418,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        }
+                    ],
+                    "reward" : {
+                        "item_name" : "Wild Seeds (Wi)",
+                        "id" : 108027,
+                        "quantity" : 30,
+                        "type" : "crafting_recipes"
+                    }
+                },
+                "Construction" : {
+                    "id" : 17,
+                    "donations" : [
+                        {
+                            "item_name" : "Wood",
+                            "id" : 388,
+                            "quantity" : 99,
+                            "quality" : 0,
+                            "type" : "basic_items"
+                        },
+                        {
+                            "item_name" : "Wood",
+                            "id" : 388,
+                            "quantity" : 99,
+                            "quality" : 0,
+                            "type" : "basic_items"
+                        },
+                        {
+                            "item_name" : "Stone",
+                            "id" : 390,
+                            "quantity" : 99,
+                            "quality" : 0,
+                            "type" : "basic_items"
+                        },
+                        {
+                            "item_name" : "Hardwood",
+                            "id" : 709,
+                            "quantity" : 10,
+                            "quality" : 0,
+                            "type" : "basic_items"
+                        }
+                    ],
+                    "reward" : {
+                        "item_name" : "Charcoal Klin",
+                        "id" : 108073,
+                        "quantity" : 1,
+                        "type" : "crafting_recipes"
+                    }
+                },
+                "Exotic Foraging" : {
+                    "id" : 19,
+                    "donations" : [
+                        {
+                            "item_name" : "Coconut",
+                            "id" : 88,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        },
+                        {
+                            "item_name" : "Cactus Fruit",
+                            "id" : 90,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        },
+                        {
+                            "item_name" : "Cave Carrot",
+                            "id" : 78,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        },
+                        {
+                            "item_name" : "Red Mushroom",
+                            "id" : 420,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        },
+                        {
+                            "item_name" : "Purple Mushroom",
+                            "id" : 422,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        },
+                        {
+                            "item_name" : "Maple Syrup",
+                            "id" : 724,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        },
+                        {
+                            "item_name" : "Oak Resin",
+                            "id" : 725,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        },
+                        {
+                            "item_name" : "Pine Tar",
+                            "id" : 726,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        },
+                        {
+                            "item_name" : "Morel",
+                            "id" : 257,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        }
+                    ],
+                    "reward" : {
+                        "item_name" : "Autumn's Bounty",
+                        "id" : 235,
+                        "quantity" : 5,
+                        "type" : "cooking_recipes"
+                    }
+                }
+            },
+            "reward" : {
+                "item_name" : "Bridge Repair",
+                "id" : null,
+                "quantity" : 1,
+                "type" : "other"
+            }
+        },
         "Boiler Room" : {
             "bundles" : {
-                "Blacksmith's Bundle" : {
+                "Blacksmith's" : {
+                    "id" : 20,
                     "donations" : [
                         {
                             "item_name" : "Copper Bar",
@@ -880,7 +899,8 @@
                         "type" : "crafting_recipes"
                     }
                 },
-                "Geologist's Bundle" : {
+                "Geologist's" : {
+                    "id" : 21,
                     "donations" : [
                         {
                             "item_name" : "Quartz",
@@ -913,12 +933,13 @@
                     ],
                     "reward" : {
                         "item_name" : "Omni Geode",
-                        "id" : 0,
+                        "id" : 113001,
                         "quantity" : 5,
                         "type" : "minerals"
                     }
                 },
-                "Adventurer's Bundle" : {
+                "Adventurer's" : {
+                    "id" : 22,
                     "donations" : [
                         {
                             "item_name" : "Slime",
@@ -951,7 +972,7 @@
                     ],
                     "reward" : {
                         "item_name" : "Small Magnet Ring",
-                        "id" : 0,
+                        "id" : 113003,
                         "quantity" : 1,
                         "type" : "equipment"
                     }
@@ -964,9 +985,93 @@
                 "type" : "other"
             }
         },
+        
+        "Vault" : {
+            "bundles" : {
+                "2,500" : {
+                    "id" : 23,
+                    "donations" : [
+                        {
+                            "item_name" : "Gold Coins",
+                            "id" : 0,
+                            "quantity" : 2500,
+                            "quality" : 0,
+                            "type" : "icons"
+                        }
+                    ],
+                    "reward" : {
+                        "item_name" : "Chocolate Cake",
+                        "id" : 220,
+                        "quantity" : 3,
+                        "type" : "cooking_recipes"
+                    }
+                },
+                "5,000" : {
+                    "id" : 24,
+                    "donations" : [
+                        {
+                            "item_name" : "Gold Coins",
+                            "id" : 0,
+                            "quantity" : 5000,
+                            "quality" : 0,
+                            "type" : "icons"
+                        }
+                    ],
+                    "reward" : {
+                        "item_name" : "Quality Fertilizer",
+                        "id" : 108019,
+                        "quantity" : 30,
+                        "type" : "crafting_recipes"
+                    }
+                },
+                "10,000" : {
+                    "id" : 25,
+                    "donations" : [
+                        {
+                            "item_name" : "Gold Coins",
+                            "id" : 0,
+                            "quantity" : 10000,
+                            "quality" : 0,
+                            "type" : "icons"
+                        }
+                    ],
+                    "reward" : {
+                        "item_name" : "Lightning Rod",
+                        "id" : 108076,
+                        "quantity" : 1,
+                        "type" : "crafting_recipes"
+                    }
+                },
+                "25,000" : {
+                    "id" : 26,
+                    "donations" : [
+                        {
+                            "item_name" : "Gold Coins",
+                            "id" : 0,
+                            "quantity" : 25000,
+                            "quality" : 0,
+                            "type" : "icons"
+                        }
+                    ],
+                    "reward" : {
+                        "item_name" : "Crystalarium",
+                        "id" : 108074,
+                        "quantity" : 1,
+                        "type" : "crafting_recipes"
+                    }
+                }
+            },
+            "reward" : {
+                "item_name" : "Bus Repair",
+                "id" : null,
+                "quantity" : 1,
+                "type" : "other"
+            }
+        },
         "Bulletin Board" : {
             "bundles" : {
-                "Chef's Bundle" : {
+                "Chef's" : {
+                    "id" : 31,
                     "donations" : [
                         {
                             "item_name" : "Maple Syrup",
@@ -991,7 +1096,7 @@
                         },
                         {
                             "item_name" : "Poppy",
-                            "id" : 0,
+                            "id" : 376,
                             "quantity" : 1,
                             "quality" : 0,
                             "type" : "shipped_items"
@@ -1018,7 +1123,86 @@
                         "type" : "cooking_recipes"
                     }
                 },
-                "Dye Bundle" : {
+                "Field Research" : {
+                    "id" : 32,
+                    "donations" : [
+                        {
+                            "item_name" : "Purple Mushroom",
+                            "id" : 422,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        },
+                        {
+                            "item_name" : "Nautilus Shell",
+                            "id" : 586,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        },
+                        {
+                            "item_name" : "Chub",
+                            "id" : 702,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "fish"
+                        },
+                        {
+                            "item_name" : "Frozen Geode",
+                            "id" : 113004,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "minerals"
+                        }
+                    ],
+                    "reward" : {
+                        "item_name" : "Recycling Machine",
+                        "id" : 108077,
+                        "quantity" : 1,
+                        "type" : "crafting_recipes"
+                    }
+                },
+                "Enchanter's" : {
+                    "id" : 33,
+                    "donations" : [
+                        {
+                            "item_name" : "Oak Resin",
+                            "id" : 725,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        },
+                        {
+                            "item_name" : "Wine",
+                            "id" : 348,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        },
+                        {
+                            "item_name" : "Rabbit's Foot",
+                            "id" : 446,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        },
+                        {
+                            "item_name" : "Pomegranate",
+                            "id" : 637,
+                            "quantity" : 1,
+                            "quality" : 0,
+                            "type" : "shipped_items"
+                        }
+                    ],
+                    "reward" : {
+                        "item_name" : "Gold Bar",
+                        "id" : 336,
+                        "quantity" : 5,
+                        "type" : "shipped_items"
+                    }
+                },
+                "Dye" : {
+                    "id" : 34,
                     "donations" : [
                         {
                             "item_name" : "Red Mushroom",
@@ -1070,45 +1254,8 @@
                         "type" : "crafting_recipes"
                     }
                 },
-                "Field Research Bundle" : {
-                    "donations" : [
-                        {
-                            "item_name" : "Purple Mushroom",
-                            "id" : 422,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        },
-                        {
-                            "item_name" : "Nautilus Shell",
-                            "id" : 586,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        },
-                        {
-                            "item_name" : "Chub",
-                            "id" : 702,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "fish"
-                        },
-                        {
-                            "item_name" : "Frozen Geode",
-                            "id" : 0,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "minerals"
-                        }
-                    ],
-                    "reward" : {
-                        "item_name" : "Recycling Machine",
-                        "id" : 108077,
-                        "quantity" : 1,
-                        "type" : "crafting_recipes"
-                    }
-                },
-                "Fooder Bundle" : {
+                "Fodder" : {
+                    "id" : 35,
                     "donations" : [
                         {
                             "item_name" : "Wheat",
@@ -1119,7 +1266,7 @@
                         },
                         {
                             "item_name" : "Hay",
-                            "id" : 0,
+                            "id" : 113005,
                             "quantity" : 10,
                             "quality" : 0,
                             "type" : "shipped_items"
@@ -1134,47 +1281,9 @@
                     ],
                     "reward" : {
                         "item_name" : "Heater",
-                        "id" : 0,
+                        "id" : 113006,
                         "quantity" : 1,
                         "type" : "crafting_recipes"
-                    }
-                },
-                "Enchanter's Bundle" : {
-                    "donations" : [
-                        {
-                            "item_name" : "Oak Resin",
-                            "id" : 725,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        },
-                        {
-                            "item_name" : "Wine",
-                            "id" : 348,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        },
-                        {
-                            "item_name" : "Rabbit's Foot",
-                            "id" : 446,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        },
-                        {
-                            "item_name" : "Pomegranate",
-                            "id" : 637,
-                            "quantity" : 1,
-                            "quality" : 0,
-                            "type" : "shipped_items"
-                        }
-                    ],
-                    "reward" : {
-                        "item_name" : "Gold Bar",
-                        "id" : 336,
-                        "quantity" : 5,
-                        "type" : "shipped_items"
                     }
                 }
             },
@@ -1184,90 +1293,13 @@
                 "quantity" : 1,
                 "type" : "other"
             }
-        },
-        "Vault" : {
-            "bundles" : {
-                "2,500 Bundle" : {
-                    "donations" : [
-                        {
-                            "item_name" : "Gold Coins",
-                            "id" : 0,
-                            "quantity" : 2500,
-                            "quality" : 0,
-                            "type" : "icons"
-                        }
-                    ],
-                    "reward" : {
-                        "item_name" : "Chocolate Cake",
-                        "id" : 220,
-                        "quantity" : 3,
-                        "type" : "cooking_recipes"
-                    }
-                },
-                "5,000 Bundle" : {
-                    "donations" : [
-                        {
-                            "item_name" : "Gold Coins",
-                            "id" : 0,
-                            "quantity" : 5000,
-                            "quality" : 0,
-                            "type" : "icons"
-                        }
-                    ],
-                    "reward" : {
-                        "item_name" : "Quality Fertilizer",
-                        "id" : 108019,
-                        "quantity" : 30,
-                        "type" : "crafting_recipes"
-                    }
-                },
-                "10,000 Bundle" : {
-                    "donations" : [
-                        {
-                            "item_name" : "Gold Coins",
-                            "id" : 0,
-                            "quantity" : 10000,
-                            "quality" : 0,
-                            "type" : "icons"
-                        }
-                    ],
-                    "reward" : {
-                        "item_name" : "Lightning Rod",
-                        "id" : 108076,
-                        "quantity" : 1,
-                        "type" : "crafting_recipes"
-                    }
-                },
-                "25,000 Bundle" : {
-                    "donations" : [
-                        {
-                            "item_name" : "Gold Coins",
-                            "id" : 0,
-                            "quantity" : 25000,
-                            "quality" : 0,
-                            "type" : "icons"
-                        }
-                    ],
-                    "reward" : {
-                        "item_name" : "Crystalarium",
-                        "id" : 108074,
-                        "quantity" : 1,
-                        "type" : "crafting_recipes"
-                    }
-                }
-            },
-            "reward" : {
-                "item_name" : "Bus Repair",
-                "id" : null,
-                "quantity" : 1,
-                "type" : "other"
-            }
         }
     },
     "1.4.0" : {
         "Abandoned JojaMart" : {
             "bundles" : {
-                "The Missing Bundle" : {
+                "The Missing" : {
+                    "id" : 36,
                     "donations" : [
                         {
                             "item_name" : "Wine",

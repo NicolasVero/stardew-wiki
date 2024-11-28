@@ -703,5 +703,12 @@
 	"112009" : "Ginger Island",
 	"112010" : "Qi's Walnut Room",
 	"112011" : "The Summit",
-	"112012" : "Mastery Cave"
+	"112012" : "Mastery Cave",
+
+    "113001" : "Omni Geode",
+    "113002" : "Glow Ring",
+    "113003" : "Small Magnet Ring",
+    "113004" : "Frozen Geode",
+    "113005" : "Hay",
+    "113006" : "Heater"
 }
