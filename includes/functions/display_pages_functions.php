@@ -188,6 +188,9 @@ function display_page():string {
 			$structure .= display_unlockables();
 			$structure .= display_locations_visited();
 			
+			$structure .= display_secret_notes();
+			$structure .= display_books();
+
 			$structure .= display_cooking_recipes();
 			$structure .= display_fish();
 			
@@ -196,9 +199,6 @@ function display_page():string {
 			
 			$structure .= display_achievements();
 			$structure .= display_enemies();
-
-			$structure .= display_books();
-			$structure .= display_secret_notes();
 
 			$structure .= display_shipped_items();
 			
