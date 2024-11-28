@@ -840,14 +840,14 @@ function get_bundle_reward(string $reward):array {
 	$formatted_reward = explode(" ", $reward);
 
 	$reward_type = $formatted_reward[0];
-	log_($formatted_reward);
 	get_correct_id($formatted_reward[1]);
 	$reward_id = ($reward_type != "BO") ? $formatted_reward[1] : get_custom_id($big_objects_json[$formatted_reward[1]]);
+	$reward_name = get_item_name_by_id($reward_id);
 
 	$bundle_reward = [
 		"type" => $reward_type,
 		"id" => $reward_id,
-		"name" => "",
+		"name" => $reward_name,
 		"quantity" => $formatted_reward[2]
 	];
 
