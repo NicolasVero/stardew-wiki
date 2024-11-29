@@ -586,8 +586,7 @@ function are_all_adventurers_guild_categories_completed(array $adventurers_guild
     return $counter == count($adventurers_guild_data);
 }
 
-function get_player_pet():array {
-	$data = $GLOBALS["untreated_player_data"];
+function get_player_pet(object $data):array {
 	$breed = (int) $data->whichPetBreed;
 	$type = (is_game_older_than_1_6()) ?
 		(((string) $data->catPerson == "true") ? "cat" : "dog")
@@ -776,7 +775,7 @@ function get_player_bundles(object $general_data):array {
 		$bundle_data_name = "$bundle_room/$bundle_id";
 		$bundle_progress = [
 			"room_name" => $bundle_room,
-			"bundle_id" => $bundle_id,
+			"id" => $bundle_id,
 			"progress"  => $bundle_booleans
 		];
 
@@ -789,5 +788,9 @@ function get_player_bundles(object $general_data):array {
 		}
 	}
 
+	uasort($player_bundles, function ($a, $b) {
+		return $a['bundle_id'] <=> $b['bundle_id'];
+	});
+	
 	return $player_bundles;
 }

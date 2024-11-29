@@ -119,19 +119,19 @@ function get_aggregated_data(object $data):array {
     return [
         "general" => [
             "id"                    => (int) $data->UniqueMultiplayerID,
-            "game_version"          => (string) $general_data->gameVersion,
-            "game_version_score"    => $game_version_score,
-            "should_spawn_monsters" => $should_spawn_monsters,
+            "game_version"          => (string) $general_data->gameVersion, // Trouver un moyen de les appeler 1fois/save et non 1fois/perso/save
+            "game_version_score"    => $game_version_score, // Trouver un moyen de les appeler 1fois/save et non 1fois/perso/save
+            "should_spawn_monsters" => $should_spawn_monsters, // Trouver un moyen de les appeler 1fois/save et non 1fois/perso/save
             "name"                  => (string) $data->name,
             "gender"                => get_player_gender([$data->gender, $data->isMale]),
             "farm_name"             => (string) $data->farmName,
-            "farmer_level"          => get_farmer_level(),
+            "farmer_level"          => get_farmer_level($data),
             "favorite_thing"        => (string) $data->favoriteThing,
-            "pet"                   => get_player_pet(),
-            "spouse"                => get_spouse(),
+            "pet"                   => get_player_pet($data),
+            "spouse"                => get_spouse($data),
             "children"              => get_children_amount((int) $data->UniqueMultiplayerID),
-            "house_level"           => get_house_upgrade_level(),
-            "date"                  => get_formatted_date(),
+            "house_level"           => get_house_upgrade_level($data),
+            "date"                  => get_formatted_date(), // Trouver un moyen de les appeler 1fois/save et non 1fois/perso/save
             "game_duration"         => get_game_duration((int) $data->millisecondsPlayed),
             "mine_level"            => (int) $data->deepestMineLevel,
             "max_items"             => (int) $data->maxItems,
@@ -140,10 +140,10 @@ function get_aggregated_data(object $data):array {
             "grandpa_score"         => get_grandpa_score(),
             "golds"                 => (int) $data->money,
             "total_golds"           => (int) $data->totalMoneyEarned,
-            "golden_walnuts"        => (int) $general_data->goldenWalnutsFound,
+            "golden_walnuts"        => (int) $general_data->goldenWalnutsFound, // Trouver un moyen de les appeler 1fois/save et non 1fois/perso/save
             "qi_gems"               => (int) $data->qiGems,
             "casino_coins"          => (int) $data->clubCoins,
-            "raccoons"              => (int) $general_data->timesFedRaccoons,
+            "raccoons"              => (int) $general_data->timesFedRaccoons, // Trouver un moyen de les appeler 1fois/save et non 1fois/perso/save
             "stardrops_found"       => get_player_stardrops_found((int) $data->maxStamina)
         ],
         "levels" => [
@@ -167,12 +167,12 @@ function get_aggregated_data(object $data):array {
         "friendship"        => get_player_friendship_data($data->friendshipData),
         "enemies_killed"    => get_player_enemies_killed_data($data->stats),
         "quest_log"         => get_player_quest_log($data->questLog),
-        "farm_animals"      => get_player_farm_animals(),
-        "weather"           => get_weather(),
+        "farm_animals"      => get_player_farm_animals(), // Trouver un moyen de les appeler 1fois/save et non 1fois/perso/save
+        "weather"           => get_weather(), // Trouver un moyen de les appeler 1fois/save et non 1fois/perso/save
         "secret_notes"      => get_player_secret_notes($data->secretNotesSeen),
-        "jumino_kart"       => get_jumino_kart_leaderboard(),
-        "museum_coords"     => get_museum_pieces_coords($general_data),
-        "locations_visited" => get_player_visited_locations($data),
-        "cc_bundles"        => get_player_bundles($general_data)
+        "jumino_kart"       => get_jumino_kart_leaderboard(), // Trouver un moyen de les appeler 1fois/save et non 1fois/perso/save
+        "museum_coords"     => get_museum_pieces_coords($general_data), // Trouver un moyen de les appeler 1fois/save et non 1fois/perso/save
+        "locations_visited" => get_player_visited_locations($data), // Trouver un moyen de les appeler 1fois/save et non 1fois/perso/save
+        "cc_bundles"        => get_player_bundles($general_data) // Trouver un moyen de les appeler 1fois/save et non 1fois/perso/save
     ];
 }

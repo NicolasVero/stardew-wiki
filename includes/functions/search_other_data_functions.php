@@ -65,8 +65,7 @@ function get_is_married():bool {
 	return isset($data->spouse);
 }
 
-function get_spouse():mixed {
-	$data = $GLOBALS["untreated_player_data"];
+function get_spouse(object $data):mixed {
 	return (!empty($data->spouse)) ? $data->spouse : null;
 }
 
@@ -113,8 +112,7 @@ function is_golden_clock_on_farm():bool {
 	return false;
 }
 
-function get_house_upgrade_level():int {
-	$data = $GLOBALS["untreated_player_data"];
+function get_house_upgrade_level(object $data):int {
 	return (int) $data->houseUpgradeLevel;
 }
 
@@ -242,8 +240,7 @@ function get_gamelocation_index(object $general_data, string $searched_location)
 	return $index;
 }
 
-function get_farmer_level():string {
-	$data = $GLOBALS["untreated_player_data"];
+function get_farmer_level(object $data):string {
     $level_names = [
         "Newcomer",
         "Greenhorn",
@@ -311,7 +308,7 @@ function get_grandpa_score(): int {
         }
     }
 
-    $house_level = get_house_upgrade_level();
+    $house_level = get_house_upgrade_level($data);
     $is_married = get_is_married();
     if($house_level >= 2 && $is_married) {
         $grandpa_points++;
@@ -622,8 +619,13 @@ function get_player_bundle_progress(object $bundle_data, array $bundle_progress)
 		"Abandoned JojaMart" => "ccMovieTheater"
     ];
 
-
 	$bundle_details = get_player_bundle_details($bundle_data);
+	
+	$bundle_details = [
+		"bundle_id" => $bundle_progress["id"],
+		"room_name" => $bundle_progress["room_name"]
+	] + $bundle_details;
+
 	$bundle_details["is_complete"] = false;
 	$bundle_details["items_added"] = [];
 
@@ -668,7 +670,7 @@ function get_player_bundle_details(object $bundle_data):array {
 	$bundle_limit = $formatted_bundle[4];
 	
 	$bundle_details = [
-		"name" => $bundle_name,
+		"bundle_name" => $bundle_name,
 		"requirements" => $bundle_requirements,
 		"limit" => $bundle_limit,
 		"reward" => $bundle_reward
