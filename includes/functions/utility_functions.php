@@ -265,7 +265,11 @@ function get_contributors():array {
 				],
 				"website" => [
 					"url" => "https://romain-gerard.com/index.php",
-					"on_display" => false
+					"on_display" => true
+				],
+				"codewars" => [
+					"url" => "https://www.codewars.com/users/BreadyBred",
+					"on_display" => true
 				]
 			]
 		],
@@ -288,6 +292,10 @@ function get_contributors():array {
 				"website" => [
 					"url" => "https://nicolas-vero.fr/",
 					"on_display" => false
+				],
+				"codewars" => [
+					"url" => "https://www.codewars.com/users/NicolasVero",
+					"on_display" => true
 				]
 			]
 		]
