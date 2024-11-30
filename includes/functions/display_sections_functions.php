@@ -100,7 +100,7 @@ function display_header():string {
 
     $images_path = get_images_folder();
 	$farm_name = str_contains(strtolower($farm_name), "farm") ? $farm_name : $farm_name . " farm";
-	$gender = ($gender == null) ? "neutral" : $gender;
+	$gender = ($gender === null) ? "neutral" : $gender;
 
     $structure = "
         <header>
@@ -280,9 +280,9 @@ function display_friendships(int $limit = -1): string {
     $birthday_json = sanitize_json_with_version("villagers_birthday");
     $json_with_version = sanitize_json_with_version("villagers", true);
     
-    $section_class = ($limit == -1) ? "all-friends" : "top-friends";
-    $view_all = ($limit == -1) ? "" : "<span class='view-all-friends view-all-friendships-$player_id modal-opener'>- View all friendships</span>";
-    $structure = ($limit == -1)
+    $section_class = ($limit === -1) ? "all-friends" : "top-friends";
+    $view_all = ($limit === -1) ? "" : "<span class='view-all-friends view-all-friendships-$player_id modal-opener'>- View all friendships</span>";
+    $structure = ($limit === -1)
         ? "
         <section class='info-section friends-section $section_class $section_class-$player_id modal-window'>
             <div class='panel-header'>
@@ -301,7 +301,7 @@ function display_friendships(int $limit = -1): string {
         ";
 
     foreach($friendship_data as $name => $friend) {
-        if($limit == 0) {
+        if($limit === 0) {
             break;
         }
         
@@ -319,7 +319,7 @@ function display_friendships(int $limit = -1): string {
     }
 
     foreach($villagers_json as $villager_name) {
-        if($limit == 0) {
+        if($limit === 0) {
             break;
         }
 
@@ -423,12 +423,12 @@ function display_detailled_gallery(array $gallery_details, string $width = "", a
             $element_class = ($is_found) ? "found" : "not-found";
 
             // Wilderness Golem désactivé si pas la ferme wilderness
-            if($json_filename == "enemies" && $json_line_name == "Wilderness Golem" && $GLOBALS["should_spawn_monsters"] == "false") {
+            if($json_filename === "enemies" && $json_line_name === "Wilderness Golem" && $GLOBALS["should_spawn_monsters"] === "false") {
                 continue;
             }
 
             if(in_array($json_filename, ["cooking_recipes", "crafting_recipes", "artifacts", "minerals"])) {
-                if($is_found && $player_data[$json_line_name]["counter"] == 0) {
+                if($is_found && $player_data[$json_line_name]["counter"] === 0) {
                     $element_class .= " unused";
                 }
             }

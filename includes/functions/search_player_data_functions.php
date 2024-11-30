@@ -7,7 +7,7 @@ function get_player_gender(array $genders):string {
 		}
 
 		if(is_numeric($gender[0])) {
-			return ($gender[0] == 0) ? "Male" : "Female";
+			return ($gender[0] === 0) ? "Male" : "Female";
 		} else {
 			return ($gender[0]) ? "Male" : "Female";
 		} 
@@ -31,7 +31,7 @@ function get_player_achievements(object $achievements):array {
 
 function does_player_have_achievement(object $achievements, int $achievement_id):bool {
 	foreach($achievements->int as $achievement) {
-		if($achievement_id == $achievement) {
+		if($achievement_id === $achievement) {
 			return true;
 		}
 	}
@@ -236,7 +236,7 @@ function get_player_fishes_caught(object $data):array {
 			"fish"
 		);
 
-		if(empty($fish_reference) || $fish_reference == "") {
+		if(empty($fish_reference) || $fish_reference === "") {
 			continue;
 		}
 		
@@ -386,12 +386,12 @@ function get_player_quest_log(object $data):array {
 	$special_orders_json = sanitize_json_with_version("special_orders", true);
 
 	foreach($entire_data->specialOrders->SpecialOrder as $special_order) {
-		if(((string) $special_order->questState) != "InProgress") {
+		if(((string) $special_order->questState) !== "InProgress") {
 			continue;
 		}
 
 		$target = (string) $special_order->requester;
-		$is_qi_order = ((string) $special_order->orderType == "Qi");
+		$is_qi_order = ((string) $special_order->orderType === "Qi");
 
 		$number_to_get = (int) $special_order->objectives->maxCount;
 		$number_obtained = (int) $special_order->objectives->currentCount;
@@ -464,7 +464,7 @@ function get_player_cooking_recipes(object $recipes, object $recipes_cooked):arr
 
 				get_correct_id($recipe_id);
 
-				if($recipe_id == $index) {
+				if($recipe_id === $index) {
 					$cooking_recipes_data[$item_name] = [
 						"id"      => $recipe_id,
 						"counter" => (int) $recipe_cooked->value->int
@@ -583,13 +583,13 @@ function are_all_adventurers_guild_categories_completed(array $adventurers_guild
 		}
     }
 
-    return $counter == count($adventurers_guild_data);
+    return $counter === count($adventurers_guild_data);
 }
 
 function get_player_pet(object $data):array {
 	$breed = (int) $data->whichPetBreed;
 	$type = (is_game_older_than_1_6()) ?
-		(((string) $data->catPerson == "true") ? "cat" : "dog")
+		(((string) $data->catPerson === "true") ? "cat" : "dog")
 		:
 		lcfirst((string) $data->whichPetType);
 
@@ -636,8 +636,8 @@ function get_player_farm_animals():array {
 				$friendship = (int) $animal->value->FarmAnimal->friendshipTowardFarmer;
 				$happiness = (int) $animal->value->FarmAnimal->happiness;
 
-				$pet = ((string) $animal->value->FarmAnimal->wasPet == "true") ? true : false;
-				$auto_pet = ((string) $animal->value->FarmAnimal->wasAutoPet == "true") ? true : false;
+				$pet = ((string) $animal->value->FarmAnimal->wasPet === "true") ? true : false;
+				$auto_pet = ((string) $animal->value->FarmAnimal->wasAutoPet === "true") ? true : false;
 				$was_pet = (($pet) || ($auto_pet));
 
 				$animal_data = [

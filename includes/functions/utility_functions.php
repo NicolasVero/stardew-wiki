@@ -69,7 +69,7 @@ function get_github_medias_url():string {
 }
 
 function is_on_localhost():bool {
-	return $_SERVER["HTTP_HOST"] == "localhost";
+	return $_SERVER["HTTP_HOST"] === "localhost";
 }
 
 function is_game_older_than_1_6():bool {
@@ -94,7 +94,7 @@ function get_formatted_date(bool $display_date = true):mixed {
 }
 
 function formate_number(int $number, string $lang = "en"):string {
-	if($lang == "fr") {
+	if($lang === "fr") {
 		return number_format($number, 0, ",", " ");
 	}
 
@@ -142,7 +142,7 @@ function formate_usernames(string $username):string {
 }
 
 function in_bytes_conversion(string $size, string $use = "local"):int {
-    $unit_to_power = ($use == "local") 
+    $unit_to_power = ($use === "local") 
 		? ["o"  => 0, "Ko" => 1, "Mo" => 2, "Go" => 3]
 		: ["K" => 1, "M" => 2, "G" => 3];
 
@@ -242,8 +242,8 @@ function get_php_max_upload_size():string {
 function is_a_mobile_device():bool {
 	return (
 		stristr($_SERVER["HTTP_USER_AGENT"], "Android") ||
-		strpos($_SERVER["HTTP_USER_AGENT"], "iPod") != false ||
-		strpos($_SERVER["HTTP_USER_AGENT"], "iPhone") != false 
+		strpos($_SERVER["HTTP_USER_AGENT"], "iPod") !== false ||
+		strpos($_SERVER["HTTP_USER_AGENT"], "iPhone") !== false 
 	);
 }
 
@@ -328,6 +328,6 @@ function get_script_loader():string {
 	";
 }
 
-if(isset($_GET["action"]) && $_GET["action"] == "get_max_upload_size") {	
+if(isset($_GET["action"]) && $_GET["action"] === "get_max_upload_size") {	
 	echo get_php_max_upload_size();
 }
