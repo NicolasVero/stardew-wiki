@@ -771,6 +771,10 @@ function get_player_bundles(object $general_data):array {
 
 			$bundle_room = $bundle_room_name;
 		}
+		
+		if(empty($bundle_room)) {
+			continue;
+		}
 
 		$bundle_data_name = "$bundle_room/$bundle_id";
 		$bundle_progress = [
@@ -784,13 +788,11 @@ function get_player_bundles(object $general_data):array {
 				continue;
 			}
 
-			$player_bundles[$bundle_data_name] = get_player_bundle_progress($bundle_data, $bundle_progress);
+			$player_bundles[$bundle_id] = get_player_bundle_progress($bundle_data, $bundle_progress);
 		}
 	}
-
-	uasort($player_bundles, function ($a, $b) {
-		return $a['bundle_id'] <=> $b['bundle_id'];
-	});
+	
+	ksort($player_bundles);
 	
 	return $player_bundles;
 }

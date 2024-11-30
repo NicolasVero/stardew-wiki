@@ -409,6 +409,11 @@ function load_elements() {
             exit_button: `.exit-museum-${i}`,
             modal_panel: `.museum-${i}`
         });
+        buttons.push({
+            open_button: `.view-community-center-${i}`,
+            exit_button: `.exit-community-center-${i}`,
+            modal_panel: `.community-center-${i}`
+        });
     }
     buttons.forEach(button => {
         activate_buttons(button.open_button, button.exit_button, button.modal_panel);
@@ -582,10 +587,12 @@ function update_section_visibility(section, settings) {
     const is_empty = is_section_empty(section);
     const has_older_items = has_section_older_version_items(section);
     if (settings.toggle_versions && is_empty && !has_older_items) {
-        if (title)
+        if (title) {
             title.style.display = "none";
-        if (smaller_title)
+        }
+        if (smaller_title) {
             smaller_title.style.display = "none";
+        }
         return;
     }
     if (title) {
@@ -595,10 +602,9 @@ function update_section_visibility(section, settings) {
         const should_show_smaller_title = (settings.no_spoil)
             ? is_empty
             : (settings.toggle_versions && is_empty && has_older_items);
-        smaller_title.style.display = should_show_smaller_title ? "block" : "none";
+        smaller_title.style.display = (should_show_smaller_title) ? "block" : "none";
     }
 }
-;
 function update_display(target_classes) {
     const settings = get_settings();
     const update_elements = (class_name) => {

@@ -33,7 +33,6 @@
                 15,
                 16,
                 17,
-                18,
                 19
             ],
             "reward" : {
@@ -71,16 +70,6 @@
             ],
             "reward" : {
                 "item_name" : "Friendship ♡"
-            }
-        }
-    },
-    "1.4.0" : {
-        "Abandoned JojaMart" : {
-            "bundle_ids" : [
-                36
-            ],
-            "reward" : {
-                "item_name" : "Movie Theater"
             }
         }
     }

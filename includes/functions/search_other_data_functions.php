@@ -607,6 +607,49 @@ function get_museum_piece_type(string $piece_name):string {
 	return (in_array($piece_name, $artifacts)) ? "artifacts" : "minerals";
 }
 
+function get_cc_binary_hash(array $player_bundles):string {
+	$bundles_json = sanitize_json_with_version("bundles", true);
+	$room_indexes = [];
+
+	foreach($bundles_json as $room_name => $room_details) {
+		$room_indexes[$room_name] = [];
+		foreach ($room_details["bundle_ids"] as $id) {
+			$room_indexes[$room_name][] = [$id => false];
+		}
+	}
+
+	foreach($player_bundles as $bundle_id => $player_bundle) {
+		if(empty($player_bundle["is_complete"]) || $player_bundle["is_complete"] === false) {
+			continue;
+		}
+
+		foreach($room_indexes[$player_bundle["room_name"]] as &$bundle) {
+			if(!isset($bundle[$bundle_id])) {
+				continue;
+			}
+			
+			$bundle[$bundle_id] = true;
+		}
+	}
+
+	$binary_result = "";
+	foreach($room_indexes as $room_name => $bundles) {
+		$all_complete = true;
+
+		foreach($bundles as $bundle) {
+			if(in_array(false, $bundle)) {
+				$all_complete = false;
+				break;
+			}
+		}
+		
+		$binary_result .= $all_complete ? "1" : "0";
+	}
+
+	$binary_result = str_pad($binary_result, 6, "0", STR_PAD_RIGHT);
+	return $binary_result;
+}
+
 function get_player_bundle_progress(object $bundle_data, array $bundle_progress):array {
 	$host_untreated_data = $GLOBALS["untreated_all_players_data"]->player;
 	$cc_rooms = [
@@ -615,19 +658,16 @@ function get_player_bundle_progress(object $bundle_data, array $bundle_progress)
 		"Pantry" => "ccPantry", 
         "Fish Tank" => "ccFishTank",
 		"Vault" => "ccVault",
-		"Bulletin Board" => "ccBulletin",
-		"Abandoned JojaMart" => "ccMovieTheater"
+		"Bulletin Board" => "ccBulletin"
     ];
 
 	$bundle_details = get_player_bundle_details($bundle_data);
-	
-	$bundle_details = [
-		"bundle_id" => $bundle_progress["id"],
-		"room_name" => $bundle_progress["room_name"]
-	] + $bundle_details;
-
 	$bundle_details["is_complete"] = false;
 	$bundle_details["items_added"] = [];
+	
+	$bundle_details = [
+		"room_name" => $bundle_progress["room_name"]
+	] + $bundle_details;
 
 	// Les bundles sont entièrement constitués de "true" si il a été complété SAUF pour les bundles de "Vault"
 	$is_bundle_completed = ($bundle_progress["room_name"] != "Vault") ?
@@ -641,8 +681,7 @@ function get_player_bundle_progress(object $bundle_data, array $bundle_progress)
 		$bundle_progress["progress"][0] == "true"
 		||
 		has_element($cc_rooms[$bundle_progress["room_name"]], $host_untreated_data)
-	)
-	;
+	);
 
 	if(empty($bundle_details["limit"])) {
 		$bundle_details["limit"] = count($bundle_details["requirements"]);

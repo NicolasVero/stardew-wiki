@@ -119,9 +119,9 @@ function get_aggregated_data(object $data):array {
     return [
         "general" => [
             "id"                    => (int) $data->UniqueMultiplayerID,
-            "game_version"          => (string) $general_data->gameVersion, // Globale
-            "game_version_score"    => $game_version_score, // Globale
-            "should_spawn_monsters" => $should_spawn_monsters, // Globale
+            "game_version"          => (string) $general_data->gameVersion,
+            "game_version_score"    => $game_version_score,
+            "should_spawn_monsters" => $should_spawn_monsters,
             "name"                  => (string) $data->name,
             "gender"                => get_player_gender([$data->gender, $data->isMale]),
             "farm_name"             => (string) $data->farmName,
@@ -131,7 +131,7 @@ function get_aggregated_data(object $data):array {
             "spouse"                => get_spouse($data),
             "children"              => get_children_amount((int) $data->UniqueMultiplayerID),
             "house_level"           => get_house_upgrade_level($data),
-            "date"                  => get_formatted_date(), // Globale
+            "date"                  => get_formatted_date(),
             "game_duration"         => get_game_duration((int) $data->millisecondsPlayed),
             "mine_level"            => (int) $data->deepestMineLevel,
             "max_items"             => (int) $data->maxItems,
@@ -140,10 +140,10 @@ function get_aggregated_data(object $data):array {
             "grandpa_score"         => get_grandpa_score(),
             "golds"                 => (int) $data->money,
             "total_golds"           => (int) $data->totalMoneyEarned,
-            "golden_walnuts"        => (int) $general_data->goldenWalnutsFound, // Globale
+            "golden_walnuts"        => (int) $general_data->goldenWalnutsFound,
             "qi_gems"               => (int) $data->qiGems,
             "casino_coins"          => (int) $data->clubCoins,
-            "raccoons"              => (int) $general_data->timesFedRaccoons, // Globale
+            "raccoons"              => (int) $general_data->timesFedRaccoons,
             "stardrops_found"       => get_player_stardrops_found((int) $data->maxStamina)
         ],
         "levels" => [
@@ -167,12 +167,12 @@ function get_aggregated_data(object $data):array {
         "friendship"        => get_player_friendship_data($data->friendshipData),
         "enemies_killed"    => get_player_enemies_killed_data($data->stats),
         "quest_log"         => get_player_quest_log($data->questLog),
-        "farm_animals"      => get_player_farm_animals(), // Globale
-        "weather"           => get_weather(), // Globale
+        "farm_animals"      => get_player_farm_animals(),
+        "weather"           => get_weather(),
         "secret_notes"      => get_player_secret_notes($data->secretNotesSeen),
-        "jumino_kart"       => get_jumino_kart_leaderboard(), // Globale
-        "museum_coords"     => get_museum_pieces_coords($general_data), // Globale
-        "locations_visited" => get_player_visited_locations($data), // Globale
-        "cc_bundles"        => get_player_bundles($general_data) // Globale
+        "jumino_kart"       => get_jumino_kart_leaderboard(),
+        "museum_coords"     => get_museum_pieces_coords($general_data),
+        "locations_visited" => get_player_visited_locations($data),
+        "cc_bundles"        => get_player_bundles($general_data)
     ];
 }

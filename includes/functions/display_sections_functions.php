@@ -8,7 +8,8 @@ function display_panels():string {
 	$structure .= display_farm_animals_panel();
 	$structure .= display_junimo_kart_panel();
 	$structure .= display_museum_panel();
-
+	$structure .= display_community_center_panel();
+    
     return $structure;
 }
 

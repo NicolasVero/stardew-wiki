@@ -86,6 +86,12 @@ function load_elements():void {
             exit_button: `.exit-museum-${i}`,
             modal_panel: `.museum-${i}`
         });
+
+		buttons.push({
+            open_button: `.view-community-center-${i}`,
+            exit_button: `.exit-community-center-${i}`,
+            modal_panel: `.community-center-${i}`
+        });
 	}
 
 	buttons.forEach(button => {
