@@ -330,7 +330,7 @@ function display_farm_animals_panel():string {
                 $heart_icon = 
                 (($friendship_level >= $i) ?
                     "heart.png" :
-                        (($friendship_level == ($i - 0.5)) ?
+                        (($friendship_level === ($i - 0.5)) ?
                             "half_heart.png" : "empty_heart.png"));
                 $hearts_html .= "<img src='{$images_path}icons/$heart_icon' class='hearts' alt=''/>";
             }
@@ -394,7 +394,7 @@ function display_junimo_kart_panel():string {
 
         $name = (string) $untreated_score->name->string;
         $score = (int) $untreated_score->score->int;
-        $leader_class = ($counter == 1) ? "leader" : "";
+        $leader_class = ($counter === 1) ? "leader" : "";
         $structure .= "
             <span class='record-holder $leader_class'>
                 <span class='record-holder-details'>
@@ -449,7 +449,7 @@ function display_museum_panel():string {
 
             $museum_piece = "";
             foreach($museum_data as $piece_index => $piece_details) {
-                if($piece_details["coords"]["X"] == $column_count && $piece_details["coords"]["Y"] == $row_count) {
+                if($piece_details["coords"]["X"] === $column_count && $piece_details["coords"]["Y"] === $row_count) {
                     $piece_filename = formate_text_for_file(get_item_name_by_id($piece_details["id"]));
                     $piece_type = $piece_details["type"];
                     $museum_piece = "<img src='{$images_path}{$piece_type}/{$piece_filename}.png' class='museum-piece' alt='$piece_filename'/>";

@@ -51,9 +51,9 @@ function get_level_progress_bar(int $level):string {
 
     for($i = 1; $i <= $max_level; $i++) {
         if($level >= $i) {
-            $level_bar = get_images_folder() . (($i % ($max_level / 2) == 0) ? "icons/big_level.png"       : "icons/level.png");
+            $level_bar = get_images_folder() . (($i % ($max_level / 2) === 0) ? "icons/big_level.png"       : "icons/level.png");
         } else {
-            $level_bar = get_images_folder() . (($i % ($max_level / 2) == 0) ? "icons/big_level_empty.png" : "icons/level_empty.png");
+            $level_bar = get_images_folder() . (($i % ($max_level / 2) === 0) ? "icons/big_level_empty.png" : "icons/level_empty.png");
         }
 
         $structure .= "<img src='$level_bar' alt=''/>";        
@@ -67,7 +67,7 @@ function get_skills_icons(array $skills, string $current_skill):string {
     $structure = "<div class='skills-section'>";
 
     foreach($skills as $skill) {
-        if($current_skill == strtolower($skill["source"])) {
+        if($current_skill === strtolower($skill["source"])) {
 
             $skill_icon = strtolower($skill["skill"]);
             $skill_icon_path = get_images_folder() . "skills/$skill_icon.png";
@@ -122,7 +122,7 @@ function get_tooltip_text(array $player_data, string $json_line_name, string $da
 
         case "artifacts":
         case "minerals":  
-            if($counter == 0) return "$json_line_name: not given yet";
+            if($counter === 0) return "$json_line_name: not given yet";
             return "$json_line_name: given to museum";
 
         default : return $json_line_name;
@@ -142,9 +142,9 @@ function get_friendship_structure(array $friendship_info):string {
     
     $friend_level = $friend["friend_level"] ?? 0;
     $status = $friend["status"] ?? "Unknown";
-    $can_be_married = in_array($name, $marriables_npc) && $status == "Friendly";
-    $max_heart = ($status) == "Married" ? 14 : 10;
-    $is_met = ($status == "Unknown") ? "not-met" : "met";
+    $can_be_married = in_array($name, $marriables_npc) && $status === "Friendly";
+    $max_heart = ($status) === "Married" ? 14 : 10;
+    $is_met = ($status === "Unknown") ? "not-met" : "met";
     
     $hearts_html = "";
 
@@ -155,7 +155,7 @@ function get_friendship_structure(array $friendship_info):string {
 
     $gifted = ($friend) ? [
         $friend["week_gifts"] > 0 ? "gifted" : "not-gifted",
-        $friend["week_gifts"] == 2 ? "gifted" : "not-gifted"
+        $friend["week_gifts"] === 2 ? "gifted" : "not-gifted"
     ] : ["not-gifted", "not-gifted"];
 
     return "
@@ -203,10 +203,10 @@ function get_weather_tooltip(string $weather):string {
 function get_child_tooltip(string $spouse, array $children):string {
 	$gender = get_the_married_person_gender($spouse);
 	$children_count = count($children);
-	$children_names = ($children_count == 1) ? $children[0] : implode(" and ", $children);
+	$children_names = ($children_count === 1) ? $children[0] : implode(" and ", $children);
 	$nombre = ($children_count > 1) ? "children" : "child";
 
-	if($children_count == 0) {   
+	if($children_count === 0) {   
         return "With $gender $spouse, haven't yet had $nombre";
     }
 

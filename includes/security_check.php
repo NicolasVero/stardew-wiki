@@ -14,7 +14,7 @@ function is_file_secure(mixed $file, string $external_error = null):bool {
         throw new Exception("Invalid file size.");
     }
 
-    if((!in_array($file["type"], ["application/xml", "text/xml", "application/octet-stream"])) || (finfo_file($finfo, $file["tmp_name"]) != "text/xml")) {
+    if((!in_array($file["type"], ["application/xml", "text/xml", "application/octet-stream"])) || (finfo_file($finfo, $file["tmp_name"]) !== "text/xml")) {
         throw new Exception("The file is not in xml format.");
     }
     
