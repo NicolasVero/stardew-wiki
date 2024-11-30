@@ -589,7 +589,7 @@ function display_crafting_recipes():string {
 }
 
 function display_farm_animals():string {
-    $data = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
+    $data = $GLOBALS["shared_players_data"];
     $gallery_details = [
         "player_data" => $data["farm_animals"],
         "json_filename" => "farm_animals",
@@ -613,7 +613,7 @@ function display_secret_notes():string {
 }
 
 function display_locations_visited():string {
-    $data = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
+    $data = $GLOBALS["shared_players_data"];
     $gallery_details = [
         "player_data" => $data["locations_visited"],
         "json_filename" => "locations_to_visit",
