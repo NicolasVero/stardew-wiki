@@ -65,8 +65,7 @@ function get_is_married():bool {
 	return isset($data->spouse);
 }
 
-function get_spouse():mixed {
-	$data = $GLOBALS["untreated_player_data"];
+function get_spouse(object $data):mixed {
 	return (!empty($data->spouse)) ? $data->spouse : null;
 }
 
@@ -113,8 +112,7 @@ function is_golden_clock_on_farm():bool {
 	return false;
 }
 
-function get_house_upgrade_level():int {
-	$data = $GLOBALS["untreated_player_data"];
+function get_house_upgrade_level(object $data):int {
 	return (int) $data->houseUpgradeLevel;
 }
 
@@ -228,23 +226,21 @@ function is_given_to_museum(int $item_id, object $general_data, int $museum_inde
 	return 0;
 }
 
-function get_museum_index(object $general_data):int {
-	$index_museum = 0;
-
+function get_gamelocation_index(object $general_data, string $searched_location):int {
+	$index = 0;
 	$locations = $general_data->locations->GameLocation;
 
 	foreach($locations as $location) {
-		if(isset($location->museumPieces)) {
+		if(isset($location->$searched_location)) {
 			break;
 		}
-		$index_museum++;
+		$index++;
 	}
 
-	return $index_museum;
+	return $index;
 }
 
-function get_farmer_level():string {
-	$data = $GLOBALS["untreated_player_data"];
+function get_farmer_level(object $data):string {
     $level_names = [
         "Newcomer",
         "Greenhorn",
@@ -312,7 +308,7 @@ function get_grandpa_score(): int {
         }
     }
 
-    $house_level = get_house_upgrade_level();
+    $house_level = get_house_upgrade_level($data);
     $is_married = get_is_married();
     if($house_level >= 2 && $is_married) {
         $grandpa_points++;
@@ -583,8 +579,9 @@ function get_junimo_kart_fake_leaderboard():object {
 }
 
 function get_museum_pieces_coords(object $data):array {
-	$museum_index = get_museum_index($data);
+	$museum_index = get_gamelocation_index($data, "museumPieces");
 	$in_game_museum_pieces = $data->locations->GameLocation[$museum_index]->museumPieces;
+	$museum_piece_details = [];
 
 	foreach($in_game_museum_pieces->item as $museum_piece) {
 		$museum_piece_id = (is_game_older_than_1_6()) ? (int) $museum_piece->value->int : (int) $museum_piece->value->string;
@@ -608,4 +605,155 @@ function get_museum_pieces_coords(object $data):array {
 function get_museum_piece_type(string $piece_name):string {
 	$artifacts = sanitize_json_with_version("artifacts", true);
 	return (in_array($piece_name, $artifacts)) ? "artifacts" : "minerals";
+}
+
+function get_cc_binary_hash(array $player_bundles):string {
+	$bundles_json = sanitize_json_with_version("bundles", true);
+	$room_indexes = [];
+
+	foreach($bundles_json as $room_name => $room_details) {
+		$room_indexes[$room_name] = [];
+		foreach ($room_details["bundle_ids"] as $id) {
+			$room_indexes[$room_name][] = [$id => false];
+		}
+	}
+
+	foreach($player_bundles as $bundle_id => $player_bundle) {
+		if(empty($player_bundle["is_complete"]) || $player_bundle["is_complete"] === false) {
+			continue;
+		}
+
+		foreach($room_indexes[$player_bundle["room_name"]] as &$bundle) {
+			if(!isset($bundle[$bundle_id])) {
+				continue;
+			}
+			
+			$bundle[$bundle_id] = true;
+		}
+	}
+
+	$binary_result = "";
+	foreach($room_indexes as $room_name => $bundles) {
+		$all_complete = true;
+
+		foreach($bundles as $bundle) {
+			if(in_array(false, $bundle)) {
+				$all_complete = false;
+				break;
+			}
+		}
+		
+		$binary_result .= $all_complete ? "1" : "0";
+	}
+
+	$binary_result = str_pad($binary_result, 6, "0", STR_PAD_RIGHT);
+	return $binary_result;
+}
+
+function get_player_bundle_progress(object $bundle_data, array $bundle_progress):array {
+	$host_untreated_data = $GLOBALS["untreated_all_players_data"]->player;
+	$cc_rooms = [
+        "Boiler Room" => "ccBoilerRoom",
+		"Crafts Room" => "ccCraftsRoom",
+		"Pantry" => "ccPantry", 
+        "Fish Tank" => "ccFishTank",
+		"Vault" => "ccVault",
+		"Bulletin Board" => "ccBulletin"
+    ];
+
+	$bundle_details = get_player_bundle_details($bundle_data);
+	$bundle_details["is_complete"] = false;
+	$bundle_details["items_added"] = [];
+	
+	$bundle_details = [
+		"room_name" => $bundle_progress["room_name"]
+	] + $bundle_details;
+
+	// Les bundles sont entièrement constitués de "true" si il a été complété SAUF pour les bundles de "Vault"
+	$is_bundle_completed = ($bundle_progress["room_name"] != "Vault") ?
+	(
+		!in_array("false", $bundle_progress["progress"], true)
+		||
+		has_element($cc_rooms[$bundle_progress["room_name"]], $host_untreated_data)
+	)
+	:
+	(
+		$bundle_progress["progress"][0] == "true"
+		||
+		has_element($cc_rooms[$bundle_progress["room_name"]], $host_untreated_data)
+	);
+
+	if(empty($bundle_details["limit"])) {
+		$bundle_details["limit"] = count($bundle_details["requirements"]);
+	}
+
+	if($is_bundle_completed) {
+		$bundle_details["is_complete"] = true;
+		return $bundle_details;
+	}
+
+	for($item_in_bundle = 0; $item_in_bundle < count($bundle_details["requirements"]); $item_in_bundle++) {
+		if($bundle_progress["progress"][$item_in_bundle] == "true") {
+			array_push($bundle_details["items_added"], $bundle_details["requirements"][$item_in_bundle]);
+		}
+	}
+
+	return $bundle_details;
+}
+
+function get_player_bundle_details(object $bundle_data):array {
+	$formatted_bundle = explode("/", (string) $bundle_data->value->string);
+	$bundle_name = $formatted_bundle[0];
+	$bundle_reward = get_bundle_reward($formatted_bundle[1]);
+	$bundle_requirements = get_bundle_requirements($formatted_bundle[2]);
+	$bundle_limit = $formatted_bundle[4];
+	
+	$bundle_details = [
+		"bundle_name" => $bundle_name,
+		"requirements" => $bundle_requirements,
+		"limit" => $bundle_limit,
+		"reward" => $bundle_reward
+	];
+
+	return $bundle_details;
+}
+
+function get_bundle_requirements(string $requirements):array {
+	$formatted_requirements = array_chunk(preg_split('/\s+/', $requirements), 3);
+	$bundle_requirements = [];
+	foreach($formatted_requirements as $item) {
+		get_correct_id($item[0]);
+		$item[0] = abs($item[0]);
+		$item_name = ($item[0] == 1) ? "Gold Coins" : get_item_name_by_id($item[0]);
+
+		$bundle_requirement_item = [
+			"id" => $item[0],
+			"name" => $item_name,
+			"quantity" => $item[1],
+			"quality" => $item[2],
+		];
+
+		array_push($bundle_requirements, $bundle_requirement_item);
+	}
+
+	return $bundle_requirements;
+}
+
+function get_bundle_reward(string $reward):array {
+	$big_objects_json = $GLOBALS["json"]["big_objects"];
+	$formatted_reward = explode(" ", $reward);
+
+	$reward_type = $formatted_reward[0];
+	get_correct_id($formatted_reward[1]);
+	$reward_id = ($reward_type != "BO") ? $formatted_reward[1] : get_custom_id($big_objects_json[$formatted_reward[1]]);
+	$reward_name = get_item_name_by_id($reward_id);
+
+	$bundle_reward = [
+		"type" => $reward_type,
+		"id" => $reward_id,
+		"name" => $reward_name,
+		"quantity" => $formatted_reward[2]
+	];
+
+	return $bundle_reward;
 }

@@ -307,6 +307,12 @@ function get_player_quest_log(object $data):array {
 			$days_left = (int) $item->daysLeft;
 			$rewards = [(int) $item->reward];
 			$target = $item->target;
+
+			$goal_name = "";
+			$keyword = "";
+			$keyword_ing = "";
+			$number_to_get = 0;
+			$number_obtained = 0;
 			
 			switch($quest_type) {
 
@@ -497,7 +503,7 @@ function get_player_artifacts(object $artifacts, object $general_data):array {
 		get_correct_id($artifact_id);
 
 		$artifacts_reference = find_reference_in_json($artifact_id, "artifacts");
-		$museum_index = get_museum_index($general_data);
+		$museum_index = get_gamelocation_index($general_data, "museumPieces");
 
 		if(!empty($artifacts_reference)) {
 			$artifacts_data[$artifacts_reference] = [
@@ -527,7 +533,7 @@ function get_player_minerals(object $minerals, object $general_data):array {
 		
 		$minerals_reference = find_reference_in_json($mineral_id, "minerals");
 		
-		$museum_index = get_museum_index($general_data);
+		$museum_index = get_gamelocation_index($general_data, "museumPieces");
 
 		if(!empty($minerals_reference)) {
 			$minerals_data[$minerals_reference] = [
@@ -580,8 +586,7 @@ function are_all_adventurers_guild_categories_completed(array $adventurers_guild
     return $counter == count($adventurers_guild_data);
 }
 
-function get_player_pet():array {
-	$data = $GLOBALS["untreated_player_data"];
+function get_player_pet(object $data):array {
 	$breed = (int) $data->whichPetBreed;
 	$type = (is_game_older_than_1_6()) ?
 		(((string) $data->catPerson == "true") ? "cat" : "dog")
@@ -747,4 +752,47 @@ function get_player_visited_locations(object $player_data):array {
 	}
 
 	return $player_visited_locations;
+}
+
+function get_player_bundles(object $general_data):array {
+	$bundles_index = get_gamelocation_index($general_data, "bundles");
+	$bundles_json = sanitize_json_with_version("bundles", true);
+	$bundles_data = $general_data->bundleData;
+	$bundle_arrays = $general_data->locations->GameLocation[$bundles_index]->bundles;
+
+	foreach($bundle_arrays->item as $bundle_array) {
+		$bundle_id = (int) $bundle_array->key->int;
+		$bundle_booleans = (array) $bundle_array->value->ArrayOfBoolean->boolean;
+
+		foreach($bundles_json as $bundle_room_name => $bundle_room_details) {
+			if(!in_array($bundle_id, $bundle_room_details["bundle_ids"])) {
+				continue;
+			}
+
+			$bundle_room = $bundle_room_name;
+		}
+		
+		if(empty($bundle_room)) {
+			continue;
+		}
+
+		$bundle_data_name = "$bundle_room/$bundle_id";
+		$bundle_progress = [
+			"room_name" => $bundle_room,
+			"id" => $bundle_id,
+			"progress"  => $bundle_booleans
+		];
+
+		foreach($bundles_data->item as $bundle_data) {
+			if((string) $bundle_data->key->string != $bundle_data_name) {
+				continue;
+			}
+
+			$player_bundles[$bundle_id] = get_player_bundle_progress($bundle_data, $bundle_progress);
+		}
+	}
+	
+	ksort($player_bundles);
+	
+	return $player_bundles;
 }

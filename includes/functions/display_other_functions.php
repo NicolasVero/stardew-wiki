@@ -41,6 +41,10 @@ function display_junimo_kart_button():string {
 	return "<img src='" . get_images_folder() . "/icons/controller.png' class='controller-icon view-junimo-kart-leaderboard view-junimo-kart-leaderboard-" . $GLOBALS['player_id'] . " button-elements modal-opener icon' alt='Controller icon'>";
 }
 
+function display_community_center():string {
+	return "<img src='" . get_images_folder() . "/icons/golden_scroll.png' class='golden-scroll-icon view-community-center view-community-center-" . $GLOBALS['player_id'] . " button-elements modal-opener icon' alt='Golden Scroll icon'>";
+}
+
 function display_quest_button():string {
 	return "<img src='" . get_images_folder() . "/icons/quest_icon.png' class='quest-icon view-all-quests view-all-quests-" . $GLOBALS['player_id'] . " button-elements modal-opener icon' alt='Quest icon'>";
 }

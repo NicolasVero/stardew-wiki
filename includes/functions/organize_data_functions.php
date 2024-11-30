@@ -102,12 +102,12 @@ function get_aggregated_data(object $data):array {
             "name"                  => (string) $data->name,
             "gender"                => get_player_gender([$data->gender, $data->isMale]),
             "farm_name"             => (string) $data->farmName,
-            "farmer_level"          => get_farmer_level(),
+            "farmer_level"          => get_farmer_level($data),
             "favorite_thing"        => (string) $data->favoriteThing,
-            "pet"                   => get_player_pet(),
-            "spouse"                => get_spouse(),
+            "pet"                   => get_player_pet($data),
+            "spouse"                => get_spouse($data),
             "children"              => get_children_amount((int) $data->UniqueMultiplayerID),
-            "house_level"           => get_house_upgrade_level(),
+            "house_level"           => get_house_upgrade_level($data),
             "date"                  => get_formatted_date(),
             "game_duration"         => get_game_duration((int) $data->millisecondsPlayed),
             "mine_level"            => (int) $data->deepestMineLevel,
@@ -156,6 +156,7 @@ function get_shared_aggregated_data(object $data):array {
         "weather"               => get_weather(),
         "jumino_kart"           => get_jumino_kart_leaderboard(),
         "museum_coords"         => get_museum_pieces_coords($general_data),
-        "locations_visited"     => get_player_visited_locations($data)
+        "locations_visited"     => get_player_visited_locations($data),
+        "cc_bundles"            => get_player_bundles($general_data)
     ];
 }

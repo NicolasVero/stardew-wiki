@@ -8,7 +8,8 @@ function display_panels():string {
 	$structure .= display_farm_animals_panel();
 	$structure .= display_junimo_kart_panel();
 	$structure .= display_museum_panel();
-
+	$structure .= display_community_center_panel();
+    
     return $structure;
 }
 
@@ -160,6 +161,7 @@ function display_header():string {
 function display_general_stats():string {
 	$player_id = $GLOBALS["player_id"];
 	$all_players_data = $GLOBALS["all_players_data"][$player_id]["general"];
+	$community_center_button = display_community_center();
 	$junimo_kart_button = display_junimo_kart_button();
 	$quest_button = display_quest_button();
 
@@ -174,6 +176,7 @@ function display_general_stats():string {
     return "
         <section class='info-section general-stats'>
         	<h2 class='section-title'>General stats</h2>
+            $community_center_button
             $junimo_kart_button
 			$quest_button
             <div>" .

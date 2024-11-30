@@ -384,6 +384,7 @@ function display_junimo_kart_panel():string {
                 <span class='scores'>
         ";
 
+    // Marche pas lorsque vide
     $untreated_scores = $untreated_data->junimoKartLeaderboards->entries ?? get_junimo_kart_fake_leaderboard();
     $counter = 1;
 
@@ -480,6 +481,22 @@ function display_museum_panel():string {
             </span>
         </section>
     ";
+}
+
+function display_community_center_panel():string {
+    $player_id = $GLOBALS["player_id"];
+    $player_data = $GLOBALS["shared_players_data"];
+    $images_path = get_images_folder();
+	$cc_binary = get_cc_binary_hash($player_data["cc_bundles"]);
+
+    $structure = "
+        <section class='panel community-center-panel community-center-$player_id modal-window'>
+            <img src='{$images_path}icons/exit.png' class='absolute-exit exit exit-community-center-$player_id' alt=''/>
+            <img src='{$images_path}bundles/CC_$cc_binary.png'' alt=''/>
+        </section>
+    ";
+
+    return $structure;
 }
 
 if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"]) && $_POST["action"] === "display_feedback_panel") {
