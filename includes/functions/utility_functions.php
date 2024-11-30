@@ -199,6 +199,10 @@ function array_keys_exists(array $keys, array $array):bool {
     return count(array_diff_key(array_flip($keys), $array)) === 0;
 }
 
+function is_object_empty(object $object):bool {
+	return ($object->attributes()->count() === 0);
+}
+
 function decode(string $filename): array {
     $url = get_json_folder() . "$filename.json";
     $ch = curl_init($url);

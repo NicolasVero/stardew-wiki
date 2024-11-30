@@ -384,8 +384,7 @@ function display_junimo_kart_panel():string {
                 <span class='scores'>
         ";
 
-    // Marche pas lorsque vide
-    $untreated_scores = $untreated_data->junimoKartLeaderboards->entries ?? get_junimo_kart_fake_leaderboard();
+    $untreated_scores = get_junimo_leaderboard($untreated_data->junimoKartLeaderboards->entries);
     $counter = 1;
 
     foreach($untreated_scores->NetLeaderboardsEntry as $untreated_score) {

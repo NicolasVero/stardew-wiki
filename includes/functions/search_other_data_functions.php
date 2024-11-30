@@ -523,60 +523,41 @@ function has_any_player_gotten_all_stardrops():bool {
 	return false;
 }
 
-function get_junimo_kart_fake_leaderboard():object {
-	return (object) [
-		"NetLeaderboardsEntry" => [
-			(object) [
-				"name" => (object) [
-					"string" => "Lewis"
-				],
-				"score" => (object) [
-					"int" => 50000
-				]
-			]
-		],
-		"NetLeaderboardsEntry" => [
-			(object) [
-				"name" => (object) [
-					"string" => "Shane"
-				],
-				"score" => (object) [
-					"int" => 25000
-				]
-			]
-		],
-		"NetLeaderboardsEntry" => [
-			(object) [
-				"name" => (object) [
-					"string" => "Lewis"
-				],
-				"score" => (object) [
-					"int" => 10000
-				]
-			]
-		],
-		"NetLeaderboardsEntry" => [
-			(object) [
-				"name" => (object) [
-					"string" => "Lewis"
-				],
-				"score" => (object) [
-					"int" => 5000
-				]
-			]
-		],
-		"NetLeaderboardsEntry" => [
-			(object) [
-				"name" => (object) [
-					"string" => "Lewis"
-				],
-				"score" => (object) [
-					"int" => 250
-				]
-			]
-		]
-	];
+function get_junimo_leaderboard(object $junimo_leaderboard):object {
+	if(is_object_empty($junimo_leaderboard)) {
+		return get_junimo_kart_fake_leaderboard();
+	}
+
+	return $junimo_leaderboard;
 }
+
+function get_junimo_kart_fake_leaderboard(): object {
+    return (object) [
+        "NetLeaderboardsEntry" => [
+            (object) [
+                "name" => (object) ["string" => "Lewis"],
+                "score" => (object) ["int" => 50000]
+            ],
+            (object) [
+                "name" => (object) ["string" => "Shane"],
+                "score" => (object) ["int" => 25000]
+            ],
+            (object) [
+                "name" => (object) ["string" => "Lewis"],
+                "score" => (object) ["int" => 10000]
+            ],
+            (object) [
+                "name" => (object) ["string" => "Lewis"],
+                "score" => (object) ["int" => 5000]
+            ],
+            (object) [
+                "name" => (object) ["string" => "Lewis"],
+                "score" => (object) ["int" => 250]
+            ],
+        ],
+    ];
+}
+
 
 function get_museum_pieces_coords(object $data):array {
 	$museum_index = get_gamelocation_index($data, "museumPieces");
