@@ -377,11 +377,14 @@
 	&.calendar-panel {
 		.invisible-panel;
 		@calendar-ratio: 1;
-		@calendar-block: 9.33vw * @calendar-ratio;
-		@calendar-border-width: 0.29vw * @calendar-ratio;
-		@calendar-left-margin: 2.33vw * @calendar-ratio;
-		@calendar-real-width: 70vw * @calendar-ratio;
-		@calendar-top-margin: 9.33vw * @calendar-ratio;
+		@used-width: 50vw;
+		@calendar-width: 480;
+		// (used-width en vw * valeur en pixel) / calendar-width en px
+		@calendar-block: ((@used-width * 64) / @calendar-width) * @calendar-ratio;
+		@calendar-border-width: ((@used-width * 2) / @calendar-width) * @calendar-ratio;
+		@calendar-left-margin: ((@used-width * 16) / @calendar-width) * @calendar-ratio;
+		@calendar-real-width: ((@used-width * @calendar-width) / @calendar-width) * @calendar-ratio;
+		@calendar-top-margin: ((@used-width * 64) / @calendar-width) * @calendar-ratio;
 
 		aspect-ratio: 1.43;
 		width: @calendar-real-width;
@@ -584,11 +587,14 @@
 		.invisible-panel;
 		.panel-with-background;
 		.panel-with-border;
-		@museum-ratio: 1;
-		@museum-block: 2.94vw * @museum-ratio;
-		@museum-left-margin: 1.29vw * @museum-ratio;
-		@museum-real-width: 70vw * @museum-ratio;
-		@museum-top-margin: 13.33vw * @museum-ratio;
+		@museum-ratio: 1;		
+		@used-width: 50vw;
+		@museum-width: 757;
+		// (used-width en vw * valeur en pixel) / museum-width en px
+		@museum-block: ((@used-width * 31.75) / @museum-width) * @museum-ratio;
+		@museum-left-margin: ((@used-width * 14) / @museum-width) * @museum-ratio;
+		@museum-real-width: ((@used-width * @museum-width) / @museum-width) * @museum-ratio;
+		@museum-top-margin: ((@used-width * 144) / @museum-width) * @museum-ratio;
 		
 		aspect-ratio: 1.29;
 		background-image: url("../../medias/images/content/museum_bg.png");
