@@ -1,7 +1,7 @@
 <?php
 
 function display_player_selection():string {
-	$players_names = $GLOBALS["players_names"];
+    $players_names = $GLOBALS["players_names"];
     
     $structure = "<ul id='players_selection'>";
 

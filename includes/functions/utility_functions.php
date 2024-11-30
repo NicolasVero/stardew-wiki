@@ -302,6 +302,30 @@ function get_contributors():array {
 	];
 }
 
+function get_players_name():array {
+	$players_data = $GLOBALS["all_players_data"];
+	$players_names = [];
+
+	for($i = 0; $i < count($players_data); $i++) {
+		array_push($players_names, $players_data[$i]["general"]["name"]);
+	}
+
+	return $players_names;
+}
+
+function get_script_loader():string {
+	return "
+		<script>
+			document.addEventListener('DOMContentLoaded', function() {
+				const players_count = " . count($GLOBALS["players_names"]) . "
+				initialize_player_swapper(players_count);
+				initialize_settings();
+				load_elements();
+			});
+		</script>
+	";
+}
+
 if(isset($_GET["action"]) && $_GET["action"] == "get_max_upload_size") {	
 	echo get_php_max_upload_size();
 }

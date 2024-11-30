@@ -9,7 +9,7 @@ function get_element_completion_percentage(int $max_amount, int $current_amount)
 }
 
 function does_host_has_element(string $element):int {
-	return ($GLOBALS["host_player_data"]["has_element"][$element]["is_found"]);
+	return ($GLOBALS["host_player_data"]["unlockables"][$element]["is_found"]);
 }
 
 function has_element(string $element, object $data):int {
