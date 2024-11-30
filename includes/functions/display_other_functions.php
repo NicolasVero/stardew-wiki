@@ -1,7 +1,7 @@
 <?php
 
 function display_player_selection():string {
-	$players_names = $GLOBALS["players_names"];
+    $players_names = $GLOBALS["players_names"];
     
     $structure = "<ul id='players_selection'>";
 
@@ -251,7 +251,7 @@ function display_festival_icon():string {
 }
 
 function display_weather_icon():string {
-    $data = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
+    $data = $GLOBALS["shared_players_data"];
     $weather = $data["weather"];
 
     return "
