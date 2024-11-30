@@ -344,7 +344,7 @@ function display_friendships(int $limit = -1): string {
 }
 
 function display_unlockables():string {
-	$player_unlockables = $GLOBALS["all_players_data"][$GLOBALS["player_id"]]["has_element"];
+	$player_unlockables = $GLOBALS["all_players_data"][$GLOBALS["player_id"]]["unlockables"];
 	$version_score = $GLOBALS["game_version_score"];
     $images_path = get_images_folder() . "unlockables/";
 	$decoded_unlockables = $GLOBALS["json"]["unlockables"];
