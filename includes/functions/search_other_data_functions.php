@@ -633,13 +633,23 @@ function get_cc_binary_hash(array $player_bundles):string {
 
 function get_player_bundle_progress(object $bundle_data, array $bundle_progress):array {
 	$host_untreated_data = $GLOBALS["untreated_all_players_data"]->player;
+
 	$cc_rooms = [
         "Boiler Room" => "ccBoilerRoom",
 		"Crafts Room" => "ccCraftsRoom",
-		"Pantry" => "ccPantry", 
+		"Pantry" => "ccPantry",
         "Fish Tank" => "ccFishTank",
 		"Vault" => "ccVault",
 		"Bulletin Board" => "ccBulletin"
+    ];
+
+	$joja_rooms = [
+        "Boiler Room" => "jojaBoilerRoom",
+		"Crafts Room" => "jojaCraftsRoom",
+		"Pantry" => "jojaPantry",
+        "Fish Tank" => "jojaFishTank",
+		"Vault" => "jojaVault",
+		"Bulletin Board" => "JojaMember"
     ];
 
 	$bundle_details = get_player_bundle_details($bundle_data);
@@ -656,12 +666,16 @@ function get_player_bundle_progress(object $bundle_data, array $bundle_progress)
 		!in_array("false", $bundle_progress["progress"], true)
 		||
 		has_element($cc_rooms[$bundle_progress["room_name"]], $host_untreated_data)
+		||
+		has_element($joja_rooms[$bundle_progress["room_name"]], $host_untreated_data)
 	)
 	:
 	(
 		$bundle_progress["progress"][0] == "true"
 		||
 		has_element($cc_rooms[$bundle_progress["room_name"]], $host_untreated_data)
+		||
+		has_element($joja_rooms[$bundle_progress["room_name"]], $host_untreated_data)
 	);
 
 	if(empty($bundle_details["limit"])) {
