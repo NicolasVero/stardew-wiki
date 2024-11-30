@@ -304,7 +304,7 @@ function display_calendar_panel():string {
 
 function display_farm_animals_panel():string {
     $player_id = $GLOBALS["player_id"];
-    $animals_friendship = $GLOBALS["all_players_data"][$player_id]["farm_animals"];
+    $animals_friendship = $GLOBALS["shared_players_data"]["farm_animals"];
     $images_path = get_images_folder();
     $friendships = "";
 
@@ -418,7 +418,7 @@ function display_junimo_kart_panel():string {
 
 function display_museum_panel():string {
 	$player_id = $GLOBALS["player_id"];
-    $museum_data = $GLOBALS["all_players_data"][$player_id]["museum_coords"];
+    $museum_data = $GLOBALS["shared_players_data"]["museum_coords"];
     $images_path = get_images_folder();
     $column_start = 26;
     $column_end = 49;

@@ -7,9 +7,16 @@ function load_save($save_file, $use_ajax = true):mixed {
     load_all_json();
 
     $GLOBALS["untreated_all_players_data"] = $data;
+    $GLOBALS["game_version"] = $data->gameVersion;
+	$GLOBALS["game_version_score"] = (int) get_game_version_score((string) $data->gameVersion);;
+	$GLOBALS["should_spawn_monsters"] = $data->shouldSpawnMonsters;
+    $GLOBALS["shared_players_data"] = get_shared_aggregated_data($data->player);
+
     $players_data = get_all_players_data();
     $players = get_all_players();
     $pages["sur_header"] = display_sur_header(false, false);
+
+
 
     for($player_count = 0; $player_count < count($players); $player_count++) {
         $GLOBALS["player_id"] = $player_count;
@@ -109,12 +116,9 @@ function get_all_players():array {
 
 function get_aggregated_data(object $data):array {
     $general_data = $GLOBALS["untreated_all_players_data"];
-    $game_version_score = (int) get_game_version_score((string) $general_data->gameVersion);
-    $should_spawn_monsters = $general_data->shouldSpawnMonsters;
 	$GLOBALS["untreated_player_data"] = $data;
-	$GLOBALS["game_version"] = $general_data->gameVersion;
-	$GLOBALS["game_version_score"] = $game_version_score;
-	$GLOBALS["should_spawn_monsters"] = $should_spawn_monsters;
+    $game_version_score = $GLOBALS["game_version_score"];
+    $should_spawn_monsters = $GLOBALS["should_spawn_monsters"];
     
     return [
         "general" => [
@@ -167,9 +171,21 @@ function get_aggregated_data(object $data):array {
         "friendship"        => get_player_friendship_data($data->friendshipData),
         "enemies_killed"    => get_player_enemies_killed_data($data->stats),
         "quest_log"         => get_player_quest_log($data->questLog),
+        "secret_notes"      => get_player_secret_notes($data->secretNotesSeen),
+        // "farm_animals"      => get_player_farm_animals(),
+        // "weather"           => get_weather(),
+        // "jumino_kart"       => get_jumino_kart_leaderboard(),
+        // "museum_coords"     => get_museum_pieces_coords($general_data),
+        // "locations_visited" => get_player_visited_locations($data)
+    ];
+}
+
+function get_shared_aggregated_data(object $data):array {
+    $general_data = $GLOBALS["untreated_all_players_data"];
+
+    return [
         "farm_animals"      => get_player_farm_animals(),
         "weather"           => get_weather(),
-        "secret_notes"      => get_player_secret_notes($data->secretNotesSeen),
         "jumino_kart"       => get_jumino_kart_leaderboard(),
         "museum_coords"     => get_museum_pieces_coords($general_data),
         "locations_visited" => get_player_visited_locations($data)

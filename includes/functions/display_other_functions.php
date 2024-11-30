@@ -247,7 +247,7 @@ function display_festival_icon():string {
 }
 
 function display_weather_icon():string {
-    $data = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
+    $data = $GLOBALS["shared_players_data"];
     $weather = $data["weather"];
 
     return "
