@@ -38,17 +38,7 @@ function load_save($save_file, $use_ajax = true):mixed {
             $structure .= $page;
         }
         
-        $structure .= "
-            <script>
-                document.addEventListener('DOMContentLoaded', function() {
-                    const players_count = " . count($GLOBALS["players_names"]) . "
-                    initialize_player_swapper(players_count);
-                    initialize_settings();
-                    load_elements();
-                });
-            </script>
-        ";
-
+        $structure .= get_script_loader();
         echo $structure;
     }
     
