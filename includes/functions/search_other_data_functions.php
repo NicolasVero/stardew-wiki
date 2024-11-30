@@ -71,7 +71,7 @@ function get_spouse(object $data):mixed {
 
 function is_this_the_same_day(string $date):bool {
     extract(get_formatted_date(false));
-    return $date == "$day/$season";
+    return $date === "$day/$season";
 }
 
 function get_amount_obelisk_on_map():int {
@@ -102,7 +102,7 @@ function is_golden_clock_on_farm():bool {
 	foreach($locations as $location) {
 		if(isset($location->buildings->Building)) {
 			foreach($location->buildings->Building as $building) {
-				if((string) $building->buildingType == "Gold Clock") {
+				if((string) $building->buildingType === "Gold Clock") {
                     return true;
                 }
 			}
@@ -127,7 +127,7 @@ function get_children_amount(int $id):array {
                     continue;
                 }
 
-				if((int) $npc->idOfParent == $id) {
+				if((int) $npc->idOfParent === $id) {
                     array_push($children_name, $npc->name);
                 }
 			}
@@ -143,7 +143,7 @@ function get_children_amount(int $id):array {
                             continue;
                         }
 
-						if((int) $npc->idOfParent == $id) {
+						if((int) $npc->idOfParent === $id) {
                             array_push($children_name, $npc->name);
                         }
                     }
@@ -180,24 +180,24 @@ function get_weather(string $weather_location = "Default"):string {
 
     foreach($locations as $complex_location) {
 		foreach($complex_location as $location) {
-			if($location->key->string == $weather_location) {
-				if($location->value->LocationWeather->weather->string != "Festival") {
+			if($location->key->string === $weather_location) {
+				if($location->value->LocationWeather->weather->string !== "Festival") {
 					return formate_text_for_file((string)$location->value->LocationWeather->weather->string);
 				}
 
-				if($location->value->LocationWeather->isRaining->string == true) {
+				if($location->value->LocationWeather->isRaining->string === true) {
 					return "rain";
 				}
 
-				if($location->value->LocationWeather->isSnowing->string == true) {
+				if($location->value->LocationWeather->isSnowing->string === true) {
 					return "snow";
 				}
 
-				if($location->value->LocationWeather->isLightning->string == true) {
+				if($location->value->LocationWeather->isLightning->string === true) {
 					return "storm";
 				}
 
-				if($location->value->LocationWeather->isGreenRain->string == true) {
+				if($location->value->LocationWeather->isGreenRain->string === true) {
 					return "green_rain";
 				}
 			}
@@ -213,11 +213,11 @@ function is_given_to_museum(int $item_id, object $general_data, int $museum_inde
 
 	foreach($museum_items->item as $museum_item) {
 		if($version_score < get_game_version_score("1.6.0")) {
-			if($item_id == (int) $museum_item->value->int) {
+			if($item_id === (int) $museum_item->value->int) {
 				return 1;
 			}
 		} else {
-			if($item_id == (int) $museum_item->value->string) {
+			if($item_id === (int) $museum_item->value->string) {
 				return 1;
 			}
 		}
@@ -403,7 +403,7 @@ function get_perfection_elements():array {
 
 function get_perfection_percentage():string {
 	$untreated_data = $GLOBALS["untreated_all_players_data"];
-	if((string) $untreated_data->farmPerfect == "true")
+	if((string) $untreated_data->farmPerfect === "true")
 		return 100;
 
 	$perfection_elements = get_perfection_elements();
@@ -479,7 +479,7 @@ function get_player_with_highest_friendships():array {
 
 		foreach($friendships as $friendship_name => $friendship) {
 			extract($friendship);
-			$can_be_married = in_array($friendship_name, $marriables_npc) && $status == "Friendly";
+			$can_be_married = in_array($friendship_name, $marriables_npc) && $status === "Friendly";
 
 			if(($can_be_married && $friend_level >= 8) || (!$can_be_married && $friend_level >= 10)) {
 				$friend_counter++;
@@ -515,7 +515,7 @@ function has_any_player_gotten_all_stardrops():bool {
 
 	for($current_player = 0; $current_player < $total_players; $current_player++) {
 		$stardrops_founds = $all_data[$current_player]["general"]["stardrops_found"];
-		if($stardrops_founds == 7) {
+		if($stardrops_founds === 7) {
 			return true;
 		}
 	}
