@@ -642,13 +642,17 @@
 	&.community-center-panel {
 		.invisible-panel;
 		.panel-with-border;
-		@museum-ratio: 1.5;
-		@used-width: 50vw;
-		@museum-width: 1120;
-		// (used-width en vw * valeur en pixel) / museum-width en px
-		@museum-real-width: ((@used-width * @museum-width) / @museum-width) * @museum-ratio;
+		@cc-ratio: 1.5;
+		@used-width: 60vw;
+		@cc-width: 1120;
+		// (used-width en vw * valeur en pixel) / cc-width en px
+		@cc-real-width: ((@used-width * @cc-width) / @cc-width) * @cc-ratio;
 		
 		aspect-ratio: 2.33;
-		width: @museum-real-width;
+		width: @cc-real-width;
+
+		& > .background-image {
+			width: 100%;
+		}
 	}
 }

@@ -484,17 +484,26 @@ function display_museum_panel():string {
 
 function display_community_center_panel():string {
     $player_id = $GLOBALS["player_id"];
-    $player_data = $GLOBALS["shared_players_data"];
+    $player_bundles = $GLOBALS["shared_players_data"]["cc_bundles"];
+    $bundles_json = sanitize_json_with_version("bundles", true);
     $images_path = get_images_folder();
-	$cc_binary = get_cc_binary_hash($player_data["cc_bundles"]);
+	$cc_binary = get_cc_binary_hash($player_bundles);
 
     $structure = "
         <section class='panel community-center-panel community-center-$player_id modal-window'>
             <img src='{$images_path}icons/exit.png' class='absolute-exit exit exit-community-center-$player_id' alt=''/>
-            <img src='{$images_path}bundles/CC_$cc_binary.png'' alt=''/>
+            <img src='{$images_path}bundles/CC_$cc_binary.png'' class='background-image' alt='Community center background'/>
+            <span class='bundles'>
+    ";
+    
+    foreach($bundles_json as $room_name => $room_details) {
+        $structure .= "<h2>$room_name</h2>";
+    }
+
+    $structure .= "
+            </span>
         </section>
     ";
-
     return $structure;
 }
 

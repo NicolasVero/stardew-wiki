@@ -661,7 +661,7 @@ function get_player_bundle_progress(object $bundle_data, array $bundle_progress)
 	] + $bundle_details;
 
 	// Les bundles sont entièrement constitués de "true" si il a été complété SAUF pour les bundles de "Vault"
-	$is_bundle_completed = ($bundle_progress["room_name"] != "Vault") ?
+	$is_bundle_completed = ($bundle_progress["room_name"] !== "Vault") ?
 	(
 		!in_array("false", $bundle_progress["progress"], true)
 		||
@@ -671,7 +671,7 @@ function get_player_bundle_progress(object $bundle_data, array $bundle_progress)
 	)
 	:
 	(
-		$bundle_progress["progress"][0] == "true"
+		$bundle_progress["progress"][0] === "true"
 		||
 		has_element($cc_rooms[$bundle_progress["room_name"]], $host_untreated_data)
 		||
@@ -688,7 +688,7 @@ function get_player_bundle_progress(object $bundle_data, array $bundle_progress)
 	}
 
 	for($item_in_bundle = 0; $item_in_bundle < count($bundle_details["requirements"]); $item_in_bundle++) {
-		if($bundle_progress["progress"][$item_in_bundle] == "true") {
+		if($bundle_progress["progress"][$item_in_bundle] === "true") {
 			array_push($bundle_details["items_added"], $bundle_details["requirements"][$item_in_bundle]);
 		}
 	}
