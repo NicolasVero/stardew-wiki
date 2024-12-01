@@ -63,9 +63,9 @@ async function AJAX_send():Promise<void> {
             const html = data.html;
 
             page_display.innerHTML = html["sur_header"];
-            page_display.innerHTML += landing_page;
-
+            
             if(data.code === "success") {
+                page_display.innerHTML += landing_page;
                 const players_count = data.players.length;
 
                 for(let i = 0; i < players_count; i++) {

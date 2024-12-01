@@ -19,8 +19,8 @@ function file_choice(event) {
 }
 // Upload File AJAX
 function AJAX_send() {
+    var _a, _b, _c;
     return __awaiter(this, void 0, void 0, function* () {
-        var _a, _b, _c;
         const xml_upload = document.getElementById("save-upload");
         const file = (_a = xml_upload === null || xml_upload === void 0 ? void 0 : xml_upload.files) === null || _a === void 0 ? void 0 : _a[0];
         if (!file) {
@@ -51,8 +51,8 @@ function AJAX_send() {
                 const data = JSON.parse(xhr.responseText);
                 const html = data.html;
                 page_display.innerHTML = html["sur_header"];
-                page_display.innerHTML += landing_page;
                 if (data.code === "success") {
+                    page_display.innerHTML += landing_page;
                     const players_count = data.players.length;
                     for (let i = 0; i < players_count; i++) {
                         page_display.innerHTML += html["player_" + i];
