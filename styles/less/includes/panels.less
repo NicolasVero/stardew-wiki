@@ -587,7 +587,7 @@
 		.invisible-panel;
 		.panel-with-background;
 		.panel-with-border;
-		@museum-ratio: 1;		
+		@museum-ratio: 1;
 		@used-width: 50vw;
 		@museum-width: 757;
 		// (used-width en vw * valeur en pixel) / museum-width en px
@@ -642,5 +642,53 @@
 	&.community-center-panel {
 		.invisible-panel;
 		.panel-with-border;
+		@cc-ratio: 1.5;
+		@used-width: 60vw;
+		@cc-width: 1120;
+		// (used-width en vw * valeur en pixel) / cc-width en px
+		@cc-real-width: ((@used-width * @cc-width) / @cc-width) * @cc-ratio;
+		
+		aspect-ratio: 2.33;
+		width: @cc-real-width;
+
+		& > .background-image {
+			width: 100%;
+		}
+
+		& > .rooms {
+			display: flex;
+			flex-direction: column;
+			gap: @big-gap;
+			padding: @big-gap;
+
+			h2 {
+				font-family: @primary-ff;
+				font-size: @big-fs;
+				font-weight: 400;
+				margin: 0;
+			}
+
+			& > .room {
+				display: flex;
+				flex-direction: column;
+				gap: @md-gap;
+
+				& > .bundles {
+					display: flex;
+					gap: @md-gap;
+
+					& > .bundle {
+						display: flex;
+						position: relative;
+
+						& > .checkmark {
+							bottom: 0;
+							position: absolute;
+							right: 0;
+						}
+					}
+				}
+			}
+		}
 	}
 }
