@@ -654,5 +654,41 @@
 		& > .background-image {
 			width: 100%;
 		}
+
+		& > .rooms {
+			display: flex;
+			flex-direction: column;
+			gap: @big-gap;
+			padding: @big-gap;
+
+			h2 {
+				font-family: @primary-ff;
+				font-size: @big-fs;
+				font-weight: 400;
+				margin: 0;
+			}
+
+			& > .room {
+				display: flex;
+				flex-direction: column;
+				gap: @md-gap;
+
+				& > .bundles {
+					display: flex;
+					gap: @md-gap;
+
+					& > .bundle {
+						display: flex;
+						position: relative;
+
+						& > .checkmark {
+							bottom: 0;
+							position: absolute;
+							right: 0;
+						}
+					}
+				}
+			}
+		}
 	}
 }

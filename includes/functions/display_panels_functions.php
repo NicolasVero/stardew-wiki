@@ -485,6 +485,7 @@ function display_museum_panel():string {
 function display_community_center_panel():string {
     $player_id = $GLOBALS["player_id"];
     $player_bundles = $GLOBALS["shared_players_data"]["cc_bundles"];
+    $host_untreated_data = $GLOBALS["untreated_all_players_data"]->player;
     $bundles_json = sanitize_json_with_version("bundles", true);
     $images_path = get_images_folder();
 	$cc_binary = get_cc_binary_hash($player_bundles);
@@ -493,11 +494,36 @@ function display_community_center_panel():string {
         <section class='panel community-center-panel community-center-$player_id modal-window'>
             <img src='{$images_path}icons/exit.png' class='absolute-exit exit exit-community-center-$player_id' alt=''/>
             <img src='{$images_path}bundles/CC_$cc_binary.png'' class='background-image' alt='Community center background'/>
-            <span class='bundles'>
+            <span class='rooms'>
     ";
     
     foreach($bundles_json as $room_name => $room_details) {
-        $structure .= "<h2>$room_name</h2>";
+        if($room_name === "Bulletin Board" && has_element("JojaMember", $host_untreated_data)) {
+            continue;
+        }
+        $structure .= "
+            <span class='room'>
+                <h2>$room_name</h2>
+                <span class='bundles'>";
+
+        foreach($room_details["bundle_ids"] as $bundle_id) {
+            $bundle_details = $player_bundles[$bundle_id];
+            $is_complete_class = ($bundle_details["is_complete"]) ? "complete" : "incomplete";
+            
+            $structure .= "<span class='bundle'>
+                <img src='{$images_path}bundles/" . formate_text_for_file($bundle_details["bundle_name"]) . "_bundle.png' alt='" . $bundle_details["bundle_name"] . " Bundle' class='$is_complete_class'/>";
+
+            // if($bundle_details["is_complete"]) {
+            //     $structure .= "<img src='{$images_path}icons/checked.png' class='checkmark'/>";
+            // }
+
+            $structure .= "</span>";
+        }
+
+        $structure .= "
+                </span>
+            </span>
+        ";
     }
 
     $structure .= "
