@@ -37,6 +37,11 @@ function display_settings_panel():string {
                     <label for='no_spoil_mode' id='no-spoil-label'>Hide undiscovered items</label>
                 </span>
                 <span class='checkbox'>
+                    <input type='checkbox' id='steam_achievements'>
+                    <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png' alt=''></span>
+                    <label for='steam_achievements' id='steam_achievements-label'>Show Steam achievements icons</label>
+                </span>
+                <span class='checkbox'>
                     <input type='checkbox' id='toggle_versions_items_mode' checked>
                     <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png' alt=''></span>
                     <label for='toggle_versions_items_mode' id='toggle-versions-items-label'>Hide items from more recent versions</label>
