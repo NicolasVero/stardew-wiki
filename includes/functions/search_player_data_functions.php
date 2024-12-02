@@ -464,7 +464,7 @@ function get_player_cooking_recipes(object $recipes, object $recipes_cooked):arr
 
 				get_correct_id($recipe_id);
 
-				if($recipe_id === $index) {
+				if($recipe_id == $index) {
 					$cooking_recipes_data[$item_name] = [
 						"id"      => $recipe_id,
 						"counter" => (int) $recipe_cooked->value->int
