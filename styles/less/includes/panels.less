@@ -651,8 +651,30 @@
 		aspect-ratio: 2.33;
 		width: @cc-real-width;
 
-		& > .background-image {
-			width: 100%;
+		& > .community-center-background-container {
+			position: relative;
+
+			& > .background-image {
+				width: 100%;
+			}
+
+			& > .chevron-down {
+				animation: float-up-down 3s ease-in-out infinite;
+				bottom: 20px;
+				position: absolute;
+				right: 50%;
+				transform: translateX(-50%);
+				width: 1.5rem;
+			}
+		}
+
+		@keyframes float-up-down {
+			0%, 100% {
+				transform: translateY(0);
+			}
+			50% {
+				transform: translateY(-10px);
+			}
 		}
 
 		& > .rooms {

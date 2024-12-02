@@ -493,7 +493,10 @@ function display_community_center_panel():string {
     $structure = "
         <section class='panel community-center-panel community-center-$player_id modal-window'>
             <img src='{$images_path}icons/exit.png' class='absolute-exit exit exit-community-center-$player_id' alt=''/>
-            <img src='{$images_path}bundles/CC_$cc_binary.png'' class='background-image' alt='Community center background'/>
+            <div class='community-center-background-container'>
+                <img src='{$images_path}bundles/CC_$cc_binary.png' class='background-image' alt='Community center background'/>
+                <img src='{$images_path}icons/chevron_down.png' class='chevron-down' alt='Scroll indicator'/>
+            </div>
             <span class='rooms'>
     ";
     
