@@ -19,8 +19,8 @@ function file_choice(event) {
 }
 // Upload File AJAX
 function AJAX_send() {
-    var _a, _b, _c;
     return __awaiter(this, void 0, void 0, function* () {
+        var _a, _b, _c;
         const xml_upload = document.getElementById("save-upload");
         const file = (_a = xml_upload === null || xml_upload === void 0 ? void 0 : xml_upload.files) === null || _a === void 0 ? void 0 : _a[0];
         if (!file) {
@@ -600,11 +600,8 @@ function update_section_visibility(section, settings) {
     const is_empty = is_section_empty(section);
     const has_older_items = has_section_older_version_items(section);
     if (settings.toggle_versions && is_empty && !has_older_items) {
-        if (title) {
-            title.style.display = "none";
-        }
-        if (smaller_title) {
-            smaller_title.style.display = "none";
+        if (section) {
+            section.style.display = "none";
         }
         return;
     }
