@@ -3,32 +3,36 @@ interface Settings {
     no_spoil: boolean;
 }
 
-function update_section_visibility(section: HTMLElement, settings: Settings):void {
+function update_section_visibility(section: HTMLElement, settings: Settings): void {
     const title = section.querySelector("h2");
     const smaller_title = section.children[1]?.querySelector("span .no-spoil-title") as HTMLElement;
     const is_empty = is_section_empty(section);
     const has_older_items = has_section_older_version_items(section);
 
-    if(settings.toggle_versions && is_empty && !has_older_items) {
-        if(section) {
-            section.style.display = "none";
-        }
-
+    if (settings.toggle_versions && is_empty && !has_older_items) {
+        section.style.display = "none";
         return;
+    } else {
+        section.style.display = "block";
     }
 
-    if(title) {   
+    if (title) {
         title.style.display = "block";
     }
 
-    if(smaller_title) {
-        const should_show_smaller_title = (settings.no_spoil) 
-            ? is_empty 
-            : (settings.toggle_versions && is_empty && has_older_items);
+    if (smaller_title) {
+        let should_show_smaller_title = false;
 
-        smaller_title.style.display = (should_show_smaller_title) ? "block" : "none"; 
+        if (settings.no_spoil) {
+            should_show_smaller_title = is_empty;
+        } else if (settings.toggle_versions) {
+            should_show_smaller_title = is_empty && has_older_items;
+        } else {
+            should_show_smaller_title = is_empty;
+        }
+
+        smaller_title.style.display = should_show_smaller_title ? "block" : "none";
     }
-
 }
 
 function update_display(target_classes: string | string[]):void {
