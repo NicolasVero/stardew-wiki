@@ -1,4 +1,8 @@
+# Files
 .env
-PHPMailer
+
+# Folders
+PHPMailer/
 vendor/
 node_modules/
+data/saves/
