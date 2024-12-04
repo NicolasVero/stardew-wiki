@@ -44,7 +44,7 @@ function display_settings_panel():string {
                 <span class='checkbox'>
                     <input type='checkbox' id='toggle_versions_items_mode' checked>
                     <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png' alt=''></span>
-                    <label for='toggle_versions_items_mode' id='toggle-versions-items-label'>Hide items from more recent versions</label>
+                    <label for='toggle_versions_items_mode' id='toggle-versions-items-label'>Hide items from newer versions</label>
                 </span>
                 <span class='checkbox'>
                     <input type='checkbox' id='wiki_redirections' checked>
