@@ -299,7 +299,7 @@ function get_contributors():array {
 			"name" => "Nicolas",
 			"icon" => "nicolas",
 			"texts" => [
-				"Nicolas is a young man with a passion for development, sleep, and who loves to make web development during his weekends.",
+				"Nicolas is passionate about sleep and web development. He works as a web developer at Neoma Business School.",
 				"He took care of the Back-End of the website, as well as the UX / UI design."
 			],
 			"socials" => [
