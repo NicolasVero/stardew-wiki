@@ -76,6 +76,7 @@ function display_quest_panel():string {
 				</span>
 			</section>
 		";
+        return $structure;
 	}
 
     foreach($this_player_data as $data) {
@@ -311,7 +312,25 @@ function display_farm_animals_panel():string {
     $player_id = $GLOBALS["player_id"];
     $animals_friendship = $GLOBALS["shared_players_data"]["farm_animals"];
     $images_path = get_images_folder();
-    $friendships = "";
+
+    $structure = "
+        <section class='panel all-animals-panel all-animals-$player_id modal-window'>
+            <div class='panel-header'>
+                <h2 class='section-title panel-title'>Farm animals friendships</h2>
+                <img src='{$images_path}icons/exit.png' class='exit-all-animals-$player_id exit' alt=''/>
+            </div>
+            <span class='friendlist'>
+    ";
+
+    if(empty($animals_friendship)) {
+        $structure .= "
+			        <h3>Nothing to see here yet</h3>
+                </span>
+            </section>
+        ";
+
+        return $structure;
+    }
 
     foreach($animals_friendship as $animal_friendship) {
         extract($animal_friendship);
@@ -340,7 +359,7 @@ function display_farm_animals_panel():string {
                 $hearts_html .= "<img src='{$images_path}icons/$heart_icon' class='hearts' alt=''/>";
             }
 
-            $friendships .= "
+            $structure .= "
             <span>
                 <a class='wiki_link' href='$wiki_url' target='_blank'>
                     <img src='$animal_icon' class='animal-icon' alt='$type icon'/>
@@ -361,17 +380,10 @@ function display_farm_animals_panel():string {
         }
     }
 
-    $structure = "       
-        <section class='panel all-animals-panel all-animals-$player_id modal-window'>
-            <div class='panel-header'>
-                <h2 class='section-title panel-title'>Farm animals friendships</h2>
-                <img src='{$images_path}icons/exit.png' class='exit-all-animals-$player_id exit' alt=''/>
-            </div>
-            <span class='friendlist'>
-                $friendships
+    $structure .= "
             </span>
         </section>
-        ";
+    ";
 
     return $structure;
 }

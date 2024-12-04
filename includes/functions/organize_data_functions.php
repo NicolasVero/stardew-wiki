@@ -56,9 +56,10 @@ function get_farmhands():array {
             }
 
             foreach($game_location->buildings->Building as $building) {
-                if(!isset($building->indoors->farmhand)) {
+                if(!isset($building->indoors->farmhand) || (string) $building->indoors->farmhand->name === "") {
                     continue;
                 }
+
                 $farmhand = $building->indoors->farmhand;
                 array_push($all_farmhands, $farmhand);
             }

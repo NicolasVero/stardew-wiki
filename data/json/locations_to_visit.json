@@ -1,24 +1,16 @@
 {
-	"1.0.0" : {
+	"1.6.0" : {
 		"112001" : "Casino",
 		"112002" : "Calico Desert",
 		"112003" : "Skull Cavern",
 		"112004" : "Greenhouse",
 		"112005" : "Secret Woods",
-		"112006" : "The Sewers"
-	},
-	"1.1.0" : {
-		"112007" : "Witch's Swamp"
-	},
-	"1.4.0" : {
-		"112008" : "Quarry"
-	},
-	"1.5.0" : {
+		"112006" : "The Sewers",
+		"112007" : "Witch's Swamp",
+		"112008" : "Quarry",
 		"112009" : "Ginger Island",
 		"112010" : "Qi's Walnut Room",
-		"112011" : "The Summit"
-	},
-	"1.6.0" : {
+		"112011" : "The Summit",
 		"112012" : "Mastery Cave"
 	}
 }

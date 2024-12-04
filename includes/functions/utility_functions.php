@@ -184,11 +184,11 @@ function get_custom_id(string $item):int {
 }
 
 function get_item_id_by_name(string $name):int {
-	return array_search($name, $GLOBALS["json"]["all_items"]);
+	return array_search($name, $GLOBALS["json"]["all_items"]) ?? "Null";
 }
 
 function get_item_name_by_id(int $id):string {
-	return $GLOBALS["json"]["all_items"][$id];
+	return $GLOBALS["json"]["all_items"][$id] ?? 0;
 }
 
 function get_wiki_link(int $id):string {
