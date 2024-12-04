@@ -701,7 +701,7 @@ function get_player_bundle_details(object $bundle_data):array {
 	$bundle_name = $formatted_bundle[0];
 	$bundle_reward = get_bundle_reward($formatted_bundle[1]);
 	$bundle_requirements = get_bundle_requirements($formatted_bundle[2]);
-	$bundle_limit = $formatted_bundle[4];
+	$bundle_limit = $formatted_bundle[4] ?? count($bundle_requirements);
 	
 	$bundle_details = [
 		"bundle_name" => $bundle_name,
