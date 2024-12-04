@@ -77,11 +77,11 @@ function does_save_exists(string $save):bool {
 }
 
 function get_images_folder(bool $is_external = false):string {
-	return ($is_external || !is_on_localhost()) ? get_github_medias_url() : get_site_root() . "/medias/images/";
+	return ($is_external || !is_on_localhost()) ? get_github_medias_url() : get_site_root() . "/medias/images";
 }
 
 function get_github_medias_url():string {
-	return "https://raw.githubusercontent.com/NicolasVero/stardew-dashboard/refs/heads/master/medias/images/";
+	return "https://raw.githubusercontent.com/NicolasVero/stardew-dashboard/refs/heads/master/medias/images";
 }
 
 function is_on_localhost():bool {

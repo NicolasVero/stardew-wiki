@@ -21,20 +21,20 @@ function display_game_version():string {
 }
 
 function display_settings_button(string $prefix):string {
-    $structure = "<span class='$prefix-settings modal-opener'><img src='" . get_images_folder() ."icons/settings.png' class='modal-opener' alt='Settings icon'></span>";
+    $structure = "<span class='$prefix-settings modal-opener'><img src='" . get_images_folder() . "/icons/settings.png' class='modal-opener' alt='Settings icon'></span>";
     return $structure;
 }
 
 function display_save_button(string $prefix):string {
-    return "<span class='$prefix-upload modal-opener'><img src='" . get_images_folder() ."icons/file.png' class='modal-opener' alt='File upload icon'></span>";
+    return "<span class='$prefix-upload modal-opener'><img src='" . get_images_folder() . "/icons/file.png' class='modal-opener' alt='File upload icon'></span>";
 }
 
 function display_feedback_button():string {
-    return "<span class='feedback-opener modal-opener'><img src='" . get_images_folder() ."icons/feedback.png' class='modal-opener' alt='Feedback icon'></span>";
+    return "<span class='feedback-opener modal-opener'><img src='" . get_images_folder() . "/icons/feedback.png' class='modal-opener' alt='Feedback icon'></span>";
 }
 
 function display_home_button():string {
-    return "<span class='landing-page-opener'><img src='" . get_images_folder() ."icons/home.png' id='home-icon' alt='Home icon'></span>";
+    return "<span class='landing-page-opener'><img src='" . get_images_folder() . "/icons/home.png' id='home-icon' alt='Home icon'></span>";
 }
 
 function display_junimo_kart_button():string {
@@ -51,13 +51,14 @@ function display_quest_button():string {
 
 function get_level_progress_bar(int $level):string {
     $max_level = 10;
+    $images_path = get_images_folder();
     $structure = "<span class='level-progress-bar'>";
 
     for($i = 1; $i <= $max_level; $i++) {
         if($level >= $i) {
-            $level_bar = get_images_folder() . (($i % ($max_level / 2) === 0) ? "icons/big_level.png"       : "icons/level.png");
+            $level_bar = $images_path . (($i % ($max_level / 2) === 0) ? "/icons/big_level.png"       : "/icons/level.png");
         } else {
-            $level_bar = get_images_folder() . (($i % ($max_level / 2) === 0) ? "icons/big_level_empty.png" : "icons/level_empty.png");
+            $level_bar = $images_path . (($i % ($max_level / 2) === 0) ? "/icons/big_level_empty.png" : "/icons/level_empty.png");
         }
 
         $structure .= "<img src='$level_bar' alt=''/>";        
@@ -68,13 +69,14 @@ function get_level_progress_bar(int $level):string {
 }
 
 function get_skills_icons(array $skills, string $current_skill):string {
+    $images_path = get_images_folder();
     $structure = "<div class='skills-section'>";
 
     foreach($skills as $skill) {
         if($current_skill === strtolower($skill["source"])) {
 
             $skill_icon = strtolower($skill["skill"]);
-            $skill_icon_path = get_images_folder() . "skills/$skill_icon.png";
+            $skill_icon_path = "$images_path/skills/$skill_icon.png";
             $skill_description = $skill["description"];
             
             $structure .= "
@@ -135,7 +137,7 @@ function get_tooltip_text(array $player_data, string $json_line_name, string $da
 
 function get_friendship_structure(array $friendship_info):string {
     extract($friendship_info);
-    $friend_icon = $images_path . "characters/" . strtolower($name) . ".png";
+    $friend_icon = "$images_path/characters/" . strtolower($name) . ".png";
     $is_newer_version = array_search($name, $json_with_version) ? "older-version" : "newer-version";
     
     $birthday = $birthday_json[get_custom_id($name)] ?? null;
@@ -153,7 +155,7 @@ function get_friendship_structure(array $friendship_info):string {
     $hearts_html = "";
 
     for($i = 1; $i <= $max_heart; $i++) {
-        $heart_icon = $images_path . "icons/" . (($i > 8 && $can_be_married) ? "locked_heart.png" : (($friend_level >= $i) ? "heart.png" : "empty_heart.png"));
+        $heart_icon = "$images_path/icons/" . (($i > 8 && $can_be_married) ? "locked_heart.png" : (($friend_level >= $i) ? "heart.png" : "empty_heart.png"));
         $hearts_html .= "<img src='$heart_icon' class='hearts' alt=''/>";
     }
 
@@ -170,13 +172,13 @@ function get_friendship_structure(array $friendship_info):string {
             <span class='character-name " . strtolower($name) . "'>$name</span>
             <span class='hearts-level'>$hearts_html</span>
             <span class='tooltip'> 
-                <img src='{$images_path}icons/birthday_icon.png' class='birthday_icon $is_birthday' alt=''/>
+                <img src='$images_path/icons/birthday_icon.png' class='birthday_icon $is_birthday' alt=''/>
                 <span class='left'>$birthday_date</span>
             </span>
             <span class='interactions'>
                 <span class='tooltip'>
-                    <img src='{$images_path}icons/gift.png' class='interaction {$gifted[0]}' alt=''/>
-                    <img src='{$images_path}icons/gift.png' class='interaction {$gifted[1]}' alt=''/>
+                    <img src='$images_path/icons/gift.png' class='interaction {$gifted[0]}' alt=''/>
+                    <img src='$images_path/icons/gift.png' class='interaction {$gifted[1]}' alt=''/>
                     <span class='left'>Gifts made in the last week</span>
                 </span>
             </span>
@@ -218,6 +220,7 @@ function get_child_tooltip(string $spouse, array $children):string {
 }
 
 function display_festival_icon():string {
+    $images_path = get_images_folder();
     $festivals = sanitize_json_with_version("festivals", true);
 	$festival_name = "Not a festival day";
 	$festival_class = "isnt_festival";
@@ -237,14 +240,14 @@ function display_festival_icon():string {
     ? 
 	"<span class='tooltip'>
 		<a class='wiki_link' href='$wiki_url' target='_blank'>
-			<img src='" . get_images_folder() . "/icons/festival_icon.gif' class='festival_icon $festival_class' alt='Festival icon'>
+			<img src='$images_path/icons/festival_icon.gif' class='festival_icon $festival_class' alt='Festival icon'>
 		</a>
 		<span class='right'>$festival_name</span>
 	</span>"
 	:
 	"<span class='tooltip'>
         <a class='wiki_link' href='https://stardewvalleywiki.com/Festivals' target='_blank'>
-		    <img src='" . get_images_folder() . "/icons/festival_icon.png' class='festival_icon $festival_class' alt='Festival icon'>
+		    <img src='$images_path/icons/festival_icon.png' class='festival_icon $festival_class' alt='Festival icon'>
 		</a>
         <span class='right'>$festival_name</span>
 	</span>";
@@ -252,12 +255,13 @@ function display_festival_icon():string {
 
 function display_weather_icon():string {
     $data = $GLOBALS["shared_players_data"];
+    $images_path = get_images_folder();
     $weather = $data["weather"];
 
     return "
         <span class='tooltip'>
             <a class='wiki_link' href='https://stardewvalleywiki.com/Weather' target='_blank'>
-                <img src='" . get_images_folder() . "/icons/$weather.png' class='weather_icon' alt='Weather icon'>
+                <img src='$images_path/icons/$weather.png' class='weather_icon' alt='Weather icon'>
             </a>
             <span class='left'>" . get_weather_tooltip($weather) . "</span>
         </span>
@@ -267,7 +271,8 @@ function display_weather_icon():string {
 function display_project_contributor(array $options):string {
     extract($options);
 
-    $portrait =  get_images_folder() . "content/$icon.png";
+    $images_path = get_images_folder();
+    $portrait =  "$images_path/content/$icon.png";
     $presentation = "";
 
     foreach($texts as $text) {
@@ -279,7 +284,7 @@ function display_project_contributor(array $options):string {
     foreach($socials as $social_name => $social) {
         extract($social);
         if($on_display) {
-            $socials_links .= "<a href='$url' target='_blank'><img src='" . get_images_folder() . "social/$social_name.png' alt='$social_name'/></a>";
+            $socials_links .= "<a href='$url' target='_blank'><img src='$images_path/social/$social_name.png' alt='$social_name'/></a>";
         }
     }
 
@@ -300,7 +305,7 @@ function display_project_contributor(array $options):string {
 
 
     // <span>
-    //     <img src='" . get_images_folder() ."content/romain.png' class='character-image romain' alt=''>
+    //     <img src='$images_path/content/romain.png' class='character-image romain' alt=''>
     //     <span>
     //         <span class='character-presentation'>
     //             <span>
@@ -311,9 +316,9 @@ function display_project_contributor(array $options):string {
     //             </span>
     //         </span>
     //         <span class='socials'>
-    //             <a href='https://github.com/BreadyBred' target='_blank'><img src='" . get_images_folder() ."social/github.png' alt=''></a>
-    //             <a href='https://www.linkedin.com/in/romain-gerard/' target='_blank'><img src='" . get_images_folder() ."social/linkedin.png' alt=''></a>
-    //             <a href='https://www.linkedin.com/in/romain-gerard/' target='_blank'><img src='" . get_images_folder() ."social/linkedin.png' alt=''></a>
+    //             <a href='https://github.com/BreadyBred' target='_blank'><img src='$images_path/social/github.png' alt=''></a>
+    //             <a href='https://www.linkedin.com/in/romain-gerard/' target='_blank'><img src='$images_path/social/linkedin.png' alt=''></a>
+    //             <a href='https://www.linkedin.com/in/romain-gerard/' target='_blank'><img src='$images_path/social/linkedin.png' alt=''></a>
     //         </span>
     //     </span>
     // </span>

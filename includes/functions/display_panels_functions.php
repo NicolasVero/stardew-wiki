@@ -1,11 +1,13 @@
 <?php
 
 function display_save_panel():string {
+    $images_path = get_images_folder();
+
     return "
         <section class='panel upload-panel to-keep-open modal-window'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Upload a save</h2>
-                <img src='" . get_images_folder() . "icons/exit.png' class='exit-upload exit'/>
+                <img src='$images_path/icons/exit.png' class='exit-upload exit'/>
             </div>
             <span>
                 <span>
@@ -19,36 +21,38 @@ function display_save_panel():string {
 }
 
 function display_settings_panel():string {
+    $images_path = get_images_folder();
+    
     return "
         <section class='panel settings settings-panel modal-window'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Settings</h2>
-                <img src='" . get_images_folder() . "icons/exit.png' class='exit-settings exit' alt=''/>
+                <img src='$images_path/icons/exit.png' class='exit-settings exit' alt=''/>
             </div>
             <span class='checkboxes'>
                 <span class='checkbox'>
                     <input type='checkbox' id='spoil_mode'>
-                    <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png' alt=''></span>
+                    <span class='checkmark'><img src='$images_path/icons/checked.png' alt=''></span>
                     <label for='spoil_mode' id='spoil-label'>Hide discovered items</label>
                 </span>
                 <span class='checkbox'>
                     <input type='checkbox' id='no_spoil_mode'>
-                    <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png' alt=''></span>
+                    <span class='checkmark'><img src='$images_path/icons/checked.png' alt=''></span>
                     <label for='no_spoil_mode' id='no-spoil-label'>Hide undiscovered items</label>
                 </span>
                 <span class='checkbox'>
                     <input type='checkbox' id='steam_achievements'>
-                    <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png' alt=''></span>
+                    <span class='checkmark'><img src='$images_path/icons/checked.png' alt=''></span>
                     <label for='steam_achievements' id='steam_achievements-label'>Show Steam achievements icons</label>
                 </span>
                 <span class='checkbox'>
                     <input type='checkbox' id='toggle_versions_items_mode' checked>
-                    <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png' alt=''></span>
+                    <span class='checkmark'><img src='$images_path/icons/checked.png' alt=''></span>
                     <label for='toggle_versions_items_mode' id='toggle-versions-items-label'>Hide items from newer versions</label>
                 </span>
                 <span class='checkbox'>
                     <input type='checkbox' id='wiki_redirections' checked>
-                    <span class='checkmark'><img src='" . get_images_folder() . "icons/checked.png' alt=''></span>
+                    <span class='checkmark'><img src='$images_path/icons/checked.png' alt=''></span>
                     <label for='wiki_redirections' id='wiki_redirections-label'>Activate wiki redirections</label>
                 </span>
             </span>
@@ -65,7 +69,7 @@ function display_quest_panel():string {
         <section class='panel quests-panel all-quests-$player_id modal-window'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Quests in progress</h2>
-                <img src='" . get_images_folder() . "icons/exit.png' class='exit-all-quests-$player_id exit' alt=''/>
+                <img src='$images_path/icons/exit.png' class='exit-all-quests-$player_id exit' alt=''/>
             </div>
             <span class='quests'>
     ";
@@ -139,11 +143,13 @@ function display_quest_panel():string {
 }
 
 function display_feedback_panel():string {
+    $images_path = get_images_folder();
+
     return "
         <section class='panel feedback-panel modal-window to-destroy'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Your feedback</h2>
-                <img src='" . get_images_folder() . "icons/exit.png' class='exit-feedback exit' alt=''/>
+                <img src='$images_path/icons/exit.png' class='exit-feedback exit' alt=''/>
             </div>
             <span>
                 <form id='feedback_form'>
@@ -165,19 +171,19 @@ function display_feedback_panel():string {
                         <span class='topic_selection'>
                             <span>
                                 <input type='radio' id='feature_request' value='Feature request' name='topic' class='feedback_real_radio' required checked>
-                                <img src='" . get_images_folder() . "icons/feature.png' class='feedback_custom_radio' alt='Feature request topic'>
+                                <img src='$images_path/icons/feature.png' class='feedback_custom_radio' alt='Feature request topic'>
                                 <label for='feature_request'>Feature request</label>
                             </span>
 
                             <span>
                                 <input type='radio' id='bug_report' value='Bug report' name='topic' class='feedback_real_radio'>
-                                <img src='" . get_images_folder() . "icons/bug.png' class='feedback_custom_radio topic_not_selected' alt='Bug report topic'>
+                                <img src='$images_path/icons/bug.png' class='feedback_custom_radio topic_not_selected' alt='Bug report topic'>
                                 <label for='bug_report'>Bug report</label>
                             </span>
 
                             <span>
                                 <input type='radio' id='other' value='Other' name='topic' class='feedback_real_radio'>
-                                <img src='" . get_images_folder() . "icons/other.png' class='feedback_custom_radio topic_not_selected' alt='Other topic'>
+                                <img src='$images_path/icons/other.png' class='feedback_custom_radio topic_not_selected' alt='Other topic'>
                                 <label for='other'>Other</label>
                             </span>
                         </span>
@@ -197,6 +203,7 @@ function display_feedback_panel():string {
 
 function display_monster_eradication_goals_panel():string {
 	$player_id = $GLOBALS["player_id"];
+    $images_path = get_images_folder();
     $goals_data = get_player_adventurers_guild_data($player_id);
     $goals = "";
 
@@ -213,12 +220,12 @@ function display_monster_eradication_goals_panel():string {
         $reward_icon = "
             <span class='tooltip' style='display: flex;'>
                 <a class='wiki_link' href='$wiki_link' target='_blank'>
-                    <img src='" . get_images_folder() . "rewards/$src.png' alt='$alt' class='reward $is_found always-on-display'/>
+                    <img src='$images_path/rewards/$src.png' alt='$alt' class='reward $is_found always-on-display'/>
                 </a>
                 <span class='right'>$alt</span>
             </span>
         ";
-        $is_completed_icon = ($is_completed) ? "<img src='" . get_images_folder() . "content/goal_star.png' class='star'>" : "";
+        $is_completed_icon = ($is_completed) ? "<img src='$images_path/content/goal_star.png' class='star'>" : "";
         $total = ($is_completed) ? $counter : "$counter/$limit";
         $goals .= "<span class='goal'>$reward_icon $total $target $is_completed_icon</span>";
     }
@@ -226,13 +233,13 @@ function display_monster_eradication_goals_panel():string {
     return "
         <section class='panel monster-eradication-goals-panel monster-eradication-goals-$player_id modal-window'>
             <span class='header'>
-                <img src='" . get_images_folder() . "content/dashes.png' class='dashes' alt=''>
+                <img src='$images_path/content/dashes.png' class='dashes' alt=''>
                 <span class='title'>
                     <span>&emsp;&emsp;&emsp;&emsp;--Monster Eradication Goals</span>
                     <span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;\"Help us keep the valley safe.\"</span>
                 </span>
-                <img src='" . get_images_folder() . "content/dashes.png' class='dashes' alt=''>
-                <img src='" . get_images_folder() . "icons/exit.png' class='exit-monster-eradication-goals exit-monster-eradication-goals-$player_id exit' alt=''>
+                <img src='$images_path/content/dashes.png' class='dashes' alt=''>
+                <img src='$images_path/icons/exit.png' class='exit-monster-eradication-goals exit-monster-eradication-goals-$player_id exit' alt=''>
             </span>
             <span class='goals'>
                 $goals
@@ -296,8 +303,8 @@ function display_calendar_panel():string {
     return "
         <section class='panel calendar-panel calendar-$player_id modal-window'>
             <span class='calendar-block'>
-                <img src='{$images_path}icons/exit.png' class='absolute-exit exit exit-calendar-$player_id' alt=''/>
-                <img src='{$images_path}content/calendar_$season.png' alt='Calendar background' class='calendar-bg'>
+                <img src='$images_path/icons/exit.png' class='absolute-exit exit exit-calendar-$player_id' alt=''/>
+                <img src='$images_path/content/calendar_$season.png' alt='Calendar background' class='calendar-bg'>
                 <table>
                     <tbody>
                         $table_structure
@@ -317,7 +324,7 @@ function display_farm_animals_panel():string {
         <section class='panel all-animals-panel all-animals-$player_id modal-window'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Farm animals friendships</h2>
-                <img src='{$images_path}icons/exit.png' class='exit-all-animals-$player_id exit' alt=''/>
+                <img src='$images_path/icons/exit.png' class='exit-all-animals-$player_id exit' alt=''/>
             </div>
             <span class='friendlist'>
     ";
@@ -341,11 +348,11 @@ function display_farm_animals_panel():string {
             $formatted_name = formate_usernames($name);
             $formatted_type = formate_text_for_file($type);
             $wiki_url = get_wiki_link($id);
-            $animal_icon = "{$images_path}farm_animals/$formatted_type.png";
+            $animal_icon = "$images_path/farm_animals/$formatted_type.png";
             $pet_class = ($was_pet) ? "pet" : "not-petted";
             $pet_tooltip = ($was_pet) ? "Caressed by the auto-petter" : "No auto-petter in this building";
             $status = ($happiness > 200) ? "happy" : (($happiness > 30) ? "fine" : "sad");
-            $status_icon = "{$images_path}icons/{$status}_emote.png";
+            $status_icon = "$images_path/icons/{$status}_emote.png";
 
 
             $hearts_html = "";
@@ -356,7 +363,7 @@ function display_farm_animals_panel():string {
                     "heart.png" :
                         (($friendship_level === ($i - 0.5)) ?
                             "half_heart.png" : "empty_heart.png"));
-                $hearts_html .= "<img src='{$images_path}icons/$heart_icon' class='hearts' alt=''/>";
+                $hearts_html .= "<img src='$images_path/icons/$heart_icon' class='hearts' alt=''/>";
             }
 
             $structure .= "
@@ -368,7 +375,7 @@ function display_farm_animals_panel():string {
                 <span class='hearts-level'>$hearts_html</span>
                 <span class='interactions'>
                     <span class='tooltip'>
-                        <img src='{$images_path}icons/pet.png' class='interaction $pet_class' alt=''/>
+                        <img src='$images_path/icons/pet.png' class='interaction $pet_class' alt=''/>
                         <span class='left'>$pet_tooltip</span>
                     </span>
                     <span class='tooltip'>
@@ -396,8 +403,8 @@ function display_junimo_kart_panel():string {
     $structure = "
         <section class='panel junimo-kart-leaderboard-panel junimo-kart-leaderboard-$player_id modal-window'>
             <span class='leaderboard'>
-                <img src='{$images_path}icons/exit.png' class='absolute-exit exit exit-junimo-kart-leaderboard-$player_id' alt=''/>
-                <img src='{$images_path}content/junimo_kart.png' class='image-title' alt=''/>
+                <img src='$images_path/icons/exit.png' class='absolute-exit exit exit-junimo-kart-leaderboard-$player_id' alt=''/>
+                <img src='$images_path/content/junimo_kart.png' class='image-title' alt=''/>
                 <span class='scores'>
         ";
 
@@ -469,7 +476,7 @@ function display_museum_panel():string {
                 if($piece_details["coords"]["X"] === $column_count && $piece_details["coords"]["Y"] === $row_count) {
                     $piece_filename = formate_text_for_file(get_item_name_by_id($piece_details["id"]));
                     $piece_type = $piece_details["type"];
-                    $museum_piece = "<img src='{$images_path}{$piece_type}/{$piece_filename}.png' class='museum-piece' alt='$piece_filename'/>";
+                    $museum_piece = "<img src='$images_path/$piece_type/$piece_filename.png' class='museum-piece' alt='$piece_filename'/>";
 
                     unset($museum_data[$piece_index]);
                 }
@@ -488,7 +495,7 @@ function display_museum_panel():string {
     return "
         <section class='panel museum-panel museum-$player_id modal-window'>
             <span class='museum-block'>
-                <img src='{$images_path}icons/exit.png' class='absolute-exit exit exit-museum-$player_id' alt=''/>
+                <img src='$images_path/icons/exit.png' class='absolute-exit exit exit-museum-$player_id' alt=''/>
                 <table>
                     <tbody>
                         $table_structure
@@ -509,10 +516,10 @@ function display_community_center_panel():string {
 
     $structure = "
         <section class='panel community-center-panel community-center-$player_id modal-window'>
-            <img src='{$images_path}icons/exit.png' class='absolute-exit exit exit-community-center-$player_id' alt=''/>
+            <img src='$images_path/icons/exit.png' class='absolute-exit exit exit-community-center-$player_id' alt=''/>
             <div class='community-center-background-container'>
-                <img src='{$images_path}bundles/CC_$cc_binary.png' class='background-image' alt='Community center background'/>
-                <img src='{$images_path}icons/chevron_down.png' class='chevron-down' alt='Scroll indicator'/>
+                <img src='$images_path/bundles/CC_$cc_binary.png' class='background-image' alt='Community center background'/>
+                <img src='$images_path/icons/chevron_down.png' class='chevron-down' alt='Scroll indicator'/>
             </div>
             <span class='rooms'>
     ";
@@ -531,10 +538,10 @@ function display_community_center_panel():string {
             $is_complete_class = ($bundle_details["is_complete"]) ? "complete" : "incomplete";
             
             $structure .= "<span class='bundle'>
-                <img src='{$images_path}bundles/" . formate_text_for_file($bundle_details["bundle_name"]) . "_bundle.png' alt='" . $bundle_details["bundle_name"] . " Bundle' class='$is_complete_class'/>";
+                <img src='$images_path/bundles/" . formate_text_for_file($bundle_details["bundle_name"]) . "_bundle.png' alt='" . $bundle_details["bundle_name"] . " Bundle' class='$is_complete_class'/>";
 
             // if($bundle_details["is_complete"]) {
-            //     $structure .= "<img src='{$images_path}icons/checked.png' class='checkmark'/>";
+            //     $structure .= "<img src='$images_path/icons/checked.png' class='checkmark'/>";
             // }
 
             $structure .= "</span>";

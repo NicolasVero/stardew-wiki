@@ -21,7 +21,7 @@ function display_stat(array $parameters):string {
     $formatted_value = filter_var($value, FILTER_VALIDATE_INT) ? formate_number($value) : $value;
     $alt = $alt ?? $icon;
     $label = $label ?? $icon;
-    $image = "<img src='{$images_path}icons/$formatted_icon.png' alt='$alt' />";
+    $image = "<img src='$images_path/icons/$formatted_icon.png' alt='$alt' />";
 
     if(isset($tooltip)) {
         $image = "
@@ -61,7 +61,7 @@ function display_spouse(mixed $spouse, array $children):string {
         <span>
             <span class='tooltip'>
                 <a class='wiki_link' href='https://stardewvalleywiki.com/Children' target='_blank'>
-                    <img src='{$images_path}characters/" . lcfirst($spouse) . ".png' alt='$spouse'/>
+                    <img src='$images_path/characters/" . lcfirst($spouse) . ".png' alt='$spouse'/>
                 </a>
                 <span> " . get_child_tooltip($spouse, $children) . "</span>
             </span>
@@ -106,8 +106,8 @@ function display_header():string {
         <header>
             <div class='header'>
                 <span class='player'>
-                    <img src='{$images_path}icons/" . $pet['type'] . "_" . $pet['breed'] . ".png' alt='Pet type'/>
-                    <img src='{$images_path}icons/" . strtolower($gender) . ".png' alt='Gender logo: $gender' class='player_gender_logo'/>
+                    <img src='$images_path/icons/" . $pet['type'] . "_" . $pet['breed'] . ".png' alt='Pet type'/>
+                    <img src='$images_path/icons/" . strtolower($gender) . ".png' alt='Gender logo: $gender' class='player_gender_logo'/>
                     <span class='data player_name'>" . formate_usernames($name) . "<span class='data-label'> $farmer_level at $farm_name</span></span>
                 </span>
 
@@ -167,7 +167,6 @@ function display_general_stats():string {
 
     extract($all_players_data);
 
-    $images_path = get_images_folder();
     $max_mine_level = 120;
     $deepest_mine_level = ($mine_level > $max_mine_level) ? $max_mine_level : $mine_level; 
     $deepest_skull_mine_level = ($mine_level - $max_mine_level < 0) ? 0 : $mine_level - $max_mine_level;
@@ -226,8 +225,7 @@ function display_skills():string {
 
     foreach($this_player_skills_levels as $key => $level) {
         $level_icon_name = explode('_', $key)[0];
-        $level_icon      = get_images_folder() . "skills/$level_icon_name.png";
-        $mastery_icon    = get_images_folder() . "skills/mastery.png";
+        $images_path = get_images_folder();
         $mastery_class   = (array_key_exists(ucfirst(explode('_', $key)[0]) . " Mastery", $this_player_masteries)) ? 'found' : 'not-found';
         $mastery_tooltip = ucfirst(explode('_', $key)[0]) . " mastery";
         $is_newer_version_class = (is_game_older_than_1_6()) ? "newer-version" : "older-version";
@@ -236,14 +234,14 @@ function display_skills():string {
             <span class='skill $key'>
                 <span class='tooltip'>
                     <a class='wiki_link' href='https://stardewvalleywiki.com/Mastery_Cave' target='_blank'>
-                        <img src='$mastery_icon' class='level-icon $mastery_class $mastery_visible_class $is_newer_version_class' alt='$key'/>
+                        <img src='$images_path/skills/mastery.png' class='level-icon $mastery_class $mastery_visible_class $is_newer_version_class' alt='$key'/>
                     </a>
                     <span>" . ucfirst($mastery_tooltip) . "</span>
                 </span>
         
                 <span class='tooltip'>
                     <a class='wiki_link' href='https://stardewvalleywiki.com/Skills#" . ucfirst($level_icon_name) . "' target='_blank'>
-                        <img src='$level_icon' class='level-icon' alt='$key'/>
+                        <img src='$images_path/skills/$level_icon_name.png' class='level-icon' alt='$key'/>
                     </a>
                     <span>" . ucfirst($level_icon_name) . "</span>
                 </span>
@@ -287,7 +285,7 @@ function display_friendships(int $limit = -1): string {
         <section class='info-section friends-section $section_class $section_class-$player_id modal-window'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Friendship progression</h2>
-                <img src='{$images_path}icons/exit.png' class='exit-all-friendships-$player_id exit' alt=''/>
+                <img src='$images_path/icons/exit.png' class='exit-all-friendships-$player_id exit' alt=''/>
             </div>
             <span class='friendlist'>
         "
@@ -349,7 +347,6 @@ function display_friendships(int $limit = -1): string {
 function display_unlockables():string {
 	$player_unlockables = $GLOBALS["all_players_data"][$GLOBALS["player_id"]]["unlockables"];
 	$version_score = $GLOBALS["game_version_score"];
-    $images_path = get_images_folder() . "unlockables/";
 	$decoded_unlockables = $GLOBALS["json"]["unlockables"];
 
     $structure = "
@@ -369,7 +366,7 @@ function display_unlockables():string {
             }
 	
 			$unlockable_class = ($player_unlockables[$formatted_name]["is_found"]) ? "found" : "not-found";
-			$unlockable_image = "$images_path$formatted_name.png";
+			$unlockable_image = get_images_folder() . "/unlockables/$formatted_name.png";
 			$wiki_url = get_wiki_link(get_item_id_by_name($unlockable));
 			
 			$structure .= "
@@ -433,28 +430,28 @@ function display_detailled_gallery(array $gallery_details, string $width = "", a
                 }
             }
 
-            $element_image = $images_path . "$json_filename/" . formate_text_for_file((string) explode('µ', $json_line_name)[0]). ".png";
+            $element_image = "$images_path/$json_filename/" . formate_text_for_file((string) explode('µ', $json_line_name)[0]). ".png";
             if(in_array($json_filename, ["secret_notes"])) {
                 $line_name = explode(" ", $json_line_name);
                 $icon_name = formate_text_for_file(implode(" ", array_slice($line_name, 0, 2)));
-                $element_image = $images_path . "icons/$icon_name.png";
+                $element_image = "$images_path/icons/$icon_name.png";
             }
             
             
             if(in_array($json_filename, ["locations_to_visit"])) {
                 $element_image = [
-                    "casino"           => "{$images_path}icons/casino_coins.png",
-                    "calico_desert"    => "{$images_path}shipped_items/cactus_fruit.png",
-                    "skull_cavern"     => "{$images_path}enemies/haunted_skull.png",
-                    "greenhouse"       => "{$images_path}crafting_recipes/quality_sprinkler.png",
-                    "secret_woods"     => "{$images_path}shipped_items/fiber.png",
-                    "the_sewers"       => "{$images_path}icons/trash.png",
-                    "witchs_swamp"     => "{$images_path}fish/void_salmon.png",
-                    "quarry"           => "{$images_path}crafting_recipes/bomb.png",
-                    "ginger_island"    => "{$images_path}shipped_items/ginger.png",
-                    "qis_walnut_room"  => "{$images_path}icons/qi_gems.png",
-                    "the_summit"       => "{$images_path}icons/stardrop.png",
-                    "mastery_cave"     => "{$images_path}skills/mastery.png",
+                    "casino"           => "$images_path/icons/casino_coins.png",
+                    "calico_desert"    => "$images_path/shipped_items/cactus_fruit.png",
+                    "skull_cavern"     => "$images_path/enemies/haunted_skull.png",
+                    "greenhouse"       => "$images_path/crafting_recipes/quality_sprinkler.png",
+                    "secret_woods"     => "$images_path/shipped_items/fiber.png",
+                    "the_sewers"       => "$images_path/icons/trash.png",
+                    "witchs_swamp"     => "$images_path/fish/void_salmon.png",
+                    "quarry"           => "$images_path/crafting_recipes/bomb.png",
+                    "ginger_island"    => "$images_path/shipped_items/ginger.png",
+                    "qis_walnut_room"  => "$images_path/icons/qi_gems.png",
+                    "the_summit"       => "$images_path/icons/stardrop.png",
+                    "mastery_cave"     => "$images_path/skills/mastery.png",
                 ][formate_text_for_file($json_line_name)];
             }
 
