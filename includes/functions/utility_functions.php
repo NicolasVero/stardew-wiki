@@ -56,8 +56,24 @@ function get_site_root():string {
 	return "$protocol://stardew-dashboard.42web.io/";
 }
 
+function get_site_directory():string {
+	return strstr(__DIR__, 'stardew_dashboard', true) . 'stardew_dashboard/';
+}
+
 function get_json_folder():string {
     return get_site_root() . "data/json/";
+}
+
+function get_saves_folder(bool $use_directory = false):string {
+    if($use_directory) {
+		return get_site_directory() . "data/saves";
+	}
+
+	return get_site_root() . "data/saves";
+}
+
+function does_save_exists(string $save):bool {
+	return is_file(get_saves_folder(is_on_localhost()) . "/" . $_GET["dev"]);
 }
 
 function get_images_folder(bool $is_external = false):string {
