@@ -5,6 +5,7 @@ function display_landing_page(bool $with_surheader = true):string {
 		return display_mobile_landing_page();
 	}
 
+    $images_path = get_images_folder();
 	$sur_header     = ($with_surheader) ? display_sur_header(true, false) : "";
     $save_panel     = display_save_panel();
     $settings_panel = display_settings_panel();
@@ -52,14 +53,14 @@ function display_landing_page(bool $with_surheader = true):string {
 							<span>
 								Well done! The hardest part is behind us! Now you just have to upload your save 
 								<span class='img-embed landing-upload'>
-									<img src='" . get_images_folder() ."icons/file.png' class='modal-opener' alt='File upload icon'>
+									<img src='$images_path/icons/file.png' class='modal-opener' alt='File upload icon'>
 								</span>
 								directly to our website and let the magic happen.
 							</span>
 							<span>
 								There's also a range of settings
 								<span class='img-embed landing-settings'>
-									<img src='" . get_images_folder() ."icons/settings.png' class='modal-opener' alt='Settings icon'>
+									<img src='$images_path/icons/settings.png' class='modal-opener' alt='Settings icon'>
 								</span>
 								to customize your experience!
 							</span>
@@ -76,7 +77,7 @@ function display_landing_page(bool $with_surheader = true):string {
 							<span>
 								Click
 								<span class='img-embed feedback-opener'>
-									<img src='" . get_images_folder() ."icons/feedback.png' class='modal-opener' alt='Feedback icon'>
+									<img src='$images_path/icons/feedback.png' class='modal-opener' alt='Feedback icon'>
 								</span>
 								to open the feedback form and share your thoughts with us.
 								Thank you for being a part of our community and helping us grow!
@@ -99,11 +100,13 @@ function display_landing_page(bool $with_surheader = true):string {
 				</main>
         	</div>
         </div>
-        <img src='" . get_images_folder() . "content/loading.gif' id='loading-strip' class='loading' alt=''>
+        <img src='$images_path/content/loading.gif' id='loading-strip' class='loading' alt=''>
     ";
 }
 
 function display_mobile_landing_page():string {
+    $images_path = get_images_folder();
+
 	return "
 		<div id='display'>
 			<div id='mobile_landing_page'>
@@ -128,7 +131,7 @@ function display_mobile_landing_page():string {
 						</span>
 						<span class='characters'>
 							<span>
-								<img src='" . get_images_folder() ."content/romain.png' class='character-image romain' alt=''>
+								<img src='$images_path/content/romain.png' class='character-image romain' alt=''>
 								<span>
 									<span class='character-presentation'>
 										<span>
@@ -139,13 +142,13 @@ function display_mobile_landing_page():string {
 										</span>
 									</span>
 									<span class='socials'>
-										<a href='https://github.com/BreadyBred' target='_blank'><img src='" . get_images_folder() ."social/github.png' alt=''></a>
-										<a href='https://www.linkedin.com/in/romain-gerard/' target='_blank'><img src='" . get_images_folder() ."social/linkedin.png' alt=''></a>
+										<a href='https://github.com/BreadyBred' target='_blank'><img src='$images_path/social/github.png' alt=''></a>
+										<a href='https://www.linkedin.com/in/romain-gerard/' target='_blank'><img src='$images_path/social/linkedin.png' alt=''></a>
 									</span>
 								</span>
 							</span>
 							<span>
-								<img src='" . get_images_folder() ."content/nico.png' class='character-image nico' alt=''>
+								<img src='$images_path/content/nico.png' class='character-image nico' alt=''>
 								<span>
 									<span class='character-presentation'>
 										<span>
@@ -156,8 +159,8 @@ function display_mobile_landing_page():string {
 										</span>
 									</span>
 									<span class='socials'>
-										<a href='https://github.com/NicolasVero' target='_blank'><img src='" . get_images_folder() ."social/github.png' alt=''></a>
-										<a href='https://www.linkedin.com/in/nicolas-vero/' target='_blank'><img src='" . get_images_folder() ."social/linkedin.png' alt=''></a>
+										<a href='https://github.com/NicolasVero' target='_blank'><img src='$images_path/social/github.png' alt=''></a>
+										<a href='https://www.linkedin.com/in/nicolas-vero/' target='_blank'><img src='$images_path/social/linkedin.png' alt=''></a>
 									</span>
 								</span>
 							</span>
@@ -211,6 +214,7 @@ function display_page():string {
 }
 
 function display_error_page(Exception $exception):string {
+    $images_path = get_images_folder();
     $exception_dialogues = [
         "The file is not in xml format." => [
             "dialogue" => "Oh, my stars! It appears this file has lost its way in the tangled underbrush of incompatible formats. XML, my dear friend, is the language of precision and organization, much like the delicate balance of ecosystems on our beloved Ginger Island!",
@@ -243,7 +247,7 @@ function display_error_page(Exception $exception):string {
     $structure = "
         <div class='error-wrapper'>
             <div class='dialogue-box-error-container'>
-                <img src='" . get_images_folder() . "dialogue_boxes/$image.png' alt='" . $exception->getMessage() . "'/>
+                <img src='$images_path/dialogue_boxes/$image.png' alt='" . $exception->getMessage() . "'/>
                 <span>$dialogue</span>
             </div>
         </div>

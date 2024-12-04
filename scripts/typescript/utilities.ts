@@ -3,8 +3,8 @@ function get_site_root():string {
     const host: string = window.location.host;
 
     return (host === "localhost") 
-        ? `${protocol}//localhost/travail/stardew_dashboard/` 
-        : `${protocol}//stardew-dashboard.42web.io/`;
+        ? `${protocol}//localhost/travail/stardew_dashboard` 
+        : `${protocol}//stardew-dashboard.42web.io`;
 }
 
 async function get_max_upload_size():Promise<number> {

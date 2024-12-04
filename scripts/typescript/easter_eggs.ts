@@ -25,7 +25,7 @@ function easter_egg_characters():void {
 		return;
 	}
 
-	const audio: HTMLAudioElement = new Audio(get_site_root() + "medias/audio/trigger.mp3");
+	const audio: HTMLAudioElement = new Audio(get_site_root() + "/medias/audio/trigger.mp3");
 	let is_playing: boolean = false;
 
 	const play_once = ():void => {
@@ -75,7 +75,7 @@ function easter_egg_kaaris():void {
 
     element.classList.add("easter_egg_kaaris");
 
-    const audio: HTMLAudioElement = new Audio(get_site_root() + "medias/audio/kaaris_maison-citrouille.mp3");
+    const audio: HTMLAudioElement = new Audio(get_site_root() + "/medias/audio/kaaris_maison-citrouille.mp3");
     let is_playing: boolean = false;
 
     const play_once = (): void => {
