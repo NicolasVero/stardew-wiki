@@ -73,7 +73,7 @@ function get_saves_folder(bool $use_directory = false):string {
 }
 
 function does_save_exists(string $save):bool {
-	return is_file(get_saves_folder(is_on_localhost()) . "/" . $_GET["dev"]);
+    return is_file(get_saves_folder(true) . "/$save");
 }
 
 function get_images_folder(bool $is_external = false):string {
