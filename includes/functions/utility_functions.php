@@ -49,27 +49,27 @@ function load_all_json():void {
 
 function get_site_root():string {
 	if(is_on_localhost()) {
-		return "http://localhost/travail/stardew_dashboard/";
+		return "http://localhost/travail/stardew_dashboard";
 	}
 	
 	$protocol = (empty($_SERVER["HTTPS"]) && $_SERVER["HTTPS"] === "off") ? "http" : "https";
-	return "$protocol://stardew-dashboard.42web.io/";
+	return "$protocol://stardew-dashboard.42web.io";
 }
 
 function get_site_directory():string {
-	return strstr(__DIR__, 'stardew_dashboard', true) . 'stardew_dashboard/';
+	return strstr(__DIR__, 'stardew_dashboard', true) . 'stardew_dashboard';
 }
 
 function get_json_folder():string {
-    return get_site_root() . "data/json/";
+    return get_site_root() . "/data/json";
 }
 
 function get_saves_folder(bool $use_directory = false):string {
     if($use_directory) {
-		return get_site_directory() . "data/saves";
+		return get_site_directory() . "/data/saves";
 	}
 
-	return get_site_root() . "data/saves";
+	return get_site_root() . "/data/saves";
 }
 
 function does_save_exists(string $save):bool {
@@ -77,7 +77,7 @@ function does_save_exists(string $save):bool {
 }
 
 function get_images_folder(bool $is_external = false):string {
-	return ($is_external || !is_on_localhost()) ? get_github_medias_url() : get_site_root() . "medias/images/";
+	return ($is_external || !is_on_localhost()) ? get_github_medias_url() : get_site_root() . "/medias/images/";
 }
 
 function get_github_medias_url():string {
@@ -220,7 +220,7 @@ function is_object_empty(object $object):bool {
 }
 
 function decode(string $filename): array {
-    $url = get_json_folder() . "$filename.json";
+    $url = get_json_folder() . "/$filename.json";
     $ch = curl_init($url);
     
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);

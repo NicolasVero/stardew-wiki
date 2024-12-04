@@ -38,7 +38,7 @@ function AJAX_send() {
         page_display.innerHTML = "";
         const form_data = new FormData();
         const xhr = new XMLHttpRequest();
-        const url = get_site_root() + "includes/get_xml_data.php";
+        const url = get_site_root() + "/includes/get_xml_data.php";
         if (is_file_too_big) {
             form_data.append("save-upload", new File(["SizeException"], "Error_SizeException.xml"));
         }
@@ -201,7 +201,7 @@ function easter_egg_characters() {
     if (!elements.length) {
         return;
     }
-    const audio = new Audio(get_site_root() + "medias/audio/trigger.mp3");
+    const audio = new Audio(get_site_root() + "/medias/audio/trigger.mp3");
     let is_playing = false;
     const play_once = () => {
         if (!is_playing) {
@@ -237,7 +237,7 @@ function easter_egg_kaaris() {
         return;
     }
     element.classList.add("easter_egg_kaaris");
-    const audio = new Audio(get_site_root() + "medias/audio/kaaris_maison-citrouille.mp3");
+    const audio = new Audio(get_site_root() + "/medias/audio/kaaris_maison-citrouille.mp3");
     let is_playing = false;
     const play_once = () => {
         if (!is_playing) {
@@ -648,8 +648,8 @@ function get_site_root() {
     const protocol = window.location.protocol;
     const host = window.location.host;
     return (host === "localhost")
-        ? `${protocol}//localhost/travail/stardew_dashboard/`
-        : `${protocol}//stardew-dashboard.42web.io/`;
+        ? `${protocol}//localhost/travail/stardew_dashboard`
+        : `${protocol}//stardew-dashboard.42web.io`;
 }
 function get_max_upload_size() {
     return __awaiter(this, void 0, void 0, function* () {
