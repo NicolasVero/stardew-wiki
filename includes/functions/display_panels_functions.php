@@ -537,20 +537,45 @@ function display_community_center_panel():string {
 
         foreach($room_details["bundle_ids"] as $bundle_id) {
             $bundle_details = $player_bundles[$bundle_id];
-            $is_complete_class = ($bundle_details["is_complete"]) ? "complete" : "incomplete";
-            $bundle_tooltip_class = ($bundle_details["is_complete"]) ? "" : "bundle-tooltip tooltip";
-            $bundle_tooltip = ($bundle_details["is_complete"]) ? "" : "
-                <span>
-                    <img src='$images_path/content/bundle_bg.png' alt='Bundle background' class='bundle-bg'>
+            $bundle_name = $bundle_details["bundle_name"];
+            $formatted_bundle_name = formate_text_for_file($bundle_name);
+
+            if($bundle_details["is_complete"]) {
+                $is_complete_class = "complete";
+                $bundle_tooltip_class = "";
+                $bundle_tooltip = "";
+            } else {
+                $is_complete_class = "incomplete";
+                $bundle_tooltip_class = "bundle-tooltip tooltip";
+                $required_items = "";
+
+                foreach($bundle_details["requirements"] as $requirement) {
+                    extract($requirement);
+                    $formatted_item_name = formate_text_for_file($name);
+                    $required_items .= "<img src='$images_path/$type/$formatted_item_name.png' alt='$name' class='required-item'>";
+                }
+
+                $slot_image = "<img src='$images_path/icons/bundle_slot.png' alt='' class='slot'>";
+                $slots = str_repeat($slot_image, $bundle_details["limit"]);
+
+                $bundle_tooltip = "
                     <span>
-                        <img src='$images_path/bundles/" . formate_text_for_file($bundle_details["bundle_name"]) . "_bundle.png' alt='" . $bundle_details["bundle_name"] . " Bundle' class='bundle-icon'/>
+                        <img src='$images_path/content/bundle_bg.png' alt='Bundle background' class='bundle-bg'>
+                        <img src='$images_path/bundles/{$formatted_bundle_name}_bundle.png' alt='$bundle_name Bundle' class='bundle-icon'/>
+                        <span class='required-items'>
+                            $required_items
+                        </span>
+                        <span class='slots'>
+                            $slots
+                        </span>
                     </span>
-                </span>
-            ";
+                ";
+            }
+            
             
             $structure .= "
                 <span class='bundle $bundle_tooltip_class'>
-                    <img src='$images_path/bundles/" . formate_text_for_file($bundle_details["bundle_name"]) . "_bundle.png' alt='" . $bundle_details["bundle_name"] . " Bundle' class='$is_complete_class'/>
+                    <img src='$images_path/bundles/{$formatted_bundle_name}_bundle.png' alt='$bundle_name Bundle' class='$is_complete_class'/>
                     $bundle_tooltip
             ";
 

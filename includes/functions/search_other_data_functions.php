@@ -716,16 +716,37 @@ function get_player_bundle_details(object $bundle_data):array {
 function get_bundle_requirements(string $requirements):array {
 	$formatted_requirements = array_chunk(preg_split('/\s+/', $requirements), 3);
 	$bundle_requirements = [];
+	$item_types = [
+		"artifacts"        => sanitize_json_with_version("artifacts"),
+		"cooking_recipes"  => sanitize_json_with_version("cooking_recipes"),
+		"crafting_recipes" => sanitize_json_with_version("crafting_recipes"),
+		"fish"             => sanitize_json_with_version("fish"),
+		"minerals"         => sanitize_json_with_version("minerals"),
+		"shipped_items"    => sanitize_json_with_version("shipped_items")
+	];
+
 	foreach($formatted_requirements as $item) {
 		get_correct_id($item[0]);
 		$item[0] = abs($item[0]);
 		$item_name = ($item[0] == 1) ? "Gold Coins" : get_item_name_by_id($item[0]);
+
+		if($item_name == "None") {
+			continue;
+		}
+
+		$item_type = "additionnal_items";
+		foreach($item_types as $category => $values) {
+			if(in_array($item_name, $values)) {
+				$item_type = $category;
+			}
+		}
 
 		$bundle_requirement_item = [
 			"id" => $item[0],
 			"name" => $item_name,
 			"quantity" => $item[1],
 			"quality" => $item[2],
+			"type" => $item_type
 		];
 
 		array_push($bundle_requirements, $bundle_requirement_item);
