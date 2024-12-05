@@ -16,25 +16,39 @@ function display_player_selection():string {
 }
 
 function display_game_version():string {
-    $structure = "<span class='game_version'>V " . $GLOBALS["game_version"] . "</span>";
-    return $structure;
+    return "<span class='game_version'>V " . $GLOBALS["game_version"] . "</span>";
 }
 
 function display_settings_button(string $prefix):string {
-    $structure = "<span class='$prefix-settings modal-opener'><img src='" . get_images_folder() . "/icons/settings.png' class='modal-opener' alt='Settings icon'></span>";
-    return $structure;
+    return "
+        <span class='$prefix-settings modal-opener'>
+            <img src='" . get_images_folder() . "/icons/settings.png' class='modal-opener' alt='Settings icon'>
+        </span>
+    ";
 }
 
 function display_save_button(string $prefix):string {
-    return "<span class='$prefix-upload modal-opener'><img src='" . get_images_folder() . "/icons/file.png' class='modal-opener' alt='File upload icon'></span>";
+    return "
+        <span class='$prefix-upload modal-opener'>
+            <img src='" . get_images_folder() . "/icons/file.png' class='modal-opener' alt='File upload icon'>
+        </span>
+    ";
 }
 
 function display_feedback_button():string {
-    return "<span class='feedback-opener modal-opener'><img src='" . get_images_folder() . "/icons/feedback.png' class='modal-opener' alt='Feedback icon'></span>";
+    return "
+        <span class='feedback-opener modal-opener'>
+            <img src='" . get_images_folder() . "/icons/feedback.png' class='modal-opener' alt='Feedback icon'>
+        </span>
+    ";
 }
 
 function display_home_button():string {
-    return "<span class='landing-page-opener'><img src='" . get_images_folder() . "/icons/home.png' id='home-icon' alt='Home icon'></span>";
+    return "
+        <span class='landing-page-opener'>
+            <img src='" . get_images_folder() . "/icons/home.png' id='home-icon' alt='Home icon'>
+        </span>
+    ";
 }
 
 function display_junimo_kart_button():string {

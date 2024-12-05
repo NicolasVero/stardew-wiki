@@ -346,6 +346,7 @@ function display_friendships(int $limit = -1): string {
 
 function display_unlockables():string {
 	$player_unlockables = $GLOBALS["all_players_data"][$GLOBALS["player_id"]]["unlockables"];
+    $images_path = get_images_folder();
 	$version_score = $GLOBALS["game_version_score"];
 	$decoded_unlockables = $GLOBALS["json"]["unlockables"];
 
@@ -366,7 +367,7 @@ function display_unlockables():string {
             }
 	
 			$unlockable_class = ($player_unlockables[$formatted_name]["is_found"]) ? "found" : "not-found";
-			$unlockable_image = get_images_folder() . "/unlockables/$formatted_name.png";
+			$unlockable_image = "$images_path/unlockables/$formatted_name.png";
 			$wiki_url = get_wiki_link(get_item_id_by_name($unlockable));
 			
 			$structure .= "

@@ -540,9 +540,9 @@ function display_community_center_panel():string {
             $structure .= "<span class='bundle'>
                 <img src='$images_path/bundles/" . formate_text_for_file($bundle_details["bundle_name"]) . "_bundle.png' alt='" . $bundle_details["bundle_name"] . " Bundle' class='$is_complete_class'/>";
 
-            // if($bundle_details["is_complete"]) {
-            //     $structure .= "<img src='$images_path/icons/checked.png' class='checkmark'/>";
-            // }
+            if($bundle_details["is_complete"]) {
+                $structure .= "<img src='$images_path/icons/checked_alt.png' class='checkmark'/>";
+            }
 
             $structure .= "</span>";
         }
