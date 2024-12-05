@@ -1,18 +1,30 @@
 // out: false
 
-.small-panel {
+.small-panel-width {
 	min-width: 20vw;
 }
 
-.medium-panel {
+.medium-panel-width {
 	min-width: 40vw;
 }
 
-.big-panel {
+.big-panel-width {
 	min-width: 60vw;
 }
 
-.large-panel {
+.small-panel-height {
+	min-height: 30vh;
+}
+
+.medium-panel-height {
+	min-height: 50vh;
+}
+
+.big-panel-height {
+	min-height: 80vh;
+}
+
+.limit-panel-height {
 	max-height: 80vh;
 }
 
@@ -50,7 +62,7 @@
 }
 
 .modal-panel {
-	.large-panel;
+	.limit-panel-height;
 	.panel-with-border;
 	color: @primary-fc;
 	font-family: @primary-ff;
@@ -76,7 +88,7 @@
 	&.upload-panel {
 		.invisible-panel;
 		.modal-panel;
-		.small-panel;
+		.small-panel-width;
 
 		& > span {
 			display: flex;
@@ -113,7 +125,7 @@
 	&.settings-panel {
 		.invisible-panel;
 		.modal-panel;
-		.small-panel;
+		.small-panel-width;
 
 		.checkboxes {
 			display: flex;
@@ -134,7 +146,7 @@
 	}
 
 	&.feedback-panel {
-		.medium-panel;
+		.medium-panel-width;
 		.modal-panel;
 
 		span {
@@ -238,12 +250,12 @@
 
 	&.quests-panel {
 		.invisible-panel;
-		.large-panel;
-		.medium-panel;
+		.medium-panel-width;
 		.panel-with-border;
 		color: @primary-fc;
 		font-family: @primary-ff;
 		font-size: @md-fs;
+		max-height: 80vh;
 		padding: @big-gap @big-gap;
 	
 		.section-title {
@@ -310,7 +322,7 @@
 	}
 	
 	&.monster-eradication-goals-panel {
-		.big-panel;
+		.big-panel-width;
 		.invisible-panel;
 		.panel-with-background;
 		aspect-ratio: 1.79;
@@ -460,7 +472,7 @@
 	&.all-animals-panel {
 		.invisible-panel;
 		.panel-with-border;
-		.small-panel;
+		.small-panel-width;
 		color: @primary-fc;
 		font-family: @primary-ff;
 		font-size: @md-fs;
@@ -530,7 +542,7 @@
 	}
 	
 	&.junimo-kart-leaderboard-panel {
-		.big-panel;
+		.big-panel-width;
 		.invisible-panel;
 		.panel-with-background;
 		.panel-with-border;
