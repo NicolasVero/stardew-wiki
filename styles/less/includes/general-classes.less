@@ -140,18 +140,25 @@ pre {
 
 // Tooltips
 .tooltip {
+
+	&.bundle-tooltip {
+		& > span {
+			bottom: 0;
+		}
+	}
+	
     &:hover {
         position: relative;
     }
 
-    span {
+    & > span {
         .data;
         background-color: @stardew-bg;
         border-image: url("../../medias/images/content/border_image.png") 15 stretch;
         border-image-width: 2px;
         display: none !important;
 		max-width: calc(100vw / 2);
-        padding: 5px 7.5px;
+        padding: @small-gap (@small-gap + @xsmall-gap);
         position: absolute;
         width: max-content;
 

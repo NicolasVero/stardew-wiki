@@ -406,7 +406,7 @@ function display_junimo_kart_panel():string {
                 <img src='$images_path/icons/exit.png' class='absolute-exit exit exit-junimo-kart-leaderboard-$player_id' alt=''/>
                 <img src='$images_path/content/junimo_kart.png' class='image-title' alt=''/>
                 <span class='scores'>
-        ";
+    ";
 
     $untreated_scores = get_junimo_leaderboard($untreated_data->junimoKartLeaderboards->entries);
     $counter = 1;
@@ -528,21 +528,35 @@ function display_community_center_panel():string {
         if($room_name === "Bulletin Board" && has_element("JojaMember", $host_untreated_data)) {
             continue;
         }
+
         $structure .= "
             <span class='room'>
                 <h2>$room_name</h2>
-                <span class='bundles'>";
+                <span class='bundles'>
+        ";
 
         foreach($room_details["bundle_ids"] as $bundle_id) {
             $bundle_details = $player_bundles[$bundle_id];
             $is_complete_class = ($bundle_details["is_complete"]) ? "complete" : "incomplete";
+            $bundle_tooltip_class = ($bundle_details["is_complete"]) ? "" : "bundle-tooltip tooltip";
+            $bundle_tooltip = ($bundle_details["is_complete"]) ? "" : "
+                <span>
+                    <img src='$images_path/content/bundle_bg.png' alt='Bundle background' class='bundle-bg'>
+                    <span>
+                        <img src='$images_path/bundles/" . formate_text_for_file($bundle_details["bundle_name"]) . "_bundle.png' alt='" . $bundle_details["bundle_name"] . " Bundle' class='bundle-icon'/>
+                    </span>
+                </span>
+            ";
             
-            $structure .= "<span class='bundle'>
-                <img src='$images_path/bundles/" . formate_text_for_file($bundle_details["bundle_name"]) . "_bundle.png' alt='" . $bundle_details["bundle_name"] . " Bundle' class='$is_complete_class'/>";
+            $structure .= "
+                <span class='bundle $bundle_tooltip_class'>
+                    <img src='$images_path/bundles/" . formate_text_for_file($bundle_details["bundle_name"]) . "_bundle.png' alt='" . $bundle_details["bundle_name"] . " Bundle' class='$is_complete_class'/>
+                    $bundle_tooltip
+            ";
 
-            if($bundle_details["is_complete"]) {
-                $structure .= "<img src='$images_path/icons/checked_alt.png' class='checkmark'/>";
-            }
+            // if($bundle_details["is_complete"]) {
+            //     $structure .= "<img src='$images_path/icons/checked_alt.png' class='checkmark'/>";
+            // }
 
             $structure .= "</span>";
         }
