@@ -548,6 +548,7 @@ function display_community_center_panel():string {
                 $is_complete_class = "incomplete";
                 $bundle_tooltip_class = "bundle-tooltip tooltip";
 
+                //! faire exception pour afficher le nombre de gold coins à donner?
                 $required_items = display_bundle_requirements($bundle_details["requirements"], $bundle_details["items_added"]);
                 $slots = ($bundle_details["room_name"] === "Vault") ? display_bundle_purchase() : display_bundle_added_items($bundle_details["items_added"], $bundle_details["limit"]);
 
@@ -570,13 +571,8 @@ function display_community_center_panel():string {
                 <span class='bundle $bundle_tooltip_class'>
                     <img src='$images_path/bundles/{$formatted_bundle_name}_bundle.png' alt='$bundle_name Bundle' class='$is_complete_class'/>
                     $bundle_tooltip
+                </span>
             ";
-
-            // if($bundle_details["is_complete"]) {
-            //     $structure .= "<img src='$images_path/icons/checked_alt.png' class='checkmark'/>";
-            // }
-
-            $structure .= "</span>";
         }
 
         $structure .= "
@@ -589,6 +585,7 @@ function display_community_center_panel():string {
             </span>
         </section>
     ";
+
     return $structure;
 }
 

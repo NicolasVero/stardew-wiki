@@ -12,8 +12,6 @@ function update_section_visibility(section: HTMLElement, settings: Settings): vo
     if (settings.toggle_versions && is_empty && !has_older_items) {
         section.style.display = "none";
         return;
-    } else {
-        section.style.display = "block";
     }
 
     if (title) {
