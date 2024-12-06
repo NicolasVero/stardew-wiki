@@ -643,9 +643,9 @@
 						width: @museum-block;
 
 						& > .museum-piece {
+							left: 50%;
 							margin: 0;
 							position: absolute;
-							left: 50%;
 							transform: translate(-50%, -50%);
 							width: 1.25vw;
 						}
@@ -761,7 +761,30 @@
 								width: @cc-items-width;
 
 								& > .required-item {
+									position: relative;
 									width: 1.5vw;
+
+									& > img {
+										&.item {
+											height: 100%;
+											width: 100%;
+										}
+
+										&.quality {
+											bottom: 0;
+											position: absolute;
+											right: 0;
+											width: .5vw;
+										}
+									}
+									
+									& > .quantity {
+										bottom: -.5vw;
+										color: @third-fc;
+										position: absolute;
+										left: 0;
+										font-size: .75vw;
+									}
 								}
 							}
 
@@ -778,7 +801,25 @@
 								width: @cc-slot-width;
 
 								& > .slot {
-									width: 1.5vw;
+									position: relative;
+									width: 2.1vw;
+
+									& > img {
+										&.empty-slot {
+											height: 100%;
+											width: 100%;
+										}
+
+										&.added-item {
+											height: 70%;
+											left: 50%;
+											margin: 0;
+											position: absolute;
+											top: 50%;
+											transform: translate(-50%, -50%);
+											width: 70%;
+										}
+									}
 								}
 							}
 						}

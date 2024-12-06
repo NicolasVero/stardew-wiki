@@ -547,16 +547,9 @@ function display_community_center_panel():string {
             } else {
                 $is_complete_class = "incomplete";
                 $bundle_tooltip_class = "bundle-tooltip tooltip";
-                $required_items = "";
 
-                foreach($bundle_details["requirements"] as $requirement) {
-                    extract($requirement);
-                    $formatted_item_name = formate_text_for_file($name);
-                    $required_items .= "<img src='$images_path/$type/$formatted_item_name.png' alt='$name' class='required-item'>";
-                }
-
-                $slot_image = "<img src='$images_path/icons/bundle_slot.png' alt='' class='slot'>";
-                $slots = str_repeat($slot_image, $bundle_details["limit"]);
+                $required_items = display_bundle_requirements($bundle_details["requirements"], $bundle_details["items_added"]);
+                $slots = display_bundle_added_items($bundle_details["items_added"], $bundle_details["limit"]);
 
                 $bundle_tooltip = "
                     <span>

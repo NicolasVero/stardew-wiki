@@ -773,3 +773,15 @@ function get_bundle_reward(string $reward):array {
 
 	return $bundle_reward;
 }
+
+function has_been_donated_in_bundle(string $name, array $donated_items):bool {
+	$has_been_donated = false;
+
+	foreach($donated_items as $donated_item) {
+		if($name == $donated_item["name"]) {
+			$has_been_donated = true;
+		}
+	}
+
+	return $has_been_donated;
+}

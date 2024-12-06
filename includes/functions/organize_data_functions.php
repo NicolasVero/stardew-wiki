@@ -65,7 +65,7 @@ function get_farmhands():array {
             }
         }
     } else {
-        if(empty($data->farmhands)) {
+        if(empty($data->farmhands) || (string) $data->farmhands->name === "") {
             return [];
         }
 
