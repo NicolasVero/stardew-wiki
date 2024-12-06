@@ -549,7 +549,7 @@ function display_community_center_panel():string {
                 $bundle_tooltip_class = "bundle-tooltip tooltip";
 
                 $required_items = display_bundle_requirements($bundle_details["requirements"], $bundle_details["items_added"]);
-                $slots = display_bundle_added_items($bundle_details["items_added"], $bundle_details["limit"]);
+                $slots = ($bundle_details["room_name"] === "Vault") ? display_bundle_purchase() : display_bundle_added_items($bundle_details["items_added"], $bundle_details["limit"]);
 
                 $bundle_tooltip = "
                     <span>

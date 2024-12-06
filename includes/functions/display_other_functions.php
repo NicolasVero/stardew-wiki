@@ -347,7 +347,7 @@ function display_bundle_requirements(array $requirements, array $added_items):st
 
         $formatted_item_name = formate_text_for_file($name);
         $has_been_donated = (has_been_donated_in_bundle($name, $added_items)) ? "donated" : "not-donated";
-        $quantity = ($quantity > 1) ? "<span class='quantity'>$quantity</span>" : "";
+        $quantity = ($quantity > 1 && $quantity < 10) ? "<span class='quantity'>$quantity</span>" : "";
 
         $structure .= "
             <span class='required-item'>
@@ -384,4 +384,8 @@ function display_bundle_added_items(array $added_items, int $limit):string {
     }
 
     return $structure;
+}
+
+function display_bundle_purchase():string {
+    return "<img src='" . get_images_folder() . "/content/purchase.png' alt='' class='purchase'>";
 }
