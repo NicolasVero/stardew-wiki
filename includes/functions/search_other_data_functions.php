@@ -699,15 +699,13 @@ function get_player_bundle_progress(object $bundle_data, array $bundle_progress)
 function get_player_bundle_details(object $bundle_data):array {
 	$formatted_bundle = explode("/", (string) $bundle_data->value->string);
 	$bundle_name = $formatted_bundle[0];
-	$bundle_reward = get_bundle_reward($formatted_bundle[1]);
 	$bundle_requirements = get_bundle_requirements($formatted_bundle[2]);
 	$bundle_limit = $formatted_bundle[4] ?? count($bundle_requirements);
 	
 	$bundle_details = [
 		"bundle_name" => $bundle_name,
 		"requirements" => $bundle_requirements,
-		"limit" => $bundle_limit,
-		"reward" => $bundle_reward
+		"limit" => $bundle_limit
 	];
 
 	return $bundle_details;
@@ -753,25 +751,6 @@ function get_bundle_requirements(string $requirements):array {
 	}
 
 	return $bundle_requirements;
-}
-
-function get_bundle_reward(string $reward):array {
-	$big_objects_json = $GLOBALS["json"]["big_objects"];
-	$formatted_reward = explode(" ", $reward);
-
-	$reward_type = $formatted_reward[0];
-	get_correct_id($formatted_reward[1]);
-	$reward_id = ($reward_type !== "BO") ? $formatted_reward[1] : get_custom_id($big_objects_json[$formatted_reward[1]]);
-	$reward_name = get_item_name_by_id($reward_id);
-
-	$bundle_reward = [
-		"type" => $reward_type,
-		"id" => $reward_id,
-		"name" => $reward_name,
-		"quantity" => $formatted_reward[2]
-	];
-
-	return $bundle_reward;
 }
 
 function has_been_donated_in_bundle(string $name, array $donated_items):bool {

@@ -341,7 +341,7 @@ function display_project_contributor(array $options):string {
 function display_bundle_requirements(array $requirements, array $added_items):string {
     $structure = "";
     $images_path = get_images_folder();
-
+    
     foreach($requirements as $requirement) {
         extract($requirement);
 
