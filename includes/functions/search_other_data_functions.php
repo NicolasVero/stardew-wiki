@@ -728,9 +728,9 @@ function get_bundle_requirements(string $requirements):array {
 	foreach($formatted_requirements as $item) {
 		get_correct_id($item[0]);
 		$item[0] = abs($item[0]);
-		$item_name = ($item[0] == 1) ? "Gold Coins" : get_item_name_by_id($item[0]);
+		$item_name = ($item[0] === 1) ? "Gold Coins" : get_item_name_by_id($item[0]);
 
-		if($item_name == "None") {
+		if($item_name === "None") {
 			continue;
 		}
 
@@ -761,7 +761,7 @@ function get_bundle_reward(string $reward):array {
 
 	$reward_type = $formatted_reward[0];
 	get_correct_id($formatted_reward[1]);
-	$reward_id = ($reward_type != "BO") ? $formatted_reward[1] : get_custom_id($big_objects_json[$formatted_reward[1]]);
+	$reward_id = ($reward_type !== "BO") ? $formatted_reward[1] : get_custom_id($big_objects_json[$formatted_reward[1]]);
 	$reward_name = get_item_name_by_id($reward_id);
 
 	$bundle_reward = [
@@ -778,7 +778,7 @@ function has_been_donated_in_bundle(string $name, array $donated_items):bool {
 	$has_been_donated = false;
 
 	foreach($donated_items as $donated_item) {
-		if($name == $donated_item["name"]) {
+		if($name === $donated_item["name"]) {
 			$has_been_donated = true;
 		}
 	}

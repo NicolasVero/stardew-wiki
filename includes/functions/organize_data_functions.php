@@ -8,7 +8,7 @@ function load_save($save_file, $use_ajax = true):mixed {
     $GLOBALS["untreated_all_players_data"] = $data;
     $GLOBALS["game_version"] = $data->gameVersion;
 	$GLOBALS["game_version_score"] = (int) get_game_version_score((string) $data->gameVersion);;
-	$GLOBALS["should_spawn_monsters"] = $data->shouldSpawnMonsters;
+	$GLOBALS["should_spawn_monsters"] = (string) $data->shouldSpawnMonsters;
     $GLOBALS["shared_players_data"] = get_shared_aggregated_data($data->player);
 
     $players_data = get_all_players_data();

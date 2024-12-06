@@ -192,6 +192,8 @@ function find_reference_in_json(mixed $id, string $file):mixed {
 function get_correct_id(mixed &$id):void {
 	if(!filter_var((int) $id, FILTER_VALIDATE_INT)) {
 		$id = get_custom_id($id);
+	} else {
+		$id = (int) $id;
 	}
 }
 
