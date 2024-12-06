@@ -712,7 +712,6 @@ function get_player_stardrops_found(int $player_stamina):int {
 }
 
 function get_player_visited_locations(object $player_data):array {
-	//! Réglé ça pour les anciennes version
 	if(is_game_older_than_1_6()) {
 		return [];
 	}

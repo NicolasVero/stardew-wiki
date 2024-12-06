@@ -603,9 +603,6 @@ function update_section_visibility(section, settings) {
         section.style.display = "none";
         return;
     }
-    else {
-        section.style.display = "block";
-    }
     if (title) {
         title.style.display = "block";
     }

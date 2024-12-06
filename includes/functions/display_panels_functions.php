@@ -406,7 +406,7 @@ function display_junimo_kart_panel():string {
                 <img src='$images_path/icons/exit.png' class='absolute-exit exit exit-junimo-kart-leaderboard-$player_id' alt=''/>
                 <img src='$images_path/content/junimo_kart.png' class='image-title' alt=''/>
                 <span class='scores'>
-        ";
+    ";
 
     $untreated_scores = get_junimo_leaderboard($untreated_data->junimoKartLeaderboards->entries);
     $counter = 1;
@@ -528,23 +528,51 @@ function display_community_center_panel():string {
         if($room_name === "Bulletin Board" && has_element("JojaMember", $host_untreated_data)) {
             continue;
         }
+
         $structure .= "
             <span class='room'>
                 <h2>$room_name</h2>
-                <span class='bundles'>";
+                <span class='bundles'>
+        ";
 
         foreach($room_details["bundle_ids"] as $bundle_id) {
             $bundle_details = $player_bundles[$bundle_id];
-            $is_complete_class = ($bundle_details["is_complete"]) ? "complete" : "incomplete";
-            
-            $structure .= "<span class='bundle'>
-                <img src='$images_path/bundles/" . formate_text_for_file($bundle_details["bundle_name"]) . "_bundle.png' alt='" . $bundle_details["bundle_name"] . " Bundle' class='$is_complete_class'/>";
+            $bundle_name = $bundle_details["bundle_name"];
+            $formatted_bundle_name = formate_text_for_file($bundle_name);
 
             if($bundle_details["is_complete"]) {
-                $structure .= "<img src='$images_path/icons/checked_alt.png' class='checkmark'/>";
-            }
+                $is_complete_class = "complete";
+                $bundle_tooltip_class = "";
+                $bundle_tooltip = "";
+            } else {
+                $is_complete_class = "incomplete";
+                $bundle_tooltip_class = "bundle-tooltip tooltip";
 
-            $structure .= "</span>";
+                //! faire exception pour afficher le nombre de gold coins à donner?
+                $required_items = display_bundle_requirements($bundle_details["requirements"], $bundle_details["items_added"]);
+                $slots = ($bundle_details["room_name"] === "Vault") ? display_bundle_purchase() : display_bundle_added_items($bundle_details["items_added"], $bundle_details["limit"]);
+
+                $bundle_tooltip = "
+                    <span>
+                        <img src='$images_path/content/bundle_bg.png' alt='Bundle background' class='bundle-bg'>
+                        <img src='$images_path/bundles/{$formatted_bundle_name}_bundle.png' alt='$bundle_name Bundle' class='bundle-icon'/>
+                        <span class='required-items'>
+                            $required_items
+                        </span>
+                        <span class='slots'>
+                            $slots
+                        </span>
+                    </span>
+                ";
+            }
+            
+            
+            $structure .= "
+                <span class='bundle $bundle_tooltip_class'>
+                    <img src='$images_path/bundles/{$formatted_bundle_name}_bundle.png' alt='$bundle_name Bundle' class='$is_complete_class'/>
+                    $bundle_tooltip
+                </span>
+            ";
         }
 
         $structure .= "
@@ -557,6 +585,7 @@ function display_community_center_panel():string {
             </span>
         </section>
     ";
+
     return $structure;
 }
 

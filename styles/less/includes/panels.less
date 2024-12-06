@@ -1,18 +1,30 @@
 // out: false
 
-.small-panel {
+.small-panel-width {
 	min-width: 20vw;
 }
 
-.medium-panel {
+.medium-panel-width {
 	min-width: 40vw;
 }
 
-.big-panel {
+.big-panel-width {
 	min-width: 60vw;
 }
 
-.large-panel {
+.small-panel-height {
+	min-height: 30vh;
+}
+
+.medium-panel-height {
+	min-height: 50vh;
+}
+
+.big-panel-height {
+	min-height: 80vh;
+}
+
+.limit-panel-height {
 	max-height: 80vh;
 }
 
@@ -22,7 +34,7 @@
 	justify-content: space-between;
 	margin-bottom: @big-gap;
 }
-	
+
 .panel-title {
 	.data;
 }
@@ -31,7 +43,7 @@
 	display: none;
 }
 
-			
+
 .absolute-exit {
 	position: absolute;
 	top: @big-gap;
@@ -50,7 +62,7 @@
 }
 
 .modal-panel {
-	.large-panel;
+	.limit-panel-height;
 	.panel-with-border;
 	color: @primary-fc;
 	font-family: @primary-ff;
@@ -76,7 +88,7 @@
 	&.upload-panel {
 		.invisible-panel;
 		.modal-panel;
-		.small-panel;
+		.small-panel-width;
 
 		& > span {
 			display: flex;
@@ -113,7 +125,7 @@
 	&.settings-panel {
 		.invisible-panel;
 		.modal-panel;
-		.small-panel;
+		.small-panel-width;
 
 		.checkboxes {
 			display: flex;
@@ -134,7 +146,7 @@
 	}
 
 	&.feedback-panel {
-		.medium-panel;
+		.medium-panel-width;
 		.modal-panel;
 
 		span {
@@ -238,48 +250,48 @@
 
 	&.quests-panel {
 		.invisible-panel;
-		.large-panel;
-		.medium-panel;
+		.medium-panel-width;
 		.panel-with-border;
 		color: @primary-fc;
 		font-family: @primary-ff;
 		font-size: @md-fs;
+		max-height: 80vh;
 		padding: @big-gap @big-gap;
-	
+
 		.section-title {
 			margin: 0;
 		}
-	
+
 		.quests {
 			display: flex;
 			flex-direction: column;
 			gap: @big-gap;
 			white-space: nowrap;
-	
+
 			.quest {
 				display: flex;
 				gap: @bigger-gap * 2;
 				justify-content: space-between;
-	
+
 				& > span {
 					gap: @small-gap;
 					justify-content: center;
 				}
-	
+
 				.quest-infos {
 					display: flex;
 					flex-direction: column;
 					width: 500px;
-	
+
 					.quest-description {
 						font-size: @big-fs;
 					}
-	
+
 					.quest-title {
 						font-style: italic;
 					}
 				}
-	
+
 				.days-left {
 					align-items: center;
 					display: flex;
@@ -290,27 +302,27 @@
 					gap: @big-gap;
 					justify-content: flex-end;
 					width: 228px;
-	
+
 					.quest-reward {
 						align-items: center;
 						display: flex;
 						gap: @xsmall-gap;
 					}
 				}
-	
+
 				img {
 					width: @small-icon;
 				}
 			}
 		}
-	
+
 		.section-title {
 			font-size: @big-fs;
 		}
 	}
-	
+
 	&.monster-eradication-goals-panel {
-		.big-panel;
+		.big-panel-width;
 		.invisible-panel;
 		.panel-with-background;
 		aspect-ratio: 1.79;
@@ -319,13 +331,13 @@
 		font-family: @dialogue-ff;
 		font-size: @giant-fs;
 		padding: @big-gap @big-gap;
-	
+
 		& > * {
 			display: flex;
 			flex-direction: column;
 			gap: @md-gap;
 		}
-	
+
 		& > .header {
 			position: relative;
 	
@@ -335,14 +347,14 @@
 				font-weight: 900;
 				letter-spacing: 3px;
 			}
-	
+
 			& > .dashes {
 				@dash-amount: 30;
 				@dash-gap: 3px;
 				@dash-width: 14px;
 				width: @dash-amount * @dash-width + (@dash-amount - 1) * @dash-gap;
 			}
-	
+
 			& > .exit {
 				position: absolute;
 				right: @md-gap;
@@ -350,21 +362,21 @@
 				width: @big-icon;
 			}
 		}
-	
+
 		& > .goals {
 			margin-left: @md-gap + @small-gap;
 			margin-top: @md-gap;
-	
+
 			& > .goal {
 				align-items: center;
 				display: flex;
 				gap: @md-gap;
-	
+
 				& > *:not(.tooltip) {
 					font-weight: 900;
 					letter-spacing: 3px;
 				}
-	
+
 				& img.reward {
 					height: @big-icon;
 					object-fit: contain;
@@ -373,7 +385,7 @@
 			}
 		}
 	}
-	
+
 	&.calendar-panel {
 		.invisible-panel;
 		@calendar-ratio: 1;
@@ -388,7 +400,7 @@
 
 		aspect-ratio: 1.43;
 		width: @calendar-real-width;
-		
+
 		& > .calendar-block {
 			display: block;
 			height: 100%;
@@ -400,7 +412,7 @@
 				position: absolute;
 				width: 100%;
 			}
-	
+
 			& > table {
 				border-collapse: collapse;
 				height: fit-content;
@@ -408,7 +420,7 @@
 				position: absolute;
 				top: @calendar-top-margin + (@calendar-border-width / 2);
 				width: fit-content;
-				
+
 				& > tbody > tr {
 					display: block;
 					height: @calendar-block;
@@ -420,7 +432,7 @@
 						padding: 0;
 						text-align: center;
 						width: @calendar-block;
-	
+
 						&:hover {
 							border: solid 2px @calendar-bc;
 						}
@@ -429,7 +441,7 @@
 							height: 100%;
 							margin: 0 auto;
 							vertical-align: middle;
-	
+
 							& > a {
 								cursor: @pointer;
 								display: block;
@@ -438,14 +450,14 @@
 							}
 						}
 					}
-	
+
 					& > td.simple-event {
 						& > div {
 							display: block;
 							width: 100%;
 						}
 					}
-	
+
 					& > td.double-event {
 						& > div {
 							display: inline-block;
@@ -456,23 +468,23 @@
 			}
 		}
 	}
-	
+
 	&.all-animals-panel {
 		.invisible-panel;
 		.panel-with-border;
-		.small-panel;
+		.small-panel-width;
 		color: @primary-fc;
 		font-family: @primary-ff;
 		font-size: @md-fs;
 		max-height: 80vh;
 		padding: @md-gap @big-gap;
-	
+
 		& > .panel-header {
 			& > .section-title {
 				font-size: @big-fs;
 			}
 		}
-	
+
 		& > .friendlist {
 			display: flex;
 			flex-direction: column;
@@ -482,21 +494,21 @@
 				display: flex;
 				gap: @bigger-gap;
 			}
-	
+
 			.animal-icon {
 				cursor: @help;
 				height: @bigger-icon;
 				object-fit: contain;
 				width: @giant-icon;
 			}
-	
+
 			.animal-name {
 				font-family: @primary-ff;
 				overflow: hidden;
 				text-overflow: ellipsis;
 				width: 100px;
 			}
-	
+
 			.hearts-level {
 				display: flex;
 				flex-wrap: wrap;
@@ -506,12 +518,12 @@
 					width: @small-icon;
 				}
 			}
-	
+
 			.interactions {
 				align-items: center;
 				display: flex;
 				gap: @big-gap;
-	
+
 				& > span {
 					display: flex;
 					gap: @md-gap;
@@ -521,16 +533,16 @@
 					width: @md-icon;
 				}
 			}
-	
+
 			.animal-status {
 				.data;
 				font-size: @md-fs;
 			}
 		}
 	}
-	
+
 	&.junimo-kart-leaderboard-panel {
-		.big-panel;
+		.big-panel-width;
 		.invisible-panel;
 		.panel-with-background;
 		.panel-with-border;
@@ -554,14 +566,14 @@
 				margin: @bigger-gap auto 0 auto;
 				width: 50%;
 			}
-	
+
 			& > .scores {
 				display: flex;
 				flex-direction: column;
 				gap: @md-gap;
 				margin: 0 auto @bigger-gap auto;
 				width: 25%;
-	
+
 				& > .record-holder {
 					color: @third-fc;
 					display: flex;
@@ -569,7 +581,7 @@
 					font-size: @bigger-fs;
 					justify-content: space-between;
 					text-shadow: 3px 3px 3px @primary-fc;
-	
+
 					& > .record-holder-details {
 						display: flex;
 						gap: @md-gap;
@@ -578,7 +590,7 @@
 							width: 33px;
 						}
 					}
-	
+
 					&.leader {
 						animation: rainbow 10s infinite linear;
 					}
@@ -599,7 +611,7 @@
 		@museum-left-margin: ((@used-width * 14) / @museum-width) * @museum-ratio;
 		@museum-real-width: ((@used-width * @museum-width) / @museum-width) * @museum-ratio;
 		@museum-top-margin: ((@used-width * 144) / @museum-width) * @museum-ratio;
-		
+
 		aspect-ratio: 1.29;
 		background-image: url("../../medias/images/content/museum_bg.png");
 		width: @museum-real-width;
@@ -609,7 +621,7 @@
 			height: 100%;
 			position: relative;
 			width: 100%;
-	
+
 			& > table {
 				border-collapse: collapse;
 				height: fit-content;
@@ -617,12 +629,12 @@
 				position: absolute;
 				top: @museum-top-margin;
 				width: fit-content;
-				
+
 				& > tbody > tr {
 					display: block;
 					height: @museum-block;
 					width: fit-content;
-	
+
 					& > td {
 						box-sizing: border-box;
 						height: @museum-block;
@@ -631,11 +643,11 @@
 						width: @museum-block;
 
 						& > .museum-piece {
+							left: 50%;
 							margin: 0;
 							position: absolute;
-							left: 50%;
 							transform: translate(-50%, -50%);
-							width: @md-icon;
+							width: 1.25vw;
 						}
 					}
 				}
@@ -706,6 +718,111 @@
 					& > .bundle {
 						display: flex;
 						position: relative;
+
+						&.bundle-tooltip > span {
+							@cc-ratio: 1;
+							@used-width: 20vw;
+							@cc-width: 340;
+							// (used-width en vw * valeur en pixel) / cc-width en px
+							@cc-background-width: ((@used-width * @cc-width) / @cc-width) * @cc-ratio;
+							@cc-image-left-margin: ((@used-width * 136.5) / @cc-width) * @cc-ratio;
+							@cc-items-left-margin: ((@used-width * 66) / @cc-width) * @cc-ratio;
+							@cc-items-width: ((@used-width * 198) / @cc-width) * @cc-ratio;
+							@cc-image-top-margin: ((@used-width * 44) / @cc-width) * @cc-ratio;
+							@cc-image-width: ((@used-width * 64) / @cc-width) * @cc-ratio;
+							@cc-required-height: ((@used-width * 62) / @cc-width) * @cc-ratio;
+							@cc-required-top-margin: ((@used-width * 138) / @cc-width) * @cc-ratio;
+							@cc-slot-border-width: ((@used-width * 8) / @cc-width) * @cc-ratio;
+							@cc-slot-height: ((@used-width * 84) / @cc-width) * @cc-ratio;
+							@cc-slot-top-margin: ((@used-width * 228) / @cc-width) * @cc-ratio;
+							@cc-slot-width: ((@used-width * 182) / @cc-width) * @cc-ratio;
+
+							& > .bundle-bg {
+								width: @cc-background-width;
+							}
+							
+							& > .bundle-icon {
+								position: absolute;
+								left: @cc-image-left-margin;
+								top: @cc-image-top-margin;
+								width: @cc-image-width;
+							}
+
+							& > .required-items {
+								align-items: center;
+								display: flex;
+								flex-wrap: wrap;
+								gap: 0.25vw;
+								height: @cc-required-height;
+								justify-content: center;
+								left: @cc-items-left-margin;
+								position: absolute;
+								top: @cc-required-top-margin;
+								width: @cc-items-width;
+
+								& > .required-item {
+									position: relative;
+									width: 1.5vw;
+
+									& > img {
+										&.item {
+											height: 100%;
+											width: 100%;
+										}
+
+										&.quality {
+											bottom: 0;
+											position: absolute;
+											right: 0;
+											width: .5vw;
+										}
+									}
+									
+									& > .quantity {
+										bottom: -.5vw;
+										color: @third-fc;
+										position: absolute;
+										left: 0;
+										font-size: .75vw;
+									}
+								}
+							}
+
+							& > .slots {
+								align-items: center;
+								display: flex;
+								flex-wrap: wrap;
+								gap: 0.25vw;
+								height: @cc-slot-height;
+								justify-content: center;
+								left: (@cc-items-left-margin + @cc-slot-border-width);
+								position: absolute;
+								top: @cc-slot-top-margin;
+								width: @cc-slot-width;
+
+								& > .slot {
+									position: relative;
+									width: 2.1vw;
+
+									& > img {
+										&.empty-slot, &.purchase {
+											height: 100%;
+											width: 100%;
+										}
+
+										&.added-item {
+											height: 70%;
+											left: 50%;
+											margin: 0;
+											position: absolute;
+											top: 50%;
+											transform: translate(-50%, -50%);
+											width: 70%;
+										}
+									}
+								}
+							}
+						}
 
 						& > .checkmark {
 							bottom: 0;
