@@ -282,143 +282,31 @@ function get_player_friendship_data(object $data):array {
 }
 
 function get_player_quest_log(object $data):array {
+	$entire_data = $GLOBALS["untreated_all_players_data"];
 	$quests_data = [];
 
-	foreach($data->Quest as $item) {
-		$quest_id = (int) $item->id;
+	foreach($data->Quest as $quest) {
+		$quest_id = (int) $quest->id;
 		$quest_reference = find_reference_in_json(
 			$quest_id,
 			"quests"
 		);
 
-		// Quêtes histoire
+		// if -> Quête histoire // else -> Quête daily
 		if(!empty($quest_reference)){
-			$quests_data[] = [
-				"time_limited"	=> false,
-				"objective"   	=> $quest_reference["objective"],
-				"description" 	=> $quest_reference["description"],
-				"title"       	=> $quest_reference["title"],
-				"rewards"     	=> $quest_reference["reward"]
-			];
+			$quests_data[] = get_story_quest_data($quest_reference);
 		} else {
-			// Quêtes daily
-			$quest_type = (int) $item->questType;
-
-			$days_left = (int) $item->daysLeft;
-			$rewards = [(int) $item->reward];
-			$target = $item->target;
-
-			$goal_name = "";
-			$keyword = "";
-			$keyword_ing = "";
-			$number_to_get = 0;
-			$number_obtained = 0;
-			
-			switch($quest_type) {
-
-				case 3 :
-					$goal_name = find_reference_in_json(formate_original_data_string($item->item), "shipped_items");
-
-					$keyword = "Deliver";
-					$keyword_ing = "Delivering";
-
-					$number_to_get = $item->number;
-					$number_obtained = 0;
-					break;
-
-				case 4 :
-					$goal_name = $item->monsterName;
-
-					$keyword = "Kill";
-					$keyword_ing = "Killing";
-
-					$number_to_get = $item->numberToKill;
-					$number_obtained = $item->numberKilled;
-					break;
-
-				case 5 :
-					$goal_name = "people";
-
-					$keyword = "Talk to";
-					$keyword_ing = "Socializing";
-
-					$number_to_get = $item->total;
-					$number_obtained = $item->whoToGreet;
-					break;
-
-				case 7 :
-					$goal_name = find_reference_in_json(formate_original_data_string($item->whichFish), "fish");
-
-					$keyword = "Fish";
-					$keyword_ing = "Fishing";
-
-					$number_to_get = $item->numberToFish;
-					$number_obtained = $item->numberFished;
-					break;
-
-				case 10 :
-					$goal_name = find_reference_in_json(formate_original_data_string($item->resource), "shipped_items");
-
-					$keyword = "Fish";
-					$keyword_ing = "Fishing";
-
-					$number_to_get = $item->number;
-					$number_obtained = $item->numberCollected;
-					break;
+			if (($quest_data = get_daily_quest_data($quest)) !== null) {
+				$quests_data[] = $quest_data;
 			}
-			
-			$title = "$keyword_ing Quest";
-			$description = "Help $target with his $keyword_ing request.";
-			$objective = "$keyword $number_to_get $goal_name for $target: $number_obtained/$number_to_get";
-			$quests_data[] = [
-				"time_limited"	=> true,
-				"objective"   	=> $objective,
-				"description" 	=> $description,
-				"title"       	=> $title,
-				"daysLeft"    	=> $days_left,
-				"rewards"     	=> $rewards
-			];
 		}
 	}
 
 	// Special Orders (Weekly)
-	$entire_data = $GLOBALS["untreated_all_players_data"];
-	$special_orders_json = sanitize_json_with_version("special_orders", true);
-
 	foreach($entire_data->specialOrders->SpecialOrder as $special_order) {
-		if(((string) $special_order->questState) !== "InProgress") {
-			continue;
+		if (($special_order_data = get_special_order_data($special_order)) !== null) {
+			$quests_data[] = $special_order_data;
 		}
-
-		$target = (string) $special_order->requester;
-		$is_qi_order = ((string) $special_order->orderType === "Qi");
-
-		$number_to_get = (int) $special_order->objectives->maxCount;
-		$number_obtained = (int) $special_order->objectives->currentCount;
-
-		$title = ($is_qi_order) ? "QI's Special Order" : "Weekly Special Order";
-		$description = $special_orders_json[(string) $special_order->questKey];
-
-		$objective = "$target, $description: $number_obtained/$number_to_get";
-
-		$days_left = (int) $special_order->dueDate - get_number_of_days_ingame();
-
-		$rewards = [];
-
-		foreach($special_order->rewards as $reward) {
-			if($reward->amount) {
-				$rewards[] = ($is_qi_order) ? (int) $reward->amount->int . "_q" : ((int) $reward->amount->int) * ((int) $reward->multiplier->float);
-			}
-		}
-			
-		$quests_data[] = [
-			"time_limited"	=> true,
-			"objective"   	=> $objective,
-			"description" 	=> $description,
-			"title"       	=> $title,
-			"daysLeft"    	=> $days_left,
-			"rewards"     	=> $rewards
-		];
 	}
 
 	return $quests_data;
