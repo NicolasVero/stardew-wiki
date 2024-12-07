@@ -1,6 +1,12 @@
 <?php 
 
-function get_player_gender(array $genders):string {
+function get_player_gender():string {
+	$player_data = $GLOBALS["untreated_player_data"];
+	$genders = [
+		$player_data->gender,
+		$player_data->isMale
+	];
+
 	foreach($genders as $gender) {
 		if(empty($gender)) {
 			continue;
@@ -16,10 +22,11 @@ function get_player_gender(array $genders):string {
 	return "Neutral";
 }
 
-function get_player_achievements(object $achievements):array {
+function get_player_achievements():array {
+    $player_achievements = $GLOBALS["untreated_player_data"]->achievements;
 	$achievements_data = [];
 	
-	foreach($achievements->int as $achievement) {
+	foreach($player_achievements->int as $achievement) {
 		$achievement = find_reference_in_json((int) $achievement, "achievements_details");
 		extract($achievement);
 
@@ -95,8 +102,7 @@ function get_player_unlockables_list():array {
 
 function get_player_unlockable(string $unlockable_name):int {
 	$player_data = $GLOBALS["untreated_player_data"];
-	$version_score = $GLOBALS["game_version_score"];
-	$is_older_version = ($version_score < get_game_version_score("1.6.0"));
+	$is_older_version = (is_game_older_than_1_6());
 
 	switch($unlockable_name) {
 		case "forest_magic":
@@ -140,15 +146,15 @@ function get_player_unlockable(string $unlockable_name):int {
 	}
 }
 
-function get_player_shipped_items(object $items):array {
+function get_player_shipped_items():array {
+	$player_items = $GLOBALS["untreated_player_data"]->basicShipped;
 	$shipped_items_data = [];
 
-	foreach($items->item as $item) {
-
+	foreach($player_items->item as $item) {
 		$item_id = (is_game_older_than_1_6()) ? $item->key->int : $item->key->string;
 		$item_id = formate_original_data_string($item_id);
-		
 		get_correct_id($item_id);
+
 		$shipped_items_reference = find_reference_in_json($item_id, "shipped_items");
 		
 		if(!empty($shipped_items_reference)) {
@@ -159,12 +165,13 @@ function get_player_shipped_items(object $items):array {
 	return $shipped_items_data;
 }
 
-function get_player_skills_data(array $skills):array {
+function get_player_skills_data():array {
+	$player_skills = (array) $GLOBALS["untreated_player_data"]->professions->int;
 	$json_skills = sanitize_json_with_version("skills");
 	$skills_data = [];
 
 	foreach($json_skills as $key => $skill) {
-		if(in_array($key, $skills)) {
+		if(in_array($key, $player_skills)) {
 			$skills_data[] = $json_skills[$key];
 		}
 	}
@@ -172,31 +179,32 @@ function get_player_skills_data(array $skills):array {
 	return $skills_data;
 }
 
-function get_player_enemies_killed_data(object $data):array { 
+function get_player_enemies_killed_data():array { 
+	$player_enemies_killed = $GLOBALS["untreated_player_data"]->stats;
 	$enemies_data = [];
 	
-	foreach($data->specificMonstersKilled->item as $enemy) {
-		$enemies_data[(string) $enemy->key->string] = [
-			"id"             => get_custom_id((string) $enemy->key->string),
-			"killed_counter" => (int) $enemy->value->int
+	foreach($player_enemies_killed->specificMonstersKilled->item as $enemy_killed) {
+		$enemies_data[(string) $enemy_killed->key->string] = [
+			"id"             => get_custom_id((string) $enemy_killed->key->string),
+			"killed_counter" => (int) $enemy_killed->value->int
 		];
 	}
 
 	return $enemies_data;
 }
 
-function get_player_books(object $data):array {
-	return get_player_items_list($data, "books");
+function get_player_books():array {
+	$player_books = $GLOBALS["untreated_player_data"]->stats->Values;
+	return get_player_items_list($player_books, "books");
 }
 
-function get_player_masteries(object $data):array {
-	return get_player_items_list($data, "masteries");
+function get_player_masteries():array {
+	$player_masteries = $GLOBALS["untreated_player_data"]->stats->Values;
+	return get_player_items_list($player_masteries, "masteries");
 }
 
 function get_player_items_list(object $data, string $filename):array {
-	$version_score = $GLOBALS["game_version_score"];
-
-	if($version_score < get_game_version_score("1.6.0")) {
+	if(is_game_older_than_1_6()) {
 		return [];
 	}
 	
@@ -219,29 +227,24 @@ function get_player_items_list(object $data, string $filename):array {
 	return $items_data;
 }
 
-function get_player_fishes_caught(object $data):array {
-	$version_score = $GLOBALS["game_version_score"];
+function get_player_fishes_caught():array {
+	$player_fishes = $GLOBALS["untreated_player_data"]->fishCaught;
 	$fishes_data = [];
 
-	foreach($data->item as $item) {
+	foreach($player_fishes->item as $fish) {
+		$fish_id = (is_game_older_than_1_6()) ? $fish->key->int : $fish->key->string;
+		$fish_id = formate_original_data_string($fish_id);
+		get_correct_id($fish_id);
 
-		$item_id = (is_game_older_than_1_6()) ? $item->key->int : $item->key->string;
-		$item_id = formate_original_data_string($item_id);
-
-		get_correct_id($item_id);
-
-		$values_array = (array) $item->value->ArrayOfInt->int;
-		$fish_reference = find_reference_in_json(
-			$item_id,
-			"fish"
-		);
+		$values_array = (array) $fish->value->ArrayOfInt->int;
+		$fish_reference = find_reference_in_json($fish_id, "fish");
 
 		if(empty($fish_reference) || $fish_reference === "") {
 			continue;
 		}
 		
 		$fishes_data[$fish_reference] = [
-			"id"             => (int) $item_id,
+			"id"             => (int) $fish_id,
 			"caught_counter" => (int) $values_array[0],
 			"max_length"     => (int) $values_array[1]
 		];
@@ -250,14 +253,14 @@ function get_player_fishes_caught(object $data):array {
 	return $fishes_data;
 }
 
-function get_player_friendship_data(object $data):array {
-	$friends_data = [];
+function get_player_friendship_data():array {
+	$player_friendships = $GLOBALS["untreated_player_data"]->friendshipData;
 	$villagers_json = sanitize_json_with_version("villagers");
 	$birthday_json = sanitize_json_with_version("villagers_birthday");
+	$friends_data = [];
 
-	foreach($data->item as $item) {
-		
-		$friend_name = (string) $item->key->string;
+	foreach($player_friendships->item as $friend) {
+		$friend_name = (string) $friend->key->string;
 
 		if(!in_array($friend_name, $villagers_json)) {
 			continue;
@@ -265,12 +268,12 @@ function get_player_friendship_data(object $data):array {
 
 		$friends_data[$friend_name] = [
 			"id"              => get_custom_id($friend_name),
-			"points"          => (int) $item->value->Friendship->Points,
-			"friend_level"    => (int) floor(($item->value->Friendship->Points) / 250),
+			"points"          => (int) $friend->value->Friendship->Points,
+			"friend_level"    => (int) floor(($friend->value->Friendship->Points) / 250),
 			"birthday"        => $birthday_json[get_custom_id($friend_name)],
-			"status"          => (string) $item->value->Friendship->Status,
-			"week_gifts"      => (int) $item->value->Friendship->GiftsThisWeek,
-			"talked_to_today" => (int) $item->value->Friendship->TalkedToToday
+			"status"          => (string) $friend->value->Friendship->Status,
+			"week_gifts"      => (int) $friend->value->Friendship->GiftsThisWeek,
+			"talked_to_today" => (int) $friend->value->Friendship->TalkedToToday
 		];
 	}
 
@@ -281,11 +284,12 @@ function get_player_friendship_data(object $data):array {
 	return $friends_data; 
 }
 
-function get_player_quest_log(object $data):array {
+function get_player_quest_log():array {
 	$entire_data = $GLOBALS["untreated_all_players_data"];
+	$player_quest_log = $GLOBALS["untreated_player_data"]->questLog;
 	$quests_data = [];
 
-	foreach($data->Quest as $quest) {
+	foreach($player_quest_log->Quest as $quest) {
 		$quest_id = (int) $quest->id;
 		$quest_reference = find_reference_in_json(
 			$quest_id,
@@ -312,11 +316,12 @@ function get_player_quest_log(object $data):array {
 	return $quests_data;
 }
 
-function get_player_crafting_recipes(object $recipes):array {
-	$crafting_recipes_data = [];
+function get_player_crafting_recipes():array {
+	$player_crafting_recipes = $GLOBALS["untreated_player_data"]->craftingRecipes;
 	$crafting_recipes_json = sanitize_json_with_version("crafting_recipes");
+	$crafting_recipes_data = [];
 
-	foreach($recipes->item as $recipe) {
+	foreach($player_crafting_recipes->item as $recipe) {
 		
 		$item_name = formate_original_data_string($recipe->key->string);
 		$index = array_search($item_name, $crafting_recipes_json);
@@ -330,26 +335,22 @@ function get_player_crafting_recipes(object $recipes):array {
 	return $crafting_recipes_data;
 }
 
-function get_player_cooking_recipes(object $recipes, object $recipes_cooked):array {
-	$version_score = $GLOBALS["game_version_score"];
-	$cooking_recipes_data = [];
+function get_player_cooking_recipes():array {
+	$player_recipes = $GLOBALS["untreated_player_data"]->cookingRecipes;
+	$player_recipes_cooked = $GLOBALS["untreated_player_data"]->recipesCooked;
 	$cooking_recipes_json = sanitize_json_with_version("cooking_recipes");
-	$has_ever_cooked = (empty((array) $recipes_cooked)) ? false : true;
+	$cooking_recipes_data = [];
 
-	foreach($recipes->item as $recipe) {
+	$has_ever_cooked = (empty((array) $player_recipes_cooked)) ? false : true;
 
+	foreach($player_recipes->item as $recipe) {
 		$item_name = formate_original_data_string($recipe->key->string);
 		$index = array_search($item_name, $cooking_recipes_json);      
 
 		if($has_ever_cooked) {
-			foreach($recipes_cooked->item as $recipe_cooked) {
+			foreach($player_recipes_cooked->item as $recipe_cooked) {
 
-				if($version_score < get_game_version_score("1.6.0")) {
-					$recipe_id = (int) $recipe_cooked->key->int;
-				} else {
-					$recipe_id = $recipe_cooked->key->string;
-				}
-
+				$recipe_id = ((is_game_older_than_1_6())) ? (int) $recipe_cooked->key->int : $recipe_cooked->key->string;
 				get_correct_id($recipe_id);
 
 				if($recipe_id === $index) {
@@ -376,18 +377,15 @@ function get_player_cooking_recipes(object $recipes, object $recipes_cooked):arr
 	return $cooking_recipes_data;
 }
 
-function get_player_artifacts(object $artifacts, object $general_data):array {
-	$version_score = $GLOBALS["game_version_score"];
+function get_player_artifacts():array {
+	$player_artifacts = $GLOBALS["untreated_player_data"]->archaeologyFound;
+    $general_data = $GLOBALS["untreated_all_players_data"];
 	$artifacts_data = [];
 
-	foreach($artifacts->item as $artifact) {
+	foreach($player_artifacts->item as $artifact) {
 
-		if($version_score < get_game_version_score("1.6.0")) {
-			$artifact_id = formate_original_data_string($artifact->key->int);
-		} else {
-			$artifact_id = formate_original_data_string($artifact->key->string);
-		} 
-
+		$artifact_id = ((is_game_older_than_1_6())) ? $artifact->key->int : $artifact->key->string;
+		$artifact_id = formate_original_data_string((string) $artifact_id);
 		get_correct_id($artifact_id);
 
 		$artifacts_reference = find_reference_in_json($artifact_id, "artifacts");
@@ -396,7 +394,7 @@ function get_player_artifacts(object $artifacts, object $general_data):array {
 		if(!empty($artifacts_reference)) {
 			$artifacts_data[$artifacts_reference] = [
 				"id"      => $artifact_id,
-				"counter" => is_given_to_museum($artifact_id, $general_data, $museum_index, $version_score)
+				"counter" => is_given_to_museum($artifact_id, $general_data, $museum_index)
 			];
 		}
 	}
@@ -404,29 +402,23 @@ function get_player_artifacts(object $artifacts, object $general_data):array {
 	return $artifacts_data;
 }
 
-function get_player_minerals(object $minerals, object $general_data):array {
-	$version_score = $GLOBALS["game_version_score"];
+function get_player_minerals():array {
+	$player_minerals = $GLOBALS["untreated_player_data"]->mineralsFound;
+    $general_data = $GLOBALS["untreated_all_players_data"];
 	$minerals_data = [];
 
-	foreach($minerals->item as $mineral) {
-
-		if($version_score < get_game_version_score("1.6.0")) {
-			$mineral_id = formate_original_data_string($mineral->key->int);
-		} else {
-			$mineral_id = formate_original_data_string($mineral->key->string);
-		} 
-
-
+	foreach($player_minerals->item as $mineral) {
+		$mineral_id = ((is_game_older_than_1_6())) ? $mineral->key->int : $mineral->key->string;
+		$mineral_id = formate_original_data_string((string) $mineral_id);
 		get_correct_id($mineral_id);
 		
 		$minerals_reference = find_reference_in_json($mineral_id, "minerals");
-		
 		$museum_index = get_gamelocation_index($general_data, "museumPieces");
 
 		if(!empty($minerals_reference)) {
 			$minerals_data[$minerals_reference] = [
 				"id"      => $mineral_id,
-				"counter" => is_given_to_museum($mineral_id, $general_data, $museum_index, $version_score)
+				"counter" => is_given_to_museum($mineral_id, $general_data, $museum_index)
 			];
 		}
 	}
@@ -474,12 +466,13 @@ function are_all_adventurers_guild_categories_completed(array $adventurers_guild
     return $counter === count($adventurers_guild_data);
 }
 
-function get_player_pet(object $data):array {
-	$breed = (int) $data->whichPetBreed;
+function get_player_pet():array {
+	$player_data = $GLOBALS["untreated_player_data"];
+	$breed = (int) $player_data->whichPetBreed;
 	$type = (is_game_older_than_1_6()) ?
-		(((string) $data->catPerson === "true") ? "cat" : "dog")
+		(((string) $player_data->catPerson === "true") ? "cat" : "dog")
 		:
-		lcfirst((string) $data->whichPetType);
+		lcfirst((string) $player_data->whichPetType);
 
 	return [
 		"type"  => $type,
@@ -561,19 +554,20 @@ function get_player_farm_animals():array {
     return $animals_data;
 }
 
-function get_player_secret_notes(object $notes):array {
-	$notes = (array) $notes->int;
-	sort($notes);
-	$all_notes = [];
+function get_player_secret_notes():array {
+	$player_secret_notes = $GLOBALS["untreated_player_data"]->secretNotesSeen;
+	$player_secret_notes = (array) $player_secret_notes->int;
+	sort($player_secret_notes);
+	$all_secret_notes = [];
 
-	foreach($notes as $note) {
-		$note_name = find_reference_in_json($note, "secret_notes");
-		$all_notes[$note_name] = [
-			"id" => $note
+	foreach($player_secret_notes as $secret_note) {
+		$secret_note_name = find_reference_in_json($secret_note, "secret_notes");
+		$all_secret_notes[$secret_note_name] = [
+			"id" => $secret_note
 		];
 	}
 
-	return $all_notes;
+	return $all_secret_notes;
 }
 
 function get_jumino_kart_leaderboard():array {
@@ -593,17 +587,19 @@ function get_jumino_kart_leaderboard():array {
 	return $leaderboard;
 }
 
-function get_player_stardrops_found(int $player_stamina):int {
+function get_player_stardrops_found():int {
+	$player_stamina = (int) $GLOBALS["untreated_player_data"]->maxStamina;
 	$min_stamina = 270;
 	$stamina_per_stardrop = 34;
 	return ($player_stamina - $min_stamina) / $stamina_per_stardrop;
 }
 
-function get_player_visited_locations(object $player_data):array {
+function get_player_visited_locations():array {
 	if(is_game_older_than_1_6()) {
 		return [];
 	}
 
+	$player_data = $GLOBALS["untreated_player_data"];
 	$locations_to_visit = sanitize_json_with_version("locations_to_visit");
 	$player_visited_locations = [];
 	$locations_real_name = [
@@ -646,11 +642,12 @@ function get_player_visited_locations(object $player_data):array {
 	return $player_visited_locations;
 }
 
-function get_player_bundles(object $general_data):array {
-	$bundles_index = get_gamelocation_index($general_data, "bundles");
+function get_player_bundles():array {
+    $untreated_all_data = $GLOBALS["untreated_all_players_data"];
+	$bundles_index = get_gamelocation_index($untreated_all_data, "bundles");
 	$bundles_json = sanitize_json_with_version("bundles", true);
-	$bundles_data = $general_data->bundleData;
-	$bundle_arrays = $general_data->locations->GameLocation[$bundles_index]->bundles;
+	$bundles_data = $untreated_all_data->bundleData;
+	$bundle_arrays = $untreated_all_data->locations->GameLocation[$bundles_index]->bundles;
 
 	foreach($bundle_arrays->item as $bundle_array) {
 		$bundle_id = (int) $bundle_array->key->int;
