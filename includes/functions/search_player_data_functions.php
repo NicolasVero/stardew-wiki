@@ -12,11 +12,12 @@ function get_player_gender():string {
 			continue;
 		}
 
-		if(is_numeric($gender[0])) {
-			return ($gender[0] === 0) ? "Male" : "Female";
+		$gender = (string) $gender[0];
+		if(is_numeric($gender)) {
+			return ($gender === 0) ? "Male" : "Female";
 		} else {
-			return ($gender[0]) ? "Male" : "Female";
-		} 
+			return ($gender === "false" || $gender === "Male") ? "Male" : "Female";
+		}
 	}
 
 	return "Neutral";
@@ -38,14 +39,17 @@ function get_player_achievements():array {
 
 function does_player_have_achievement(object $achievements, int $achievement_id):bool {
 	foreach($achievements->int as $achievement) {
-		if($achievement_id === $achievement) {
-			return true;
+		if($achievement_id !== $achievement) {
+			continue;
 		}
+
+		return true;
 	}
 
 	return false;
 }
 
+//& TODO
 function get_player_unlockables_list():array {
 	$data = $GLOBALS["untreated_player_data"];
 	return [
@@ -100,6 +104,7 @@ function get_player_unlockables_list():array {
 	];
 }
 
+//& TODO
 function get_player_unlockable(string $unlockable_name):int {
 	$player_data = $GLOBALS["untreated_player_data"];
 	$is_older_version = (is_game_older_than_1_6());
@@ -156,10 +161,12 @@ function get_player_shipped_items():array {
 		get_correct_id($item_id);
 
 		$shipped_items_reference = find_reference_in_json($item_id, "shipped_items");
-		
-		if(!empty($shipped_items_reference)) {
-			$shipped_items_data[$shipped_items_reference] = [ "id" => $item_id ];
+
+		if(empty($shipped_items_reference)) {
+			continue;
 		}
+
+		$shipped_items_data[$shipped_items_reference] = [ "id" => $item_id ];
 	}
 	
 	return $shipped_items_data;
@@ -171,9 +178,11 @@ function get_player_skills_data():array {
 	$skills_data = [];
 
 	foreach($json_skills as $key => $skill) {
-		if(in_array($key, $player_skills)) {
-			$skills_data[] = $json_skills[$key];
+		if(!in_array($key, $player_skills)) {
+			continue;
 		}
+
+		$skills_data[] = $json_skills[$key];
 	}
 
 	return $skills_data;
@@ -207,7 +216,7 @@ function get_player_items_list(object $data, string $filename):array {
 	if(is_game_older_than_1_6()) {
 		return [];
 	}
-	
+
 	$items_data = [];
 
 	foreach($data->item as $item) {
