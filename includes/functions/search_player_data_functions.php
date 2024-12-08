@@ -13,10 +13,12 @@ function get_player_gender():string {
 		}
 
 		$gender = (string) $gender[0];
+
+		// $gender: (0 / 1) || ("true" / "false") || ("Male" / "Female")
 		if(is_numeric($gender)) {
 			return ($gender === 0) ? "Male" : "Female";
 		} else {
-			return ($gender === "false" || $gender === "Male") ? "Male" : "Female";
+			return ($gender === "true" || $gender === "Male") ? "Male" : "Female";
 		}
 	}
 
