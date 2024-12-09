@@ -150,7 +150,7 @@ function get_aggregated_data(object $data):array {
         "enemies_killed"    => get_player_enemies_killed_data(),
         "quest_log"         => get_player_quest_log(),
         "secret_notes"      => get_player_secret_notes(),
-        "locations_visited" => get_player_visited_locations(),
+        "locations_visited" => get_player_visited_locations()
     ];
 }
 
