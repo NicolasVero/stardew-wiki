@@ -9,7 +9,7 @@ function load_save($save_file, $use_ajax = true):mixed {
     $GLOBALS["game_version"] = $data->gameVersion;
 	$GLOBALS["game_version_score"] = (int) get_game_version_score((string) $data->gameVersion);;
 	$GLOBALS["should_spawn_monsters"] = (string) $data->shouldSpawnMonsters;
-    $GLOBALS["shared_players_data"] = get_shared_aggregated_data($data->player);
+    $GLOBALS["shared_players_data"] = get_shared_aggregated_data();
 
     $players_data = get_all_players_data();
     $GLOBALS["players_names"] = get_players_name();
@@ -65,11 +65,15 @@ function get_farmhands():array {
             }
         }
     } else {
-        if(empty($data->farmhands) || (string) $data->farmhands->name === "") {
+        if(empty($data->farmhands)) {
             return [];
         }
 
         foreach($data->farmhands->Farmer as $farmhand) {
+            if((string) $farmhand->name === "") {
+                continue;
+            }
+
             array_push($all_farmhands, $farmhand);
         }
     }
@@ -101,16 +105,16 @@ function get_aggregated_data(object $data):array {
         "general" => [
             "id"                    => (int) $data->UniqueMultiplayerID,
             "name"                  => (string) $data->name,
-            "gender"                => get_player_gender([$data->gender, $data->isMale]),
+            "gender"                => get_player_gender(),
             "farm_name"             => (string) $data->farmName,
-            "farmer_level"          => get_farmer_level($data),
+            "farmer_level"          => get_farmer_level(),
             "favorite_thing"        => (string) $data->favoriteThing,
-            "pet"                   => get_player_pet($data),
-            "spouse"                => get_spouse($data),
-            "children"              => get_children_amount((int) $data->UniqueMultiplayerID),
-            "house_level"           => get_house_upgrade_level($data),
+            "pet"                   => get_player_pet(),
+            "spouse"                => get_spouse(),
+            "children"              => get_children_amount(),
+            "house_level"           => get_house_upgrade_level(),
             "date"                  => get_formatted_date(),
-            "game_duration"         => get_game_duration((int) $data->millisecondsPlayed),
+            "game_duration"         => get_game_duration(),
             "mine_level"            => (int) $data->deepestMineLevel,
             "max_items"             => (int) $data->maxItems,
             "max_health"            => (int) $data->maxHealth,
@@ -122,7 +126,7 @@ function get_aggregated_data(object $data):array {
             "qi_gems"               => (int) $data->qiGems,
             "casino_coins"          => (int) $data->clubCoins,
             "raccoons"              => (int) $general_data->timesFedRaccoons,
-            "stardrops_found"       => get_player_stardrops_found((int) $data->maxStamina)
+            "stardrops_found"       => get_player_stardrops_found()
         ],
         "levels" => [
             "farming_level"  => (int) $data->farmingLevel,
@@ -132,32 +136,30 @@ function get_aggregated_data(object $data):array {
             "fishing_level"  => (int) $data->fishingLevel,
         ],
         "unlockables"       => get_player_unlockables_list(),
-        "crafting_recipes"  => get_player_crafting_recipes($data->craftingRecipes),
-        "books"             => get_player_books($data->stats->Values),
-        "masteries"         => get_player_masteries($data->stats->Values),
-        "fish_caught"       => get_player_fishes_caught($data->fishCaught),
-        "artifacts_found"   => get_player_artifacts($data->archaeologyFound, $general_data),
-        "minerals_found"    => get_player_minerals($data->mineralsFound, $general_data),
-        "cooking_recipes"   => get_player_cooking_recipes($data->cookingRecipes, $data->recipesCooked),
-        "shipped_items"     => get_player_shipped_items($data->basicShipped),
-        "achievements"      => get_player_achievements($data->achievements),
-        "skills"            => get_player_skills_data((array) $data->professions->int),
-        "friendship"        => get_player_friendship_data($data->friendshipData),
-        "enemies_killed"    => get_player_enemies_killed_data($data->stats),
-        "quest_log"         => get_player_quest_log($data->questLog),
-        "secret_notes"      => get_player_secret_notes($data->secretNotesSeen)
+        "crafting_recipes"  => get_player_crafting_recipes(),
+        "books"             => get_player_books(),
+        "masteries"         => get_player_masteries(),
+        "fish_caught"       => get_player_fishes_caught(),
+        "artifacts_found"   => get_player_artifacts(),
+        "minerals_found"    => get_player_minerals(),
+        "cooking_recipes"   => get_player_cooking_recipes(),
+        "shipped_items"     => get_player_shipped_items(),
+        "achievements"      => get_player_achievements(),
+        "skills"            => get_player_skills_data(),
+        "friendship"        => get_player_friendship_data(),
+        "enemies_killed"    => get_player_enemies_killed_data(),
+        "quest_log"         => get_player_quest_log(),
+        "secret_notes"      => get_player_secret_notes(),
+        "locations_visited" => get_player_visited_locations()
     ];
 }
 
-function get_shared_aggregated_data(object $data):array {
-    $general_data = $GLOBALS["untreated_all_players_data"];
-
+function get_shared_aggregated_data():array {
     return [
         "farm_animals"          => get_player_farm_animals(),
         "weather"               => get_weather(),
         "jumino_kart"           => get_jumino_kart_leaderboard(),
-        "museum_coords"         => get_museum_pieces_coords($general_data),
-        "locations_visited"     => get_player_visited_locations($data),
-        "cc_bundles"            => get_player_bundles($general_data)
+        "museum_coords"         => get_museum_pieces_coords(),
+        "cc_bundles"            => get_player_bundles()
     ];
 }
