@@ -65,8 +65,9 @@ function get_is_married():bool {
 	return isset($data->spouse);
 }
 
-function get_spouse(object $data):mixed {
-	return (!empty($data->spouse)) ? $data->spouse : null;
+function get_spouse():mixed {
+	$player_data = $GLOBALS["untreated_player_data"];
+	return (!empty($player_data->spouse)) ? $player_data->spouse : null;
 }
 
 function is_this_the_same_day(string $date):bool {
@@ -112,11 +113,12 @@ function is_golden_clock_on_farm():bool {
 	return false;
 }
 
-function get_house_upgrade_level(object $data):int {
-	return (int) $data->houseUpgradeLevel;
+function get_house_upgrade_level():int {
+	return (int) $GLOBALS["untreated_player_data"]->houseUpgradeLevel;
 }
 
-function get_children_amount(int $id):array {
+function get_children_amount():array {
+	$player_id = (int) $GLOBALS["untreated_player_data"]->UniqueMultiplayerID;
 	$locations = $GLOBALS["untreated_all_players_data"]->locations->GameLocation;
 	$children_name = [];
 
@@ -127,7 +129,7 @@ function get_children_amount(int $id):array {
                     continue;
                 }
 
-				if((int) $npc->idOfParent === $id) {
+				if((int) $npc->idOfParent === $player_id) {
                     array_push($children_name, $npc->name);
                 }
 			}
@@ -143,7 +145,7 @@ function get_children_amount(int $id):array {
                             continue;
                         }
 
-						if((int) $npc->idOfParent === $id) {
+						if((int) $npc->idOfParent === $player_id) {
                             array_push($children_name, $npc->name);
                         }
                     }
@@ -207,19 +209,15 @@ function get_weather(string $weather_location = "Default"):string {
 	return "sun";
 }
 
-function is_given_to_museum(int $item_id, object $general_data, int $museum_index, int $version_score):int { 
+function is_given_to_museum(int $item_id, object $general_data, int $museum_index):int { 
 
 	$museum_items = $general_data->locations->GameLocation[$museum_index]->museumPieces;
 
 	foreach($museum_items->item as $museum_item) {
-		if($version_score < get_game_version_score("1.6.0")) {
-			if($item_id === (int) $museum_item->value->int) {
-				return 1;
-			}
-		} else {
-			if($item_id === (int) $museum_item->value->string) {
-				return 1;
-			}
+		$museum_item_id = (is_game_older_than_1_6()) ? (int) $museum_item->value->int : (int) $museum_item->value->string;
+
+		if($item_id === $museum_item_id) {
+			return 1;
 		}
 	}
 
@@ -240,7 +238,9 @@ function get_gamelocation_index(object $general_data, string $searched_location)
 	return $index;
 }
 
-function get_farmer_level(object $data):string {
+function get_farmer_level():string {
+	$player_data = $GLOBALS["untreated_player_data"];
+    $level = (get_total_skills_level($player_data) + $player_data->luckLevel) / 2;
     $level_names = [
         "Newcomer",
         "Greenhorn",
@@ -259,7 +259,7 @@ function get_farmer_level(object $data):string {
         "Cropmaster",
         "Farm King"
     ];
-    $level = (get_total_skills_level($data) + $data->luckLevel) / 2;
+
     return $level_names[floor($level / 2)];
 }
 
@@ -559,9 +559,10 @@ function get_junimo_kart_fake_leaderboard(): object {
 }
 
 
-function get_museum_pieces_coords(object $data):array {
-	$museum_index = get_gamelocation_index($data, "museumPieces");
-	$in_game_museum_pieces = $data->locations->GameLocation[$museum_index]->museumPieces;
+function get_museum_pieces_coords():array {
+    $untreated_all_data = $GLOBALS["untreated_all_players_data"];
+	$museum_index = get_gamelocation_index($untreated_all_data, "museumPieces");
+	$in_game_museum_pieces = $untreated_all_data->locations->GameLocation[$museum_index]->museumPieces;
 	$museum_piece_details = [];
 
 	foreach($in_game_museum_pieces->item as $museum_piece) {
@@ -763,4 +764,123 @@ function has_been_donated_in_bundle(string $name, array $donated_items):bool {
 	}
 
 	return $has_been_donated;
+}
+
+function get_story_quest_data(array $quest):array {
+	return [
+		"time_limited"	=> false,
+		"objective"   	=> $quest["objective"],
+		"description" 	=> $quest["description"],
+		"title"       	=> $quest["title"],
+		"rewards"     	=> $quest["reward"]
+	];
+}
+
+function get_daily_quest_data(object $quest):array|null {
+	$quest_type = (int) $quest->questType;
+	$days_left = (int) $quest->daysLeft;
+	$rewards = [(int) $quest->reward];
+	$target = $quest->target;
+	$quest_configs = [
+		3 => [
+			'goal_name' => fn($quest) => find_reference_in_json(formate_original_data_string($quest->item), "shipped_items"),
+			'keyword' => "Deliver",
+			'keyword_ing' => "Delivering",
+			'number_to_get' => fn($quest) => $quest->number,
+			'number_obtained' => fn($quest) => 0,
+		],
+		4 => [
+			'goal_name' => fn($quest) => $quest->monsterName,
+			'keyword' => "Kill",
+			'keyword_ing' => "Killing",
+			'number_to_get' => fn($quest) => $quest->numberToKill,
+			'number_obtained' => fn($quest) => $quest->numberKilled,
+		],
+		5 => [
+			'goal_name' => fn() => "people",
+			'keyword' => "Talk to",
+			'keyword_ing' => "Socializing",
+			'number_to_get' => fn($quest) => $quest->total,
+			'number_obtained' => fn($quest) => $quest->whoToGreet,
+		],
+		7 => [
+			'goal_name' => fn($quest) => find_reference_in_json(formate_original_data_string($quest->whichFish), "fish"),
+			'keyword' => "Fish",
+			'keyword_ing' => "Fishing",
+			'number_to_get' => fn($quest) => $quest->numberToFish,
+			'number_obtained' => fn($quest) => $quest->numberFished,
+		],
+		10 => [
+			'goal_name' => fn($quest) => find_reference_in_json(formate_original_data_string($quest->resource), "shipped_items"),
+			'keyword' => "Fish",
+			'keyword_ing' => "Fishing",
+			'number_to_get' => fn($quest) => $quest->number,
+			'number_obtained' => fn($quest) => $quest->numberCollected,
+		],
+	];
+
+	if (!isset($quest_configs[$quest_type])) {
+		return null;
+	}
+	
+	$config = $quest_configs[$quest_type];
+
+	$goal_name = $config['goal_name']($quest);
+	$keyword = $config['keyword'];
+	$keyword_ing = $config['keyword_ing'];
+	$number_to_get = $config['number_to_get']($quest);
+	$number_obtained = $config['number_obtained']($quest);
+
+	$title = "$keyword_ing Quest";
+	$description = "Help $target with his $keyword_ing request.";
+	$objective = "$keyword $number_to_get $goal_name for $target: $number_obtained/$number_to_get";
+
+	return [
+		"time_limited"	=> true,
+		"objective"   	=> $objective,
+		"description" 	=> $description,
+		"title"       	=> $title,
+		"daysLeft"    	=> $days_left,
+		"rewards"     	=> $rewards
+	];
+}
+
+function get_special_order_data(object $special_order):array|null {
+	$special_orders_json = sanitize_json_with_version("special_orders", true);
+
+	if(((string) $special_order->questState) !== "InProgress") {
+		return null;
+	}
+
+	$is_qi_order = ((string) $special_order->orderType === "Qi");
+	$title = ($is_qi_order) ? "QI's Special Order" : "Weekly Special Order";
+	$description = $special_orders_json[(string) $special_order->questKey];
+	$days_left = (int) $special_order->dueDate - get_number_of_days_ingame();
+	
+	$target = (string) $special_order->requester;
+	$number_to_get = (int) $special_order->objectives->maxCount;
+	$number_obtained = (int) $special_order->objectives->currentCount;
+	$objective = "$target, $description: $number_obtained/$number_to_get";
+
+	$rewards = [];
+	foreach($special_order->rewards as $reward) {
+		if(!isset($reward->amount)) {
+			continue;
+		}
+
+		if($is_qi_order) {
+			$rewards[] = (int) $reward->amount->int . "_q";
+		} else {
+			$rewards[] = ((int) $reward->amount->int) * ((int) $reward->multiplier->float);
+		}
+	}
+		
+	return [
+		"time_limited"	=> true,
+		"objective"   	=> $objective,
+		"description" 	=> $description,
+		"title"       	=> $title,
+		"daysLeft"    	=> $days_left,
+		"rewards"     	=> $rewards
+	];
 }

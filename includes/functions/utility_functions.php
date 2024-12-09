@@ -235,8 +235,9 @@ function decode(string $filename): array {
     return json_decode($response, true);
 }
 
-function get_game_duration(int $duration):string {
-    $totalSeconds = intdiv($duration, 1000);
+function get_game_duration():string {
+	$player_game_duration = (int) $GLOBALS["untreated_player_data"]->millisecondsPlayed;
+    $totalSeconds = intdiv($player_game_duration, 1000);
     $seconds      = $totalSeconds % 60;
     $totalMinutes = intdiv($totalSeconds, 60);
     $minutes      = $totalMinutes % 60;
