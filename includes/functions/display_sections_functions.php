@@ -21,7 +21,7 @@ function display_stat(array $parameters):string {
     $formatted_value = filter_var($value, FILTER_VALIDATE_INT) ? formate_number($value) : $value;
     $alt = $alt ?? $icon;
     $label = $label ?? $icon;
-    $image = "<img src='$images_path/icons/$formatted_icon.png' alt='$alt' />";
+    $image = "<img src='$images_path/icons/$formatted_icon.png' alt='$alt'/>";
 
     if(isset($tooltip)) {
         $image = "

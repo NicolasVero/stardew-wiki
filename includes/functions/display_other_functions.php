@@ -63,23 +63,23 @@ function display_quest_button():string {
 	return "<img src='" . get_images_folder() . "/icons/quest_icon.png' class='quest-icon view-all-quests view-all-quests-" . $GLOBALS['player_id'] . " button-elements modal-opener icon' alt='Quest icon'>";
 }
 
-function get_level_progress_bar(int $level):string {
-    $max_level = 10;
+function get_level_progress_bar(int $level, int $max_level = 10):string {
     $images_path = get_images_folder();
-    $structure = "<span class='level-progress-bar'>";
-
+    $level_structure = "";
+    
     for($i = 1; $i <= $max_level; $i++) {
-        if($level >= $i) {
-            $level_bar = $images_path . (($i % ($max_level / 2) === 0) ? "/icons/big_level.png"       : "/icons/level.png");
-        } else {
-            $level_bar = $images_path . (($i % ($max_level / 2) === 0) ? "/icons/big_level_empty.png" : "/icons/level_empty.png");
-        }
-
-        $structure .= "<img src='$level_bar' alt=''/>";        
+        $state = ($level >= $i) ? "" : "_empty";
+        $icon_type = ($i % ($max_level / 2) === 0) ? "big_level" : "level";
+        $level_bar = $images_path . "/icons/{$icon_type}{$state}.png";
+        
+        $level_structure .= "<img src='$level_bar' alt=''/>";
     }
-
-    $structure .= "</span>";
-    return $structure;
+    
+    return "
+        <span class='level-progress-bar'>
+            $level_structure
+        </span>
+    ";
 }
 
 function get_skills_icons(array $skills, string $current_skill):string {
@@ -316,26 +316,6 @@ function display_project_contributor(array $options):string {
         </span>
 
     ";
-
-
-    // <span>
-    //     <img src='$images_path/content/romain.png' class='character-image romain' alt=''>
-    //     <span>
-    //         <span class='character-presentation'>
-    //             <span>
-    //                 Romain is a hard-working web developer. He loves taking on challenges and always going the extra mile. 
-    //             </span>
-    //             <span>
-    //                 He took care of the Front-End, and helped Nicolas with the Back-End.
-    //             </span>
-    //         </span>
-    //         <span class='socials'>
-    //             <a href='https://github.com/BreadyBred' target='_blank'><img src='$images_path/social/github.png' alt=''></a>
-    //             <a href='https://www.linkedin.com/in/romain-gerard/' target='_blank'><img src='$images_path/social/linkedin.png' alt=''></a>
-    //             <a href='https://www.linkedin.com/in/romain-gerard/' target='_blank'><img src='$images_path/social/linkedin.png' alt=''></a>
-    //         </span>
-    //     </span>
-    // </span>
 }
 
 function display_bundle_requirements(array $requirements, array $added_items):string {
