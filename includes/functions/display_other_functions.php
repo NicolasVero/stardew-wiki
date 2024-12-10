@@ -22,7 +22,7 @@ function display_game_version():string {
 function display_settings_button(string $prefix):string {
     return "
         <span class='$prefix-settings modal-opener'>
-            <img src='" . get_images_folder() . "/icons/settings.png' class='modal-opener' alt='Settings icon'>
+            <img src='" . get_images_folder() . "/icons/settings.png' class='modal-opener' alt='Settings icon'/>
         </span>
     ";
 }
@@ -30,7 +30,7 @@ function display_settings_button(string $prefix):string {
 function display_save_button(string $prefix):string {
     return "
         <span class='$prefix-upload modal-opener'>
-            <img src='" . get_images_folder() . "/icons/file.png' class='modal-opener' alt='File upload icon'>
+            <img src='" . get_images_folder() . "/icons/file.png' class='modal-opener' alt='File upload icon'/>
         </span>
     ";
 }
@@ -38,7 +38,7 @@ function display_save_button(string $prefix):string {
 function display_feedback_button():string {
     return "
         <span class='feedback-opener modal-opener'>
-            <img src='" . get_images_folder() . "/icons/feedback.png' class='modal-opener' alt='Feedback icon'>
+            <img src='" . get_images_folder() . "/icons/feedback.png' class='modal-opener' alt='Feedback icon'/>
         </span>
     ";
 }
@@ -46,21 +46,21 @@ function display_feedback_button():string {
 function display_home_button():string {
     return "
         <span class='landing-page-opener'>
-            <img src='" . get_images_folder() . "/icons/home.png' id='home-icon' alt='Home icon'>
+            <img src='" . get_images_folder() . "/icons/home.png' id='home-icon' alt='Home icon'/>
         </span>
     ";
 }
 
 function display_junimo_kart_button():string {
-	return "<img src='" . get_images_folder() . "/icons/controller.png' class='controller-icon view-junimo-kart-leaderboard view-junimo-kart-leaderboard-" . $GLOBALS['player_id'] . " button-elements modal-opener icon' alt='Controller icon'>";
+	return "<img src='" . get_images_folder() . "/icons/controller.png' class='controller-icon view-junimo-kart-leaderboard view-junimo-kart-leaderboard-" . $GLOBALS['player_id'] . " button-elements modal-opener icon' alt='Controller icon'/>";
 }
 
 function display_community_center():string {
-	return "<img src='" . get_images_folder() . "/icons/golden_scroll.png' class='golden-scroll-icon view-community-center view-community-center-" . $GLOBALS['player_id'] . " button-elements modal-opener icon' alt='Golden Scroll icon'>";
+	return "<img src='" . get_images_folder() . "/icons/golden_scroll.png' class='golden-scroll-icon view-community-center view-community-center-" . $GLOBALS['player_id'] . " button-elements modal-opener icon' alt='Golden Scroll icon'/>";
 }
 
 function display_quest_button():string {
-	return "<img src='" . get_images_folder() . "/icons/quest_icon.png' class='quest-icon view-all-quests view-all-quests-" . $GLOBALS['player_id'] . " button-elements modal-opener icon' alt='Quest icon'>";
+	return "<img src='" . get_images_folder() . "/icons/quest_icon.png' class='quest-icon view-all-quests view-all-quests-" . $GLOBALS['player_id'] . " button-elements modal-opener icon' alt='Quest icon'/>";
 }
 
 function get_level_progress_bar(int $level, int $max_level = 10):string {
@@ -254,14 +254,14 @@ function display_festival_icon():string {
     ? 
 	"<span class='tooltip'>
 		<a class='wiki_link' href='$wiki_url' target='_blank'>
-			<img src='$images_path/icons/festival_icon.gif' class='festival_icon $festival_class' alt='Festival icon'>
+			<img src='$images_path/icons/festival_icon.gif' class='festival_icon $festival_class' alt='Festival icon'/>
 		</a>
 		<span class='right'>$festival_name</span>
 	</span>"
 	:
 	"<span class='tooltip'>
         <a class='wiki_link' href='https://stardewvalleywiki.com/Festivals' target='_blank'>
-		    <img src='$images_path/icons/festival_icon.png' class='festival_icon $festival_class' alt='Festival icon'>
+		    <img src='$images_path/icons/festival_icon.png' class='festival_icon $festival_class' alt='Festival icon'/>
 		</a>
         <span class='right'>$festival_name</span>
 	</span>";
@@ -275,7 +275,7 @@ function display_weather_icon():string {
     return "
         <span class='tooltip'>
             <a class='wiki_link' href='https://stardewvalleywiki.com/Weather' target='_blank'>
-                <img src='$images_path/icons/$weather.png' class='weather_icon' alt='Weather icon'>
+                <img src='$images_path/icons/$weather.png' class='weather_icon' alt='Weather icon'/>
             </a>
             <span class='left'>" . get_weather_tooltip($weather) . "</span>
         </span>
@@ -304,7 +304,7 @@ function display_project_contributor(array $options):string {
 
     return "
         <span>
-            <img src='$portrait' class='character-image $icon' alt='$name'>
+            <img src='$portrait' class='character-image $icon' alt='$name'/>
             <span>
                 <span class='character-presentation'>
                     $presentation
@@ -331,8 +331,8 @@ function display_bundle_requirements(array $requirements, array $added_items):st
 
         $structure .= "
             <span class='required-item'>
-                <img src='$images_path/$type/$formatted_item_name.png' alt='$name' class='item $has_been_donated'>
-                <img src='$images_path/icons/quality_$quality.png' alt='' class='quality'>
+                <img src='$images_path/$type/$formatted_item_name.png' class='item $has_been_donated' alt='$name'/>
+                <img src='$images_path/icons/quality_$quality.png' class='quality' alt=''/>
                 $quantity
             </span>
         ";
@@ -352,12 +352,12 @@ function display_bundle_added_items(array $added_items, int $limit):string {
             $item_name = $added_items[$i]["name"];
             $formatted_item_name = formate_text_for_file($item_name);
             $type = $added_items[$i]["type"];
-            $added_item = "<img src='$images_path/$type/$formatted_item_name.png' alt='$item_name' class='added-item'>";
+            $added_item = "<img src='$images_path/$type/$formatted_item_name.png' class='added-item' alt='$item_name'/>";
         }
 
         $structure .= "
             <span class='slot'>
-                <img src='$images_path/icons/bundle_slot.png' alt='' class='empty-slot'>
+                <img src='$images_path/icons/bundle_slot.png' class='empty-slot' alt=''/>
                 $added_item
             </span>
         ";
@@ -367,5 +367,5 @@ function display_bundle_added_items(array $added_items, int $limit):string {
 }
 
 function display_bundle_purchase():string {
-    return "<img src='" . get_images_folder() . "/content/purchase.png' alt='' class='purchase'>";
+    return "<img src='" . get_images_folder() . "/content/purchase.png' class='purchase' alt=''/>";
 }

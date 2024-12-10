@@ -99,6 +99,7 @@ function display_header():string {
     extract($all_players_data);  
 
     $images_path = get_images_folder();
+    $pet_icon = $pet['type'] . "_" . $pet['breed'];
 	$farm_name = str_contains(strtolower($farm_name), "farm") ? $farm_name : $farm_name . " farm";
 	$gender = ($gender === null) ? "neutral" : $gender;
 
@@ -106,8 +107,8 @@ function display_header():string {
         <header>
             <div class='header'>
                 <span class='player'>
-                    <img src='$images_path/icons/" . $pet['type'] . "_" . $pet['breed'] . ".png' alt='Pet type'/>
-                    <img src='$images_path/icons/" . strtolower($gender) . ".png' alt='Gender logo: $gender' class='player_gender_logo'/>
+                    <img src='$images_path/icons/$pet_icon.png' alt='Pet type'/>
+                    <img src='$images_path/icons/" . strtolower($gender) . ".png' class='player_gender_logo' alt='Gender logo: $gender'/>
                     <span class='data player_name'>" . formate_usernames($name) . "<span class='data-label'> $farmer_level at $farm_name</span></span>
                 </span>
 
@@ -285,7 +286,7 @@ function display_friendships(int $limit = -1): string {
         <section class='info-section friends-section $section_class $section_class-$player_id modal-window'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Friendship progression</h2>
-                <img src='$images_path/icons/exit.png' class='exit-all-friendships-$player_id exit' alt=''/>
+                <img src='$images_path/icons/exit.png' class='exit-all-friendships-$player_id exit' alt='Exit'/>
             </div>
             <span class='friendlist'>
         "
@@ -373,7 +374,7 @@ function display_unlockables():string {
 			$structure .= "
 				<span class='tooltip'>
 					<a class='wiki_link' href='$wiki_url' target='_blank'>
-						<img src='$unlockable_image' alt='$unlockable' class='gallery-item unlockables $unlockable_class $is_newer_version_class'/>
+						<img src='$unlockable_image' class='gallery-item unlockables $unlockable_class $is_newer_version_class' alt='$unlockable'/>
 					</a>
 					<span>$unlockable</span>
 				</span>
@@ -471,7 +472,7 @@ function display_detailled_gallery(array $gallery_details, string $width = "", a
 			$structure .= "
 				<span class='tooltip'>
 					<a class='wiki_link' href='$wiki_url' target='_blank'>
-                        <img src='$element_image' alt='$json_line_name' class='gallery-item $json_filename $element_class $is_newer_version_class'/>
+                        <img src='$element_image' class='gallery-item $json_filename $element_class $is_newer_version_class' alt='$json_line_name'/>
                     </a>
                     <span>$element_tooltip</span>
                 </span>

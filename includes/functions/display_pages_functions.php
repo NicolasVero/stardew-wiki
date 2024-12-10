@@ -53,14 +53,14 @@ function display_landing_page(bool $with_surheader = true):string {
 							<span>
 								Well done! The hardest part is behind us! Now you just have to upload your save 
 								<span class='img-embed landing-upload'>
-									<img src='$images_path/icons/file.png' class='modal-opener' alt='File upload icon'>
+									<img src='$images_path/icons/file.png' class='modal-opener' alt='File upload icon'/>
 								</span>
 								directly to our website and let the magic happen.
 							</span>
 							<span>
 								There's also a range of settings
 								<span class='img-embed landing-settings'>
-									<img src='$images_path/icons/settings.png' class='modal-opener' alt='Settings icon'>
+									<img src='$images_path/icons/settings.png' class='modal-opener' alt='Settings icon'/>
 								</span>
 								to customize your experience!
 							</span>
@@ -77,7 +77,7 @@ function display_landing_page(bool $with_surheader = true):string {
 							<span>
 								Click
 								<span class='img-embed feedback-opener'>
-									<img src='$images_path/icons/feedback.png' class='modal-opener' alt='Feedback icon'>
+									<img src='$images_path/icons/feedback.png' class='modal-opener' alt='Feedback icon'/>
 								</span>
 								to open the feedback form and share your thoughts with us.
 								Thank you for being a part of our community and helping us grow!
@@ -100,13 +100,18 @@ function display_landing_page(bool $with_surheader = true):string {
 				</main>
         	</div>
         </div>
-        <img src='$images_path/content/loading.gif' id='loading-strip' class='loading' alt=''>
+        <img src='$images_path/content/loading.gif' id='loading-strip' class='loading' alt=''/>
     ";
 }
 
 function display_mobile_landing_page():string {
-    $images_path = get_images_folder();
+	$contributors_structure = "";
+	$contributors = get_contributors();
 
+	foreach($contributors as $contributor) {
+		$contributors_structure .= display_project_contributor($contributor);
+	}
+	
 	return "
 		<div id='display'>
 			<div id='mobile_landing_page'>
