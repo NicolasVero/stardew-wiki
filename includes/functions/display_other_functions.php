@@ -318,7 +318,6 @@ function display_project_contributor(array $options):string {
                 </span>
             </span>
         </span>
-
     ";
 }
 
