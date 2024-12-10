@@ -457,16 +457,14 @@ function get_highest_count_for_category(string $category):array {
 				return $item["counter"] > 0;
 			});
 			$amount_elements = count($filtered_elements);
-		}
-		else if(in_array($category, $exceptions_level)) {
+		} else if(in_array($category, $exceptions_level)) {
 			$level_category = $all_data[$current_player]["levels"];
 			$amount_elements = 0;
 			
 			foreach($level_category as $level) {
 				$amount_elements += $level;
 			}
-		}
-		else {
+		} else {
 			$amount_elements = count($all_data[$current_player][$category]);	
 		}
 

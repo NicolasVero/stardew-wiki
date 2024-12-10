@@ -462,8 +462,7 @@ function display_detailled_gallery(array $gallery_details, string $width = "", a
                     "achievements" => "https://stardewvalleywiki.com/Achievements",
                     "secret_notes" => "https://stardewvalleywiki.com/Secret_Notes"
                 ][$json_filename];
-            }
-            else {
+            } else {
                 $wiki_url = get_wiki_link(get_item_id_by_name($json_line_name));
             }
 

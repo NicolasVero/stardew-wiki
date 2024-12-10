@@ -145,8 +145,7 @@ function get_player_unlockables():array {
 			case "element_host" :
 				if(is_game_older_than_1_6()) {
 					$player_unlockables[$unlockable_name] = has_element($player_data->$older_element);
-				}
-				else {
+				} else {
 					$player_unlockables[$unlockable_name] = has_element_based_on_host($unlockable_name, $newer_element);
 				}
 				break;

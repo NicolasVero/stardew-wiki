@@ -107,23 +107,25 @@ function display_quest_panel():string {
 		$structure .= "<span class='quest-rewards'>";
 		
         for($i = 0; $i<count($rewards); $i++) {
-			// Does reward need a tooltip (gold and qi gems don't)
+			// Reward tooltip (pas besoin pourgold and qi gems)
             $structure .= ((is_numeric($rewards[$i]) || str_ends_with($rewards[$i], 'q'))) ? "<span class='quest-reward'>" : "<span class='quest-reward tooltip'>";
             
-			// If reward is Friendship hearts/points
+			/*
+            if Friendship hearts/points
+			elseif Gold
+			elseif Qi Gems
+			elseif something else
+            */
             if(strstr($rewards[$i], "Friendship")) {
                 $reward_number = explode(" ", $rewards[$i])[0];
                 $structure .= "<img src='$images_path/rewards/heart_$reward_number.png' alt='Friendship reward'/>";
-            }
-			// If reward is Gold
-            elseif(is_numeric($rewards[$i]))
+            } elseif(is_numeric($rewards[$i])) {
                 $structure .= formate_number($rewards[$i]) . "<img src='$images_path/rewards/gold.png' alt='Gold coins reward'/>";
-			// If reward is Qi Gems
-            elseif(str_ends_with($rewards[$i], 'q'))
+            } elseif(str_ends_with($rewards[$i], 'q')) {
                 $structure .= explode('_', $rewards[$i])[0] . "<img src='$images_path/rewards/qi_gem.png' alt='Qi gems reward'/>";
-			// If reward is something else
-            else
+            } else {
                 $structure .= $rewards[$i];
+            }
 
             $structure .= (is_numeric($rewards[$i])) ? "" : "<span class='left'>$rewards[$i]</span>";
             $structure .= "</span>";
