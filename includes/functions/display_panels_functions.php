@@ -72,7 +72,7 @@ function display_quest_panel():string {
                     <img src='$images_path/icons/exit.png' class='exit-all-quests-$player_id exit' alt='Exit'/>
                 </div>
                 <span class='quests'>
-					<h3>Nothing to see here yet</h3>
+					<h3>" . no_items_placeholder() . "</h3>
 				</span>
 			</section>
         ";
@@ -333,7 +333,7 @@ function display_farm_animals_panel():string {
                     <img src='$images_path/icons/exit.png' class='exit-all-animals-$player_id exit' alt='Exit'/>
                 </div>
                 <span class='friendlist'>
-			        <h3>Nothing to see here yet</h3>
+			        <h3>" . no_items_placeholder() . "</h3>
                 </span>
             </section>
         ";

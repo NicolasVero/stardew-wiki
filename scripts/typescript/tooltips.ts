@@ -8,18 +8,14 @@ function update_tooltips_after_ajax():void {
 
 function initialize_tooltips():void {
     const tooltips: NodeListOf<HTMLElement> = document.querySelectorAll(".tooltip");
-    
+
     tooltips.forEach((tooltip: HTMLElement) => {
-        const window_width: number = window.innerWidth;
         const rect: DOMRect = tooltip.getBoundingClientRect();
         const span: HTMLElement | null = tooltip.querySelector("span");
 
-        if(span && !span.classList.contains("left") && !span.classList.contains("right")) {
-            if(rect.left < window_width / 2) {
-                span.classList.add("right");
-            } else {
-                span.classList.add("left");
-            }
+        if(span && !["left", "right"].some(className => span.classList.contains(className))) {
+            const tooltip_position: string = rect.left < window.innerWidth / 2 ? "right" : "left";
+            span.classList.add(tooltip_position);
         }
     });
 }
@@ -35,22 +31,19 @@ function on_images_loaded(callback: () => void):void {
         return;
     }
 
+    const increment_and_check = () => {
+        images_loaded++;
+        if(images_loaded === total_images) {
+            callback();
+        }
+    };
+
     images.forEach((image: HTMLImageElement) => {
         if(image.complete) {
-            images_loaded++;
+            increment_and_check();
         } else {
-            image.addEventListener("load", () => {
-                images_loaded++;
-                if(images_loaded === total_images) {
-                    callback();
-                }
-            });
-            image.addEventListener("error", () => {
-                images_loaded++;
-                if(images_loaded === total_images) {
-                    callback();
-                }
-            });
+            image.addEventListener("load", increment_and_check);
+            image.addEventListener("error", increment_and_check);
         }
     });
 
