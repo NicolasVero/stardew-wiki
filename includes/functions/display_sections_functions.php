@@ -42,7 +42,7 @@ function display_stat(array $parameters):string {
 
     if(isset($wiki_link)) {
         return "
-            <a class='wiki_link' href='https://stardewvalleywiki.com/$wiki_link' target='_blank'>
+            <a href='https://stardewvalleywiki.com/$wiki_link' class='wiki_link' target='_blank'>
                 $image_field
             </a>
         ";
@@ -60,7 +60,7 @@ function display_spouse(mixed $spouse, array $children):string {
     return "
         <span>
             <span class='tooltip'>
-                <a class='wiki_link' href='https://stardewvalleywiki.com/Children' target='_blank'>
+                <a href='https://stardewvalleywiki.com/Children' class='wiki_link' target='_blank'>
                     <img src='$images_path/characters/" . lcfirst($spouse) . ".png' alt='$spouse'/>
                 </a>
                 <span> " . get_child_tooltip($spouse, $children) . "</span>
@@ -211,6 +211,7 @@ function display_general_stats():string {
 }
 
 function display_skills():string {
+    $images_path = get_images_folder();
 	$this_player_data = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
 	$this_player_skills = $this_player_data["skills"];
 	$this_player_skills_levels = $this_player_data["levels"];
@@ -226,7 +227,6 @@ function display_skills():string {
 
     foreach($this_player_skills_levels as $key => $level) {
         $level_icon_name = explode('_', $key)[0];
-        $images_path = get_images_folder();
         $mastery_class   = (array_key_exists(ucfirst(explode('_', $key)[0]) . " Mastery", $this_player_masteries)) ? 'found' : 'not-found';
         $mastery_tooltip = ucfirst(explode('_', $key)[0]) . " mastery";
         $is_newer_version_class = (is_game_older_than_1_6()) ? "newer-version" : "older-version";
@@ -234,14 +234,14 @@ function display_skills():string {
         $structure .= "
             <span class='skill $key'>
                 <span class='tooltip'>
-                    <a class='wiki_link' href='https://stardewvalleywiki.com/Mastery_Cave' target='_blank'>
+                    <a href='https://stardewvalleywiki.com/Mastery_Cave' class='wiki_link' target='_blank'>
                         <img src='$images_path/skills/mastery.png' class='level-icon $mastery_class $mastery_visible_class $is_newer_version_class' alt='$key'/>
                     </a>
                     <span>" . ucfirst($mastery_tooltip) . "</span>
                 </span>
         
                 <span class='tooltip'>
-                    <a class='wiki_link' href='https://stardewvalleywiki.com/Skills#" . ucfirst($level_icon_name) . "' target='_blank'>
+                    <a href='https://stardewvalleywiki.com/Skills#" . ucfirst($level_icon_name) . "' class='wiki_link' target='_blank'>
                         <img src='$images_path/skills/$level_icon_name.png' class='level-icon' alt='$key'/>
                     </a>
                     <span>" . ucfirst($level_icon_name) . "</span>
@@ -249,7 +249,7 @@ function display_skills():string {
                 " . get_level_progress_bar($level) . "
                 <span class='level data'>$level</span>
                 <span>
-                    <a class='wiki_link' href='https://stardewvalleywiki.com/Skills' target='_blank'>" 
+                    <a href='https://stardewvalleywiki.com/Skills' class='wiki_link' target='_blank'>" 
                         . get_skills_icons($this_player_skills, $level_icon_name) . "
                     </a>
                 </span>
@@ -373,7 +373,7 @@ function display_unlockables():string {
 			
 			$structure .= "
 				<span class='tooltip'>
-					<a class='wiki_link' href='$wiki_url' target='_blank'>
+					<a href='$wiki_url' class='wiki_link' target='_blank'>
 						<img src='$unlockable_image' class='gallery-item unlockables $unlockable_class $is_newer_version_class' alt='$unlockable'/>
 					</a>
 					<span>$unlockable</span>
@@ -471,7 +471,7 @@ function display_detailled_gallery(array $gallery_details, string $width = "", a
 
 			$structure .= "
 				<span class='tooltip'>
-					<a class='wiki_link' href='$wiki_url' target='_blank'>
+					<a href='$wiki_url' class='wiki_link' target='_blank'>
                         <img src='$element_image' class='gallery-item $json_filename $element_class $is_newer_version_class' alt='$json_line_name'/>
                     </a>
                     <span>$element_tooltip</span>

@@ -219,7 +219,7 @@ function display_monster_eradication_goals_panel():string {
         $is_found = ($counter < $limit) ? "not-found" : "found";
         $reward_icon = "
             <span class='tooltip' style='display: flex;'>
-                <a class='wiki_link' href='$wiki_link' target='_blank'>
+                <a href='$wiki_link' class='wiki_link' target='_blank'>
                     <img src='$images_path/rewards/$src.png' class='reward $is_found always-on-display' alt='$alt'/>
                 </a>
                 <span class='right'>$alt</span>
@@ -368,7 +368,7 @@ function display_farm_animals_panel():string {
 
             $structure .= "
             <span>
-                <a class='wiki_link' href='$wiki_url' target='_blank'>
+                <a href='$wiki_url' class='wiki_link' target='_blank'>
                     <img src='$animal_icon' class='animal-icon' alt='$type icon'/>
                 </a>
                 <span class='animal-name'>$formatted_name</span>
