@@ -42,7 +42,7 @@ function display_stat(array $parameters):string {
 
     if(isset($wiki_link)) {
         return "
-            <a href='https://stardewvalleywiki.com/$wiki_link' class='wiki_link' target='_blank'>
+            <a href='https://stardewvalleywiki.com/$wiki_link' class='wiki_link' rel='noreferrer' target='_blank'>
                 $image_field
             </a>
         ";
@@ -60,7 +60,7 @@ function display_spouse(mixed $spouse, array $children):string {
     return "
         <span>
             <span class='tooltip'>
-                <a href='https://stardewvalleywiki.com/Children' class='wiki_link' target='_blank'>
+                <a href='https://stardewvalleywiki.com/Children' class='wiki_link' rel='noreferrer' target='_blank'>
                     <img src='$images_path/characters/" . lcfirst($spouse) . ".png' alt='$spouse'/>
                 </a>
                 <span> " . get_child_tooltip($spouse, $children) . "</span>
@@ -234,14 +234,14 @@ function display_skills():string {
         $structure .= "
             <span class='skill $key'>
                 <span class='tooltip'>
-                    <a href='https://stardewvalleywiki.com/Mastery_Cave' class='wiki_link' target='_blank'>
+                    <a href='https://stardewvalleywiki.com/Mastery_Cave' class='wiki_link' rel='noreferrer' target='_blank'>
                         <img src='$images_path/skills/mastery.png' class='level-icon $mastery_class $mastery_visible_class $is_newer_version_class' alt='$key'/>
                     </a>
                     <span>" . ucfirst($mastery_tooltip) . "</span>
                 </span>
         
                 <span class='tooltip'>
-                    <a href='https://stardewvalleywiki.com/Skills#" . ucfirst($level_icon_name) . "' class='wiki_link' target='_blank'>
+                    <a href='https://stardewvalleywiki.com/Skills#" . ucfirst($level_icon_name) . "' class='wiki_link' rel='noreferrer' target='_blank'>
                         <img src='$images_path/skills/$level_icon_name.png' class='level-icon' alt='$key'/>
                     </a>
                     <span>" . ucfirst($level_icon_name) . "</span>
@@ -249,7 +249,7 @@ function display_skills():string {
                 " . get_level_progress_bar($level) . "
                 <span class='level data'>$level</span>
                 <span>
-                    <a href='https://stardewvalleywiki.com/Skills' class='wiki_link' target='_blank'>" 
+                    <a href='https://stardewvalleywiki.com/Skills' class='wiki_link' rel='noreferrer' target='_blank'>" 
                         . get_skills_icons($this_player_skills, $level_icon_name) . "
                     </a>
                 </span>
@@ -373,7 +373,7 @@ function display_unlockables():string {
 			
 			$structure .= "
 				<span class='tooltip'>
-					<a href='$wiki_url' class='wiki_link' target='_blank'>
+					<a href='$wiki_url' class='wiki_link' rel='noreferrer' target='_blank'>
 						<img src='$unlockable_image' class='gallery-item unlockables $unlockable_class $is_newer_version_class' alt='$unlockable'/>
 					</a>
 					<span>$unlockable</span>
@@ -471,7 +471,7 @@ function display_detailled_gallery(array $gallery_details, string $width = "", a
 
 			$structure .= "
 				<span class='tooltip'>
-					<a href='$wiki_url' class='wiki_link' target='_blank'>
+					<a href='$wiki_url' class='wiki_link' rel='noreferrer' target='_blank'>
                         <img src='$element_image' class='gallery-item $json_filename $element_class $is_newer_version_class' alt='$json_line_name'/>
                     </a>
                     <span>$element_tooltip</span>

@@ -219,7 +219,7 @@ function display_monster_eradication_goals_panel():string {
         $is_found = ($counter < $limit) ? "not-found" : "found";
         $reward_icon = "
             <span class='tooltip' style='display: flex;'>
-                <a href='$wiki_link' class='wiki_link' target='_blank'>
+                <a href='$wiki_link' class='wiki_link' rel='noreferrer' target='_blank'>
                     <img src='$images_path/rewards/$src.png' class='reward $is_found always-on-display' alt='$alt'/>
                 </a>
                 <span class='right'>$alt</span>
@@ -263,7 +263,7 @@ function display_calendar_panel():string {
 
         for($columns = 1; $columns <= $day_count; $columns++) {
             $day_digit = ($lines * $day_count) + $columns;
-            $date = $day_digit . "/" . $season;
+            $date = "$day_digit/$season";
 
             if(array_key_exists($date, $all_dates)) {
                 $wiki_link = (is_array($all_dates[$date])) ?
@@ -276,16 +276,16 @@ function display_calendar_panel():string {
                 $table_structure .= (is_array($all_dates[$date])) ?
                     "<td class='double-event'>
                         <div>
-                            <a href='" . $wiki_link[0] . "' class='wiki_link' target='_blank'></a>
+                            <a href='" . $wiki_link[0] . "' class='wiki_link' rel='noreferrer' target='_blank'></a>
                         </div>
                         <div>
-                            <a href='" . $wiki_link[1] . "' class='wiki_link' target='_blank'></a>
+                            <a href='" . $wiki_link[1] . "' class='wiki_link' rel='noreferrer' target='_blank'></a>
                         </div>
                     </td>"
                     :
                     "<td class='simple-event'>
                         <div>
-                            <a href='$wiki_link' class='wiki_link' target='_blank'></a>
+                            <a href='$wiki_link' class='wiki_link' rel='noreferrer' target='_blank'></a>
                         </div>
                     </td>";
             } else {
@@ -368,7 +368,7 @@ function display_farm_animals_panel():string {
 
             $structure .= "
             <span>
-                <a href='$wiki_url' class='wiki_link' target='_blank'>
+                <a href='$wiki_url' class='wiki_link' rel='noreferrer' target='_blank'>
                     <img src='$animal_icon' class='animal-icon' alt='$type icon'/>
                 </a>
                 <span class='animal-name'>$formatted_name</span>

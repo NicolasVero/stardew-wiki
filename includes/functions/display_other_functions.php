@@ -180,7 +180,7 @@ function get_friendship_structure(array $friendship_info):string {
 
     return "
         <span>
-            <a href='$wiki_url' class='wiki_link' target='_blank'>
+            <a href='$wiki_url' class='wiki_link' rel='noreferrer' target='_blank'>
                 <img src='$friend_icon' class='character-icon $is_newer_version $is_met' alt='$name icon'/>
             </a>
             <span class='character-name " . strtolower($name) . "'>$name</span>
@@ -253,14 +253,14 @@ function display_festival_icon():string {
 	return (isset($wiki_url)) 
     ? 
 	"<span class='tooltip'>
-		<a href='$wiki_url' class='wiki_link' target='_blank'>
+		<a href='$wiki_url' class='wiki_link' rel='noreferrer' target='_blank'>
 			<img src='$images_path/icons/festival_icon.gif' class='festival_icon $festival_class' alt='Festival icon'/>
 		</a>
 		<span class='right'>$festival_name</span>
 	</span>"
 	:
 	"<span class='tooltip'>
-        <a href='https://stardewvalleywiki.com/Festivals' class='wiki_link' target='_blank'>
+        <a href='https://stardewvalleywiki.com/Festivals' class='wiki_link' rel='noreferrer' target='_blank'>
 		    <img src='$images_path/icons/festival_icon.png' class='festival_icon $festival_class' alt='Festival icon'/>
 		</a>
         <span class='right'>$festival_name</span>
@@ -274,7 +274,7 @@ function display_weather_icon():string {
 
     return "
         <span class='tooltip'>
-            <a href='https://stardewvalleywiki.com/Weather' class='wiki_link' target='_blank'>
+            <a href='https://stardewvalleywiki.com/Weather' class='wiki_link' rel='noreferrer' target='_blank'>
                 <img src='$images_path/icons/$weather.png' class='weather_icon' alt='Weather icon'/>
             </a>
             <span class='left'>" . get_weather_tooltip($weather) . "</span>
@@ -298,7 +298,7 @@ function display_project_contributor(array $options):string {
     foreach($socials as $social_name => $social) {
         extract($social);
         if($on_display) {
-            $socials_links .= "<a href='$url' target='_blank'><img src='$images_path/social/$social_name.png' alt='$social_name'/></a>";
+            $socials_links .= "<a href='$url' rel='noreferrer' target='_blank'><img src='$images_path/social/$social_name.png' alt='$social_name'/></a>";
         }
     }
 
