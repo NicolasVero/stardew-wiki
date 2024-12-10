@@ -51,59 +51,19 @@ function does_player_have_achievement(object $achievements, int $achievement_id)
 	return false;
 }
 
-//& TODO
 function get_player_unlockables_list():array {
-	$data = $GLOBALS["untreated_player_data"];
-	return [
-		"forest_magic" => [
-			"id"       => 107004,
-			"is_found" => get_player_unlockable("forest_magic")
-		],
-		"dwarvish_translation_guide" => [
-			"id"       => 107000,
-			"is_found" => get_player_unlockable("dwarvish_translation_guide")
-		],
-		"rusty_key" => [
-			"id"       => 107001,
-			"is_found" => get_player_unlockable("rusty_key")
-		],
-		"club_card" => [
-			"id"       => 107002,
-			"is_found" => get_player_unlockable("club_card")
-		],
-		"special_charm" => [
-			"id"       => 107007,
-			"is_found" => get_player_unlockable("special_charm")
-		],
-		"skull_key" => [
-			"id"       => 107003,
-			"is_found" => get_player_unlockable("skull_key")
-		],
-		"magnifying_glass" => [
-			"id"       => 107008,
-			"is_found" => get_player_unlockable("magnifying_glass")
-		],            
-		"dark_talisman" => [
-			"id"       => 107005,
-			"is_found" => get_player_unlockable("dark_talisman")
-		],
-		"magic_ink" => [
-			"id"       => 107006,
-			"is_found" => get_player_unlockable("magic_ink")
-		],
-		"bears_knowledge" => [
-			"id"       => 107009,
-			"is_found" => (int) in_array(2120303, (array) $data->eventsSeen->int)
-		],
-		"spring_onion_mastery" => [
-			"id"       => 107010,
-			"is_found" => (int) in_array(3910979, (array) $data->eventsSeen->int)
-		],
-		"town_key" => [
-			"id"       => 107011,
-			"is_found" => get_player_unlockable("town_key")
-		]
-	];
+	$unlockables_json = sanitize_json_with_version("unlockables");
+	$unlockables = [];
+
+	foreach($unlockables_json as $unlockable_id => $unlockable_name) {
+		$formatted_name = formate_text_for_file($unlockable_name);
+		$unlockables[$formatted_name] = [
+			"id" => $unlockable_id,
+			"is_found" => get_player_unlockable($formatted_name)
+		];
+	}
+
+	return $unlockables;
 }
 
 //& TODO
@@ -113,43 +73,49 @@ function get_player_unlockable(string $unlockable_name):int {
 
 	switch($unlockable_name) {
 		case "forest_magic":
-			return has_element("canReadJunimoText", $player_data);
+			return has_element_in_mail("canReadJunimoText", $player_data);
 
 		case "dwarvish_translation_guide":
 			return ($is_older_version)
-				? has_element_ov($player_data->canUnderstandDwarves) : 
+				? has_element($player_data->canUnderstandDwarves) : 
 					((isset($GLOBALS["host_player_data"]))
-						? does_host_has_element("dwarvish_translation_guide") : has_element("HasDwarvishTranslationGuide", $player_data));
+						? does_host_has_element("dwarvish_translation_guide") : has_element_in_mail("HasDwarvishTranslationGuide", $player_data));
 
 		case "rusty_key":
 			return ($is_older_version)
-				? has_element_ov($player_data->hasRustyKey) :
+				? has_element($player_data->hasRustyKey) :
 					((isset($GLOBALS["host_player_data"]))
-						? does_host_has_element("rusty_key") : has_element("HasRustyKey", $player_data));
+						? does_host_has_element("rusty_key") : has_element_in_mail("HasRustyKey", $player_data));
 		
 		case "club_card":
-			return ($is_older_version) ? has_element_ov($player_data->hasClubCard) : has_element("HasClubCard", $player_data);
+			return ($is_older_version) ? has_element($player_data->hasClubCard) : has_element_in_mail("HasClubCard", $player_data);
 
 		case "special_charm":
-			return ($is_older_version) ? has_element_ov($player_data->hasSpecialCharm) : has_element("HasSpecialCharm", $player_data);
+			return ($is_older_version) ? has_element($player_data->hasSpecialCharm) : has_element_in_mail("HasSpecialCharm", $player_data);
 
 		case "skull_key":
 			return ($is_older_version)
-				? has_element_ov($player_data->hasSkullKey) :
+				? has_element($player_data->hasSkullKey) :
 					((isset($GLOBALS["host_player_data"]))
-						? does_host_has_element("skull_key") : has_element("HasSkullKey", $player_data));
+						? does_host_has_element("skull_key") : has_element_in_mail("HasSkullKey", $player_data));
 
 		case "magnifying_glass":
-			return ($is_older_version) ? has_element_ov($player_data->hasMagnifyingGlass) : has_element("HasMagnifyingGlass", $player_data);
+			return ($is_older_version) ? has_element($player_data->hasMagnifyingGlass) : has_element_in_mail("HasMagnifyingGlass", $player_data);
 
 		case "dark_talisman":
-			return ($is_older_version) ? has_element_ov($player_data->hasDarkTalisman) : has_element("HasDarkTalisman", $player_data);
+			return ($is_older_version) ? has_element($player_data->hasDarkTalisman) : has_element_in_mail("HasDarkTalisman", $player_data);
 
 		case "magic_ink":
-			return ($is_older_version) ? has_element_ov($player_data->hasMagicInk) : has_element("hasPickedUpMagicInk", $player_data);
+			return ($is_older_version) ? has_element($player_data->hasMagicInk) : has_element_in_mail("hasPickedUpMagicInk", $player_data);
+
+		case "bears_knowledge":
+			return (int) in_array(2120303, (array) $player_data->eventsSeen->int);
+
+		case "spring_onion_mastery":
+			return (int) in_array(3910979, (array) $player_data->eventsSeen->int);
 
 		case "town_key":
-			return ($is_older_version) ? has_element_ov($player_data->HasTownKey) : has_element("HasTownKey", $player_data);
+			return ($is_older_version) ? has_element($player_data->HasTownKey) : has_element_in_mail("HasTownKey", $player_data);
 	}
 }
 
@@ -641,7 +607,7 @@ function get_player_visited_locations():array {
 	];
 
 	foreach($additional_locations as $additional_location => $location_real_name) {
-		if(has_element($additional_location, $player_data)) {
+		if(has_element_in_mail($additional_location, $player_data)) {
 			$player_visited_locations[$location_real_name] = [
 				"id" => get_item_id_by_name($location_real_name)
 			];
