@@ -51,106 +51,108 @@ function does_player_have_achievement(object $achievements, int $achievement_id)
 	return false;
 }
 
-//& TODO
 function get_player_unlockables_list():array {
-	$data = $GLOBALS["untreated_player_data"];
-	return [
-		"forest_magic" => [
-			"id"       => 107004,
-			"is_found" => get_player_unlockable("forest_magic")
-		],
-		"dwarvish_translation_guide" => [
-			"id"       => 107000,
-			"is_found" => get_player_unlockable("dwarvish_translation_guide")
-		],
-		"rusty_key" => [
-			"id"       => 107001,
-			"is_found" => get_player_unlockable("rusty_key")
-		],
-		"club_card" => [
-			"id"       => 107002,
-			"is_found" => get_player_unlockable("club_card")
-		],
-		"special_charm" => [
-			"id"       => 107007,
-			"is_found" => get_player_unlockable("special_charm")
-		],
-		"skull_key" => [
-			"id"       => 107003,
-			"is_found" => get_player_unlockable("skull_key")
-		],
-		"magnifying_glass" => [
-			"id"       => 107008,
-			"is_found" => get_player_unlockable("magnifying_glass")
-		],            
-		"dark_talisman" => [
-			"id"       => 107005,
-			"is_found" => get_player_unlockable("dark_talisman")
-		],
-		"magic_ink" => [
-			"id"       => 107006,
-			"is_found" => get_player_unlockable("magic_ink")
-		],
-		"bears_knowledge" => [
-			"id"       => 107009,
-			"is_found" => (int) in_array(2120303, (array) $data->eventsSeen->int)
-		],
-		"spring_onion_mastery" => [
-			"id"       => 107010,
-			"is_found" => (int) in_array(3910979, (array) $data->eventsSeen->int)
-		],
-		"town_key" => [
-			"id"       => 107011,
-			"is_found" => get_player_unlockable("town_key")
-		]
-	];
+	$unlockables_json = sanitize_json_with_version("unlockables");
+	$unlockables = get_player_unlockables();
+
+	foreach($unlockables_json as $unlockable_id => $unlockable_name) {
+		$formatted_name = formate_text_for_file($unlockable_name);
+		$unlockables[$formatted_name] = [
+			"id" => $unlockable_id,
+			"is_found" => $unlockables[$formatted_name]
+		];
+	}
+
+	return $unlockables;
 }
 
 //& TODO
-function get_player_unlockable(string $unlockable_name):int {
+function get_player_unlockables():array {
 	$player_data = $GLOBALS["untreated_player_data"];
-	$is_older_version = (is_game_older_than_1_6());
+	$player_unlockables = [];
+	$unlockables_details = [
+		"forest_magic" => [
+			"type" => "mail",
+			"element_name" => "canReadJunimoText"
+		],
+		"dwarvish_translation_guide" => [
+			"type" => "element_host",
+			"older_element" => "canUnderstandDwarves",
+			"newer_element" => "HasDwarvishTranslationGuide"
+		],
+		"rusty_key" => [
+			"type" => "element_host",
+			"older_element" => "hasRustyKey",
+			"newer_version" => "HasRustyKey"
+		],
+		"club_card" => [
+			"type" => "version",
+			"older_element" => "hasClubCard",
+			"newer_element" => "HasClubCard"
+		],
+		"special_charm" => [
+			"type" => "version",
+			"older_element" => "hasSpecialCharm",
+			"newer_element" => "HasSpecialCharm"
+		],
+		"skull_key" => [
+			"type" => "element_host",
+			"older_element" => "hasSkullKey",
+			"newer_element" => "HasSkullKey"
+		],
+		"magnifying_glass" => [
+			"type" => "version",
+			"older_element" => "hasMagnifyingGlass",
+			"newer_element" => "HasMagnifyingGlass"
+		],
+		"dark_talisman" => [
+			"type" => "version",
+			"older_element" => "hasDarkTalisman",
+			"newer_element" => "HasDarkTalisman"
+		],
+		"magic_ink" => [
+			"type" => "version",
+			"older_element" => "hasMagicInk",
+			"newer_element" => "hasPickedUpMagicInk"
+		],
+		"bears_knowledge" => [
+			"type" => "event",
+			"event_id" => 2120303,
+		],
+		"spring_onion_mastery" => [
+			"type" => "event",
+			"event_id" => 3910979,
+		],
+		"town_key" => [
+			"type" => "version",
+			"older_element" => "HasTownKey",
+			"newer_element" => "HasTownKey",
+		]
+	];
 
-	switch($unlockable_name) {
-		case "forest_magic":
-			return has_element("canReadJunimoText", $player_data);
-
-		case "dwarvish_translation_guide":
-			return ($is_older_version)
-				? has_element_ov($player_data->canUnderstandDwarves) : 
-					((isset($GLOBALS["host_player_data"]))
-						? does_host_has_element("dwarvish_translation_guide") : has_element("HasDwarvishTranslationGuide", $player_data));
-
-		case "rusty_key":
-			return ($is_older_version)
-				? has_element_ov($player_data->hasRustyKey) :
-					((isset($GLOBALS["host_player_data"]))
-						? does_host_has_element("rusty_key") : has_element("HasRustyKey", $player_data));
-		
-		case "club_card":
-			return ($is_older_version) ? has_element_ov($player_data->hasClubCard) : has_element("HasClubCard", $player_data);
-
-		case "special_charm":
-			return ($is_older_version) ? has_element_ov($player_data->hasSpecialCharm) : has_element("HasSpecialCharm", $player_data);
-
-		case "skull_key":
-			return ($is_older_version)
-				? has_element_ov($player_data->hasSkullKey) :
-					((isset($GLOBALS["host_player_data"]))
-						? does_host_has_element("skull_key") : has_element("HasSkullKey", $player_data));
-
-		case "magnifying_glass":
-			return ($is_older_version) ? has_element_ov($player_data->hasMagnifyingGlass) : has_element("HasMagnifyingGlass", $player_data);
-
-		case "dark_talisman":
-			return ($is_older_version) ? has_element_ov($player_data->hasDarkTalisman) : has_element("HasDarkTalisman", $player_data);
-
-		case "magic_ink":
-			return ($is_older_version) ? has_element_ov($player_data->hasMagicInk) : has_element("hasPickedUpMagicInk", $player_data);
-
-		case "town_key":
-			return ($is_older_version) ? has_element_ov($player_data->HasTownKey) : has_element("HasTownKey", $player_data);
+	foreach($unlockables_details as $unlockable_name => $unlockable_details) {
+		extract($unlockable_details);
+		switch($type) {
+			case "mail" :
+				$player_unlockables[$unlockable_name] = has_element_in_mail($element_name);
+				break;
+			case "version" :
+				$player_unlockables[$unlockable_name] = has_element_based_on_version($older_element, $newer_element);
+				break;
+			case "event" :
+				$player_unlockables[$unlockable_name] = (int) in_array($event_id, (array) $player_data->eventsSeen->int);
+				break;
+			case "element_host" :
+				if(is_game_older_than_1_6()) {
+					$player_unlockables[$unlockable_name] = has_element($player_data->$older_element);
+				} else {
+					$player_unlockables[$unlockable_name] = has_element_based_on_host($unlockable_name, $newer_element);
+				}
+				break;
+		}
 	}
+
+	return $player_unlockables;
 }
 
 function get_player_shipped_items():array {
@@ -160,7 +162,7 @@ function get_player_shipped_items():array {
 	foreach($player_items->item as $item) {
 		$item_id = (is_game_older_than_1_6()) ? $item->key->int : $item->key->string;
 		$item_id = formate_original_data_string($item_id);
-		get_correct_id($item_id);
+		$item_id = get_correct_id($item_id);
 
 		$shipped_items_reference = find_reference_in_json($item_id, "shipped_items");
 
@@ -222,9 +224,8 @@ function get_player_items_list(object $data, string $filename):array {
 	$items_data = [];
 
 	foreach($data->item as $item) {
-
 		$item_id = formate_original_data_string($item->key->string);
-		get_correct_id($item_id);
+		$item_id = get_correct_id($item_id);
 
 		$item_reference = find_reference_in_json($item_id, $filename);
 
@@ -245,7 +246,7 @@ function get_player_fishes_caught():array {
 	foreach($player_fishes->item as $fish) {
 		$fish_id = (is_game_older_than_1_6()) ? $fish->key->int : $fish->key->string;
 		$fish_id = formate_original_data_string($fish_id);
-		get_correct_id($fish_id);
+		$fish_id = get_correct_id($fish_id);
 
 		$values_array = (array) $fish->value->ArrayOfInt->int;
 		$fish_reference = find_reference_in_json($fish_id, "fish");
@@ -360,9 +361,8 @@ function get_player_cooking_recipes():array {
 
 		if($has_ever_cooked) {
 			foreach($player_recipes_cooked->item as $recipe_cooked) {
-
 				$recipe_id = ((is_game_older_than_1_6())) ? (int) $recipe_cooked->key->int : $recipe_cooked->key->string;
-				get_correct_id($recipe_id);
+				$recipe_id = get_correct_id($recipe_id);
 
 				if($recipe_id === $index) {
 					$cooking_recipes_data[$item_name] = [
@@ -397,7 +397,7 @@ function get_player_artifacts():array {
 
 		$artifact_id = ((is_game_older_than_1_6())) ? $artifact->key->int : $artifact->key->string;
 		$artifact_id = formate_original_data_string((string) $artifact_id);
-		get_correct_id($artifact_id);
+		$artifact_id = get_correct_id($artifact_id);
 
 		$artifacts_reference = find_reference_in_json($artifact_id, "artifacts");
 		$museum_index = get_gamelocation_index($general_data, "museumPieces");
@@ -421,7 +421,7 @@ function get_player_minerals():array {
 	foreach($player_minerals->item as $mineral) {
 		$mineral_id = ((is_game_older_than_1_6())) ? $mineral->key->int : $mineral->key->string;
 		$mineral_id = formate_original_data_string((string) $mineral_id);
-		get_correct_id($mineral_id);
+		$mineral_id = get_correct_id($mineral_id);
 		
 		$minerals_reference = find_reference_in_json($mineral_id, "minerals");
 		$museum_index = get_gamelocation_index($general_data, "museumPieces");
@@ -643,7 +643,7 @@ function get_player_visited_locations():array {
 	];
 
 	foreach($additional_locations as $additional_location => $location_real_name) {
-		if(has_element($additional_location, $player_data)) {
+		if(has_element_in_mail($additional_location)) {
 			$player_visited_locations[$location_real_name] = [
 				"id" => get_item_id_by_name($location_real_name)
 			];

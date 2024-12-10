@@ -2,12 +2,11 @@
 
 function display_save_panel():string {
     $images_path = get_images_folder();
-
     return "
         <section class='panel upload-panel to-keep-open modal-window'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Upload a save</h2>
-                <img src='$images_path/icons/exit.png' class='exit-upload exit'/>
+                <img src='$images_path/icons/exit.png' class='exit-upload exit' alt='Exit'/>
             </div>
             <span>
                 <span>
@@ -22,37 +21,36 @@ function display_save_panel():string {
 
 function display_settings_panel():string {
     $images_path = get_images_folder();
-    
     return "
         <section class='panel settings settings-panel modal-window'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Settings</h2>
-                <img src='$images_path/icons/exit.png' class='exit-settings exit' alt=''/>
+                <img src='$images_path/icons/exit.png' class='exit-settings exit' alt='Exit'/>
             </div>
             <span class='checkboxes'>
                 <span class='checkbox'>
                     <input type='checkbox' id='spoil_mode'>
-                    <span class='checkmark'><img src='$images_path/icons/checked.png' alt=''></span>
+                    <span class='checkmark'><img src='$images_path/icons/checked.png' alt=''/></span>
                     <label for='spoil_mode' id='spoil-label'>Hide discovered items</label>
                 </span>
                 <span class='checkbox'>
                     <input type='checkbox' id='no_spoil_mode'>
-                    <span class='checkmark'><img src='$images_path/icons/checked.png' alt=''></span>
+                    <span class='checkmark'><img src='$images_path/icons/checked.png' alt=''/></span>
                     <label for='no_spoil_mode' id='no-spoil-label'>Hide undiscovered items</label>
                 </span>
                 <span class='checkbox'>
                     <input type='checkbox' id='steam_achievements'>
-                    <span class='checkmark'><img src='$images_path/icons/checked.png' alt=''></span>
+                    <span class='checkmark'><img src='$images_path/icons/checked.png' alt=''/></span>
                     <label for='steam_achievements' id='steam_achievements-label'>Show Steam achievements icons</label>
                 </span>
                 <span class='checkbox'>
                     <input type='checkbox' id='toggle_versions_items_mode' checked>
-                    <span class='checkmark'><img src='$images_path/icons/checked.png' alt=''></span>
+                    <span class='checkmark'><img src='$images_path/icons/checked.png' alt=''/></span>
                     <label for='toggle_versions_items_mode' id='toggle-versions-items-label'>Hide items from newer versions</label>
                 </span>
                 <span class='checkbox'>
                     <input type='checkbox' id='wiki_redirections' checked>
-                    <span class='checkmark'><img src='$images_path/icons/checked.png' alt=''></span>
+                    <span class='checkmark'><img src='$images_path/icons/checked.png' alt=''/></span>
                     <label for='wiki_redirections' id='wiki_redirections-label'>Activate wiki redirections</label>
                 </span>
             </span>
@@ -64,29 +62,26 @@ function display_quest_panel():string {
 	$player_id = $GLOBALS["player_id"];
 	$this_player_data = $GLOBALS["all_players_data"][$player_id]["quest_log"];
     $images_path = get_images_folder();
-
-    $structure = "
-        <section class='panel quests-panel all-quests-$player_id modal-window'>
-            <div class='panel-header'>
-                <h2 class='section-title panel-title'>Quests in progress</h2>
-                <img src='$images_path/icons/exit.png' class='exit-all-quests-$player_id exit' alt=''/>
-            </div>
-            <span class='quests'>
-    ";
+    $quest_structure = "";
 
 	if(empty($this_player_data)) {
-		$structure .= "
+        return "
+            <section class='panel quests-panel all-quests-$player_id modal-window'>
+                <div class='panel-header'>
+                    <h2 class='section-title panel-title'>Quests in progress</h2>
+                    <img src='$images_path/icons/exit.png' class='exit-all-quests-$player_id exit' alt='Exit'/>
+                </div>
+                <span class='quests'>
 					<h3>Nothing to see here yet</h3>
 				</span>
 			</section>
-		";
-        return $structure;
+        ";
 	}
 
     foreach($this_player_data as $data) {
 		extract($data);
 
-        $structure .= "
+        $quest_structure .= "
             <span class='quest'>
                 <span class='quest-infos'>
                     <span class='quest-description'>$objective</span>
@@ -95,61 +90,68 @@ function display_quest_panel():string {
         ";
 
         if(empty($rewards)) {
-			$structure .= "</span>";
+			$quest_structure .= "</span>";
 			continue;
 		}
         
 		if(isset($daysLeft)) {
 			$day_text = ($daysLeft > 1) ? "days" : "day";
-			$structure .= " <span class='days-left'><img src='$images_path/icons/timer.png' alt='Time left'/>$daysLeft $day_text</span>";
+			$quest_structure .= " <span class='days-left'><img src='$images_path/icons/timer.png' alt='Time left'/>$daysLeft $day_text</span>";
 		}
 
-		$structure .= "<span class='quest-rewards'>";
+		$quest_structure .= "<span class='quest-rewards'>";
 		
         for($i = 0; $i<count($rewards); $i++) {
-			// Does reward need a tooltip (gold and qi gems don't)
-            $structure .= ((is_numeric($rewards[$i]) || str_ends_with($rewards[$i], 'q'))) ? "<span class='quest-reward'>" : "<span class='quest-reward tooltip'>";
+			// Reward tooltip (pas besoin pourgold and qi gems)
+            $quest_structure .= ((is_numeric($rewards[$i]) || str_ends_with($rewards[$i], 'q'))) ? "<span class='quest-reward'>" : "<span class='quest-reward tooltip'>";
             
-			// If reward is Friendship hearts/points
+			/*
+            if Friendship hearts/points
+			elseif Gold
+			elseif Qi Gems
+			elseif something else
+            */
             if(strstr($rewards[$i], "Friendship")) {
                 $reward_number = explode(" ", $rewards[$i])[0];
-                $structure .= "<img src='$images_path/rewards/heart_$reward_number.png' alt='Friendship reward'/>";
+                $quest_structure .= "<img src='$images_path/rewards/heart_$reward_number.png' alt='Friendship reward'/>";
+            } elseif(is_numeric($rewards[$i])) {
+                $quest_structure .= formate_number($rewards[$i]) . "<img src='$images_path/rewards/gold.png' alt='Gold coins reward'/>";
+            } elseif(str_ends_with($rewards[$i], 'q')) {
+                $quest_structure .= explode('_', $rewards[$i])[0] . "<img src='$images_path/rewards/qi_gem.png' alt='Qi gems reward'/>";
+            } else {
+                $quest_structure .= $rewards[$i];
             }
-			// If reward is Gold
-            elseif(is_numeric($rewards[$i]))
-                $structure .= formate_number($rewards[$i]) . "<img src='$images_path/rewards/gold.png' alt='Gold coins reward'/>";
-			// If reward is Qi Gems
-            elseif(str_ends_with($rewards[$i], 'q'))
-                $structure .= explode('_', $rewards[$i])[0] . "<img src='$images_path/rewards/qi_gem.png' alt='Qi gems reward'/>";
-			// If reward is something else
-            else
-                $structure .= $rewards[$i];
 
-            $structure .= (is_numeric($rewards[$i])) ? "" : "<span class='left'>$rewards[$i]</span>";
-            $structure .= "</span>";
+            $quest_structure .= (is_numeric($rewards[$i])) ? "" : "<span class='left'>$rewards[$i]</span>";
+            $quest_structure .= "</span>";
         }
-        $structure .= "
+
+        $quest_structure .= "
                 </span>
             </span>
         ";
     }
 
-    $structure .= "
+    return "
+        <section class='panel quests-panel all-quests-$player_id modal-window'>
+            <div class='panel-header'>
+                <h2 class='section-title panel-title'>Quests in progress</h2>
+                <img src='$images_path/icons/exit.png' class='exit-all-quests-$player_id exit' alt='Exit'/>
+            </div>
+            <span class='quests'>
+                $quest_structure
             </span>
         </section>
     ";
-
-    return $structure;
 }
 
 function display_feedback_panel():string {
     $images_path = get_images_folder();
-
     return "
         <section class='panel feedback-panel modal-window to-destroy'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Your feedback</h2>
-                <img src='$images_path/icons/exit.png' class='exit-feedback exit' alt=''/>
+                <img src='$images_path/icons/exit.png' class='exit-feedback exit' alt='Exit'/>
             </div>
             <span>
                 <form id='feedback_form'>
@@ -171,19 +173,19 @@ function display_feedback_panel():string {
                         <span class='topic_selection'>
                             <span>
                                 <input type='radio' id='feature_request' value='Feature request' name='topic' class='feedback_real_radio' required checked>
-                                <img src='$images_path/icons/feature.png' class='feedback_custom_radio' alt='Feature request topic'>
+                                <img src='$images_path/icons/feature.png' class='feedback_custom_radio' alt='Feature request topic'/>
                                 <label for='feature_request'>Feature request</label>
                             </span>
 
                             <span>
                                 <input type='radio' id='bug_report' value='Bug report' name='topic' class='feedback_real_radio'>
-                                <img src='$images_path/icons/bug.png' class='feedback_custom_radio topic_not_selected' alt='Bug report topic'>
+                                <img src='$images_path/icons/bug.png' class='feedback_custom_radio topic_not_selected' alt='Bug report topic'/>
                                 <label for='bug_report'>Bug report</label>
                             </span>
 
                             <span>
                                 <input type='radio' id='other' value='Other' name='topic' class='feedback_real_radio'>
-                                <img src='$images_path/icons/other.png' class='feedback_custom_radio topic_not_selected' alt='Other topic'>
+                                <img src='$images_path/icons/other.png' class='feedback_custom_radio topic_not_selected' alt='Other topic'/>
                                 <label for='other'>Other</label>
                             </span>
                         </span>
@@ -217,29 +219,30 @@ function display_monster_eradication_goals_panel():string {
 
         $wiki_link = get_wiki_link(get_item_id_by_name($alt));
         $is_found = ($counter < $limit) ? "not-found" : "found";
+        $total = ($is_completed) ? $counter : "$counter/$limit";
+        $is_completed_icon = ($is_completed) ? "<img src='$images_path/content/goal_star.png' class='star' alt=''/>" : "";
         $reward_icon = "
             <span class='tooltip' style='display: flex;'>
-                <a class='wiki_link' href='$wiki_link' target='_blank'>
-                    <img src='$images_path/rewards/$src.png' alt='$alt' class='reward $is_found always-on-display'/>
+                <a href='$wiki_link' class='wiki_link' rel='noreferrer' target='_blank'>
+                    <img src='$images_path/rewards/$src.png' class='reward $is_found always-on-display' alt='$alt'/>
                 </a>
                 <span class='right'>$alt</span>
             </span>
         ";
-        $is_completed_icon = ($is_completed) ? "<img src='$images_path/content/goal_star.png' class='star'>" : "";
-        $total = ($is_completed) ? $counter : "$counter/$limit";
+
         $goals .= "<span class='goal'>$reward_icon $total $target $is_completed_icon</span>";
     }
 
     return "
         <section class='panel monster-eradication-goals-panel monster-eradication-goals-$player_id modal-window'>
             <span class='header'>
-                <img src='$images_path/content/dashes.png' class='dashes' alt=''>
+                <img src='$images_path/content/dashes.png' class='dashes' alt=''/>
                 <span class='title'>
                     <span>&emsp;&emsp;&emsp;&emsp;--Monster Eradication Goals</span>
                     <span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;\"Help us keep the valley safe.\"</span>
                 </span>
-                <img src='$images_path/content/dashes.png' class='dashes' alt=''>
-                <img src='$images_path/icons/exit.png' class='exit-monster-eradication-goals exit-monster-eradication-goals-$player_id exit' alt=''>
+                <img src='$images_path/content/dashes.png' class='dashes' alt=''/>
+                <img src='$images_path/icons/exit.png' class='exit-monster-eradication-goals exit-monster-eradication-goals-$player_id exit' alt='Exit'/>
             </span>
             <span class='goals'>
                 $goals
@@ -263,7 +266,7 @@ function display_calendar_panel():string {
 
         for($columns = 1; $columns <= $day_count; $columns++) {
             $day_digit = ($lines * $day_count) + $columns;
-            $date = $day_digit . "/" . $season;
+            $date = "$day_digit/$season";
 
             if(array_key_exists($date, $all_dates)) {
                 $wiki_link = (is_array($all_dates[$date])) ?
@@ -273,19 +276,20 @@ function display_calendar_panel():string {
                     ]
                     :
                     get_wiki_link(get_custom_id($all_dates[$date]));
+
                 $table_structure .= (is_array($all_dates[$date])) ?
                     "<td class='double-event'>
                         <div>
-                            <a href='" . $wiki_link[0] . "' class='wiki_link' target='_blank'></a>
+                            <a href='" . $wiki_link[0] . "' class='wiki_link' rel='noreferrer' target='_blank'></a>
                         </div>
                         <div>
-                            <a href='" . $wiki_link[1] . "' class='wiki_link' target='_blank'></a>
+                            <a href='" . $wiki_link[1] . "' class='wiki_link' rel='noreferrer' target='_blank'></a>
                         </div>
                     </td>"
                     :
                     "<td class='simple-event'>
                         <div>
-                            <a href='$wiki_link' class='wiki_link' target='_blank'></a>
+                            <a href='$wiki_link' class='wiki_link' rel='noreferrer' target='_blank'></a>
                         </div>
                     </td>";
             } else {
@@ -303,8 +307,8 @@ function display_calendar_panel():string {
     return "
         <section class='panel calendar-panel calendar-$player_id modal-window'>
             <span class='calendar-block'>
-                <img src='$images_path/icons/exit.png' class='absolute-exit exit exit-calendar-$player_id' alt=''/>
-                <img src='$images_path/content/calendar_$season.png' alt='Calendar background' class='calendar-bg'>
+                <img src='$images_path/icons/exit.png' class='absolute-exit exit exit-calendar-$player_id' alt='Exit'/>
+                <img src='$images_path/content/calendar_$season.png' class='calendar-bg' alt='Calendar background'/>
                 <table>
                     <tbody>
                         $table_structure
@@ -319,24 +323,20 @@ function display_farm_animals_panel():string {
     $player_id = $GLOBALS["player_id"];
     $animals_friendship = $GLOBALS["shared_players_data"]["farm_animals"];
     $images_path = get_images_folder();
-
-    $structure = "
-        <section class='panel all-animals-panel all-animals-$player_id modal-window'>
-            <div class='panel-header'>
-                <h2 class='section-title panel-title'>Farm animals friendships</h2>
-                <img src='$images_path/icons/exit.png' class='exit-all-animals-$player_id exit' alt=''/>
-            </div>
-            <span class='friendlist'>
-    ";
+    $farm_animals_structure = "";
 
     if(empty($animals_friendship)) {
-        $structure .= "
+        return "
+            <section class='panel all-animals-panel all-animals-$player_id modal-window'>
+                <div class='panel-header'>
+                    <h2 class='section-title panel-title'>Farm animals friendships</h2>
+                    <img src='$images_path/icons/exit.png' class='exit-all-animals-$player_id exit' alt='Exit'/>
+                </div>
+                <span class='friendlist'>
 			        <h3>Nothing to see here yet</h3>
                 </span>
             </section>
         ";
-
-        return $structure;
     }
 
     foreach($animals_friendship as $animal_friendship) {
@@ -366,47 +366,46 @@ function display_farm_animals_panel():string {
                 $hearts_html .= "<img src='$images_path/icons/$heart_icon' class='hearts' alt=''/>";
             }
 
-            $structure .= "
-            <span>
-                <a class='wiki_link' href='$wiki_url' target='_blank'>
-                    <img src='$animal_icon' class='animal-icon' alt='$type icon'/>
-                </a>
-                <span class='animal-name'>$formatted_name</span>
-                <span class='hearts-level'>$hearts_html</span>
-                <span class='interactions'>
-                    <span class='tooltip'>
-                        <img src='$images_path/icons/pet.png' class='interaction $pet_class' alt=''/>
-                        <span class='left'>$pet_tooltip</span>
-                    </span>
-                    <span class='tooltip'>
-                        <img src='$status_icon' class='status' alt='$status'/>
-                        <span class='left'>" . get_animal_status_tooltip($status, $formatted_name) . "</span>
+            $farm_animals_structure .= "
+                <span>
+                    <a href='$wiki_url' class='wiki_link' rel='noreferrer' target='_blank'>
+                        <img src='$animal_icon' class='animal-icon' alt='$type icon'/>
+                    </a>
+                    <span class='animal-name'>$formatted_name</span>
+                    <span class='hearts-level'>$hearts_html</span>
+                    <span class='interactions'>
+                        <span class='tooltip'>
+                            <img src='$images_path/icons/pet.png' class='interaction $pet_class' alt=''/>
+                            <span class='left'>$pet_tooltip</span>
+                        </span>
+                        <span class='tooltip'>
+                            <img src='$status_icon' class='status' alt='$status'/>
+                            <span class='left'>" . get_animal_status_tooltip($status, $formatted_name) . "</span>
+                        </span>
                     </span>
                 </span>
-            </span>";
+            ";
         }
     }
 
-    $structure .= "
+    return "
+        <section class='panel all-animals-panel all-animals-$player_id modal-window'>
+            <div class='panel-header'>
+                <h2 class='section-title panel-title'>Farm animals friendships</h2>
+                <img src='$images_path/icons/exit.png' class='exit-all-animals-$player_id exit' alt='Exit'/>
+            </div>
+            <span class='friendlist'>
+                $farm_animals_structure
             </span>
         </section>
     ";
-
-    return $structure;
 }
 
 function display_junimo_kart_panel():string {
     $untreated_data = $GLOBALS["untreated_all_players_data"];
     $player_id = $GLOBALS["player_id"];
     $images_path = get_images_folder();
-
-    $structure = "
-        <section class='panel junimo-kart-leaderboard-panel junimo-kart-leaderboard-$player_id modal-window'>
-            <span class='leaderboard'>
-                <img src='$images_path/icons/exit.png' class='absolute-exit exit exit-junimo-kart-leaderboard-$player_id' alt=''/>
-                <img src='$images_path/content/junimo_kart.png' class='image-title' alt=''/>
-                <span class='scores'>
-    ";
+    $junimo_structure = "";
 
     $untreated_scores = get_junimo_leaderboard($untreated_data->junimoKartLeaderboards->entries);
     $counter = 1;
@@ -419,7 +418,7 @@ function display_junimo_kart_panel():string {
         $name = (string) $untreated_score->name->string;
         $score = (int) $untreated_score->score->int;
         $leader_class = ($counter === 1) ? "leader" : "";
-        $structure .= "
+        $junimo_structure .= "
             <span class='record-holder $leader_class'>
                 <span class='record-holder-details'>
                     <span class='record-holder-counter'>#$counter</span>
@@ -431,13 +430,17 @@ function display_junimo_kart_panel():string {
         $counter++;
     }
 
-    $structure .= "
+    return "
+        <section class='panel junimo-kart-leaderboard-panel junimo-kart-leaderboard-$player_id modal-window'>
+            <span class='leaderboard'>
+                <img src='$images_path/icons/exit.png' class='absolute-exit exit exit-junimo-kart-leaderboard-$player_id' alt='Exit'/>
+                <img src='$images_path/content/junimo_kart.png' class='image-title' alt='Junimo Kart Background'/>
+                <span class='scores'>
+                    $junimo_structure
                 </span>
             </span>
         </section>
     ";
-
-    return $structure;
 }
 
 function display_museum_panel():string {
@@ -495,7 +498,7 @@ function display_museum_panel():string {
     return "
         <section class='panel museum-panel museum-$player_id modal-window'>
             <span class='museum-block'>
-                <img src='$images_path/icons/exit.png' class='absolute-exit exit exit-museum-$player_id' alt=''/>
+                <img src='$images_path/icons/exit.png' class='absolute-exit exit exit-museum-$player_id' alt='Exit'/>
                 <table>
                     <tbody>
                         $table_structure
@@ -509,27 +512,17 @@ function display_museum_panel():string {
 function display_community_center_panel():string {
     $player_id = $GLOBALS["player_id"];
     $player_bundles = $GLOBALS["shared_players_data"]["cc_bundles"];
-    $host_untreated_data = $GLOBALS["untreated_all_players_data"]->player;
     $bundles_json = sanitize_json_with_version("bundles", true);
     $images_path = get_images_folder();
 	$cc_binary = get_cc_binary_hash($player_bundles);
-
-    $structure = "
-        <section class='panel community-center-panel community-center-$player_id modal-window'>
-            <img src='$images_path/icons/exit.png' class='absolute-exit exit exit-community-center-$player_id' alt=''/>
-            <div class='community-center-background-container'>
-                <img src='$images_path/bundles/CC_$cc_binary.png' class='background-image' alt='Community center background'/>
-                <img src='$images_path/icons/chevron_down.png' class='chevron-down' alt='Scroll indicator'/>
-            </div>
-            <span class='rooms'>
-    ";
+    $cc_structure = "";
     
     foreach($bundles_json as $room_name => $room_details) {
-        if($room_name === "Bulletin Board" && has_element("JojaMember", $host_untreated_data)) {
+        if($room_name === "Bulletin Board" && has_element_in_mail("JojaMember")) {
             continue;
         }
 
-        $structure .= "
+        $cc_structure .= "
             <span class='room'>
                 <h2>$room_name</h2>
                 <span class='bundles'>
@@ -554,8 +547,8 @@ function display_community_center_panel():string {
 
                 $bundle_tooltip = "
                     <span>
-                        <img src='$images_path/content/bundle_bg.png' alt='Bundle background' class='bundle-bg'>
-                        <img src='$images_path/bundles/{$formatted_bundle_name}_bundle.png' alt='$bundle_name Bundle' class='bundle-icon'/>
+                        <img src='$images_path/content/bundle_bg.png' class='bundle-bg' alt='Bundle background'/>
+                        <img src='$images_path/bundles/{$formatted_bundle_name}_bundle.png' class='bundle-icon' alt='$bundle_name Bundle'/>
                         <span class='required-items'>
                             $required_items
                         </span>
@@ -567,26 +560,32 @@ function display_community_center_panel():string {
             }
             
             
-            $structure .= "
+            $cc_structure .= "
                 <span class='bundle $bundle_tooltip_class'>
-                    <img src='$images_path/bundles/{$formatted_bundle_name}_bundle.png' alt='$bundle_name Bundle' class='$is_complete_class'/>
+                    <img src='$images_path/bundles/{$formatted_bundle_name}_bundle.png' class='$is_complete_class' alt='$bundle_name Bundle'/>
                     $bundle_tooltip
                 </span>
             ";
         }
 
-        $structure .= "
+        $cc_structure .= "
                 </span>
             </span>
         ";
     }
 
-    $structure .= "
+    return "
+        <section class='panel community-center-panel community-center-$player_id modal-window'>
+            <img src='$images_path/icons/exit.png' class='absolute-exit exit exit-community-center-$player_id' alt='Exit'/>
+            <div class='community-center-background-container'>
+                <img src='$images_path/bundles/CC_$cc_binary.png' class='background-image' alt='Community center background'/>
+                <img src='$images_path/icons/chevron_down.png' class='chevron-down' alt='Scroll indicator'/>
+            </div>
+            <span class='rooms'>
+                $cc_structure
             </span>
         </section>
     ";
-
-    return $structure;
 }
 
 if($_SERVER["REQUEST_METHOD"] === "POST" && isset($_POST["action"]) && $_POST["action"] === "display_feedback_panel") {

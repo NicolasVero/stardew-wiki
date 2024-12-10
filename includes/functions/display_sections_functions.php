@@ -32,23 +32,25 @@ function display_stat(array $parameters):string {
         ";
     }
 
-    $image_field = "
+    if(isset($wiki_link)) {
+        return "
+            <a href='https://stardewvalleywiki.com/$wiki_link' class='wiki_link' rel='noreferrer' target='_blank'>
+                <span>
+                    $image
+                    <span class='data $formatted_icon'>$formatted_value</span>
+                    <span class='data-label'>$label</span>
+                </span>
+            </a>
+        ";
+    }
+
+    return "
         <span>
             $image
             <span class='data $formatted_icon'>$formatted_value</span>
             <span class='data-label'>$label</span>
         </span>
     ";
-
-    if(isset($wiki_link)) {
-        return "
-            <a class='wiki_link' href='https://stardewvalleywiki.com/$wiki_link' target='_blank'>
-                $image_field
-            </a>
-        ";
-    }
-
-    return $image_field;
 }
 
 function display_spouse(mixed $spouse, array $children):string {
@@ -60,7 +62,7 @@ function display_spouse(mixed $spouse, array $children):string {
     return "
         <span>
             <span class='tooltip'>
-                <a class='wiki_link' href='https://stardewvalleywiki.com/Children' target='_blank'>
+                <a href='https://stardewvalleywiki.com/Children' class='wiki_link' rel='noreferrer' target='_blank'>
                     <img src='$images_path/characters/" . lcfirst($spouse) . ".png' alt='$spouse'/>
                 </a>
                 <span> " . get_child_tooltip($spouse, $children) . "</span>
@@ -75,19 +77,22 @@ function display_sur_header(bool $is_landing_page = false, bool $is_error_screen
 	$menu_id = ($is_landing_page) ? "landing_menu" : (($is_error_screen) ? "error_menu" : "dashboard_menu");
 	$save_id = ($is_landing_page) ? "landing" : "file";
 	$settings_id = ($is_landing_page) ? "landing" : "main";
-	
-	$structure = "<div id='$menu_id' class='sur-header'>";
-		$structure .= (!$is_landing_page && !$is_error_screen) ? display_player_selection() : "";
-		$structure .= "<span>";
-			$structure .= (!$is_landing_page && !$is_error_screen) ? display_game_version() : "";
-			$structure .= display_save_button($save_id);
-			$structure .= display_settings_button($settings_id);
-			$structure .= display_feedback_button();
-			$structure .= (!$is_landing_page && !$is_error_screen) ? display_home_button() : "";
-		$structure .= "</span>";
-	$structure .= "</div>";
+    $player_selection = (!$is_landing_page && !$is_error_screen) ? display_player_selection() : "";
+	$game_version = (!$is_landing_page && !$is_error_screen) ? display_game_version() : "";
+	$home_button = (!$is_landing_page && !$is_error_screen) ? display_home_button() : "";
 
-    return $structure;
+    return "
+        <div id='$menu_id' class='sur-header'>
+            $player_selection
+            <span>
+                $game_version
+                " . display_save_button($save_id) . "
+                " . display_settings_button($settings_id) . "
+                " . display_feedback_button() . "
+                $home_button
+            </span>
+        </div>
+    ";
 }
 
 function display_header():string {
@@ -99,15 +104,16 @@ function display_header():string {
     extract($all_players_data);  
 
     $images_path = get_images_folder();
+    $pet_icon = $pet['type'] . "_" . $pet['breed'];
 	$farm_name = str_contains(strtolower($farm_name), "farm") ? $farm_name : $farm_name . " farm";
 	$gender = ($gender === null) ? "neutral" : $gender;
 
-    $structure = "
+    return "
         <header>
             <div class='header'>
                 <span class='player'>
-                    <img src='$images_path/icons/" . $pet['type'] . "_" . $pet['breed'] . ".png' alt='Pet type'/>
-                    <img src='$images_path/icons/" . strtolower($gender) . ".png' alt='Gender logo: $gender' class='player_gender_logo'/>
+                    <img src='$images_path/icons/$pet_icon.png' alt='Pet type'/>
+                    <img src='$images_path/icons/" . strtolower($gender) . ".png' class='player_gender_logo' alt='Gender logo: $gender'/>
                     <span class='data player_name'>" . formate_usernames($name) . "<span class='data-label'> $farmer_level at $farm_name</span></span>
                 </span>
 
@@ -154,8 +160,6 @@ function display_header():string {
             </div>
         </header>
     ";
-
-    return $structure;
 }
 
 function display_general_stats():string {
@@ -210,37 +214,32 @@ function display_general_stats():string {
 }
 
 function display_skills():string {
+    $images_path = get_images_folder();
 	$this_player_data = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
 	$this_player_skills = $this_player_data["skills"];
 	$this_player_skills_levels = $this_player_data["levels"];
 	$this_player_masteries = $this_player_data["masteries"];
-
-    $structure = "
-		<section class='skills-section info-section'>
-			<h2 class='section-title'>Skills</h2>
-            <span>
-    ";
+    $skill_structure = "";
 
     $mastery_visible_class = (empty($this_player_masteries)) ? "" : "not-hide";
 
     foreach($this_player_skills_levels as $key => $level) {
         $level_icon_name = explode('_', $key)[0];
-        $images_path = get_images_folder();
         $mastery_class   = (array_key_exists(ucfirst(explode('_', $key)[0]) . " Mastery", $this_player_masteries)) ? 'found' : 'not-found';
         $mastery_tooltip = ucfirst(explode('_', $key)[0]) . " mastery";
         $is_newer_version_class = (is_game_older_than_1_6()) ? "newer-version" : "older-version";
 
-        $structure .= "
+        $skill_structure .= "
             <span class='skill $key'>
                 <span class='tooltip'>
-                    <a class='wiki_link' href='https://stardewvalleywiki.com/Mastery_Cave' target='_blank'>
+                    <a href='https://stardewvalleywiki.com/Mastery_Cave' class='wiki_link' rel='noreferrer' target='_blank'>
                         <img src='$images_path/skills/mastery.png' class='level-icon $mastery_class $mastery_visible_class $is_newer_version_class' alt='$key'/>
                     </a>
                     <span>" . ucfirst($mastery_tooltip) . "</span>
                 </span>
         
                 <span class='tooltip'>
-                    <a class='wiki_link' href='https://stardewvalleywiki.com/Skills#" . ucfirst($level_icon_name) . "' target='_blank'>
+                    <a href='https://stardewvalleywiki.com/Skills#" . ucfirst($level_icon_name) . "' class='wiki_link' rel='noreferrer' target='_blank'>
                         <img src='$images_path/skills/$level_icon_name.png' class='level-icon' alt='$key'/>
                     </a>
                     <span>" . ucfirst($level_icon_name) . "</span>
@@ -248,7 +247,7 @@ function display_skills():string {
                 " . get_level_progress_bar($level) . "
                 <span class='level data'>$level</span>
                 <span>
-                    <a class='wiki_link' href='https://stardewvalleywiki.com/Skills' target='_blank'>" 
+                    <a href='https://stardewvalleywiki.com/Skills' class='wiki_link' rel='noreferrer' target='_blank'>" 
                         . get_skills_icons($this_player_skills, $level_icon_name) . "
                     </a>
                 </span>
@@ -256,12 +255,14 @@ function display_skills():string {
         ";
     }
 
-    $structure .= "
+    return "
+		<section class='skills-section info-section'>
+			<h2 class='section-title'>Skills</h2>
+            <span>
+                $skill_structure
             </span>
         </section>
     ";
-
-    return $structure;
 }
 
 function display_top_friendships(int $limit = 5):string {
@@ -285,7 +286,7 @@ function display_friendships(int $limit = -1): string {
         <section class='info-section friends-section $section_class $section_class-$player_id modal-window'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Friendship progression</h2>
-                <img src='$images_path/icons/exit.png' class='exit-all-friendships-$player_id exit' alt=''/>
+                <img src='$images_path/icons/exit.png' class='exit-all-friendships-$player_id exit' alt='Exit'/>
             </div>
             <span class='friendlist'>
         "
@@ -349,13 +350,7 @@ function display_unlockables():string {
     $images_path = get_images_folder();
 	$version_score = $GLOBALS["game_version_score"];
 	$decoded_unlockables = $GLOBALS["json"]["unlockables"];
-
-    $structure = "
-        <section class='gallery unlockables-section _50'>
-            <h2 class='section-title'>Unlockables</h2>
-            <span>
-				<h3 class='no-spoil-title'>Nothing to see here yet</h3>
-    ";
+    $unlockables_structure = "";
 
 	foreach($decoded_unlockables as $version => $unlockables) {
         $is_newer_version_class = ($version_score < get_game_version_score($version)) ? "newer-version" : "older-version";
@@ -370,10 +365,10 @@ function display_unlockables():string {
 			$unlockable_image = "$images_path/unlockables/$formatted_name.png";
 			$wiki_url = get_wiki_link(get_item_id_by_name($unlockable));
 			
-			$structure .= "
+			$unlockables_structure .= "
 				<span class='tooltip'>
-					<a class='wiki_link' href='$wiki_url' target='_blank'>
-						<img src='$unlockable_image' alt='$unlockable' class='gallery-item unlockables $unlockable_class $is_newer_version_class'/>
+					<a href='$wiki_url' class='wiki_link' rel='noreferrer' target='_blank'>
+						<img src='$unlockable_image' class='gallery-item unlockables $unlockable_class $is_newer_version_class' alt='$unlockable'/>
 					</a>
 					<span>$unlockable</span>
 				</span>
@@ -381,12 +376,15 @@ function display_unlockables():string {
 		}
 	}
 
-    $structure .= "
+    return "
+        <section class='gallery unlockables-section _50'>
+            <h2 class='section-title'>Unlockables</h2>
+            <span>
+				<h3 class='no-spoil-title'>Nothing to see here yet</h3>
+                $unlockables_structure
 			</span>
 		</section>
 	";
-
-    return $structure;
 }
 
 function display_detailled_gallery(array $gallery_details, string $width = "", array $panel_details = []):string {
@@ -461,8 +459,7 @@ function display_detailled_gallery(array $gallery_details, string $width = "", a
                     "achievements" => "https://stardewvalleywiki.com/Achievements",
                     "secret_notes" => "https://stardewvalleywiki.com/Secret_Notes"
                 ][$json_filename];
-            }
-            else {
+            } else {
                 $wiki_url = get_wiki_link(get_item_id_by_name($json_line_name));
             }
 
@@ -470,8 +467,8 @@ function display_detailled_gallery(array $gallery_details, string $width = "", a
 
 			$structure .= "
 				<span class='tooltip'>
-					<a class='wiki_link' href='$wiki_url' target='_blank'>
-                        <img src='$element_image' alt='$json_line_name' class='gallery-item $json_filename $element_class $is_newer_version_class'/>
+					<a href='$wiki_url' class='wiki_link' rel='noreferrer' target='_blank'>
+                        <img src='$element_image' class='gallery-item $json_filename $element_class $is_newer_version_class' alt='$json_line_name'/>
                     </a>
                     <span>$element_tooltip</span>
                 </span>
