@@ -12,12 +12,32 @@ function does_host_has_element(string $element):int {
 	return ($GLOBALS["host_player_data"]["unlockables"][$element]["is_found"]);
 }
 
-function has_element_in_mail(string $element, object $data):int {
-    return (in_array($element, (array) $data->mailReceived->string)) ? 1 : 0;
+function has_element_in_mail(string $element):int {
+	$player_data = $GLOBALS["untreated_player_data"] ?? $GLOBALS["untreated_all_players_data"]->player;
+    return (in_array($element, (array) $player_data->mailReceived->string)) ? 1 : 0;
 }
 
 function has_element(object $element):int {
     return !empty((array) $element);
+}
+
+function has_element_based_on_version(string $element_older_version, string $element_newer_version):int {
+	$player_data = $GLOBALS["untreated_player_data"];
+
+	if(is_game_older_than_1_6()) {
+		return has_element($player_data->$element_older_version);
+	}
+
+	return has_element_in_mail($element_newer_version);
+}
+
+function has_element_based_on_host(string $element, string $element_newer_version):int {
+	$player_data = $GLOBALS["untreated_player_data"];
+	if(isset($GLOBALS["host_player_data"])) {
+		return does_host_has_element($element);
+	}
+	
+	return has_element_in_mail($element_newer_version);
 }
 
 function get_game_version_score(string $version):int {
@@ -333,7 +353,7 @@ function get_grandpa_score(): int {
     }
 
     $cc_completed = array_reduce($cc_rooms, function($completed, $room) use ($data) {
-        return $completed && has_element_in_mail($room, $data);
+        return $completed && has_element_in_mail($room);
     }, true);
 
     if($cc_completed) {
@@ -344,11 +364,12 @@ function get_grandpa_score(): int {
         $grandpa_points += 2;
     }
 
-    if(get_player_unlockable("skull_key")) {
+	$player_unlockables = get_player_unlockables();
+    if($player_unlockables["skull_key"]) {
         $grandpa_points++;
     }
 
-    if(get_player_unlockable("rusty_key")) {
+    if($player_unlockables["rusty_key"]) {
         $grandpa_points++;
     }
 
@@ -666,17 +687,17 @@ function get_player_bundle_progress(object $bundle_data, array $bundle_progress)
 	(
 		!in_array("false", $bundle_progress["progress"], true)
 		||
-		has_element_in_mail($cc_rooms[$bundle_progress["room_name"]], $host_untreated_data)
+		has_element_in_mail($cc_rooms[$bundle_progress["room_name"]])
 		||
-		has_element_in_mail($joja_rooms[$bundle_progress["room_name"]], $host_untreated_data)
+		has_element_in_mail($joja_rooms[$bundle_progress["room_name"]])
 	)
 	:
 	(
 		$bundle_progress["progress"][0] === "true"
 		||
-		has_element_in_mail($cc_rooms[$bundle_progress["room_name"]], $host_untreated_data)
+		has_element_in_mail($cc_rooms[$bundle_progress["room_name"]])
 		||
-		has_element_in_mail($joja_rooms[$bundle_progress["room_name"]], $host_untreated_data)
+		has_element_in_mail($joja_rooms[$bundle_progress["room_name"]])
 	);
 
 	if(empty($bundle_details["limit"])) {

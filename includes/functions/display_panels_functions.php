@@ -525,7 +525,7 @@ function display_community_center_panel():string {
     ";
     
     foreach($bundles_json as $room_name => $room_details) {
-        if($room_name === "Bulletin Board" && has_element_in_mail("JojaMember", $host_untreated_data)) {
+        if($room_name === "Bulletin Board" && has_element_in_mail("JojaMember")) {
             continue;
         }
 
