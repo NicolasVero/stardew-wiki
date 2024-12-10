@@ -9,21 +9,21 @@ function update_section_visibility(section: HTMLElement, settings: Settings): vo
     const is_empty = is_section_empty(section);
     const has_older_items = has_section_older_version_items(section);
 
-    if (settings.toggle_versions && is_empty && !has_older_items) {
+    if(settings.toggle_versions && is_empty && !has_older_items) {
         section.style.display = "none";
         return;
     }
 
-    if (title) {
+    if(title) {
         title.style.display = "block";
     }
 
-    if (smaller_title) {
+    if(smaller_title) {
         let should_show_smaller_title = false;
 
-        if (settings.no_spoil) {
+        if(settings.no_spoil) {
             should_show_smaller_title = is_empty;
-        } else if (settings.toggle_versions) {
+        } else if(settings.toggle_versions) {
             should_show_smaller_title = is_empty && has_older_items;
         } else {
             should_show_smaller_title = is_empty;

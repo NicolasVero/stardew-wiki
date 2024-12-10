@@ -12,18 +12,14 @@ function toggle_custom_checkboxes(checkmark_class: string):void {
     });
 }
 
-function toggle_checkboxes_actions():void {
-    const checkboxes: NodeListOf<HTMLElement> = document.querySelectorAll(".checkbox");
+function toggle_checkboxes_actions(): void {
+    document.querySelectorAll(".checkbox input[type='checkbox']").forEach((checkbox_input) => {
+        const input = checkbox_input as HTMLInputElement;
+        const function_name = input.id;
+        const is_checked = input.checked;
 
-    checkboxes.forEach((checkbox) => {
-        const checkbox_input = checkbox.querySelector("input[type='checkbox']") as HTMLInputElement;
-        if(checkbox_input) {
-            const function_name = checkbox_input.id;
-            const is_checked = checkbox_input.checked;
-
-            if(is_checked && typeof window[function_name] === "function") {
-                (window[function_name] as Function)();
-            }
+        if(is_checked && typeof window[function_name] === "function") {
+            (window[function_name] as Function)();
         }
     });
 }

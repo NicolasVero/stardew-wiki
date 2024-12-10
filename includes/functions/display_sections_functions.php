@@ -1,7 +1,7 @@
 <?php
 
 function display_panels():string {
-	$structure = display_friendships();
+	$structure  = display_friendships();
 	$structure .= display_quest_panel();
 	$structure .= display_monster_eradication_goals_panel();
 	$structure .= display_calendar_panel();
@@ -62,7 +62,7 @@ function display_spouse(mixed $spouse, array $children):string {
     return "
         <span>
             <span class='tooltip'>
-                <a href='https://stardewvalleywiki.com/Children' class='wiki_link' rel='noreferrer' target='_blank'>
+                <a href='" . get_wiki_link_by_name("children") . "' class='wiki_link' rel='noreferrer' target='_blank'>
                     <img src='$images_path/characters/" . lcfirst($spouse) . ".png' alt='$spouse'/>
                 </a>
                 <span> " . get_child_tooltip($spouse, $children) . "</span>
@@ -232,14 +232,14 @@ function display_skills():string {
         $skill_structure .= "
             <span class='skill $key'>
                 <span class='tooltip'>
-                    <a href='https://stardewvalleywiki.com/Mastery_Cave' class='wiki_link' rel='noreferrer' target='_blank'>
+                    <a href='" . get_wiki_link_by_name("mastery_cave") . "' class='wiki_link' rel='noreferrer' target='_blank'>
                         <img src='$images_path/skills/mastery.png' class='level-icon $mastery_class $mastery_visible_class $is_newer_version_class' alt='$key'/>
                     </a>
                     <span>" . ucfirst($mastery_tooltip) . "</span>
                 </span>
         
                 <span class='tooltip'>
-                    <a href='https://stardewvalleywiki.com/Skills#" . ucfirst($level_icon_name) . "' class='wiki_link' rel='noreferrer' target='_blank'>
+                    <a href='" . get_wiki_link_by_name("skills") . "#" . ucfirst($level_icon_name) . "' class='wiki_link' rel='noreferrer' target='_blank'>
                         <img src='$images_path/skills/$level_icon_name.png' class='level-icon' alt='$key'/>
                     </a>
                     <span>" . ucfirst($level_icon_name) . "</span>
@@ -247,7 +247,7 @@ function display_skills():string {
                 " . get_level_progress_bar($level) . "
                 <span class='level data'>$level</span>
                 <span>
-                    <a href='https://stardewvalleywiki.com/Skills' class='wiki_link' rel='noreferrer' target='_blank'>" 
+                    <a href='" . get_wiki_link_by_name("skills") . "' class='wiki_link' rel='noreferrer' target='_blank'>" 
                         . get_skills_icons($this_player_skills, $level_icon_name) . "
                     </a>
                 </span>
@@ -380,7 +380,7 @@ function display_unlockables():string {
         <section class='gallery unlockables-section _50'>
             <h2 class='section-title'>Unlockables</h2>
             <span>
-				<h3 class='no-spoil-title'>Nothing to see here yet</h3>
+				<h3 class='no-spoil-title'>" . no_items_placeholder() . "</h3>
                 $unlockables_structure
 			</span>
 		</section>
@@ -408,7 +408,7 @@ function display_detailled_gallery(array $gallery_details, string $width = "", a
         <section class='gallery $json_filename-section $width'>
             $title
             <span>
-				<h3 class='no-spoil-title'>Nothing to see here yet</h3>
+				<h3 class='no-spoil-title'>" . no_items_placeholder() . "</h3>
     ";
     
     foreach($json_data as $key => $json_version) {
@@ -456,8 +456,8 @@ function display_detailled_gallery(array $gallery_details, string $width = "", a
 
             if(in_array($json_filename, ["achievements", "secret_notes"])) {
                 $wiki_url = [
-                    "achievements" => "https://stardewvalleywiki.com/Achievements",
-                    "secret_notes" => "https://stardewvalleywiki.com/Secret_Notes"
+                    "achievements" => get_wiki_link_by_name("achievements"),
+                    "secret_notes" => get_wiki_link_by_name("secret_notes")
                 ][$json_filename];
             } else {
                 $wiki_url = get_wiki_link(get_item_id_by_name($json_line_name));

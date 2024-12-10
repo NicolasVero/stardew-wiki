@@ -167,15 +167,12 @@ function toggle_custom_checkboxes(checkmark_class) {
     });
 }
 function toggle_checkboxes_actions() {
-    const checkboxes = document.querySelectorAll(".checkbox");
-    checkboxes.forEach((checkbox) => {
-        const checkbox_input = checkbox.querySelector("input[type='checkbox']");
-        if (checkbox_input) {
-            const function_name = checkbox_input.id;
-            const is_checked = checkbox_input.checked;
-            if (is_checked && typeof window[function_name] === "function") {
-                window[function_name]();
-            }
+    document.querySelectorAll(".checkbox input[type='checkbox']").forEach((checkbox_input) => {
+        const input = checkbox_input;
+        const function_name = input.id;
+        const is_checked = input.checked;
+        if (is_checked && typeof window[function_name] === "function") {
+            window[function_name]();
         }
     });
 }
@@ -227,27 +224,20 @@ function easter_egg_characters() {
     });
 }
 function easter_egg_kaaris() {
-    var _a;
-    let element = document.querySelector(".house");
-    if (!element) {
-        return;
-    }
-    element = Array.from(((_a = element.previousElementSibling) === null || _a === void 0 ? void 0 : _a.children) || []).find((child) => child.tagName === "IMG");
+    var _a, _b;
+    const element = (_b = (_a = document.querySelector(".house")) === null || _a === void 0 ? void 0 : _a.previousElementSibling) === null || _b === void 0 ? void 0 : _b.querySelector("img");
     if (!element) {
         return;
     }
     element.classList.add("easter_egg_kaaris");
     const audio = new Audio(get_site_root() + "/medias/audio/kaaris_maison-citrouille.mp3");
     let is_playing = false;
-    const play_once = () => {
+    element.addEventListener("dblclick", () => {
         if (!is_playing) {
             is_playing = true;
-            audio.play().finally(() => {
-                is_playing = false;
-            });
+            audio.play().finally(() => is_playing = false);
         }
-    };
-    element.addEventListener("dblclick", play_once);
+    });
 }
 // Create feedback form
 function activate_feedback_ajax_trigger() {
@@ -533,11 +523,13 @@ function swap_displayed_player(player_id) {
         players_display[i].style.display = (player_id !== i) ? "none" : "block";
     }
 }
-const get_settings = () => ({
-    no_spoil: document.getElementById("no_spoil_mode").checked,
-    toggle_versions: document.getElementById("toggle_versions_items_mode").checked,
-    spoil: document.getElementById("spoil_mode").checked
-});
+function get_settings() {
+    return {
+        no_spoil: document.getElementById("no_spoil_mode").checked,
+        toggle_versions: document.getElementById("toggle_versions_items_mode").checked,
+        spoil: document.getElementById("spoil_mode").checked
+    };
+}
 function update_tooltips_after_ajax() {
     on_images_loaded(() => {
         initialize_tooltips();
@@ -548,16 +540,11 @@ function update_tooltips_after_ajax() {
 function initialize_tooltips() {
     const tooltips = document.querySelectorAll(".tooltip");
     tooltips.forEach((tooltip) => {
-        const window_width = window.innerWidth;
         const rect = tooltip.getBoundingClientRect();
         const span = tooltip.querySelector("span");
-        if (span && !span.classList.contains("left") && !span.classList.contains("right")) {
-            if (rect.left < window_width / 2) {
-                span.classList.add("right");
-            }
-            else {
-                span.classList.add("left");
-            }
+        if (span && !["left", "right"].some(className => span.classList.contains(className))) {
+            const tooltip_position = rect.left < window.innerWidth / 2 ? "right" : "left";
+            span.classList.add(tooltip_position);
         }
     });
 }
@@ -570,23 +557,19 @@ function on_images_loaded(callback) {
         callback();
         return;
     }
+    const increment_and_check = () => {
+        images_loaded++;
+        if (images_loaded === total_images) {
+            callback();
+        }
+    };
     images.forEach((image) => {
         if (image.complete) {
-            images_loaded++;
+            increment_and_check();
         }
         else {
-            image.addEventListener("load", () => {
-                images_loaded++;
-                if (images_loaded === total_images) {
-                    callback();
-                }
-            });
-            image.addEventListener("error", () => {
-                images_loaded++;
-                if (images_loaded === total_images) {
-                    callback();
-                }
-            });
+            image.addEventListener("load", increment_and_check);
+            image.addEventListener("error", increment_and_check);
         }
     });
     if (images_loaded === total_images) {

@@ -211,7 +211,7 @@ function get_animal_status_tooltip(string $status, string $animal_name):string {
         "happy" => "$animal_name looks really happy today!",
         "fine"  => "$animal_name looks fine today!",
         "angry" => "$animal_name looks sad today :("
-    ][$status];
+    ][$status] ?? "";
 }
 
 function get_weather_tooltip(string $weather):string {
@@ -222,7 +222,7 @@ function get_weather_tooltip(string $weather):string {
 		"wind"       => "It's going to be cloudy, with gusts of wind throughout the day",
 		"storm"      => "Looks like a storm is approaching. Thunder and lightning is expected",
 		"snow"       => "Expect a few inches of snow tomorrow"
-	][$weather];
+	][$weather] ?? "";
 }
 
 function get_child_tooltip(string $spouse, array $children):string {
@@ -265,7 +265,7 @@ function display_festival_icon():string {
 	</span>"
 	:
 	"<span class='tooltip'>
-        <a href='https://stardewvalleywiki.com/Festivals' class='wiki_link' rel='noreferrer' target='_blank'>
+        <a href='" . get_wiki_link_by_name("festival") . "' class='wiki_link' rel='noreferrer' target='_blank'>
 		    <img src='$images_path/icons/festival_icon.png' class='festival_icon $festival_class' alt='Festival icon'/>
 		</a>
         <span class='right'>$festival_name</span>

@@ -58,34 +58,22 @@ function easter_egg_characters():void {
 	});
 }
 
-function easter_egg_kaaris():void {
-    let element: HTMLElement | null = document.querySelector(".house");
+function easter_egg_kaaris(): void {
+    const element: HTMLElement | null = document.querySelector(".house")?.previousElementSibling?.querySelector("img");
 
     if(!element) {
-		return;
-	}
-
-    element = Array.from(element.previousElementSibling?.children || []).find(
-        (child) => child.tagName === "IMG"
-    ) as HTMLElement | null;
-
-    if(!element) {
-		return;
-	}
-
+        return;
+    }
+	
     element.classList.add("easter_egg_kaaris");
 
     const audio: HTMLAudioElement = new Audio(get_site_root() + "/medias/audio/kaaris_maison-citrouille.mp3");
-    let is_playing: boolean = false;
+    let is_playing = false;
 
-    const play_once = (): void => {
+    element.addEventListener("dblclick", () => {
         if(!is_playing) {
             is_playing = true;
-            audio.play().finally(() => {
-                is_playing = false;
-            });
+            audio.play().finally(() => is_playing = false);
         }
-    };
-
-    element.addEventListener("dblclick", play_once);
+    });
 }

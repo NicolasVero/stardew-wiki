@@ -213,6 +213,17 @@ function get_wiki_link(int $id):string {
 	return $GLOBALS["json"]["wiki_links"][$id];
 }
 
+function get_wiki_link_by_name(string $name):string {
+	return "https://stardewvalleywiki.com/" . [
+		"achievements" => "Achievements",
+		"children"     => "Children",
+		"festival"     => "Festivals",
+		"mastery_cave" => "Mastery_Cave",
+		"secret_notes" => "Secret_Notes",
+		"skills"       => "Skills"
+	][$name] ?? "";
+}
+
 function array_keys_exists(array $keys, array $array):bool {
     return count(array_diff_key(array_flip($keys), $array)) === 0;
 }
@@ -349,6 +360,10 @@ function get_script_loader():string {
 			});
 		</script>
 	";
+}
+
+function no_items_placeholder():string {
+	return "Nothing to see here";
 }
 
 if(isset($_GET["action"]) && $_GET["action"] === "get_max_upload_size") {	
