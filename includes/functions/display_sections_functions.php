@@ -32,23 +32,25 @@ function display_stat(array $parameters):string {
         ";
     }
 
-    $image_field = "
+    if(isset($wiki_link)) {
+        return "
+            <a href='https://stardewvalleywiki.com/$wiki_link' class='wiki_link' rel='noreferrer' target='_blank'>
+                <span>
+                    $image
+                    <span class='data $formatted_icon'>$formatted_value</span>
+                    <span class='data-label'>$label</span>
+                </span>
+            </a>
+        ";
+    }
+
+    return "
         <span>
             $image
             <span class='data $formatted_icon'>$formatted_value</span>
             <span class='data-label'>$label</span>
         </span>
     ";
-
-    if(isset($wiki_link)) {
-        return "
-            <a href='https://stardewvalleywiki.com/$wiki_link' class='wiki_link' rel='noreferrer' target='_blank'>
-                $image_field
-            </a>
-        ";
-    }
-
-    return $image_field;
 }
 
 function display_spouse(mixed $spouse, array $children):string {
@@ -75,19 +77,22 @@ function display_sur_header(bool $is_landing_page = false, bool $is_error_screen
 	$menu_id = ($is_landing_page) ? "landing_menu" : (($is_error_screen) ? "error_menu" : "dashboard_menu");
 	$save_id = ($is_landing_page) ? "landing" : "file";
 	$settings_id = ($is_landing_page) ? "landing" : "main";
-	
-	$structure = "<div id='$menu_id' class='sur-header'>";
-		$structure .= (!$is_landing_page && !$is_error_screen) ? display_player_selection() : "";
-		$structure .= "<span>";
-			$structure .= (!$is_landing_page && !$is_error_screen) ? display_game_version() : "";
-			$structure .= display_save_button($save_id);
-			$structure .= display_settings_button($settings_id);
-			$structure .= display_feedback_button();
-			$structure .= (!$is_landing_page && !$is_error_screen) ? display_home_button() : "";
-		$structure .= "</span>";
-	$structure .= "</div>";
+    $player_selection = (!$is_landing_page && !$is_error_screen) ? display_player_selection() : "";
+	$game_version = (!$is_landing_page && !$is_error_screen) ? display_game_version() : "";
+	$home_button = (!$is_landing_page && !$is_error_screen) ? display_home_button() : "";
 
-    return $structure;
+    return "
+        <div id='$menu_id' class='sur-header'>
+            $player_selection
+            <span>
+                $game_version
+                " . display_save_button($save_id) . "
+                " . display_settings_button($settings_id) . "
+                " . display_feedback_button() . "
+                $home_button
+            </span>
+        </div>
+    ";
 }
 
 function display_header():string {
@@ -103,7 +108,7 @@ function display_header():string {
 	$farm_name = str_contains(strtolower($farm_name), "farm") ? $farm_name : $farm_name . " farm";
 	$gender = ($gender === null) ? "neutral" : $gender;
 
-    $structure = "
+    return "
         <header>
             <div class='header'>
                 <span class='player'>
@@ -155,8 +160,6 @@ function display_header():string {
             </div>
         </header>
     ";
-
-    return $structure;
 }
 
 function display_general_stats():string {
@@ -216,12 +219,7 @@ function display_skills():string {
 	$this_player_skills = $this_player_data["skills"];
 	$this_player_skills_levels = $this_player_data["levels"];
 	$this_player_masteries = $this_player_data["masteries"];
-
-    $structure = "
-		<section class='skills-section info-section'>
-			<h2 class='section-title'>Skills</h2>
-            <span>
-    ";
+    $skill_structure = "";
 
     $mastery_visible_class = (empty($this_player_masteries)) ? "" : "not-hide";
 
@@ -231,7 +229,7 @@ function display_skills():string {
         $mastery_tooltip = ucfirst(explode('_', $key)[0]) . " mastery";
         $is_newer_version_class = (is_game_older_than_1_6()) ? "newer-version" : "older-version";
 
-        $structure .= "
+        $skill_structure .= "
             <span class='skill $key'>
                 <span class='tooltip'>
                     <a href='https://stardewvalleywiki.com/Mastery_Cave' class='wiki_link' rel='noreferrer' target='_blank'>
@@ -257,12 +255,14 @@ function display_skills():string {
         ";
     }
 
-    $structure .= "
+    return "
+		<section class='skills-section info-section'>
+			<h2 class='section-title'>Skills</h2>
+            <span>
+                $skill_structure
             </span>
         </section>
     ";
-
-    return $structure;
 }
 
 function display_top_friendships(int $limit = 5):string {
@@ -350,13 +350,7 @@ function display_unlockables():string {
     $images_path = get_images_folder();
 	$version_score = $GLOBALS["game_version_score"];
 	$decoded_unlockables = $GLOBALS["json"]["unlockables"];
-
-    $structure = "
-        <section class='gallery unlockables-section _50'>
-            <h2 class='section-title'>Unlockables</h2>
-            <span>
-				<h3 class='no-spoil-title'>Nothing to see here yet</h3>
-    ";
+    $unlockables_structure = "";
 
 	foreach($decoded_unlockables as $version => $unlockables) {
         $is_newer_version_class = ($version_score < get_game_version_score($version)) ? "newer-version" : "older-version";
@@ -371,7 +365,7 @@ function display_unlockables():string {
 			$unlockable_image = "$images_path/unlockables/$formatted_name.png";
 			$wiki_url = get_wiki_link(get_item_id_by_name($unlockable));
 			
-			$structure .= "
+			$unlockables_structure .= "
 				<span class='tooltip'>
 					<a href='$wiki_url' class='wiki_link' rel='noreferrer' target='_blank'>
 						<img src='$unlockable_image' class='gallery-item unlockables $unlockable_class $is_newer_version_class' alt='$unlockable'/>
@@ -382,12 +376,15 @@ function display_unlockables():string {
 		}
 	}
 
-    $structure .= "
+    return "
+        <section class='gallery unlockables-section _50'>
+            <h2 class='section-title'>Unlockables</h2>
+            <span>
+				<h3 class='no-spoil-title'>Nothing to see here yet</h3>
+                $unlockables_structure
 			</span>
 		</section>
 	";
-
-    return $structure;
 }
 
 function display_detailled_gallery(array $gallery_details, string $width = "", array $panel_details = []):string {

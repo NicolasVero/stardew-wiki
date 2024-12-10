@@ -2,17 +2,19 @@
 
 function display_player_selection():string {
     $players_names = $GLOBALS["players_names"];
-    
-    $structure = "<ul id='players_selection'>";
+    $players_name_structure = "";
 
     if(count($players_names) > 1) {
         for($i = 0; $i < count($players_names); $i++) {
-            $structure .= "<li class='player_selection' value='player_$i'>" . formate_usernames($players_names[$i]) . "</option>";
+            $players_name_structure .= "<li class='player_selection' value='player_$i'>" . formate_usernames($players_names[$i]) . "</option>";
         }
     }
 
-    $structure .= "</ul>";
-    return $structure;
+    return "
+        <ul id='players_selection'>
+            $players_name_structure
+        </ul>
+    ";
 }
 
 function display_game_version():string {
@@ -84,7 +86,7 @@ function get_level_progress_bar(int $level, int $max_level = 10):string {
 
 function get_skills_icons(array $skills, string $current_skill):string {
     $images_path = get_images_folder();
-    $structure = "<div class='skills-section'>";
+    $skill_structure = "";
 
     foreach($skills as $skill) {
         if($current_skill === strtolower($skill["source"])) {
@@ -92,8 +94,8 @@ function get_skills_icons(array $skills, string $current_skill):string {
             $skill_icon = strtolower($skill["skill"]);
             $skill_icon_path = "$images_path/skills/$skill_icon.png";
             $skill_description = $skill["description"];
-            
-            $structure .= "
+
+            $skill_structure .= "
                 <span class='tooltip'>
                     <img src='$skill_icon_path' alt='$skill_description'/>
                     <span>$skill_description</span>
@@ -102,8 +104,11 @@ function get_skills_icons(array $skills, string $current_skill):string {
         }
     }
 
-    $structure .= "</div>";
-    return $structure;
+    return "
+        <div class='skills-section'>
+            $skill_structure
+        </div>
+    ";
 }
 
 function get_tooltip_text(array $player_data, string $json_line_name, string $data_type):string {
@@ -288,12 +293,11 @@ function display_project_contributor(array $options):string {
     $images_path = get_images_folder();
     $portrait =  "$images_path/content/$icon.png";
     $presentation = "";
+    $socials_links = "";
 
     foreach($texts as $text) {
         $presentation .= "<span>$text</span>";
     }
-
-    $socials_links = "";
 
     foreach($socials as $social_name => $social) {
         extract($social);
@@ -319,8 +323,8 @@ function display_project_contributor(array $options):string {
 }
 
 function display_bundle_requirements(array $requirements, array $added_items):string {
-    $structure = "";
     $images_path = get_images_folder();
+    $structure = "";
     
     foreach($requirements as $requirement) {
         extract($requirement);

@@ -6,8 +6,8 @@ function display_landing_page(bool $with_surheader = true):string {
 	}
 
     $images_path = get_images_folder();
-	$sur_header     = ($with_surheader) ? display_sur_header(true, false) : "";
-    $save_panel     = display_save_panel();
+	$sur_header = ($with_surheader) ? display_sur_header(true, false) : "";
+    $save_panel = display_save_panel();
     $settings_panel = display_settings_panel();
 
 	$contributors_structure = "";
@@ -216,14 +216,12 @@ function display_error_page(Exception $exception):string {
 
     extract($exception_dialogues[$exception->getMessage()]);
 
-    $structure = "
+    return "
         <div class='error-wrapper'>
             <div class='dialogue-box-error-container'>
                 <img src='$images_path/dialogue_boxes/$image.png' alt='" . $exception->getMessage() . "'/>
                 <span>$dialogue</span>
             </div>
         </div>
-    ";
-
-    return $structure;
+	";
 }
