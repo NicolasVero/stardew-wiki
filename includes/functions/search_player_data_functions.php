@@ -160,7 +160,7 @@ function get_player_shipped_items():array {
 	foreach($player_items->item as $item) {
 		$item_id = (is_game_older_than_1_6()) ? $item->key->int : $item->key->string;
 		$item_id = formate_original_data_string($item_id);
-		get_correct_id($item_id);
+		$item_id = get_correct_id($item_id);
 
 		$shipped_items_reference = find_reference_in_json($item_id, "shipped_items");
 
@@ -222,9 +222,8 @@ function get_player_items_list(object $data, string $filename):array {
 	$items_data = [];
 
 	foreach($data->item as $item) {
-
 		$item_id = formate_original_data_string($item->key->string);
-		get_correct_id($item_id);
+		$item_id = get_correct_id($item_id);
 
 		$item_reference = find_reference_in_json($item_id, $filename);
 
@@ -245,7 +244,7 @@ function get_player_fishes_caught():array {
 	foreach($player_fishes->item as $fish) {
 		$fish_id = (is_game_older_than_1_6()) ? $fish->key->int : $fish->key->string;
 		$fish_id = formate_original_data_string($fish_id);
-		get_correct_id($fish_id);
+		$fish_id = get_correct_id($fish_id);
 
 		$values_array = (array) $fish->value->ArrayOfInt->int;
 		$fish_reference = find_reference_in_json($fish_id, "fish");
@@ -360,9 +359,8 @@ function get_player_cooking_recipes():array {
 
 		if($has_ever_cooked) {
 			foreach($player_recipes_cooked->item as $recipe_cooked) {
-
 				$recipe_id = ((is_game_older_than_1_6())) ? (int) $recipe_cooked->key->int : $recipe_cooked->key->string;
-				get_correct_id($recipe_id);
+				$recipe_id = get_correct_id($recipe_id);
 
 				if($recipe_id === $index) {
 					$cooking_recipes_data[$item_name] = [
@@ -397,7 +395,7 @@ function get_player_artifacts():array {
 
 		$artifact_id = ((is_game_older_than_1_6())) ? $artifact->key->int : $artifact->key->string;
 		$artifact_id = formate_original_data_string((string) $artifact_id);
-		get_correct_id($artifact_id);
+		$artifact_id = get_correct_id($artifact_id);
 
 		$artifacts_reference = find_reference_in_json($artifact_id, "artifacts");
 		$museum_index = get_gamelocation_index($general_data, "museumPieces");
@@ -421,7 +419,7 @@ function get_player_minerals():array {
 	foreach($player_minerals->item as $mineral) {
 		$mineral_id = ((is_game_older_than_1_6())) ? $mineral->key->int : $mineral->key->string;
 		$mineral_id = formate_original_data_string((string) $mineral_id);
-		get_correct_id($mineral_id);
+		$mineral_id = get_correct_id($mineral_id);
 		
 		$minerals_reference = find_reference_in_json($mineral_id, "minerals");
 		$museum_index = get_gamelocation_index($general_data, "museumPieces");

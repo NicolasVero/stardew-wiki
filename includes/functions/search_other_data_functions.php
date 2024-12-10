@@ -725,7 +725,7 @@ function get_bundle_requirements(string $requirements):array {
 	];
 
 	foreach($formatted_requirements as $item) {
-		get_correct_id($item[0]);
+		$item[0] = get_correct_id($item[0]);
 		$item[0] = abs($item[0]);
 		$item_name = ($item[0] === 1) ? "Gold Coins" : get_item_name_by_id($item[0]);
 

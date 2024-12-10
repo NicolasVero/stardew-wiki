@@ -189,12 +189,12 @@ function find_reference_in_json(mixed $id, string $file):mixed {
     return isset($json_file[$id]) ? $json_file[$id] : null;
 }
 
-function get_correct_id(mixed &$id):void {
+function get_correct_id(mixed &$id):int {
 	if(!filter_var((int) $id, FILTER_VALIDATE_INT)) {
-		$id = get_custom_id($id);
-	} else {
-		$id = (int) $id;
+		return get_custom_id($id);
 	}
+
+	return (int) $id;
 }
 
 function get_custom_id(string $item):int {
