@@ -52,7 +52,7 @@ window.addEventListener("load", () => {
     activate_feedback_ajax_trigger();
 });
 
-function handle_no_spoil_mode() {
+function handle_no_spoil_mode():void {
     const spoil_checkbox = document.getElementById("spoil_mode") as HTMLInputElement;
     const no_spoil_checkbox = document.getElementById("no_spoil_mode") as HTMLInputElement;
 
@@ -63,25 +63,27 @@ function handle_no_spoil_mode() {
     update_display(["not-found", "found"]);
 };
 
-function handle_toggle_versions_mode() {
+function handle_toggle_versions_mode():void {
     update_display("newer-version");
 };
 
-function handle_spoil_mode() {
+function handle_spoil_mode():void {
     const no_spoil_checkbox = document.getElementById("no_spoil_mode") as HTMLInputElement;
     const spoil_checkbox = document.getElementById("spoil_mode") as HTMLInputElement;
 
-    if(no_spoil_checkbox && spoil_checkbox) {
-        if(spoil_checkbox.checked && no_spoil_checkbox.checked) {
-            no_spoil_checkbox.checked = false;
-            update_display(["not-found", "found"]);
-        } else {
-            update_display(["found"]);
-        }
+    if(!no_spoil_checkbox || !spoil_checkbox) {
+        return;
+    }
+
+    if(spoil_checkbox.checked && no_spoil_checkbox.checked) {
+        no_spoil_checkbox.checked = false;
+        update_display(["not-found", "found"]);
+    } else {
+        update_display(["found"]);
     }
 };
 
-function handle_steam_mode() {
+function handle_steam_mode():void {
     const images_folder = ["steam_achievements", "achievements"];
     const images = document.querySelectorAll(".achievements-section img");
 
@@ -92,7 +94,7 @@ function handle_steam_mode() {
     });
 }
 
-function initialize_settings() {
+function initialize_settings():void {
     handle_toggle_versions_mode();
     handle_no_spoil_mode();
     handle_spoil_mode();
