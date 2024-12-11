@@ -32,7 +32,6 @@ function has_element_based_on_version(string $element_older_version, string $ele
 }
 
 function has_element_based_on_host(string $element, string $element_newer_version):int {
-	$player_data = $GLOBALS["untreated_player_data"];
 	if(isset($GLOBALS["host_player_data"])) {
 		return does_host_has_element($element);
 	}
@@ -61,8 +60,22 @@ function get_player_season():string {
 	return get_formatted_date(false)["season"];
 }
 
-function get_total_skills_level(object $data):int {
-	return ($data->farmingLevel + $data->miningLevel + $data->combatLevel + $data->foragingLevel + $data->fishingLevel);
+function get_total_skills_level():int {
+    $player_data = $GLOBALS["untreated_player_data"];
+	$skill_types = [
+		"farmingLevel",
+		"miningLevel",
+		"combatLevel",
+		"foragingLevel",
+		"fishingLevel"
+	];
+
+	$total_levels = 0;
+	foreach($skill_types as $skill) {
+		$total_levels += $player_data->$skill;
+	}
+
+	return $total_levels;
 }
 
 function get_pet_frienship_points():int {
@@ -260,7 +273,7 @@ function get_gamelocation_index(object $general_data, string $searched_location)
 
 function get_farmer_level():string {
 	$player_data = $GLOBALS["untreated_player_data"];
-    $level = (get_total_skills_level($player_data) + $player_data->luckLevel) / 2;
+    $level = (get_total_skills_level() + $player_data->luckLevel) / 2;
     $level_names = [
         "Newcomer",
         "Greenhorn",
@@ -315,7 +328,7 @@ function get_grandpa_score(): int {
         }
     }
 
-    $total_skills_level = get_total_skills_level($data);
+    $total_skills_level = get_total_skills_level();
     foreach($skill_goals as $goal_data) {
         if($total_skills_level > $goal_data["goal"]) {
             $grandpa_points += $goal_data["points"];
@@ -424,13 +437,15 @@ function get_perfection_elements():array {
 
 function get_perfection_percentage():string {
 	$untreated_data = $GLOBALS["untreated_all_players_data"];
-	if((string) $untreated_data->farmPerfect === "true")
+	if((string) $untreated_data->farmPerfect === "true") {
 		return 100;
+	}
 
 	$perfection_elements = get_perfection_elements();
 	$percentage = 0;
-	foreach($perfection_elements as $element_percent)
+	foreach($perfection_elements as $element_percent) {
 		$percentage += $element_percent;
+	}
 
 	return round($percentage);
 }
@@ -521,8 +536,9 @@ function has_players_done_monster_slayer_hero():bool {
 	$total_players = get_number_of_player();
 	
 	for($current_player = 0; $current_player < $total_players; $current_player++) {
-		if(get_player_adventurers_guild_data($current_player)["is_all_completed"])
+		if(get_player_adventurers_guild_data($current_player)["is_all_completed"]) {
 			return true;
+		}
 	}
 
 	return false;
@@ -534,6 +550,7 @@ function has_any_player_gotten_all_stardrops():bool {
 
 	for($current_player = 0; $current_player < $total_players; $current_player++) {
 		$stardrops_founds = $all_data[$current_player]["general"]["stardrops_found"];
+
 		if($stardrops_founds === 7) {
 			return true;
 		}
@@ -577,7 +594,6 @@ function get_junimo_kart_fake_leaderboard(): object {
     ];
 }
 
-
 function get_museum_pieces_coords():array {
     $untreated_all_data = $GLOBALS["untreated_all_players_data"];
 	$museum_index = get_gamelocation_index($untreated_all_data, "museumPieces");
@@ -587,6 +603,7 @@ function get_museum_pieces_coords():array {
 	foreach($in_game_museum_pieces->item as $museum_piece) {
 		$museum_piece_id = (is_game_older_than_1_6()) ? (int) $museum_piece->value->int : (int) $museum_piece->value->string;
 		$museum_piece_name = get_item_name_by_id($museum_piece_id);
+
 		$museum_piece_details[$museum_piece_name] = [
 			"id" => $museum_piece_id,
 			"type" => get_museum_piece_type($museum_piece_name),
@@ -600,6 +617,7 @@ function get_museum_pieces_coords():array {
 	usort($museum_piece_details, function($a, $b) {
 		return $a["coords"]["X"] <=> $b["coords"]["X"];
 	});
+
 	return $museum_piece_details;
 }
 
@@ -652,8 +670,34 @@ function get_cc_binary_hash(array $player_bundles):string {
 }
 
 function get_player_bundle_progress(object $bundle_data, array $bundle_progress):array {
-	$host_untreated_data = $GLOBALS["untreated_all_players_data"]->player;
+	$bundle_details = get_player_bundle_details($bundle_data);
+	$bundle_details["is_complete"] = false;
+	$bundle_details["items_added"] = [];
+	
+	$bundle_details = [
+		"room_name" => $bundle_progress["room_name"]
+	] + $bundle_details;
 
+	if(empty($bundle_details["limit"])) {
+		$bundle_details["limit"] = count($bundle_details["requirements"]);
+	}
+
+	$is_bundle_completed = is_bundle_completed($bundle_progress["room_name"], $bundle_progress["progress"]);
+	if($is_bundle_completed) {
+		$bundle_details["is_complete"] = true;
+		return $bundle_details;
+	}
+
+	for($item_in_bundle = 0; $item_in_bundle < count($bundle_details["requirements"]); $item_in_bundle++) {
+		if($bundle_progress["progress"][$item_in_bundle] === "true") {
+			array_push($bundle_details["items_added"], $bundle_details["requirements"][$item_in_bundle]);
+		}
+	}
+
+	return $bundle_details;
+}
+
+function is_bundle_completed(string $room_name, array $progress):bool {
 	$cc_rooms = [
         "Boiler Room" => "ccBoilerRoom",
 		"Crafts Room" => "ccCraftsRoom",
@@ -672,48 +716,25 @@ function get_player_bundle_progress(object $bundle_data, array $bundle_progress)
 		"Bulletin Board" => "JojaMember"
     ];
 
-	$bundle_details = get_player_bundle_details($bundle_data);
-	$bundle_details["is_complete"] = false;
-	$bundle_details["items_added"] = [];
-	
-	$bundle_details = [
-		"room_name" => $bundle_progress["room_name"]
-	] + $bundle_details;
-
 	// Les bundles sont entièrement constitués de "true" si il a été complété SAUF pour les bundles de "Vault"
-	$is_bundle_completed = ($bundle_progress["room_name"] !== "Vault") ?
+	$is_bundle_completed = ($room_name !== "Vault") ?
 	(
-		!in_array("false", $bundle_progress["progress"], true)
+		!in_array("false", $progress, true)
 		||
-		has_element_in_mail($cc_rooms[$bundle_progress["room_name"]])
+		has_element_in_mail($cc_rooms[$room_name])
 		||
-		has_element_in_mail($joja_rooms[$bundle_progress["room_name"]])
+		has_element_in_mail($joja_rooms[$room_name])
 	)
 	:
 	(
-		$bundle_progress["progress"][0] === "true"
+		$progress[0] === "true"
 		||
-		has_element_in_mail($cc_rooms[$bundle_progress["room_name"]])
+		has_element_in_mail($cc_rooms[$room_name])
 		||
-		has_element_in_mail($joja_rooms[$bundle_progress["room_name"]])
+		has_element_in_mail($joja_rooms[$room_name])
 	);
 
-	if(empty($bundle_details["limit"])) {
-		$bundle_details["limit"] = count($bundle_details["requirements"]);
-	}
-
-	if($is_bundle_completed) {
-		$bundle_details["is_complete"] = true;
-		return $bundle_details;
-	}
-
-	for($item_in_bundle = 0; $item_in_bundle < count($bundle_details["requirements"]); $item_in_bundle++) {
-		if($bundle_progress["progress"][$item_in_bundle] === "true") {
-			array_push($bundle_details["items_added"], $bundle_details["requirements"][$item_in_bundle]);
-		}
-	}
-
-	return $bundle_details;
+	return $is_bundle_completed;
 }
 
 function get_player_bundle_details(object $bundle_data):array {
