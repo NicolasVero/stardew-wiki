@@ -128,14 +128,15 @@ function handle_toggle_versions_mode() {
 function handle_spoil_mode() {
     const no_spoil_checkbox = document.getElementById("no_spoil_mode");
     const spoil_checkbox = document.getElementById("spoil_mode");
-    if (no_spoil_checkbox && spoil_checkbox) {
-        if (spoil_checkbox.checked && no_spoil_checkbox.checked) {
-            no_spoil_checkbox.checked = false;
-            update_display(["not-found", "found"]);
-        }
-        else {
-            update_display(["found"]);
-        }
+    if (!no_spoil_checkbox || !spoil_checkbox) {
+        return;
+    }
+    if (spoil_checkbox.checked && no_spoil_checkbox.checked) {
+        no_spoil_checkbox.checked = false;
+        update_display(["not-found", "found"]);
+    }
+    else {
+        update_display(["found"]);
     }
 }
 ;
@@ -352,7 +353,7 @@ function load_elements() {
         { open_button: ".file-upload", exit_button: ".exit-upload", modal_panel: ".upload-panel" }
     ];
     const dynamic_prefixes = [
-        "all-friendships", "all-quests", "monster-eradication-goals",
+        "all-friends", "all-quests", "monster-eradication-goals",
         "calendar", "all-animals", "junimo-kart-leaderboard",
         "museum", "community-center"
     ];
