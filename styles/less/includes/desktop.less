@@ -1,0 +1,26 @@
+// out: false
+
+@media (min-width: @desktop-breakpoint) {
+	// Gallery items
+	._50 {
+		flex-basis: 47.5%;
+	}
+
+	._100 {
+		flex-basis: 100%;
+	}
+
+	body {
+		main {
+			.first-gallery {
+				.intra-gallery {
+					order: 1;
+				}
+
+				.friends-section {
+					order: 2;
+				}
+			}
+		}
+	}
+}

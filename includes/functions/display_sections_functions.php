@@ -597,7 +597,7 @@ function display_farm_animals():string {
         "panel_alt"     => "all-animals",
         "panel_name"    => "all farm animals"
     ];
-    return display_detailled_gallery($gallery_details, "_50", $panel_details);
+    return display_detailled_gallery($gallery_details, "", $panel_details);
 }
 
 function display_secret_notes():string {

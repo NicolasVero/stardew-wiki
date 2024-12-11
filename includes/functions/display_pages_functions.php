@@ -151,7 +151,7 @@ function display_page():string {
 
 		$structure .= display_general_stats();
 		
-		$structure .= "<div class='separated-galleries'>";
+		$structure .= "<div class='separated-galleries first-gallery'>";
 			$structure .= "<div class='intra-gallery _50'>";
 				$structure .= display_skills();
 				$structure .= display_farm_animals();
