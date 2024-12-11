@@ -280,13 +280,13 @@ function display_friendships(int $limit = -1): string {
     $json_with_version = sanitize_json_with_version("villagers", true);
     
     $section_class = ($limit === -1) ? "all-friends" : "top-friends";
-    $view_all = ($limit === -1) ? "" : "<span class='view-all-friends view-all-friendships-$player_id modal-opener'>- View all friendships</span>";
+    $view_all = ($limit === -1) ? "" : "<span class='view-all-friends view-all-friends-$player_id modal-opener'>- View all friendships</span>";
     $structure = ($limit === -1)
         ? "
         <section class='info-section friends-section $section_class $section_class-$player_id modal-window'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Friendship progression</h2>
-                <img src='$images_path/icons/exit.png' class='exit-all-friendships-$player_id exit' alt='Exit'/>
+                <img src='$images_path/icons/exit.png' class='exit-all-friends-$player_id exit' alt='Exit'/>
             </div>
             <span class='friendlist'>
         "

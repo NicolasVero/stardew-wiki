@@ -21,7 +21,7 @@ function load_elements():void {
     ];
 
     const dynamic_prefixes = [
-        "all-friendships", "all-quests", "monster-eradication-goals",
+        "all-friends", "all-quests", "monster-eradication-goals",
         "calendar", "all-animals", "junimo-kart-leaderboard",
         "museum", "community-center"
     ];
