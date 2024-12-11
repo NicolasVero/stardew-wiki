@@ -16,7 +16,6 @@ function load_all_json():void {
 		"all_dates",
 		"all_items",
 		"artifacts",
-		"big_objects",
 		"books",
 		"bundles",
 		"cooking_recipes",
