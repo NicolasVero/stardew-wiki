@@ -131,9 +131,17 @@ pre {
 
 // Tooltips
 .tooltip {
-	&.calendar-tooltip {
+	&.calendar-tooltip, &.museum-tooltip, &.bundle-tooltip {
 		& > span {
 			bottom: 0;
+		}
+
+		img {
+			z-index: 3;
+		}
+
+		.left, .right {
+			z-index: 5;
 		}
 	}
 
@@ -141,7 +149,6 @@ pre {
 		& > span {
 			border-image: none;
 			border-image-width: 0px;
-			bottom: 0;
 			font-size: 0px;
 			padding: 0;
 		}
@@ -179,7 +186,6 @@ pre {
 
             & ~ span {
                 display: inline !important;
-                z-index: 100;
 
                	&.left {
                	    left: auto;
@@ -210,7 +216,7 @@ pre {
     top: 0;
     transition: opacity 1s ease;
     width: 180vw;
-    z-index: 1000;
+    z-index: 2;
 }
 
 .fullscreen-image.show {

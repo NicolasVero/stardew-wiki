@@ -490,12 +490,18 @@ function display_museum_panel():string {
             $current_col = ($column_count - $column_start) + 1;
             $current_row = ($row_count - $row_start) + 1;
 
-            $museum_piece = "";
+            $museum_tooltip = "";
             foreach($museum_data as $piece_index => $piece_details) {
                 if($piece_details["coords"]["X"] === $column_count && $piece_details["coords"]["Y"] === $row_count) {
                     $piece_filename = formate_text_for_file(get_item_name_by_id($piece_details["id"]));
+                    $piece_name = ucfirst($piece_filename);
                     $piece_type = $piece_details["type"];
-                    $museum_piece = "<img src='$images_path/$piece_type/$piece_filename.png' class='museum-piece' alt='$piece_filename'/>";
+                    $museum_tooltip = "
+                        <span class='museum-tooltip tooltip'>
+                            <img src='$images_path/$piece_type/$piece_filename.png' class='museum-piece' alt='$piece_name'/>
+                            <span>$piece_name</span>
+                        </span>
+                    ";
 
                     unset($museum_data[$piece_index]);
                 }
@@ -503,7 +509,7 @@ function display_museum_panel():string {
 
             $table_structure .= "
                 <td class='fillable-space col{$current_col} row{$current_row}'>
-                    $museum_piece
+                    $museum_tooltip
                 </td>
             ";
         }

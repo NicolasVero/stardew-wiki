@@ -48,7 +48,7 @@
 	position: absolute;
 	top: @big-gap;
 	right: @big-gap;
-	z-index: 1001;
+	z-index: 3;
 }
 
 .panel {
@@ -57,8 +57,7 @@
 	overflow-y: scroll;
 	position: fixed;
 	scrollbar-width: none;
-	// 1000 -> Au dessus de tout / 998 Laisse le tooltip passer par dessus
-	z-index: 1000;
+	z-index: 2;
 }
 
 .modal-panel {
@@ -643,14 +642,19 @@
 						padding: 0;
 						position: relative;
 						width: @museum-block;
+						z-index: 4;
 
-						& > .museum-piece {
-							filter: drop-shadow(1px 1px 0.5px #2b2a2a);
+						& > span {
 							left: 50%;
 							margin: 0;
 							position: absolute;
 							transform: translate(-50%, -50%);
 							width: 1.25vw;
+
+							.museum-piece {
+								filter: drop-shadow(1px 1px 0.5px #2b2a2a);
+								width: 100%;
+							}
 						}
 					}
 				}
