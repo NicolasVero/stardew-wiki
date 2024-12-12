@@ -642,7 +642,6 @@
 						padding: 0;
 						position: relative;
 						width: @museum-block;
-						z-index: 4;
 
 						& > span {
 							left: 50%;
@@ -650,9 +649,11 @@
 							position: absolute;
 							transform: translate(-50%, -50%);
 							width: 1.25vw;
+							height: 1.25vw;
 
 							.museum-piece {
 								filter: drop-shadow(1px 1px 0.5px #2b2a2a);
+								position: absolute;
 								width: 100%;
 							}
 						}
