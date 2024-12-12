@@ -406,12 +406,17 @@ function get_candles_lit(int $grandpa_score):int {
 }
 
 function get_perfection_max_elements():array {
-	return $GLOBALS["json"]["perfection_elements"];
+	$game_version = substr($GLOBALS["game_version"], 0, 3);
+	if((float) $game_version < 1.5) {
+		$game_version = "1.5";
+	}
+	
+	return $GLOBALS["json"]["perfection_elements"][$game_version];
 }
 
 function get_perfection_elements():array {
 	$general_data = $GLOBALS["host_player_data"]["general"];
-	$game_version = substr($GLOBALS["game_version"], 0, 3);
+	$perfection_elements = get_perfection_max_elements();
 
 	$highest_items_shipped 		= get_highest_count_for_category("shipped_items")["highest_count"];
 	$highest_farmer_level 		= get_highest_count_for_category("farmer_level")["highest_count"];
@@ -421,14 +426,14 @@ function get_perfection_elements():array {
 	$highest_friendship 		= get_player_with_highest_friendships()["highest_count"];
 
 	return [
-		"Golden Walnuts found"		=> get_element_completion_percentage(get_perfection_max_elements()[$game_version]["golden_walnuts"], (int) $general_data["golden_walnuts"]) * 5,
-		"Crafting Recipes Made"		=> get_element_completion_percentage(get_perfection_max_elements()[$game_version]["crafting_recipes"], $highest_crafting_recipes) * 10,
-		"Cooking Recipes Made"		=> get_element_completion_percentage(get_perfection_max_elements()[$game_version]["cooking_recipes"], $highest_cooking_recipes) * 10,
-		"Produce & Forage Shipped"	=> get_element_completion_percentage(get_perfection_max_elements()[$game_version]["shipped_items"], $highest_items_shipped) * 15,
-		"Obelisks on Farm"			=> get_element_completion_percentage(get_perfection_max_elements()[$game_version]["obelisks"], get_amount_obelisk_on_map()) * 4 ,
-		"Farmer Level"				=> get_element_completion_percentage(get_perfection_max_elements()[$game_version]["farmer_level"], $highest_farmer_level) * 5 ,
-		"Fish Caught"				=> get_element_completion_percentage(get_perfection_max_elements()[$game_version]["fish_caught"], $highest_fish_caught) * 10,
-		"Great Friends"				=> get_element_completion_percentage(get_perfection_max_elements()[$game_version]["friendship"], $highest_friendship) * 11,
+		"Golden Walnuts found"		=> get_element_completion_percentage($perfection_elements["golden_walnuts"], (int) $general_data["golden_walnuts"]) * 5,
+		"Crafting Recipes Made"		=> get_element_completion_percentage($perfection_elements["crafting_recipes"], $highest_crafting_recipes) * 10,
+		"Cooking Recipes Made"		=> get_element_completion_percentage($perfection_elements["cooking_recipes"], $highest_cooking_recipes) * 10,
+		"Produce & Forage Shipped"	=> get_element_completion_percentage($perfection_elements["shipped_items"], $highest_items_shipped) * 15,
+		"Obelisks on Farm"			=> get_element_completion_percentage($perfection_elements["obelisks"], get_amount_obelisk_on_map()) * 4 ,
+		"Farmer Level"				=> get_element_completion_percentage($perfection_elements["farmer_level"], $highest_farmer_level) * 5 ,
+		"Fish Caught"				=> get_element_completion_percentage($perfection_elements["fish_caught"], $highest_fish_caught) * 10,
+		"Great Friends"				=> get_element_completion_percentage($perfection_elements["friendship"], $highest_friendship) * 11,
 		"Monster Slayer Hero"		=> get_element_completion_percentage(1, (int) has_players_done_monster_slayer_hero()) * 10,
 		"Found All Stardrops"		=> get_element_completion_percentage(1, (int) has_any_player_gotten_all_stardrops()) * 10,
 		"Golden Clock on Farm"		=> get_element_completion_percentage(1, (int) is_golden_clock_on_farm()) * 10
@@ -451,7 +456,6 @@ function get_perfection_percentage():string {
 }
 
 function get_highest_count_for_category(string $category):array {
-	$game_version = substr($GLOBALS["game_version"], 0, 3);
 	$total_players = get_number_of_player();
 	$all_data = $GLOBALS["all_players_data"];
 	$highest_player = 0;
@@ -489,7 +493,7 @@ function get_highest_count_for_category(string $category):array {
 		}
 	}
 
-	$perfection_max = get_perfection_max_elements()[$game_version][$category];
+	$perfection_max = get_perfection_max_elements()[$category];
 	$max_elements = min($max_elements, $perfection_max);
 
 	return [
@@ -499,13 +503,11 @@ function get_highest_count_for_category(string $category):array {
 }
 
 function get_player_with_highest_friendships():array {
-	$game_version = substr($GLOBALS["game_version"], 0, 3);
 	$total_players = get_number_of_player();
+    $marriables_npc = sanitize_json_with_version("marriables");
 	$all_data = $GLOBALS["all_players_data"];
 	$highest_player = 0;
 	$max_elements = 0;
-	
-    $marriables_npc = sanitize_json_with_version("marriables");
 
 	for($current_player = 0; $current_player < $total_players; $current_player++) {
 		$friendships = $all_data[$current_player]["friendship"];
@@ -523,7 +525,7 @@ function get_player_with_highest_friendships():array {
 		if($friend_counter > $max_elements) $max_elements = $friend_counter;
 	}
 
-	$perfection_max = get_perfection_max_elements()[$game_version]["friendship"];
+	$perfection_max = get_perfection_max_elements()["friendship"];
 	$max_elements = min($max_elements, $perfection_max);
 
 	return [

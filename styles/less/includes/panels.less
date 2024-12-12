@@ -433,11 +433,13 @@
 						text-align: center;
 						width: @calendar-block;
 
-						&:hover {
-							border: solid 2px @calendar-bc;
+						&.filled {
+							&:hover {
+								border: solid 2px @calendar-bc;
+							}
 						}
 	
-						& > div {
+						& > span {
 							height: 100%;
 							margin: 0 auto;
 							vertical-align: middle;
@@ -452,14 +454,14 @@
 					}
 
 					& > td.simple-event {
-						& > div {
+						& > span {
 							display: block;
 							width: 100%;
 						}
 					}
 
 					& > td.double-event {
-						& > div {
+						& > span {
 							display: inline-block;
 							width: 45%;
 						}

@@ -3,7 +3,7 @@
 function display_save_panel():string {
     $images_path = get_images_folder();
     return "
-        <section class='panel upload-panel to-keep-open modal-window'>
+        <section class='upload-panel panel to-keep-open modal-window'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Upload a save</h2>
                 <img src='$images_path/icons/exit.png' class='exit-upload exit' alt='Exit'/>
@@ -22,7 +22,7 @@ function display_save_panel():string {
 function display_settings_panel():string {
     $images_path = get_images_folder();
     return "
-        <section class='panel settings settings-panel modal-window'>
+        <section class='settings-panel panel settings modal-window'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Settings</h2>
                 <img src='$images_path/icons/exit.png' class='exit-settings exit' alt='Exit'/>
@@ -66,7 +66,7 @@ function display_quest_panel():string {
 
 	if(empty($this_player_data)) {
         return "
-            <section class='panel quests-panel all-quests-$player_id modal-window'>
+            <section class='all-quests-$player_id panel quests-panel modal-window'>
                 <div class='panel-header'>
                     <h2 class='section-title panel-title'>Quests in progress</h2>
                     <img src='$images_path/icons/exit.png' class='exit-all-quests-$player_id exit' alt='Exit'/>
@@ -122,7 +122,7 @@ function display_quest_panel():string {
                 $quest_structure .= $rewards[$i];
             }
 
-            $quest_structure .= (is_numeric($rewards[$i])) ? "" : "<span class='left'>$rewards[$i]</span>";
+            $quest_structure .= (is_numeric($rewards[$i])) ? "" : "<span>$rewards[$i]</span>";
             $quest_structure .= "</span>";
         }
 
@@ -133,7 +133,7 @@ function display_quest_panel():string {
     }
 
     return "
-        <section class='panel quests-panel all-quests-$player_id modal-window'>
+        <section class='all-quests-$player_id panel quests-panel modal-window'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Quests in progress</h2>
                 <img src='$images_path/icons/exit.png' class='exit-all-quests-$player_id exit' alt='Exit'/>
@@ -148,7 +148,7 @@ function display_quest_panel():string {
 function display_feedback_panel():string {
     $images_path = get_images_folder();
     return "
-        <section class='panel feedback-panel modal-window to-destroy'>
+        <section class='feedback-panel panel modal-window to-destroy'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Your feedback</h2>
                 <img src='$images_path/icons/exit.png' class='exit-feedback exit' alt='Exit'/>
@@ -226,7 +226,7 @@ function display_monster_eradication_goals_panel():string {
                 <a href='$wiki_link' class='wiki_link' rel='noreferrer' target='_blank'>
                     <img src='$images_path/rewards/$src.png' class='reward $is_found always-on-display' alt='$alt'/>
                 </a>
-                <span class='right'>$alt</span>
+                <span>$alt</span>
             </span>
         ";
 
@@ -234,7 +234,7 @@ function display_monster_eradication_goals_panel():string {
     }
 
     return "
-        <section class='panel monster-eradication-goals-panel monster-eradication-goals-$player_id modal-window'>
+        <section class='monster-eradication-goals-$player_id panel monster-eradication-goals-panel modal-window'>
             <span class='header'>
                 <img src='$images_path/content/dashes.png' class='dashes' alt=''/>
                 <span class='title'>
@@ -256,6 +256,7 @@ function display_calendar_panel():string {
     $images_path = get_images_folder();
     $season = get_player_season();
     $all_dates = $GLOBALS["json"]["all_dates"];
+    $villagers = sanitize_json_with_version("villagers");
     $week_count = 4;
     $day_count = 7;
 
@@ -268,44 +269,59 @@ function display_calendar_panel():string {
             $day_digit = ($lines * $day_count) + $columns;
             $date = "$day_digit/$season";
 
-            if(array_key_exists($date, $all_dates)) {
-                $wiki_link = (is_array($all_dates[$date])) ?
-                    [
-                        get_wiki_link(get_custom_id($all_dates[$date][0])),
-                        get_wiki_link(get_custom_id($all_dates[$date][1]))
-                    ]
-                    :
-                    get_wiki_link(get_custom_id($all_dates[$date]));
-
-                $table_structure .= (is_array($all_dates[$date])) ?
-                    "<td class='double-event'>
-                        <div>
-                            <a href='" . $wiki_link[0] . "' class='wiki_link' rel='noreferrer' target='_blank'></a>
-                        </div>
-                        <div>
-                            <a href='" . $wiki_link[1] . "' class='wiki_link' rel='noreferrer' target='_blank'></a>
-                        </div>
-                    </td>"
-                    :
-                    "<td class='simple-event'>
-                        <div>
-                            <a href='$wiki_link' class='wiki_link' rel='noreferrer' target='_blank'></a>
-                        </div>
-                    </td>";
-            } else {
+            if(!array_key_exists($date, $all_dates)) {
                 $table_structure .= "
-                <td class='simple-event'>
-                    <div></div>
+                <td class='simple-event not-filled'>
+                    <span></span>
                 </td>";
+
+                continue;
             }
 
+            if(!is_array($all_dates[$date])) {
+                $wiki_link = get_wiki_link(get_custom_id($all_dates[$date]));
+                $calendar_tooltip = (in_array($all_dates[$date], $villagers)) ? $all_dates[$date] . "'s Birthday" : $all_dates[$date];
+                $table_structure .= "
+                    <td class='simple-event filled'>
+                        <span class='calendar-tooltip tooltip'>
+                            <a href='$wiki_link' class='wiki_link' rel='noreferrer' target='_blank'></a>
+                            <span>$calendar_tooltip</span>
+                        </span>
+                    </td>
+                ";
+
+                continue;
+            }
+
+            $wiki_link = [
+                get_wiki_link(get_custom_id($all_dates[$date][0])),
+                get_wiki_link(get_custom_id($all_dates[$date][1]))
+            ];
+            $calendar_tooltip = [
+                (in_array($all_dates[$date][0], $villagers)) ? $all_dates[$date][0] . "'s Birthday" : $all_dates[$date][0],
+                (in_array($all_dates[$date][1], $villagers)) ? $all_dates[$date][1] . "'s Birthday" : $all_dates[$date][1]
+            ];
+
+            $table_structure .= "
+                <td class='double-event filled'>
+                    <span class='calendar-tooltip tooltip'>
+                        <a href='" . $wiki_link[0] . "' class='wiki_link' rel='noreferrer' target='_blank'></a>
+                        <span class='left'>" . $calendar_tooltip[0] . "</span>
+                    </span>
+                    <span class='calendar-tooltip tooltip'>
+                        <a href='" . $wiki_link[1] . "' class='wiki_link' rel='noreferrer' target='_blank'></a>
+                        <span class='right'>" . $calendar_tooltip[1] . "</span>
+                    </span>
+                </td>;
+            ";
+            
         }
 
         $table_structure .= "</tr>";
     }
 
     return "
-        <section class='panel calendar-panel calendar-$player_id modal-window'>
+        <section class='calendar-$player_id panel calendar-panel modal-window'>
             <span class='calendar-block'>
                 <img src='$images_path/icons/exit.png' class='absolute-exit exit exit-calendar-$player_id' alt='Exit'/>
                 <img src='$images_path/content/calendar_$season.png' class='calendar-bg' alt='Calendar background'/>
@@ -327,7 +343,7 @@ function display_farm_animals_panel():string {
 
     if(empty($animals_friendship)) {
         return "
-            <section class='panel all-animals-panel all-animals-$player_id modal-window'>
+            <section class='all-animals-$player_id panel all-animals-panel modal-window'>
                 <div class='panel-header'>
                     <h2 class='section-title panel-title'>Farm animals friendships</h2>
                     <img src='$images_path/icons/exit.png' class='exit-all-animals-$player_id exit' alt='Exit'/>
@@ -376,11 +392,11 @@ function display_farm_animals_panel():string {
                     <span class='interactions'>
                         <span class='tooltip'>
                             <img src='$images_path/icons/pet.png' class='interaction $pet_class' alt=''/>
-                            <span class='left'>$pet_tooltip</span>
+                            <span>$pet_tooltip</span>
                         </span>
                         <span class='tooltip'>
                             <img src='$status_icon' class='status' alt='$status'/>
-                            <span class='left'>" . get_animal_status_tooltip($status, $formatted_name) . "</span>
+                            <span>" . get_animal_status_tooltip($status, $formatted_name) . "</span>
                         </span>
                     </span>
                 </span>
@@ -389,7 +405,7 @@ function display_farm_animals_panel():string {
     }
 
     return "
-        <section class='panel all-animals-panel all-animals-$player_id modal-window'>
+        <section class='all-animals-$player_id panel all-animals-panel modal-window'>
             <div class='panel-header'>
                 <h2 class='section-title panel-title'>Farm animals friendships</h2>
                 <img src='$images_path/icons/exit.png' class='exit-all-animals-$player_id exit' alt='Exit'/>
@@ -431,7 +447,7 @@ function display_junimo_kart_panel():string {
     }
 
     return "
-        <section class='panel junimo-kart-leaderboard-panel junimo-kart-leaderboard-$player_id modal-window'>
+        <section class='junimo-kart-leaderboard-$player_id panel junimo-kart-leaderboard-panel modal-window'>
             <span class='leaderboard'>
                 <img src='$images_path/icons/exit.png' class='absolute-exit exit exit-junimo-kart-leaderboard-$player_id' alt='Exit'/>
                 <img src='$images_path/content/junimo_kart.png' class='image-title' alt='Junimo Kart Background'/>
@@ -496,7 +512,7 @@ function display_museum_panel():string {
     }
 
     return "
-        <section class='panel museum-panel museum-$player_id modal-window'>
+        <section class='museum-$player_id panel museum-panel modal-window'>
             <span class='museum-block'>
                 <img src='$images_path/icons/exit.png' class='absolute-exit exit exit-museum-$player_id' alt='Exit'/>
                 <table>
@@ -541,7 +557,6 @@ function display_community_center_panel():string {
                 $is_complete_class = "incomplete";
                 $bundle_tooltip_class = "bundle-tooltip tooltip";
 
-                //! faire exception pour afficher le nombre de gold coins à donner?
                 $required_items = display_bundle_requirements($bundle_details["requirements"], $bundle_details["items_added"]);
                 $slots = ($bundle_details["room_name"] === "Vault") ? display_bundle_purchase() : display_bundle_added_items($bundle_details["items_added"], $bundle_details["limit"]);
 
@@ -575,7 +590,7 @@ function display_community_center_panel():string {
     }
 
     return "
-        <section class='panel community-center-panel community-center-$player_id modal-window'>
+        <section class='community-center-$player_id panel community-center-panel modal-window'>
             <img src='$images_path/icons/exit.png' class='absolute-exit exit exit-community-center-$player_id' alt='Exit'/>
             <div class='community-center-background-container'>
                 <img src='$images_path/bundles/CC_$cc_binary.png' class='background-image' alt='Community center background'/>

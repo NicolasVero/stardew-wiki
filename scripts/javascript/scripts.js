@@ -391,6 +391,10 @@ function activate_buttons(show, hide, sections_to_show) {
             if (sections) {
                 current_section = sections;
                 toggle_visibility(sections, true);
+                if (!sections.hasAttribute('data-tooltips-initialized')) {
+                    initialize_tooltips(sections.classList[0]);
+                    sections.setAttribute('data-tooltips-initialized', 'true');
+                }
             }
         });
     });
@@ -488,12 +492,22 @@ function update_tooltips_after_ajax() {
         toggle_scroll(true);
     });
 }
-function initialize_tooltips() {
-    const tooltips = document.querySelectorAll(".tooltip");
+function initialize_tooltips(section = null) {
+    let tooltips;
+    if (section === null || section === '') {
+        tooltips = document.querySelectorAll(".tooltip");
+    }
+    else {
+        tooltips = document.querySelector("." + section).querySelectorAll(".tooltip");
+    }
+    // const tooltips: NodeListOf<HTMLElement> = document.querySelectorAll(".tooltip");
     tooltips.forEach((tooltip) => {
         const rect = tooltip.getBoundingClientRect();
         const span = tooltip.querySelector("span");
         if (span && !["left", "right"].some(className => span.classList.contains(className))) {
+            if (rect.left === 0) {
+                return;
+            }
             const tooltip_position = rect.left < window.innerWidth / 2 ? "right" : "left";
             span.classList.add(tooltip_position);
         }
