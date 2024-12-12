@@ -11,6 +11,11 @@ function activate_buttons(show: string, hide: string, sections_to_show: string):
             if(sections) {
                 current_section = sections;
                 toggle_visibility(sections, true);
+
+                if (!sections.hasAttribute('data-tooltips-initialized')) {
+                    initialize_tooltips(sections.classList[0]);
+                    sections.setAttribute('data-tooltips-initialized', 'true');
+                }
             }
         });
     });

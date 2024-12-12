@@ -6,14 +6,26 @@ function update_tooltips_after_ajax():void {
     });
 }
 
-function initialize_tooltips():void {
-    const tooltips: NodeListOf<HTMLElement> = document.querySelectorAll(".tooltip");
+function initialize_tooltips(section: string | null = null):void {
+    let tooltips: NodeListOf<HTMLElement>;
+    
+    if (section === null || section === '') {
+        tooltips = document.querySelectorAll(".tooltip");
+    } else {
+        tooltips = document.querySelector("." + section).querySelectorAll(".tooltip");
+    }
+
+    // const tooltips: NodeListOf<HTMLElement> = document.querySelectorAll(".tooltip");
 
     tooltips.forEach((tooltip: HTMLElement) => {
         const rect: DOMRect = tooltip.getBoundingClientRect();
         const span: HTMLElement | null = tooltip.querySelector("span");
 
         if(span && !["left", "right"].some(className => span.classList.contains(className))) {
+            if(rect.left === 0) {
+                return;
+            }
+
             const tooltip_position: string = rect.left < window.innerWidth / 2 ? "right" : "left";
             span.classList.add(tooltip_position);
         }
