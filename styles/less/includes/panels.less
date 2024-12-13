@@ -265,6 +265,7 @@
 		}
 
 		& > .header {
+			margin-bottom: @big-gap;
 			position: relative;
 	
 			& > .title {
@@ -272,12 +273,14 @@
 				flex-direction: column;
 				font-weight: 900;
 				letter-spacing: 3px;
+				text-align: center;
 			}
 
 			& > .dashes {
 				@dash-amount: 30;
 				@dash-gap: 3px;
 				@dash-width: 14px;
+				margin-inline: auto;
 				width: @dash-amount * @dash-width + (@dash-amount - 1) * @dash-gap;
 			}
 
@@ -286,6 +289,23 @@
 				right: @md-gap;
 				top: @md-gap;
 				width: @big-icon;
+			}
+		}
+
+		& > .locations {
+			display: grid !important;
+			gap: @md-gap;
+			grid-template-columns: repeat(2, 1fr);
+
+			a {
+				box-sizing: border-box;
+				color: @goal-fc;
+				padding-inline: @big-gap;
+				width: fit-content;
+				
+				&:hover, & > span:hover {
+					cursor: @pointer;
+				}
 			}
 		}
 	}
