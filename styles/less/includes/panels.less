@@ -742,6 +742,11 @@
 			position: relative;
 
 			& > .background-image {
+				// .filled-element;
+				aspect-ratio: 2.33;
+				border-image: url(../../medias/images/content/border_image.png) 15 stretch;
+				border-image-outset: 8px;
+				border-image-width: 10px;
 				width: 100%;
 			}
 
@@ -765,9 +770,9 @@
 		}
 
 		& > .rooms {
-			display: flex;
-			flex-direction: column;
+			display: grid;
 			gap: @big-gap;
+			grid-template-columns: repeat(2, 50%);
 			padding: @big-gap;
 
 			h2 {
@@ -787,7 +792,9 @@
 					gap: @md-gap;
 
 					& > .bundle {
+						aspect-ratio: 1;
 						display: flex;
+						max-width: 12%;
 						position: relative;
 
 						&.bundle-tooltip > span {
