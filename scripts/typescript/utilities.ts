@@ -30,6 +30,28 @@ function in_bytes_conversion(size: string):number {
     return value * Math.pow(1024, unit_to_power[unit]);
 }
 
+function get_current_player_id():number {
+    const visiblePlayer = Array.from(document.querySelectorAll(".player_container"))
+        .find(player => window.getComputedStyle(player).display === "block");
+
+    if(visiblePlayer) {
+        const match = visiblePlayer.className.match(/player_(\d+)_container/);
+        return match ? parseInt(match[1], 10) : null;
+    }
+
+    return null;
+}
+
+function close_all_panels(panel_selectors: string[]) {
+    panel_selectors.forEach(panelBase => {
+        const panelSelector = panelBase + "-" + get_current_player_id();
+        const panel = document.querySelector(panelSelector) as HTMLElement;
+        if (panel) {
+            panel.style.display = "none";
+        }
+    });
+}
+
 function toggle_scroll(can_scroll: boolean):void {
     document.body.style.overflow = (can_scroll) ? "auto" : "hidden";
 }
