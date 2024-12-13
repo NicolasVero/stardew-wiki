@@ -131,11 +131,20 @@ pre {
 
 // Tooltips
 .tooltip {
+	&.calendar-tooltip, &.museum-tooltip, &.bundle-tooltip {
+		&:hover {
+			z-index: 1;
+		}
+
+		& > span {
+			bottom: 0;
+		}
+	}
+
 	&.bundle-tooltip {
 		& > span {
 			border-image: none;
 			border-image-width: 0px;
-			bottom: 0;
 			font-size: 0px;
 			padding: 0;
 		}
@@ -173,16 +182,17 @@ pre {
 
             & ~ span {
                 display: inline !important;
-                z-index: 100;
 
                	&.left {
                	    left: auto;
                	    right: 100%;
+					z-index: 1;
                	}
 
                	&.right {
                	    left: 100%;
                	    right: auto;
+					z-index: 1;
                	}
             }
         }
@@ -204,7 +214,7 @@ pre {
     top: 0;
     transition: opacity 1s ease;
     width: 180vw;
-    z-index: 1000;
+    z-index: 2;
 }
 
 .fullscreen-image.show {

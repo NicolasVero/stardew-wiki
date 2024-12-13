@@ -192,13 +192,13 @@ function get_friendship_structure(array $friendship_info):string {
             <span class='hearts-level'>$hearts_html</span>
             <span class='tooltip'> 
                 <img src='$images_path/icons/birthday_icon.png' class='birthday_icon $is_birthday' alt=''/>
-                <span class='left'>$birthday_date</span>
+                <span>$birthday_date</span>
             </span>
             <span class='interactions'>
                 <span class='tooltip'>
                     <img src='$images_path/icons/gift.png' class='interaction {$gifted[0]}' alt=''/>
                     <img src='$images_path/icons/gift.png' class='interaction {$gifted[1]}' alt=''/>
-                    <span class='left'>Gifts made in the last week</span>
+                    <span>Gifts made in the last week</span>
                 </span>
             </span>
             <span class='friend-status'>$status</span>

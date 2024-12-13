@@ -128,14 +128,15 @@ function handle_toggle_versions_mode() {
 function handle_spoil_mode() {
     const no_spoil_checkbox = document.getElementById("no_spoil_mode");
     const spoil_checkbox = document.getElementById("spoil_mode");
-    if (no_spoil_checkbox && spoil_checkbox) {
-        if (spoil_checkbox.checked && no_spoil_checkbox.checked) {
-            no_spoil_checkbox.checked = false;
-            update_display(["not-found", "found"]);
-        }
-        else {
-            update_display(["found"]);
-        }
+    if (!no_spoil_checkbox || !spoil_checkbox) {
+        return;
+    }
+    if (spoil_checkbox.checked && no_spoil_checkbox.checked) {
+        no_spoil_checkbox.checked = false;
+        update_display(["not-found", "found"]);
+    }
+    else {
+        update_display(["found"]);
     }
 }
 ;
@@ -333,98 +334,48 @@ function feedback_custom_radio() {
     });
 }
 function load_error_page_items() {
-    const buttons = [
-        {
-            open_button: ".main-settings",
-            exit_button: ".exit-settings",
-            modal_panel: ".settings"
-        },
-        {
-            open_button: ".file-upload",
-            exit_button: ".exit-upload",
-            modal_panel: ".upload-panel"
-        }
+    const button_configurations = [
+        { open_button: ".main-settings", exit_button: ".exit-settings", modal_panel: ".settings" },
+        { open_button: ".file-upload", exit_button: ".exit-upload", modal_panel: ".upload-panel" }
     ];
-    buttons.forEach(button => {
-        activate_buttons(button.open_button, button.exit_button, button.modal_panel);
+    button_configurations.forEach(({ open_button, exit_button, modal_panel }) => {
+        activate_buttons(open_button, exit_button, modal_panel);
     });
 }
 function load_elements() {
     var _a;
     toggle_landing_page(false);
     toggle_checkboxes_actions();
-    const buttons = [
-        {
-            open_button: ".landing-settings",
-            exit_button: ".exit-settings",
-            modal_panel: ".settings"
-        },
-        {
-            open_button: ".landing-upload",
-            exit_button: ".exit-upload",
-            modal_panel: ".upload-panel"
-        },
-        {
-            open_button: ".main-settings",
-            exit_button: ".exit-settings",
-            modal_panel: ".settings"
-        },
-        {
-            open_button: ".file-upload",
-            exit_button: ".exit-upload",
-            modal_panel: ".upload-panel"
-        }
+    const common_buttons = [
+        { open_button: ".landing-settings", exit_button: ".exit-settings", modal_panel: ".settings" },
+        { open_button: ".landing-upload", exit_button: ".exit-upload", modal_panel: ".upload-panel" },
+        { open_button: ".main-settings", exit_button: ".exit-settings", modal_panel: ".settings" },
+        { open_button: ".file-upload", exit_button: ".exit-upload", modal_panel: ".upload-panel" }
+    ];
+    const dynamic_prefixes = [
+        "all-friends", "all-quests", "monster-eradication-goals",
+        "calendar", "all-animals", "junimo-kart-leaderboard",
+        "museum", "community-center"
     ];
     const max_players_in_a_save = 8;
+    const dynamic_buttons = [];
     for (let i = 0; i < max_players_in_a_save; i++) {
-        buttons.push({
-            open_button: `.view-all-friendships-${i}`,
-            exit_button: `.exit-all-friendships-${i}`,
-            modal_panel: `.all-friends-${i}`
-        });
-        buttons.push({
-            open_button: `.view-all-quests-${i}`,
-            exit_button: `.exit-all-quests-${i}`,
-            modal_panel: `.all-quests-${i}`
-        });
-        buttons.push({
-            open_button: `.view-monster-eradication-goals-${i}`,
-            exit_button: `.exit-monster-eradication-goals-${i}`,
-            modal_panel: `.monster-eradication-goals-${i}`
-        });
-        buttons.push({
-            open_button: `.view-calendar-${i}`,
-            exit_button: `.exit-calendar-${i}`,
-            modal_panel: `.calendar-${i}`
-        });
-        buttons.push({
-            open_button: `.view-all-animals-${i}`,
-            exit_button: `.exit-all-animals-${i}`,
-            modal_panel: `.all-animals-${i}`
-        });
-        buttons.push({
-            open_button: `.view-junimo-kart-leaderboard-${i}`,
-            exit_button: `.exit-junimo-kart-leaderboard-${i}`,
-            modal_panel: `.junimo-kart-leaderboard-${i}`
-        });
-        buttons.push({
-            open_button: `.view-museum-${i}`,
-            exit_button: `.exit-museum-${i}`,
-            modal_panel: `.museum-${i}`
-        });
-        buttons.push({
-            open_button: `.view-community-center-${i}`,
-            exit_button: `.exit-community-center-${i}`,
-            modal_panel: `.community-center-${i}`
+        dynamic_prefixes.forEach(prefix => {
+            dynamic_buttons.push({
+                open_button: `.view-${prefix}-${i}`,
+                exit_button: `.exit-${prefix}-${i}`,
+                modal_panel: `.${prefix}-${i}`
+            });
         });
     }
-    buttons.forEach(button => {
-        activate_buttons(button.open_button, button.exit_button, button.modal_panel);
+    const all_buttons = [...common_buttons, ...dynamic_buttons];
+    all_buttons.forEach(({ open_button, exit_button, modal_panel }) => {
+        activate_buttons(open_button, exit_button, modal_panel);
     });
     (_a = document.getElementById("home-icon")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
         var _a;
-        const display = (((_a = document.getElementById("landing_page")) === null || _a === void 0 ? void 0 : _a.style.display) === "none") ? true : false;
-        toggle_landing_page(display);
+        const display = ((_a = document.getElementById("landing_page")) === null || _a === void 0 ? void 0 : _a.style.display) !== "none";
+        toggle_landing_page(!display);
     });
     load_easter_eggs();
     update_tooltips_after_ajax();
@@ -440,6 +391,10 @@ function activate_buttons(show, hide, sections_to_show) {
             if (sections) {
                 current_section = sections;
                 toggle_visibility(sections, true);
+                if (!sections.hasAttribute('data-tooltips-initialized')) {
+                    initialize_tooltips(sections.classList[0]);
+                    sections.setAttribute('data-tooltips-initialized', 'true');
+                }
             }
         });
     });
@@ -537,12 +492,22 @@ function update_tooltips_after_ajax() {
         toggle_scroll(true);
     });
 }
-function initialize_tooltips() {
-    const tooltips = document.querySelectorAll(".tooltip");
+function initialize_tooltips(section = null) {
+    let tooltips;
+    if (section === null || section === '') {
+        tooltips = document.querySelectorAll(".tooltip");
+    }
+    else {
+        tooltips = document.querySelector("." + section).querySelectorAll(".tooltip");
+    }
+    // const tooltips: NodeListOf<HTMLElement> = document.querySelectorAll(".tooltip");
     tooltips.forEach((tooltip) => {
         const rect = tooltip.getBoundingClientRect();
         const span = tooltip.querySelector("span");
         if (span && !["left", "right"].some(className => span.classList.contains(className))) {
+            if (rect.left === 0) {
+                return;
+            }
             const tooltip_position = rect.left < window.innerWidth / 2 ? "right" : "left";
             span.classList.add(tooltip_position);
         }
