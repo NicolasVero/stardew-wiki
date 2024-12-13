@@ -553,7 +553,7 @@ function display_enemies():string {
         "panel_alt"     => "monster-eradication-goals",
         "panel_name"    => "Monster Eradication Goals"
     ];
-    return display_detailled_gallery($gallery_details, "_50", $panel_details);
+    return display_detailled_gallery($gallery_details, "_100", $panel_details);
 }
 
 function display_achievements():string {
