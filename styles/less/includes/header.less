@@ -99,7 +99,13 @@ header {
 		}
 
 		img {
-			width: @md-icon;
+			&.player_gender_logo {
+				height: @md-icon;
+			}
+
+			&:not(.player_gender_logo) {
+				width: @md-icon;
+			}
 		}
 	}
 
