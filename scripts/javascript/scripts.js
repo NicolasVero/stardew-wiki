@@ -333,6 +333,30 @@ function feedback_custom_radio() {
         });
     });
 }
+const panels = {
+    Digit1: ".visited-locations",
+    Digit2: ".monster-eradication-goals",
+    Digit3: ".junimo-kart-leaderboard",
+    Digit4: ".all-quests",
+    Digit5: ".all-friends",
+    Digit6: ".calendar",
+    Digit7: ".all-animals",
+    Digit8: ".museum",
+    Digit9: ".community-center"
+};
+const all_panels = Object.values(panels);
+window.addEventListener("keydown", (event) => {
+    if (event.code === "Escape") {
+        close_all_panels(all_panels);
+    }
+    if (panels[event.code]) {
+        const panel_selector = panels[event.code] + "-" + get_current_player_id();
+        const panel = document.querySelector(panel_selector);
+        const panel_display = ((panel === null || panel === void 0 ? void 0 : panel.style.display) === "block") ? "none" : "block";
+        close_all_panels(all_panels);
+        panel.style.display = panel_display;
+    }
+});
 function load_error_page_items() {
     const button_configurations = [
         { open_button: ".main-settings", exit_button: ".exit-settings", modal_panel: ".settings" },
@@ -357,9 +381,9 @@ function load_elements() {
         "calendar", "all-animals", "junimo-kart-leaderboard",
         "museum", "community-center", "visited-locations"
     ];
-    const max_players_in_a_save = 8;
+    const players_in_save = get_players_number();
     const dynamic_buttons = [];
-    for (let i = 0; i < max_players_in_a_save; i++) {
+    for (let i = 0; i < players_in_save; i++) {
         dynamic_prefixes.forEach(prefix => {
             dynamic_buttons.push({
                 open_button: `.view-${prefix}-${i}`,
@@ -416,9 +440,6 @@ function activate_close_buttons(hide, sections_to_hide) {
             }
         });
     });
-}
-function toggle_visibility(element, should_display) {
-    element.style.display = should_display ? "block" : "none";
 }
 function hide_panels(event = {}) {
     if (current_section && event.target instanceof HTMLElement && event.target !== current_section && !current_section.contains(event.target) && !event.target.classList.contains("modal-opener")) {
@@ -615,6 +636,35 @@ function in_bytes_conversion(size) {
     const value = parseInt(matches[1], 10);
     const unit = matches[2];
     return value * Math.pow(1024, unit_to_power[unit]);
+}
+function toggle_visibility(element, should_display) {
+    element.style.display = (should_display) ? "block" : "none";
+}
+function get_current_player_id() {
+    const visiblePlayer = Array.from(document.querySelectorAll(".player_container"))
+        .find(player => window.getComputedStyle(player).display === "block");
+    if (visiblePlayer) {
+        const match = visiblePlayer.className.match(/player_(\d+)_container/);
+        return match ? parseInt(match[1], 10) : null;
+    }
+    return null;
+}
+function get_players_number() {
+    const players_container = document.querySelector('#players_selection');
+    if (players_container !== null) {
+        const players_number = players_container.getElementsByTagName('li').length;
+        return (players_number === 0) ? 1 : players_number;
+    }
+    return null;
+}
+function close_all_panels(panel_selectors) {
+    panel_selectors.forEach(panelBase => {
+        const panelSelector = panelBase + "-" + get_current_player_id();
+        const panel = document.querySelector(panelSelector);
+        if (panel) {
+            panel.style.display = "none";
+        }
+    });
 }
 function toggle_scroll(can_scroll) {
     document.body.style.overflow = (can_scroll) ? "auto" : "hidden";

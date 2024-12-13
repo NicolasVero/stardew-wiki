@@ -42,10 +42,6 @@ function activate_close_buttons(hide: string, sections_to_hide: string):void {
     });
 }
 
-function toggle_visibility(element: HTMLElement, should_display: boolean):void {
-    element.style.display = should_display ? "block" : "none";
-}
-
 function hide_panels(event: MouseEvent = {} as MouseEvent):void {
     if(current_section && event.target instanceof HTMLElement && event.target !== current_section && !current_section.contains(event.target) && !event.target.classList.contains("modal-opener")) {
         if(current_section.classList.contains("feedback-panel")) {

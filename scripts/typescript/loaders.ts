@@ -26,10 +26,10 @@ function load_elements():void {
         "museum", "community-center", "visited-locations"
     ];
 
-    const max_players_in_a_save = 8;
+    const players_in_save = get_players_number();
     const dynamic_buttons = [];
 	
-    for(let i = 0; i < max_players_in_a_save; i++) {
+    for(let i = 0; i < players_in_save; i++) {
         dynamic_prefixes.forEach(prefix => {
             dynamic_buttons.push({
                 open_button: `.view-${prefix}-${i}`,
@@ -38,7 +38,7 @@ function load_elements():void {
             });
         });
     }
-
+    
     const all_buttons = [...common_buttons, ...dynamic_buttons];
 
     all_buttons.forEach(({ open_button, exit_button, modal_panel }) => {
