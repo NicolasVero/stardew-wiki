@@ -381,9 +381,9 @@ function load_elements() {
         "calendar", "all-animals", "junimo-kart-leaderboard",
         "museum", "community-center", "visited-locations"
     ];
-    const max_players_in_a_save = 8;
+    const players_in_save = get_players_number();
     const dynamic_buttons = [];
-    for (let i = 0; i < max_players_in_a_save; i++) {
+    for (let i = 0; i < players_in_save; i++) {
         dynamic_prefixes.forEach(prefix => {
             dynamic_buttons.push({
                 open_button: `.view-${prefix}-${i}`,
@@ -440,9 +440,6 @@ function activate_close_buttons(hide, sections_to_hide) {
             }
         });
     });
-}
-function toggle_visibility(element, should_display) {
-    element.style.display = should_display ? "block" : "none";
 }
 function hide_panels(event = {}) {
     if (current_section && event.target instanceof HTMLElement && event.target !== current_section && !current_section.contains(event.target) && !event.target.classList.contains("modal-opener")) {
@@ -640,12 +637,23 @@ function in_bytes_conversion(size) {
     const unit = matches[2];
     return value * Math.pow(1024, unit_to_power[unit]);
 }
+function toggle_visibility(element, should_display) {
+    element.style.display = (should_display) ? "block" : "none";
+}
 function get_current_player_id() {
     const visiblePlayer = Array.from(document.querySelectorAll(".player_container"))
         .find(player => window.getComputedStyle(player).display === "block");
     if (visiblePlayer) {
         const match = visiblePlayer.className.match(/player_(\d+)_container/);
         return match ? parseInt(match[1], 10) : null;
+    }
+    return null;
+}
+function get_players_number() {
+    const players_container = document.querySelector('#players_selection');
+    if (players_container !== null) {
+        const players_number = players_container.getElementsByTagName('li').length;
+        return (players_number === 0) ? 1 : players_number;
     }
     return null;
 }

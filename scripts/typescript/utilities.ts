@@ -30,6 +30,10 @@ function in_bytes_conversion(size: string):number {
     return value * Math.pow(1024, unit_to_power[unit]);
 }
 
+function toggle_visibility(element: HTMLElement, should_display: boolean):void {
+    element.style.display = (should_display) ? "block" : "none";
+}
+
 function get_current_player_id():number {
     const visiblePlayer = Array.from(document.querySelectorAll(".player_container"))
         .find(player => window.getComputedStyle(player).display === "block");
@@ -37,6 +41,17 @@ function get_current_player_id():number {
     if(visiblePlayer) {
         const match = visiblePlayer.className.match(/player_(\d+)_container/);
         return match ? parseInt(match[1], 10) : null;
+    }
+
+    return null;
+}
+
+function get_players_number(): number | null {
+    const players_container: HTMLElement | null = document.querySelector('#players_selection');
+
+    if(players_container !== null) {
+        const players_number = players_container.getElementsByTagName('li').length;
+        return (players_number === 0) ? 1 : players_number;
     }
 
     return null;
