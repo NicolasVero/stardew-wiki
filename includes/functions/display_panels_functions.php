@@ -274,10 +274,9 @@ function display_monster_eradication_goals_panel():string {
     return "
         <section class='monster-eradication-goals-$player_id panel monster-eradication-goals-panel modal-window'>
             <span class='header'>
-                <img src='$images_path/content/dashes.png' class='dashes' alt=''/>
                 <span class='title'>
-                    <span>&emsp;&emsp;&emsp;&emsp;--Monster Eradication Goals</span>
-                    <span>&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;\"Help us keep the valley safe.\"</span>
+                    <span>Monster Eradication Goals</span>
+                    <span>Help us keep the valley safe.</span>
                 </span>
                 <img src='$images_path/content/dashes.png' class='dashes' alt=''/>
                 <img src='$images_path/icons/exit.png' class='exit-monster-eradication-goals exit-monster-eradication-goals-$player_id exit' alt='Exit'/>

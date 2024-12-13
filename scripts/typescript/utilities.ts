@@ -41,7 +41,7 @@ function toggle_loading(shown: boolean):void {
     }
 }
 
-function get_parent_element(element: HTMLElement | null): HTMLElement | null {
+function get_parent_element(element: HTMLElement | null):HTMLElement | null {
     if(!element) {
         return null;
     }
@@ -51,7 +51,7 @@ function get_parent_element(element: HTMLElement | null): HTMLElement | null {
 };
 
 function set_element_display(element: HTMLElement | null, show: boolean):void {
-    if(element) {
+    if(element && element.className !== "locations") {
         element.style.display = show ? "flex" : "none";
     }
 };

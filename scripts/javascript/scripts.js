@@ -634,7 +634,7 @@ function get_parent_element(element) {
 }
 ;
 function set_element_display(element, show) {
-    if (element) {
+    if (element && element.className !== "locations") {
         element.style.display = show ? "flex" : "none";
     }
 }

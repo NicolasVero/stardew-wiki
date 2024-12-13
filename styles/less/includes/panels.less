@@ -293,7 +293,7 @@
 		}
 
 		& > .locations {
-			display: grid !important;
+			display: grid;
 			gap: @md-gap;
 			grid-template-columns: repeat(2, 1fr);
 
@@ -408,12 +408,17 @@
 				flex-direction: column;
 				font-weight: 900;
 				letter-spacing: 3px;
+
+				& > span {
+					text-align: center;
+				}
 			}
 
 			& > .dashes {
 				@dash-amount: 30;
 				@dash-gap: 3px;
 				@dash-width: 14px;
+				margin-inline: auto;
 				width: @dash-amount * @dash-width + (@dash-amount - 1) * @dash-gap;
 			}
 
@@ -742,6 +747,10 @@
 			position: relative;
 
 			& > .background-image {
+				aspect-ratio: 2.33;
+				border-image: url(../../medias/images/content/border_image.png) 15 stretch;
+				border-image-outset: 8px;
+				border-image-width: 10px;
 				width: 100%;
 			}
 
@@ -765,9 +774,9 @@
 		}
 
 		& > .rooms {
-			display: flex;
-			flex-direction: column;
+			display: grid;
 			gap: @big-gap;
+			grid-template-columns: repeat(2, 50%);
 			padding: @big-gap;
 
 			h2 {
@@ -787,7 +796,9 @@
 					gap: @md-gap;
 
 					& > .bundle {
+						aspect-ratio: 1;
 						display: flex;
+						max-width: 12%;
 						position: relative;
 
 						&.bundle-tooltip > span {
