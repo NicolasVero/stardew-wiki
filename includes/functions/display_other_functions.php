@@ -65,6 +65,10 @@ function display_quest_button():string {
 	return "<img src='" . get_images_folder() . "/icons/quest_icon.png' class='quest-icon view-all-quests view-all-quests-" . $GLOBALS['player_id'] . " button-elements modal-opener icon' alt='Quest icon'/>";
 }
 
+function display_visited_locations_button():string {
+	return "<img src='" . get_images_folder() . "/icons/quest_icon.png' class='visited-locations-icon view-visited-locations view-visited-locations-" . $GLOBALS['player_id'] . " button-elements modal-opener icon' alt='Visited locations icon'/>";
+}
+
 function get_level_progress_bar(int $level, int $max_level = 10):string {
     $images_path = get_images_folder();
     $level_structure = "";

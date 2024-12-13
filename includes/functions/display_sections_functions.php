@@ -3,6 +3,7 @@
 function display_panels():string {
 	$structure  = display_friendships();
 	$structure .= display_quest_panel();
+    $structure .= display_visited_locations();
 	$structure .= display_monster_eradication_goals_panel();
 	$structure .= display_calendar_panel();
 	$structure .= display_farm_animals_panel();
@@ -168,6 +169,7 @@ function display_general_stats():string {
 	$community_center_button = display_community_center();
 	$junimo_kart_button = display_junimo_kart_button();
 	$quest_button = display_quest_button();
+    $visited_locations_button = display_visited_locations_button();
 
     extract($all_players_data);
 
@@ -179,6 +181,7 @@ function display_general_stats():string {
     return "
         <section class='info-section general-stats'>
         	<h2 class='section-title'>General stats</h2>
+            $visited_locations_button
             $community_center_button
             $junimo_kart_button
 			$quest_button

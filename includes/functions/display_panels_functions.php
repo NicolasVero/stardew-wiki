@@ -58,6 +58,44 @@ function display_settings_panel():string {
     ";
 }
 
+function display_visited_locations():string {
+    $player_id = $GLOBALS["player_id"];
+    $visited_locations = $GLOBALS["all_players_data"][$player_id]["locations_visited"];
+    $images_path = get_images_folder();
+    $json_data = $GLOBALS["json"]["locations_to_visit"];
+
+    $locations = "";
+    foreach($json_data as $key => $json_version) {
+        foreach($json_version as $json_line_name) {
+            $is_found = array_key_exists($json_line_name, $visited_locations);
+            $element_class = ($is_found) ? "found" : "not-found";
+
+            $wiki_link = get_wiki_link(get_item_id_by_name($json_line_name));
+            $locations .= "
+                <a href='$wiki_link' class='wiki_link' rel='noreferrer' target='_blank'>
+                    <span class='$element_class'>$json_line_name</span>
+                </a>
+            ";
+        }
+
+    }
+
+    return "
+        <section class='visited-locations-$player_id panel visited-locations-panel modal-window'>
+             <span class='header'>
+                <span class='title'>
+                    <span>Visited Locations</span>
+                </span>
+                <img src='$images_path/content/dashes.png' class='dashes' alt=''/>
+                <img src='$images_path/icons/exit.png' class='exit-monster-eradication-goals exit-monster-eradication-goals-$player_id exit' alt='Exit'/>
+            </span>
+            <span class='locations'>
+                $locations
+            </span>
+        </section>
+    ";
+}
+
 function display_quest_panel():string {
 	$player_id = $GLOBALS["player_id"];
 	$this_player_data = $GLOBALS["all_players_data"][$player_id]["quest_log"];
