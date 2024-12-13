@@ -247,6 +247,49 @@
 		}
 	}
 
+	&.visited-locations-panel {
+		.big-panel-width;
+		.invisible-panel;
+		.panel-with-background;
+		aspect-ratio: 1.79;
+		background-image: url("../../medias/images/content/adventurers_guild_bg.png");
+		color: @goal-fc;
+		font-family: @dialogue-ff;
+		font-size: @giant-fs;
+		padding: @big-gap @big-gap;
+
+		& > * {
+			display: flex;
+			flex-direction: column;
+			gap: @md-gap;
+		}
+
+		& > .header {
+			position: relative;
+	
+			& > .title {
+				display: flex;
+				flex-direction: column;
+				font-weight: 900;
+				letter-spacing: 3px;
+			}
+
+			& > .dashes {
+				@dash-amount: 30;
+				@dash-gap: 3px;
+				@dash-width: 14px;
+				width: @dash-amount * @dash-width + (@dash-amount - 1) * @dash-gap;
+			}
+
+			& > .exit {
+				position: absolute;
+				right: @md-gap;
+				top: @md-gap;
+				width: @big-icon;
+			}
+		}
+	}
+
 	&.quests-panel {
 		.invisible-panel;
 		.medium-panel-width;

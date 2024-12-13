@@ -58,6 +58,33 @@ function display_settings_panel():string {
     ";
 }
 
+function display_visited_locations():string {
+    // $data = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
+    // $gallery_details = [
+    //     "player_data" => $data["locations_visited"],
+    //     "json_filename" => "locations_to_visit",
+    //     "section_title" => "Locations visited"
+    // ];
+    // return display_detailled_gallery($gallery_details, "_50");
+    $player_id = $GLOBALS["player_id"];
+    $visited_locations = $GLOBALS["all_players_data"][$player_id]["locations_visited"];
+    $images_path = get_images_folder();
+    // log_($visited_locations);
+    
+    return "
+        <section class='visited-locations-$player_id panel visited-locations-panel modal-window'>
+             <span class='header'>
+                <img src='$images_path/content/dashes.png' class='dashes' alt=''/>
+                <span class='title'>
+                    <span>Visited Locations</span>
+                </span>
+                <img src='$images_path/content/dashes.png' class='dashes' alt=''/>
+                <img src='$images_path/icons/exit.png' class='exit-monster-eradication-goals exit-monster-eradication-goals-$player_id exit' alt='Exit'/>
+            </span>
+        </section>
+    ";
+}
+
 function display_quest_panel():string {
 	$player_id = $GLOBALS["player_id"];
 	$this_player_data = $GLOBALS["all_players_data"][$player_id]["quest_log"];

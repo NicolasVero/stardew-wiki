@@ -355,7 +355,7 @@ function load_elements() {
     const dynamic_prefixes = [
         "all-friends", "all-quests", "monster-eradication-goals",
         "calendar", "all-animals", "junimo-kart-leaderboard",
-        "museum", "community-center"
+        "museum", "community-center", "visited-locations"
     ];
     const max_players_in_a_save = 8;
     const dynamic_buttons = [];
