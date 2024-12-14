@@ -12,7 +12,7 @@ function toggle_custom_checkboxes(checkmark_class: string):void {
     });
 }
 
-function toggle_checkboxes_actions(): void {
+function toggle_checkboxes_actions():void {
     document.querySelectorAll(".checkbox input[type='checkbox']").forEach((checkbox_input) => {
         const input = checkbox_input as HTMLInputElement;
         const function_name = input.id;

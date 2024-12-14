@@ -13,10 +13,10 @@ interface FeedbackResponse {
 function file_choice(event: Event):void {
     const input = event.target as HTMLInputElement;
     const new_filename = input.files ? input.files[0].name.substring(0, 12) : "";
-    const filenameElement = document.getElementById("new-filename");
+    const filename_element = document.getElementById("new-filename");
 
-    if (filenameElement) {
-        filenameElement.innerHTML = new_filename;
+    if (filename_element) {
+        filename_element.innerHTML = new_filename;
     }
 
     toggle_loading(true);
@@ -75,7 +75,6 @@ async function AJAX_send():Promise<void> {
                 initialize_player_swapper(players_count);
                 initialize_settings();
                 load_elements();
-
             } else {
                 page_display.innerHTML += html["error_message"];
                 load_error_page_items();

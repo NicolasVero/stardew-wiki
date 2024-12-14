@@ -3,7 +3,7 @@ interface Settings {
     no_spoil: boolean;
 }
 
-function update_section_visibility(section: HTMLElement, settings: Settings): void {
+function update_section_visibility(section: HTMLElement, settings: Settings):void {
     const title = section.querySelector("h2");
     const smaller_title = section.children[1]?.querySelector("span .no-spoil-title") as HTMLElement;
     const is_empty = is_section_empty(section);
@@ -40,8 +40,10 @@ function update_display(target_classes: string | string[]):void {
 
     const update_elements = (class_name: string) => {
         const elements = document.getElementsByClassName(class_name);
+
         Array.from(elements).forEach((element: HTMLElement) => {
             const parent = get_parent_element(element);
+
             if(parent) {
                 set_element_display(parent, should_show_element(element, settings));
             }
@@ -55,6 +57,7 @@ function update_display(target_classes: string | string[]):void {
     }
 
     const sections = document.getElementsByClassName("gallery");
+    
     Array.from(sections).forEach((section: HTMLElement) => 
         update_section_visibility(section, settings)
     );

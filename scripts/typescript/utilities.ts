@@ -18,8 +18,8 @@ async function get_max_upload_size():Promise<number> {
 
 function in_bytes_conversion(size: string):number {
     const unit_to_power: { [key: string]: number } = { "o": 0, "Ko": 1, "Mo": 2, "Go": 3 };
-
     const matches = size.match(/(\d+)([a-zA-Z]+)/);
+
     if(!matches) {
         throw new Error("Invalid size format");
     }
@@ -35,18 +35,18 @@ function toggle_visibility(element: HTMLElement, should_display: boolean):void {
 }
 
 function get_current_player_id():number {
-    const visiblePlayer = Array.from(document.querySelectorAll(".player_container"))
+    const visible_player = Array.from(document.querySelectorAll(".player_container"))
         .find(player => window.getComputedStyle(player).display === "block");
 
-    if(visiblePlayer) {
-        const match = visiblePlayer.className.match(/player_(\d+)_container/);
+    if(visible_player) {
+        const match = visible_player.className.match(/player_(\d+)_container/);
         return match ? parseInt(match[1], 10) : null;
     }
 
     return null;
 }
 
-function get_players_number(): number | null {
+function get_players_number():number | null {
     const players_container: HTMLElement | null = document.querySelector('#players_selection');
 
     if(players_container !== null) {
@@ -58,10 +58,11 @@ function get_players_number(): number | null {
 }
 
 function close_all_panels(panel_selectors: string[]) {
-    panel_selectors.forEach(panelBase => {
-        const panelSelector = panelBase + "-" + get_current_player_id();
-        const panel = document.querySelector(panelSelector) as HTMLElement;
-        if (panel) {
+    panel_selectors.forEach(panel_base => {
+        const panel_selector = panel_base + "-" + get_current_player_id();
+        const panel = document.querySelector(panel_selector) as HTMLElement;
+        
+        if(panel) {
             panel.style.display = "none";
         }
     });
@@ -72,9 +73,10 @@ function toggle_scroll(can_scroll: boolean):void {
 }
 
 function toggle_loading(shown: boolean):void {
-    const loadingStrip = document.getElementById("loading-strip");
-    if(loadingStrip) {
-        loadingStrip.style.display = (shown) ? "block" : "none";
+    const loading_strip = document.getElementById("loading-strip");
+
+    if(loading_strip) {
+        loading_strip.style.display = (shown) ? "block" : "none";
     }
 }
 
@@ -102,13 +104,13 @@ function is_section_empty(section: HTMLElement):boolean {
     return Array.from(spans).every(span => span.style.display === "none");
 };
 
-function has_section_older_version_items (section: HTMLElement):boolean {
+function has_section_older_version_items(section: HTMLElement):boolean {
     return Array.from(section.querySelectorAll("img")).some((img: HTMLImageElement) => 
         has_class(img, "older-version")
     );
 };
 
-function should_show_element(element, settings) {
+function should_show_element(element, settings):boolean {
     const is_newer = has_class(element, "newer-version");
     const is_not_found = has_class(element, "not-found");
     const should_keep_on_display = has_class(element, "always-on-display");
@@ -126,13 +128,14 @@ function should_show_element(element, settings) {
 function toggle_landing_page(display: boolean):void {
     const landing_page = document.getElementById("landing_page");
 
-    if (landing_page) {
+    if(landing_page) {
         landing_page.style.display = display ? "block" : "none";
     }
 }
 
 function save_landing_surheader():void {
 	const landing_menu = document.getElementById("landing_menu");
+
 	if(landing_menu) {
 		const surheader = landing_menu.innerHTML;
 	}
