@@ -3,9 +3,9 @@ function wiki_redirections():void {
 
     links.forEach((link) => {
         link.addEventListener("click", (event: MouseEvent) => {
-            const wikiRedirectionsCheckbox = document.getElementById("wiki_redirections") as HTMLInputElement;
+            const wiki_redirections_checkbox = document.getElementById("wiki_redirections") as HTMLInputElement;
 
-            if(!wikiRedirectionsCheckbox.checked) {
+            if(!wiki_redirections_checkbox.checked) {
                 event.preventDefault();
                 event.stopImmediatePropagation();
             }

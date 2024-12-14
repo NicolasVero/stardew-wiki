@@ -10,9 +10,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 function file_choice(event) {
     const input = event.target;
     const new_filename = input.files ? input.files[0].name.substring(0, 12) : "";
-    const filenameElement = document.getElementById("new-filename");
-    if (filenameElement) {
-        filenameElement.innerHTML = new_filename;
+    const filename_element = document.getElementById("new-filename");
+    if (filename_element) {
+        filename_element.innerHTML = new_filename;
     }
     toggle_loading(true);
     AJAX_send();
@@ -80,12 +80,7 @@ window.addEventListener("load", () => {
     if (tag) {
         tag.innerHTML = os_path;
     }
-    document.addEventListener("keyup", (event) => {
-        if (event.key === "Escape") {
-            hide_panels({});
-        }
-    });
-    document.addEventListener("click", hide_panels);
+    // document.addEventListener("click", hide_panels);
     const toggle_versions_items_mode = document.getElementById("toggle_versions_items_mode");
     const no_spoil_mode = document.getElementById("no_spoil_mode");
     const spoil_mode = document.getElementById("spoil_mode");
@@ -204,18 +199,18 @@ function easter_egg_characters() {
     const play_once = () => {
         if (!is_playing) {
             is_playing = true;
-            const full_screen_image = document.createElement("img");
-            full_screen_image.src = `https://raw.githubusercontent.com/NicolasVero/stardew-dashboard/refs/heads/master/medias/images/characters/${character}.png`;
-            full_screen_image.classList.add("fullscreen-image");
-            document.body.appendChild(full_screen_image);
-            full_screen_image.classList.add("show");
+            const fullscreen_image = document.createElement("img");
+            fullscreen_image.src = `https://raw.githubusercontent.com/NicolasVero/stardew-dashboard/refs/heads/master/medias/images/characters/${character}.png`;
+            fullscreen_image.classList.add("fullscreen-image");
+            document.body.appendChild(fullscreen_image);
+            fullscreen_image.classList.add("show");
             audio.play().finally(() => {
                 is_playing = false;
             });
             setTimeout(() => {
-                full_screen_image.classList.remove("show");
-                full_screen_image.addEventListener("transitionend", () => {
-                    full_screen_image.remove();
+                fullscreen_image.classList.remove("show");
+                fullscreen_image.addEventListener("transitionend", () => {
+                    fullscreen_image.remove();
                 });
             }, 1000);
         }
@@ -240,13 +235,12 @@ function easter_egg_kaaris() {
         }
     });
 }
-// Create feedback form
 function activate_feedback_ajax_trigger() {
     const triggers = document.querySelectorAll(".feedback-opener");
     triggers.forEach(trigger => {
         trigger.addEventListener("click", () => {
-            hide_all_sections();
             const existing_window = document.querySelector(".feedback-panel");
+            hide_all_sections();
             if (existing_window) {
                 toggle_visibility(existing_window, true);
             }
@@ -271,18 +265,17 @@ function feedback_form_creation() {
         .then(response => response.text())
         .then(data => {
         const temp_container = document.createElement("div");
+        current_section = document.querySelector(".feedback-panel");
         temp_container.innerHTML = data;
         while (temp_container.firstChild) {
             xml_upload === null || xml_upload === void 0 ? void 0 : xml_upload.appendChild(temp_container.firstChild);
         }
-        current_section = document.querySelector(".feedback-panel");
         feedback_custom_radio();
         activate_feedback_form();
         activate_close_buttons(".exit-feedback", ".feedback-panel");
     })
         .catch(error => console.error("Error:", error));
 }
-// Feedback Form AJAX
 function activate_feedback_form() {
     const form = document.getElementById("feedback_form");
     form === null || form === void 0 ? void 0 : form.addEventListener("submit", (event) => {
@@ -342,13 +335,14 @@ const panels = {
     Digit6: ".calendar",
     Digit7: ".all-animals",
     Digit8: ".museum",
-    Digit9: ".community-center"
+    Digit9: ".community-center",
 };
 const all_panels = Object.values(panels);
 window.addEventListener("keydown", (event) => {
     if (event.code === "Escape") {
         close_all_panels(all_panels);
     }
+    console.log(event.code);
     if (panels[event.code]) {
         const panel_selector = panels[event.code] + "-" + get_current_player_id();
         const panel = document.querySelector(panel_selector);
@@ -442,15 +436,14 @@ function activate_close_buttons(hide, sections_to_hide) {
     });
 }
 function hide_panels(event = {}) {
-    if (current_section && event.target instanceof HTMLElement && event.target !== current_section && !current_section.contains(event.target) && !event.target.classList.contains("modal-opener")) {
-        if (current_section.classList.contains("feedback-panel")) {
-            current_section.remove();
-            return;
-        }
-        if (!current_section.classList.contains("to-keep-open")) {
-            current_section.style.display = "none";
-        }
+    if (!current_section || !(event.target instanceof HTMLElement) || (event.target === current_section) || current_section.contains(event.target) || event.target.classList.contains("modal-opener") || current_section.classList.contains("to-keep-open")) {
+        return;
     }
+    if (current_section.classList.contains("feedback-panel")) {
+        current_section.remove();
+        return;
+    }
+    current_section.style.display = "none";
 }
 function hide_all_sections(section_destroy = false) {
     const sections = document.querySelectorAll(".modal-window");
@@ -536,8 +529,8 @@ function initialize_tooltips(section = null) {
 }
 function on_images_loaded(callback) {
     toggle_scroll(false);
-    const images = document.querySelectorAll("img");
     let images_loaded = 0;
+    const images = document.querySelectorAll("img");
     const total_images = images.length;
     if (total_images === 0) {
         callback();
@@ -641,10 +634,10 @@ function toggle_visibility(element, should_display) {
     element.style.display = (should_display) ? "block" : "none";
 }
 function get_current_player_id() {
-    const visiblePlayer = Array.from(document.querySelectorAll(".player_container"))
+    const visible_player = Array.from(document.querySelectorAll(".player_container"))
         .find(player => window.getComputedStyle(player).display === "block");
-    if (visiblePlayer) {
-        const match = visiblePlayer.className.match(/player_(\d+)_container/);
+    if (visible_player) {
+        const match = visible_player.className.match(/player_(\d+)_container/);
         return match ? parseInt(match[1], 10) : null;
     }
     return null;
@@ -658,9 +651,9 @@ function get_players_number() {
     return null;
 }
 function close_all_panels(panel_selectors) {
-    panel_selectors.forEach(panelBase => {
-        const panelSelector = panelBase + "-" + get_current_player_id();
-        const panel = document.querySelector(panelSelector);
+    panel_selectors.forEach(panel_base => {
+        const panel_selector = panel_base + "-" + get_current_player_id();
+        const panel = document.querySelector(panel_selector);
         if (panel) {
             panel.style.display = "none";
         }
@@ -670,9 +663,9 @@ function toggle_scroll(can_scroll) {
     document.body.style.overflow = (can_scroll) ? "auto" : "hidden";
 }
 function toggle_loading(shown) {
-    const loadingStrip = document.getElementById("loading-strip");
-    if (loadingStrip) {
-        loadingStrip.style.display = (shown) ? "block" : "none";
+    const loading_strip = document.getElementById("loading-strip");
+    if (loading_strip) {
+        loading_strip.style.display = (shown) ? "block" : "none";
     }
 }
 function get_parent_element(element) {
@@ -735,8 +728,8 @@ function wiki_redirections() {
     const links = document.querySelectorAll("a");
     links.forEach((link) => {
         link.addEventListener("click", (event) => {
-            const wikiRedirectionsCheckbox = document.getElementById("wiki_redirections");
-            if (!wikiRedirectionsCheckbox.checked) {
+            const wiki_redirections_checkbox = document.getElementById("wiki_redirections");
+            if (!wiki_redirections_checkbox.checked) {
                 event.preventDefault();
                 event.stopImmediatePropagation();
             }

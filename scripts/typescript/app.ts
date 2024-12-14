@@ -9,13 +9,7 @@ window.addEventListener("load", () => {
         tag.innerHTML = os_path;
     }
 
-    document.addEventListener("keyup", (event: KeyboardEvent) => {
-        if(event.key === "Escape") {
-            hide_panels({} as MouseEvent);
-        }
-    });
-
-    document.addEventListener("click", hide_panels);
+    // document.addEventListener("click", hide_panels);
     
     const toggle_versions_items_mode = document.getElementById("toggle_versions_items_mode");
     const no_spoil_mode = document.getElementById("no_spoil_mode");

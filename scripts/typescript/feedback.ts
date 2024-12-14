@@ -1,12 +1,11 @@
-// Create feedback form
 function activate_feedback_ajax_trigger():void {
     const triggers = document.querySelectorAll(".feedback-opener");
 
     triggers.forEach(trigger => {
         trigger.addEventListener("click", () => {
-            hide_all_sections();
-
             const existing_window = document.querySelector(".feedback-panel");
+            hide_all_sections();
+            
             if(existing_window) {
                 toggle_visibility(existing_window as HTMLElement, true);
             } else {
@@ -32,13 +31,13 @@ function feedback_form_creation():void {
     .then(response => response.text())
     .then(data => {
         const temp_container = document.createElement("div");
+        current_section = document.querySelector(".feedback-panel");
         temp_container.innerHTML = data;
 
         while(temp_container.firstChild) {
             xml_upload?.appendChild(temp_container.firstChild);
         }
 
-        current_section = document.querySelector(".feedback-panel");
 
         feedback_custom_radio();
         activate_feedback_form();
@@ -47,12 +46,10 @@ function feedback_form_creation():void {
     .catch(error => console.error("Error:", error));
 }
 
-// Feedback Form AJAX
 function activate_feedback_form():void {
     const form = document.getElementById("feedback_form") as HTMLFormElement;
     form?.addEventListener("submit", (event) => {
         event.preventDefault();
-
         const formData = new FormData(form);
 
         fetch("./includes/sendmail.php", {
@@ -77,8 +74,10 @@ function feedback_custom_radio():void {
 
     feedback_fake_radios.forEach(fake_radio => {
         const span_topic = fake_radio.parentElement!;
+        
         span_topic.addEventListener("click", () => {
             const real_radio = fake_radio.previousElementSibling as HTMLInputElement;
+
             if(real_radio && real_radio.type === "radio") {
                 real_radio.checked = true;
                 real_radio.dispatchEvent(new Event("change"));
@@ -93,6 +92,7 @@ function feedback_custom_radio():void {
             });
 
             const fake_radio = real_radio.nextElementSibling as HTMLElement;
+            
             if(fake_radio && fake_radio.tagName === "IMG") {
                 if((real_radio as HTMLInputElement).checked) {
                     fake_radio.classList.remove("topic_not_selected");

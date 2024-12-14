@@ -43,16 +43,16 @@ function activate_close_buttons(hide: string, sections_to_hide: string):void {
 }
 
 function hide_panels(event: MouseEvent = {} as MouseEvent):void {
-    if(current_section && event.target instanceof HTMLElement && event.target !== current_section && !current_section.contains(event.target) && !event.target.classList.contains("modal-opener")) {
-        if(current_section.classList.contains("feedback-panel")) {
-            current_section.remove();
-            return;
-        }
-
-        if(!current_section.classList.contains("to-keep-open")) {
-            current_section.style.display = "none";
-        }
+    if(!current_section || !(event.target instanceof HTMLElement) || (event.target === current_section) || current_section.contains(event.target) || event.target.classList.contains("modal-opener") || current_section.classList.contains("to-keep-open")) {
+        return;
     }
+
+    if(current_section.classList.contains("feedback-panel")) {
+        current_section.remove();
+        return;
+    }
+
+    current_section.style.display = "none";
 }
 
 function hide_all_sections(section_destroy: boolean = false):void {

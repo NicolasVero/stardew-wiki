@@ -32,22 +32,22 @@ function easter_egg_characters():void {
 		if(!is_playing) {
 			is_playing = true;
 
-			const full_screen_image: HTMLImageElement = document.createElement("img");
-			full_screen_image.src = `https://raw.githubusercontent.com/NicolasVero/stardew-dashboard/refs/heads/master/medias/images/characters/${character}.png`;
-			full_screen_image.classList.add("fullscreen-image");
-			document.body.appendChild(full_screen_image);
+			const fullscreen_image: HTMLImageElement = document.createElement("img");
+			fullscreen_image.src = `https://raw.githubusercontent.com/NicolasVero/stardew-dashboard/refs/heads/master/medias/images/characters/${character}.png`;
+			fullscreen_image.classList.add("fullscreen-image");
+			document.body.appendChild(fullscreen_image);
 
-			full_screen_image.classList.add("show");
+			fullscreen_image.classList.add("show");
 
 			audio.play().finally(() => {
 				is_playing = false;
 			});
 
 			setTimeout(() => {
-				full_screen_image.classList.remove("show");
+				fullscreen_image.classList.remove("show");
 
-				full_screen_image.addEventListener("transitionend", () => {
-					full_screen_image.remove();
+				fullscreen_image.addEventListener("transitionend", () => {
+					fullscreen_image.remove();
 				});
 			}, 1000);
 		}
@@ -58,7 +58,7 @@ function easter_egg_characters():void {
 	});
 }
 
-function easter_egg_kaaris(): void {
+function easter_egg_kaaris():void {
     const element: HTMLElement | null = document.querySelector(".house")?.previousElementSibling?.querySelector("img");
 
     if(!element) {
