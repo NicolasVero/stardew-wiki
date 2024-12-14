@@ -57,15 +57,48 @@ function get_players_number():number | null {
     return null;
 }
 
-function close_all_panels(panel_selectors: string[]) {
+function get_deletabled_settings_panels():string[] {
+    return [".feedback-panel"];
+}
+
+function get_closabled_settings_panels():string[] {
+    return [".upload-panel", ".settings-panel"];
+}
+
+function get_settings_panels():string[] {
+    return [...get_closabled_settings_panels(), ...get_deletabled_settings_panels()];
+}
+
+function close_all_panels(panel_selectors: string[], include_setting_panels: boolean = false) {
+    const settings_panels: string[] = (include_setting_panels) ? get_settings_panels() : [];
+    panel_selectors.push(...settings_panels);
+    
     panel_selectors.forEach(panel_base => {
-        const panel_selector = panel_base + "-" + get_current_player_id();
-        const panel = document.querySelector(panel_selector) as HTMLElement;
-        
+        const id: string = settings_panels.includes(panel_base) ? "" : "-" + get_current_player_id();
+        const panel_selector: string = panel_base + id;
+        const panel: HTMLElement = document.querySelector(panel_selector);
+
+        console.log(panel_selector)
+
         if(panel) {
             panel.style.display = "none";
+
+            if(get_deletabled_settings_panels().includes(panel_selector)) {
+                panel.remove();
+            }
         }
     });
+}
+
+function can_close_panel(event: Event):boolean {
+    return (
+        current_section
+        && event.target instanceof HTMLElement
+        && event.target !== current_section
+        && !current_section.contains(event.target)
+        && !event.target.classList.contains("modal-opener")
+        && !current_section.classList.contains("to-keep-open")
+    );
 }
 
 function toggle_scroll(can_scroll: boolean):void {
