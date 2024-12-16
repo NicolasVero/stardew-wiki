@@ -272,9 +272,9 @@ function display_top_friendships(int $limit = 5):string {
     return display_friendships($limit);
 }
 
-function display_friendships(int $limit = -1): string {
-    $player_id = $GLOBALS["player_id"];
-    $friendship_data = $GLOBALS["all_players_data"][$player_id]["friendship"];
+function display_friendships(int $limit = -1):string {
+    $player_id = get_current_player_id();
+    $friendship_data = get_friendships_data();
     $images_path = get_images_folder();
     
     $marriables_npc = sanitize_json_with_version("marriables");
@@ -349,7 +349,7 @@ function display_friendships(int $limit = -1): string {
 }
 
 function display_unlockables():string {
-	$player_unlockables = $GLOBALS["all_players_data"][$GLOBALS["player_id"]]["unlockables"];
+    $player_unlockables = get_unlockables_data();
     $images_path = get_images_folder();
 	$version_score = $GLOBALS["game_version_score"];
 	$decoded_unlockables = $GLOBALS["json"]["unlockables"];
@@ -488,9 +488,8 @@ function display_detailled_gallery(array $gallery_details, string $width = "", a
 }
 
 function display_books():string {
-	$data = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
     $gallery_details = [
-        "player_data" => $data["books"],
+        "player_data" => get_books_data(),
         "json_filename" => "books",
         "section_title" => "Books"
     ];
@@ -498,9 +497,8 @@ function display_books():string {
 }
 
 function display_fish():string {
-	$data = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
     $gallery_details = [
-        "player_data" => $data["fish_caught"],
+        "player_data" => get_fish_data(),
         "json_filename" => "fish",
         "section_title" => "Fish caught"
     ];
@@ -518,9 +516,8 @@ function display_cooking_recipes():string {
 }
 
 function display_minerals():string {
-	$data = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
     $gallery_details = [
-        "player_data" => $data["minerals_found"],
+        "player_data" => get_minerals_data(),
         "json_filename" => "minerals",
         "section_title" => "Minerals"
     ];

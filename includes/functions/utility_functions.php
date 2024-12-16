@@ -247,11 +247,11 @@ function decode(string $filename): array {
 
 function get_game_duration():string {
 	$player_game_duration = (int) $GLOBALS["untreated_player_data"]->millisecondsPlayed;
-    $totalSeconds = intdiv($player_game_duration, 1000);
-    $seconds      = $totalSeconds % 60;
-    $totalMinutes = intdiv($totalSeconds, 60);
-    $minutes      = $totalMinutes % 60;
-    $hours        = intdiv($totalMinutes, 60);
+    $total_seconds = intdiv($player_game_duration, 1000);
+    $seconds      = $total_seconds % 60;
+    $total_minutes = intdiv($total_seconds, 60);
+    $minutes      = $total_minutes % 60;
+    $hours        = intdiv($total_minutes, 60);
 	
     return sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
 }
