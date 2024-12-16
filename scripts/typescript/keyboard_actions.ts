@@ -12,11 +12,11 @@ const panels: Record<string, string> = {
 const all_panels: string[] = Object.values(panels); 
 
 window.addEventListener("keydown", (event: KeyboardEvent) => {
+    console.log(event)
     if(event.code === "Escape") {
-        close_all_panels(all_panels);
+        close_all_panels(all_panels, true);
     } 
 
-    console.log(event.code);
     if(panels[event.code]) {
         const panel_selector = panels[event.code] + "-" + get_current_player_id();
         const panel = document.querySelector(panel_selector) as HTMLElement;
@@ -24,5 +24,11 @@ window.addEventListener("keydown", (event: KeyboardEvent) => {
         
         close_all_panels(all_panels);
         panel.style.display = panel_display;
+    }
+});
+
+window.addEventListener("click", (event: MouseEvent) => {
+    if(can_close_panel(event)) {
+        close_all_panels(all_panels, true);
     }
 });
