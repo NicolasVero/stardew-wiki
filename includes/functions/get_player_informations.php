@@ -33,7 +33,7 @@ function get_artifacts_data(int $player_id = null):array {
     return get_data("artifacts_found", $player_id);
 }
 
-function get_enemies_data(int $player_id = null):array {
+function get_enemies_killed_data(int $player_id = null):array {
     return get_data("enemies_killed", $player_id);
 }
 
@@ -64,3 +64,8 @@ function get_locations_visited_data(int $player_id = null):array {
 function get_cooking_recipes_data(int $player_id = null):array {
     return get_data("cooking_recipes", $player_id);
 }
+
+function get_quest_log_data(int $player_id = null):array {
+    return get_data("quest_log", $player_id);
+}
+

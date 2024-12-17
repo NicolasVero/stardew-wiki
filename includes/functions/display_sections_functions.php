@@ -97,7 +97,7 @@ function display_sur_header(bool $is_landing_page = false, bool $is_error_screen
 }
 
 function display_header():string {
-	$player_id = $GLOBALS["player_id"];
+	$player_id = get_current_player_id();
 	$all_players_data = $GLOBALS["all_players_data"][$player_id]["general"];
 	$festival_icon = display_festival_icon();
     $weather_icon = display_weather_icon();
@@ -164,7 +164,7 @@ function display_header():string {
 }
 
 function display_general_stats():string {
-	$player_id = $GLOBALS["player_id"];
+	$player_id = get_current_player_id();
 	$all_players_data = $GLOBALS["all_players_data"][$player_id]["general"];
 	$community_center_button = display_community_center();
 	$junimo_kart_button = display_junimo_kart_button();
@@ -398,7 +398,7 @@ function display_detailled_gallery(array $gallery_details, string $width = "", a
 
     extract($panel_details);
 
-    $player_id = $GLOBALS["player_id"];
+    $player_id = get_current_player_id();
     $title = (!empty($panel_details)) ?
         "<span class='has_panel'>
             <h2 class='section-title'>$section_title</h2>
@@ -542,7 +542,7 @@ function display_artifacts():string {
 
 function display_enemies():string {
     $gallery_details = [
-        "player_data" => get_enemies_killed(),
+        "player_data" => get_enemies_killed_data(),
         "json_filename" => "enemies",
         "section_title" => "Enemies killed"
     ];
