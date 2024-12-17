@@ -28,3 +28,39 @@ function get_fish_data(int $player_id = null):array {
 function get_minerals_data(int $player_id = null):array {
     return get_data("minerals_found", $player_id);
 }
+
+function get_artifacts_data(int $player_id = null):array {
+    return get_data("artifacts_found", $player_id);
+}
+
+function get_enemies_data(int $player_id = null):array {
+    return get_data("enemies_killed", $player_id);
+}
+
+function get_achievements_data(int $player_id = null):array {
+    return get_data("achievements", $player_id);
+}
+
+function get_shipped_items_data(int $player_id = null):array {
+    return get_data("shipped_items", $player_id);
+}
+
+function get_crafting_recipes_data(int $player_id = null):array {
+    return get_data("crafting_recipes", $player_id);
+}
+
+function get_farm_animals_data():array {
+    return $GLOBALS["shared_players_data"]["farm_animals"];
+}
+
+function get_secret_notes_data(int $player_id = null):array {
+    return get_data("secret_notes", $player_id);
+}
+
+function get_locations_visited_data(int $player_id = null):array {
+    return get_data("locations_visited", $player_id);
+}
+
+function get_cooking_recipes_data(int $player_id = null):array {
+    return get_data("cooking_recipes", $player_id);
+}

@@ -506,9 +506,8 @@ function display_fish():string {
 }
 
 function display_cooking_recipes():string {
-	$data = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
     $gallery_details = [
-        "player_data" => $data["cooking_recipes"],
+        "player_data" => get_cooking_recipes_data(),
         "json_filename" => "cooking_recipes",
         "section_title" => "Cooking recipes"
     ];
@@ -529,9 +528,8 @@ function display_minerals():string {
 }
 
 function display_artifacts():string {
-	$data = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
     $gallery_details = [
-        "player_data" => $data["artifacts_found"],
+        "player_data" => get_artifacts_data(),
         "json_filename" => "artifacts",
         "section_title" => "Artifacts"
     ];
@@ -543,9 +541,8 @@ function display_artifacts():string {
 }
 
 function display_enemies():string {
-	$data = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
     $gallery_details = [
-        "player_data" => $data["enemies_killed"],
+        "player_data" => get_enemies_killed(),
         "json_filename" => "enemies",
         "section_title" => "Enemies killed"
     ];
@@ -557,9 +554,8 @@ function display_enemies():string {
 }
 
 function display_achievements():string {
-	$data = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
     $gallery_details = [
-        "player_data" => $data["achievements"],
+        "player_data" => get_achievements_data(),
         "json_filename" => "achievements",
         "section_title" => "In-game achievements"
     ];
@@ -567,9 +563,8 @@ function display_achievements():string {
 }
 
 function display_shipped_items():string {
-	$data = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
     $gallery_details = [
-        "player_data" => $data["shipped_items"],
+        "player_data" => get_shipped_items_data(),
         "json_filename" => "shipped_items",
         "section_title" => "Shipped items"
     ];
@@ -577,9 +572,8 @@ function display_shipped_items():string {
 }
 
 function display_crafting_recipes():string {
-	$data = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
     $gallery_details = [
-        "player_data" => $data["crafting_recipes"],
+        "player_data" => get_crafting_recipes_data(),
         "json_filename" => "crafting_recipes",
         "section_title" => "Crafting recipes"
     ];
@@ -587,9 +581,8 @@ function display_crafting_recipes():string {
 }
 
 function display_farm_animals():string {
-    $data = $GLOBALS["shared_players_data"];
     $gallery_details = [
-        "player_data" => $data["farm_animals"],
+        "player_data" => get_farm_animals_data(),
         "json_filename" => "farm_animals",
         "section_title" => "Farm animals"
     ];
@@ -601,9 +594,8 @@ function display_farm_animals():string {
 }
 
 function display_secret_notes():string {
-    $data = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
     $gallery_details = [
-        "player_data" => $data["secret_notes"],
+        "player_data" => get_secret_notes_data(),
         "json_filename" => "secret_notes",
         "section_title" => "Secret notes"
     ];
@@ -611,9 +603,8 @@ function display_secret_notes():string {
 }
 
 function display_locations_visited():string {
-    $data = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
     $gallery_details = [
-        "player_data" => $data["locations_visited"],
+        "player_data" => get_locations_visited_data(),
         "json_filename" => "locations_to_visit",
         "section_title" => "Locations visited"
     ];

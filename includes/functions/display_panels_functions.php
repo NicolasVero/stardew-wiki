@@ -77,7 +77,6 @@ function display_visited_locations():string {
                 </a>
             ";
         }
-
     }
 
     return "
