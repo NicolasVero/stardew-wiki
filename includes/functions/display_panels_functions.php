@@ -241,7 +241,7 @@ function display_feedback_panel():string {
 }
 
 function display_monster_eradication_goals_panel():string {
-	$player_id = $GLOBALS["player_id"];
+	$player_id = get_current_player_id();
     $images_path = get_images_folder();
     $goals_data = get_player_adventurers_guild_data($player_id);
     $goals = "";

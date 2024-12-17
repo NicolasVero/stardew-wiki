@@ -69,3 +69,18 @@ function get_quest_log_data(int $player_id = null):array {
     return get_data("quest_log", $player_id);
 }
 
+function get_general_data(int $player_id = null):array {
+    return get_data("general", $player_id);
+}
+
+function get_skills_data(int $player_id = null):array {
+    return get_data("skills", $player_id);
+}
+
+function get_levels_data(int $player_id = null):array {
+    return get_data("levels", $player_id);
+}
+
+function get_masteries_data(int $player_id = null):array {
+    return get_data("masteries", $player_id);
+}

@@ -98,7 +98,7 @@ function display_sur_header(bool $is_landing_page = false, bool $is_error_screen
 
 function display_header():string {
 	$player_id = get_current_player_id();
-	$all_players_data = $GLOBALS["all_players_data"][$player_id]["general"];
+	$all_players_data = get_general_data();
 	$festival_icon = display_festival_icon();
     $weather_icon = display_weather_icon();
     
@@ -107,7 +107,6 @@ function display_header():string {
     $images_path = get_images_folder();
     $pet_icon = $pet['type'] . "_" . $pet['breed'];
 	$farm_name = str_contains(strtolower($farm_name), "farm") ? $farm_name : $farm_name . " farm";
-	$gender = ($gender === null) ? "neutral" : $gender;
 
     return "
         <header>
@@ -165,7 +164,7 @@ function display_header():string {
 
 function display_general_stats():string {
 	$player_id = get_current_player_id();
-	$all_players_data = $GLOBALS["all_players_data"][$player_id]["general"];
+	$all_players_data = get_general_data();
 	$community_center_button = display_community_center();
 	$junimo_kart_button = display_junimo_kart_button();
 	$quest_button = display_quest_button();
@@ -218,17 +217,16 @@ function display_general_stats():string {
 
 function display_skills():string {
     $images_path = get_images_folder();
-	$this_player_data = $GLOBALS["all_players_data"][$GLOBALS["player_id"]];
-	$this_player_skills = $this_player_data["skills"];
-	$this_player_skills_levels = $this_player_data["levels"];
-	$this_player_masteries = $this_player_data["masteries"];
+	$player_skills = get_skills_data();
+	$player_skills_levels = get_levels_data();
+	$player_masteries = get_masteries_data();
     $skill_structure = "";
 
-    $mastery_visible_class = (empty($this_player_masteries)) ? "" : "not-hide";
+    $mastery_visible_class = (empty($player_masteries)) ? "" : "not-hide";
 
-    foreach($this_player_skills_levels as $key => $level) {
+    foreach($player_skills_levels as $key => $level) {
         $level_icon_name = explode('_', $key)[0];
-        $mastery_class   = (array_key_exists(ucfirst(explode('_', $key)[0]) . " Mastery", $this_player_masteries)) ? 'found' : 'not-found';
+        $mastery_class   = (array_key_exists(ucfirst(explode('_', $key)[0]) . " Mastery", $player_masteries)) ? 'found' : 'not-found';
         $mastery_tooltip = ucfirst(explode('_', $key)[0]) . " mastery";
         $is_newer_version_class = (is_game_older_than_1_6()) ? "newer-version" : "older-version";
 
@@ -251,7 +249,7 @@ function display_skills():string {
                 <span class='level data'>$level</span>
                 <span>
                     <a href='" . get_wiki_link_by_name("skills") . "' class='wiki_link' rel='noreferrer' target='_blank'>" 
-                        . get_skills_icons($this_player_skills, $level_icon_name) . "
+                        . get_skills_icons($player_skills, $level_icon_name) . "
                     </a>
                 </span>
             </span>

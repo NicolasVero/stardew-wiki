@@ -54,19 +54,19 @@ function display_home_button():string {
 }
 
 function display_junimo_kart_button():string {
-	return "<img src='" . get_images_folder() . "/icons/controller.png' class='controller-icon view-junimo-kart-leaderboard view-junimo-kart-leaderboard-" . $GLOBALS['player_id'] . " button-elements modal-opener icon' alt='Controller icon'/>";
+	return "<img src='" . get_images_folder() . "/icons/controller.png' class='controller-icon view-junimo-kart-leaderboard view-junimo-kart-leaderboard-" . get_current_player_id() . " button-elements modal-opener icon' alt='Controller icon'/>";
 }
 
 function display_community_center():string {
-	return "<img src='" . get_images_folder() . "/icons/golden_scroll.png' class='golden-scroll-icon view-community-center view-community-center-" . $GLOBALS['player_id'] . " button-elements modal-opener icon' alt='Golden Scroll icon'/>";
+	return "<img src='" . get_images_folder() . "/icons/golden_scroll.png' class='golden-scroll-icon view-community-center view-community-center-" . get_current_player_id() . " button-elements modal-opener icon' alt='Golden Scroll icon'/>";
 }
 
 function display_quest_button():string {
-	return "<img src='" . get_images_folder() . "/icons/quest_icon.png' class='quest-icon view-all-quests view-all-quests-" . $GLOBALS['player_id'] . " button-elements modal-opener icon' alt='Quest icon'/>";
+	return "<img src='" . get_images_folder() . "/icons/quest_icon.png' class='quest-icon view-all-quests view-all-quests-" . get_current_player_id() . " button-elements modal-opener icon' alt='Quest icon'/>";
 }
 
 function display_visited_locations_button():string {
-	return "<img src='" . get_images_folder() . "/icons/quest_icon.png' class='visited-locations-icon view-visited-locations view-visited-locations-" . $GLOBALS['player_id'] . " button-elements modal-opener icon' alt='Visited locations icon'/>";
+	return "<img src='" . get_images_folder() . "/icons/quest_icon.png' class='visited-locations-icon view-visited-locations view-visited-locations-" . get_current_player_id() . " button-elements modal-opener icon' alt='Visited locations icon'/>";
 }
 
 function get_level_progress_bar(int $level, int $max_level = 10):string {
