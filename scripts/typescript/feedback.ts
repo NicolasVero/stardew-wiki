@@ -1,9 +1,9 @@
 function activate_feedback_ajax_trigger():void {
-    const triggers = document.querySelectorAll(".feedback-opener");
+    const triggers : NodeListOf<Element> = document.querySelectorAll(".feedback-opener");
 
     triggers.forEach(trigger => {
         trigger.addEventListener("click", () => {
-            const existing_window = document.querySelector(".feedback-panel");
+            const existing_window : Element = document.querySelector(".feedback-panel");
             hide_all_sections();
             
             if(existing_window) {
@@ -17,7 +17,7 @@ function activate_feedback_ajax_trigger():void {
 
 // Create feedback form
 function feedback_form_creation():void {
-    const xml_upload = document.querySelector("body");
+    const xml_upload : HTMLBodyElement = document.querySelector("body");
 
     fetch("./includes/functions/display_panels_functions.php", {
         method: "POST",
@@ -30,7 +30,7 @@ function feedback_form_creation():void {
     })
     .then(response => response.text())
     .then(data => {
-        const temp_container = document.createElement("div");
+        const temp_container : HTMLDivElement = document.createElement("div");
         current_section = document.querySelector(".feedback-panel");
         temp_container.innerHTML = data;
 

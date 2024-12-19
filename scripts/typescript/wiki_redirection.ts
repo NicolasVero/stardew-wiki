@@ -1,5 +1,5 @@
 function wiki_redirections():void {
-    const links = document.querySelectorAll("a");
+    const links: NodeListOf<HTMLAnchorElement> = document.querySelectorAll("a");
 
     links.forEach((link) => {
         link.addEventListener("click", (event: MouseEvent) => {

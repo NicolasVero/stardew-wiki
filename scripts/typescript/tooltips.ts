@@ -7,7 +7,7 @@ function update_tooltips_after_ajax():void {
 }
 
 function initialize_tooltips(section: string | null = null):void {
-    let tooltips: NodeListOf<HTMLElement>;
+    let tooltips : NodeListOf<HTMLElement>;
     
     if (section === null || section === '') {
         tooltips = document.querySelectorAll(".tooltip");
@@ -15,11 +15,9 @@ function initialize_tooltips(section: string | null = null):void {
         tooltips = document.querySelector("." + section).querySelectorAll(".tooltip");
     }
 
-    // const tooltips: NodeListOf<HTMLElement> = document.querySelectorAll(".tooltip");
-
     tooltips.forEach((tooltip: HTMLElement) => {
-        const rect: DOMRect = tooltip.getBoundingClientRect();
-        const span: HTMLElement | null = tooltip.querySelector("span");
+        const rect : DOMRect = tooltip.getBoundingClientRect();
+        const span : HTMLElement | null = tooltip.querySelector("span");
 
         if(span && !["left", "right"].some(className => span.classList.contains(className))) {
             if(rect.left === 0) {
@@ -34,9 +32,9 @@ function initialize_tooltips(section: string | null = null):void {
 
 function on_images_loaded(callback: () => void):void {
     toggle_scroll(false);
-    let images_loaded: number = 0;
-    const images: NodeListOf<HTMLImageElement> = document.querySelectorAll("img");
-    const total_images: number = images.length;
+    let images_loaded : number = 0;
+    const images : NodeListOf<HTMLImageElement> = document.querySelectorAll("img");
+    const total_images : number = images.length;
 
     if(total_images === 0) {
         callback();
@@ -50,7 +48,7 @@ function on_images_loaded(callback: () => void):void {
         }
     };
 
-    images.forEach((image: HTMLImageElement) => {
+    images.forEach((image : HTMLImageElement) => {
         if(image.complete) {
             increment_and_check();
         } else {
