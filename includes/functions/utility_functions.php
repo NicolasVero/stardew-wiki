@@ -231,10 +231,10 @@ function is_object_empty(object $object):bool {
 	return ($object->attributes()->count() === 0);
 }
 
-function decode(string $filename): array {
+function decode(string $filename):array {
     $url = get_json_folder() . "/$filename.json";
     $ch = curl_init($url);
-    
+
     curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
     curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 
