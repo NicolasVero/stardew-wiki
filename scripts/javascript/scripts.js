@@ -11,7 +11,7 @@ function file_choice(event) {
     const input = event.target;
     const new_filename = input.files ? input.files[0].name.substring(0, 12) : "";
     const filename_element = document.getElementById("new-filename");
-    if (filename_element) {
+    if (filename_element !== null) {
         filename_element.innerHTML = new_filename;
     }
     toggle_loading(true);
@@ -23,7 +23,7 @@ function AJAX_send() {
         var _a, _b, _c;
         const xml_upload = document.getElementById("save-upload");
         const file = (_a = xml_upload === null || xml_upload === void 0 ? void 0 : xml_upload.files) === null || _a === void 0 ? void 0 : _a[0];
-        if (!file) {
+        if (file === null) {
             alert("An error occurred while uploading the file. Please try again.");
             return;
         }
@@ -32,7 +32,7 @@ function AJAX_send() {
         const page_display = document.getElementById("display");
         const landing_menu = document.getElementById("landing_menu");
         const landing_page = (_c = (_b = document.getElementById("landing_page")) === null || _b === void 0 ? void 0 : _b.outerHTML) !== null && _c !== void 0 ? _c : "";
-        if (landing_menu) {
+        if (landing_menu === null) {
             landing_menu.outerHTML = "";
         }
         page_display.innerHTML = "";
@@ -50,6 +50,7 @@ function AJAX_send() {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                 const data = JSON.parse(xhr.responseText);
                 const html = data.html;
+                console.log(typeof html);
                 page_display.innerHTML = html["sur_header"];
                 if (data.code === "success") {
                     page_display.innerHTML += landing_page;
@@ -106,49 +107,6 @@ window.addEventListener("load", () => {
     toggle_custom_checkboxes(".checkmark");
     activate_feedback_ajax_trigger();
 });
-function handle_no_spoil_mode() {
-    const spoil_checkbox = document.getElementById("spoil_mode");
-    const no_spoil_checkbox = document.getElementById("no_spoil_mode");
-    if (no_spoil_checkbox && spoil_checkbox && no_spoil_checkbox.checked && spoil_checkbox.checked) {
-        spoil_checkbox.checked = false;
-    }
-    update_display(["not-found", "found"]);
-}
-;
-function handle_toggle_versions_mode() {
-    update_display("newer-version");
-}
-;
-function handle_spoil_mode() {
-    const no_spoil_checkbox = document.getElementById("no_spoil_mode");
-    const spoil_checkbox = document.getElementById("spoil_mode");
-    if (!no_spoil_checkbox || !spoil_checkbox) {
-        return;
-    }
-    if (spoil_checkbox.checked && no_spoil_checkbox.checked) {
-        no_spoil_checkbox.checked = false;
-        update_display(["not-found", "found"]);
-    }
-    else {
-        update_display(["found"]);
-    }
-}
-;
-function handle_steam_mode() {
-    const images_folder = ["steam_achievements", "achievements"];
-    const images = document.querySelectorAll(".achievements-section img");
-    images.forEach((image) => {
-        const src = image.getAttribute("src");
-        const [old_folder, new_folder] = (src.includes('steam')) ? images_folder : [...images_folder].reverse();
-        image.setAttribute("src", src.replace(old_folder, new_folder));
-    });
-}
-function initialize_settings() {
-    handle_toggle_versions_mode();
-    handle_no_spoil_mode();
-    handle_spoil_mode();
-}
-;
 function toggle_custom_checkboxes(checkmark_class) {
     const checkmarks = document.querySelectorAll(checkmark_class);
     checkmarks.forEach((checkbox) => {
@@ -338,7 +296,6 @@ const panels = {
 };
 const all_panels = Object.values(panels);
 window.addEventListener("keydown", (event) => {
-    console.log(event);
     if (event.code === "Escape") {
         close_all_panels(all_panels, true);
     }
@@ -439,16 +396,6 @@ function activate_close_buttons(hide, sections_to_hide) {
         });
     });
 }
-// function hide_panels(event: MouseEvent = {} as MouseEvent):void {
-//     if(!current_section || !(event.target instanceof HTMLElement) || (event.target === current_section) || current_section.contains(event.target) || event.target.classList.contains("modal-opener") || current_section.classList.contains("to-keep-open")) {
-//         return;
-//     }
-//     if(current_section.classList.contains("feedback-panel")) {
-//         current_section.remove();
-//         return;
-//     }
-//     current_section.style.display = "none";
-// }
 function hide_all_sections(section_destroy = false) {
     const sections = document.querySelectorAll(".modal-window");
     sections.forEach((section) => {
@@ -502,6 +449,49 @@ function get_settings() {
         toggle_versions: document.getElementById("toggle_versions_items_mode").checked,
         spoil: document.getElementById("spoil_mode").checked
     };
+}
+function initialize_settings() {
+    handle_toggle_versions_mode();
+    handle_no_spoil_mode();
+    handle_spoil_mode();
+}
+;
+function handle_no_spoil_mode() {
+    const spoil_checkbox = document.getElementById("spoil_mode");
+    const no_spoil_checkbox = document.getElementById("no_spoil_mode");
+    if (no_spoil_checkbox && spoil_checkbox && no_spoil_checkbox.checked && spoil_checkbox.checked) {
+        spoil_checkbox.checked = false;
+    }
+    update_display(["not-found", "found"]);
+}
+;
+function handle_toggle_versions_mode() {
+    update_display("newer-version");
+}
+;
+function handle_spoil_mode() {
+    const no_spoil_checkbox = document.getElementById("no_spoil_mode");
+    const spoil_checkbox = document.getElementById("spoil_mode");
+    if (!no_spoil_checkbox || !spoil_checkbox) {
+        return;
+    }
+    if (spoil_checkbox.checked && no_spoil_checkbox.checked) {
+        no_spoil_checkbox.checked = false;
+        update_display(["not-found", "found"]);
+    }
+    else {
+        update_display(["found"]);
+    }
+}
+;
+function handle_steam_mode() {
+    const images_folder = ["steam_achievements", "achievements"];
+    const images = document.querySelectorAll(".achievements-section img");
+    images.forEach((image) => {
+        const src = image.getAttribute("src");
+        const [old_folder, new_folder] = (src.includes('steam')) ? images_folder : [...images_folder].reverse();
+        image.setAttribute("src", src.replace(old_folder, new_folder));
+    });
 }
 function update_tooltips_after_ajax() {
     on_images_loaded(() => {
@@ -670,8 +660,7 @@ function close_all_panels(panel_selectors, include_setting_panels = false) {
         const id = settings_panels.includes(panel_base) ? "" : "-" + get_current_player_id();
         const panel_selector = panel_base + id;
         const panel = document.querySelector(panel_selector);
-        console.log(panel_selector);
-        if (panel) {
+        if (panel !== null) {
             panel.style.display = "none";
             if (get_deletabled_settings_panels().includes(panel_selector)) {
                 panel.remove();
