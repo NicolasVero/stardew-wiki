@@ -26,7 +26,7 @@ function load_elements():void {
         "museum", "community-center", "visited-locations"
     ];
 
-    const players_in_save = get_players_number();
+    const players_in_save : number = get_players_number();
     const dynamic_buttons = [];
 	
     for(let i = 0; i < players_in_save; i++) {
