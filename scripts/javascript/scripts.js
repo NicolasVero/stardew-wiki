@@ -85,20 +85,20 @@ window.addEventListener("load", () => {
     const no_spoil_mode = document.getElementById("no_spoil_mode");
     const spoil_mode = document.getElementById("spoil_mode");
     const steam_achievements = document.getElementById("steam_achievements");
-    if (toggle_versions_items_mode) {
+    if (toggle_versions_items_mode !== null) {
         toggle_versions_items_mode.addEventListener("change", handle_toggle_versions_mode);
     }
-    if (no_spoil_mode) {
+    if (no_spoil_mode !== null) {
         no_spoil_mode.addEventListener("change", handle_no_spoil_mode);
     }
-    if (spoil_mode) {
+    if (spoil_mode !== null) {
         spoil_mode.addEventListener("change", handle_spoil_mode);
     }
-    if (steam_achievements) {
+    if (steam_achievements !== null) {
         steam_achievements.addEventListener("change", handle_steam_mode);
     }
     const save_upload = document.getElementById("save-upload");
-    if (save_upload) {
+    if (save_upload !== null) {
         save_upload.addEventListener("change", file_choice);
     }
     save_landing_surheader();
@@ -112,7 +112,7 @@ function toggle_custom_checkboxes(checkmark_class) {
     checkmarks.forEach((checkbox) => {
         checkbox.addEventListener("click", () => {
             const adjacent_checkbox = checkbox.previousElementSibling;
-            if (adjacent_checkbox && adjacent_checkbox.type === "checkbox") {
+            if (adjacent_checkbox !== null && adjacent_checkbox.type === "checkbox") {
                 adjacent_checkbox.checked = !adjacent_checkbox.checked;
                 adjacent_checkbox.dispatchEvent(new Event("change"));
             }
@@ -179,7 +179,7 @@ function easter_egg_characters() {
 function easter_egg_kaaris() {
     var _a, _b;
     const element = (_b = (_a = document.querySelector(".house")) === null || _a === void 0 ? void 0 : _a.previousElementSibling) === null || _b === void 0 ? void 0 : _b.querySelector("img");
-    if (!element) {
+    if (element === null) {
         return;
     }
     element.classList.add("easter_egg_kaaris");
@@ -367,7 +367,7 @@ function activate_buttons(show, hide, sections_to_show) {
     show_button.forEach((button) => {
         button.addEventListener("click", () => {
             hide_all_sections(true);
-            if (sections) {
+            if (sections !== null) {
                 current_section = sections;
                 toggle_visibility(sections, true);
                 if (!sections.hasAttribute('data-tooltips-initialized')) {
@@ -389,7 +389,7 @@ function activate_close_buttons(hide, sections_to_hide) {
     const sections = document.querySelector(sections_to_hide);
     hide_button.forEach((button) => {
         button.addEventListener("click", () => {
-            if (sections) {
+            if (sections !== null) {
                 sections.remove();
                 current_section = null;
             }

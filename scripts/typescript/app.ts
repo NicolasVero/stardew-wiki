@@ -9,29 +9,29 @@ window.addEventListener("load", () => {
         tag.innerHTML = os_path;
     }
     
-    const toggle_versions_items_mode = document.getElementById("toggle_versions_items_mode");
-    const no_spoil_mode = document.getElementById("no_spoil_mode");
-    const spoil_mode = document.getElementById("spoil_mode");
-    const steam_achievements = document.getElementById("steam_achievements");
+    const toggle_versions_items_mode : HTMLElement = document.getElementById("toggle_versions_items_mode");
+    const no_spoil_mode : HTMLElement = document.getElementById("no_spoil_mode");
+    const spoil_mode : HTMLElement = document.getElementById("spoil_mode");
+    const steam_achievements : HTMLElement = document.getElementById("steam_achievements");
     
-    if(toggle_versions_items_mode) {
+    if(toggle_versions_items_mode !== null) {
         toggle_versions_items_mode.addEventListener("change", handle_toggle_versions_mode);
     }
     
-    if(no_spoil_mode) {
+    if(no_spoil_mode !== null) {
         no_spoil_mode.addEventListener("change", handle_no_spoil_mode);
     }
 
-    if(spoil_mode) {
+    if(spoil_mode !== null) {
         spoil_mode.addEventListener("change", handle_spoil_mode);
     }
 
-    if(steam_achievements) {
+    if(steam_achievements !== null) {
         steam_achievements.addEventListener("change", handle_steam_mode);
     }
 
-    const save_upload = document.getElementById("save-upload");
-    if(save_upload) {
+    const save_upload : HTMLElement = document.getElementById("save-upload");
+    if(save_upload !== null) {
         save_upload.addEventListener("change", file_choice);
     }
 
