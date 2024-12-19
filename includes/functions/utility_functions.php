@@ -299,7 +299,7 @@ function get_contributors():array {
 					"on_display" => true
 				],
 				"website" => [
-					"url" => "https://romain-gerard.com/index.php",
+					"url" => "https://romain-gerard.com/",
 					"on_display" => true
 				],
 				"codewars" => [
