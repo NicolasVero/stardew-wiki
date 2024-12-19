@@ -1,6 +1,6 @@
 function get_site_root():string { 
-    const protocol: string = window.location.protocol;
-    const host: string = window.location.host;
+    const protocol : string = window.location.protocol;
+    const host : string = window.location.host;
 
     return (host === "localhost") 
         ? `${protocol}//localhost/travail/stardew_dashboard` 
@@ -9,7 +9,7 @@ function get_site_root():string {
 
 async function get_max_upload_size():Promise<number> {
 	return fetch("./includes/functions/utility_functions.php?action=get_max_upload_size")
-		.then(response => response.json())
+		.then(response => response.json()) 
 		.then((data: { post_max_size: number }) => {
 			return data.post_max_size;
 		}
@@ -18,14 +18,14 @@ async function get_max_upload_size():Promise<number> {
 
 function in_bytes_conversion(size: string):number {
     const unit_to_power: { [key: string]: number } = { "o": 0, "Ko": 1, "Mo": 2, "Go": 3 };
-    const matches = size.match(/(\d+)([a-zA-Z]+)/);
+    const matches : RegExpMatchArray = size.match(/(\d+)([a-zA-Z]+)/);
 
     if(!matches) {
         throw new Error("Invalid size format");
     }
 
-    const value: number = parseInt(matches[1], 10);
-    const unit: string = matches[2];
+    const value : number = parseInt(matches[1], 10);
+    const unit : string = matches[2];
 
     return value * Math.pow(1024, unit_to_power[unit]);
 }
@@ -39,7 +39,7 @@ function get_current_player_id():number {
         .find(player => window.getComputedStyle(player).display === "block");
 
     if(visible_player) {
-        const match = visible_player.className.match(/player_(\d+)_container/);
+        const match : RegExpMatchArray = visible_player.className.match(/player_(\d+)_container/);
         return match ? parseInt(match[1], 10) : null;
     }
 
@@ -47,10 +47,10 @@ function get_current_player_id():number {
 }
 
 function get_players_number():number | null {
-    const players_container: HTMLElement | null = document.querySelector('#players_selection');
+    const players_container: HTMLElement = document.querySelector('#players_selection');
 
     if(players_container !== null) {
-        const players_number = players_container.getElementsByTagName('li').length;
+        const players_number : number = players_container.getElementsByTagName('li').length;
         return (players_number === 0) ? 1 : players_number;
     }
 
@@ -106,17 +106,17 @@ function toggle_scroll(can_scroll: boolean):void {
 function toggle_loading(shown: boolean):void {
     const loading_strip = document.getElementById("loading-strip");
 
-    if(loading_strip) {
+    if(loading_strip !== null) {
         loading_strip.style.display = (shown) ? "block" : "none";
     }
 }
 
 function get_parent_element(element: HTMLElement | null):HTMLElement | null {
-    if(!element) {
+    if(element !== null) {
         return null;
     }
 
-    const parent = element.parentElement;
+    const parent: HTMLElement = element.parentElement;
     return parent?.classList.contains("wiki_link") ? parent.parentElement : parent;
 };
 
@@ -142,11 +142,11 @@ function has_section_older_version_items(section: HTMLElement):boolean {
 };
 
 function should_show_element(element, settings):boolean {
-    const is_newer = has_class(element, "newer-version");
-    const is_not_found = has_class(element, "not-found");
-    const should_keep_on_display = has_class(element, "always-on-display");
-    const is_found = has_class(element, "found");
-    const is_not_hide = has_class(element, "not-hide");
+    const is_newer: boolean = has_class(element, "newer-version");
+    const is_not_found: boolean = has_class(element, "not-found");
+    const should_keep_on_display: boolean = has_class(element, "always-on-display");
+    const is_found: boolean = has_class(element, "found");
+    const is_not_hide: boolean = has_class(element, "not-hide");
 
     if(is_not_hide) return true;
     if(settings.toggle_versions && is_newer) return false;
@@ -157,17 +157,17 @@ function should_show_element(element, settings):boolean {
 };
 
 function toggle_landing_page(display: boolean):void {
-    const landing_page = document.getElementById("landing_page");
+    const landing_page: HTMLElement = document.getElementById("landing_page");
 
-    if(landing_page) {
+    if(landing_page != null) {
         landing_page.style.display = display ? "block" : "none";
     }
 }
 
 function save_landing_surheader():void {
-	const landing_menu = document.getElementById("landing_menu");
+	const landing_menu: HTMLElement = document.getElementById("landing_menu");
 
-	if(landing_menu) {
+	if(landing_menu !== null) {
 		const surheader = landing_menu.innerHTML;
 	}
 }
