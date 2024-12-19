@@ -78,9 +78,7 @@ function close_all_panels(panel_selectors: string[], include_setting_panels: boo
         const panel_selector: string = panel_base + id;
         const panel: HTMLElement = document.querySelector(panel_selector);
 
-        console.log(panel_selector)
-
-        if(panel) {
+        if(panel !== null) {
             panel.style.display = "none";
 
             if(get_deletabled_settings_panels().includes(panel_selector)) {

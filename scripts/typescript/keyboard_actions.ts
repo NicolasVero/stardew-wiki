@@ -12,7 +12,6 @@ const panels: Record<string, string> = {
 const all_panels: string[] = Object.values(panels); 
 
 window.addEventListener("keydown", (event: KeyboardEvent) => {
-    console.log(event)
     if(event.code === "Escape") {
         close_all_panels(all_panels, true);
     } 

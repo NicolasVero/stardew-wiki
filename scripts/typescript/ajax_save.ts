@@ -12,10 +12,10 @@ interface FeedbackResponse {
 
 function file_choice(event: Event):void {
     const input = event.target as HTMLInputElement;
-    const new_filename = input.files ? input.files[0].name.substring(0, 12) : "";
-    const filename_element = document.getElementById("new-filename");
+    const new_filename : string = input.files ? input.files[0].name.substring(0, 12) : "";
+    const filename_element : HTMLElement = document.getElementById("new-filename");
 
-    if (filename_element) {
+    if(filename_element !== null) {
         filename_element.innerHTML = new_filename;
     }
 
@@ -26,28 +26,28 @@ function file_choice(event: Event):void {
 // Upload File AJAX
 async function AJAX_send():Promise<void> {
     const xml_upload = document.getElementById("save-upload") as HTMLInputElement;
-    const file = xml_upload?.files?.[0];
+    const file : File = xml_upload?.files?.[0];
 
-    if(!file) {
+    if(file === null) {
         alert("An error occurred while uploading the file. Please try again.");
         return;
     }
 
     const max_upload_size = await get_max_upload_size();
-    const is_file_too_big = file.size > max_upload_size;
-    const page_display = document.getElementById("display") as HTMLElement;
-    const landing_menu = document.getElementById("landing_menu");
-    const landing_page = document.getElementById("landing_page")?.outerHTML ?? "";
+    const is_file_too_big : boolean = file.size > max_upload_size;
+    const page_display : HTMLElement = document.getElementById("display");
+    const landing_menu : HTMLElement = document.getElementById("landing_menu");
+    const landing_page : string = document.getElementById("landing_page")?.outerHTML ?? "";
 
-    if(landing_menu) {
+    if(landing_menu === null) {
         landing_menu.outerHTML = "";
     }
 
     page_display.innerHTML = "";
 
-    const form_data = new FormData();
-    const xhr = new XMLHttpRequest();
-    const url = get_site_root() + "/includes/get_xml_data.php";
+    const form_data : FormData = new FormData();
+    const xhr : XMLHttpRequest = new XMLHttpRequest();
+    const url : string = get_site_root() + "/includes/get_xml_data.php";
 
     if(is_file_too_big) {
         form_data.append("save-upload", new File(["SizeException"], "Error_SizeException.xml"));
@@ -59,14 +59,16 @@ async function AJAX_send():Promise<void> {
 
     xhr.onreadystatechange = function () {
         if(xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
-            const data: AjaxResponse = JSON.parse(xhr.responseText);
-            const html = data.html;
+            const data : AjaxResponse = JSON.parse(xhr.responseText);
+            const html : Record<string, string> = data.html;
+
+            console.log(typeof html)
 
             page_display.innerHTML = html["sur_header"];
             
             if(data.code === "success") {
                 page_display.innerHTML += landing_page;
-                const players_count = data.players.length;
+                const players_count : number = data.players.length;
 
                 for(let i = 0; i < players_count; i++) {
                     page_display.innerHTML += html["player_" + i];
