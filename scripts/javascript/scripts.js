@@ -50,7 +50,6 @@ function AJAX_send() {
             if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
                 const data = JSON.parse(xhr.responseText);
                 const html = data.html;
-                console.log(typeof html);
                 page_display.innerHTML = html["sur_header"];
                 if (data.code === "success") {
                     page_display.innerHTML += landing_page;
@@ -78,7 +77,7 @@ let surheader;
 window.addEventListener("load", () => {
     const os_path = get_os_path(detect_os());
     const tag = document.getElementById("save_os_path");
-    if (tag) {
+    if (tag !== null) {
         tag.innerHTML = os_path;
     }
     const toggle_versions_items_mode = document.getElementById("toggle_versions_items_mode");
@@ -148,7 +147,7 @@ function easter_egg_characters() {
     ].reduce((acc, val) => acc * val, 1) % characters.length;
     const character = characters[index_picker];
     const elements = document.querySelectorAll(".character-name." + character);
-    if (!elements.length) {
+    if (elements.length === 0) {
         return;
     }
     const audio = new Audio(get_site_root() + "/medias/audio/trigger.mp3");
@@ -260,7 +259,7 @@ function feedback_custom_radio() {
         const span_topic = fake_radio.parentElement;
         span_topic.addEventListener("click", () => {
             const real_radio = fake_radio.previousElementSibling;
-            if (real_radio && real_radio.type === "radio") {
+            if (real_radio !== null && real_radio.type === "radio") {
                 real_radio.checked = true;
                 real_radio.dispatchEvent(new Event("change"));
             }
@@ -272,7 +271,7 @@ function feedback_custom_radio() {
                 fake_radio.classList.add("topic_not_selected");
             });
             const fake_radio = real_radio.nextElementSibling;
-            if (fake_radio && fake_radio.tagName === "IMG") {
+            if (fake_radio !== null && fake_radio.tagName === "IMG") {
                 if (real_radio.checked) {
                     fake_radio.classList.remove("topic_not_selected");
                 }
@@ -459,7 +458,7 @@ function initialize_settings() {
 function handle_no_spoil_mode() {
     const spoil_checkbox = document.getElementById("spoil_mode");
     const no_spoil_checkbox = document.getElementById("no_spoil_mode");
-    if (no_spoil_checkbox && spoil_checkbox && no_spoil_checkbox.checked && spoil_checkbox.checked) {
+    if (no_spoil_checkbox !== null && spoil_checkbox !== null && no_spoil_checkbox.checked && spoil_checkbox.checked) {
         spoil_checkbox.checked = false;
     }
     update_display(["not-found", "found"]);
@@ -472,7 +471,7 @@ function handle_toggle_versions_mode() {
 function handle_spoil_mode() {
     const no_spoil_checkbox = document.getElementById("no_spoil_mode");
     const spoil_checkbox = document.getElementById("spoil_mode");
-    if (!no_spoil_checkbox || !spoil_checkbox) {
+    if (no_spoil_checkbox === null || spoil_checkbox === null) {
         return;
     }
     if (spoil_checkbox.checked && no_spoil_checkbox.checked) {
@@ -508,7 +507,6 @@ function initialize_tooltips(section = null) {
     else {
         tooltips = document.querySelector("." + section).querySelectorAll(".tooltip");
     }
-    // const tooltips: NodeListOf<HTMLElement> = document.querySelectorAll(".tooltip");
     tooltips.forEach((tooltip) => {
         const rect = tooltip.getBoundingClientRect();
         const span = tooltip.querySelector("span");
@@ -516,7 +514,7 @@ function initialize_tooltips(section = null) {
             if (rect.left === 0) {
                 return;
             }
-            const tooltip_position = rect.left < window.innerWidth / 2 ? "right" : "left";
+            const tooltip_position = (rect.left < window.innerWidth / 2) ? "right" : "left";
             span.classList.add(tooltip_position);
         }
     });
@@ -560,10 +558,10 @@ function update_section_visibility(section, settings) {
         return;
     }
     section.style.visibility = "visible";
-    if (title) {
+    if (title !== null) {
         title.style.display = "block";
     }
-    if (smaller_title) {
+    if (smaller_title !== null) {
         let should_show_smaller_title = false;
         if (settings.no_spoil) {
             should_show_smaller_title = is_empty;
@@ -583,7 +581,7 @@ function update_display(target_classes) {
         const elements = document.getElementsByClassName(class_name);
         Array.from(elements).forEach((element) => {
             const parent = get_parent_element(element);
-            if (parent) {
+            if (parent !== null) {
                 set_element_display(parent, should_show_element(element, settings));
             }
         });
@@ -630,7 +628,7 @@ function toggle_visibility(element, should_display) {
 function get_current_player_id() {
     const visible_player = Array.from(document.querySelectorAll(".player_container"))
         .find(player => window.getComputedStyle(player).display === "block");
-    if (visible_player) {
+    if (visible_player !== null) {
         const match = visible_player.className.match(/player_(\d+)_container/);
         return match ? parseInt(match[1], 10) : null;
     }
@@ -681,12 +679,12 @@ function toggle_scroll(can_scroll) {
 }
 function toggle_loading(shown) {
     const loading_strip = document.getElementById("loading-strip");
-    if (loading_strip) {
+    if (loading_strip !== null) {
         loading_strip.style.display = (shown) ? "block" : "none";
     }
 }
 function get_parent_element(element) {
-    if (!element) {
+    if (element !== null) {
         return null;
     }
     const parent = element.parentElement;
@@ -731,13 +729,13 @@ function should_show_element(element, settings) {
 ;
 function toggle_landing_page(display) {
     const landing_page = document.getElementById("landing_page");
-    if (landing_page) {
-        landing_page.style.display = display ? "block" : "none";
+    if (landing_page !== null) {
+        landing_page.style.display = (display) ? "block" : "none";
     }
 }
 function save_landing_surheader() {
     const landing_menu = document.getElementById("landing_menu");
-    if (landing_menu) {
+    if (landing_menu !== null) {
         const surheader = landing_menu.innerHTML;
     }
 }
