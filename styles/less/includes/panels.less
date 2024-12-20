@@ -250,9 +250,10 @@
 	&.visited-locations-panel {
 		.big-panel-width;
 		.invisible-panel;
+		.panel-with-border;
 		.panel-with-background;
 		aspect-ratio: 1.79;
-		background-image: url("../../medias/images/content/adventurers_guild_bg.png");
+		background-image: url("../../medias/images/content/map_no_border.png");
 		color: @goal-fc;
 		font-family: @dialogue-ff;
 		font-size: @giant-fs;
@@ -269,6 +270,7 @@
 			position: relative;
 	
 			& > .title {
+				color: @third-fc;
 				display: flex;
 				flex-direction: column;
 				font-weight: 900;
@@ -294,17 +296,22 @@
 
 		& > .locations {
 			display: grid;
-			gap: @md-gap;
+			gap: @md-gap @bigger-gap;
 			grid-template-columns: repeat(2, 1fr);
 
 			a {
 				box-sizing: border-box;
-				color: @goal-fc;
+				color: @third-fc;
 				padding-inline: @big-gap;
 				width: fit-content;
 				
 				&:hover, & > span:hover {
 					cursor: @pointer;
+				}
+
+				&:nth-child(odd) {
+					left: 55%;
+					position: relative;
 				}
 			}
 		}
