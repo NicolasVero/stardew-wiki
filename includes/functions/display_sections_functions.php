@@ -120,7 +120,7 @@ function display_header(): string {
                 <span class='date'>
                     $weather_icon
                     <span class='data date-in-game view-calendar-$player_id modal-opener'>$date</span>
-					$festival_icon
+                    $festival_icon
                 </span>
 
                 <span class='game_time'>
