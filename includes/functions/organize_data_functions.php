@@ -1,6 +1,6 @@
 <?php
 
-function load_save($save_file, $use_ajax = true):mixed {
+function load_save($save_file, $use_ajax = true): mixed {
     $uploadedFile = $save_file;
     $data = simplexml_load_file($uploadedFile);
     load_all_json();
@@ -45,7 +45,7 @@ function load_save($save_file, $use_ajax = true):mixed {
     return true;
 }
 
-function get_farmhands():array {
+function get_farmhands(): array {
     $data = $GLOBALS["untreated_all_players_data"];
     $all_farmhands = [];
 
@@ -81,7 +81,7 @@ function get_farmhands():array {
     return $all_farmhands;
 }
 
-function get_all_players_data():array {
+function get_all_players_data(): array {
     $players_data = [];
     $data = $GLOBALS["untreated_all_players_data"];
     array_push($players_data, get_aggregated_data($data->player));
@@ -154,7 +154,7 @@ function get_aggregated_data(object $data):array {
     ];
 }
 
-function get_shared_aggregated_data():array {
+function get_shared_aggregated_data(): array {
     return [
         "farm_animals"          => get_player_farm_animals(),
         "weather"               => get_weather(),

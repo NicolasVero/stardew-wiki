@@ -1,6 +1,6 @@
 <?php
 
-function display_panels():string {
+function display_panels(): string {
 	$structure  = display_friendships();
 	$structure .= display_quest_panel();
     $structure .= display_visited_locations();
@@ -15,7 +15,7 @@ function display_panels():string {
 }
 
 // [] --> *icon, *value, tooltip, alt, label, wiki_link
-function display_stat(array $parameters):string {
+function display_stat(array $parameters): string {
     extract($parameters);
     $images_path = get_images_folder();
     $formatted_icon = formate_text_for_file($icon);
@@ -54,7 +54,7 @@ function display_stat(array $parameters):string {
     ";
 }
 
-function display_spouse(mixed $spouse, array $children):string {
+function display_spouse(mixed $spouse, array $children): string {
     if(empty($spouse)) {
         return "";
     }
@@ -74,7 +74,7 @@ function display_spouse(mixed $spouse, array $children):string {
     ";
 }
 
-function display_sur_header(bool $is_landing_page = false, bool $is_error_screen = false):string {
+function display_sur_header(bool $is_landing_page = false, bool $is_error_screen = false): string {
 	$menu_id = ($is_landing_page) ? "landing_menu" : (($is_error_screen) ? "error_menu" : "dashboard_menu");
 	$save_id = ($is_landing_page) ? "landing" : "file";
 	$settings_id = ($is_landing_page) ? "landing" : "main";
@@ -96,7 +96,7 @@ function display_sur_header(bool $is_landing_page = false, bool $is_error_screen
     ";
 }
 
-function display_header():string {
+function display_header(): string {
 	$player_id = get_current_player_id();
 	$all_players_data = get_general_data();
 	$festival_icon = display_festival_icon();
@@ -162,7 +162,7 @@ function display_header():string {
     ";
 }
 
-function display_general_stats():string {
+function display_general_stats(): string {
 	$player_id = get_current_player_id();
 	$all_players_data = get_general_data();
 	$community_center_button = display_community_center();
@@ -215,7 +215,7 @@ function display_general_stats():string {
     ";
 }
 
-function display_skills():string {
+function display_skills(): string {
     $images_path = get_images_folder();
 	$player_skills = get_skills_data();
 	$player_skills_levels = get_levels_data();
@@ -266,11 +266,11 @@ function display_skills():string {
     ";
 }
 
-function display_top_friendships(int $limit = 5):string {
+function display_top_friendships(int $limit = 5): string {
     return display_friendships($limit);
 }
 
-function display_friendships(int $limit = -1):string {
+function display_friendships(int $limit = -1): string {
     $player_id = get_current_player_id();
     $friendship_data = get_friendships_data();
     $images_path = get_images_folder();
@@ -346,7 +346,7 @@ function display_friendships(int $limit = -1):string {
     return $structure;
 }
 
-function display_unlockables():string {
+function display_unlockables(): string {
     $player_unlockables = get_unlockables_data();
     $images_path = get_images_folder();
 	$version_score = $GLOBALS["game_version_score"];
@@ -388,7 +388,7 @@ function display_unlockables():string {
 	";
 }
 
-function display_detailled_gallery(array $gallery_details, string $width = "", array $panel_details = []):string {
+function display_detailled_gallery(array $gallery_details, string $width = "", array $panel_details = []): string {
     extract($gallery_details);
 	$version_score = $GLOBALS["game_version_score"];
 	$images_path = get_images_folder();
@@ -485,7 +485,7 @@ function display_detailled_gallery(array $gallery_details, string $width = "", a
     return $structure;
 }
 
-function display_books():string {
+function display_books(): string {
     $gallery_details = [
         "player_data" => get_books_data(),
         "json_filename" => "books",
@@ -494,7 +494,7 @@ function display_books():string {
     return display_detailled_gallery($gallery_details, "_50");
 }
 
-function display_fish():string {
+function display_fish(): string {
     $gallery_details = [
         "player_data" => get_fish_data(),
         "json_filename" => "fish",
@@ -503,7 +503,7 @@ function display_fish():string {
     return display_detailled_gallery($gallery_details, "_50");
 }
 
-function display_cooking_recipes():string {
+function display_cooking_recipes(): string {
     $gallery_details = [
         "player_data" => get_cooking_recipes_data(),
         "json_filename" => "cooking_recipes",
@@ -512,7 +512,7 @@ function display_cooking_recipes():string {
     return display_detailled_gallery($gallery_details, "_50");
 }
 
-function display_minerals():string {
+function display_minerals(): string {
     $gallery_details = [
         "player_data" => get_minerals_data(),
         "json_filename" => "minerals",
@@ -525,7 +525,7 @@ function display_minerals():string {
     return display_detailled_gallery($gallery_details, "_50", $panel_details);
 }
 
-function display_artifacts():string {
+function display_artifacts(): string {
     $gallery_details = [
         "player_data" => get_artifacts_data(),
         "json_filename" => "artifacts",
@@ -538,7 +538,7 @@ function display_artifacts():string {
     return display_detailled_gallery($gallery_details, "_50", $panel_details);
 }
 
-function display_enemies():string {
+function display_enemies(): string {
     $gallery_details = [
         "player_data" => get_enemies_killed_data(),
         "json_filename" => "enemies",
@@ -551,7 +551,7 @@ function display_enemies():string {
     return display_detailled_gallery($gallery_details, "_100", $panel_details);
 }
 
-function display_achievements():string {
+function display_achievements(): string {
     $gallery_details = [
         "player_data" => get_achievements_data(),
         "json_filename" => "achievements",
@@ -560,7 +560,7 @@ function display_achievements():string {
     return display_detailled_gallery($gallery_details, "_50");
 }
 
-function display_shipped_items():string {
+function display_shipped_items(): string {
     $gallery_details = [
         "player_data" => get_shipped_items_data(),
         "json_filename" => "shipped_items",
@@ -569,7 +569,7 @@ function display_shipped_items():string {
     return display_detailled_gallery($gallery_details, "_100");
 }
 
-function display_crafting_recipes():string {
+function display_crafting_recipes(): string {
     $gallery_details = [
         "player_data" => get_crafting_recipes_data(),
         "json_filename" => "crafting_recipes",
@@ -578,7 +578,7 @@ function display_crafting_recipes():string {
     return display_detailled_gallery($gallery_details, "_100");
 }
 
-function display_farm_animals():string {
+function display_farm_animals(): string {
     $gallery_details = [
         "player_data" => get_farm_animals_data(),
         "json_filename" => "farm_animals",
@@ -591,7 +591,7 @@ function display_farm_animals():string {
     return display_detailled_gallery($gallery_details, "", $panel_details);
 }
 
-function display_secret_notes():string {
+function display_secret_notes(): string {
     $gallery_details = [
         "player_data" => get_secret_notes_data(),
         "json_filename" => "secret_notes",
@@ -600,7 +600,7 @@ function display_secret_notes():string {
     return display_detailled_gallery($gallery_details, "_50");
 }
 
-function display_locations_visited():string {
+function display_locations_visited(): string {
     $gallery_details = [
         "player_data" => get_locations_visited_data(),
         "json_filename" => "locations_to_visit",

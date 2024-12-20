@@ -1,6 +1,6 @@
 <?php
 
-function display_player_selection():string {
+function display_player_selection(): string {
     $players_names = $GLOBALS["players_names"];
     $players_name_structure = "";
 
@@ -17,11 +17,11 @@ function display_player_selection():string {
     ";
 }
 
-function display_game_version():string {
+function display_game_version(): string {
     return "<span class='game_version'>V " . $GLOBALS["game_version"] . "</span>";
 }
 
-function display_settings_button(string $prefix):string {
+function display_settings_button(string $prefix): string {
     return "
         <span class='$prefix-settings modal-opener'>
             <img src='" . get_images_folder() . "/icons/settings.png' class='modal-opener' alt='Settings icon'/>
@@ -29,7 +29,7 @@ function display_settings_button(string $prefix):string {
     ";
 }
 
-function display_save_button(string $prefix):string {
+function display_save_button(string $prefix): string {
     return "
         <span class='$prefix-upload modal-opener'>
             <img src='" . get_images_folder() . "/icons/file.png' class='modal-opener' alt='File upload icon'/>
@@ -37,7 +37,7 @@ function display_save_button(string $prefix):string {
     ";
 }
 
-function display_feedback_button():string {
+function display_feedback_button(): string {
     return "
         <span class='feedback-opener modal-opener'>
             <img src='" . get_images_folder() . "/icons/feedback.png' class='modal-opener' alt='Feedback icon'/>
@@ -45,7 +45,7 @@ function display_feedback_button():string {
     ";
 }
 
-function display_home_button():string {
+function display_home_button(): string {
     return "
         <span class='landing-page-opener'>
             <img src='" . get_images_folder() . "/icons/home.png' id='home-icon' alt='Home icon'/>
@@ -53,23 +53,23 @@ function display_home_button():string {
     ";
 }
 
-function display_junimo_kart_button():string {
+function display_junimo_kart_button(): string {
 	return "<img src='" . get_images_folder() . "/icons/controller.png' class='controller-icon view-junimo-kart-leaderboard view-junimo-kart-leaderboard-" . get_current_player_id() . " button-elements modal-opener icon' alt='Controller icon'/>";
 }
 
-function display_community_center():string {
+function display_community_center(): string {
 	return "<img src='" . get_images_folder() . "/icons/golden_scroll.png' class='golden-scroll-icon view-community-center view-community-center-" . get_current_player_id() . " button-elements modal-opener icon' alt='Golden Scroll icon'/>";
 }
 
-function display_quest_button():string {
+function display_quest_button(): string {
 	return "<img src='" . get_images_folder() . "/icons/quest_icon.png' class='quest-icon view-all-quests view-all-quests-" . get_current_player_id() . " button-elements modal-opener icon' alt='Quest icon'/>";
 }
 
-function display_visited_locations_button():string {
+function display_visited_locations_button(): string {
 	return "<img src='" . get_images_folder() . "/icons/quest_icon.png' class='visited-locations-icon view-visited-locations view-visited-locations-" . get_current_player_id() . " button-elements modal-opener icon' alt='Visited locations icon'/>";
 }
 
-function get_level_progress_bar(int $level, int $max_level = 10):string {
+function get_level_progress_bar(int $level, int $max_level = 10): string {
     $images_path = get_images_folder();
     $level_structure = "";
     
@@ -88,7 +88,7 @@ function get_level_progress_bar(int $level, int $max_level = 10):string {
     ";
 }
 
-function get_skills_icons(array $skills, string $current_skill):string {
+function get_skills_icons(array $skills, string $current_skill): string {
     $images_path = get_images_folder();
     $skill_structure = "";
 
@@ -115,7 +115,7 @@ function get_skills_icons(array $skills, string $current_skill):string {
     ";
 }
 
-function get_tooltip_text(array $player_data, string $json_line_name, string $data_type):string {
+function get_tooltip_text(array $player_data, string $json_line_name, string $data_type): string {
     $data_array = $player_data[$json_line_name];
 
     if(empty($data_array)) {
@@ -158,7 +158,7 @@ function get_tooltip_text(array $player_data, string $json_line_name, string $da
     }
 }
 
-function get_friendship_structure(array $friendship_info):string {
+function get_friendship_structure(array $friendship_info): string {
     extract($friendship_info);
     $friend_icon = "$images_path/characters/" . strtolower($name) . ".png";
     $is_newer_version = array_search($name, $json_with_version) ? "older-version" : "newer-version";
@@ -210,7 +210,7 @@ function get_friendship_structure(array $friendship_info):string {
     ";
 }
 
-function get_animal_status_tooltip(string $status, string $animal_name):string {
+function get_animal_status_tooltip(string $status, string $animal_name): string {
     return [
         "happy" => "$animal_name looks really happy today!",
         "fine"  => "$animal_name looks fine today!",
@@ -218,7 +218,7 @@ function get_animal_status_tooltip(string $status, string $animal_name):string {
     ][$status] ?? "";
 }
 
-function get_weather_tooltip(string $weather):string {
+function get_weather_tooltip(string $weather): string {
 	return [
 		"sun"        => "It's going to be clear and sunny all day",
 		"rain"       => "It's going to rain all day tomorrow",
@@ -229,7 +229,7 @@ function get_weather_tooltip(string $weather):string {
 	][$weather] ?? "";
 }
 
-function get_child_tooltip(string $spouse, array $children):string {
+function get_child_tooltip(string $spouse, array $children): string {
 	$gender = get_the_married_person_gender($spouse);
 	$children_count = count($children);
 	$children_names = ($children_count === 1) ? $children[0] : implode(" and ", $children);
@@ -242,7 +242,7 @@ function get_child_tooltip(string $spouse, array $children):string {
 	return "With $gender $spouse, you had $children_count $nombre : $children_names";
 }
 
-function display_festival_icon():string {
+function display_festival_icon(): string {
     $images_path = get_images_folder();
     $festivals = sanitize_json_with_version("festivals", true);
 	$festival_name = "Not a festival day";
@@ -276,7 +276,7 @@ function display_festival_icon():string {
 	</span>";
 }
 
-function display_weather_icon():string {
+function display_weather_icon(): string {
     $data = $GLOBALS["shared_players_data"];
     $images_path = get_images_folder();
     $weather = $data["weather"];
@@ -291,7 +291,7 @@ function display_weather_icon():string {
     ";
 }
 
-function display_project_contributor(array $options):string {
+function display_project_contributor(array $options): string {
     extract($options);
 
     $images_path = get_images_folder();
@@ -325,7 +325,7 @@ function display_project_contributor(array $options):string {
     ";
 }
 
-function display_bundle_requirements(array $requirements, array $added_items):string {
+function display_bundle_requirements(array $requirements, array $added_items): string {
     $images_path = get_images_folder();
     $structure = "";
     
@@ -348,7 +348,7 @@ function display_bundle_requirements(array $requirements, array $added_items):st
     return $structure;
 }
 
-function display_bundle_added_items(array $added_items, int $limit):string {
+function display_bundle_added_items(array $added_items, int $limit): string {
     $structure = "";
     $images_path = get_images_folder();
     
@@ -373,6 +373,6 @@ function display_bundle_added_items(array $added_items, int $limit):string {
     return $structure;
 }
 
-function display_bundle_purchase():string {
+function display_bundle_purchase(): string {
     return "<img src='" . get_images_folder() . "/content/purchase.png' class='purchase' alt=''/>";
 }

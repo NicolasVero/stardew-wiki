@@ -1,6 +1,6 @@
 <?php 
 
-function display_landing_page(bool $with_surheader = true):string {
+function display_landing_page(bool $with_surheader = true): string {
 	if(is_a_mobile_device()) {
 		return display_mobile_landing_page();
 	}
@@ -104,7 +104,7 @@ function display_landing_page(bool $with_surheader = true):string {
     ";
 }
 
-function display_mobile_landing_page():string {
+function display_mobile_landing_page(): string {
 	$contributors_structure = "";
 	$contributors = get_contributors();
 
@@ -144,7 +144,7 @@ function display_mobile_landing_page():string {
 	";
 }
 
-function display_page():string {
+function display_page(): string {
     $structure = display_header();
     $structure .= "<main>";
 		$structure .= display_panels();
@@ -185,7 +185,7 @@ function display_page():string {
     return $structure;
 }
 
-function display_error_page(Exception $exception):string {
+function display_error_page(Exception $exception): string {
     $images_path = get_images_folder();
     $exception_dialogues = [
         "The file is not in xml format." => [
