@@ -97,7 +97,7 @@ function get_all_players_data(): array {
     return $players_data;
 }
 
-function get_aggregated_data(object $data):array {
+function get_aggregated_data(object $data): array {
     $general_data = $GLOBALS["untreated_all_players_data"];
 	$GLOBALS["untreated_player_data"] = $data;
     

@@ -133,7 +133,7 @@ function formate_original_data_string(string $data): string {
     return str_replace("(O)", "", $data);
 }
 
-function formate_usernames(string $username):string {
+function formate_usernames(string $username): string {
 	$regex = [
 		"à" => "a", "á" => "a", "â" => "a", "ã" => "a", "ä" => "a", "å" => "a", "æ" => "ae",
 		"ç" => "c",
@@ -188,7 +188,7 @@ function find_reference_in_json(mixed $id, string $file): mixed {
     return isset($json_file[$id]) ? $json_file[$id] : null;
 }
 
-function get_correct_id(mixed &$id):int {
+function get_correct_id(mixed &$id): int {
 	if(!filter_var((int) $id, FILTER_VALIDATE_INT)) {
 		return get_custom_id($id);
 	}

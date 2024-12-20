@@ -1,6 +1,6 @@
 let current_section: HTMLElement | null = null;
 
-function activate_buttons(show: string, hide: string, sections_to_show: string):void {
+function activate_buttons(show: string, hide: string, sections_to_show: string): void {
     const show_button: NodeListOf<HTMLElement> = document.querySelectorAll(show);
     const hide_button: NodeListOf<HTMLElement> = document.querySelectorAll(hide);
     const sections: HTMLElement = document.querySelector(sections_to_show);

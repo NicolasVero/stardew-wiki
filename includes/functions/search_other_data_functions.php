@@ -60,7 +60,7 @@ function get_player_season(): string {
 	return get_formatted_date(false)["season"];
 }
 
-function get_total_skills_level():int {
+function get_total_skills_level(): int {
     $player_data = $GLOBALS["untreated_player_data"];
 	$skill_types = [
 		"farmingLevel",

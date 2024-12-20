@@ -68,7 +68,7 @@ function activate_feedback_form(): void {
     });
 }
 
-function feedback_custom_radio():void {
+function feedback_custom_radio(): void {
     const feedback_fake_radios: NodeListOf<Element> = document.querySelectorAll(".feedback_custom_radio");
     const feedback_real_radios: NodeListOf<Element> = document.querySelectorAll(".feedback_real_radio");
 
