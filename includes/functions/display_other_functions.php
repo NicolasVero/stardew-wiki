@@ -66,7 +66,7 @@ function display_quest_button(): string {
 }
 
 function display_visited_locations_button(): string {
-	return "<img src='" . get_images_folder() . "/icons/quest_icon.png' class='visited-locations-icon view-visited-locations view-visited-locations-" . get_current_player_id() . " button-elements modal-opener icon' alt='Visited locations icon'/>";
+	return "<img src='" . get_images_folder() . "/icons/location_icon.png' class='visited-locations-icon view-visited-locations view-visited-locations-" . get_current_player_id() . " button-elements modal-opener icon' alt='Visited locations icon'/>";
 }
 
 function get_level_progress_bar(int $level, int $max_level = 10): string {

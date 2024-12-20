@@ -85,7 +85,7 @@ function display_visited_locations(): string {
                 <span class='title'>
                     <span>Visited Locations</span>
                 </span>
-                <img src='$images_path/content/dashes.png' class='dashes' alt=''/>
+                <img src='$images_path/content/white_dashes.png' class='dashes' alt=''/>
                 <img src='$images_path/icons/exit.png' class='exit-monster-eradication-goals exit-monster-eradication-goals-$player_id exit' alt='Exit'/>
             </span>
             <span class='locations'>
