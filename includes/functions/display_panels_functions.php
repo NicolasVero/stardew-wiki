@@ -1,6 +1,6 @@
 <?php
 
-function display_save_panel():string {
+function display_save_panel(): string {
     $images_path = get_images_folder();
     return "
         <section class='upload-panel panel to-keep-open modal-window'>
@@ -19,7 +19,7 @@ function display_save_panel():string {
     ";
 }
 
-function display_settings_panel():string {
+function display_settings_panel(): string {
     $images_path = get_images_folder();
     return "
         <section class='settings-panel panel settings modal-window'>
@@ -58,7 +58,7 @@ function display_settings_panel():string {
     ";
 }
 
-function display_visited_locations():string {
+function display_visited_locations(): string {
     $player_id = get_current_player_id();
     $visited_locations = get_locations_visited_data();
     $images_path = get_images_folder();
@@ -95,7 +95,7 @@ function display_visited_locations():string {
     ";
 }
 
-function display_quest_panel():string {
+function display_quest_panel(): string {
 	$player_id = get_current_player_id();
 	$this_player_data = get_quest_log_data();
     $images_path = get_images_folder();
@@ -182,7 +182,7 @@ function display_quest_panel():string {
     ";
 }
 
-function display_feedback_panel():string {
+function display_feedback_panel(): string {
     $images_path = get_images_folder();
     return "
         <section class='feedback-panel panel modal-window to-destroy'>
@@ -240,7 +240,7 @@ function display_feedback_panel():string {
     ";
 }
 
-function display_monster_eradication_goals_panel():string {
+function display_monster_eradication_goals_panel(): string {
 	$player_id = get_current_player_id();
     $images_path = get_images_folder();
     $goals_data = get_player_adventurers_guild_data($player_id);
@@ -287,7 +287,7 @@ function display_monster_eradication_goals_panel():string {
     ";
 }
 
-function display_calendar_panel():string {
+function display_calendar_panel(): string {
 	$player_id = get_current_player_id();
     $images_path = get_images_folder();
     $season = get_player_season();
@@ -371,7 +371,7 @@ function display_calendar_panel():string {
     ";
 }
 
-function display_farm_animals_panel():string {
+function display_farm_animals_panel(): string {
 	$player_id = get_current_player_id();
     $animals_friendship = get_farm_animals_data();
     $images_path = get_images_folder();
@@ -453,7 +453,7 @@ function display_farm_animals_panel():string {
     ";
 }
 
-function display_junimo_kart_panel():string {
+function display_junimo_kart_panel(): string {
     $untreated_data = $GLOBALS["untreated_all_players_data"];
     $player_id = get_current_player_id();
     $images_path = get_images_folder();
@@ -495,7 +495,7 @@ function display_junimo_kart_panel():string {
     ";
 }
 
-function display_museum_panel():string {
+function display_museum_panel(): string {
 	$player_id = get_current_player_id();
     $museum_data = $GLOBALS["shared_players_data"]["museum_coords"];
     $images_path = get_images_folder();
@@ -567,7 +567,7 @@ function display_museum_panel():string {
     ";
 }
 
-function display_community_center_panel():string {
+function display_community_center_panel(): string {
     $player_id = get_current_player_id();
     $player_bundles = $GLOBALS["shared_players_data"]["cc_bundles"];
     $bundles_json = sanitize_json_with_version("bundles", true);

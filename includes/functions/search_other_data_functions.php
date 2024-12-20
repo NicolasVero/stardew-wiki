@@ -1,27 +1,27 @@
 <?php
 
-function is_objective_completed(int $current_counter, int $limit):bool {
+function is_objective_completed(int $current_counter, int $limit): bool {
     return ($current_counter >= $limit);
 }
 
-function get_element_completion_percentage(int $max_amount, int $current_amount):float {
+function get_element_completion_percentage(int $max_amount, int $current_amount): float {
 	return round(($current_amount / $max_amount), 3, PHP_ROUND_HALF_DOWN);
 }
 
-function does_host_has_element(string $element):int {
+function does_host_has_element(string $element): int {
 	return ($GLOBALS["host_player_data"]["unlockables"][$element]["is_found"]);
 }
 
-function has_element_in_mail(string $element):int {
+function has_element_in_mail(string $element): int {
 	$player_data = $GLOBALS["untreated_player_data"] ?? $GLOBALS["untreated_all_players_data"]->player;
     return (in_array($element, (array) $player_data->mailReceived->string)) ? 1 : 0;
 }
 
-function has_element(object $element):int {
+function has_element(object $element): int {
     return !empty((array) $element);
 }
 
-function has_element_based_on_version(string $element_older_version, string $element_newer_version):int {
+function has_element_based_on_version(string $element_older_version, string $element_newer_version): int {
 	$player_data = $GLOBALS["untreated_player_data"];
 
 	if(is_game_older_than_1_6()) {
@@ -31,7 +31,7 @@ function has_element_based_on_version(string $element_older_version, string $ele
 	return has_element_in_mail($element_newer_version);
 }
 
-function has_element_based_on_host(string $element, string $element_newer_version):int {
+function has_element_based_on_host(string $element, string $element_newer_version): int {
 	if(isset($GLOBALS["host_player_data"])) {
 		return does_host_has_element($element);
 	}
@@ -39,7 +39,7 @@ function has_element_based_on_host(string $element, string $element_newer_versio
 	return has_element_in_mail($element_newer_version);
 }
 
-function get_game_version_score(string $version):int {
+function get_game_version_score(string $version): int {
 	$version_numbers = explode(".", $version);
 
 	while(count($version_numbers) < 3) {
@@ -56,11 +56,11 @@ function get_game_version_score(string $version):int {
 	return (int) $score;
 }
 
-function get_player_season():string {
+function get_player_season(): string {
 	return get_formatted_date(false)["season"];
 }
 
-function get_total_skills_level():int {
+function get_total_skills_level(): int {
     $player_data = $GLOBALS["untreated_player_data"];
 	$skill_types = [
 		"farmingLevel",
@@ -78,7 +78,7 @@ function get_total_skills_level():int {
 	return $total_levels;
 }
 
-function get_pet_frienship_points():int {
+function get_pet_frienship_points(): int {
 	$locations = $GLOBALS["untreated_all_players_data"]->locations->GameLocation;
 	foreach($locations as $location) {
 		if(isset($location->characters)) {
@@ -93,22 +93,22 @@ function get_pet_frienship_points():int {
 	return 0;
 }
 
-function get_is_married():bool {
+function get_is_married(): bool {
 	$data = $GLOBALS["untreated_player_data"];
 	return isset($data->spouse);
 }
 
-function get_spouse():mixed {
+function get_spouse(): mixed {
 	$player_data = $GLOBALS["untreated_player_data"];
 	return (!empty($player_data->spouse)) ? $player_data->spouse : null;
 }
 
-function is_this_the_same_day(string $date):bool {
+function is_this_the_same_day(string $date): bool {
     extract(get_formatted_date(false));
     return $date === "$day/$season";
 }
 
-function get_amount_obelisk_on_map():int {
+function get_amount_obelisk_on_map(): int {
 	$locations = $GLOBALS["untreated_all_players_data"]->locations->GameLocation;
 	$obelisk_count = 0;
 	$obelisk_names = [
@@ -131,7 +131,7 @@ function get_amount_obelisk_on_map():int {
 	return $obelisk_count;
 }
 
-function is_golden_clock_on_farm():bool {
+function is_golden_clock_on_farm(): bool {
 	$locations = $GLOBALS["untreated_all_players_data"]->locations->GameLocation;
 	foreach($locations as $location) {
 		if(isset($location->buildings->Building)) {
@@ -146,11 +146,11 @@ function is_golden_clock_on_farm():bool {
 	return false;
 }
 
-function get_house_upgrade_level():int {
+function get_house_upgrade_level(): int {
 	return (int) $GLOBALS["untreated_player_data"]->houseUpgradeLevel;
 }
 
-function get_children_amount():array {
+function get_children_amount(): array {
 	$player_id = (int) $GLOBALS["untreated_player_data"]->UniqueMultiplayerID;
 	$locations = $GLOBALS["untreated_all_players_data"]->locations->GameLocation;
 	$children_name = [];
@@ -190,7 +190,7 @@ function get_children_amount():array {
 	return $children_name;
 }
 
-function get_the_married_person_gender(string $spouse):string {
+function get_the_married_person_gender(string $spouse): string {
 	$wifes = ["abigail", "emily", "haley", "leah", "maru", "penny"];
 	$husbands = ["alex", "elliott", "harvey", "sam", "sebastian", "shane"];
 
@@ -205,11 +205,11 @@ function get_the_married_person_gender(string $spouse):string {
 	return "";
 }
 
-function get_all_adventurers_guild_categories():array {
+function get_all_adventurers_guild_categories(): array {
 	return $GLOBALS["json"]["adventurer's_guild_goals"];
 }
 
-function get_weather(string $weather_location = "Default"):string {
+function get_weather(string $weather_location = "Default"): string {
     $data = $GLOBALS["untreated_all_players_data"];
     $locations = $data->locationWeather;
 
@@ -242,7 +242,7 @@ function get_weather(string $weather_location = "Default"):string {
 	return "sun";
 }
 
-function is_given_to_museum(int $item_id, object $general_data, int $museum_index):int { 
+function is_given_to_museum(int $item_id, object $general_data, int $museum_index): int { 
 
 	$museum_items = $general_data->locations->GameLocation[$museum_index]->museumPieces;
 
@@ -257,7 +257,7 @@ function is_given_to_museum(int $item_id, object $general_data, int $museum_inde
 	return 0;
 }
 
-function get_gamelocation_index(object $general_data, string $searched_location):int {
+function get_gamelocation_index(object $general_data, string $searched_location): int {
 	$index = 0;
 	$locations = $general_data->locations->GameLocation;
 
@@ -271,7 +271,7 @@ function get_gamelocation_index(object $general_data, string $searched_location)
 	return $index;
 }
 
-function get_farmer_level():string {
+function get_farmer_level(): string {
 	$player_data = $GLOBALS["untreated_player_data"];
     $level = (get_total_skills_level() + $player_data->luckLevel) / 2;
     $level_names = [
@@ -389,7 +389,7 @@ function get_grandpa_score(): int {
     return $grandpa_points;
 }
 
-function get_candles_lit(int $grandpa_score):int {
+function get_candles_lit(int $grandpa_score): int {
 	if($grandpa_score <= 3) {
         return 1;
     }
@@ -405,7 +405,7 @@ function get_candles_lit(int $grandpa_score):int {
 	return 4;
 }
 
-function get_perfection_max_elements():array {
+function get_perfection_max_elements(): array {
 	$game_version = substr($GLOBALS["game_version"], 0, 3);
 	if((float) $game_version < 1.5) {
 		$game_version = "1.5";
@@ -414,7 +414,7 @@ function get_perfection_max_elements():array {
 	return $GLOBALS["json"]["perfection_elements"][$game_version];
 }
 
-function get_perfection_elements():array {
+function get_perfection_elements(): array {
 	$general_data = $GLOBALS["host_player_data"]["general"];
 	$perfection_elements = get_perfection_max_elements();
 
@@ -440,7 +440,7 @@ function get_perfection_elements():array {
 	];
 }
 
-function get_perfection_percentage():string {
+function get_perfection_percentage(): string {
 	$untreated_data = $GLOBALS["untreated_all_players_data"];
 	if((string) $untreated_data->farmPerfect === "true") {
 		return 100;
@@ -455,7 +455,7 @@ function get_perfection_percentage():string {
 	return round($percentage);
 }
 
-function get_highest_count_for_category(string $category):array {
+function get_highest_count_for_category(string $category): array {
 	$total_players = get_number_of_player();
 	$all_data = $GLOBALS["all_players_data"];
 	$highest_player = 0;
@@ -502,7 +502,7 @@ function get_highest_count_for_category(string $category):array {
 	];
 }
 
-function get_player_with_highest_friendships():array {
+function get_player_with_highest_friendships(): array {
 	$total_players = get_number_of_player();
     $marriables_npc = sanitize_json_with_version("marriables");
 	$all_data = $GLOBALS["all_players_data"];
@@ -534,7 +534,7 @@ function get_player_with_highest_friendships():array {
 	];
 }
 
-function has_players_done_monster_slayer_hero():bool {
+function has_players_done_monster_slayer_hero(): bool {
 	$total_players = get_number_of_player();
 	
 	for($current_player = 0; $current_player < $total_players; $current_player++) {
@@ -546,7 +546,7 @@ function has_players_done_monster_slayer_hero():bool {
 	return false;
 }
 
-function has_any_player_gotten_all_stardrops():bool {
+function has_any_player_gotten_all_stardrops(): bool {
 	$total_players = get_number_of_player();
 	$all_data = $GLOBALS["all_players_data"];
 
@@ -561,7 +561,7 @@ function has_any_player_gotten_all_stardrops():bool {
 	return false;
 }
 
-function get_junimo_leaderboard(object $junimo_leaderboard):object {
+function get_junimo_leaderboard(object $junimo_leaderboard): object {
 	if(is_object_empty($junimo_leaderboard)) {
 		return get_junimo_kart_fake_leaderboard();
 	}
@@ -596,7 +596,7 @@ function get_junimo_kart_fake_leaderboard(): object {
     ];
 }
 
-function get_museum_pieces_coords():array {
+function get_museum_pieces_coords(): array {
     $untreated_all_data = $GLOBALS["untreated_all_players_data"];
 	$museum_index = get_gamelocation_index($untreated_all_data, "museumPieces");
 	$in_game_museum_pieces = $untreated_all_data->locations->GameLocation[$museum_index]->museumPieces;
@@ -623,12 +623,12 @@ function get_museum_pieces_coords():array {
 	return $museum_piece_details;
 }
 
-function get_museum_piece_type(string $piece_name):string {
+function get_museum_piece_type(string $piece_name): string {
 	$artifacts = sanitize_json_with_version("artifacts", true);
 	return (in_array($piece_name, $artifacts)) ? "artifacts" : "minerals";
 }
 
-function get_cc_binary_hash(array $player_bundles):string {
+function get_cc_binary_hash(array $player_bundles): string {
 	$bundles_json = sanitize_json_with_version("bundles", true);
 	$room_indexes = [];
 
@@ -671,7 +671,7 @@ function get_cc_binary_hash(array $player_bundles):string {
 	return $binary_result;
 }
 
-function get_player_bundle_progress(object $bundle_data, array $bundle_progress):array {
+function get_player_bundle_progress(object $bundle_data, array $bundle_progress): array {
 	$bundle_details = get_player_bundle_details($bundle_data);
 	$bundle_details["is_complete"] = false;
 	$bundle_details["items_added"] = [];
@@ -699,7 +699,7 @@ function get_player_bundle_progress(object $bundle_data, array $bundle_progress)
 	return $bundle_details;
 }
 
-function is_bundle_completed(string $room_name, array $progress):bool {
+function is_bundle_completed(string $room_name, array $progress): bool {
 	$cc_rooms = [
         "Boiler Room" => "ccBoilerRoom",
 		"Crafts Room" => "ccCraftsRoom",
@@ -739,7 +739,7 @@ function is_bundle_completed(string $room_name, array $progress):bool {
 	return $is_bundle_completed;
 }
 
-function get_player_bundle_details(object $bundle_data):array {
+function get_player_bundle_details(object $bundle_data): array {
 	$formatted_bundle = explode("/", (string) $bundle_data->value->string);
 	$bundle_name = $formatted_bundle[0];
 	$bundle_requirements = get_bundle_requirements($formatted_bundle[2]);
@@ -754,7 +754,7 @@ function get_player_bundle_details(object $bundle_data):array {
 	return $bundle_details;
 }
 
-function get_bundle_requirements(string $requirements):array {
+function get_bundle_requirements(string $requirements): array {
 	$formatted_requirements = array_chunk(preg_split('/\s+/', $requirements), 3);
 	$bundle_requirements = [];
 	$item_types = [
@@ -796,7 +796,7 @@ function get_bundle_requirements(string $requirements):array {
 	return $bundle_requirements;
 }
 
-function has_been_donated_in_bundle(string $name, array $donated_items):bool {
+function has_been_donated_in_bundle(string $name, array $donated_items): bool {
 	$has_been_donated = false;
 
 	foreach($donated_items as $donated_item) {
@@ -808,7 +808,7 @@ function has_been_donated_in_bundle(string $name, array $donated_items):bool {
 	return $has_been_donated;
 }
 
-function get_story_quest_data(array $quest):array {
+function get_story_quest_data(array $quest): array {
 	return [
 		"time_limited"	=> false,
 		"objective"   	=> $quest["objective"],
@@ -818,7 +818,7 @@ function get_story_quest_data(array $quest):array {
 	];
 }
 
-function get_daily_quest_data(object $quest):array|null {
+function get_daily_quest_data(object $quest): array|null {
 	$quest_type = (int) $quest->questType;
 	$days_left = (int) $quest->daysLeft;
 	$rewards = [(int) $quest->reward];
@@ -887,7 +887,7 @@ function get_daily_quest_data(object $quest):array|null {
 	];
 }
 
-function get_special_order_data(object $special_order):array|null {
+function get_special_order_data(object $special_order): array|null {
 	$special_orders_json = sanitize_json_with_version("special_orders", true);
 
 	if(((string) $special_order->questState) !== "InProgress") {

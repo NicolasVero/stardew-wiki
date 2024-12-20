@@ -6,13 +6,13 @@ function get_settings(): { no_spoil: boolean, toggle_versions: boolean, spoil: b
     };
 }
 
-function initialize_settings():void {
+function initialize_settings(): void {
     handle_toggle_versions_mode();
     handle_no_spoil_mode();
     handle_spoil_mode();
 };
 
-function handle_no_spoil_mode():void {
+function handle_no_spoil_mode(): void {
     const spoil_checkbox = document.getElementById("spoil_mode") as HTMLInputElement;
     const no_spoil_checkbox = document.getElementById("no_spoil_mode") as HTMLInputElement;
 
@@ -23,11 +23,11 @@ function handle_no_spoil_mode():void {
     update_display(["not-found", "found"]);
 };
 
-function handle_toggle_versions_mode():void {
+function handle_toggle_versions_mode(): void {
     update_display("newer-version");
 };
 
-function handle_spoil_mode():void {
+function handle_spoil_mode(): void {
     const no_spoil_checkbox = document.getElementById("no_spoil_mode") as HTMLInputElement;
     const spoil_checkbox = document.getElementById("spoil_mode") as HTMLInputElement;
 
@@ -43,12 +43,12 @@ function handle_spoil_mode():void {
     }
 };
 
-function handle_steam_mode():void {
-    const images_folder : string[] = ["steam_achievements", "achievements"];
-    const images : NodeListOf<Element> = document.querySelectorAll(".achievements-section img");
+function handle_steam_mode(): void {
+    const images_folder: string[] = ["steam_achievements", "achievements"];
+    const images: NodeListOf<Element> = document.querySelectorAll(".achievements-section img");
 
-    images.forEach((image) => {
-        const src : string = image.getAttribute("src");
+    images.forEach((image: Element) => {
+        const src: string = image.getAttribute("src");
         const [old_folder, new_folder] = (src.includes('steam')) ? images_folder : [...images_folder].reverse();
         image.setAttribute("src", src.replace(old_folder, new_folder));
     });

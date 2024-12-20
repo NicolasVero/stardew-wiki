@@ -1,6 +1,6 @@
 <?php
 
-function log_(mixed $element, string $title = null):void {
+function log_(mixed $element, string $title = null): void {
     if($title !== null) {
 		echo "<h2>$title</h2>";
 	}
@@ -8,7 +8,7 @@ function log_(mixed $element, string $title = null):void {
 	echo "<pre>" . print_r($element, true) . "</pre>";
 }
 
-function load_all_json():void {
+function load_all_json(): void {
 	$all_json = [
 		"achievements_details",
 		"achievements",
@@ -46,7 +46,7 @@ function load_all_json():void {
 	}
 }
 
-function get_site_root():string {
+function get_site_root(): string {
 	if(is_on_localhost()) {
 		return "http://localhost/travail/stardew_dashboard";
 	}
@@ -55,15 +55,15 @@ function get_site_root():string {
 	return "$protocol://stardew-dashboard.42web.io";
 }
 
-function get_site_directory():string {
+function get_site_directory(): string {
 	return strstr(__DIR__, 'stardew_dashboard', true) . 'stardew_dashboard';
 }
 
-function get_json_folder():string {
+function get_json_folder(): string {
     return get_site_root() . "/data/json";
 }
 
-function get_saves_folder(bool $use_directory = false):string {
+function get_saves_folder(bool $use_directory = false): string {
     if($use_directory) {
 		return get_site_directory() . "/data/saves";
 	}
@@ -71,27 +71,27 @@ function get_saves_folder(bool $use_directory = false):string {
 	return get_site_root() . "/data/saves";
 }
 
-function does_save_exists(string $save):bool {
+function does_save_exists(string $save): bool {
     return is_file(get_saves_folder(true) . "/$save");
 }
 
-function get_images_folder(bool $is_external = false):string {
+function get_images_folder(bool $is_external = false): string {
 	return ($is_external || !is_on_localhost()) ? get_github_medias_url() : get_site_root() . "/medias/images";
 }
 
-function get_github_medias_url():string {
+function get_github_medias_url(): string {
 	return "https://raw.githubusercontent.com/NicolasVero/stardew-dashboard/refs/heads/master/medias/images";
 }
 
-function is_on_localhost():bool {
+function is_on_localhost(): bool {
 	return $_SERVER["HTTP_HOST"] === "localhost";
 }
 
-function is_game_older_than_1_6():bool {
+function is_game_older_than_1_6(): bool {
 	return ($GLOBALS["game_version_score"] < get_game_version_score("1.6.0"));
 }
 
-function get_formatted_date(bool $display_date = true):mixed {
+function get_formatted_date(bool $display_date = true): mixed {
 	$data = $GLOBALS["untreated_player_data"];
     $day    = $data->dayOfMonthForSaveGame;
     $season = ["spring", "summer", "fall", "winter"][$data->seasonForSaveGame % 4];
@@ -108,7 +108,7 @@ function get_formatted_date(bool $display_date = true):mixed {
 	];
 }
 
-function formate_number(int $number, string $lang = "en"):string {
+function formate_number(int $number, string $lang = "en"): string {
 	if($lang === "fr") {
 		return number_format($number, 0, ",", " ");
 	}
@@ -116,7 +116,7 @@ function formate_number(int $number, string $lang = "en"):string {
 	return number_format($number);
 } 
 
-function formate_text_for_file(string $string):string {
+function formate_text_for_file(string $string): string {
     $search  = [" ", "'", "(", ")", ",", ".", ":"];
     $replace = ["_", ""  , "" , "", "", "", ""   ];
     $string = str_replace($search, $replace, $string);
@@ -129,11 +129,11 @@ function formate_text_for_file(string $string):string {
     return $string;
 }
 
-function formate_original_data_string(string $data):string {
+function formate_original_data_string(string $data): string {
     return str_replace("(O)", "", $data);
 }
 
-function formate_usernames(string $username):string {
+function formate_usernames(string $username): string {
 	$regex = [
 		"à" => "a", "á" => "a", "â" => "a", "ã" => "a", "ä" => "a", "å" => "a", "æ" => "ae",
 		"ç" => "c",
@@ -156,7 +156,7 @@ function formate_usernames(string $username):string {
 	return strtr($username, $regex);
 }
 
-function in_bytes_conversion(string $size, string $use = "local"):int {
+function in_bytes_conversion(string $size, string $use = "local"): int {
     $unit_to_power = ($use === "local") 
 		? ["o"  => 0, "Ko" => 1, "Mo" => 2, "Go" => 3]
 		: ["K" => 1, "M" => 2, "G" => 3];
@@ -169,7 +169,7 @@ function in_bytes_conversion(string $size, string $use = "local"):int {
     return $value * pow(1024, $unit_to_power[$unite]);
 }
 
-function sanitize_json_with_version(string $json_name, bool $version_controler = false):array {
+function sanitize_json_with_version(string $json_name, bool $version_controler = false): array {
 	$original_json = $GLOBALS["json"][$json_name];
 	$game_version_score = $GLOBALS["game_version_score"] ?? "";
 	$sanitize_json = [];
@@ -183,12 +183,12 @@ function sanitize_json_with_version(string $json_name, bool $version_controler =
 	return $sanitize_json;
 }
 
-function find_reference_in_json(mixed $id, string $file):mixed {
+function find_reference_in_json(mixed $id, string $file): mixed {
     $json_file = sanitize_json_with_version($file);
     return isset($json_file[$id]) ? $json_file[$id] : null;
 }
 
-function get_correct_id(mixed &$id):int {
+function get_correct_id(mixed &$id): int {
 	if(!filter_var((int) $id, FILTER_VALIDATE_INT)) {
 		return get_custom_id($id);
 	}
@@ -196,23 +196,23 @@ function get_correct_id(mixed &$id):int {
 	return (int) $id;
 }
 
-function get_custom_id(string $item):int {
+function get_custom_id(string $item): int {
     return array_search($item, $GLOBALS["json"]["custom_ids"]);
 }
 
-function get_item_id_by_name(string $name):int {
+function get_item_id_by_name(string $name): int {
 	return array_search($name, $GLOBALS["json"]["all_items"]) ?? 0;
 }
 
-function get_item_name_by_id(int $id):string {
+function get_item_name_by_id(int $id): string {
 	return $GLOBALS["json"]["all_items"][$id] ?? "None";
 }
 
-function get_wiki_link(int $id):string {
+function get_wiki_link(int $id): string {
 	return $GLOBALS["json"]["wiki_links"][$id];
 }
 
-function get_wiki_link_by_name(string $name):string {
+function get_wiki_link_by_name(string $name): string {
 	return "https://stardewvalleywiki.com/" . [
 		"achievements" => "Achievements",
 		"children"     => "Children",
@@ -223,15 +223,15 @@ function get_wiki_link_by_name(string $name):string {
 	][$name] ?? "";
 }
 
-function array_keys_exists(array $keys, array $array):bool {
+function array_keys_exists(array $keys, array $array): bool {
     return count(array_diff_key(array_flip($keys), $array)) === 0;
 }
 
-function is_object_empty(object $object):bool {
+function is_object_empty(object $object): bool {
 	return ($object->attributes()->count() === 0);
 }
 
-function decode(string $filename):array {
+function decode(string $filename): array {
     $url = get_json_folder() . "/$filename.json";
     $ch = curl_init($url);
 
@@ -245,7 +245,7 @@ function decode(string $filename):array {
     return json_decode($response, true);
 }
 
-function get_game_duration():string {
+function get_game_duration(): string {
 	$player_game_duration = (int) $GLOBALS["untreated_player_data"]->millisecondsPlayed;
     $total_seconds = intdiv($player_game_duration, 1000);
     $seconds      = $total_seconds % 60;
@@ -256,23 +256,23 @@ function get_game_duration():string {
     return sprintf("%02d:%02d:%02d", $hours, $minutes, $seconds);
 }
 
-function get_number_of_player():int {
+function get_number_of_player(): int {
 	return count($GLOBALS["all_players_data"]);
 }
 
-function get_number_of_days_ingame():int {
+function get_number_of_days_ingame(): int {
 	$data = $GLOBALS["untreated_player_data"];
     return ((($data->dayOfMonthForSaveGame - 1)) + ($data->seasonForSaveGame * 28) + (($data->yearForSaveGame - 1) * 112));
 }
 
-function get_php_max_upload_size():string {
+function get_php_max_upload_size(): string {
 	$post_max_size_bytes = in_bytes_conversion(ini_get("post_max_size"), "server");
 	return json_encode([
         "post_max_size" => $post_max_size_bytes
     ]);
 }
 
-function is_a_mobile_device():bool {
+function is_a_mobile_device(): bool {
 	return (
 		stristr($_SERVER["HTTP_USER_AGENT"], "Android") ||
 		strpos($_SERVER["HTTP_USER_AGENT"], "iPod") !== false ||
@@ -280,7 +280,7 @@ function is_a_mobile_device():bool {
 	);
 }
 
-function get_contributors():array {
+function get_contributors(): array {
 	return [
 		[
 			"name" => "Romain",
@@ -337,7 +337,7 @@ function get_contributors():array {
 	];
 }
 
-function get_players_name():array {
+function get_players_name(): array {
 	$players_data = $GLOBALS["all_players_data"];
 	$players_names = [];
 
@@ -348,7 +348,7 @@ function get_players_name():array {
 	return $players_names;
 }
 
-function get_script_loader():string {
+function get_script_loader(): string {
 	return "
 		<script>
 			document.addEventListener('DOMContentLoaded', function() {
@@ -361,7 +361,7 @@ function get_script_loader():string {
 	";
 }
 
-function no_items_placeholder():string {
+function no_items_placeholder(): string {
 	return "Nothing to see here";
 }
 

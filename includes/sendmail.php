@@ -4,7 +4,7 @@ require __DIR__ . "/../vendor/autoload.php";
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-function send_feedback_mail(array $user_details):bool {
+function send_feedback_mail(array $user_details): bool {
 	require_once "load_environment.php";
 	
 	extract($user_details);

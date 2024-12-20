@@ -1,6 +1,6 @@
 <?php 
 
-function get_player_gender():string {
+function get_player_gender(): string {
 	$player_data = $GLOBALS["untreated_player_data"];
 	$genders = [
 		$player_data->gender,
@@ -25,7 +25,7 @@ function get_player_gender():string {
 	return "Neutral";
 }
 
-function get_player_achievements():array {
+function get_player_achievements(): array {
     $player_achievements = $GLOBALS["untreated_player_data"]->achievements;
 	$achievements_data = [];
 	
@@ -39,7 +39,7 @@ function get_player_achievements():array {
 	return $achievements_data;
 }
 
-function does_player_have_achievement(object $achievements, int $achievement_id):bool {
+function does_player_have_achievement(object $achievements, int $achievement_id): bool {
 	foreach($achievements->int as $achievement) {
 		if($achievement_id !== $achievement) {
 			continue;
@@ -51,7 +51,7 @@ function does_player_have_achievement(object $achievements, int $achievement_id)
 	return false;
 }
 
-function get_player_unlockables_list():array {
+function get_player_unlockables_list(): array {
 	$unlockables_json = sanitize_json_with_version("unlockables");
 	$unlockables = get_player_unlockables();
 
@@ -67,7 +67,7 @@ function get_player_unlockables_list():array {
 }
 
 //& TODO
-function get_player_unlockables():array {
+function get_player_unlockables(): array {
 	$player_data = $GLOBALS["untreated_player_data"];
 	$player_unlockables = [];
 	$unlockables_details = [
@@ -155,7 +155,7 @@ function get_player_unlockables():array {
 	return $player_unlockables;
 }
 
-function get_player_shipped_items():array {
+function get_player_shipped_items(): array {
 	$player_items = $GLOBALS["untreated_player_data"]->basicShipped;
 	$shipped_items_data = [];
 
@@ -176,7 +176,7 @@ function get_player_shipped_items():array {
 	return $shipped_items_data;
 }
 
-function get_player_skills_data():array {
+function get_player_skills_data(): array {
 	$player_skills = (array) $GLOBALS["untreated_player_data"]->professions->int;
 	$json_skills = sanitize_json_with_version("skills");
 	$skills_data = [];
@@ -192,7 +192,7 @@ function get_player_skills_data():array {
 	return $skills_data;
 }
 
-function get_player_enemies_killed_data():array { 
+function get_player_enemies_killed_data(): array { 
 	$player_enemies_killed = $GLOBALS["untreated_player_data"]->stats;
 	$enemies_data = [];
 	
@@ -206,17 +206,17 @@ function get_player_enemies_killed_data():array {
 	return $enemies_data;
 }
 
-function get_player_books():array {
+function get_player_books(): array {
 	$player_books = $GLOBALS["untreated_player_data"]->stats->Values;
 	return get_player_items_list($player_books, "books");
 }
 
-function get_player_masteries():array {
+function get_player_masteries(): array {
 	$player_masteries = $GLOBALS["untreated_player_data"]->stats->Values;
 	return get_player_items_list($player_masteries, "masteries");
 }
 
-function get_player_items_list(object $data, string $filename):array {
+function get_player_items_list(object $data, string $filename): array {
 	if(is_game_older_than_1_6()) {
 		return [];
 	}
@@ -239,7 +239,7 @@ function get_player_items_list(object $data, string $filename):array {
 	return $items_data;
 }
 
-function get_player_fishes_caught():array {
+function get_player_fishes_caught(): array {
 	$player_fishes = $GLOBALS["untreated_player_data"]->fishCaught;
 	$fishes_data = [];
 
@@ -265,7 +265,7 @@ function get_player_fishes_caught():array {
 	return $fishes_data;
 }
 
-function get_player_friendship_data():array {
+function get_player_friendship_data(): array {
 	$player_friendships = $GLOBALS["untreated_player_data"]->friendshipData;
 	$villagers_json = sanitize_json_with_version("villagers");
 	$birthday_json = sanitize_json_with_version("villagers_birthday");
@@ -296,7 +296,7 @@ function get_player_friendship_data():array {
 	return $friends_data; 
 }
 
-function get_player_quest_log():array {
+function get_player_quest_log(): array {
 	$entire_data = $GLOBALS["untreated_all_players_data"];
 	$player_quest_log = $GLOBALS["untreated_player_data"]->questLog;
 	$quests_data = [];
@@ -328,7 +328,7 @@ function get_player_quest_log():array {
 	return $quests_data;
 }
 
-function get_player_crafting_recipes():array {
+function get_player_crafting_recipes(): array {
 	$player_crafting_recipes = $GLOBALS["untreated_player_data"]->craftingRecipes;
 	$crafting_recipes_json = sanitize_json_with_version("crafting_recipes");
 	$crafting_recipes_data = [];
@@ -347,7 +347,7 @@ function get_player_crafting_recipes():array {
 	return $crafting_recipes_data;
 }
 
-function get_player_cooking_recipes():array {
+function get_player_cooking_recipes(): array {
 	$player_recipes = $GLOBALS["untreated_player_data"]->cookingRecipes;
 	$player_recipes_cooked = $GLOBALS["untreated_player_data"]->recipesCooked;
 	$cooking_recipes_json = sanitize_json_with_version("cooking_recipes");
@@ -388,7 +388,7 @@ function get_player_cooking_recipes():array {
 	return $cooking_recipes_data;
 }
 
-function get_player_artifacts():array {
+function get_player_artifacts(): array {
 	$player_artifacts = $GLOBALS["untreated_player_data"]->archaeologyFound;
     $general_data = $GLOBALS["untreated_all_players_data"];
 	$artifacts_data = [];
@@ -413,7 +413,7 @@ function get_player_artifacts():array {
 	return $artifacts_data;
 }
 
-function get_player_minerals():array {
+function get_player_minerals(): array {
 	$player_minerals = $GLOBALS["untreated_player_data"]->mineralsFound;
     $general_data = $GLOBALS["untreated_all_players_data"];
 	$minerals_data = [];
@@ -437,7 +437,7 @@ function get_player_minerals():array {
 	return $minerals_data;
 }
 
-function get_player_adventurers_guild_data(int $player_id):array {
+function get_player_adventurers_guild_data(int $player_id): array {
 	$categories = get_all_adventurers_guild_categories();
 	$enemies_killed = $GLOBALS["all_players_data"][$player_id]["enemies_killed"];
 	$adventurers_guild_data = [];
@@ -466,7 +466,7 @@ function get_player_adventurers_guild_data(int $player_id):array {
 	return $adventurers_guild_data;
 }
 
-function are_all_adventurers_guild_categories_completed(array $adventurers_guild_data):bool {
+function are_all_adventurers_guild_categories_completed(array $adventurers_guild_data): bool {
     $counter = 0;
     foreach($adventurers_guild_data as $data) {
         if($data["is_completed"]) {	
@@ -477,7 +477,7 @@ function are_all_adventurers_guild_categories_completed(array $adventurers_guild
     return $counter === count($adventurers_guild_data);
 }
 
-function get_player_pet():array {
+function get_player_pet(): array {
 	$player_data = $GLOBALS["untreated_player_data"];
 	$breed = (int) $player_data->whichPetBreed;
 	$type = (is_game_older_than_1_6()) ?
@@ -491,7 +491,7 @@ function get_player_pet():array {
 	];
 }
 
-function get_player_farm_animals():array {
+function get_player_farm_animals(): array {
     $data = $GLOBALS["untreated_all_players_data"];
     $animals_data = [];
     
@@ -565,7 +565,7 @@ function get_player_farm_animals():array {
     return $animals_data;
 }
 
-function get_player_secret_notes():array {
+function get_player_secret_notes(): array {
 	$player_secret_notes = $GLOBALS["untreated_player_data"]->secretNotesSeen;
 	$player_secret_notes = (array) $player_secret_notes->int;
 	sort($player_secret_notes);
@@ -581,7 +581,7 @@ function get_player_secret_notes():array {
 	return $all_secret_notes;
 }
 
-function get_jumino_kart_leaderboard():array {
+function get_jumino_kart_leaderboard(): array {
 	$data = $GLOBALS["untreated_all_players_data"];
 	$all_entries = $data->junimoKartLeaderboards->entries;
 	$leaderboard = [];
@@ -598,14 +598,14 @@ function get_jumino_kart_leaderboard():array {
 	return $leaderboard;
 }
 
-function get_player_stardrops_found():int {
+function get_player_stardrops_found(): int {
 	$player_stamina = (int) $GLOBALS["untreated_player_data"]->maxStamina;
 	$min_stamina = 270;
 	$stamina_per_stardrop = 34;
 	return ($player_stamina - $min_stamina) / $stamina_per_stardrop;
 }
 
-function get_player_visited_locations():array {
+function get_player_visited_locations(): array {
 	if(is_game_older_than_1_6()) {
 		return [];
 	}
@@ -653,7 +653,7 @@ function get_player_visited_locations():array {
 	return $player_visited_locations;
 }
 
-function get_player_bundles():array {
+function get_player_bundles(): array {
     $untreated_all_data = $GLOBALS["untreated_all_players_data"];
 	$bundles_index = get_gamelocation_index($untreated_all_data, "bundles");
 	$bundles_json = sanitize_json_with_version("bundles", true);

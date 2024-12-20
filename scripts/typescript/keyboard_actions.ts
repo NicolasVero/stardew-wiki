@@ -17,9 +17,9 @@ window.addEventListener("keydown", (event: KeyboardEvent) => {
     } 
 
     if(panels[event.code]) {
-        const panel_selector : string = panels[event.code] + "-" + get_current_player_id();
-        const panel : HTMLElement = document.querySelector(panel_selector);
-        const panel_display : string = (panel?.style.display === "block") ? "none" : "block";
+        const panel_selector: string = panels[event.code] + "-" + get_current_player_id();
+        const panel: HTMLElement = document.querySelector(panel_selector);
+        const panel_display: string = (panel?.style.display === "block") ? "none" : "block";
         
         close_all_panels(all_panels);
         panel.style.display = panel_display;

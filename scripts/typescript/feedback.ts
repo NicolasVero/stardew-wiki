@@ -1,9 +1,9 @@
-function activate_feedback_ajax_trigger():void {
-    const triggers : NodeListOf<Element> = document.querySelectorAll(".feedback-opener");
+function activate_feedback_ajax_trigger(): void {
+    const triggers: NodeListOf<Element> = document.querySelectorAll(".feedback-opener");
 
     triggers.forEach(trigger => {
-        trigger.addEventListener("click", () => {
-            const existing_window : Element = document.querySelector(".feedback-panel");
+        trigger.addEventListener("click", (): void => {
+            const existing_window: Element = document.querySelector(".feedback-panel");
             hide_all_sections();
             
             if(existing_window) {
@@ -16,8 +16,8 @@ function activate_feedback_ajax_trigger():void {
 }
 
 // Create feedback form
-function feedback_form_creation():void {
-    const xml_upload : HTMLBodyElement = document.querySelector("body");
+function feedback_form_creation(): void {
+    const xml_upload: HTMLBodyElement = document.querySelector("body");
 
     fetch("./includes/functions/display_panels_functions.php", {
         method: "POST",
@@ -46,7 +46,7 @@ function feedback_form_creation():void {
     .catch(error => console.error("Error:", error));
 }
 
-function activate_feedback_form():void {
+function activate_feedback_form(): void {
     const form = document.getElementById("feedback_form") as HTMLFormElement;
     form?.addEventListener("submit", (event) => {
         event.preventDefault();
@@ -68,17 +68,17 @@ function activate_feedback_form():void {
     });
 }
 
-function feedback_custom_radio():void {
-    const feedback_fake_radios = document.querySelectorAll(".feedback_custom_radio");
-    const feedback_real_radios = document.querySelectorAll(".feedback_real_radio");
+function feedback_custom_radio(): void {
+    const feedback_fake_radios: NodeListOf<Element> = document.querySelectorAll(".feedback_custom_radio");
+    const feedback_real_radios: NodeListOf<Element> = document.querySelectorAll(".feedback_real_radio");
 
     feedback_fake_radios.forEach(fake_radio => {
-        const span_topic = fake_radio.parentElement!;
+        const span_topic: HTMLElement = fake_radio.parentElement!;
         
         span_topic.addEventListener("click", () => {
             const real_radio = fake_radio.previousElementSibling as HTMLInputElement;
 
-            if(real_radio && real_radio.type === "radio") {
+            if(real_radio !== null && real_radio.type === "radio") {
                 real_radio.checked = true;
                 real_radio.dispatchEvent(new Event("change"));
             }
@@ -93,7 +93,7 @@ function feedback_custom_radio():void {
 
             const fake_radio = real_radio.nextElementSibling as HTMLElement;
             
-            if(fake_radio && fake_radio.tagName === "IMG") {
+            if(fake_radio !== null && fake_radio.tagName === "IMG") {
                 if((real_radio as HTMLInputElement).checked) {
                     fake_radio.classList.remove("topic_not_selected");
                 } else {

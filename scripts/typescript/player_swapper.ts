@@ -1,5 +1,5 @@
-function initialize_player_swapper(players_count: number):void {
-	const players_selection : HTMLCollectionOf<HTMLElement> = document.getElementsByClassName("player_selection") as HTMLCollectionOf<HTMLElement>;
+function initialize_player_swapper(players_count: number): void {
+	const players_selection: HTMLCollectionOf<HTMLElement> = document.getElementsByClassName("player_selection") as HTMLCollectionOf<HTMLElement>;
 
 	for(let i = 0; i < players_selection.length; i++) {
 		players_selection[i].addEventListener("click", () => {
@@ -8,8 +8,8 @@ function initialize_player_swapper(players_count: number):void {
 	}
 }
 
-function swap_displayed_player(player_id: number):void {
-	const players_display : HTMLCollectionOf<HTMLElement> = document.getElementsByClassName("player_container") as HTMLCollectionOf<HTMLElement>;
+function swap_displayed_player(player_id: number): void {
+	const players_display: HTMLCollectionOf<HTMLElement> = document.getElementsByClassName("player_container") as HTMLCollectionOf<HTMLElement>;
 
 	for(let i = 0; i < players_display.length; i++) {
 		players_display[i].style.display = (player_id !== i) ? "none" : "block";

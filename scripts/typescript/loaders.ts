@@ -1,4 +1,4 @@
-function load_error_page_items():void {
+function load_error_page_items(): void {
     const button_configurations = [
         { open_button: ".main-settings", exit_button: ".exit-settings", modal_panel: ".settings"     },
         { open_button: ".file-upload",   exit_button: ".exit-upload",   modal_panel: ".upload-panel" }
@@ -9,7 +9,7 @@ function load_error_page_items():void {
     });
 }
 
-function load_elements():void {
+function load_elements(): void {
     toggle_landing_page(false);
     toggle_checkboxes_actions();
 
@@ -26,7 +26,7 @@ function load_elements():void {
         "museum", "community-center", "visited-locations"
     ];
 
-    const players_in_save : number = get_players_number();
+    const players_in_save: number = get_players_number();
     const dynamic_buttons = [];
 	
     for(let i = 0; i < players_in_save; i++) {
@@ -46,7 +46,7 @@ function load_elements():void {
     });
 
     document.getElementById("home-icon")?.addEventListener("click", () => {
-        const display = document.getElementById("landing_page")?.style.display !== "none";
+        const display: boolean = document.getElementById("landing_page")?.style.display !== "none";
         toggle_landing_page(!display);
     });
 
