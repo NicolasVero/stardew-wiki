@@ -405,17 +405,6 @@ function get_player_with_highest_friendships(): array {
 	];
 }
 
-function has_players_done_monster_slayer_hero(): bool {
-	$total_players = get_number_of_player();
-	
-	for($current_player = 0; $current_player < $total_players; $current_player++) {
-		if(get_player_adventurers_guild_data($current_player)["is_all_completed"]) {
-			return true;
-		}
-	}
-
-	return false;
-}
 
 function has_any_player_gotten_all_stardrops(): bool {
 	$total_players = get_number_of_player();

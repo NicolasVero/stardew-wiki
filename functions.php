@@ -43,3 +43,6 @@ require_once "includes/panels/quests/display_data.php";
 
 require_once "includes/panels/eradication_goals/get_data.php";
 require_once "includes/panels/eradication_goals/display_data.php";
+
+require_once "includes/panels/museum/get_data.php";
+require_once "includes/panels/museum/display_data.php";
