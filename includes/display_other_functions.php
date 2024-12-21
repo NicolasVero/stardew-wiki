@@ -63,57 +63,7 @@ function get_skills_icons(array $skills, string $current_skill): string {
 }
 
 
-function get_friendship_structure(array $friendship_info): string {
-    extract($friendship_info);
-    $friend_icon = "$images_path/characters/" . strtolower($name) . ".png";
-    $is_newer_version = array_search($name, $json_with_version) ? "older-version" : "newer-version";
-    
-    $birthday = $birthday_json[get_custom_id($name)] ?? null;
-    $is_birthday = $birthday && is_this_the_same_day($birthday) ? "is_birthday" : "isnt_birthday";
-    $birthday_date = $birthday ? "Day " . explode("/", $birthday)[0] . " of " . explode("/", $birthday)[1] : "Unknown";
-    
-    $wiki_url = get_wiki_link(get_item_id_by_name($name));
-    
-    $friend_level = $friend["friend_level"] ?? 0;
-    $status = $friend["status"] ?? "Unknown";
-    $can_be_married = in_array($name, $marriables_npc) && $status === "Friendly";
-    $max_heart = ($status) === "Married" ? 14 : 10;
-    $is_met = ($status === "Unknown") ? "not-met" : "met";
-    
-    $hearts_html = "";
 
-    for($i = 1; $i <= $max_heart; $i++) {
-        $heart_icon = "$images_path/icons/" . (($i > 8 && $can_be_married) ? "locked_heart.png" : (($friend_level >= $i) ? "heart.png" : "empty_heart.png"));
-        $hearts_html .= "<img src='$heart_icon' class='hearts' alt=''/>";
-    }
-
-    $gifted = ($friend) ? [
-        $friend["week_gifts"] > 0 ? "gifted" : "not-gifted",
-        $friend["week_gifts"] === 2 ? "gifted" : "not-gifted"
-    ] : ["not-gifted", "not-gifted"];
-
-    return "
-        <span>
-            <a href='$wiki_url' class='wiki_link' rel='noreferrer' target='_blank'>
-                <img src='$friend_icon' class='character-icon $is_newer_version $is_met' alt='$name icon'/>
-            </a>
-            <span class='character-name " . strtolower($name) . "'>$name</span>
-            <span class='hearts-level'>$hearts_html</span>
-            <span class='tooltip'> 
-                <img src='$images_path/icons/birthday_icon.png' class='birthday_icon $is_birthday' alt=''/>
-                <span>$birthday_date</span>
-            </span>
-            <span class='interactions'>
-                <span class='tooltip'>
-                    <img src='$images_path/icons/gift.png' class='interaction {$gifted[0]}' alt=''/>
-                    <img src='$images_path/icons/gift.png' class='interaction {$gifted[1]}' alt=''/>
-                    <span>Gifts made in the last week</span>
-                </span>
-            </span>
-            <span class='friend-status'>$status</span>
-        </span>
-    ";
-}
 
 function get_animal_status_tooltip(string $status, string $animal_name): string {
     return [

@@ -22,3 +22,9 @@ require_once "includes/topbar/display_data.php";
 // General stats
 require_once "includes/general_stats/get_data.php";
 require_once "includes/general_stats/display_data.php";
+
+require_once "includes/panels/unlockables/get_data.php";
+require_once "includes/panels/unlockables/display_data.php";
+
+require_once "includes/panels/friendships/get_data.php";
+require_once "includes/panels/friendships/display_data.php";

@@ -65,85 +65,8 @@ function display_skills(): string {
     ";
 }
 
-function display_top_friendships(int $limit = 5): string {
-    return display_friendships($limit);
-}
 
-function display_friendships(int $limit = -1): string {
-    $player_id = get_current_player_id();
-    $friendship_data = get_friendships_data();
-    $images_path = get_images_folder();
-    
-    $marriables_npc = sanitize_json_with_version("marriables");
-    $villagers_json = sanitize_json_with_version("villagers");
-    $birthday_json = sanitize_json_with_version("villagers_birthday");
-    $json_with_version = sanitize_json_with_version("villagers", true);
-    
-    $section_class = ($limit === -1) ? "all-friends" : "top-friends";
-    $view_all = ($limit === -1) ? "" : "<span class='view-all-friends view-all-friends-$player_id modal-opener'>- View all friendships</span>";
-    $structure = ($limit === -1)
-        ? "
-        <section class='info-section friends-section $section_class $section_class-$player_id modal-window'>
-            <div class='panel-header'>
-                <h2 class='section-title panel-title'>Friendship progression</h2>
-                <img src='$images_path/icons/exit.png' class='exit-all-friends-$player_id exit' alt='Exit'/>
-            </div>
-            <span class='friendlist'>
-        "
-        : "
-        <section class='info-section friends-section $section_class _50'>
-            <span class='has_panel'>
-                <h2 class='section-title'>Friendship progression</h2>
-                $view_all
-            </span>
-            <span class='friendlist'>
-        ";
 
-    foreach($friendship_data as $name => $friend) {
-        if($limit === 0) {
-            break;
-        }
-        
-        $friendship_info = [
-            "name" => $name,
-            "friend" => $friend,
-            "images_path" => $images_path,
-            "marriables_npc" => $marriables_npc,
-            "birthday_json" => $birthday_json,
-            "json_with_version"=> $json_with_version
-        ];
-
-        $structure .= get_friendship_structure($friendship_info);
-        $limit--;
-    }
-
-    foreach($villagers_json as $villager_name) {
-        if($limit === 0) {
-            break;
-        }
-
-        if(isset($friendship_data[$villager_name])) {   
-            continue;
-        }
-
-        $friendship_info = [
-            "name" => $villager_name,
-            "friend" => null,
-            "images_path" => $images_path,
-            "marriables_npc" => $marriables_npc,
-            "birthday_json" => $birthday_json,
-            "json_with_version"=> $json_with_version
-        ];
-        
-        $structure .= get_friendship_structure($friendship_info);
-        $limit--;
-    }
-
-    $structure .= "
-            </span>
-        </section>";
-    return $structure;
-}
 
 
 
