@@ -11,6 +11,10 @@ require_once "includes/display_panels_functions.php";
 require_once "includes/display_pages_functions.php";
 
 
-
+// Header
 require_once "includes/header/get_data.php";
 require_once "includes/header/display_data.php";
+
+// Topbar
+// require_once "includes/topbar/get_data.php";
+require_once "includes/topbar/display_data.php";

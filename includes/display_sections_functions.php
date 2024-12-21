@@ -74,27 +74,7 @@ function display_spouse(mixed $spouse, array $children): string {
     ";
 }
 
-function display_sur_header(bool $is_landing_page = false, bool $is_error_screen = false): string {
-	$menu_id = ($is_landing_page) ? "landing_menu" : (($is_error_screen) ? "error_menu" : "dashboard_menu");
-	$save_id = ($is_landing_page) ? "landing" : "file";
-	$settings_id = ($is_landing_page) ? "landing" : "main";
-    $player_selection = (!$is_landing_page && !$is_error_screen) ? display_player_selection() : "";
-	$game_version = (!$is_landing_page && !$is_error_screen) ? display_game_version() : "";
-	$home_button = (!$is_landing_page && !$is_error_screen) ? display_home_button() : "";
 
-    return "
-        <div id='$menu_id' class='sur-header'>
-            $player_selection
-            <span>
-                $game_version
-                " . display_save_button($save_id) . "
-                " . display_settings_button($settings_id) . "
-                " . display_feedback_button() . "
-                $home_button
-            </span>
-        </div>
-    ";
-}
 
 
 

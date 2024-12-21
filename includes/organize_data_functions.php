@@ -13,7 +13,7 @@ function load_save(string $save_file, bool $use_ajax = true): mixed {
 
     $players_data = get_all_players_data();
     $GLOBALS["players_names"] = get_players_name();
-    $pages["sur_header"] = display_sur_header();
+    $pages["topbar"] = display_topbar();
 
     
     for($player_count = 0; $player_count < count($players_data); $player_count++) {
