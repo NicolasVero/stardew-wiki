@@ -431,3 +431,16 @@ function has_any_player_gotten_all_stardrops(): bool {
 
 	return false;
 }
+
+function get_child_tooltip(string $spouse, array $children): string {
+	$gender = get_the_married_person_gender($spouse);
+	$children_count = count($children);
+	$children_names = ($children_count === 1) ? $children[0] : implode(" and ", $children);
+	$nombre = ($children_count > 1) ? "children" : "child";
+
+	if($children_count === 0) {   
+        return "With $gender $spouse, haven't yet had $nombre";
+    }
+
+	return "With $gender $spouse, you had $children_count $nombre : $children_names";
+}

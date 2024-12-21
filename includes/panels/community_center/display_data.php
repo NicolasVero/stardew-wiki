@@ -81,3 +81,55 @@ function display_community_center_panel(): string {
         </section>
     ";
 }
+
+function display_bundle_requirements(array $requirements, array $added_items): string {
+    $images_path = get_images_folder();
+    $structure = "";
+    
+    foreach($requirements as $requirement) {
+        extract($requirement);
+
+        $formatted_item_name = formate_text_for_file($name);
+        $has_been_donated = (has_been_donated_in_bundle($name, $added_items)) ? "donated" : "not-donated";
+        $quantity = ($quantity > 1) ? "<span class='quantity'>$quantity</span>" : "";
+
+        $structure .= "
+            <span class='required-item'>
+                <img src='$images_path/$type/$formatted_item_name.png' class='item $has_been_donated' alt='$name'/>
+                <img src='$images_path/icons/quality_$quality.png' class='quality' alt=''/>
+                $quantity
+            </span>
+        ";
+    }
+
+    return $structure;
+}
+
+function display_bundle_added_items(array $added_items, int $limit): string {
+    $structure = "";
+    $images_path = get_images_folder();
+    
+    for($i = 0; $i < $limit; $i++) {
+        $added_item = "";
+
+        if(isset($added_items[$i])) {
+            $item_name = $added_items[$i]["name"];
+            $formatted_item_name = formate_text_for_file($item_name);
+            $type = $added_items[$i]["type"];
+            $added_item = "<img src='$images_path/$type/$formatted_item_name.png' class='added-item' alt='$item_name'/>";
+        }
+
+        $structure .= "
+            <span class='slot'>
+                <img src='$images_path/icons/bundle_slot.png' class='empty-slot' alt=''/>
+                $added_item
+            </span>
+        ";
+    }
+
+    return $structure;
+}
+
+function display_bundle_purchase(): string {
+    return "<img src='" . get_images_folder() . "/content/purchase.png' class='purchase' alt=''/>";
+}

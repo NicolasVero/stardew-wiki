@@ -10,9 +10,6 @@ function display_quest_button(): string {
 	return "<img src='" . get_images_folder() . "/icons/quest_icon.png' class='quest-icon view-all-quests view-all-quests-" . get_current_player_id() . " button-elements modal-opener icon' alt='Quest icon'/>";
 }
 
-function display_visited_locations_button(): string {
-	return "<img src='" . get_images_folder() . "/icons/location_icon.png' class='visited-locations-icon view-visited-locations view-visited-locations-" . get_current_player_id() . " button-elements modal-opener icon' alt='Visited locations icon'/>";
-}
 
 function get_level_progress_bar(int $level, int $max_level = 10): string {
     $images_path = get_images_folder();
@@ -73,18 +70,7 @@ function get_animal_status_tooltip(string $status, string $animal_name): string 
 
 
 
-function get_child_tooltip(string $spouse, array $children): string {
-	$gender = get_the_married_person_gender($spouse);
-	$children_count = count($children);
-	$children_names = ($children_count === 1) ? $children[0] : implode(" and ", $children);
-	$nombre = ($children_count > 1) ? "children" : "child";
 
-	if($children_count === 0) {   
-        return "With $gender $spouse, haven't yet had $nombre";
-    }
-
-	return "With $gender $spouse, you had $children_count $nombre : $children_names";
-}
 
 
 
@@ -123,54 +109,3 @@ function display_project_contributor(array $options): string {
     ";
 }
 
-function display_bundle_requirements(array $requirements, array $added_items): string {
-    $images_path = get_images_folder();
-    $structure = "";
-    
-    foreach($requirements as $requirement) {
-        extract($requirement);
-
-        $formatted_item_name = formate_text_for_file($name);
-        $has_been_donated = (has_been_donated_in_bundle($name, $added_items)) ? "donated" : "not-donated";
-        $quantity = ($quantity > 1) ? "<span class='quantity'>$quantity</span>" : "";
-
-        $structure .= "
-            <span class='required-item'>
-                <img src='$images_path/$type/$formatted_item_name.png' class='item $has_been_donated' alt='$name'/>
-                <img src='$images_path/icons/quality_$quality.png' class='quality' alt=''/>
-                $quantity
-            </span>
-        ";
-    }
-
-    return $structure;
-}
-
-function display_bundle_added_items(array $added_items, int $limit): string {
-    $structure = "";
-    $images_path = get_images_folder();
-    
-    for($i = 0; $i < $limit; $i++) {
-        $added_item = "";
-
-        if(isset($added_items[$i])) {
-            $item_name = $added_items[$i]["name"];
-            $formatted_item_name = formate_text_for_file($item_name);
-            $type = $added_items[$i]["type"];
-            $added_item = "<img src='$images_path/$type/$formatted_item_name.png' class='added-item' alt='$item_name'/>";
-        }
-
-        $structure .= "
-            <span class='slot'>
-                <img src='$images_path/icons/bundle_slot.png' class='empty-slot' alt=''/>
-                $added_item
-            </span>
-        ";
-    }
-
-    return $structure;
-}
-
-function display_bundle_purchase(): string {
-    return "<img src='" . get_images_folder() . "/content/purchase.png' class='purchase' alt=''/>";
-}

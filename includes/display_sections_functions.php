@@ -3,7 +3,7 @@
 function display_panels(): string {
 	$structure  = display_friendships();
 	$structure .= display_quest_panel();
-    $structure .= display_visited_locations();
+    $structure .= display_visited_locations_panel();
 	$structure .= display_monster_eradication_goals_panel();
 	$structure .= display_calendar_panel();
 	$structure .= display_farm_animals_panel();
@@ -278,15 +278,6 @@ function display_secret_notes(): string {
         "player_data" => get_secret_notes_data(),
         "json_filename" => "secret_notes",
         "section_title" => "Secret notes"
-    ];
-    return display_detailled_gallery($gallery_details, "_50");
-}
-
-function display_locations_visited(): string {
-    $gallery_details = [
-        "player_data" => get_locations_visited_data(),
-        "json_filename" => "locations_to_visit",
-        "section_title" => "Locations visited"
     ];
     return display_detailled_gallery($gallery_details, "_50");
 }

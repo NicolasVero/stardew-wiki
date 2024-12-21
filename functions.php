@@ -31,3 +31,6 @@ require_once "includes/panels/friendships/display_data.php";
 
 require_once "includes/panels/community_center/get_data.php";
 require_once "includes/panels/community_center/display_data.php";
+
+require_once "includes/panels/visited_locations/get_data.php";
+require_once "includes/panels/visited_locations/display_data.php";
