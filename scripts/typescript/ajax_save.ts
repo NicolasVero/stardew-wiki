@@ -39,7 +39,7 @@ async function AJAX_send(): Promise<void> {
     const landing_menu: HTMLElement = document.getElementById("landing_menu");
     const landing_page: string = document.getElementById("landing_page")?.outerHTML ?? "";
 
-    if(landing_menu === null) {
+    if(landing_menu !== null) {
         landing_menu.outerHTML = "";
     }
 
