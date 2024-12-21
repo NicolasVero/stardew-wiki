@@ -218,16 +218,7 @@ function get_animal_status_tooltip(string $status, string $animal_name): string 
     ][$status] ?? "";
 }
 
-function get_weather_tooltip(string $weather): string {
-	return [
-		"sun"        => "It's going to be clear and sunny all day",
-		"rain"       => "It's going to rain all day tomorrow",
-		"green_rain" => "Um... There appears to be some kind of... anomalous reading... I... don't know what this means...",
-		"wind"       => "It's going to be cloudy, with gusts of wind throughout the day",
-		"storm"      => "Looks like a storm is approaching. Thunder and lightning is expected",
-		"snow"       => "Expect a few inches of snow tomorrow"
-	][$weather] ?? "";
-}
+
 
 function get_child_tooltip(string $spouse, array $children): string {
 	$gender = get_the_married_person_gender($spouse);
@@ -242,54 +233,8 @@ function get_child_tooltip(string $spouse, array $children): string {
 	return "With $gender $spouse, you had $children_count $nombre : $children_names";
 }
 
-function display_festival_icon(): string {
-    $images_path = get_images_folder();
-    $festivals = sanitize_json_with_version("festivals", true);
-	$festival_name = "Not a festival day";
-	$festival_class = "isnt_festival";
 
-	foreach($festivals as $key => $festival) {
-		for($i = 0; $i < count($festival["date"]); $i++) {
-			if(is_this_the_same_day($festival["date"][$i])) {
-				$festival_class = "is_festival";
-				$festival_name = $festival["name"];
-				$wiki_url = get_wiki_link($key);
-				break;
-			}
-		}
-	}
 
-	return (isset($wiki_url)) 
-    ? 
-	"<span class='tooltip'>
-		<a href='$wiki_url' class='wiki_link' rel='noreferrer' target='_blank'>
-			<img src='$images_path/icons/festival_icon.gif' class='festival_icon $festival_class' alt='Festival icon'/>
-		</a>
-		<span class='right'>$festival_name</span>
-	</span>"
-	:
-	"<span class='tooltip'>
-        <a href='" . get_wiki_link_by_name("festival") . "' class='wiki_link' rel='noreferrer' target='_blank'>
-		    <img src='$images_path/icons/festival_icon.png' class='festival_icon $festival_class' alt='Festival icon'/>
-		</a>
-        <span class='right'>$festival_name</span>
-	</span>";
-}
-
-function display_weather_icon(): string {
-    $data = $GLOBALS["shared_players_data"];
-    $images_path = get_images_folder();
-    $weather = $data["weather"];
-
-    return "
-        <span class='tooltip'>
-            <a href='https://stardewvalleywiki.com/Weather' class='wiki_link' rel='noreferrer' target='_blank'>
-                <img src='$images_path/icons/$weather.png' class='weather_icon' alt='Weather icon'/>
-            </a>
-            <span class='left'>" . get_weather_tooltip($weather) . "</span>
-        </span>
-    ";
-}
 
 function display_project_contributor(array $options): string {
     extract($options);
