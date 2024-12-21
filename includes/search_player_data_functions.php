@@ -142,37 +142,7 @@ function get_player_fishes_caught(): array {
 
 
 
-function get_player_quest_log(): array {
-	$entire_data = $GLOBALS["untreated_all_players_data"];
-	$player_quest_log = $GLOBALS["untreated_player_data"]->questLog;
-	$quests_data = [];
 
-	foreach($player_quest_log->Quest as $quest) {
-		$quest_id = (int) $quest->id;
-		$quest_reference = find_reference_in_json(
-			$quest_id,
-			"quests"
-		);
-
-		// if -> Quête histoire // else -> Quête daily
-		if(!empty($quest_reference)){
-			$quests_data[] = get_story_quest_data($quest_reference);
-		} else {
-			if (($quest_data = get_daily_quest_data($quest)) !== null) {
-				$quests_data[] = $quest_data;
-			}
-		}
-	}
-
-	// Special Orders (Weekly)
-	foreach($entire_data->specialOrders->SpecialOrder as $special_order) {
-		if (($special_order_data = get_special_order_data($special_order)) !== null) {
-			$quests_data[] = $special_order_data;
-		}
-	}
-
-	return $quests_data;
-}
 
 function get_player_crafting_recipes(): array {
 	$player_crafting_recipes = $GLOBALS["untreated_player_data"]->craftingRecipes;

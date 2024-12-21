@@ -6,9 +6,7 @@ function display_junimo_kart_button(): string {
 
 
 
-function display_quest_button(): string {
-	return "<img src='" . get_images_folder() . "/icons/quest_icon.png' class='quest-icon view-all-quests view-all-quests-" . get_current_player_id() . " button-elements modal-opener icon' alt='Quest icon'/>";
-}
+
 
 
 function get_level_progress_bar(int $level, int $max_level = 10): string {
