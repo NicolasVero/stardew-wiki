@@ -10,10 +10,6 @@ function get_element_completion_percentage(int $max_amount, int $current_amount)
 	return round(($current_amount / $max_amount), 3, PHP_ROUND_HALF_DOWN);
 }
 
-//& Voir plus deplacer utility functions
-function does_host_has_element(string $element): int {
-	return ($GLOBALS["host_player_data"]["unlockables"][$element]["is_found"]);
-}
 
 function has_element_in_mail(string $element): int {
 	$player_data = $GLOBALS["untreated_player_data"] ?? $GLOBALS["untreated_all_players_data"]->player;
@@ -35,13 +31,7 @@ function has_element_based_on_version(string $element_older_version, string $ele
 	return has_element_in_mail($element_newer_version);
 }
 
-function has_element_based_on_host(string $element, string $element_newer_version): int {
-	if(isset($GLOBALS["host_player_data"])) {
-		return does_host_has_element($element);
-	}
-	
-	return has_element_in_mail($element_newer_version);
-}
+
 
 //& Voir plus deplacer utility functions
 function get_game_version_score(string $version): int {
