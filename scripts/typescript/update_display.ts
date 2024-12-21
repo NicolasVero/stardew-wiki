@@ -35,7 +35,7 @@ function update_section_visibility(section: HTMLElement, settings: Settings): vo
     }
 }
 
-function update_display(target_classes: string | string[]): void {
+function update_display(target_classes: string[]): void {
     const settings = get_settings();
 
     const update_elements = (class_name: string) => {
@@ -45,17 +45,13 @@ function update_display(target_classes: string | string[]): void {
             const parent: HTMLElement = get_parent_element(element);
 
             if(parent !== null) {
+                // console.log('uwu')
                 set_element_display(parent, should_show_element(element, settings));
             }
         });
     };
 
-    if(Array.isArray(target_classes)) {
-        target_classes.forEach(update_elements);
-    } else {
-        update_elements(target_classes);
-    }
-
+    target_classes.forEach(update_elements);
     const sections: HTMLCollectionOf<Element> = document.getElementsByClassName("gallery");
     
     Array.from(sections).forEach((section: HTMLElement) => 

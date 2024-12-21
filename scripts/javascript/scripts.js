@@ -32,7 +32,7 @@ function AJAX_send() {
         const page_display = document.getElementById("display");
         const landing_menu = document.getElementById("landing_menu");
         const landing_page = (_c = (_b = document.getElementById("landing_page")) === null || _b === void 0 ? void 0 : _b.outerHTML) !== null && _c !== void 0 ? _c : "";
-        if (landing_menu === null) {
+        if (landing_menu !== null) {
             landing_menu.outerHTML = "";
         }
         page_display.innerHTML = "";
@@ -465,7 +465,7 @@ function handle_no_spoil_mode() {
 }
 ;
 function handle_toggle_versions_mode() {
-    update_display("newer-version");
+    update_display(["newer-version"]);
 }
 ;
 function handle_spoil_mode() {
@@ -475,10 +475,12 @@ function handle_spoil_mode() {
         return;
     }
     if (spoil_checkbox.checked && no_spoil_checkbox.checked) {
+        console.log('1');
         no_spoil_checkbox.checked = false;
         update_display(["not-found", "found"]);
     }
     else {
+        console.log('2');
         update_display(["found"]);
     }
 }
@@ -582,16 +584,12 @@ function update_display(target_classes) {
         Array.from(elements).forEach((element) => {
             const parent = get_parent_element(element);
             if (parent !== null) {
+                // console.log('uwu')
                 set_element_display(parent, should_show_element(element, settings));
             }
         });
     };
-    if (Array.isArray(target_classes)) {
-        target_classes.forEach(update_elements);
-    }
-    else {
-        update_elements(target_classes);
-    }
+    target_classes.forEach(update_elements);
     const sections = document.getElementsByClassName("gallery");
     Array.from(sections).forEach((section) => update_section_visibility(section, settings));
 }
@@ -684,7 +682,7 @@ function toggle_loading(shown) {
     }
 }
 function get_parent_element(element) {
-    if (element !== null) {
+    if (element === null) {
         return null;
     }
     const parent = element.parentElement;
@@ -692,8 +690,8 @@ function get_parent_element(element) {
 }
 ;
 function set_element_display(element, show) {
-    if (element && element.className !== "locations") {
-        element.style.display = show ? "flex" : "none";
+    if (element !== null && element.className !== "locations") {
+        element.style.display = (show) ? "flex" : "none";
     }
 }
 ;

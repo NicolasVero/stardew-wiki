@@ -1,8 +1,8 @@
 <?php
 
-function load_save($save_file, $use_ajax = true): mixed {
-    $uploadedFile = $save_file;
-    $data = simplexml_load_file($uploadedFile);
+function load_save(string $save_file, bool $use_ajax = true): mixed {
+    $uploaded_file = $save_file;
+    $data = simplexml_load_file($uploaded_file);
     load_all_json();
 
     $GLOBALS["untreated_all_players_data"] = $data;

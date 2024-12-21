@@ -24,7 +24,7 @@ function handle_no_spoil_mode(): void {
 };
 
 function handle_toggle_versions_mode(): void {
-    update_display("newer-version");
+    update_display(["newer-version"]);
 };
 
 function handle_spoil_mode(): void {
@@ -36,9 +36,11 @@ function handle_spoil_mode(): void {
     }
 
     if(spoil_checkbox.checked && no_spoil_checkbox.checked) {
+        console.log('1')
         no_spoil_checkbox.checked = false;
         update_display(["not-found", "found"]);
     } else {
+        console.log('2')
         update_display(["found"]);
     }
 };
