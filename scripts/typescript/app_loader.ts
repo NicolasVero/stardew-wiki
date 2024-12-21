@@ -1,7 +1,6 @@
 let surheader: HTMLElement | null;
 
 window.addEventListener("load", () => {
-
     const os_path: string = get_os_path(detect_os());
     const tag: HTMLElement = document.getElementById("save_os_path");
     

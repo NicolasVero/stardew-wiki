@@ -45,7 +45,6 @@ function update_display(target_classes: string[]): void {
             const parent: HTMLElement = get_parent_element(element);
 
             if(parent !== null) {
-                // console.log('uwu')
                 set_element_display(parent, should_show_element(element, settings));
             }
         });

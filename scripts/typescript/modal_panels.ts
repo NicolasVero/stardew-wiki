@@ -53,3 +53,23 @@ function hide_all_sections(section_destroy: boolean = false): void {
 		section.style.display = "none";
 	});
 }
+
+const modals = document.querySelectorAll<HTMLDivElement>('.modal-window');
+modals.forEach((modal) => {
+    modal.addEventListener(
+        'wheel',
+        (event: WheelEvent) => {
+            const scroll_top: number = modal.scrollTop; 
+            const scroll_height: number = modal.scrollHeight;
+            const client_height: number = modal.clientHeight;
+
+            const is_at_top = scroll_top === 0 && event.deltaY < 0;
+            const is_at_bottom = scroll_top + client_height >= scroll_height && event.deltaY > 0;
+
+            if(is_at_top || is_at_bottom) {
+                event.preventDefault();
+            }
+        },
+        { passive: false }
+    );
+});

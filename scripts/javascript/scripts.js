@@ -106,28 +106,6 @@ window.addEventListener("load", () => {
     toggle_custom_checkboxes(".checkmark");
     activate_feedback_ajax_trigger();
 });
-function toggle_custom_checkboxes(checkmark_class) {
-    const checkmarks = document.querySelectorAll(checkmark_class);
-    checkmarks.forEach((checkbox) => {
-        checkbox.addEventListener("click", () => {
-            const adjacent_checkbox = checkbox.previousElementSibling;
-            if (adjacent_checkbox !== null && adjacent_checkbox.type === "checkbox") {
-                adjacent_checkbox.checked = !adjacent_checkbox.checked;
-                adjacent_checkbox.dispatchEvent(new Event("change"));
-            }
-        });
-    });
-}
-function toggle_checkboxes_actions() {
-    document.querySelectorAll(".checkbox input[type='checkbox']").forEach((checkbox_input) => {
-        const input = checkbox_input;
-        const function_name = input.id;
-        const is_checked = input.checked;
-        if (is_checked && typeof window[function_name] === "function") {
-            window[function_name]();
-        }
-    });
-}
 function load_easter_eggs() {
     easter_egg_characters();
     easter_egg_kaaris();
@@ -190,6 +168,53 @@ function easter_egg_kaaris() {
             audio.play().finally(() => is_playing = false);
         }
     });
+}
+function load_error_page_items() {
+    const button_configurations = [
+        { open_button: ".main-settings", exit_button: ".exit-settings", modal_panel: ".settings" },
+        { open_button: ".file-upload", exit_button: ".exit-upload", modal_panel: ".upload-panel" }
+    ];
+    button_configurations.forEach(({ open_button, exit_button, modal_panel }) => {
+        activate_buttons(open_button, exit_button, modal_panel);
+    });
+}
+function load_elements() {
+    var _a;
+    toggle_landing_page(false);
+    toggle_checkboxes_actions();
+    const common_buttons = [
+        { open_button: ".landing-settings", exit_button: ".exit-settings", modal_panel: ".settings" },
+        { open_button: ".landing-upload", exit_button: ".exit-upload", modal_panel: ".upload-panel" },
+        { open_button: ".main-settings", exit_button: ".exit-settings", modal_panel: ".settings" },
+        { open_button: ".file-upload", exit_button: ".exit-upload", modal_panel: ".upload-panel" }
+    ];
+    const dynamic_prefixes = [
+        "all-friends", "all-quests", "monster-eradication-goals",
+        "calendar", "all-animals", "junimo-kart-leaderboard",
+        "museum", "community-center", "visited-locations"
+    ];
+    const players_in_save = get_players_number();
+    const dynamic_buttons = [];
+    for (let i = 0; i < players_in_save; i++) {
+        dynamic_prefixes.forEach(prefix => {
+            dynamic_buttons.push({
+                open_button: `.view-${prefix}-${i}`,
+                exit_button: `.exit-${prefix}-${i}`,
+                modal_panel: `.${prefix}-${i}`
+            });
+        });
+    }
+    const all_buttons = [...common_buttons, ...dynamic_buttons];
+    all_buttons.forEach(({ open_button, exit_button, modal_panel }) => {
+        activate_buttons(open_button, exit_button, modal_panel);
+    });
+    (_a = document.getElementById("home-icon")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
+        var _a;
+        const display = ((_a = document.getElementById("landing_page")) === null || _a === void 0 ? void 0 : _a.style.display) !== "none";
+        toggle_landing_page(!display);
+    });
+    load_easter_eggs();
+    update_tooltips_after_ajax();
 }
 function activate_feedback_ajax_trigger() {
     const triggers = document.querySelectorAll(".feedback-opener");
@@ -311,53 +336,6 @@ window.addEventListener("click", (event) => {
         close_all_panels(all_panels, true);
     }
 });
-function load_error_page_items() {
-    const button_configurations = [
-        { open_button: ".main-settings", exit_button: ".exit-settings", modal_panel: ".settings" },
-        { open_button: ".file-upload", exit_button: ".exit-upload", modal_panel: ".upload-panel" }
-    ];
-    button_configurations.forEach(({ open_button, exit_button, modal_panel }) => {
-        activate_buttons(open_button, exit_button, modal_panel);
-    });
-}
-function load_elements() {
-    var _a;
-    toggle_landing_page(false);
-    toggle_checkboxes_actions();
-    const common_buttons = [
-        { open_button: ".landing-settings", exit_button: ".exit-settings", modal_panel: ".settings" },
-        { open_button: ".landing-upload", exit_button: ".exit-upload", modal_panel: ".upload-panel" },
-        { open_button: ".main-settings", exit_button: ".exit-settings", modal_panel: ".settings" },
-        { open_button: ".file-upload", exit_button: ".exit-upload", modal_panel: ".upload-panel" }
-    ];
-    const dynamic_prefixes = [
-        "all-friends", "all-quests", "monster-eradication-goals",
-        "calendar", "all-animals", "junimo-kart-leaderboard",
-        "museum", "community-center", "visited-locations"
-    ];
-    const players_in_save = get_players_number();
-    const dynamic_buttons = [];
-    for (let i = 0; i < players_in_save; i++) {
-        dynamic_prefixes.forEach(prefix => {
-            dynamic_buttons.push({
-                open_button: `.view-${prefix}-${i}`,
-                exit_button: `.exit-${prefix}-${i}`,
-                modal_panel: `.${prefix}-${i}`
-            });
-        });
-    }
-    const all_buttons = [...common_buttons, ...dynamic_buttons];
-    all_buttons.forEach(({ open_button, exit_button, modal_panel }) => {
-        activate_buttons(open_button, exit_button, modal_panel);
-    });
-    (_a = document.getElementById("home-icon")) === null || _a === void 0 ? void 0 : _a.addEventListener("click", () => {
-        var _a;
-        const display = ((_a = document.getElementById("landing_page")) === null || _a === void 0 ? void 0 : _a.style.display) !== "none";
-        toggle_landing_page(!display);
-    });
-    load_easter_eggs();
-    update_tooltips_after_ajax();
-}
 let current_section = null;
 function activate_buttons(show, hide, sections_to_show) {
     const show_button = document.querySelectorAll(show);
@@ -404,6 +382,19 @@ function hide_all_sections(section_destroy = false) {
         section.style.display = "none";
     });
 }
+const modals = document.querySelectorAll('.modal-window');
+modals.forEach((modal) => {
+    modal.addEventListener('wheel', (event) => {
+        const scroll_top = modal.scrollTop;
+        const scroll_height = modal.scrollHeight;
+        const client_height = modal.clientHeight;
+        const is_at_top = scroll_top === 0 && event.deltaY < 0;
+        const is_at_bottom = scroll_top + client_height >= scroll_height && event.deltaY > 0;
+        if (is_at_top || is_at_bottom) {
+            event.preventDefault();
+        }
+    }, { passive: false });
+});
 var OS;
 (function (OS) {
     OS["mac"] = "mac";
@@ -475,12 +466,10 @@ function handle_spoil_mode() {
         return;
     }
     if (spoil_checkbox.checked && no_spoil_checkbox.checked) {
-        console.log('1');
         no_spoil_checkbox.checked = false;
         update_display(["not-found", "found"]);
     }
     else {
-        console.log('2');
         update_display(["found"]);
     }
 }
@@ -492,6 +481,40 @@ function handle_steam_mode() {
         const src = image.getAttribute("src");
         const [old_folder, new_folder] = (src.includes('steam')) ? images_folder : [...images_folder].reverse();
         image.setAttribute("src", src.replace(old_folder, new_folder));
+    });
+}
+function wiki_redirections() {
+    const links = document.querySelectorAll("a");
+    links.forEach((link) => {
+        link.addEventListener("click", (event) => {
+            const wiki_redirections_checkbox = document.getElementById("wiki_redirections");
+            if (!wiki_redirections_checkbox.checked) {
+                event.preventDefault();
+                event.stopImmediatePropagation();
+            }
+        });
+    });
+}
+function toggle_custom_checkboxes(checkmark_class) {
+    const checkmarks = document.querySelectorAll(checkmark_class);
+    checkmarks.forEach((checkbox) => {
+        checkbox.addEventListener("click", () => {
+            const adjacent_checkbox = checkbox.previousElementSibling;
+            if (adjacent_checkbox !== null && adjacent_checkbox.type === "checkbox") {
+                adjacent_checkbox.checked = !adjacent_checkbox.checked;
+                adjacent_checkbox.dispatchEvent(new Event("change"));
+            }
+        });
+    });
+}
+function toggle_checkboxes_actions() {
+    document.querySelectorAll(".checkbox input[type='checkbox']").forEach((checkbox_input) => {
+        const input = checkbox_input;
+        const function_name = input.id;
+        const is_checked = input.checked;
+        if (is_checked && typeof window[function_name] === "function") {
+            window[function_name]();
+        }
     });
 }
 function update_tooltips_after_ajax() {
@@ -584,7 +607,6 @@ function update_display(target_classes) {
         Array.from(elements).forEach((element) => {
             const parent = get_parent_element(element);
             if (parent !== null) {
-                // console.log('uwu')
                 set_element_display(parent, should_show_element(element, settings));
             }
         });
@@ -736,16 +758,4 @@ function save_landing_surheader() {
     if (landing_menu !== null) {
         const surheader = landing_menu.innerHTML;
     }
-}
-function wiki_redirections() {
-    const links = document.querySelectorAll("a");
-    links.forEach((link) => {
-        link.addEventListener("click", (event) => {
-            const wiki_redirections_checkbox = document.getElementById("wiki_redirections");
-            if (!wiki_redirections_checkbox.checked) {
-                event.preventDefault();
-                event.stopImmediatePropagation();
-            }
-        });
-    });
 }
