@@ -4,7 +4,7 @@ function display_junimo_kart_button(): string {
 	return "<img src='" . get_images_folder() . "/icons/controller.png' class='controller-icon view-junimo-kart-leaderboard view-junimo-kart-leaderboard-" . get_current_player_id() . " button-elements modal-opener icon' alt='Controller icon'/>";
 }
 
-function display_community_center(): string {
+function display_community_center_button(): string {
 	return "<img src='" . get_images_folder() . "/icons/golden_scroll.png' class='golden-scroll-icon view-community-center view-community-center-" . get_current_player_id() . " button-elements modal-opener icon' alt='Golden Scroll icon'/>";
 }
 
@@ -62,48 +62,6 @@ function get_skills_icons(array $skills, string $current_skill): string {
     ";
 }
 
-function get_tooltip_text(array $player_data, string $json_line_name, string $data_type): string {
-    $data_array = $player_data[$json_line_name];
-
-    if(empty($data_array)) {
-        return $json_line_name;
-    }
-
-    extract($data_array);
-
-    switch($data_type) {
-        case "locations_to_visit" :
-            return "$json_line_name";
-
-        case "farm_animals" : 
-            return "$json_line_name: $counter in your farm";
-
-        case "fish" : 
-            if($max_length > 0) return "$json_line_name: caught $caught_counter times ($max_length inches)";
-            return "$json_line_name: caught $caught_counter times";
-
-        case "enemies" : 
-            return "$json_line_name: $killed_counter killed";
-
-        case "cooking_recipes" :
-            if(!$counter) return "$json_line_name: not cooked yet";
-            return "$json_line_name: cooked " . (int) $counter . " times";
-
-		case "crafting_recipes" :
-			if(!$counter) return "$json_line_name: not crafted yet";
-			return "$json_line_name: crafted " . (int) $counter . " times";
-
-        case "achievements" :
-            return "$json_line_name: $description";
-
-        case "artifacts":
-        case "minerals":  
-            if($counter === 0) return "$json_line_name: not given yet";
-            return "$json_line_name: given to museum";
-
-        default : return $json_line_name;
-    }
-}
 
 function get_friendship_structure(array $friendship_info): string {
     extract($friendship_info);

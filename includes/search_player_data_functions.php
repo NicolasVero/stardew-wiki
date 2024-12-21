@@ -1,29 +1,6 @@
 <?php 
 
-function get_player_gender(): string {
-	$player_data = $GLOBALS["untreated_player_data"];
-	$genders = [
-		$player_data->gender,
-		$player_data->isMale
-	];
 
-	foreach($genders as $gender) {
-		if(empty($gender)) {
-			continue;
-		}
-
-		$gender = (string) $gender[0];
-
-		// $gender: (0 / 1) || ("true" / "false") || ("Male" / "Female")
-		if(is_numeric($gender)) {
-			return ($gender === 0) ? "Male" : "Female";
-		} else {
-			return ($gender === "true" || $gender === "Male") ? "Male" : "Female";
-		}
-	}
-
-	return "Neutral";
-}
 
 function get_player_achievements(): array {
     $player_achievements = $GLOBALS["untreated_player_data"]->achievements;
@@ -66,7 +43,6 @@ function get_player_unlockables_list(): array {
 	return $unlockables;
 }
 
-//& TODO
 function get_player_unlockables(): array {
 	$player_data = $GLOBALS["untreated_player_data"];
 	$player_unlockables = [];
