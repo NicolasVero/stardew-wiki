@@ -40,3 +40,6 @@ require_once "includes/panels/calendar/display_data.php";
 
 require_once "includes/panels/quests/get_data.php";
 require_once "includes/panels/quests/display_data.php";
+
+require_once "includes/panels/eradication_goals/get_data.php";
+require_once "includes/panels/eradication_goals/display_data.php";
